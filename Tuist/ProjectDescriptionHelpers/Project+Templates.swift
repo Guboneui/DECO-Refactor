@@ -9,7 +9,7 @@ extension Project {
     
     
     /// Helper function to create a framework target and an associated unit test target
-    private static func makeFrameworkTargets(
+    private static func makeFrameworkTarget(
         name: String,
         platform: Platform,
         iOSTargetVersion: String,
@@ -19,6 +19,7 @@ extension Project {
                              platform: platform,
                              product: .framework,
                              bundleId: "come.deco.ios.\(name)",
+                             deploymentTarget: .iOS(targetVersion: "15.0", devices: .iphone),
                              infoPlist: .default,
                              sources: ["Sources/**"],
                              resources: ["Resources/**"],
@@ -91,7 +92,7 @@ extension Project {
                                             iOSTargetVersion: String,
                                             infoPlist: [String: InfoPlist.Value] = [:],
                                             dependencies: [TargetDependency] = []) -> Project {
-        var targets = makeFrameworkTargets(name: name,
+        var targets = makeFrameworkTarget(name: name,
                                            platform: platform,
                                            iOSTargetVersion: iOSTargetVersion,
                                            dependencies: dependencies)
@@ -109,7 +110,7 @@ extension Project {
     public static func framework(name: String,
                                  platform: Platform, iOSTargetVersion: String,
                                  dependencies: [TargetDependency] = []) -> Project {
-        let targets = makeFrameworkTargets(name: name,
+        let targets = makeFrameworkTarget(name: name,
                                            platform: platform,
                                            iOSTargetVersion: iOSTargetVersion,
                                            dependencies: dependencies)

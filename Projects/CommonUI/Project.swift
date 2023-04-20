@@ -13,5 +13,12 @@ private let iOSTargetVersion: String = "15.0"
 let project = Project.framework(
   name: projectName,
   platform: .iOS,
-  iOSTargetVersion: iOSTargetVersion
+  iOSTargetVersion: "15.0"
 )
+
+//let project = Project.makeFrameworkProject(
+//  name: projectName,
+//  isDynamic: false,
+//  dependencies: [],
+//  needTestTarget: false
+//)

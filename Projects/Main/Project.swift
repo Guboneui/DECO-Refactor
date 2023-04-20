@@ -24,6 +24,7 @@ let project = Project.app(
   platform: .iOS,
   iOSTargetVersion: iOSTargetVersion,
   infoPlist: infoPlist,
-  dependencies: []
+  dependencies: [
+    .project(target: "CommonUI", path: .relativeToCurrentFile("../CommonUI"))
+  ]
 )
-

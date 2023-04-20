@@ -21,7 +21,7 @@ extension Project {
                              bundleId: "come.deco.ios.\(name)",
                              infoPlist: .default,
                              sources: ["Sources/**"],
-                             resources: [],
+                             resources: ["Resources/**"],
                              dependencies: [])
         
         return [sources]

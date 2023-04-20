@@ -5,6 +5,9 @@
       location = "group:Projects"
       name = "Projects">
       <FileRef
+         location = "group:CommonUI/CommonUI.xcodeproj">
+      </FileRef>
+      <FileRef
          location = "group:Main/DECO.xcodeproj">
       </FileRef>
    </Group>

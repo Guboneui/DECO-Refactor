@@ -7,9 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0DDB27BFF7A1632F03B3F0EA /* SUIT-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = F26FF844FFFBE6F04FE82E77 /* SUIT-Medium.otf */; };
+		132E71F17B1D363766B88B84 /* NotoSansKR-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 15CD4B8F263EBED9EE862DEC /* NotoSansKR-Bold.otf */; };
+		39EC6BCA36C6D9020E2FBEEE /* SUIT-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7D7B839FF2BD4170FF0A7D18 /* SUIT-Bold.otf */; };
 		58B702764F53366CA63D89D8 /* Asset.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4BB1AB775A07E3583B8990C0 /* Asset.xcassets */; };
+		714358F8979540D404967A8C /* NotoSansKR-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = E38DB27C3893FC63485E721B /* NotoSansKR-Regular.otf */; };
+		78B4B46181CA417BE68BF59C /* NotoSansKR-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2EA530434C111C4BB344B33F /* NotoSansKR-Black.otf */; };
+		79C9DDFD08B61B5717A7E756 /* SUIT-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 59332FC4BE501E08FBC09008 /* SUIT-Thin.otf */; };
+		7B588595AF49828E89039740 /* NotoSansKR-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = F7B93756B58D9D39B4C97D24 /* NotoSansKR-Medium.otf */; };
 		7DC59B80630854028C7C80F4 /* TuistBundle+CommonUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EF204F3CD6F86C6167C300 /* TuistBundle+CommonUI.swift */; };
+		8015832F17AC96CA7BBDEA57 /* TuistFonts+CommonUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65557C5B1D459C06F72A1C53 /* TuistFonts+CommonUI.swift */; };
+		81598275117F4F1EAEE6B7A3 /* SUIT-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1006E85895DAE7BD2F9C0138 /* SUIT-ExtraBold.otf */; };
+		ABB3E7D7A65477D326550231 /* SUIT-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = BBDFCECD69448A84AA99E9F7 /* SUIT-Regular.otf */; };
+		B92AD89494DA17495A336B21 /* SUIT-Heavy.otf in Resources */ = {isa = PBXBuildFile; fileRef = 86E3FD9C981C1524E3907F57 /* SUIT-Heavy.otf */; };
+		BF3B1D53FB6A082F6BE50966 /* SUIT-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = CED5695C335D5BB3770DFCCF /* SUIT-ExtraLight.otf */; };
+		C6379C9A1F1988F5E6924D77 /* NotoSansKR-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7C05DBB465D60BCA13477EF8 /* NotoSansKR-Light.otf */; };
+		C7DE771C5F434A22FB302FA6 /* SUIT-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2AAA16EB10167F4F8A589DF2 /* SUIT-Light.otf */; };
 		C94951E661D9DC9D28B56273 /* TuistAssets+CommonUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F625FE1E640FBDB817D76A3 /* TuistAssets+CommonUI.swift */; };
+		CBF9EB191E353B25C3DDC36E /* NotoSansKR-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 92B162ACA7CC5EBDFC92444E /* NotoSansKR-Thin.otf */; };
+		D5F8CCDEC095E3F282F056BE /* SUIT-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5F7A7C2511C18A00FD6038C5 /* SUIT-SemiBold.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -26,11 +42,27 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1006E85895DAE7BD2F9C0138 /* SUIT-ExtraBold.otf */ = {isa = PBXFileReference; path = "SUIT-ExtraBold.otf"; sourceTree = "<group>"; };
+		15CD4B8F263EBED9EE862DEC /* NotoSansKR-Bold.otf */ = {isa = PBXFileReference; path = "NotoSansKR-Bold.otf"; sourceTree = "<group>"; };
+		2AAA16EB10167F4F8A589DF2 /* SUIT-Light.otf */ = {isa = PBXFileReference; path = "SUIT-Light.otf"; sourceTree = "<group>"; };
+		2EA530434C111C4BB344B33F /* NotoSansKR-Black.otf */ = {isa = PBXFileReference; path = "NotoSansKR-Black.otf"; sourceTree = "<group>"; };
 		4BB1AB775A07E3583B8990C0 /* Asset.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Asset.xcassets; sourceTree = "<group>"; };
+		59332FC4BE501E08FBC09008 /* SUIT-Thin.otf */ = {isa = PBXFileReference; path = "SUIT-Thin.otf"; sourceTree = "<group>"; };
+		5F7A7C2511C18A00FD6038C5 /* SUIT-SemiBold.otf */ = {isa = PBXFileReference; path = "SUIT-SemiBold.otf"; sourceTree = "<group>"; };
+		65557C5B1D459C06F72A1C53 /* TuistFonts+CommonUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TuistFonts+CommonUI.swift"; sourceTree = "<group>"; };
 		6F625FE1E640FBDB817D76A3 /* TuistAssets+CommonUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TuistAssets+CommonUI.swift"; sourceTree = "<group>"; };
+		7C05DBB465D60BCA13477EF8 /* NotoSansKR-Light.otf */ = {isa = PBXFileReference; path = "NotoSansKR-Light.otf"; sourceTree = "<group>"; };
+		7D7B839FF2BD4170FF0A7D18 /* SUIT-Bold.otf */ = {isa = PBXFileReference; path = "SUIT-Bold.otf"; sourceTree = "<group>"; };
+		86E3FD9C981C1524E3907F57 /* SUIT-Heavy.otf */ = {isa = PBXFileReference; path = "SUIT-Heavy.otf"; sourceTree = "<group>"; };
+		92B162ACA7CC5EBDFC92444E /* NotoSansKR-Thin.otf */ = {isa = PBXFileReference; path = "NotoSansKR-Thin.otf"; sourceTree = "<group>"; };
 		94EF204F3CD6F86C6167C300 /* TuistBundle+CommonUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TuistBundle+CommonUI.swift"; sourceTree = "<group>"; };
+		BBDFCECD69448A84AA99E9F7 /* SUIT-Regular.otf */ = {isa = PBXFileReference; path = "SUIT-Regular.otf"; sourceTree = "<group>"; };
 		CDBD62030B65AE3A6A7F34D6 /* CommonUI-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "CommonUI-Info.plist"; sourceTree = "<group>"; };
+		CED5695C335D5BB3770DFCCF /* SUIT-ExtraLight.otf */ = {isa = PBXFileReference; path = "SUIT-ExtraLight.otf"; sourceTree = "<group>"; };
+		E38DB27C3893FC63485E721B /* NotoSansKR-Regular.otf */ = {isa = PBXFileReference; path = "NotoSansKR-Regular.otf"; sourceTree = "<group>"; };
 		F0F7A08F911F04FE3F6FE36B /* CommonUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CommonUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F26FF844FFFBE6F04FE82E77 /* SUIT-Medium.otf */ = {isa = PBXFileReference; path = "SUIT-Medium.otf"; sourceTree = "<group>"; };
+		F7B93756B58D9D39B4C97D24 /* NotoSansKR-Medium.otf */ = {isa = PBXFileReference; path = "NotoSansKR-Medium.otf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +79,7 @@
 		0559206105CFA6813150DAF7 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				26936B36B5F9171A92DA00FC /* Fonts */,
 				4BB1AB775A07E3583B8990C0 /* Asset.xcassets */,
 			);
 			path = Resources;
@@ -58,6 +91,28 @@
 				CDBD62030B65AE3A6A7F34D6 /* CommonUI-Info.plist */,
 			);
 			path = InfoPlists;
+			sourceTree = "<group>";
+		};
+		26936B36B5F9171A92DA00FC /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				2EA530434C111C4BB344B33F /* NotoSansKR-Black.otf */,
+				15CD4B8F263EBED9EE862DEC /* NotoSansKR-Bold.otf */,
+				7C05DBB465D60BCA13477EF8 /* NotoSansKR-Light.otf */,
+				F7B93756B58D9D39B4C97D24 /* NotoSansKR-Medium.otf */,
+				E38DB27C3893FC63485E721B /* NotoSansKR-Regular.otf */,
+				92B162ACA7CC5EBDFC92444E /* NotoSansKR-Thin.otf */,
+				7D7B839FF2BD4170FF0A7D18 /* SUIT-Bold.otf */,
+				1006E85895DAE7BD2F9C0138 /* SUIT-ExtraBold.otf */,
+				CED5695C335D5BB3770DFCCF /* SUIT-ExtraLight.otf */,
+				86E3FD9C981C1524E3907F57 /* SUIT-Heavy.otf */,
+				2AAA16EB10167F4F8A589DF2 /* SUIT-Light.otf */,
+				F26FF844FFFBE6F04FE82E77 /* SUIT-Medium.otf */,
+				BBDFCECD69448A84AA99E9F7 /* SUIT-Regular.otf */,
+				5F7A7C2511C18A00FD6038C5 /* SUIT-SemiBold.otf */,
+				59332FC4BE501E08FBC09008 /* SUIT-Thin.otf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		6C37E0F3E17EB24142CC8AA4 /* Project */ = {
@@ -107,6 +162,7 @@
 			children = (
 				6F625FE1E640FBDB817D76A3 /* TuistAssets+CommonUI.swift */,
 				94EF204F3CD6F86C6167C300 /* TuistBundle+CommonUI.swift */,
+				65557C5B1D459C06F72A1C53 /* TuistFonts+CommonUI.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -166,6 +222,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				58B702764F53366CA63D89D8 /* Asset.xcassets in Resources */,
+				78B4B46181CA417BE68BF59C /* NotoSansKR-Black.otf in Resources */,
+				132E71F17B1D363766B88B84 /* NotoSansKR-Bold.otf in Resources */,
+				C6379C9A1F1988F5E6924D77 /* NotoSansKR-Light.otf in Resources */,
+				7B588595AF49828E89039740 /* NotoSansKR-Medium.otf in Resources */,
+				714358F8979540D404967A8C /* NotoSansKR-Regular.otf in Resources */,
+				CBF9EB191E353B25C3DDC36E /* NotoSansKR-Thin.otf in Resources */,
+				39EC6BCA36C6D9020E2FBEEE /* SUIT-Bold.otf in Resources */,
+				81598275117F4F1EAEE6B7A3 /* SUIT-ExtraBold.otf in Resources */,
+				BF3B1D53FB6A082F6BE50966 /* SUIT-ExtraLight.otf in Resources */,
+				B92AD89494DA17495A336B21 /* SUIT-Heavy.otf in Resources */,
+				C7DE771C5F434A22FB302FA6 /* SUIT-Light.otf in Resources */,
+				0DDB27BFF7A1632F03B3F0EA /* SUIT-Medium.otf in Resources */,
+				ABB3E7D7A65477D326550231 /* SUIT-Regular.otf in Resources */,
+				D5F8CCDEC095E3F282F056BE /* SUIT-SemiBold.otf in Resources */,
+				79C9DDFD08B61B5717A7E756 /* SUIT-Thin.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -178,6 +249,7 @@
 			files = (
 				C94951E661D9DC9D28B56273 /* TuistAssets+CommonUI.swift in Sources */,
 				7DC59B80630854028C7C80F4 /* TuistBundle+CommonUI.swift in Sources */,
+				8015832F17AC96CA7BBDEA57 /* TuistFonts+CommonUI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

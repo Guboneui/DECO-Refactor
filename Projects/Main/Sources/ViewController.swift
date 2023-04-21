@@ -7,11 +7,11 @@
 //
 
 import UIKit
-import CommonUI
+//import CommonUI
 
 class ViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
-		
+	//	self.view.backgroundColor = CommonUIAsset.Color.blackColor.color
   }
 }

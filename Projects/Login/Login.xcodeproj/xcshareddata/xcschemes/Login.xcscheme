@@ -14,38 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "CFD7DEB690E20277121FAD5C"
-               BuildableName = "CommonUI.framework"
-               BlueprintName = "CommonUI"
-               ReferencedContainer = "container:Projects/CommonUI/CommonUI.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7811CB0177222590338F6A41"
-               BuildableName = "DECO.app"
-               BlueprintName = "DECO"
-               ReferencedContainer = "container:Projects/Main/DECO.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
                BlueprintIdentifier = "EF8CE03A2759141C3B1EAC1D"
                BuildableName = "Login.framework"
                BlueprintName = "Login"
-               ReferencedContainer = "container:Projects/Login/Login.xcodeproj">
+               ReferencedContainer = "container:Login.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -54,7 +26,8 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      disableMainThreadChecker = "YES">
       <Testables>
       </Testables>
    </TestAction>
@@ -71,10 +44,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "CFD7DEB690E20277121FAD5C"
-            BuildableName = "CommonUI.framework"
-            BlueprintName = "CommonUI"
-            ReferencedContainer = "container:Projects/CommonUI/CommonUI.xcodeproj">
+            BlueprintIdentifier = "EF8CE03A2759141C3B1EAC1D"
+            BuildableName = "Login.framework"
+            BlueprintName = "Login"
+            ReferencedContainer = "container:Login.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </LaunchAction>
@@ -87,10 +60,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "CFD7DEB690E20277121FAD5C"
-            BuildableName = "CommonUI.framework"
-            BlueprintName = "CommonUI"
-            ReferencedContainer = "container:Projects/CommonUI/CommonUI.xcodeproj">
+            BlueprintIdentifier = "EF8CE03A2759141C3B1EAC1D"
+            BuildableName = "Login.framework"
+            BlueprintName = "Login"
+            ReferencedContainer = "container:Login.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>

@@ -29,16 +29,6 @@ let infoPlist: [String:InfoPlist.Value] = [
   "UILaunchStoryboardName": "LaunchScreen"
 ]
 
-//let project = Project.app(
-//  name: projectName,
-//  platform: .iOS,
-//  iOSTargetVersion: iOSTargetVersion,
-//  infoPlist: infoPlist,
-//  dependencies: [
-//    .project(target: "CommonUI", path: .relativeToCurrentFile("../CommonUI"))
-//  ]
-//)
-
 public var baseSettings: [String: SettingValue] = [
   "CURRENT_PROJECT_VERSION": "\(buildNumber)", // 빌드
   "MARKETING_VERSION": "\(buildVersion)", // 버전
@@ -67,7 +57,7 @@ let appTarget = Target(
     sources: ["Sources/**"],
     resources: ["Resources/**"],
     dependencies: [
-      .project(target: "CommonUI", path: .relativeToCurrentFile("../CommonUI"))
+      .project(target: "Login", path: .relativeToCurrentFile("../Login"))
     ],
     settings: settings,
     environment: ["OS_ACTIVITY_MODE": "disable"] // 불필요 로그 제거

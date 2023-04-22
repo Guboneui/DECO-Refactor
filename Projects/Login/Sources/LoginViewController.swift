@@ -8,12 +8,24 @@
 
 import UIKit
 import CommonUI
+import SnapKit
+
 
 
 public class LoginViewController: UIViewController {
+  
+  let label = UILabel()
+  
   override public func viewDidLoad() {
     super.viewDidLoad()
-    self.view.backgroundColor = CommonUIAsset.Color.successColor.color
+    self.view.backgroundColor = CommonUIAsset.Color.primaryColor.color
     print("🔊[DEBUG]: Login")
+    
+    label.text = "asdf"
+    
+    self.view.addSubview(label)
+    label.snp.makeConstraints { make in
+      make.center.equalToSuperview()
+    }
   }
 }

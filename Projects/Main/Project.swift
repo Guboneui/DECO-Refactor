@@ -70,6 +70,7 @@ let project = Project(
     developmentRegion: "ko",
     textSettings: .textSettings(usesTabs: true, indentWidth: 2, tabWidth: 2)
   ),
+  packages: [],
   settings: settings,
   targets: [appTarget]
 )

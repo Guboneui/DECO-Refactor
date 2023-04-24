@@ -206,9 +206,10 @@ final class LoginMainViewController:
     
     loginContainer.pin
       .above(of: infoContainer, aligned: .center)
-      .marginBottom(300)
+      .marginBottom(76)
+      .height(200)
       .width(270)
-      
+    
     loginContainer.flex.direction(.column).define { flex in
       flex.addItem(kakaoLoginView).height(47).width(270)
       kakaoLoginView.flex.direction(.row)
@@ -249,23 +250,15 @@ final class LoginMainViewController:
   }
   
   private func setupGestures() {
-    naverLoginView.rx.tapGesture()
+    kakaoLoginView.rx.tapGesture()
       .when(.recognized)
       .throttle(.milliseconds(300), latest: false, scheduler: MainScheduler.instance)
       .bind { [weak self] _ in
         guard let self else { return }
-        print("ksdjf;lakj")
+        print("🔊[DEBUG]: 카카오 클릭")
         
       }.disposed(by: disposeBag)
     
-    kakaoLoginLabel.rx.tapGesture()
-      .when(.recognized)
-      .throttle(.milliseconds(300), latest: false, scheduler: MainScheduler.instance)
-      .bind { [weak self] _ in
-        guard let self else { return }
-        print("123123123123123")
-        
-      }.disposed(by: disposeBag)
     
     termLabel.rx.tapGesture()
       .when(.recognized)
@@ -273,7 +266,7 @@ final class LoginMainViewController:
       .subscribe(onNext: { _ in
         SafariLoderImpl.loadSafari(with: DecoURL.termURL)
       }).disposed(by: disposeBag)
-
+    
     privacyLabel.rx.tapGesture()
       .when(.recognized)
       .throttle(.milliseconds(300), latest: false, scheduler: MainScheduler.instance)

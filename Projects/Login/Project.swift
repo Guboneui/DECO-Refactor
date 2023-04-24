@@ -10,6 +10,7 @@ import ProjectDescriptionHelpers
 
 let setting: Settings = .settings(
   base: [
+    "GCC_PREPROCESSOR_DEFINITIONS" : "FLEXLAYOUT_SWIFT_PACKAGE=1",
     "DEVELOPMENT_TEAM": "VKGAQDGK5R",
     "OTHER_LDFLAGS": "-ObjC"
   ],
@@ -18,12 +19,23 @@ let setting: Settings = .settings(
 )
 
 let packages: [Package] = [
-  .SnapKit
+  .RIBs,
+  .RxGesture,
+  .PinLayout,
+  .FlexLayout,
+  .Then,
+  .Hero
 ]
 
 let dependencies: [TargetDependency] = [
   .project(target: "CommonUI", path: "../CommonUI"),
-  .SnapKit
+  .project(target: "Util", path: "../Util"),
+  .RIBs,
+  .RxGesture,
+  .PinLayout,
+  .FlexLayout,
+  .Then,
+  .Hero
 ]
 
 let login = Target(

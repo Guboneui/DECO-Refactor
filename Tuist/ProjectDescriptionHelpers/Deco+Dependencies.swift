@@ -11,7 +11,11 @@ public extension TargetDependency {
   static let FirebaseAnalytics: TargetDependency = .package(product: "FirebaseAnalytics")
   static let FirebaseCrashlytics: TargetDependency = .package(product: "FirebaseCrashlytics")
   static let RxSwift: TargetDependency = .package(product: "RxSwift")
+  static let RxGesture: TargetDependency = .package(product: "RxGesture")
   static let RIBs: TargetDependency = .package(product: "RIBs")
+  static let FlexLayout: TargetDependency = .package(product: "FlexLayout")
+  static let PinLayout: TargetDependency = .package(product: "PinLayout")
+  static let Hero: TargetDependency = .package(product: "Hero")
 }
 
 public extension Package {
@@ -25,5 +29,8 @@ public extension Package {
   static let Hero: Package = .remote(url: "https://github.com/HeroTransitions/Hero.git", requirement: .exact("1.5.0"))
   static let GoogleMapsUtils: Package = .remote(url: "https://github.com/googlemaps/google-maps-ios-utils.git", requirement: .upToNextMinor(from: "4.1.0"))
   static let RxSwift: Package = .remote(url: "https://github.com/ReactiveX/RxSwift.git", requirement: .exact("6.5.0"))
+  static let RxGesture: Package = .remote(url: "https://github.com/RxSwiftCommunity/RxGesture", requirement: .upToNextMajor(from: "4.0.0"))
   static let RIBs: Package = .remote(url: "https://github.com/uber/RIBs", requirement: .upToNextMajor(from: "0.9.2"))
+  static let FlexLayout: Package = .remote(url: "https://github.com/layoutBox/FlexLayout", requirement: .exact("1.3.24"))
+  static let PinLayout: Package = .remote(url: "https://github.com/layoutBox/PinLayout", requirement: .upToNextMajor(from: "1.0.0"))
 }

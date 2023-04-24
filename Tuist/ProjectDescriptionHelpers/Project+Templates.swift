@@ -114,6 +114,7 @@ extension Project {
                                platform: Platform,
                                iOSTargetVersion: String,
                                isDynamic: Bool,
+                               packages: [Package] = [],
                                dependencies: [TargetDependency] = []) -> Project {
     let targets = makeFrameworkTarget(name: name,
                                       platform: platform,
@@ -122,6 +123,7 @@ extension Project {
                                       dependencies: dependencies)
     return Project(name: name,
                    organizationName: organizationName,
+                   packages: packages,
                    targets: targets)
   }
 }

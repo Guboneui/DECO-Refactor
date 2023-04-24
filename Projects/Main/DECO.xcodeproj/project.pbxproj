@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2CD17D44FB4C1CCB9C3C0E1B /* Util.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 49CD77C53DC92A1E666BAEA4 /* Util.framework */; platformFilter = ios; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		47B92428C9B21BA820B52F08 /* Login.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B6686109E67E5AF15338F03 /* Login.framework */; platformFilter = ios; };
 		6ABD43ADEA446D2AE1E006AE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41ACEE68352FF01E741559F /* AppDelegate.swift */; };
 		9F371DD267ED12537FA3A41B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2437B41BF8E4809F2034229 /* ViewController.swift */; };
@@ -23,6 +24,7 @@
 			files = (
 				ECFE1BD8132C50064B86D257 /* CommonUI.framework in Embed Frameworks */,
 				F93F35E3A1ACDDE5648FCD83 /* Login.framework in Embed Frameworks */,
+				2CD17D44FB4C1CCB9C3C0E1B /* Util.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -33,6 +35,7 @@
 		0B6686109E67E5AF15338F03 /* Login.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Login.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0BDC1A48960A2B5B50EE808C /* CommonUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CommonUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B5B47F76E0624DB4B0A1406 /* DECO-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "DECO-Info.plist"; sourceTree = "<group>"; };
+		49CD77C53DC92A1E666BAEA4 /* Util.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Util.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2437B41BF8E4809F2034229 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		B41ACEE68352FF01E741559F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B8B48B1EF47A5C5EDF44940B /* DECO.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DECO.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -109,6 +112,7 @@
 				0BDC1A48960A2B5B50EE808C /* CommonUI.framework */,
 				B8B48B1EF47A5C5EDF44940B /* DECO.app */,
 				0B6686109E67E5AF15338F03 /* Login.framework */,
+				49CD77C53DC92A1E666BAEA4 /* Util.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -221,7 +225,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 2304230338009;
+				CURRENT_PROJECT_VERSION = 2304241830009;
 				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = VKGAQDGK5R;
@@ -230,6 +234,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = "FLEXLAYOUT_SWIFT_PACKAGE=1";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -251,10 +256,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2304230338009;
+				CURRENT_PROJECT_VERSION = 2304241830009;
 				DEVELOPMENT_TEAM = VKGAQDGK5R;
 				ENABLE_BITCODE = NO;
 				ENABLE_PREVIEWS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = "FLEXLAYOUT_SWIFT_PACKAGE=1";
 				INFOPLIST_FILE = "Derived/InfoPlists/DECO-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = DECO;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
@@ -312,7 +318,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 2304230338009;
+				CURRENT_PROJECT_VERSION = 2304241830009;
 				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = VKGAQDGK5R;
@@ -323,10 +329,7 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
+				GCC_PREPROCESSOR_DEFINITIONS = "FLEXLAYOUT_SWIFT_PACKAGE=1";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -348,10 +351,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2304230338009;
+				CURRENT_PROJECT_VERSION = 2304241830009;
 				DEVELOPMENT_TEAM = VKGAQDGK5R;
 				ENABLE_BITCODE = NO;
 				ENABLE_PREVIEWS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = "FLEXLAYOUT_SWIFT_PACKAGE=1";
 				INFOPLIST_FILE = "Derived/InfoPlists/DECO-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = DECO;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;

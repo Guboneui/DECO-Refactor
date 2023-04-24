@@ -13,5 +13,8 @@
       <FileRef
          location = "group:Main/DECO.xcodeproj">
       </FileRef>
+      <FileRef
+         location = "group:Util/Util.xcodeproj">
+      </FileRef>
    </Group>
 </Workspace>

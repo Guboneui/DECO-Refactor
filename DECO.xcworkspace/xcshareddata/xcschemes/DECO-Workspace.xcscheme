@@ -48,6 +48,20 @@
                ReferencedContainer = "container:Projects/Login/Login.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "D5BAEF0EE03F09D494B7E734"
+               BuildableName = "Util.framework"
+               BlueprintName = "Util"
+               ReferencedContainer = "container:Projects/Util/Util.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction

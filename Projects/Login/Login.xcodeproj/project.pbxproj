@@ -3,13 +3,27 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		11842A9F58FD806FF4AEC658 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A68A494C3A92CC6F209B7E /* LoginViewController.swift */; };
-		E01367743430A57E02252E16 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 990C7A93EAF78357937E44D4 /* SnapKit */; };
+		061639D961CDB9AE95FEE699 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 3C2B858351E15AC7826E6DE4 /* Then */; };
+		29591AAD3FFD33357A7F0572 /* LoginMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E714AD57768426CD6CDEAD /* LoginMainViewController.swift */; };
+		33F7153E7375AC679AD43144 /* NickNameRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA7A9D90F63851CF86F986A /* NickNameRouter.swift */; };
+		39333C0D64BE1CDCF09F21C5 /* NickNameBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2A0E129B15AAB06E6F6894 /* NickNameBuilder.swift */; };
+		3DFCD9207B6B14D9EF5A63CF /* Hero in Frameworks */ = {isa = PBXBuildFile; productRef = 7839595B2746D0D522C30D90 /* Hero */; };
+		451AC81235BBDAE54CE314D7 /* LoginMainRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC42161F1C62E6A03AC6F99 /* LoginMainRouter.swift */; };
+		534D8CA2727D7E896624DBC7 /* NickNameInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03EE677B69D616837D1C3421 /* NickNameInteractor.swift */; };
+		61C658B888F65B993B1680A0 /* FlexLayout in Frameworks */ = {isa = PBXBuildFile; productRef = FAB07FF18BE21C79333BF4D1 /* FlexLayout */; };
+		658164F4C3326A85F31BFD43 /* NickNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3BB2BF4A194BC2F84902C76 /* NickNameViewController.swift */; };
+		758EEAC0BCF54C3CDD386164 /* LoginComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAA7FCCE1B280C3832C28D3 /* LoginComponent.swift */; };
+		971F81A40F83E972F4F54B41 /* LoginMainBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293D99C8D142BA60CA47CCC0 /* LoginMainBuilder.swift */; };
+		AA66CE4D6213C35ECFA384DC /* Util.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 111D1A79CB7EAB7BDA369813 /* Util.framework */; platformFilter = ios; };
+		BA1447347F172DE4651EB9A6 /* RxGesture in Frameworks */ = {isa = PBXBuildFile; productRef = 77718C3206BFD086913A6F71 /* RxGesture */; };
+		D5DA8CBAD0929D29711B9FA0 /* PinLayout in Frameworks */ = {isa = PBXBuildFile; productRef = 1D84563C6DC31692496AD5F4 /* PinLayout */; };
+		E01367743430A57E02252E16 /* RIBs in Frameworks */ = {isa = PBXBuildFile; productRef = FA971027539EA02A31D7AF14 /* RIBs */; };
 		F841FF334E1C6034EABAEDCB /* CommonUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21D6E91FA13D3D7D7989E850 /* CommonUI.framework */; platformFilter = ios; };
+		F9DF39C63EFF75BD58AF12CB /* LoginMainInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B037B55F4CC6B5BB890396 /* LoginMainInteractor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -26,10 +40,19 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		11A68A494C3A92CC6F209B7E /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		03EE677B69D616837D1C3421 /* NickNameInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameInteractor.swift; sourceTree = "<group>"; };
+		0DC42161F1C62E6A03AC6F99 /* LoginMainRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginMainRouter.swift; sourceTree = "<group>"; };
+		111D1A79CB7EAB7BDA369813 /* Util.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Util.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F122292170A9B08F370E93A /* Login-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Login-Info.plist"; sourceTree = "<group>"; };
 		21D6E91FA13D3D7D7989E850 /* CommonUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CommonUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		28C6E6787DFAF624F53D6F5B /* Login.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Login.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		293D99C8D142BA60CA47CCC0 /* LoginMainBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginMainBuilder.swift; sourceTree = "<group>"; };
+		4FA7A9D90F63851CF86F986A /* NickNameRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameRouter.swift; sourceTree = "<group>"; };
+		83E714AD57768426CD6CDEAD /* LoginMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginMainViewController.swift; sourceTree = "<group>"; };
+		ADAA7FCCE1B280C3832C28D3 /* LoginComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginComponent.swift; sourceTree = "<group>"; };
+		BA2A0E129B15AAB06E6F6894 /* NickNameBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameBuilder.swift; sourceTree = "<group>"; };
+		E1B037B55F4CC6B5BB890396 /* LoginMainInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginMainInteractor.swift; sourceTree = "<group>"; };
+		E3BB2BF4A194BC2F84902C76 /* NickNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,7 +61,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				F841FF334E1C6034EABAEDCB /* CommonUI.framework in Frameworks */,
-				E01367743430A57E02252E16 /* SnapKit in Frameworks */,
+				AA66CE4D6213C35ECFA384DC /* Util.framework in Frameworks */,
+				E01367743430A57E02252E16 /* RIBs in Frameworks */,
+				BA1447347F172DE4651EB9A6 /* RxGesture in Frameworks */,
+				D5DA8CBAD0929D29711B9FA0 /* PinLayout in Frameworks */,
+				61C658B888F65B993B1680A0 /* FlexLayout in Frameworks */,
+				061639D961CDB9AE95FEE699 /* Then in Frameworks */,
+				3DFCD9207B6B14D9EF5A63CF /* Hero in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -58,8 +87,21 @@
 			children = (
 				21D6E91FA13D3D7D7989E850 /* CommonUI.framework */,
 				28C6E6787DFAF624F53D6F5B /* Login.framework */,
+				111D1A79CB7EAB7BDA369813 /* Util.framework */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		3CC3CD51502C2286540DF4F5 /* LoginMain */ = {
+			isa = PBXGroup;
+			children = (
+				ADAA7FCCE1B280C3832C28D3 /* LoginComponent.swift */,
+				293D99C8D142BA60CA47CCC0 /* LoginMainBuilder.swift */,
+				E1B037B55F4CC6B5BB890396 /* LoginMainInteractor.swift */,
+				0DC42161F1C62E6A03AC6F99 /* LoginMainRouter.swift */,
+				83E714AD57768426CD6CDEAD /* LoginMainViewController.swift */,
+			);
+			path = LoginMain;
 			sourceTree = "<group>";
 		};
 		47D08CC30AC651152A01B24B /* InfoPlists */ = {
@@ -80,7 +122,8 @@
 		82158BAC7310E834F5971A06 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				11A68A494C3A92CC6F209B7E /* LoginViewController.swift */,
+				3CC3CD51502C2286540DF4F5 /* LoginMain */,
+				BCBB051467027A266D2C923F /* SignUp */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -94,6 +137,14 @@
 			name = Project;
 			sourceTree = "<group>";
 		};
+		BCBB051467027A266D2C923F /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				EB830A991EBF8BAFC70FBB62 /* Nickname */,
+			);
+			path = SignUp;
+			sourceTree = "<group>";
+		};
 		E31225F45B959E9057547147 = {
 			isa = PBXGroup;
 			children = (
@@ -101,6 +152,17 @@
 				6A94C6BA5CFCFEEAE644E6D0 /* Frameworks */,
 				275CA20C12D61868FDE00BD5 /* Products */,
 			);
+			sourceTree = "<group>";
+		};
+		EB830A991EBF8BAFC70FBB62 /* Nickname */ = {
+			isa = PBXGroup;
+			children = (
+				BA2A0E129B15AAB06E6F6894 /* NickNameBuilder.swift */,
+				03EE677B69D616837D1C3421 /* NickNameInteractor.swift */,
+				4FA7A9D90F63851CF86F986A /* NickNameRouter.swift */,
+				E3BB2BF4A194BC2F84902C76 /* NickNameViewController.swift */,
+			);
+			path = Nickname;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -121,7 +183,12 @@
 			);
 			name = Login;
 			packageProductDependencies = (
-				990C7A93EAF78357937E44D4 /* SnapKit */,
+				FA971027539EA02A31D7AF14 /* RIBs */,
+				77718C3206BFD086913A6F71 /* RxGesture */,
+				1D84563C6DC31692496AD5F4 /* PinLayout */,
+				FAB07FF18BE21C79333BF4D1 /* FlexLayout */,
+				3C2B858351E15AC7826E6DE4 /* Then */,
+				7839595B2746D0D522C30D90 /* Hero */,
 			);
 			productName = Login;
 			productReference = 28C6E6787DFAF624F53D6F5B /* Login.framework */;
@@ -133,8 +200,6 @@
 		353B4020F35CB9C9FFC126AA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				TargetAttributes = {
-				};
 			};
 			buildConfigurationList = 6C10079AF94881EFE73379E4 /* Build configuration list for PBXProject "Login" */;
 			compatibilityVersion = "Xcode 13.0";
@@ -146,7 +211,12 @@
 			);
 			mainGroup = E31225F45B959E9057547147;
 			packageReferences = (
-				9151C7D668A3E298E7831F9D /* XCRemoteSwiftPackageReference "SnapKit" */,
+				C1833B794F4D8ED538254343 /* XCRemoteSwiftPackageReference "Hero" */,
+				1334CD3542B3D6A26709FC3F /* XCRemoteSwiftPackageReference "RxGesture" */,
+				98C70932D98D857B7354CBCA /* XCRemoteSwiftPackageReference "Then" */,
+				EE0794037D2ABC1E9BCF2F28 /* XCRemoteSwiftPackageReference "FlexLayout" */,
+				DCB570F8328940F77F18A47A /* XCRemoteSwiftPackageReference "PinLayout" */,
+				44488A005A8925AE490B5634 /* XCRemoteSwiftPackageReference "RIBs" */,
 			);
 			productRefGroup = 275CA20C12D61868FDE00BD5 /* Products */;
 			projectDirPath = "";
@@ -172,7 +242,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				11842A9F58FD806FF4AEC658 /* LoginViewController.swift in Sources */,
+				758EEAC0BCF54C3CDD386164 /* LoginComponent.swift in Sources */,
+				971F81A40F83E972F4F54B41 /* LoginMainBuilder.swift in Sources */,
+				F9DF39C63EFF75BD58AF12CB /* LoginMainInteractor.swift in Sources */,
+				451AC81235BBDAE54CE314D7 /* LoginMainRouter.swift in Sources */,
+				29591AAD3FFD33357A7F0572 /* LoginMainViewController.swift in Sources */,
+				39333C0D64BE1CDCF09F21C5 /* NickNameBuilder.swift in Sources */,
+				534D8CA2727D7E896624DBC7 /* NickNameInteractor.swift in Sources */,
+				33F7153E7375AC679AD43144 /* NickNameRouter.swift in Sources */,
+				658164F4C3326A85F31BFD43 /* NickNameViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -189,6 +267,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREPROCESSOR_DEFINITIONS = "FLEXLAYOUT_SWIFT_PACKAGE=1";
 				INFOPLIST_FILE = "Derived/InfoPlists/Login-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
@@ -222,6 +301,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREPROCESSOR_DEFINITIONS = "FLEXLAYOUT_SWIFT_PACKAGE=1";
 				INFOPLIST_FILE = "Derived/InfoPlists/Login-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
@@ -382,20 +462,80 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		9151C7D668A3E298E7831F9D /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+		1334CD3542B3D6A26709FC3F /* XCRemoteSwiftPackageReference "RxGesture" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SnapKit/SnapKit";
+			repositoryURL = "https://github.com/RxSwiftCommunity/RxGesture";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 5.0.1;
+				minimumVersion = 4.0.0;
+			};
+		};
+		44488A005A8925AE490B5634 /* XCRemoteSwiftPackageReference "RIBs" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/uber/RIBs";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.9.2;
+			};
+		};
+		98C70932D98D857B7354CBCA /* XCRemoteSwiftPackageReference "Then" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/devxoul/Then";
+			requirement = {
+				kind = exactVersion;
+				version = 2.7.0;
+			};
+		};
+		C1833B794F4D8ED538254343 /* XCRemoteSwiftPackageReference "Hero" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/HeroTransitions/Hero.git";
+			requirement = {
+				kind = exactVersion;
+				version = 1.5.0;
+			};
+		};
+		DCB570F8328940F77F18A47A /* XCRemoteSwiftPackageReference "PinLayout" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/layoutBox/PinLayout";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+		EE0794037D2ABC1E9BCF2F28 /* XCRemoteSwiftPackageReference "FlexLayout" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/layoutBox/FlexLayout";
+			requirement = {
+				kind = exactVersion;
+				version = 1.3.24;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		990C7A93EAF78357937E44D4 /* SnapKit */ = {
+		1D84563C6DC31692496AD5F4 /* PinLayout */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = SnapKit;
+			productName = PinLayout;
+		};
+		3C2B858351E15AC7826E6DE4 /* Then */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Then;
+		};
+		77718C3206BFD086913A6F71 /* RxGesture */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = RxGesture;
+		};
+		7839595B2746D0D522C30D90 /* Hero */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Hero;
+		};
+		FA971027539EA02A31D7AF14 /* RIBs */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = RIBs;
+		};
+		FAB07FF18BE21C79333BF4D1 /* FlexLayout */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FlexLayout;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

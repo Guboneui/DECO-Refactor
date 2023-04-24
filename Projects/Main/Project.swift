@@ -30,6 +30,7 @@ let infoPlist: [String:InfoPlist.Value] = [
 ]
 
 public var baseSettings: [String: SettingValue] = [
+  "GCC_PREPROCESSOR_DEFINITIONS" : "FLEXLAYOUT_SWIFT_PACKAGE=1",
   "CURRENT_PROJECT_VERSION": "\(buildNumber)", // 빌드
   "MARKETING_VERSION": "\(buildVersion)", // 버전
   "DEVELOPMENT_TEAM": "VKGAQDGK5R",
@@ -57,7 +58,7 @@ let appTarget = Target(
     sources: ["Sources/**"],
     resources: ["Resources/**"],
     dependencies: [
-      .project(target: "Login", path: .relativeToCurrentFile("../Login"))
+      .project(target: "Login", path: .relativeToCurrentFile("../Login")),
     ],
     settings: settings,
     environment: ["OS_ACTIVITY_MODE": "disable"] // 불필요 로그 제거

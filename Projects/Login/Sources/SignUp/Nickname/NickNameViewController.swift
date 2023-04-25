@@ -8,19 +8,50 @@
 import RIBs
 import RxSwift
 import UIKit
+import RxGesture
+import PinLayout
+import CommonUI
+
 
 protocol NickNamePresentableListener: AnyObject {
-  // TODO: Declare properties and methods that the view controller can invoke to perform
-  // business logic, such as signIn(). This protocol is implemented by the corresponding
-  // interactor class.
+  
+  func pop()
 }
 
 final class NickNameViewController: UIViewController, NickNamePresentable, NickNameViewControllable {
   
   weak var listener: NickNamePresentableListener?
+  private let disposeBag = DisposeBag()
+  
+ 
+  private let navigationBar = NavigationBar(navTitle: "회원가입하기", showGuideLine: true)
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    self.view.backgroundColor = .blue
+    self.view.backgroundColor = .white
+    setupViews()
+    setupGestures()
+  }
+  
+  override func viewDidLayoutSubviews() {
+    super.viewDidLayoutSubviews()
+    self.setupLayouts()
+  }
+  
+  private func setupViews() {
+    self.view.addSubview(navigationBar)
+  }
+  
+  private func setupLayouts() {
+    navigationBar.pin
+      .top(view.pin.safeArea.top)
+      .horizontally()
+  }
+  
+  private func setupGestures() {
+    navigationBar.didTapBackButton = { [weak self] in
+      guard let self else { return }
+      self.listener?.pop()
+    }
   }
 }

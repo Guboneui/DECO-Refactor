@@ -46,6 +46,7 @@ public enum CommonUIAsset {
     public static let arrowDarkgrey2 = CommonUIImages(name: "arrow_darkgrey_2")
     public static let arrowRight = CommonUIImages(name: "arrow_right")
     public static let arrowWhite = CommonUIImages(name: "arrow_white")
+    public static let back = CommonUIImages(name: "back")
     public static let bell = CommonUIImages(name: "bell")
     public static let bellOn = CommonUIImages(name: "bell_on")
     public static let bulb = CommonUIImages(name: "bulb")
@@ -141,10 +142,20 @@ public final class CommonUIColors {
   }()
 
   #if canImport(SwiftUI)
+  private var _swiftUIColor: Any? = nil
   @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
-  public private(set) lazy var swiftUIColor: SwiftUI.Color = {
-    SwiftUI.Color(asset: self)
-  }()
+  public private(set) var swiftUIColor: SwiftUI.Color {
+    get {
+      if self._swiftUIColor == nil {
+        self._swiftUIColor = SwiftUI.Color(asset: self)
+      }
+
+      return self._swiftUIColor as! SwiftUI.Color
+    }
+    set {
+      self._swiftUIColor = newValue
+    }
+  }
   #endif
 
   fileprivate init(name: String) {
@@ -167,8 +178,8 @@ public extension CommonUIColors.Color {
 }
 
 #if canImport(SwiftUI)
+@available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
 public extension SwiftUI.Color {
-  @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
   init(asset: CommonUIColors) {
     let bundle = CommonUIResources.bundle
     self.init(asset.name, bundle: bundle)

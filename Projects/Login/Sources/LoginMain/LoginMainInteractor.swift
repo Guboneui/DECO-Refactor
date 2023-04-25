@@ -7,9 +7,13 @@
 
 import RIBs
 import RxSwift
+import Util
+import UIKit
 
 protocol LoginMainRouting: ViewableRouting {
   // TODO: Declare methods the interactor can invoke to manage sub-tree via the router.
+  func attachNicknameVC()
+  func detachNicknameVC()
 }
 
 protocol LoginMainPresentable: Presentable {
@@ -19,16 +23,28 @@ protocol LoginMainPresentable: Presentable {
 
 protocol LoginMainListener: AnyObject {
   // TODO: Declare methods the interactor can invoke to communicate with other RIBs.
+  
+  func didTapLoginButton()
 }
 
-final class LoginMainInteractor: PresentableInteractor<LoginMainPresentable>, LoginMainInteractable, LoginMainPresentableListener {
+final class LoginMainInteractor:
+  PresentableInteractor<LoginMainPresentable>,
+  LoginMainInteractable,
+  LoginMainPresentableListener
+
+{
+  
+  
+  
   
   weak var router: LoginMainRouting?
   weak var listener: LoginMainListener?
   
+  
   // TODO: Add additional dependencies to constructor. Do not perform any logic
   // in constructor.
   override init(presenter: LoginMainPresentable) {
+    
     super.init(presenter: presenter)
     presenter.listener = self
   }
@@ -36,10 +52,22 @@ final class LoginMainInteractor: PresentableInteractor<LoginMainPresentable>, Lo
   override func didBecomeActive() {
     super.didBecomeActive()
     // TODO: Implement business logic here.
+  
   }
   
   override func willResignActive() {
     super.willResignActive()
     // TODO: Pause any business logic.
   }
+  
+  func attachNicknameVC() {
+    router?.attachNicknameVC()
+    print("🔊[DEBUG]: Interactor")
+  }
+  
+  func nicknameDidTapClose() {
+    router?.detachNicknameVC()
+  }
+
+  
 }

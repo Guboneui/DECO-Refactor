@@ -7,7 +7,6 @@
 
 import RIBs
 
-
 public class LoginComponent: Component<EmptyDependency>, LoginMainDependency {
   public init() {
     super.init(dependency: EmptyComponent())

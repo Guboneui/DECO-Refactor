@@ -12,30 +12,32 @@ let setting: Settings = .settings(
   base: [
     "GCC_PREPROCESSOR_DEFINITIONS" : "FLEXLAYOUT_SWIFT_PACKAGE=1",
     "DEVELOPMENT_TEAM": "VKGAQDGK5R",
-    "OTHER_LDFLAGS": "-ObjC"
+//    "OTHER_LDFLAGS": "-ObjC"
   ],
   configurations: [],
   defaultSettings: .recommended
 )
 
 let packages: [Package] = [
-  .RIBs,
+//  .RIBs,
   .RxGesture,
-  .PinLayout,
-  .FlexLayout,
-  .Then,
-  .Hero
+//  .PinLayout,
+//  .FlexLayout,
+//  .Then,
+  .Hero,
+  .RxSwift
 ]
 
 let dependencies: [TargetDependency] = [
   .project(target: "CommonUI", path: "../CommonUI"),
   .project(target: "Util", path: "../Util"),
-  .RIBs,
+//  .RIBs,
   .RxGesture,
-  .PinLayout,
-  .FlexLayout,
-  .Then,
-  .Hero
+//  .PinLayout,
+//  .FlexLayout,
+//  .Then,
+  .Hero,
+  .RxSwift
 ]
 
 let login = Target(

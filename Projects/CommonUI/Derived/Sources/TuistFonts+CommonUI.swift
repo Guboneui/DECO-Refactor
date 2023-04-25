@@ -3,7 +3,7 @@
 // swiftformat:disable all
 // Generated using tuist — https://github.com/tuist/tuist
 
-#if os(OSX)
+#if os(macOS)
   import AppKit.NSFont
 #elseif os(iOS) || os(tvOS) || os(watchOS)
   import UIKit.UIFont
@@ -51,7 +51,7 @@ public struct CommonUIFontConvertible {
   public let family: String
   public let path: String
 
-  #if os(OSX)
+  #if os(macOS)
   public typealias Font = NSFont
   #elseif os(iOS) || os(tvOS) || os(watchOS)
   public typealias Font = UIFont
@@ -82,7 +82,7 @@ public extension CommonUIFontConvertible.Font {
     if !UIFont.fontNames(forFamilyName: font.family).contains(font.name) {
       font.register()
     }
-    #elseif os(OSX)
+    #elseif os(macOS)
     if let url = font.url, CTFontManagerGetScopeForURL(url as CFURL) == .none {
       font.register()
     }

@@ -20,6 +20,8 @@ protocol LoginMainPresentableListener: AnyObject {
   // TODO: Declare properties and methods that the view controller can invoke to perform
   // business logic, such as signIn(). This protocol is implemented by the corresponding
   // interactor class.
+  
+  func attachNicknameVC()
 }
 
 final class LoginMainViewController:
@@ -163,6 +165,11 @@ final class LoginMainViewController:
     self.setupLayouts()
   }
   
+  override func viewDidDisappear(_ animated: Bool) {
+    super.viewDidDisappear(animated)
+    print("ㅜ")
+  }
+  
   private func setupViews() {
     self.view.backgroundColor = CommonUIAsset.Color.whiteColor.color
     
@@ -256,6 +263,7 @@ final class LoginMainViewController:
       .bind { [weak self] _ in
         guard let self else { return }
         print("🔊[DEBUG]: 카카오 클릭")
+        self.listener?.attachNicknameVC()
         
       }.disposed(by: disposeBag)
     

@@ -24,7 +24,7 @@ extension Project {
                          infoPlist: .default,
                          sources: ["Sources/**"],
                          resources: ["Resources/**"],
-                         dependencies: [])
+                         dependencies: dependencies)
     
     return [sources]
   }

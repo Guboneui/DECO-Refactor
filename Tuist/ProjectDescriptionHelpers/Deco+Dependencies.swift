@@ -30,7 +30,7 @@ public extension Package {
   static let GoogleMapsUtils: Package = .remote(url: "https://github.com/googlemaps/google-maps-ios-utils.git", requirement: .upToNextMinor(from: "4.1.0"))
   static let RxSwift: Package = .remote(url: "https://github.com/ReactiveX/RxSwift.git", requirement: .exact("6.5.0"))
   static let RxGesture: Package = .remote(url: "https://github.com/RxSwiftCommunity/RxGesture", requirement: .upToNextMajor(from: "4.0.0"))
-  static let RIBs: Package = .remote(url: "https://github.com/uber/RIBs", requirement: .upToNextMajor(from: "0.9.2"))
+  static let RIBs: Package = .remote(url: "https://github.com/uber/RIBs", requirement: .upToNextMajor(from: "0.12.1"))
   static let FlexLayout: Package = .remote(url: "https://github.com/layoutBox/FlexLayout", requirement: .exact("1.3.24"))
   static let PinLayout: Package = .remote(url: "https://github.com/layoutBox/PinLayout", requirement: .upToNextMajor(from: "1.0.0"))
-}
+  }

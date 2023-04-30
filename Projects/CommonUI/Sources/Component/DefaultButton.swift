@@ -12,13 +12,13 @@ public class DefaultButton: UIButton {
   
   public override var isHighlighted: Bool {
     didSet {
-      backgroundColor = isHighlighted ? CommonUIAsset.Color.primaryColor.color.withAlphaComponent(0.8) : CommonUIAsset.Color.primaryColor.color
+      backgroundColor = isHighlighted ? .DecoColor.primaryColor.withAlphaComponent(0.8) : .DecoColor.primaryColor
     }
   }
   
   public override var isEnabled: Bool {
     didSet {
-      backgroundColor = isEnabled ? CommonUIAsset.Color.primaryColor.color : CommonUIAsset.Color.lightGray1.color
+      backgroundColor = isEnabled ? .DecoColor.primaryColor : .DecoColor.lightGray1
     }
   }
   
@@ -38,10 +38,10 @@ public class DefaultButton: UIButton {
   }
   
   private func setupDesign() {
-    self.titleLabel?.font = CommonUIFontFamily.Suit.medium.font(size: 16)
-    self.setTitleColor(CommonUIAsset.Color.darkGray2.color, for: .normal)
+    self.titleLabel?.font = .DecoFont.getFont(with: .Suit, type: .medium, size: 16)
+    self.setTitleColor(.DecoColor.darkGray2, for: .normal)
     self.layer.masksToBounds = true
     self.layer.cornerRadius = 8
-    self.backgroundColor = CommonUIAsset.Color.primaryColor.color
+    self.backgroundColor = .DecoColor.primaryColor
   }
 }

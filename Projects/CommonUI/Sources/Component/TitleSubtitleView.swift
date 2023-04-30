@@ -17,13 +17,13 @@ public class TitleSubtitleView: UIView {
   
   private let titleLabel = UILabel().then {
     $0.font = CommonUIFontFamily.NotoSansKR.medium.font(size: 18)
-    $0.textColor = CommonUIAsset.Color.darkGray2.color
+    $0.textColor = .DecoColor.darkGray2
     $0.numberOfLines = 0
   }
   
   private let subTitleLabel = UILabel().then {
     $0.font = CommonUIFontFamily.NotoSansKR.medium.font(size: 12)
-    $0.textColor = CommonUIAsset.Color.lightGray2.color
+    $0.textColor = .DecoColor.lightGray2
   }
   
   public init(title: String, subTitle: String) {

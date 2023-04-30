@@ -34,21 +34,21 @@ final class NickNameViewController: UIViewController, NickNamePresentable, NickN
   
   private let nicknameTextfield = UITextField().then {
     $0.placeholder = "닉네임을 작성해 주세요"
-    $0.font = CommonUIFontFamily.NotoSansKR.medium.font(size: 14)
-    $0.textColor = CommonUIAsset.Color.darkGray2.color
-    $0.tintColor = CommonUIAsset.Color.darkGray2.color
+    $0.font = .DecoFont.getFont(with: .NotoSans, type: .medium, size: 14)
+    $0.textColor = .DecoColor.darkGray2
+    $0.tintColor = .DecoColor.darkGray2
     $0.layer.masksToBounds = true
     $0.layer.cornerRadius = 8
     $0.layer.borderWidth = 0.75
-    $0.layer.borderColor = CommonUIAsset.Color.lightGray2.color.cgColor
+    $0.layer.borderColor = UIColor.DecoColor.lightGray2.cgColor
     $0.setLeftPaddingPoints(16)
     $0.setRightPaddingPoints(16)
   }
   
   private let warningLabel = UILabel().then {
     $0.text = "이미 사용중인 닉네임입니다"
-    $0.font = CommonUIFontFamily.NotoSansKR.medium.font(size: 10)
-    $0.textColor = CommonUIAsset.Color.warningColor.color
+    $0.font = .DecoFont.getFont(with: .NotoSans, type: .medium, size: 10)
+    $0.textColor = .DecoColor.warningColor
   }
   
   private let nextButton = DefaultButton(title: "다음")

@@ -3,13 +3,20 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		0DDB27BFF7A1632F03B3F0EA /* SUIT-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = F26FF844FFFBE6F04FE82E77 /* SUIT-Medium.otf */; };
 		132E71F17B1D363766B88B84 /* NotoSansKR-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 15CD4B8F263EBED9EE862DEC /* NotoSansKR-Bold.otf */; };
 		26A89C8ABDA7272793E1DF1A /* Image.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42C46A1D137F6D04C3967B64 /* Image.xcassets */; };
+		2C418F7829F801C40078AFD8 /* TitleSubtitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C418F7729F801C40078AFD8 /* TitleSubtitleView.swift */; };
+		2C418F7A29F8341D0078AFD8 /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C418F7929F8341D0078AFD8 /* UITextField+Extension.swift */; };
+		2C74015929FEB0DC0030F3CF /* DefaultButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C74015829FEB0DC0030F3CF /* DefaultButton.swift */; };
+		2C74015B29FEB7260030F3CF /* UIDevice+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C74015A29FEB7260030F3CF /* UIDevice+Extension.swift */; };
+		2C74016129FECB4D0030F3CF /* DecoColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C74016029FECB4D0030F3CF /* DecoColor.swift */; };
+		2C74016329FECB6B0030F3CF /* DecoImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C74016229FECB6B0030F3CF /* DecoImage.swift */; };
+		2C74016529FECCEE0030F3CF /* DecoFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C74016429FECCEE0030F3CF /* DecoFont.swift */; };
 		39EC6BCA36C6D9020E2FBEEE /* SUIT-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7D7B839FF2BD4170FF0A7D18 /* SUIT-Bold.otf */; };
 		3B93A3AC2360B6AA4211F43D /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB2A151EF61A0078BCB1E57 /* UILabel+Extension.swift */; };
 		5FBEC3225BA5ECC0C0F9FD87 /* Color.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 59964AA3F0394760335743EB /* Color.xcassets */; };
@@ -49,31 +56,38 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		1006E85895DAE7BD2F9C0138 /* SUIT-ExtraBold.otf */ = {isa = PBXFileReference; path = "SUIT-ExtraBold.otf"; sourceTree = "<group>"; };
-		15CD4B8F263EBED9EE862DEC /* NotoSansKR-Bold.otf */ = {isa = PBXFileReference; path = "NotoSansKR-Bold.otf"; sourceTree = "<group>"; };
-		2AAA16EB10167F4F8A589DF2 /* SUIT-Light.otf */ = {isa = PBXFileReference; path = "SUIT-Light.otf"; sourceTree = "<group>"; };
-		2EA530434C111C4BB344B33F /* NotoSansKR-Black.otf */ = {isa = PBXFileReference; path = "NotoSansKR-Black.otf"; sourceTree = "<group>"; };
+		1006E85895DAE7BD2F9C0138 /* SUIT-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUIT-ExtraBold.otf"; sourceTree = "<group>"; };
+		15CD4B8F263EBED9EE862DEC /* NotoSansKR-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Bold.otf"; sourceTree = "<group>"; };
+		2AAA16EB10167F4F8A589DF2 /* SUIT-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUIT-Light.otf"; sourceTree = "<group>"; };
+		2C418F7729F801C40078AFD8 /* TitleSubtitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleSubtitleView.swift; sourceTree = "<group>"; };
+		2C418F7929F8341D0078AFD8 /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
+		2C74015829FEB0DC0030F3CF /* DefaultButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultButton.swift; sourceTree = "<group>"; };
+		2C74015A29FEB7260030F3CF /* UIDevice+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Extension.swift"; sourceTree = "<group>"; };
+		2C74016029FECB4D0030F3CF /* DecoColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecoColor.swift; sourceTree = "<group>"; };
+		2C74016229FECB6B0030F3CF /* DecoImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecoImage.swift; sourceTree = "<group>"; };
+		2C74016429FECCEE0030F3CF /* DecoFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecoFont.swift; sourceTree = "<group>"; };
+		2EA530434C111C4BB344B33F /* NotoSansKR-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Black.otf"; sourceTree = "<group>"; };
 		42C46A1D137F6D04C3967B64 /* Image.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Image.xcassets; sourceTree = "<group>"; };
 		4BE8D92AE9CC47C9A81DDC00 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
-		59332FC4BE501E08FBC09008 /* SUIT-Thin.otf */ = {isa = PBXFileReference; path = "SUIT-Thin.otf"; sourceTree = "<group>"; };
+		59332FC4BE501E08FBC09008 /* SUIT-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUIT-Thin.otf"; sourceTree = "<group>"; };
 		59964AA3F0394760335743EB /* Color.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Color.xcassets; sourceTree = "<group>"; };
-		5F7A7C2511C18A00FD6038C5 /* SUIT-SemiBold.otf */ = {isa = PBXFileReference; path = "SUIT-SemiBold.otf"; sourceTree = "<group>"; };
+		5F7A7C2511C18A00FD6038C5 /* SUIT-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUIT-SemiBold.otf"; sourceTree = "<group>"; };
 		65557C5B1D459C06F72A1C53 /* TuistFonts+CommonUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TuistFonts+CommonUI.swift"; sourceTree = "<group>"; };
 		6F625FE1E640FBDB817D76A3 /* TuistAssets+CommonUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TuistAssets+CommonUI.swift"; sourceTree = "<group>"; };
-		7C05DBB465D60BCA13477EF8 /* NotoSansKR-Light.otf */ = {isa = PBXFileReference; path = "NotoSansKR-Light.otf"; sourceTree = "<group>"; };
-		7D7B839FF2BD4170FF0A7D18 /* SUIT-Bold.otf */ = {isa = PBXFileReference; path = "SUIT-Bold.otf"; sourceTree = "<group>"; };
-		86E3FD9C981C1524E3907F57 /* SUIT-Heavy.otf */ = {isa = PBXFileReference; path = "SUIT-Heavy.otf"; sourceTree = "<group>"; };
-		92B162ACA7CC5EBDFC92444E /* NotoSansKR-Thin.otf */ = {isa = PBXFileReference; path = "NotoSansKR-Thin.otf"; sourceTree = "<group>"; };
+		7C05DBB465D60BCA13477EF8 /* NotoSansKR-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Light.otf"; sourceTree = "<group>"; };
+		7D7B839FF2BD4170FF0A7D18 /* SUIT-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUIT-Bold.otf"; sourceTree = "<group>"; };
+		86E3FD9C981C1524E3907F57 /* SUIT-Heavy.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUIT-Heavy.otf"; sourceTree = "<group>"; };
+		92B162ACA7CC5EBDFC92444E /* NotoSansKR-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Thin.otf"; sourceTree = "<group>"; };
 		94EF204F3CD6F86C6167C300 /* TuistBundle+CommonUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TuistBundle+CommonUI.swift"; sourceTree = "<group>"; };
 		AAB2A151EF61A0078BCB1E57 /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
-		BBDFCECD69448A84AA99E9F7 /* SUIT-Regular.otf */ = {isa = PBXFileReference; path = "SUIT-Regular.otf"; sourceTree = "<group>"; };
+		BBDFCECD69448A84AA99E9F7 /* SUIT-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUIT-Regular.otf"; sourceTree = "<group>"; };
 		CDBD62030B65AE3A6A7F34D6 /* CommonUI-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "CommonUI-Info.plist"; sourceTree = "<group>"; };
-		CED5695C335D5BB3770DFCCF /* SUIT-ExtraLight.otf */ = {isa = PBXFileReference; path = "SUIT-ExtraLight.otf"; sourceTree = "<group>"; };
+		CED5695C335D5BB3770DFCCF /* SUIT-ExtraLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUIT-ExtraLight.otf"; sourceTree = "<group>"; };
 		D08B2B67BBE804590138C890 /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
-		E38DB27C3893FC63485E721B /* NotoSansKR-Regular.otf */ = {isa = PBXFileReference; path = "NotoSansKR-Regular.otf"; sourceTree = "<group>"; };
+		E38DB27C3893FC63485E721B /* NotoSansKR-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Regular.otf"; sourceTree = "<group>"; };
 		F0F7A08F911F04FE3F6FE36B /* CommonUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CommonUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F26FF844FFFBE6F04FE82E77 /* SUIT-Medium.otf */ = {isa = PBXFileReference; path = "SUIT-Medium.otf"; sourceTree = "<group>"; };
-		F7B93756B58D9D39B4C97D24 /* NotoSansKR-Medium.otf */ = {isa = PBXFileReference; path = "NotoSansKR-Medium.otf"; sourceTree = "<group>"; };
+		F26FF844FFFBE6F04FE82E77 /* SUIT-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUIT-Medium.otf"; sourceTree = "<group>"; };
+		F7B93756B58D9D39B4C97D24 /* NotoSansKR-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Medium.otf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +144,16 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		2C74015E29FECB370030F3CF /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				2C74016029FECB4D0030F3CF /* DecoColor.swift */,
+				2C74016229FECB6B0030F3CF /* DecoImage.swift */,
+				2C74016429FECCEE0030F3CF /* DecoFont.swift */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
 		2CB9B041D0482E219F735CBC /* Color */ = {
 			isa = PBXGroup;
 			children = (
@@ -141,8 +165,11 @@
 		45816E8E783249B256914008 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				2C74015E29FECB370030F3CF /* Assets */,
 				AAB2A151EF61A0078BCB1E57 /* UILabel+Extension.swift */,
 				4BE8D92AE9CC47C9A81DDC00 /* UIView+Extension.swift */,
+				2C418F7929F8341D0078AFD8 /* UITextField+Extension.swift */,
+				2C74015A29FEB7260030F3CF /* UIDevice+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -194,6 +221,8 @@
 			isa = PBXGroup;
 			children = (
 				D08B2B67BBE804590138C890 /* NavigationBar.swift */,
+				2C418F7729F801C40078AFD8 /* TitleSubtitleView.swift */,
+				2C74015829FEB0DC0030F3CF /* DefaultButton.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -257,8 +286,6 @@
 		C67E63A1F9DE3A88CFB79F4C /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				TargetAttributes = {
-				};
 			};
 			buildConfigurationList = 26B57D5F96290632B0503228 /* Build configuration list for PBXProject "CommonUI" */;
 			compatibilityVersion = "Xcode 13.0";
@@ -317,8 +344,15 @@
 			files = (
 				C94951E661D9DC9D28B56273 /* TuistAssets+CommonUI.swift in Sources */,
 				7DC59B80630854028C7C80F4 /* TuistBundle+CommonUI.swift in Sources */,
+				2C418F7829F801C40078AFD8 /* TitleSubtitleView.swift in Sources */,
+				2C74016129FECB4D0030F3CF /* DecoColor.swift in Sources */,
+				2C74016529FECCEE0030F3CF /* DecoFont.swift in Sources */,
+				2C74015B29FEB7260030F3CF /* UIDevice+Extension.swift in Sources */,
 				8015832F17AC96CA7BBDEA57 /* TuistFonts+CommonUI.swift in Sources */,
+				2C74015929FEB0DC0030F3CF /* DefaultButton.swift in Sources */,
 				BD2791A8A43540ABE53FA350 /* NavigationBar.swift in Sources */,
+				2C74016329FECB6B0030F3CF /* DecoImage.swift in Sources */,
+				2C418F7A29F8341D0078AFD8 /* UITextField+Extension.swift in Sources */,
 				3B93A3AC2360B6AA4211F43D /* UILabel+Extension.swift in Sources */,
 				C657246CEF8452B4CEA5C60C /* UIView+Extension.swift in Sources */,
 			);

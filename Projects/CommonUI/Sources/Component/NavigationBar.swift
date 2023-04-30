@@ -20,18 +20,18 @@ public class NavigationBar: UIView {
   public var didTapBackButton: (()->())?
   
   private let backButton = UIButton(type: .system).then {
-    $0.setImage(CommonUIAsset.Image.arrowDarkgrey2.image, for: .normal)
-    $0.tintColor = CommonUIAsset.Color.darkGray1.color
+    $0.setImage(.DecoImage.arrowDarkgray2, for: .normal)
+    $0.tintColor = .DecoColor.darkGray1
     $0.imageEdgeInsets = UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)
   }
   
   private let titleLabel = UILabel().then {
-    $0.font = CommonUIFontFamily.Suit.bold.font(size: 16)
-    $0.textColor = CommonUIAsset.Color.darkGray2.color
+    $0.font = .DecoFont.getFont(with: .Suit, type: .bold, size: 16)
+    $0.textColor = .DecoColor.darkGray2
   }
   
   private let guideLineView = UIView().then {
-    $0.backgroundColor = CommonUIAsset.Color.lightGray1.color
+    $0.backgroundColor = .DecoColor.lightGray1
   }
   
   
@@ -53,7 +53,7 @@ public class NavigationBar: UIView {
   }
   
   private func setupViews() {
-    self.backgroundColor = CommonUIAsset.Color.whiteColor.color
+    self.backgroundColor = .DecoColor.whiteColor
     self.titleLabel.text = navTitle
     
     self.addSubview(backButton)

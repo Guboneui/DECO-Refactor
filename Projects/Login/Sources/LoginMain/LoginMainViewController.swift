@@ -33,110 +33,110 @@ final class LoginMainViewController:
   private let disposeBag = DisposeBag()
   
   private let logoImageView = UIImageView().then {
-    $0.image = CommonUIAsset.Image.logoYellow.image
+    $0.image = .DecoImage.logoYellow
   }
   
   private let titleLabel = UILabel().then {
     $0.text = "온라인 감성 문구 편집샵"
-    $0.textColor = CommonUIAsset.Color.darkGray1.color
-    $0.font = CommonUIFontFamily.NotoSansKR.medium.font(size: 18)
+    $0.textColor = .DecoColor.darkGray1
+    $0.font = .DecoFont.getFont(with: .NotoSans, type: .medium, size: 18)
   }
   
   private let infoContainer = UIView()
   
   private let startLabel = UILabel().then {
     $0.text = "DECO를 시작하게 되면 "
-    $0.font = CommonUIFontFamily.NotoSansKR.medium.font(size: 8)
-    $0.textColor = CommonUIAsset.Color.gray3.color
+    $0.font = .DecoFont.getFont(with: .NotoSans, type: .medium, size: 8)
+    $0.textColor = .DecoColor.gray3
   }
   
   private let termLabel = UILabel().then {
     let attributedString = $0.makeUnderLineAttributedString(
       with: "이용약관",
       height: 12.0,
-      font: CommonUIFontFamily.NotoSansKR.bold.font(size: 8),
-      underLineColor: CommonUIAsset.Color.gray3.color
+      font: .DecoFont.getFont(with: .NotoSans, type: .bold, size: 8),
+      underLineColor: .DecoColor.gray3
     )
     $0.attributedText = attributedString
-    $0.textColor = CommonUIAsset.Color.gray3.color
+    $0.textColor = .DecoColor.gray3
   }
   
   private let andLabel = UILabel().then {
     $0.text = "과 "
-    $0.font = CommonUIFontFamily.NotoSansKR.medium.font(size: 8)
-    $0.textColor = CommonUIAsset.Color.gray3.color
+    $0.font = .DecoFont.getFont(with: .NotoSans, type: .medium, size: 8)
+    $0.textColor = .DecoColor.gray3
   }
   
   private let privacyLabel = UILabel().then {
     let attributedString = $0.makeUnderLineAttributedString(
       with: "개인정보취급방침",
       height: 12.0,
-      font: CommonUIFontFamily.NotoSansKR.bold.font(size: 8),
-      underLineColor: CommonUIAsset.Color.gray3.color
+      font: .DecoFont.getFont(with: .NotoSans, type: .bold, size: 8),
+      underLineColor: .DecoColor.gray3
     )
     $0.attributedText = attributedString
-    $0.textColor = CommonUIAsset.Color.gray3.color
+    $0.textColor = .DecoColor.gray3
   }
   
   private let agreeLabel = UILabel().then {
     $0.text = "에 동의하게 됩니다."
-    $0.font = CommonUIFontFamily.NotoSansKR.medium.font(size: 8)
-    $0.textColor = CommonUIAsset.Color.gray3.color
+    $0.font = .DecoFont.getFont(with: .NotoSans, type: .medium, size: 8)
+    $0.textColor = .DecoColor.gray3
   }
   
   private let loginContainer = UIView()
   
   private let kakaoLoginView = UIView().then {
-    $0.backgroundColor = CommonUIAsset.Color.kakao.color
+    $0.backgroundColor = .DecoColor.kakaoColor
     $0.makeCornerRadius(radius: 8.0)
   }
   
   private let kakaoLogoImageView = UIImageView().then {
-    $0.image = CommonUIAsset.Image.kakaoLogo.image
+    $0.image = .DecoImage.kakaoLogo
   }
   
   private let kakaoLoginLabel = UILabel().then {
     $0.text = "카카오로 시작하기"
-    $0.textColor = CommonUIAsset.Color.blackColor.color.withAlphaComponent(0.85)
-    $0.font = CommonUIFontFamily.Suit.bold.font(size: 16)
+    $0.textColor = .DecoColor.blackColor.withAlphaComponent(0.85)
+    $0.font = .DecoFont.getFont(with: .Suit, type: .bold, size: 16)
   }
   
   private let naverLoginView = UIView().then {
-    $0.backgroundColor = CommonUIAsset.Color.naver.color
+    $0.backgroundColor = .DecoColor.naverColor
     $0.makeCornerRadius(radius: 8.0)
   }
   
   private let naverLogoImageView = UIImageView().then {
-    $0.image = CommonUIAsset.Image.naverLogo.image
+    $0.image = .DecoImage.naverLogo
   }
   
   private let naverLoginLabel = UILabel().then {
     $0.text = "네이버로 시작하기"
-    $0.textColor = CommonUIAsset.Color.whiteColor.color
-    $0.font = CommonUIFontFamily.Suit.bold.font(size: 16)
+    $0.textColor = .DecoColor.whiteColor
+    $0.font = .DecoFont.getFont(with: .Suit, type: .bold, size: 16)
   }
   
   
   
   private let googleLoginView = UIView().then {
-    $0.backgroundColor = CommonUIAsset.Color.whiteColor.color
+    $0.backgroundColor = .DecoColor.whiteColor
     $0.makeCornerRadius(radius: 8.0)
-    $0.makeBorder(width: 1.0, borderColor: CommonUIAsset.Color.lightGray2.color)
+    $0.makeBorder(width: 1.0, borderColor: .DecoColor.lightGray2)
   }
   
   private let googleLogoImageView = UIImageView().then {
-    $0.image = CommonUIAsset.Image.googleLogo.image
+    $0.image = .DecoImage.googleLogo
   }
   
   private let googleLoginLabel = UILabel().then {
     $0.text = "구글로 시작하기"
-    $0.textColor = CommonUIAsset.Color.gray3.color
-    $0.font = CommonUIFontFamily.Suit.bold.font(size: 16)
+    $0.textColor = .DecoColor.gray3
+    $0.font = .DecoFont.getFont(with: .Suit, type: .bold, size: 16)
   }
   
   
   private let appleLoginView = UIView().then {
-    $0.backgroundColor = CommonUIAsset.Color.blackColor.color
+    $0.backgroundColor = .DecoColor.blackColor
     $0.makeCornerRadius(radius: 8.0)
     
   }
@@ -147,8 +147,8 @@ final class LoginMainViewController:
   
   private let appleLoginLabel = UILabel().then {
     $0.text = "애플로 시작하기"
-    $0.textColor = CommonUIAsset.Color.whiteColor.color
-    $0.font = CommonUIFontFamily.Suit.bold.font(size: 16)
+    $0.textColor = .DecoColor.whiteColor
+    $0.font = .DecoFont.getFont(with: .Suit, type: .bold, size: 16)
   }
   
   // MARK: - LifeCycle
@@ -168,7 +168,7 @@ final class LoginMainViewController:
   }
   
   private func setupViews() {
-    self.view.backgroundColor = CommonUIAsset.Color.whiteColor.color
+    self.view.backgroundColor = .DecoColor.whiteColor
     
     self.view.addSubview(logoImageView)
     self.view.addSubview(titleLabel)

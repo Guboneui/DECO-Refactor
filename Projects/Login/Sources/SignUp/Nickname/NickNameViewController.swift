@@ -12,10 +12,8 @@ import RxGesture
 import PinLayout
 import CommonUI
 
-
 protocol NickNamePresentableListener: AnyObject {
-  
-  func pop()
+  func popNicknameVC()
 }
 
 final class NickNameViewController: UIViewController, NickNamePresentable, NickNameViewControllable {
@@ -24,7 +22,37 @@ final class NickNameViewController: UIViewController, NickNamePresentable, NickN
   private let disposeBag = DisposeBag()
   
  
-  private let navigationBar = NavigationBar(navTitle: "회원가입하기", showGuideLine: true)
+  private let navigationBar = NavigationBar(
+    navTitle: "회원가입하기",
+    showGuideLine: true
+  )
+  
+  private let titleSubtitleView = TitleSubtitleView(
+    title: "반가워요! 닉네임을 정해주세요 :)",
+    subTitle: "tip. 부르기 쉬운 한글 닉네임은 어때요?"
+  )
+  
+  private let nicknameTextfield = UITextField().then {
+    $0.placeholder = "닉네임을 작성해 주세요"
+    $0.font = CommonUIFontFamily.NotoSansKR.medium.font(size: 14)
+    $0.textColor = CommonUIAsset.Color.darkGray2.color
+    $0.tintColor = CommonUIAsset.Color.darkGray2.color
+    $0.layer.masksToBounds = true
+    $0.layer.cornerRadius = 8
+    $0.layer.borderWidth = 0.75
+    $0.layer.borderColor = CommonUIAsset.Color.lightGray2.color.cgColor
+    $0.setLeftPaddingPoints(16)
+    $0.setRightPaddingPoints(16)
+  }
+  
+  private let warningLabel = UILabel().then {
+    $0.text = "이미 사용중인 닉네임입니다"
+    $0.font = CommonUIFontFamily.NotoSansKR.medium.font(size: 10)
+    $0.textColor = CommonUIAsset.Color.warningColor.color
+  }
+  
+  private let nextButton = DefaultButton(title: "다음")
+  
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -40,18 +68,48 @@ final class NickNameViewController: UIViewController, NickNamePresentable, NickN
   
   private func setupViews() {
     self.view.addSubview(navigationBar)
+    self.view.addSubview(titleSubtitleView)
+    self.view.addSubview(nicknameTextfield)
+    self.view.addSubview(warningLabel)
+    self.view.addSubview(nextButton)
   }
   
   private func setupLayouts() {
+    
     navigationBar.pin
-      .top(view.pin.safeArea.top)
+      .top(view.pin.safeArea)
       .horizontally()
+      .sizeToFit(.width)
+
+    titleSubtitleView.pin
+      .below(of: navigationBar)
+      .horizontally()
+      .marginTop(76)
+    
+    nicknameTextfield.pin
+      .below(of: titleSubtitleView)
+      .horizontally()
+      .height(48)
+      .margin(32, 35, 0, 30) // top left bottom right
+      
+    warningLabel.pin
+      .below(of: nicknameTextfield, aligned: .left)
+      .height(12)
+      .marginLeft(3)
+      .marginTop(12)
+      .sizeToFit()
+    
+    nextButton.pin
+      .bottom(view.pin.safeArea)
+      .horizontally()
+      .marginHorizontal(32)
+      .marginBottom(UIDevice.current.hasNotch ? 34 : 43)
   }
   
   private func setupGestures() {
     navigationBar.didTapBackButton = { [weak self] in
       guard let self else { return }
-      self.listener?.pop()
+      self.listener?.popNicknameVC()
     }
   }
 }

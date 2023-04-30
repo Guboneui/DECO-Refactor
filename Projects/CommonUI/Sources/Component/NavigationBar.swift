@@ -39,7 +39,6 @@ public class NavigationBar: UIView {
     self.navTitle = navTitle
     self.showGuideLine = showGuideLine
     super.init(frame: .zero)
-
     self.setupViews()
     self.setupGestures()
   }
@@ -55,6 +54,7 @@ public class NavigationBar: UIView {
   
   private func setupViews() {
     self.backgroundColor = CommonUIAsset.Color.whiteColor.color
+    self.titleLabel.text = navTitle
     
     self.addSubview(backButton)
     self.addSubview(titleLabel)
@@ -62,30 +62,28 @@ public class NavigationBar: UIView {
     if showGuideLine {
       self.addSubview(guideLineView)
     }
-    
-    self.titleLabel.text = navTitle
   }
   
   private func setupLayouts() {
-    pin.height(48)
+    self.pin.horizontally()
     
     backButton.pin
       .vertically()
       .left()
       .size(48)
-
-    titleLabel.pin
-      .left(to: backButton.edge.right)
+    
+    titleLabel.pin.after(of: backButton, aligned: .center)
       .marginLeft(8)
-      .centerRight()
-      .sizeToFit(.width)
+      .sizeToFit()
     
     if showGuideLine {
       guideLineView.pin
-        .horizontally()
         .bottom()
+        .horizontally()
         .height(0.5)
     }
+    
+    self.pin.wrapContent(.vertically)
     
   }
   

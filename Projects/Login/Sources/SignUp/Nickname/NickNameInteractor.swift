@@ -18,7 +18,7 @@ protocol NickNamePresentable: Presentable {
 }
 
 protocol NickNameListener: AnyObject {
-  func nicknameDidTapClose()
+  func detachNicknameVC()
 }
 
 final class NickNameInteractor:
@@ -45,8 +45,8 @@ final class NickNameInteractor:
     super.willResignActive()
   }
   
-  func pop() {
-    listener?.nicknameDidTapClose()
+  func popNicknameVC() {
+    listener?.detachNicknameVC()
   }
   
 }

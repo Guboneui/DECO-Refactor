@@ -21,7 +21,7 @@ protocol LoginMainPresentableListener: AnyObject {
   // business logic, such as signIn(). This protocol is implemented by the corresponding
   // interactor class.
   
-  func attachNicknameVC()
+  func pushNicknameVC()
 }
 
 final class LoginMainViewController:
@@ -151,8 +151,6 @@ final class LoginMainViewController:
     $0.font = CommonUIFontFamily.Suit.bold.font(size: 16)
   }
   
-  
-  
   // MARK: - LifeCycle
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -167,7 +165,6 @@ final class LoginMainViewController:
   
   override func viewDidDisappear(_ animated: Bool) {
     super.viewDidDisappear(animated)
-    print("ㅜ")
   }
   
   private func setupViews() {
@@ -263,7 +260,7 @@ final class LoginMainViewController:
       .bind { [weak self] _ in
         guard let self else { return }
         print("🔊[DEBUG]: 카카오 클릭")
-        self.listener?.attachNicknameVC()
+        self.listener?.pushNicknameVC()
         
       }.disposed(by: disposeBag)
     

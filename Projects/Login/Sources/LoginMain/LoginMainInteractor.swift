@@ -31,11 +31,7 @@ final class LoginMainInteractor:
   PresentableInteractor<LoginMainPresentable>,
   LoginMainInteractable,
   LoginMainPresentableListener
-
 {
-  
-  
-  
   
   weak var router: LoginMainRouting?
   weak var listener: LoginMainListener?
@@ -60,14 +56,12 @@ final class LoginMainInteractor:
     // TODO: Pause any business logic.
   }
   
-  func attachNicknameVC() {
+  func pushNicknameVC() {
     router?.attachNicknameVC()
     print("🔊[DEBUG]: Interactor")
   }
   
-  func nicknameDidTapClose() {
+  func detachNicknameVC() {
     router?.detachNicknameVC()
   }
-
-  
 }

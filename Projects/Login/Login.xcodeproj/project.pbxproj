@@ -8,11 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		05ABEBAF530FE13F5452BB60 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BA03B8D05AAC62E0AD725D /* LoginView.swift */; };
+		188511661225A901CA6C2279 /* GenderRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7DB39AA7585F22001CA703C /* GenderRouter.swift */; };
 		29591AAD3FFD33357A7F0572 /* LoginMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E714AD57768426CD6CDEAD /* LoginMainViewController.swift */; };
-		2CD7FDE229FF5D550052B3B6 /* GenderRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD7FDDE29FF5D550052B3B6 /* GenderRouter.swift */; };
-		2CD7FDE329FF5D550052B3B6 /* GenderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD7FDDF29FF5D550052B3B6 /* GenderViewController.swift */; };
-		2CD7FDE429FF5D550052B3B6 /* GenderBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD7FDE029FF5D550052B3B6 /* GenderBuilder.swift */; };
-		2CD7FDE529FF5D550052B3B6 /* GenderInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD7FDE129FF5D550052B3B6 /* GenderInteractor.swift */; };
+		2CD7FDF129FFA5800052B3B6 /* AgeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD7FDED29FFA5800052B3B6 /* AgeRouter.swift */; };
+		2CD7FDF229FFA5800052B3B6 /* AgeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD7FDEE29FFA5800052B3B6 /* AgeViewController.swift */; };
+		2CD7FDF329FFA5800052B3B6 /* AgeBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD7FDEF29FFA5800052B3B6 /* AgeBuilder.swift */; };
+		2CD7FDF429FFA5800052B3B6 /* AgeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD7FDF029FFA5800052B3B6 /* AgeInteractor.swift */; };
 		33F7153E7375AC679AD43144 /* NickNameRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA7A9D90F63851CF86F986A /* NickNameRouter.swift */; };
 		39333C0D64BE1CDCF09F21C5 /* NickNameBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2A0E129B15AAB06E6F6894 /* NickNameBuilder.swift */; };
 		451AC81235BBDAE54CE314D7 /* LoginMainRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC42161F1C62E6A03AC6F99 /* LoginMainRouter.swift */; };
@@ -21,12 +22,15 @@
 		758EEAC0BCF54C3CDD386164 /* LoginComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAA7FCCE1B280C3832C28D3 /* LoginComponent.swift */; };
 		971F81A40F83E972F4F54B41 /* LoginMainBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293D99C8D142BA60CA47CCC0 /* LoginMainBuilder.swift */; };
 		AA66CE4D6213C35ECFA384DC /* Util.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 111D1A79CB7EAB7BDA369813 /* Util.framework */; platformFilter = ios; };
+		B6FBEB2958F87677C9FC9557 /* GenderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78718CD1513C4208CA14B11C /* GenderViewController.swift */; };
 		BA1447347F172DE4651EB9A6 /* Hero in Frameworks */ = {isa = PBXBuildFile; productRef = 7839595B2746D0D522C30D90 /* Hero */; };
+		BC06FEAF029E1F8C0C84ED85 /* GenderInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ABF66364914A10602DA34FB /* GenderInteractor.swift */; };
 		C0B044FCE2BE487261281923 /* TermView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4D244B64542185E6C4829F /* TermView.swift */; };
 		D5DA8CBAD0929D29711B9FA0 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = BA1C87B88199D0AD7FE70894 /* RxSwift */; };
 		E01367743430A57E02252E16 /* RxGesture in Frameworks */ = {isa = PBXBuildFile; productRef = 77718C3206BFD086913A6F71 /* RxGesture */; };
 		F841FF334E1C6034EABAEDCB /* CommonUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21D6E91FA13D3D7D7989E850 /* CommonUI.framework */; platformFilter = ios; };
 		F9DF39C63EFF75BD58AF12CB /* LoginMainInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B037B55F4CC6B5BB890396 /* LoginMainInteractor.swift */; };
+		FB885C465F0A1E2AE29F19EB /* GenderBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6BABAA3CDA2BBBFAEFC76F6 /* GenderBuilder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -51,15 +55,19 @@
 		21D6E91FA13D3D7D7989E850 /* CommonUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CommonUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		28C6E6787DFAF624F53D6F5B /* Login.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Login.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		293D99C8D142BA60CA47CCC0 /* LoginMainBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginMainBuilder.swift; sourceTree = "<group>"; };
-		2CD7FDDE29FF5D550052B3B6 /* GenderRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderRouter.swift; sourceTree = "<group>"; };
-		2CD7FDDF29FF5D550052B3B6 /* GenderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderViewController.swift; sourceTree = "<group>"; };
-		2CD7FDE029FF5D550052B3B6 /* GenderBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderBuilder.swift; sourceTree = "<group>"; };
-		2CD7FDE129FF5D550052B3B6 /* GenderInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderInteractor.swift; sourceTree = "<group>"; };
+		2ABF66364914A10602DA34FB /* GenderInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderInteractor.swift; sourceTree = "<group>"; };
+		2CD7FDED29FFA5800052B3B6 /* AgeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgeRouter.swift; sourceTree = "<group>"; };
+		2CD7FDEE29FFA5800052B3B6 /* AgeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgeViewController.swift; sourceTree = "<group>"; };
+		2CD7FDEF29FFA5800052B3B6 /* AgeBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgeBuilder.swift; sourceTree = "<group>"; };
+		2CD7FDF029FFA5800052B3B6 /* AgeInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgeInteractor.swift; sourceTree = "<group>"; };
 		4FA7A9D90F63851CF86F986A /* NickNameRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameRouter.swift; sourceTree = "<group>"; };
+		78718CD1513C4208CA14B11C /* GenderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderViewController.swift; sourceTree = "<group>"; };
 		83E714AD57768426CD6CDEAD /* LoginMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginMainViewController.swift; sourceTree = "<group>"; };
 		86BA03B8D05AAC62E0AD725D /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		A7DB39AA7585F22001CA703C /* GenderRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderRouter.swift; sourceTree = "<group>"; };
 		ADAA7FCCE1B280C3832C28D3 /* LoginComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginComponent.swift; sourceTree = "<group>"; };
 		BA2A0E129B15AAB06E6F6894 /* NickNameBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameBuilder.swift; sourceTree = "<group>"; };
+		D6BABAA3CDA2BBBFAEFC76F6 /* GenderBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderBuilder.swift; sourceTree = "<group>"; };
 		E1B037B55F4CC6B5BB890396 /* LoginMainInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginMainInteractor.swift; sourceTree = "<group>"; };
 		E3BB2BF4A194BC2F84902C76 /* NickNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -98,15 +106,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		2CD7FDDD29FF5D380052B3B6 /* Gender */ = {
+		2CD7FDEC29FFA5760052B3B6 /* Age */ = {
 			isa = PBXGroup;
 			children = (
-				2CD7FDDE29FF5D550052B3B6 /* GenderRouter.swift */,
-				2CD7FDE029FF5D550052B3B6 /* GenderBuilder.swift */,
-				2CD7FDE129FF5D550052B3B6 /* GenderInteractor.swift */,
-				2CD7FDDF29FF5D550052B3B6 /* GenderViewController.swift */,
+				2CD7FDED29FFA5800052B3B6 /* AgeRouter.swift */,
+				2CD7FDEF29FFA5800052B3B6 /* AgeBuilder.swift */,
+				2CD7FDF029FFA5800052B3B6 /* AgeInteractor.swift */,
+				2CD7FDEE29FFA5800052B3B6 /* AgeViewController.swift */,
 			);
-			path = Gender;
+			path = Age;
 			sourceTree = "<group>";
 		};
 		3CC3CD51502C2286540DF4F5 /* LoginMain */ = {
@@ -128,6 +136,17 @@
 				1F122292170A9B08F370E93A /* Login-Info.plist */,
 			);
 			path = InfoPlists;
+			sourceTree = "<group>";
+		};
+		590DAAA805F7F115A4B4A091 /* Gender */ = {
+			isa = PBXGroup;
+			children = (
+				D6BABAA3CDA2BBBFAEFC76F6 /* GenderBuilder.swift */,
+				2ABF66364914A10602DA34FB /* GenderInteractor.swift */,
+				A7DB39AA7585F22001CA703C /* GenderRouter.swift */,
+				78718CD1513C4208CA14B11C /* GenderViewController.swift */,
+			);
+			path = Gender;
 			sourceTree = "<group>";
 		};
 		6A94C6BA5CFCFEEAE644E6D0 /* Frameworks */ = {
@@ -167,8 +186,9 @@
 		BCBB051467027A266D2C923F /* SignUp */ = {
 			isa = PBXGroup;
 			children = (
+				2CD7FDEC29FFA5760052B3B6 /* Age */,
+				590DAAA805F7F115A4B4A091 /* Gender */,
 				EB830A991EBF8BAFC70FBB62 /* Nickname */,
-				2CD7FDDD29FF5D380052B3B6 /* Gender */,
 			);
 			path = SignUp;
 			sourceTree = "<group>";
@@ -267,17 +287,21 @@
 				758EEAC0BCF54C3CDD386164 /* LoginComponent.swift in Sources */,
 				971F81A40F83E972F4F54B41 /* LoginMainBuilder.swift in Sources */,
 				F9DF39C63EFF75BD58AF12CB /* LoginMainInteractor.swift in Sources */,
-				2CD7FDE329FF5D550052B3B6 /* GenderViewController.swift in Sources */,
-				2CD7FDE529FF5D550052B3B6 /* GenderInteractor.swift in Sources */,
-				2CD7FDE229FF5D550052B3B6 /* GenderRouter.swift in Sources */,
+				2CD7FDF429FFA5800052B3B6 /* AgeInteractor.swift in Sources */,
 				451AC81235BBDAE54CE314D7 /* LoginMainRouter.swift in Sources */,
 				29591AAD3FFD33357A7F0572 /* LoginMainViewController.swift in Sources */,
+				2CD7FDF229FFA5800052B3B6 /* AgeViewController.swift in Sources */,
 				05ABEBAF530FE13F5452BB60 /* LoginView.swift in Sources */,
 				C0B044FCE2BE487261281923 /* TermView.swift in Sources */,
+				FB885C465F0A1E2AE29F19EB /* GenderBuilder.swift in Sources */,
+				2CD7FDF329FFA5800052B3B6 /* AgeBuilder.swift in Sources */,
+				2CD7FDF129FFA5800052B3B6 /* AgeRouter.swift in Sources */,
+				BC06FEAF029E1F8C0C84ED85 /* GenderInteractor.swift in Sources */,
+				188511661225A901CA6C2279 /* GenderRouter.swift in Sources */,
+				B6FBEB2958F87677C9FC9557 /* GenderViewController.swift in Sources */,
 				39333C0D64BE1CDCF09F21C5 /* NickNameBuilder.swift in Sources */,
 				534D8CA2727D7E896624DBC7 /* NickNameInteractor.swift in Sources */,
 				33F7153E7375AC679AD43144 /* NickNameRouter.swift in Sources */,
-				2CD7FDE429FF5D550052B3B6 /* GenderBuilder.swift in Sources */,
 				658164F4C3326A85F31BFD43 /* NickNameViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

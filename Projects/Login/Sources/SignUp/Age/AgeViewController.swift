@@ -1,5 +1,5 @@
 //
-//  GenderViewController.swift
+//  AgeViewController.swift
 //  Login
 //
 //  Created by 구본의 on 2023/05/01.
@@ -10,15 +10,13 @@ import RxSwift
 import UIKit
 import CommonUI
 
-protocol GenderPresentableListener: AnyObject {
-  func popGenderVC()
-  func pushAgeVC()
+protocol AgePresentableListener: AnyObject {
+  func popAgeVC()
 }
 
-final class GenderViewController: UIViewController, GenderPresentable, GenderViewControllable {
+final class AgeViewController: UIViewController, AgePresentable, AgeViewControllable {
   
-  weak var listener: GenderPresentableListener?
-  
+  weak var listener: AgePresentableListener?
   private let disposeBag = DisposeBag()
   
   private let navigationBar = NavigationBar(
@@ -27,13 +25,12 @@ final class GenderViewController: UIViewController, GenderPresentable, GenderVie
   )
   
   private let titleSubtitleView = TitleSubtitleView(
-    title: "00님, 성별을 알려주실래요?",
-    subTitle: "00님의 취향을 파악하는데 도움이 될 것 같아요."
+    title: "00님, 만 14세 이상이신가요?",
+    subTitle: "앱 정책 상 만 14세 미만은 이용이 불가해요."
   )
   
-  private let womanButton = CheckButton(title: "여성")
-  private let manButton = CheckButton(title: "남성")
-  private let noneButton = CheckButton(title: "선택하지 않음")
+  private let yesButton = CheckButton(title: "네")
+  private let noButton = CheckButton(title: "아니오")
   
   private let nextButton = DefaultButton(title: "다음")
   
@@ -52,9 +49,8 @@ final class GenderViewController: UIViewController, GenderPresentable, GenderVie
   private func setupViews() {
     self.view.addSubview(navigationBar)
     self.view.addSubview(titleSubtitleView)
-    self.view.addSubview(womanButton)
-    self.view.addSubview(manButton)
-    self.view.addSubview(noneButton)
+    self.view.addSubview(yesButton)
+    self.view.addSubview(noButton)
     self.view.addSubview(nextButton)
   }
   
@@ -69,17 +65,13 @@ final class GenderViewController: UIViewController, GenderPresentable, GenderVie
       .horizontally()
       .marginTop(76)
     
-    womanButton.pin
+    yesButton.pin
       .below(of: titleSubtitleView)
       .left(30)
       .marginTop(32)
     
-    manButton.pin
-      .below(of: womanButton, aligned: .left)
-      .marginTop(20)
-    
-    noneButton.pin
-      .below(of: manButton, aligned: .left)
+    noButton.pin
+      .below(of: yesButton, aligned: .left)
       .marginTop(20)
     
     nextButton.pin
@@ -92,13 +84,12 @@ final class GenderViewController: UIViewController, GenderPresentable, GenderVie
   private func setupGestures() {
     self.navigationBar.didTapBackButton = { [weak self] in
       guard let self else { return }
-      self.listener?.popGenderVC()
+      self.listener?.popAgeVC()
     }
     
     self.nextButton.tap()
       .bind { [weak self] in
         guard let self else { return }
-        self.listener?.pushAgeVC()
       }.disposed(by: disposeBag)
   }
 }

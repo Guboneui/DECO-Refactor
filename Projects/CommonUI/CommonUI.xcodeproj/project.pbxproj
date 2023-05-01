@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -11,11 +11,12 @@
 		0DDB27BFF7A1632F03B3F0EA /* SUIT-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = F26FF844FFFBE6F04FE82E77 /* SUIT-Medium.otf */; };
 		132E71F17B1D363766B88B84 /* NotoSansKR-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 15CD4B8F263EBED9EE862DEC /* NotoSansKR-Bold.otf */; };
 		26A89C8ABDA7272793E1DF1A /* Image.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42C46A1D137F6D04C3967B64 /* Image.xcassets */; };
-		2CD7FDE829FF7D910052B3B6 /* CheckButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD7FDE729FF7D910052B3B6 /* CheckButton.swift */; };
-		2CD7FDEA29FF7FB50052B3B6 /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD7FDE929FF7FB50052B3B6 /* UIButton+Extension.swift */; };
 		39EC6BCA36C6D9020E2FBEEE /* SUIT-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7D7B839FF2BD4170FF0A7D18 /* SUIT-Bold.otf */; };
 		3B93A3AC2360B6AA4211F43D /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB2A151EF61A0078BCB1E57 /* UILabel+Extension.swift */; };
+		3E07DEB89DFB0D7F64B67BC4 /* CheckButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E42D1D3EF0292998585D8C3 /* CheckButton.swift */; };
+		5BC51719418FAA2AD3BB1042 /* DefaultButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22F34DD4818748CBA3B0760 /* DefaultButton.swift */; };
 		5FBEC3225BA5ECC0C0F9FD87 /* Color.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 59964AA3F0394760335743EB /* Color.xcassets */; };
+		6CF0328438A761B1FD6A8710 /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B0E56EBD518E49216647721 /* UIButton+Extension.swift */; };
 		714358F8979540D404967A8C /* NotoSansKR-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = E38DB27C3893FC63485E721B /* NotoSansKR-Regular.otf */; };
 		78B4B46181CA417BE68BF59C /* NotoSansKR-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2EA530434C111C4BB344B33F /* NotoSansKR-Black.otf */; };
 		79C9DDFD08B61B5717A7E756 /* SUIT-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 59332FC4BE501E08FBC09008 /* SUIT-Thin.otf */; };
@@ -41,7 +42,6 @@
 		CC264CDFB484CE6F26F3012A /* UIDevice+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F4856DB9F2FDDC0600D87D /* UIDevice+Extension.swift */; };
 		CDCF6B004F010F8C75410A5A /* FlexLayout in Frameworks */ = {isa = PBXBuildFile; productRef = D9FA417022B582608592510C /* FlexLayout */; };
 		D5F8CCDEC095E3F282F056BE /* SUIT-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5F7A7C2511C18A00FD6038C5 /* SUIT-SemiBold.otf */; };
-		E5FED6F2ECDBC5BF84366B84 /* DefaultButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC61FA80FB1BFC77EB2F4D6 /* DefaultButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -59,39 +59,39 @@
 
 /* Begin PBXFileReference section */
 		00D2AA4476DC8DFC702A8DB3 /* DecoImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecoImage.swift; sourceTree = "<group>"; };
-		1006E85895DAE7BD2F9C0138 /* SUIT-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUIT-ExtraBold.otf"; sourceTree = "<group>"; };
-		15CD4B8F263EBED9EE862DEC /* NotoSansKR-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Bold.otf"; sourceTree = "<group>"; };
-		2AAA16EB10167F4F8A589DF2 /* SUIT-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUIT-Light.otf"; sourceTree = "<group>"; };
-		2CD7FDE729FF7D910052B3B6 /* CheckButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckButton.swift; sourceTree = "<group>"; };
-		2CD7FDE929FF7FB50052B3B6 /* UIButton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
-		2EA530434C111C4BB344B33F /* NotoSansKR-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Black.otf"; sourceTree = "<group>"; };
+		0B0E56EBD518E49216647721 /* UIButton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
+		1006E85895DAE7BD2F9C0138 /* SUIT-ExtraBold.otf */ = {isa = PBXFileReference; path = "SUIT-ExtraBold.otf"; sourceTree = "<group>"; };
+		15CD4B8F263EBED9EE862DEC /* NotoSansKR-Bold.otf */ = {isa = PBXFileReference; path = "NotoSansKR-Bold.otf"; sourceTree = "<group>"; };
+		2AAA16EB10167F4F8A589DF2 /* SUIT-Light.otf */ = {isa = PBXFileReference; path = "SUIT-Light.otf"; sourceTree = "<group>"; };
+		2EA530434C111C4BB344B33F /* NotoSansKR-Black.otf */ = {isa = PBXFileReference; path = "NotoSansKR-Black.otf"; sourceTree = "<group>"; };
 		42C46A1D137F6D04C3967B64 /* Image.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Image.xcassets; sourceTree = "<group>"; };
 		4A5A7A886CEA9E4C08C898EF /* TitleSubtitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleSubtitleView.swift; sourceTree = "<group>"; };
 		4BE8D92AE9CC47C9A81DDC00 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
-		59332FC4BE501E08FBC09008 /* SUIT-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUIT-Thin.otf"; sourceTree = "<group>"; };
+		59332FC4BE501E08FBC09008 /* SUIT-Thin.otf */ = {isa = PBXFileReference; path = "SUIT-Thin.otf"; sourceTree = "<group>"; };
 		59964AA3F0394760335743EB /* Color.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Color.xcassets; sourceTree = "<group>"; };
-		5F7A7C2511C18A00FD6038C5 /* SUIT-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUIT-SemiBold.otf"; sourceTree = "<group>"; };
+		5F7A7C2511C18A00FD6038C5 /* SUIT-SemiBold.otf */ = {isa = PBXFileReference; path = "SUIT-SemiBold.otf"; sourceTree = "<group>"; };
 		65557C5B1D459C06F72A1C53 /* TuistFonts+CommonUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TuistFonts+CommonUI.swift"; sourceTree = "<group>"; };
 		66F4856DB9F2FDDC0600D87D /* UIDevice+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Extension.swift"; sourceTree = "<group>"; };
+		6E42D1D3EF0292998585D8C3 /* CheckButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckButton.swift; sourceTree = "<group>"; };
 		6F625FE1E640FBDB817D76A3 /* TuistAssets+CommonUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TuistAssets+CommonUI.swift"; sourceTree = "<group>"; };
-		7C05DBB465D60BCA13477EF8 /* NotoSansKR-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Light.otf"; sourceTree = "<group>"; };
-		7D7B839FF2BD4170FF0A7D18 /* SUIT-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUIT-Bold.otf"; sourceTree = "<group>"; };
-		86E3FD9C981C1524E3907F57 /* SUIT-Heavy.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUIT-Heavy.otf"; sourceTree = "<group>"; };
-		92B162ACA7CC5EBDFC92444E /* NotoSansKR-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Thin.otf"; sourceTree = "<group>"; };
+		7C05DBB465D60BCA13477EF8 /* NotoSansKR-Light.otf */ = {isa = PBXFileReference; path = "NotoSansKR-Light.otf"; sourceTree = "<group>"; };
+		7D7B839FF2BD4170FF0A7D18 /* SUIT-Bold.otf */ = {isa = PBXFileReference; path = "SUIT-Bold.otf"; sourceTree = "<group>"; };
+		86E3FD9C981C1524E3907F57 /* SUIT-Heavy.otf */ = {isa = PBXFileReference; path = "SUIT-Heavy.otf"; sourceTree = "<group>"; };
+		92B162ACA7CC5EBDFC92444E /* NotoSansKR-Thin.otf */ = {isa = PBXFileReference; path = "NotoSansKR-Thin.otf"; sourceTree = "<group>"; };
 		94EF204F3CD6F86C6167C300 /* TuistBundle+CommonUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TuistBundle+CommonUI.swift"; sourceTree = "<group>"; };
 		AAB2A151EF61A0078BCB1E57 /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
-		BBDFCECD69448A84AA99E9F7 /* SUIT-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUIT-Regular.otf"; sourceTree = "<group>"; };
+		BBDFCECD69448A84AA99E9F7 /* SUIT-Regular.otf */ = {isa = PBXFileReference; path = "SUIT-Regular.otf"; sourceTree = "<group>"; };
 		BDB70CAC85ED852AB55C26DD /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
 		C0E091AB76783B3931B2DF8B /* DecoFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecoFont.swift; sourceTree = "<group>"; };
 		CDBD62030B65AE3A6A7F34D6 /* CommonUI-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "CommonUI-Info.plist"; sourceTree = "<group>"; };
-		CED5695C335D5BB3770DFCCF /* SUIT-ExtraLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUIT-ExtraLight.otf"; sourceTree = "<group>"; };
+		CED5695C335D5BB3770DFCCF /* SUIT-ExtraLight.otf */ = {isa = PBXFileReference; path = "SUIT-ExtraLight.otf"; sourceTree = "<group>"; };
 		D08B2B67BBE804590138C890 /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
+		D22F34DD4818748CBA3B0760 /* DefaultButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultButton.swift; sourceTree = "<group>"; };
 		DCC34201AF7778D74864863C /* DecoColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecoColor.swift; sourceTree = "<group>"; };
-		E38DB27C3893FC63485E721B /* NotoSansKR-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Regular.otf"; sourceTree = "<group>"; };
-		EBC61FA80FB1BFC77EB2F4D6 /* DefaultButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultButton.swift; sourceTree = "<group>"; };
+		E38DB27C3893FC63485E721B /* NotoSansKR-Regular.otf */ = {isa = PBXFileReference; path = "NotoSansKR-Regular.otf"; sourceTree = "<group>"; };
 		F0F7A08F911F04FE3F6FE36B /* CommonUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CommonUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F26FF844FFFBE6F04FE82E77 /* SUIT-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUIT-Medium.otf"; sourceTree = "<group>"; };
-		F7B93756B58D9D39B4C97D24 /* NotoSansKR-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Medium.otf"; sourceTree = "<group>"; };
+		F26FF844FFFBE6F04FE82E77 /* SUIT-Medium.otf */ = {isa = PBXFileReference; path = "SUIT-Medium.otf"; sourceTree = "<group>"; };
+		F7B93756B58D9D39B4C97D24 /* NotoSansKR-Medium.otf */ = {isa = PBXFileReference; path = "NotoSansKR-Medium.otf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,15 +156,6 @@
 			path = Color;
 			sourceTree = "<group>";
 		};
-		2CD7FDE629FF7D810052B3B6 /* Buttons */ = {
-			isa = PBXGroup;
-			children = (
-				EBC61FA80FB1BFC77EB2F4D6 /* DefaultButton.swift */,
-				2CD7FDE729FF7D910052B3B6 /* CheckButton.swift */,
-			);
-			path = Buttons;
-			sourceTree = "<group>";
-		};
 		3B864CC9A7BDA0D784A63DD5 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
@@ -179,11 +170,11 @@
 			isa = PBXGroup;
 			children = (
 				3B864CC9A7BDA0D784A63DD5 /* Assets */,
+				0B0E56EBD518E49216647721 /* UIButton+Extension.swift */,
 				66F4856DB9F2FDDC0600D87D /* UIDevice+Extension.swift */,
 				AAB2A151EF61A0078BCB1E57 /* UILabel+Extension.swift */,
 				BDB70CAC85ED852AB55C26DD /* UITextField+Extension.swift */,
 				4BE8D92AE9CC47C9A81DDC00 /* UIView+Extension.swift */,
-				2CD7FDE929FF7FB50052B3B6 /* UIButton+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -234,7 +225,7 @@
 		BCBFE28A82364D98B26F502F /* Component */ = {
 			isa = PBXGroup;
 			children = (
-				2CD7FDE629FF7D810052B3B6 /* Buttons */,
+				FFD1446DE747CE010D4268D6 /* Buttons */,
 				D08B2B67BBE804590138C890 /* NavigationBar.swift */,
 				4A5A7A886CEA9E4C08C898EF /* TitleSubtitleView.swift */,
 			);
@@ -266,6 +257,15 @@
 				65557C5B1D459C06F72A1C53 /* TuistFonts+CommonUI.swift */,
 			);
 			path = Sources;
+			sourceTree = "<group>";
+		};
+		FFD1446DE747CE010D4268D6 /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				6E42D1D3EF0292998585D8C3 /* CheckButton.swift */,
+				D22F34DD4818748CBA3B0760 /* DefaultButton.swift */,
+			);
+			path = Buttons;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -300,6 +300,8 @@
 		C67E63A1F9DE3A88CFB79F4C /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				TargetAttributes = {
+				};
 			};
 			buildConfigurationList = 26B57D5F96290632B0503228 /* Build configuration list for PBXProject "CommonUI" */;
 			compatibilityVersion = "Xcode 13.0";
@@ -359,14 +361,14 @@
 				C94951E661D9DC9D28B56273 /* TuistAssets+CommonUI.swift in Sources */,
 				7DC59B80630854028C7C80F4 /* TuistBundle+CommonUI.swift in Sources */,
 				8015832F17AC96CA7BBDEA57 /* TuistFonts+CommonUI.swift in Sources */,
-				E5FED6F2ECDBC5BF84366B84 /* DefaultButton.swift in Sources */,
+				3E07DEB89DFB0D7F64B67BC4 /* CheckButton.swift in Sources */,
+				5BC51719418FAA2AD3BB1042 /* DefaultButton.swift in Sources */,
 				BD2791A8A43540ABE53FA350 /* NavigationBar.swift in Sources */,
 				B5E72C89D542D08B4257C73C /* TitleSubtitleView.swift in Sources */,
-				2CD7FDE829FF7D910052B3B6 /* CheckButton.swift in Sources */,
 				7B701FE62D4EF108880CB632 /* DecoColor.swift in Sources */,
-				2CD7FDEA29FF7FB50052B3B6 /* UIButton+Extension.swift in Sources */,
 				926300E34AAEEDDCAF9DFBEA /* DecoFont.swift in Sources */,
 				0A48B28CDDEE8CE6C65B174A /* DecoImage.swift in Sources */,
+				6CF0328438A761B1FD6A8710 /* UIButton+Extension.swift in Sources */,
 				CC264CDFB484CE6F26F3012A /* UIDevice+Extension.swift in Sources */,
 				3B93A3AC2360B6AA4211F43D /* UILabel+Extension.swift in Sources */,
 				B8E0FC8C06F6503FF33AB1B7 /* UITextField+Extension.swift in Sources */,

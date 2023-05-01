@@ -13,9 +13,12 @@ public protocol LoginMainDependency: Dependency {
   // created by this RIB.
 }
 
-final class LoginMainComponent: Component<LoginMainDependency>, NickNameDependency, GenderDependency {
+final class LoginMainComponent:
+  Component<LoginMainDependency>,
+  NickNameDependency,
+  GenderDependency,
+  AgeDependency {
   
-  // TODO: Declare 'fileprivate' dependencies that are only used by this RIB.
 }
 
 // MARK: - Builder
@@ -37,14 +40,17 @@ final public class LoginMainBuilder: Builder<LoginMainDependency>, LoginMainBuil
     nav.navigationController.navigationBar.isHidden = true
     
     let interactor = LoginMainInteractor(presenter: viewController)
+    
     let nicknameBuilder = NickNameBuilder(dependency: component)
     let genderBuilder = GenderBuilder(dependency: component)
+    let ageBuilder = AgeBuilder(dependency: component)
     
     return LoginMainRouter(
       interactor: interactor,
       viewController: nav,
       nicknameBuildable: nicknameBuilder,
-      genderBuildable: genderBuilder
+      genderBuildable: genderBuilder,
+      ageBuildable: ageBuilder
     )
   }
 }

@@ -9,10 +9,14 @@ import RIBs
 import Util
 import UIKit
 
-protocol LoginMainInteractable: Interactable, NickNameListener, GenderListener {
+protocol LoginMainInteractable:
+  Interactable,
+  NickNameListener,
+  GenderListener,
+  AgeListener
+{
   var router: LoginMainRouting? { get set }
-  var listener: LoginMainListener? { get set }
-
+  var listener: LoginMainListener? { get set } 
 }
 
 protocol LoginMainViewControllable: ViewControllable {
@@ -29,16 +33,21 @@ final class LoginMainRouter: LaunchRouter<LoginMainInteractable, NavigationContr
   private let genderBuildable: GenderBuildable
   private var genderRouting: Routing?
   
+  private let ageBuildable: AgeBuildable
+  private var ageRouting: Routing?
+  
   
   // TODO: Constructor inject child builder protocols to allow building children.
   init(
     interactor: LoginMainInteractable,
     viewController: NavigationControllerable,
     nicknameBuildable: NickNameBuildable,
-    genderBuildable: GenderBuildable
+    genderBuildable: GenderBuildable,
+    ageBuildable: AgeBuildable
   ) {
     self.nicknameBuildable = nicknameBuildable
     self.genderBuildable = genderBuildable
+    self.ageBuildable = ageBuildable
     super.init(interactor: interactor, viewController: viewController)
     interactor.router = self
   }
@@ -73,5 +82,21 @@ final class LoginMainRouter: LaunchRouter<LoginMainInteractable, NavigationContr
     self.navigationControllable?.popViewController(animated: true)
     detachChild(router)
     genderRouting = nil
+  }
+  
+  func attachAgeVC() {
+    if ageRouting != nil { return }
+    let router = ageBuildable.build(withListener: interactor)
+    self.navigationControllable = viewController
+    self.navigationControllable?.pushViewController(router.viewControllable, animated: true)
+    attachChild(router)
+    self.ageRouting = router
+  }
+  
+  func detachAgeVC() {
+    guard let router = ageRouting else { return }
+    self.navigationControllable?.popViewController(animated: true)
+    detachChild(router)
+    ageRouting = nil
   }
 }

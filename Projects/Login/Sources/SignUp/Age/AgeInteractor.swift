@@ -1,5 +1,5 @@
 //
-//  GenderInteractor.swift
+//  AgeInteractor.swift
 //  Login
 //
 //  Created by 구본의 on 2023/05/01.
@@ -8,28 +8,27 @@
 import RIBs
 import RxSwift
 
-protocol GenderRouting: ViewableRouting {
+protocol AgeRouting: ViewableRouting {
   // TODO: Declare methods the interactor can invoke to manage sub-tree via the router.
 }
 
-protocol GenderPresentable: Presentable {
-  var listener: GenderPresentableListener? { get set }
+protocol AgePresentable: Presentable {
+  var listener: AgePresentableListener? { get set }
   // TODO: Declare methods the interactor can invoke the presenter to present data.
 }
 
-protocol GenderListener: AnyObject {
-  func detachGenderVC()
-  func attachAgeVC()
+protocol AgeListener: AnyObject {
+  func detachAgeVC()
 }
 
-final class GenderInteractor: PresentableInteractor<GenderPresentable>, GenderInteractable, GenderPresentableListener {
+final class AgeInteractor: PresentableInteractor<AgePresentable>, AgeInteractable, AgePresentableListener {
   
-  weak var router: GenderRouting?
-  weak var listener: GenderListener?
+  weak var router: AgeRouting?
+  weak var listener: AgeListener?
   
   // TODO: Add additional dependencies to constructor. Do not perform any logic
   // in constructor.
-  override init(presenter: GenderPresentable) {
+  override init(presenter: AgePresentable) {
     super.init(presenter: presenter)
     presenter.listener = self
   }
@@ -44,11 +43,7 @@ final class GenderInteractor: PresentableInteractor<GenderPresentable>, GenderIn
     // TODO: Pause any business logic.
   }
   
-  func popGenderVC() {
-    listener?.detachGenderVC()
-  }
-  
-  func pushAgeVC() {
-    listener?.attachAgeVC()
+  func popAgeVC() {
+    self.listener?.detachAgeVC()
   }
 }

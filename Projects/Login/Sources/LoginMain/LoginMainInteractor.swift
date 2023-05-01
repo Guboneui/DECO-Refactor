@@ -10,6 +10,13 @@ import RxSwift
 import Util
 import UIKit
 
+enum LoginType {
+  case KAKAO
+  case NAVER
+  case GOOGLE
+  case APPLE
+}
+
 protocol LoginMainRouting: ViewableRouting {
   // TODO: Declare methods the interactor can invoke to manage sub-tree via the router.
   func attachNicknameVC()
@@ -56,7 +63,7 @@ final class LoginMainInteractor:
     // TODO: Pause any business logic.
   }
   
-  func pushNicknameVC() {
+  func pushNicknameVC(by loginType: LoginType) {
     router?.attachNicknameVC()
     print("🔊[DEBUG]: Interactor")
   }

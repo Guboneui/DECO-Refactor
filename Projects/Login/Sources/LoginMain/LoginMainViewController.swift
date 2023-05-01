@@ -99,29 +99,24 @@ final class LoginMainViewController:
   }
   
   private func setupGestures() {
-    kakaoLoginView.rx.tapGesture()
-      .when(.recognized)
-      .throttle(.milliseconds(300), latest: false, scheduler: MainScheduler.instance)
-      .bind { [weak self] _ in
-        guard let self else { return }
-        print("🔊[DEBUG]: 카카오 클릭")
-        self.listener?.pushNicknameVC()
-        
-      }.disposed(by: disposeBag)
+    socialLoginView.kakaoLoginAction = { [weak self] in
+      guard let self else { return }
+      self.listener?.pushNicknameVC(by: .KAKAO)
+    }
     
+    socialLoginView.naverLoginAction = { [weak self] in
+      guard let self else { return }
+      self.listener?.pushNicknameVC(by: .NAVER)
+    }
     
-    termLabel.rx.tapGesture()
-      .when(.recognized)
-      .throttle(.milliseconds(300), latest: false, scheduler: MainScheduler.instance)
-      .subscribe(onNext: { _ in
-        SafariLoderImpl.loadSafari(with: DecoURL.termURL)
-      }).disposed(by: disposeBag)
+    socialLoginView.googleLoginAction = { [weak self] in
+      guard let self else { return }
+      self.listener?.pushNicknameVC(by: .GOOGLE)
+    }
     
-    privacyLabel.rx.tapGesture()
-      .when(.recognized)
-      .throttle(.milliseconds(300), latest: false, scheduler: MainScheduler.instance)
-      .subscribe(onNext: { _ in
-        SafariLoderImpl.loadSafari(with: DecoURL.privacyURL)
-      }).disposed(by: disposeBag)
+    socialLoginView.appleLoginAction = { [weak self] in
+      guard let self else { return }
+      self.listener?.pushNicknameVC(by: .APPLE)
+    }
   }
 }

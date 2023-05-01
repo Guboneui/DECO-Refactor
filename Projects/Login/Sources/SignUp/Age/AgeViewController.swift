@@ -12,6 +12,7 @@ import CommonUI
 
 protocol AgePresentableListener: AnyObject {
   func popAgeVC()
+  func pushMoodVC()
 }
 
 final class AgeViewController: UIViewController, AgePresentable, AgeViewControllable {
@@ -90,6 +91,7 @@ final class AgeViewController: UIViewController, AgePresentable, AgeViewControll
     self.nextButton.tap()
       .bind { [weak self] in
         guard let self else { return }
+        self.listener?.pushMoodVC()
       }.disposed(by: disposeBag)
   }
 }

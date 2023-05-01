@@ -13,7 +13,8 @@ protocol LoginMainInteractable:
   Interactable,
   NickNameListener,
   GenderListener,
-  AgeListener
+  AgeListener,
+  MoodListener
 {
   var router: LoginMainRouting? { get set }
   var listener: LoginMainListener? { get set } 
@@ -36,6 +37,8 @@ final class LoginMainRouter: LaunchRouter<LoginMainInteractable, NavigationContr
   private let ageBuildable: AgeBuildable
   private var ageRouting: Routing?
   
+  private let moodBuildable: MoodBuildable
+  private var moodRouting: Routing?
   
   // TODO: Constructor inject child builder protocols to allow building children.
   init(
@@ -43,11 +46,13 @@ final class LoginMainRouter: LaunchRouter<LoginMainInteractable, NavigationContr
     viewController: NavigationControllerable,
     nicknameBuildable: NickNameBuildable,
     genderBuildable: GenderBuildable,
-    ageBuildable: AgeBuildable
+    ageBuildable: AgeBuildable,
+    moodBuildable: MoodBuildable
   ) {
     self.nicknameBuildable = nicknameBuildable
     self.genderBuildable = genderBuildable
     self.ageBuildable = ageBuildable
+    self.moodBuildable = moodBuildable
     super.init(interactor: interactor, viewController: viewController)
     interactor.router = self
   }
@@ -98,5 +103,21 @@ final class LoginMainRouter: LaunchRouter<LoginMainInteractable, NavigationContr
     self.navigationControllable?.popViewController(animated: true)
     detachChild(router)
     ageRouting = nil
+  }
+  
+  func attachMoodVC() {
+    if moodRouting != nil { return }
+    let router = moodBuildable.build(withListener: interactor)
+    self.navigationControllable = viewController
+    self.navigationControllable?.pushViewController(router.viewControllable, animated: true)
+    attachChild(router)
+    self.moodRouting = router
+  }
+  
+  func detachMoodVC() {
+    guard let router = moodRouting else { return }
+    self.navigationControllable?.popViewController(animated: true)
+    detachChild(router)
+    moodRouting = nil
   }
 }

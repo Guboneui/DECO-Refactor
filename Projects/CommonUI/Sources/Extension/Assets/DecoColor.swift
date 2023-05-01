@@ -22,6 +22,8 @@ public extension UIColor {
     public static let darkGray1 = CommonUIAsset.Color.darkGray1.color
     public static let darkGray2 = CommonUIAsset.Color.darkGray2.color
     
+    public static let lightBackground = CommonUIAsset.Color.lightBackground3.color
+    
     public static let primaryColor = CommonUIAsset.Color.primaryColor.color
     public static let lightPrimaryColor = CommonUIAsset.Color.lightPrimaryColor.color
     

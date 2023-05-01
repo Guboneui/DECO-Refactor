@@ -17,7 +17,9 @@ final class LoginMainComponent:
   Component<LoginMainDependency>,
   NickNameDependency,
   GenderDependency,
-  AgeDependency {
+  AgeDependency,
+  MoodDependency
+{
   
 }
 
@@ -44,13 +46,15 @@ final public class LoginMainBuilder: Builder<LoginMainDependency>, LoginMainBuil
     let nicknameBuilder = NickNameBuilder(dependency: component)
     let genderBuilder = GenderBuilder(dependency: component)
     let ageBuilder = AgeBuilder(dependency: component)
+    let moodBuilder = MoodBuilder(dependency: component)
     
     return LoginMainRouter(
       interactor: interactor,
       viewController: nav,
       nicknameBuildable: nicknameBuilder,
       genderBuildable: genderBuilder,
-      ageBuildable: ageBuilder
+      ageBuildable: ageBuilder,
+      moodBuildable: moodBuilder
     )
   }
 }

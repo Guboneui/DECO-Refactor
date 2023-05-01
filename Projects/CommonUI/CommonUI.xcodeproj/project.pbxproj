@@ -27,6 +27,7 @@
 		80DD6C7C45A37C7EC93058D7 /* PinLayout in Frameworks */ = {isa = PBXBuildFile; productRef = 63E4D729D36EC9DD73DAA701 /* PinLayout */; };
 		81598275117F4F1EAEE6B7A3 /* SUIT-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1006E85895DAE7BD2F9C0138 /* SUIT-ExtraBold.otf */; };
 		926300E34AAEEDDCAF9DFBEA /* DecoFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E091AB76783B3931B2DF8B /* DecoFont.swift */; };
+		93996CA08EDB1D537507DCA3 /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80EED652CD9730D72F01A29B /* ImageCell.swift */; };
 		A94C310233472B7075DB333A /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 5B2370A8BB08E22DA85E65B0 /* Then */; };
 		ABB3E7D7A65477D326550231 /* SUIT-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = BBDFCECD69448A84AA99E9F7 /* SUIT-Regular.otf */; };
 		B5E72C89D542D08B4257C73C /* TitleSubtitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5A7A886CEA9E4C08C898EF /* TitleSubtitleView.swift */; };
@@ -76,6 +77,7 @@
 		6F625FE1E640FBDB817D76A3 /* TuistAssets+CommonUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TuistAssets+CommonUI.swift"; sourceTree = "<group>"; };
 		7C05DBB465D60BCA13477EF8 /* NotoSansKR-Light.otf */ = {isa = PBXFileReference; path = "NotoSansKR-Light.otf"; sourceTree = "<group>"; };
 		7D7B839FF2BD4170FF0A7D18 /* SUIT-Bold.otf */ = {isa = PBXFileReference; path = "SUIT-Bold.otf"; sourceTree = "<group>"; };
+		80EED652CD9730D72F01A29B /* ImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
 		86E3FD9C981C1524E3907F57 /* SUIT-Heavy.otf */ = {isa = PBXFileReference; path = "SUIT-Heavy.otf"; sourceTree = "<group>"; };
 		92B162ACA7CC5EBDFC92444E /* NotoSansKR-Thin.otf */ = {isa = PBXFileReference; path = "NotoSansKR-Thin.otf"; sourceTree = "<group>"; };
 		94EF204F3CD6F86C6167C300 /* TuistBundle+CommonUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TuistBundle+CommonUI.swift"; sourceTree = "<group>"; };
@@ -189,6 +191,14 @@
 			name = Project;
 			sourceTree = "<group>";
 		};
+		869D9F17D0C5CE03A4161A0C /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				80EED652CD9730D72F01A29B /* ImageCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		9C1A096F3230FBDAD3D47CE4 /* Image */ = {
 			isa = PBXGroup;
 			children = (
@@ -226,6 +236,7 @@
 			isa = PBXGroup;
 			children = (
 				FFD1446DE747CE010D4268D6 /* Buttons */,
+				869D9F17D0C5CE03A4161A0C /* Cells */,
 				D08B2B67BBE804590138C890 /* NavigationBar.swift */,
 				4A5A7A886CEA9E4C08C898EF /* TitleSubtitleView.swift */,
 			);
@@ -363,6 +374,7 @@
 				8015832F17AC96CA7BBDEA57 /* TuistFonts+CommonUI.swift in Sources */,
 				3E07DEB89DFB0D7F64B67BC4 /* CheckButton.swift in Sources */,
 				5BC51719418FAA2AD3BB1042 /* DefaultButton.swift in Sources */,
+				93996CA08EDB1D537507DCA3 /* ImageCell.swift in Sources */,
 				BD2791A8A43540ABE53FA350 /* NavigationBar.swift in Sources */,
 				B5E72C89D542D08B4257C73C /* TitleSubtitleView.swift in Sources */,
 				7B701FE62D4EF108880CB632 /* DecoColor.swift in Sources */,

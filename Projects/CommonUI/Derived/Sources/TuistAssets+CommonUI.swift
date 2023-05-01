@@ -29,6 +29,7 @@ public enum CommonUIAsset {
     public static let gray3 = CommonUIColors(name: "Gray3")
     public static let gray4 = CommonUIColors(name: "Gray4")
     public static let kakao = CommonUIColors(name: "Kakao")
+    public static let lightBackground3 = CommonUIColors(name: "LightBackground3")
     public static let lightGray1 = CommonUIColors(name: "LightGray1")
     public static let lightGray2 = CommonUIColors(name: "LightGray2")
     public static let lightPrimaryColor = CommonUIColors(name: "LightPrimaryColor")
@@ -62,6 +63,7 @@ public enum CommonUIAsset {
     public static let closeWhite = CommonUIImages(name: "close_white")
     public static let coloring = CommonUIImages(name: "coloring")
     public static let coloringWhite = CommonUIImages(name: "coloring_white")
+    public static let cute = CommonUIImages(name: "cute")
     public static let filter = CommonUIImages(name: "filter")
     public static let filterWhite = CommonUIImages(name: "filter_white")
     public static let findlist = CommonUIImages(name: "findlist")
@@ -72,6 +74,7 @@ public enum CommonUIAsset {
     public static let info = CommonUIImages(name: "info")
     public static let infoWhite = CommonUIImages(name: "info_white")
     public static let kakaoLogo = CommonUIImages(name: "kakaoLogo")
+    public static let kitch = CommonUIImages(name: "kitch")
     public static let like = CommonUIImages(name: "like")
     public static let likeFull = CommonUIImages(name: "like_full")
     public static let likeFullWhite = CommonUIImages(name: "like_full_white")
@@ -101,9 +104,11 @@ public enum CommonUIAsset {
     public static let saveThickWhite = CommonUIImages(name: "save_thick_white")
     public static let search = CommonUIImages(name: "search")
     public static let searchGrey2 = CommonUIImages(name: "search_grey_2")
+    public static let sense = CommonUIImages(name: "sense")
     public static let setting = CommonUIImages(name: "setting")
     public static let settingWhite = CommonUIImages(name: "setting_white")
     public static let showGrey1 = CommonUIImages(name: "show_grey_1")
+    public static let simple = CommonUIImages(name: "simple")
     public static let talk = CommonUIImages(name: "talk")
     public static let talkWhite = CommonUIImages(name: "talk_white")
     public static let text = CommonUIImages(name: "text")
@@ -118,6 +123,7 @@ public enum CommonUIAsset {
     public static let uploadFull = CommonUIImages(name: "upload_full")
     public static let uploadSec = CommonUIImages(name: "upload_sec")
     public static let uploadWhite = CommonUIImages(name: "upload_white")
+    public static let vintage = CommonUIImages(name: "vintage")
   }
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name

@@ -1,5 +1,5 @@
 //
-//  AgeInteractor.swift
+//  MoodInteractor.swift
 //  Login
 //
 //  Created by 구본의 on 2023/05/01.
@@ -8,28 +8,27 @@
 import RIBs
 import RxSwift
 
-protocol AgeRouting: ViewableRouting {
+protocol MoodRouting: ViewableRouting {
   // TODO: Declare methods the interactor can invoke to manage sub-tree via the router.
 }
 
-protocol AgePresentable: Presentable {
-  var listener: AgePresentableListener? { get set }
+protocol MoodPresentable: Presentable {
+  var listener: MoodPresentableListener? { get set }
   // TODO: Declare methods the interactor can invoke the presenter to present data.
 }
 
-protocol AgeListener: AnyObject {
-  func detachAgeVC()
-  func attachMoodVC()
+protocol MoodListener: AnyObject {
+  func detachMoodVC()
 }
 
-final class AgeInteractor: PresentableInteractor<AgePresentable>, AgeInteractable, AgePresentableListener {
+final class MoodInteractor: PresentableInteractor<MoodPresentable>, MoodInteractable, MoodPresentableListener {
   
-  weak var router: AgeRouting?
-  weak var listener: AgeListener?
+  weak var router: MoodRouting?
+  weak var listener: MoodListener?
   
   // TODO: Add additional dependencies to constructor. Do not perform any logic
   // in constructor.
-  override init(presenter: AgePresentable) {
+  override init(presenter: MoodPresentable) {
     super.init(presenter: presenter)
     presenter.listener = self
   }
@@ -44,11 +43,7 @@ final class AgeInteractor: PresentableInteractor<AgePresentable>, AgeInteractabl
     // TODO: Pause any business logic.
   }
   
-  func popAgeVC() {
-    self.listener?.detachAgeVC()
-  }
-  
-  func pushMoodVC() {
-    self.listener?.attachMoodVC()
+  func popMoodVC() {
+    listener?.detachMoodVC()
   }
 }

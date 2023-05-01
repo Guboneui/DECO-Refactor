@@ -27,6 +27,9 @@ protocol LoginMainRouting: ViewableRouting {
   
   func attachAgeVC()
   func detachAgeVC()
+  
+  func attachMoodVC()
+  func detachMoodVC()
 }
 
 protocol LoginMainPresentable: Presentable {
@@ -92,5 +95,13 @@ final class LoginMainInteractor:
   
   func detachAgeVC() {
     router?.detachAgeVC()
+  }
+  
+  func attachMoodVC() {
+    router?.attachMoodVC()
+  }
+  
+  func detachMoodVC() {
+    router?.detachMoodVC()
   }
 }

@@ -21,7 +21,7 @@ protocol LoginMainPresentableListener: AnyObject {
   // business logic, such as signIn(). This protocol is implemented by the corresponding
   // interactor class.
   
-  func pushNicknameVC()
+  func pushNicknameVC(by loginType: LoginType)
 }
 
 final class LoginMainViewController:
@@ -42,114 +42,9 @@ final class LoginMainViewController:
     $0.font = .DecoFont.getFont(with: .NotoSans, type: .medium, size: 18)
   }
   
-  private let infoContainer = UIView()
+  private let termView = TermView()
+  private let socialLoginView = LoginView()
   
-  private let startLabel = UILabel().then {
-    $0.text = "DECO를 시작하게 되면 "
-    $0.font = .DecoFont.getFont(with: .NotoSans, type: .medium, size: 8)
-    $0.textColor = .DecoColor.gray3
-  }
-  
-  private let termLabel = UILabel().then {
-    let attributedString = $0.makeUnderLineAttributedString(
-      with: "이용약관",
-      height: 12.0,
-      font: .DecoFont.getFont(with: .NotoSans, type: .bold, size: 8),
-      underLineColor: .DecoColor.gray3
-    )
-    $0.attributedText = attributedString
-    $0.textColor = .DecoColor.gray3
-  }
-  
-  private let andLabel = UILabel().then {
-    $0.text = "과 "
-    $0.font = .DecoFont.getFont(with: .NotoSans, type: .medium, size: 8)
-    $0.textColor = .DecoColor.gray3
-  }
-  
-  private let privacyLabel = UILabel().then {
-    let attributedString = $0.makeUnderLineAttributedString(
-      with: "개인정보취급방침",
-      height: 12.0,
-      font: .DecoFont.getFont(with: .NotoSans, type: .bold, size: 8),
-      underLineColor: .DecoColor.gray3
-    )
-    $0.attributedText = attributedString
-    $0.textColor = .DecoColor.gray3
-  }
-  
-  private let agreeLabel = UILabel().then {
-    $0.text = "에 동의하게 됩니다."
-    $0.font = .DecoFont.getFont(with: .NotoSans, type: .medium, size: 8)
-    $0.textColor = .DecoColor.gray3
-  }
-  
-  private let loginContainer = UIView()
-  
-  private let kakaoLoginView = UIView().then {
-    $0.backgroundColor = .DecoColor.kakaoColor
-    $0.makeCornerRadius(radius: 8.0)
-  }
-  
-  private let kakaoLogoImageView = UIImageView().then {
-    $0.image = .DecoImage.kakaoLogo
-  }
-  
-  private let kakaoLoginLabel = UILabel().then {
-    $0.text = "카카오로 시작하기"
-    $0.textColor = .DecoColor.blackColor.withAlphaComponent(0.85)
-    $0.font = .DecoFont.getFont(with: .Suit, type: .bold, size: 16)
-  }
-  
-  private let naverLoginView = UIView().then {
-    $0.backgroundColor = .DecoColor.naverColor
-    $0.makeCornerRadius(radius: 8.0)
-  }
-  
-  private let naverLogoImageView = UIImageView().then {
-    $0.image = .DecoImage.naverLogo
-  }
-  
-  private let naverLoginLabel = UILabel().then {
-    $0.text = "네이버로 시작하기"
-    $0.textColor = .DecoColor.whiteColor
-    $0.font = .DecoFont.getFont(with: .Suit, type: .bold, size: 16)
-  }
-  
-  
-  
-  private let googleLoginView = UIView().then {
-    $0.backgroundColor = .DecoColor.whiteColor
-    $0.makeCornerRadius(radius: 8.0)
-    $0.makeBorder(width: 1.0, borderColor: .DecoColor.lightGray2)
-  }
-  
-  private let googleLogoImageView = UIImageView().then {
-    $0.image = .DecoImage.googleLogo
-  }
-  
-  private let googleLoginLabel = UILabel().then {
-    $0.text = "구글로 시작하기"
-    $0.textColor = .DecoColor.gray3
-    $0.font = .DecoFont.getFont(with: .Suit, type: .bold, size: 16)
-  }
-  
-  
-  private let appleLoginView = UIView().then {
-    $0.backgroundColor = .DecoColor.blackColor
-    $0.makeCornerRadius(radius: 8.0)
-    
-  }
-  
-  private let appleLogoImageView = UIImageView().then {
-    $0.backgroundColor = .lightGray
-  }
-  
-  private let appleLoginLabel = UILabel().then {
-    $0.text = "애플로 시작하기"
-    $0.textColor = .DecoColor.whiteColor
-    $0.font = .DecoFont.getFont(with: .Suit, type: .bold, size: 16)
-  }
   
   // MARK: - LifeCycle
   override func viewDidLoad() {
@@ -172,8 +67,8 @@ final class LoginMainViewController:
     
     self.view.addSubview(logoImageView)
     self.view.addSubview(titleLabel)
-    self.view.addSubview(infoContainer)
-    self.view.addSubview(loginContainer)
+    self.view.addSubview(termView)
+    self.view.addSubview(socialLoginView)
   }
   
   // MARK: - Method
@@ -191,66 +86,16 @@ final class LoginMainViewController:
       .marginTop(20)
       .sizeToFit()
     
-    infoContainer.pin
+    termView.pin
       .bottom(view.pin.safeArea.bottom)
-      .hCenter()
-      .width(241)
-      .height(12)
+      .horizontally()
       .marginBottom(51)
     
-    infoContainer.flex.direction(.row).define { flex in
-      flex.addItem(startLabel)
-      flex.addItem(termLabel)
-      flex.addItem(andLabel)
-      flex.addItem(privacyLabel)
-      flex.addItem(agreeLabel)
-    }
-    
-    infoContainer.flex.layout(mode: .adjustWidth)
-    
-    loginContainer.pin
-      .above(of: infoContainer, aligned: .center)
+    socialLoginView.pin
+      .above(of: termView)
+      .height(224)
+      .horizontally()
       .marginBottom(76)
-      .height(200)
-      .width(270)
-    
-    loginContainer.flex.direction(.column).define { flex in
-      flex.addItem(kakaoLoginView).height(47).width(270)
-      kakaoLoginView.flex.direction(.row)
-        .alignItems(.center)
-        .define { kakaoView in
-          kakaoView.addItem(kakaoLogoImageView).marginLeft(56).size(16)
-          kakaoView.addItem(kakaoLoginLabel).marginLeft(20)
-        }
-      
-      flex.addItem(naverLoginView).height(47).width(270).marginTop(12)
-      naverLoginView.flex.direction(.row)
-        .alignItems(.center)
-        .define { naverView in
-          naverView.addItem(naverLogoImageView).marginLeft(56).size(16)
-          naverView.addItem(naverLoginLabel).marginLeft(20)
-        }
-      
-      flex.addItem(googleLoginView).height(47).width(270).marginTop(12)
-      googleLoginView.flex.direction(.row)
-        .alignItems(.center)
-        .define { googleView in
-          googleView.addItem(googleLogoImageView).marginLeft(56).size(16)
-          googleView.addItem(googleLoginLabel).marginLeft(20)
-        }
-      
-      flex.addItem(appleLoginView).height(47).width(270).marginTop(12)
-      appleLoginView.flex.direction(.row)
-        .alignItems(.center)
-        .define { appleView in
-          appleView.addItem(appleLogoImageView).marginLeft(56).size(16)
-          appleView.addItem(appleLoginLabel).marginLeft(20)
-        }
-      
-    }
-    
-    loginContainer.flex.layout(mode: .adjustWidth)
-    
   }
   
   private func setupGestures() {

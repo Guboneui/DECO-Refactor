@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		05ABEBAF530FE13F5452BB60 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BA03B8D05AAC62E0AD725D /* LoginView.swift */; };
 		29591AAD3FFD33357A7F0572 /* LoginMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E714AD57768426CD6CDEAD /* LoginMainViewController.swift */; };
 		33F7153E7375AC679AD43144 /* NickNameRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA7A9D90F63851CF86F986A /* NickNameRouter.swift */; };
 		39333C0D64BE1CDCF09F21C5 /* NickNameBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2A0E129B15AAB06E6F6894 /* NickNameBuilder.swift */; };
@@ -17,6 +18,7 @@
 		971F81A40F83E972F4F54B41 /* LoginMainBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293D99C8D142BA60CA47CCC0 /* LoginMainBuilder.swift */; };
 		AA66CE4D6213C35ECFA384DC /* Util.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 111D1A79CB7EAB7BDA369813 /* Util.framework */; platformFilter = ios; };
 		BA1447347F172DE4651EB9A6 /* Hero in Frameworks */ = {isa = PBXBuildFile; productRef = 7839595B2746D0D522C30D90 /* Hero */; };
+		C0B044FCE2BE487261281923 /* TermView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4D244B64542185E6C4829F /* TermView.swift */; };
 		D5DA8CBAD0929D29711B9FA0 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = BA1C87B88199D0AD7FE70894 /* RxSwift */; };
 		E01367743430A57E02252E16 /* RxGesture in Frameworks */ = {isa = PBXBuildFile; productRef = 77718C3206BFD086913A6F71 /* RxGesture */; };
 		F841FF334E1C6034EABAEDCB /* CommonUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21D6E91FA13D3D7D7989E850 /* CommonUI.framework */; platformFilter = ios; };
@@ -40,12 +42,14 @@
 		03EE677B69D616837D1C3421 /* NickNameInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameInteractor.swift; sourceTree = "<group>"; };
 		0DC42161F1C62E6A03AC6F99 /* LoginMainRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginMainRouter.swift; sourceTree = "<group>"; };
 		111D1A79CB7EAB7BDA369813 /* Util.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Util.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1B4D244B64542185E6C4829F /* TermView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermView.swift; sourceTree = "<group>"; };
 		1F122292170A9B08F370E93A /* Login-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Login-Info.plist"; sourceTree = "<group>"; };
 		21D6E91FA13D3D7D7989E850 /* CommonUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CommonUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		28C6E6787DFAF624F53D6F5B /* Login.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Login.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		293D99C8D142BA60CA47CCC0 /* LoginMainBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginMainBuilder.swift; sourceTree = "<group>"; };
 		4FA7A9D90F63851CF86F986A /* NickNameRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameRouter.swift; sourceTree = "<group>"; };
 		83E714AD57768426CD6CDEAD /* LoginMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginMainViewController.swift; sourceTree = "<group>"; };
+		86BA03B8D05AAC62E0AD725D /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		ADAA7FCCE1B280C3832C28D3 /* LoginComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginComponent.swift; sourceTree = "<group>"; };
 		BA2A0E129B15AAB06E6F6894 /* NickNameBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameBuilder.swift; sourceTree = "<group>"; };
 		E1B037B55F4CC6B5BB890396 /* LoginMainInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginMainInteractor.swift; sourceTree = "<group>"; };
@@ -89,6 +93,7 @@
 		3CC3CD51502C2286540DF4F5 /* LoginMain */ = {
 			isa = PBXGroup;
 			children = (
+				A690E7D4041124AB9A085D83 /* View */,
 				ADAA7FCCE1B280C3832C28D3 /* LoginComponent.swift */,
 				293D99C8D142BA60CA47CCC0 /* LoginMainBuilder.swift */,
 				E1B037B55F4CC6B5BB890396 /* LoginMainInteractor.swift */,
@@ -129,6 +134,15 @@
 				82158BAC7310E834F5971A06 /* Sources */,
 			);
 			name = Project;
+			sourceTree = "<group>";
+		};
+		A690E7D4041124AB9A085D83 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				86BA03B8D05AAC62E0AD725D /* LoginView.swift */,
+				1B4D244B64542185E6C4829F /* TermView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		BCBB051467027A266D2C923F /* SignUp */ = {
@@ -237,6 +251,8 @@
 				F9DF39C63EFF75BD58AF12CB /* LoginMainInteractor.swift in Sources */,
 				451AC81235BBDAE54CE314D7 /* LoginMainRouter.swift in Sources */,
 				29591AAD3FFD33357A7F0572 /* LoginMainViewController.swift in Sources */,
+				05ABEBAF530FE13F5452BB60 /* LoginView.swift in Sources */,
+				C0B044FCE2BE487261281923 /* TermView.swift in Sources */,
 				39333C0D64BE1CDCF09F21C5 /* NickNameBuilder.swift in Sources */,
 				534D8CA2727D7E896624DBC7 /* NickNameInteractor.swift in Sources */,
 				33F7153E7375AC679AD43144 /* NickNameRouter.swift in Sources */,

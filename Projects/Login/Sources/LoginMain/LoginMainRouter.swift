@@ -9,7 +9,7 @@ import RIBs
 import Util
 import UIKit
 
-protocol LoginMainInteractable: Interactable, NickNameListener {
+protocol LoginMainInteractable: Interactable, NickNameListener, GenderListener {
   var router: LoginMainRouting? { get set }
   var listener: LoginMainListener? { get set }
 
@@ -26,14 +26,19 @@ final class LoginMainRouter: LaunchRouter<LoginMainInteractable, NavigationContr
   private let nicknameBuildable: NickNameBuildable
   private var nicknameRouting: Routing?
   
+  private let genderBuildable: GenderBuildable
+  private var genderRouting: Routing?
+  
   
   // TODO: Constructor inject child builder protocols to allow building children.
   init(
     interactor: LoginMainInteractable,
     viewController: NavigationControllerable,
-    nicknameBuildable: NickNameBuildable
+    nicknameBuildable: NickNameBuildable,
+    genderBuildable: GenderBuildable
   ) {
     self.nicknameBuildable = nicknameBuildable
+    self.genderBuildable = genderBuildable
     super.init(interactor: interactor, viewController: viewController)
     interactor.router = self
   }
@@ -52,5 +57,21 @@ final class LoginMainRouter: LaunchRouter<LoginMainInteractable, NavigationContr
     self.navigationControllable?.popViewController(animated: true)
     detachChild(router)
     nicknameRouting = nil
+  }
+  
+  func attachGenderVC() {
+    if genderRouting != nil { return }
+    let router = genderBuildable.build(withListener: interactor)
+    self.navigationControllable = viewController
+    self.navigationControllable?.pushViewController(router.viewControllable, animated: true)
+    attachChild(router)
+    self.genderRouting = router
+  }
+  
+  func detachGenderVC() {
+    guard let router = genderRouting else { return }
+    self.navigationControllable?.popViewController(animated: true)
+    detachChild(router)
+    genderRouting = nil
   }
 }

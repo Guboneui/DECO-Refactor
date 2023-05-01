@@ -11,9 +11,7 @@ import PinLayout
 public class DefaultButton: UIButton {
   
   public override var isHighlighted: Bool {
-    didSet {
-      backgroundColor = isHighlighted ? .DecoColor.primaryColor.withAlphaComponent(0.8) : .DecoColor.primaryColor
-    }
+    didSet { makeHighLightAnimation() }
   }
   
   public override var isEnabled: Bool {

@@ -3,12 +3,16 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		05ABEBAF530FE13F5452BB60 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BA03B8D05AAC62E0AD725D /* LoginView.swift */; };
 		29591AAD3FFD33357A7F0572 /* LoginMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E714AD57768426CD6CDEAD /* LoginMainViewController.swift */; };
+		2CD7FDE229FF5D550052B3B6 /* GenderRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD7FDDE29FF5D550052B3B6 /* GenderRouter.swift */; };
+		2CD7FDE329FF5D550052B3B6 /* GenderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD7FDDF29FF5D550052B3B6 /* GenderViewController.swift */; };
+		2CD7FDE429FF5D550052B3B6 /* GenderBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD7FDE029FF5D550052B3B6 /* GenderBuilder.swift */; };
+		2CD7FDE529FF5D550052B3B6 /* GenderInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD7FDE129FF5D550052B3B6 /* GenderInteractor.swift */; };
 		33F7153E7375AC679AD43144 /* NickNameRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA7A9D90F63851CF86F986A /* NickNameRouter.swift */; };
 		39333C0D64BE1CDCF09F21C5 /* NickNameBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2A0E129B15AAB06E6F6894 /* NickNameBuilder.swift */; };
 		451AC81235BBDAE54CE314D7 /* LoginMainRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC42161F1C62E6A03AC6F99 /* LoginMainRouter.swift */; };
@@ -47,6 +51,10 @@
 		21D6E91FA13D3D7D7989E850 /* CommonUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CommonUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		28C6E6787DFAF624F53D6F5B /* Login.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Login.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		293D99C8D142BA60CA47CCC0 /* LoginMainBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginMainBuilder.swift; sourceTree = "<group>"; };
+		2CD7FDDE29FF5D550052B3B6 /* GenderRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderRouter.swift; sourceTree = "<group>"; };
+		2CD7FDDF29FF5D550052B3B6 /* GenderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderViewController.swift; sourceTree = "<group>"; };
+		2CD7FDE029FF5D550052B3B6 /* GenderBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderBuilder.swift; sourceTree = "<group>"; };
+		2CD7FDE129FF5D550052B3B6 /* GenderInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderInteractor.swift; sourceTree = "<group>"; };
 		4FA7A9D90F63851CF86F986A /* NickNameRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameRouter.swift; sourceTree = "<group>"; };
 		83E714AD57768426CD6CDEAD /* LoginMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginMainViewController.swift; sourceTree = "<group>"; };
 		86BA03B8D05AAC62E0AD725D /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -88,6 +96,17 @@
 				111D1A79CB7EAB7BDA369813 /* Util.framework */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		2CD7FDDD29FF5D380052B3B6 /* Gender */ = {
+			isa = PBXGroup;
+			children = (
+				2CD7FDDE29FF5D550052B3B6 /* GenderRouter.swift */,
+				2CD7FDE029FF5D550052B3B6 /* GenderBuilder.swift */,
+				2CD7FDE129FF5D550052B3B6 /* GenderInteractor.swift */,
+				2CD7FDDF29FF5D550052B3B6 /* GenderViewController.swift */,
+			);
+			path = Gender;
 			sourceTree = "<group>";
 		};
 		3CC3CD51502C2286540DF4F5 /* LoginMain */ = {
@@ -149,6 +168,7 @@
 			isa = PBXGroup;
 			children = (
 				EB830A991EBF8BAFC70FBB62 /* Nickname */,
+				2CD7FDDD29FF5D380052B3B6 /* Gender */,
 			);
 			path = SignUp;
 			sourceTree = "<group>";
@@ -205,8 +225,6 @@
 		353B4020F35CB9C9FFC126AA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				TargetAttributes = {
-				};
 			};
 			buildConfigurationList = 6C10079AF94881EFE73379E4 /* Build configuration list for PBXProject "Login" */;
 			compatibilityVersion = "Xcode 13.0";
@@ -249,6 +267,9 @@
 				758EEAC0BCF54C3CDD386164 /* LoginComponent.swift in Sources */,
 				971F81A40F83E972F4F54B41 /* LoginMainBuilder.swift in Sources */,
 				F9DF39C63EFF75BD58AF12CB /* LoginMainInteractor.swift in Sources */,
+				2CD7FDE329FF5D550052B3B6 /* GenderViewController.swift in Sources */,
+				2CD7FDE529FF5D550052B3B6 /* GenderInteractor.swift in Sources */,
+				2CD7FDE229FF5D550052B3B6 /* GenderRouter.swift in Sources */,
 				451AC81235BBDAE54CE314D7 /* LoginMainRouter.swift in Sources */,
 				29591AAD3FFD33357A7F0572 /* LoginMainViewController.swift in Sources */,
 				05ABEBAF530FE13F5452BB60 /* LoginView.swift in Sources */,
@@ -256,6 +277,7 @@
 				39333C0D64BE1CDCF09F21C5 /* NickNameBuilder.swift in Sources */,
 				534D8CA2727D7E896624DBC7 /* NickNameInteractor.swift in Sources */,
 				33F7153E7375AC679AD43144 /* NickNameRouter.swift in Sources */,
+				2CD7FDE429FF5D550052B3B6 /* GenderBuilder.swift in Sources */,
 				658164F4C3326A85F31BFD43 /* NickNameViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -14,6 +14,7 @@ import CommonUI
 
 protocol NickNamePresentableListener: AnyObject {
   func popNicknameVC()
+  func pushGenderVC()
 }
 
 final class NickNameViewController: UIViewController, NickNamePresentable, NickNameViewControllable {
@@ -21,7 +22,7 @@ final class NickNameViewController: UIViewController, NickNamePresentable, NickN
   weak var listener: NickNamePresentableListener?
   private let disposeBag = DisposeBag()
   
- 
+  
   private let navigationBar = NavigationBar(
     navTitle: "회원가입하기",
     showGuideLine: true
@@ -56,9 +57,9 @@ final class NickNameViewController: UIViewController, NickNamePresentable, NickN
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    self.view.backgroundColor = .white
-    setupViews()
-    setupGestures()
+    self.view.backgroundColor = .DecoColor.whiteColor
+    self.setupViews()
+    self.setupGestures()
   }
   
   override func viewDidLayoutSubviews() {
@@ -80,7 +81,7 @@ final class NickNameViewController: UIViewController, NickNamePresentable, NickN
       .top(view.pin.safeArea)
       .horizontally()
       .sizeToFit(.width)
-
+    
     titleSubtitleView.pin
       .below(of: navigationBar)
       .horizontally()
@@ -91,7 +92,7 @@ final class NickNameViewController: UIViewController, NickNamePresentable, NickN
       .horizontally()
       .height(48)
       .margin(32, 35, 0, 30) // top left bottom right
-      
+    
     warningLabel.pin
       .below(of: nicknameTextfield, aligned: .left)
       .height(12)
@@ -111,5 +112,11 @@ final class NickNameViewController: UIViewController, NickNamePresentable, NickN
       guard let self else { return }
       self.listener?.popNicknameVC()
     }
+    
+    nextButton.tap()
+      .bind { [weak self] in
+        guard let self else { return }
+        self.listener?.pushGenderVC()
+      }.disposed(by: disposeBag)
   }
 }

@@ -13,7 +13,7 @@ public protocol LoginMainDependency: Dependency {
   // created by this RIB.
 }
 
-final class LoginMainComponent: Component<LoginMainDependency>, NickNameDependency {
+final class LoginMainComponent: Component<LoginMainDependency>, NickNameDependency, GenderDependency {
   
   // TODO: Declare 'fileprivate' dependencies that are only used by this RIB.
 }
@@ -38,11 +38,13 @@ final public class LoginMainBuilder: Builder<LoginMainDependency>, LoginMainBuil
     
     let interactor = LoginMainInteractor(presenter: viewController)
     let nicknameBuilder = NickNameBuilder(dependency: component)
+    let genderBuilder = GenderBuilder(dependency: component)
     
     return LoginMainRouter(
       interactor: interactor,
       viewController: nav,
-      nicknameBuildable: nicknameBuilder
+      nicknameBuildable: nicknameBuilder,
+      genderBuildable: genderBuilder
     )
   }
 }

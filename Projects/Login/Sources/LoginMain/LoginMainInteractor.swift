@@ -21,6 +21,8 @@ protocol LoginMainRouting: ViewableRouting {
   // TODO: Declare methods the interactor can invoke to manage sub-tree via the router.
   func attachNicknameVC()
   func detachNicknameVC()
+  func attachGenderVC()
+  func detachGenderVC()
 }
 
 protocol LoginMainPresentable: Presentable {
@@ -70,5 +72,13 @@ final class LoginMainInteractor:
   
   func detachNicknameVC() {
     router?.detachNicknameVC()
+  }
+  
+  func attachGenderVC() {
+    router?.attachGenderVC()
+  }
+  
+  func detachGenderVC() {
+    router?.detachGenderVC()
   }
 }

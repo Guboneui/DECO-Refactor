@@ -23,12 +23,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let window = UIWindow(frame: UIScreen.main.bounds)
 		self.window = window
 		
-		let launchRouter = LoginMainBuilder(dependency: LoginComponent()).build()
+		let launchRouter = AppRootBuilder(dependency: AppComponent()).build(with: window)
 		self.launchRouter = launchRouter
 		self.launchRouter?.launch(from: window)
 		
     return true
   }
 }
+
 
 

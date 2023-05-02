@@ -65,7 +65,7 @@ public class ImageCell: UICollectionViewCell {
       if let image {
         self.mainImageView.image = image
       } else {
-        print("이미지 받아오기")
+
       }
     }
   }

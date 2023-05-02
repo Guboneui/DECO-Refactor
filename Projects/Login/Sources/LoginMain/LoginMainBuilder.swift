@@ -9,11 +9,9 @@ import RIBs
 import Util
 
 public protocol LoginMainDependency: Dependency {
-  // TODO: Declare the set of dependencies required by this RIB, but cannot be
-  // created by this RIB.
 }
 
-final class LoginMainComponent:
+final public class LoginMainComponent:
   Component<LoginMainDependency>,
   NickNameDependency,
   GenderDependency,
@@ -25,8 +23,8 @@ final class LoginMainComponent:
 
 // MARK: - Builder
 
-protocol LoginMainBuildable: Buildable {
-  func build() -> LaunchRouting
+public protocol LoginMainBuildable: Buildable {
+  func build() -> LoginMainRouting
 }
 
 final public class LoginMainBuilder: Builder<LoginMainDependency>, LoginMainBuildable {
@@ -35,7 +33,7 @@ final public class LoginMainBuilder: Builder<LoginMainDependency>, LoginMainBuil
     super.init(dependency: dependency)
   }
   
-  public func build() -> LaunchRouting {
+  public func build() -> LoginMainRouting {
     let component = LoginMainComponent(dependency: dependency)
     let viewController = LoginMainViewController()
     let nav = NavigationControllerable(root: viewController)
@@ -50,7 +48,7 @@ final public class LoginMainBuilder: Builder<LoginMainDependency>, LoginMainBuil
     
     return LoginMainRouter(
       interactor: interactor,
-      viewController: nav,
+      navigationController: nav,
       nicknameBuildable: nicknameBuilder,
       genderBuildable: genderBuilder,
       ageBuildable: ageBuilder,

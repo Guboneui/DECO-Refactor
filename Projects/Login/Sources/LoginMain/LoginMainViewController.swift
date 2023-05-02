@@ -24,10 +24,11 @@ protocol LoginMainPresentableListener: AnyObject {
   func pushNicknameVC(by loginType: LoginType)
 }
 
-final class LoginMainViewController:
+final public class LoginMainViewController:
   UIViewController,
   LoginMainPresentable,
-  LoginMainViewControllable {
+  LoginMainViewControllable
+{
   
   weak var listener: LoginMainPresentableListener?
   private let disposeBag = DisposeBag()
@@ -47,19 +48,17 @@ final class LoginMainViewController:
   
   
   // MARK: - LifeCycle
-  override func viewDidLoad() {
+  
+  override public func viewDidLoad() {
     super.viewDidLoad()
     self.setupViews()
     self.setupGestures()
+    
   }
   
-  override func viewDidLayoutSubviews() {
+  override public func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
     self.setupLayouts()
-  }
-  
-  override func viewDidDisappear(_ animated: Bool) {
-    super.viewDidDisappear(animated)
   }
   
   private func setupViews() {
@@ -119,4 +118,5 @@ final class LoginMainViewController:
       self.listener?.pushNicknameVC(by: .APPLE)
     }
   }
+  
 }

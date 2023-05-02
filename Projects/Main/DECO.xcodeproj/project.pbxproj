@@ -3,14 +3,18 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0501DD244E7145F91982FE46 /* AppRootRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61EB0154CEBAD1FA96E5290 /* AppRootRouter.swift */; };
+		3A049772C15648D1C826521C /* AppRootInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41868A1039E1752591863AA6 /* AppRootInteractor.swift */; };
+		41CF09C6F9A4820C1D57E0FD /* AppRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F03EA36D8E99BA964DA7B7F /* AppRootViewController.swift */; };
 		47B92428C9B21BA820B52F08 /* Login.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B6686109E67E5AF15338F03 /* Login.framework */; platformFilter = ios; };
 		6ABD43ADEA446D2AE1E006AE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41ACEE68352FF01E741559F /* AppDelegate.swift */; };
-		9F371DD267ED12537FA3A41B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2437B41BF8E4809F2034229 /* ViewController.swift */; };
+		B8E941A134C8B8076666919F /* AppComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9555C4DC9DBE2E005B175B0 /* AppComponent.swift */; };
 		ECFE1BD8132C50064B86D257 /* CommonUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0BDC1A48960A2B5B50EE808C /* CommonUI.framework */; platformFilter = ios; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		ED17F669EF8C74C22AD521EE /* AppRootBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF930340D3A6E9B0D6D2EF0B /* AppRootBuilder.swift */; };
 		F93F35E3A1ACDDE5648FCD83 /* Login.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0B6686109E67E5AF15338F03 /* Login.framework */; platformFilter = ios; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
@@ -32,10 +36,14 @@
 /* Begin PBXFileReference section */
 		0B6686109E67E5AF15338F03 /* Login.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Login.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0BDC1A48960A2B5B50EE808C /* CommonUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CommonUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F03EA36D8E99BA964DA7B7F /* AppRootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRootViewController.swift; sourceTree = "<group>"; };
 		2B5B47F76E0624DB4B0A1406 /* DECO-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "DECO-Info.plist"; sourceTree = "<group>"; };
-		B2437B41BF8E4809F2034229 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		41868A1039E1752591863AA6 /* AppRootInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRootInteractor.swift; sourceTree = "<group>"; };
 		B41ACEE68352FF01E741559F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B8B48B1EF47A5C5EDF44940B /* DECO.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DECO.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CF930340D3A6E9B0D6D2EF0B /* AppRootBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRootBuilder.swift; sourceTree = "<group>"; };
+		E61EB0154CEBAD1FA96E5290 /* AppRootRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRootRouter.swift; sourceTree = "<group>"; };
+		E9555C4DC9DBE2E005B175B0 /* AppComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppComponent.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,8 +61,9 @@
 		4E6A707764707C1DE3843120 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				BC17F6D68F2FD809E4AE861C /* AppRoot */,
+				E9555C4DC9DBE2E005B175B0 /* AppComponent.swift */,
 				B41ACEE68352FF01E741559F /* AppDelegate.swift */,
-				B2437B41BF8E4809F2034229 /* ViewController.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -103,6 +112,17 @@
 			path = Derived;
 			sourceTree = "<group>";
 		};
+		BC17F6D68F2FD809E4AE861C /* AppRoot */ = {
+			isa = PBXGroup;
+			children = (
+				CF930340D3A6E9B0D6D2EF0B /* AppRootBuilder.swift */,
+				41868A1039E1752591863AA6 /* AppRootInteractor.swift */,
+				E61EB0154CEBAD1FA96E5290 /* AppRootRouter.swift */,
+				1F03EA36D8E99BA964DA7B7F /* AppRootViewController.swift */,
+			);
+			path = AppRoot;
+			sourceTree = "<group>";
+		};
 		FF12CED73E799A847123488A /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -141,14 +161,13 @@
 			isa = PBXProject;
 			attributes = {
 				ORGANIZATIONNAME = boni;
-				TargetAttributes = {
-				};
 			};
 			buildConfigurationList = 45CF22C5A2D63BFD214ED9F1 /* Build configuration list for PBXProject "DECO" */;
 			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = ko;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				ko,
 				Base,
 				en,
 			);
@@ -177,8 +196,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B8E941A134C8B8076666919F /* AppComponent.swift in Sources */,
 				6ABD43ADEA446D2AE1E006AE /* AppDelegate.swift in Sources */,
-				9F371DD267ED12537FA3A41B /* ViewController.swift in Sources */,
+				ED17F669EF8C74C22AD521EE /* AppRootBuilder.swift in Sources */,
+				3A049772C15648D1C826521C /* AppRootInteractor.swift in Sources */,
+				0501DD244E7145F91982FE46 /* AppRootRouter.swift in Sources */,
+				41CF09C6F9A4820C1D57E0FD /* AppRootViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

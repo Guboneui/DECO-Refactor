@@ -83,6 +83,8 @@ public enum CommonUIAsset {
     public static let listupDarkgrey2 = CommonUIImages(name: "listup_darkgrey_2")
     public static let loadingWhite = CommonUIImages(name: "loading_white")
     public static let login = CommonUIImages(name: "login")
+    public static let logoDarkgray = CommonUIImages(name: "logoDarkgray")
+    public static let logoWhite = CommonUIImages(name: "logoWhite")
     public static let logoYellow = CommonUIImages(name: "logoYellow")
     public static let message = CommonUIImages(name: "message")
     public static let messageFullWhite = CommonUIImages(name: "message_full_white")

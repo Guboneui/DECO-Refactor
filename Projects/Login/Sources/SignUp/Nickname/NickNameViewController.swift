@@ -17,7 +17,11 @@ protocol NickNamePresentableListener: AnyObject {
   func pushGenderVC()
 }
 
-final class NickNameViewController: UIViewController, NickNamePresentable, NickNameViewControllable {
+final class NickNameViewController:
+  UIViewController,
+  NickNamePresentable,
+  NickNameViewControllable
+{
   
   weak var listener: NickNamePresentableListener?
   private let disposeBag = DisposeBag()

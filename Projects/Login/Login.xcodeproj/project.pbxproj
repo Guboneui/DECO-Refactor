@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -18,7 +18,6 @@
 		534D8CA2727D7E896624DBC7 /* NickNameInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03EE677B69D616837D1C3421 /* NickNameInteractor.swift */; };
 		658164F4C3326A85F31BFD43 /* NickNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3BB2BF4A194BC2F84902C76 /* NickNameViewController.swift */; };
 		6594E7091D7D3E2D91346B28 /* MoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD2DB26E3A2B25F05EB32DD /* MoodViewController.swift */; };
-		758EEAC0BCF54C3CDD386164 /* LoginComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAA7FCCE1B280C3832C28D3 /* LoginComponent.swift */; };
 		8095033580D68745F9AD7B54 /* MoodInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF3CB208E0DC0C18672327AA /* MoodInteractor.swift */; };
 		971F81A40F83E972F4F54B41 /* LoginMainBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293D99C8D142BA60CA47CCC0 /* LoginMainBuilder.swift */; };
 		A616CE0E7FCC8EFF45E6738F /* MoodRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A21591B64537E33E0EE52E9 /* MoodRouter.swift */; };
@@ -70,7 +69,6 @@
 		86BA03B8D05AAC62E0AD725D /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		9EF692959895875AEE24D2E2 /* AgeBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgeBuilder.swift; sourceTree = "<group>"; };
 		A7DB39AA7585F22001CA703C /* GenderRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderRouter.swift; sourceTree = "<group>"; };
-		ADAA7FCCE1B280C3832C28D3 /* LoginComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginComponent.swift; sourceTree = "<group>"; };
 		BA2A0E129B15AAB06E6F6894 /* NickNameBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameBuilder.swift; sourceTree = "<group>"; };
 		BF3CB208E0DC0C18672327AA /* MoodInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodInteractor.swift; sourceTree = "<group>"; };
 		BFD2DB26E3A2B25F05EB32DD /* MoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodViewController.swift; sourceTree = "<group>"; };
@@ -118,7 +116,6 @@
 			isa = PBXGroup;
 			children = (
 				A690E7D4041124AB9A085D83 /* View */,
-				ADAA7FCCE1B280C3832C28D3 /* LoginComponent.swift */,
 				293D99C8D142BA60CA47CCC0 /* LoginMainBuilder.swift */,
 				E1B037B55F4CC6B5BB890396 /* LoginMainInteractor.swift */,
 				0DC42161F1C62E6A03AC6F99 /* LoginMainRouter.swift */,
@@ -265,8 +262,6 @@
 		353B4020F35CB9C9FFC126AA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				TargetAttributes = {
-				};
 			};
 			buildConfigurationList = 6C10079AF94881EFE73379E4 /* Build configuration list for PBXProject "Login" */;
 			compatibilityVersion = "Xcode 13.0";
@@ -306,7 +301,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				758EEAC0BCF54C3CDD386164 /* LoginComponent.swift in Sources */,
 				971F81A40F83E972F4F54B41 /* LoginMainBuilder.swift in Sources */,
 				F9DF39C63EFF75BD58AF12CB /* LoginMainInteractor.swift in Sources */,
 				451AC81235BBDAE54CE314D7 /* LoginMainRouter.swift in Sources */,

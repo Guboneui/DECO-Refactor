@@ -49,6 +49,8 @@ public extension UIImage {
     public static let loadingWhite = CommonUIAsset.Image.loadingWhite.image
     public static let login = CommonUIAsset.Image.login.image
     public static let logoYellow = CommonUIAsset.Image.logoYellow.image
+    public static let logoWhite = CommonUIAsset.Image.logoWhite.image
+    public static let logoDarkgray = CommonUIAsset.Image.logoDarkgray.image
     public static let message = CommonUIAsset.Image.message.image
     public static let messageFullWhite = CommonUIAsset.Image.messageFullWhite.image
     public static let messageWhite = CommonUIAsset.Image.messageWhite.image

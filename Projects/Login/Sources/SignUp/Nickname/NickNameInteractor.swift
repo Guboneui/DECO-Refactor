@@ -32,10 +32,8 @@ final class NickNameInteractor:
   weak var listener: NickNameListener?
   
   override init(presenter: NickNamePresentable) {
-    
     super.init(presenter: presenter)
     presenter.listener = self
-    
   }
   
   override func didBecomeActive() {

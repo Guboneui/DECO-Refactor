@@ -17,7 +17,7 @@ enum LoginType {
   case APPLE
 }
 
-protocol LoginMainRouting: ViewableRouting {
+public protocol LoginMainRouting: ViewableRouting {
   // TODO: Declare methods the interactor can invoke to manage sub-tree via the router.
   func attachNicknameVC()
   func detachNicknameVC()
@@ -30,6 +30,8 @@ protocol LoginMainRouting: ViewableRouting {
   
   func attachMoodVC()
   func detachMoodVC()
+  
+  func test()
 }
 
 protocol LoginMainPresentable: Presentable {
@@ -37,28 +39,30 @@ protocol LoginMainPresentable: Presentable {
   // TODO: Declare methods the interactor can invoke the presenter to present data.
 }
 
-protocol LoginMainListener: AnyObject {
+public protocol LoginMainListener: AnyObject {
   // TODO: Declare methods the interactor can invoke to communicate with other RIBs.
-  
-  func didTapLoginButton()
 }
 
 final class LoginMainInteractor:
   PresentableInteractor<LoginMainPresentable>,
   LoginMainInteractable,
-  LoginMainPresentableListener
+  LoginMainPresentableListener, NavigationControllerDelegate
 {
+  
+  
   
   weak var router: LoginMainRouting?
   weak var listener: LoginMainListener?
   
+  let navigationControllerDelegateProxy: NavigationControllerDelegateProxy
   
   // TODO: Add additional dependencies to constructor. Do not perform any logic
   // in constructor.
   override init(presenter: LoginMainPresentable) {
-    
+    self.navigationControllerDelegateProxy = NavigationControllerDelegateProxy()
     super.init(presenter: presenter)
     presenter.listener = self
+    self.navigationControllerDelegateProxy.delegate = self
   }
   
   override func didBecomeActive() {
@@ -104,4 +108,10 @@ final class LoginMainInteractor:
   func detachMoodVC() {
     router?.detachMoodVC()
   }
+  
+  func navigationController() {
+    print("zzzzzzz")
+    router?.detachNicknameVC()
+  }
+  
 }

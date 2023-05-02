@@ -9,6 +9,25 @@ import RIBs
 import Util
 import UIKit
 
+
+//MARK: -
+
+public protocol NavigationControllerDelegate: AnyObject {
+  //func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool)
+  func navigationController()
+}
+
+public final class NavigationControllerDelegateProxy: NSObject, UINavigationControllerDelegate {
+  public weak var delegate: NavigationControllerDelegate?
+  
+  public func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
+//    delegate?.navigationController(navigationController, didShow: viewController, animated: animated)
+    delegate?.navigationController()
+  }
+}
+
+//MARK: -
+
 protocol LoginMainInteractable:
   Interactable,
   NickNameListener,
@@ -17,16 +36,21 @@ protocol LoginMainInteractable:
   MoodListener
 {
   var router: LoginMainRouting? { get set }
-  var listener: LoginMainListener? { get set } 
+  var listener: LoginMainListener? { get set }
+  
+  var navigationControllerDelegateProxy: NavigationControllerDelegateProxy { get }
 }
 
-protocol LoginMainViewControllable: ViewControllable {
+public protocol LoginMainViewControllable: ViewControllable {
   // TODO: Declare methods the router invokes to manipulate the view hierarchy.
 }
 
-final class LoginMainRouter: LaunchRouter<LoginMainInteractable, NavigationControllerable>, LoginMainRouting {
+final class LoginMainRouter: ViewableRouter<LoginMainInteractable, NavigationControllerable>, LoginMainRouting {
+  
+  
   
   private var navigationControllable: NavigationControllerable?
+
   
   private let nicknameBuildable: NickNameBuildable
   private var nicknameRouting: Routing?
@@ -43,18 +67,31 @@ final class LoginMainRouter: LaunchRouter<LoginMainInteractable, NavigationContr
   // TODO: Constructor inject child builder protocols to allow building children.
   init(
     interactor: LoginMainInteractable,
-    viewController: NavigationControllerable,
+    navigationController: NavigationControllerable,
     nicknameBuildable: NickNameBuildable,
     genderBuildable: GenderBuildable,
     ageBuildable: AgeBuildable,
     moodBuildable: MoodBuildable
   ) {
+
     self.nicknameBuildable = nicknameBuildable
     self.genderBuildable = genderBuildable
     self.ageBuildable = ageBuildable
     self.moodBuildable = moodBuildable
-    super.init(interactor: interactor, viewController: viewController)
+    super.init(interactor: interactor, viewController: navigationController)
     interactor.router = self
+    
+//    print("🔊[DEBUG]: \(navigationControllable)")
+//    
+//    print(viewControllable)
+//    
+//    print(viewControllable.uiviewController)
+//    
+//    print(viewControllable.uiviewController.navigationController)
+//    
+//    (viewControllable.uiviewController as! UINavigationController).delegate = interactor.navigationControllerDelegateProxy
+    
+    
   }
   
   func attachNicknameVC() {
@@ -119,5 +156,13 @@ final class LoginMainRouter: LaunchRouter<LoginMainInteractable, NavigationContr
     self.navigationControllable?.popViewController(animated: true)
     detachChild(router)
     moodRouting = nil
+  }
+  
+  func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
+    print("\(viewController) 팝팝팝팝팝")
+  }
+  
+  func test() {
+    print("zzlzlzlz")
   }
 }

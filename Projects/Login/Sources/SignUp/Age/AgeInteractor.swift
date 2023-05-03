@@ -9,6 +9,11 @@ import RIBs
 import RxSwift
 import Util
 
+enum AgeType {
+  case More
+  case Less
+}
+
 protocol AgeRouting: ViewableRouting {
   // TODO: Declare methods the interactor can invoke to manage sub-tree via the router.
 }
@@ -16,6 +21,7 @@ protocol AgeRouting: ViewableRouting {
 protocol AgePresentable: Presentable {
   var listener: AgePresentableListener? { get set }
   // TODO: Declare methods the interactor can invoke the presenter to present data.
+  func selectedUserAgeType(ageType: AgeType)
 }
 
 protocol AgeListener: AnyObject {
@@ -51,5 +57,9 @@ final class AgeInteractor: PresentableInteractor<AgePresentable>, AgeInteractabl
   
   func pushMoodVC() {
     self.listener?.attachMoodVC()
+  }
+  
+  func checkedAge(ageType: AgeType) {
+    self.presenter.selectedUserAgeType(ageType: ageType)
   }
 }

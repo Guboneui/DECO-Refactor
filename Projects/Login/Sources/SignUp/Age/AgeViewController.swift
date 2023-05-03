@@ -14,6 +14,8 @@ import Util
 protocol AgePresentableListener: AnyObject {
   func popAgeVC(with popType: PopType)
   func pushMoodVC()
+  
+  func checkedAge(ageType: AgeType)
 }
 
 final class AgeViewController:
@@ -23,22 +25,24 @@ final class AgeViewController:
 {
   
   weak var listener: AgePresentableListener?
-  private let disposeBag = DisposeBag()
+  private let disposeBag: DisposeBag = DisposeBag()
   
-  private let navigationBar = NavigationBar(
+  private let navigationBar: NavigationBar = NavigationBar(
     navTitle: "회원가입하기",
     showGuideLine: true
   )
   
-  private let titleSubtitleView = TitleSubtitleView(
+  private let titleSubtitleView: TitleSubtitleView = TitleSubtitleView(
     title: "00님, 만 14세 이상이신가요?",
     subTitle: "앱 정책 상 만 14세 미만은 이용이 불가해요."
   )
   
-  private let yesButton = CheckButton(title: "네")
-  private let noButton = CheckButton(title: "아니오")
+  private let yesButton: CheckButton = CheckButton(title: "네")
+  private let noButton: CheckButton = CheckButton(title: "아니오")
   
-  private let nextButton = DefaultButton(title: "다음")
+  private let nextButton: DefaultButton = DefaultButton(title: "다음").then {
+    $0.isEnabled = false
+  }
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -100,6 +104,18 @@ final class AgeViewController:
       self.listener?.popAgeVC(with: .BackButton)
     }
     
+    self.yesButton.tap()
+      .subscribe(onNext: { [weak self] in
+        guard let self else { return }
+        self.listener?.checkedAge(ageType: .More)
+      }).disposed(by: disposeBag)
+    
+    self.noButton.tap()
+      .subscribe(onNext: { [weak self] in
+        guard let self else { return }
+        self.listener?.checkedAge(ageType: .Less)
+      }).disposed(by: disposeBag)
+    
     self.nextButton.tap()
       .bind { [weak self] in
         guard let self else { return }
@@ -107,4 +123,9 @@ final class AgeViewController:
       }.disposed(by: disposeBag)
   }
   
+  func selectedUserAgeType(ageType: AgeType) {
+    self.yesButton.changeIconImage(icon: ageType == .More ? .DecoImage.checkSec : .DecoImage.checkLightgray1)
+    self.noButton.changeIconImage(icon: ageType == .Less ? .DecoImage.checkSec : .DecoImage.checkLightgray1)
+    self.nextButton.isEnabled = true
+  }
 }

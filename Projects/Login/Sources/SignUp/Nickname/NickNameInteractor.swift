@@ -15,6 +15,7 @@ protocol NickNameRouting: ViewableRouting {
 
 protocol NickNamePresentable: Presentable {
   var listener: NickNamePresentableListener? { get set }
+  func isEnableNickname(isEnable: Bool)
 }
 
 protocol NickNameListener: AnyObject {
@@ -50,6 +51,15 @@ final class NickNameInteractor:
   
   func pushGenderVC() {
     listener?.attachGenderVC()
+  }
+  
+  func checkNickname(nickName: String) {
+    // 1. 네트워크 통신
+    // 2. 받아온 결과 값으로 presenter로 VC에 값 전달
+    // 3. 다음 버튼 클릭 시 00에 닉네임 저장해야함 -> attach로직에 들어가야 함.(pushGenderVC)
+    
+    if nickName == "test" { presenter.isEnableNickname(isEnable: false) }
+    else { presenter.isEnableNickname(isEnable: true) }
   }
   
 }

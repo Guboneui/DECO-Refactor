@@ -16,6 +16,8 @@ import Util
 protocol NickNamePresentableListener: AnyObject {
   func popNicknameVC(with popType: PopType)
   func pushGenderVC()
+  
+  func checkNickname(nickName: String)
 }
 
 final class NickNameViewController:
@@ -25,20 +27,20 @@ final class NickNameViewController:
 {
   
   weak var listener: NickNamePresentableListener?
-  private let disposeBag = DisposeBag()
+  private let disposeBag: DisposeBag = DisposeBag()
   
   
-  private let navigationBar = NavigationBar(
+  private let navigationBar: NavigationBar = NavigationBar(
     navTitle: "회원가입하기",
     showGuideLine: true
   )
   
-  private let titleSubtitleView = TitleSubtitleView(
+  private let titleSubtitleView: TitleSubtitleView = TitleSubtitleView(
     title: "반가워요! 닉네임을 정해주세요 :)",
     subTitle: "tip. 부르기 쉬운 한글 닉네임은 어때요?"
   )
   
-  private let nicknameTextfield = UITextField().then {
+  private let nicknameTextfield: UITextField = UITextField().then {
     $0.placeholder = "닉네임을 작성해 주세요"
     $0.font = .DecoFont.getFont(with: .NotoSans, type: .medium, size: 14)
     $0.textColor = .DecoColor.darkGray2
@@ -51,19 +53,23 @@ final class NickNameViewController:
     $0.setRightPaddingPoints(16)
   }
   
-  private let warningLabel = UILabel().then {
+  private let warningLabel: UILabel = UILabel().then {
     $0.text = "이미 사용중인 닉네임입니다"
     $0.font = .DecoFont.getFont(with: .NotoSans, type: .medium, size: 10)
     $0.textColor = .DecoColor.warningColor
+    $0.isHidden = true
   }
   
-  private let nextButton = DefaultButton(title: "다음")
+  private let nextButton: DefaultButton = DefaultButton(title: "다음").then {
+    $0.isEnabled = false
+  }
   
   override func viewDidLoad() {
     super.viewDidLoad()
     self.view.backgroundColor = .DecoColor.whiteColor
     self.setupViews()
     self.setupGestures()
+    self.setupBindings()
   }
   
   override func viewDidDisappear(_ animated: Bool) {
@@ -127,7 +133,23 @@ final class NickNameViewController:
     nextButton.tap()
       .bind { [weak self] in
         guard let self else { return }
+        // 여기에서 닉네임도 함께 보내야 함.
         self.listener?.pushGenderVC()
       }.disposed(by: disposeBag)
+  }
+  
+  private func setupBindings() {
+    nicknameTextfield.rx.text
+      .compactMap{$0}
+      .filter{!$0.trimmingCharacters(in: .whitespaces).isEmpty}
+      .subscribe(onNext: { [weak self] in
+        guard let self else { return }
+        self.listener?.checkNickname(nickName: $0)
+      }).disposed(by: disposeBag)
+  }
+  
+  func isEnableNickname(isEnable: Bool) {
+    self.nextButton.isEnabled = isEnable
+    self.warningLabel.isHidden = isEnable
   }
 }

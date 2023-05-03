@@ -8,6 +8,11 @@
 import UIKit
 import RIBs
 
+public enum PopType {
+  case BackButton
+  case Swipe
+}
+
 public final class NavigationControllerable: ViewControllable {
   
   public var uiviewController: UIViewController { self.navigationController }

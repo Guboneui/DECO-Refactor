@@ -9,25 +9,6 @@ import RIBs
 import Util
 import UIKit
 
-
-//MARK: -
-
-public protocol NavigationControllerDelegate: AnyObject {
-  //func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool)
-  func navigationController()
-}
-
-public final class NavigationControllerDelegateProxy: NSObject, UINavigationControllerDelegate {
-  public weak var delegate: NavigationControllerDelegate?
-  
-  public func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
-//    delegate?.navigationController(navigationController, didShow: viewController, animated: animated)
-    delegate?.navigationController()
-  }
-}
-
-//MARK: -
-
 protocol LoginMainInteractable:
   Interactable,
   NickNameListener,
@@ -37,8 +18,6 @@ protocol LoginMainInteractable:
 {
   var router: LoginMainRouting? { get set }
   var listener: LoginMainListener? { get set }
-  
-  var navigationControllerDelegateProxy: NavigationControllerDelegateProxy { get }
 }
 
 public protocol LoginMainViewControllable: ViewControllable {
@@ -47,11 +26,8 @@ public protocol LoginMainViewControllable: ViewControllable {
 
 final class LoginMainRouter: ViewableRouter<LoginMainInteractable, NavigationControllerable>, LoginMainRouting {
   
-  
-  
   private var navigationControllable: NavigationControllerable?
 
-  
   private let nicknameBuildable: NickNameBuildable
   private var nicknameRouting: Routing?
   
@@ -80,18 +56,6 @@ final class LoginMainRouter: ViewableRouter<LoginMainInteractable, NavigationCon
     self.moodBuildable = moodBuildable
     super.init(interactor: interactor, viewController: navigationController)
     interactor.router = self
-    
-//    print("🔊[DEBUG]: \(navigationControllable)")
-//    
-//    print(viewControllable)
-//    
-//    print(viewControllable.uiviewController)
-//    
-//    print(viewControllable.uiviewController.navigationController)
-//    
-//    (viewControllable.uiviewController as! UINavigationController).delegate = interactor.navigationControllerDelegateProxy
-    
-    
   }
   
   func attachNicknameVC() {
@@ -99,13 +63,16 @@ final class LoginMainRouter: ViewableRouter<LoginMainInteractable, NavigationCon
     let router = nicknameBuildable.build(withListener: interactor)
     self.navigationControllable = viewController
     self.navigationControllable?.pushViewController(router.viewControllable, animated: true)
+
     attachChild(router)
     self.nicknameRouting = router
   }
   
-  func detachNicknameVC() {
+  func detachNicknameVC(with popType: PopType) {
     guard let router = nicknameRouting else { return }
-    self.navigationControllable?.popViewController(animated: true)
+    if popType == .BackButton {
+      self.navigationControllable?.popViewController(animated: true)
+    }
     detachChild(router)
     nicknameRouting = nil
   }
@@ -119,9 +86,11 @@ final class LoginMainRouter: ViewableRouter<LoginMainInteractable, NavigationCon
     self.genderRouting = router
   }
   
-  func detachGenderVC() {
+  func detachGenderVC(with popType: PopType) {
     guard let router = genderRouting else { return }
-    self.navigationControllable?.popViewController(animated: true)
+    if popType == .BackButton {
+      self.navigationControllable?.popViewController(animated: true)
+    }
     detachChild(router)
     genderRouting = nil
   }
@@ -135,9 +104,11 @@ final class LoginMainRouter: ViewableRouter<LoginMainInteractable, NavigationCon
     self.ageRouting = router
   }
   
-  func detachAgeVC() {
+  func detachAgeVC(with popType: PopType) {
     guard let router = ageRouting else { return }
-    self.navigationControllable?.popViewController(animated: true)
+    if popType == .BackButton {
+      self.navigationControllable?.popViewController(animated: true)
+    }
     detachChild(router)
     ageRouting = nil
   }
@@ -151,18 +122,12 @@ final class LoginMainRouter: ViewableRouter<LoginMainInteractable, NavigationCon
     self.moodRouting = router
   }
   
-  func detachMoodVC() {
+  func detachMoodVC(with popType: PopType) {
     guard let router = moodRouting else { return }
-    self.navigationControllable?.popViewController(animated: true)
+    if popType == .BackButton {
+      self.navigationControllable?.popViewController(animated: true)
+    }
     detachChild(router)
     moodRouting = nil
-  }
-  
-  func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
-    print("\(viewController) 팝팝팝팝팝")
-  }
-  
-  func test() {
-    print("zzlzlzlz")
   }
 }

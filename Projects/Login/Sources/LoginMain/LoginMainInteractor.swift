@@ -20,18 +20,16 @@ enum LoginType {
 public protocol LoginMainRouting: ViewableRouting {
   // TODO: Declare methods the interactor can invoke to manage sub-tree via the router.
   func attachNicknameVC()
-  func detachNicknameVC()
+  func detachNicknameVC(with popType: PopType)
   
   func attachGenderVC()
-  func detachGenderVC()
+  func detachGenderVC(with popType: PopType)
   
   func attachAgeVC()
-  func detachAgeVC()
+  func detachAgeVC(with popType: PopType)
   
   func attachMoodVC()
-  func detachMoodVC()
-  
-  func test()
+  func detachMoodVC(with popType: PopType)
 }
 
 protocol LoginMainPresentable: Presentable {
@@ -46,23 +44,18 @@ public protocol LoginMainListener: AnyObject {
 final class LoginMainInteractor:
   PresentableInteractor<LoginMainPresentable>,
   LoginMainInteractable,
-  LoginMainPresentableListener, NavigationControllerDelegate
+  LoginMainPresentableListener
 {
-  
-  
-  
+
   weak var router: LoginMainRouting?
   weak var listener: LoginMainListener?
   
-  let navigationControllerDelegateProxy: NavigationControllerDelegateProxy
   
   // TODO: Add additional dependencies to constructor. Do not perform any logic
   // in constructor.
   override init(presenter: LoginMainPresentable) {
-    self.navigationControllerDelegateProxy = NavigationControllerDelegateProxy()
     super.init(presenter: presenter)
     presenter.listener = self
-    self.navigationControllerDelegateProxy.delegate = self
   }
   
   override func didBecomeActive() {
@@ -78,40 +71,33 @@ final class LoginMainInteractor:
   
   func pushNicknameVC(by loginType: LoginType) {
     router?.attachNicknameVC()
-    print("🔊[DEBUG]: Interactor")
   }
   
-  func detachNicknameVC() {
-    router?.detachNicknameVC()
+  func detachNicknameVC(with popType: PopType) {
+    router?.detachNicknameVC(with: popType)
   }
   
   func attachGenderVC() {
     router?.attachGenderVC()
   }
   
-  func detachGenderVC() {
-    router?.detachGenderVC()
+  func detachGenderVC(with popType: PopType) {
+    router?.detachGenderVC(with: popType)
   }
   
   func attachAgeVC() {
     router?.attachAgeVC()
   }
   
-  func detachAgeVC() {
-    router?.detachAgeVC()
+  func detachAgeVC(with popType: PopType) {
+    router?.detachAgeVC(with: popType)
   }
   
   func attachMoodVC() {
     router?.attachMoodVC()
   }
   
-  func detachMoodVC() {
-    router?.detachMoodVC()
+  func detachMoodVC(with popType: PopType) {
+    router?.detachMoodVC(with: popType)
   }
-  
-  func navigationController() {
-    print("zzzzzzz")
-    router?.detachNicknameVC()
-  }
-  
 }

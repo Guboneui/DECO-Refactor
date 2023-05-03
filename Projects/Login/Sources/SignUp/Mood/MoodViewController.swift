@@ -9,9 +9,10 @@ import RIBs
 import RxSwift
 import UIKit
 import CommonUI
+import Util
 
 protocol MoodPresentableListener: AnyObject {
-  func popMoodVC()
+  func popMoodVC(with popType: PopType)
 }
 
 final class MoodViewController: UIViewController, MoodPresentable, MoodViewControllable {
@@ -60,6 +61,13 @@ final class MoodViewController: UIViewController, MoodPresentable, MoodViewContr
     self.view.backgroundColor = .DecoColor.whiteColor
     self.setupViews()
     self.setupGestures()
+  }
+  
+  override func viewDidDisappear(_ animated: Bool) {
+    super.viewDidDisappear(animated)
+    if isMovingFromParent {
+      listener?.popMoodVC(with: .Swipe)
+    }
   }
   
   override func viewDidLayoutSubviews() {
@@ -112,9 +120,10 @@ final class MoodViewController: UIViewController, MoodPresentable, MoodViewContr
   private func setupGestures() {
     self.navigationBar.didTapBackButton = { [weak self] in
       guard let self else { return }
-      self.listener?.popMoodVC()
+      self.listener?.popMoodVC(with: .BackButton)
     }
   }
+  
 }
 
 extension MoodViewController:

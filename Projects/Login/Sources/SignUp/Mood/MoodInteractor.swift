@@ -7,6 +7,7 @@
 
 import RIBs
 import RxSwift
+import Util
 
 protocol MoodRouting: ViewableRouting {
   // TODO: Declare methods the interactor can invoke to manage sub-tree via the router.
@@ -18,7 +19,7 @@ protocol MoodPresentable: Presentable {
 }
 
 protocol MoodListener: AnyObject {
-  func detachMoodVC()
+  func detachMoodVC(with popType: PopType)
 }
 
 final class MoodInteractor: PresentableInteractor<MoodPresentable>, MoodInteractable, MoodPresentableListener {
@@ -43,7 +44,7 @@ final class MoodInteractor: PresentableInteractor<MoodPresentable>, MoodInteract
     // TODO: Pause any business logic.
   }
   
-  func popMoodVC() {
-    listener?.detachMoodVC()
+  func popMoodVC(with popType: PopType) {
+    listener?.detachMoodVC(with: popType)
   }
 }

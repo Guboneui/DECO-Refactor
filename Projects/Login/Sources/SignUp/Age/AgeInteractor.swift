@@ -7,6 +7,7 @@
 
 import RIBs
 import RxSwift
+import Util
 
 protocol AgeRouting: ViewableRouting {
   // TODO: Declare methods the interactor can invoke to manage sub-tree via the router.
@@ -18,7 +19,7 @@ protocol AgePresentable: Presentable {
 }
 
 protocol AgeListener: AnyObject {
-  func detachAgeVC()
+  func detachAgeVC(with popType: PopType)
   func attachMoodVC()
 }
 
@@ -44,8 +45,8 @@ final class AgeInteractor: PresentableInteractor<AgePresentable>, AgeInteractabl
     // TODO: Pause any business logic.
   }
   
-  func popAgeVC() {
-    self.listener?.detachAgeVC()
+  func popAgeVC(with popType: PopType) {
+    self.listener?.detachAgeVC(with: popType)
   }
   
   func pushMoodVC() {

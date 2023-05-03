@@ -53,7 +53,6 @@ final public class LoginMainViewController:
     super.viewDidLoad()
     self.setupViews()
     self.setupGestures()
-    
   }
   
   override public func viewDidLayoutSubviews() {
@@ -118,5 +117,4 @@ final public class LoginMainViewController:
       self.listener?.pushNicknameVC(by: .APPLE)
     }
   }
-  
 }

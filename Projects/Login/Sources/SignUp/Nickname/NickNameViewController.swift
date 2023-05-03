@@ -11,9 +11,10 @@ import UIKit
 import RxGesture
 import PinLayout
 import CommonUI
+import Util
 
 protocol NickNamePresentableListener: AnyObject {
-  func popNicknameVC()
+  func popNicknameVC(with popType: PopType)
   func pushGenderVC()
 }
 
@@ -58,12 +59,18 @@ final class NickNameViewController:
   
   private let nextButton = DefaultButton(title: "다음")
   
-  
   override func viewDidLoad() {
     super.viewDidLoad()
     self.view.backgroundColor = .DecoColor.whiteColor
     self.setupViews()
     self.setupGestures()
+  }
+  
+  override func viewDidDisappear(_ animated: Bool) {
+    super.viewDidDisappear(animated)
+    if isMovingFromParent {
+      listener?.popNicknameVC(with: .Swipe)
+    }
   }
   
   override func viewDidLayoutSubviews() {
@@ -114,7 +121,7 @@ final class NickNameViewController:
   private func setupGestures() {
     navigationBar.didTapBackButton = { [weak self] in
       guard let self else { return }
-      self.listener?.popNicknameVC()
+      self.listener?.popNicknameVC(with: .BackButton)
     }
     
     nextButton.tap()

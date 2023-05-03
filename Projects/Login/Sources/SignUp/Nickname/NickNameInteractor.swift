@@ -18,7 +18,7 @@ protocol NickNamePresentable: Presentable {
 }
 
 protocol NickNameListener: AnyObject {
-  func detachNicknameVC()
+  func detachNicknameVC(with popType: PopType)
   func attachGenderVC()
 }
 
@@ -44,8 +44,8 @@ final class NickNameInteractor:
     super.willResignActive()
   }
   
-  func popNicknameVC() {
-    listener?.detachNicknameVC()
+  func popNicknameVC(with popType: PopType) {
+    listener?.detachNicknameVC(with: popType)
   }
   
   func pushGenderVC() {

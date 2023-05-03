@@ -7,6 +7,7 @@
 
 import RIBs
 import Util
+import UIKit
 
 public protocol LoginMainDependency: Dependency {
 }
@@ -28,6 +29,7 @@ public protocol LoginMainBuildable: Buildable {
 }
 
 final public class LoginMainBuilder: Builder<LoginMainDependency>, LoginMainBuildable {
+  
   
   override public init(dependency: LoginMainDependency) {
     super.init(dependency: dependency)
@@ -55,4 +57,5 @@ final public class LoginMainBuilder: Builder<LoginMainDependency>, LoginMainBuil
       moodBuildable: moodBuilder
     )
   }
+  
 }

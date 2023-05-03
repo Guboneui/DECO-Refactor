@@ -8,10 +8,11 @@
 import RIBs
 import RxSwift
 import UIKit
+import Util
 import CommonUI
 
 protocol GenderPresentableListener: AnyObject {
-  func popGenderVC()
+  func popGenderVC(with popType: PopType)
   func pushAgeVC()
 }
 
@@ -42,6 +43,13 @@ final class GenderViewController: UIViewController, GenderPresentable, GenderVie
     self.view.backgroundColor = .DecoColor.whiteColor
     self.setupViews()
     self.setupGestures()
+  }
+  
+  override func viewDidDisappear(_ animated: Bool) {
+    super.viewDidDisappear(animated)
+    if isMovingFromParent {
+      listener?.popGenderVC(with: .Swipe)
+    }
   }
   
   override func viewDidLayoutSubviews() {
@@ -92,7 +100,7 @@ final class GenderViewController: UIViewController, GenderPresentable, GenderVie
   private func setupGestures() {
     self.navigationBar.didTapBackButton = { [weak self] in
       guard let self else { return }
-      self.listener?.popGenderVC()
+      self.listener?.popGenderVC(with: .BackButton)
     }
     
     self.nextButton.tap()

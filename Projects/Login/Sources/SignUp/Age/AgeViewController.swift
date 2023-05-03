@@ -9,13 +9,18 @@ import RIBs
 import RxSwift
 import UIKit
 import CommonUI
+import Util
 
 protocol AgePresentableListener: AnyObject {
-  func popAgeVC()
+  func popAgeVC(with popType: PopType)
   func pushMoodVC()
 }
 
-final class AgeViewController: UIViewController, AgePresentable, AgeViewControllable {
+final class AgeViewController:
+  UIViewController,
+  AgePresentable,
+  AgeViewControllable
+{
   
   weak var listener: AgePresentableListener?
   private let disposeBag = DisposeBag()
@@ -40,6 +45,13 @@ final class AgeViewController: UIViewController, AgePresentable, AgeViewControll
     self.view.backgroundColor = .DecoColor.whiteColor
     self.setupViews()
     self.setupGestures()
+  }
+  
+  override func viewDidDisappear(_ animated: Bool) {
+    super.viewDidDisappear(animated)
+    if isMovingFromParent {
+      listener?.popAgeVC(with: .Swipe)
+    }
   }
   
   override func viewDidLayoutSubviews() {
@@ -85,7 +97,7 @@ final class AgeViewController: UIViewController, AgePresentable, AgeViewControll
   private func setupGestures() {
     self.navigationBar.didTapBackButton = { [weak self] in
       guard let self else { return }
-      self.listener?.popAgeVC()
+      self.listener?.popAgeVC(with: .BackButton)
     }
     
     self.nextButton.tap()
@@ -94,4 +106,5 @@ final class AgeViewController: UIViewController, AgePresentable, AgeViewControll
         self.listener?.pushMoodVC()
       }.disposed(by: disposeBag)
   }
+  
 }

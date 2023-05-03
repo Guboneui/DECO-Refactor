@@ -7,6 +7,7 @@
 
 import RIBs
 import RxSwift
+import Util
 
 protocol GenderRouting: ViewableRouting {
   // TODO: Declare methods the interactor can invoke to manage sub-tree via the router.
@@ -18,7 +19,7 @@ protocol GenderPresentable: Presentable {
 }
 
 protocol GenderListener: AnyObject {
-  func detachGenderVC()
+  func detachGenderVC(with popType: PopType)
   func attachAgeVC()
 }
 
@@ -44,8 +45,8 @@ final class GenderInteractor: PresentableInteractor<GenderPresentable>, GenderIn
     // TODO: Pause any business logic.
   }
   
-  func popGenderVC() {
-    listener?.detachGenderVC()
+  func popGenderVC(with popType: PopType) {
+    listener?.detachGenderVC(with: popType)
   }
   
   func pushAgeVC() {

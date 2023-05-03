@@ -9,12 +9,14 @@
 import UIKit
 import Login
 import RIBs
+import Util
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
   
   var window: UIWindow?
 	private var launchRouter: LaunchRouting?
+	private var ribTreeViewer: RIBTreeViewer?
   
   func application(
     _ application: UIApplication,
@@ -26,6 +28,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		let launchRouter = AppRootBuilder(dependency: AppComponent()).build(with: window)
 		self.launchRouter = launchRouter
 		self.launchRouter?.launch(from: window)
+		
+		ribTreeViewer = RIBTreeViewer(rootRouter: launchRouter)
+		ribTreeViewer?.startObserveTree()
 		
     return true
   }

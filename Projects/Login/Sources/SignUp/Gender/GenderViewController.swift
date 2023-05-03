@@ -14,29 +14,32 @@ import CommonUI
 protocol GenderPresentableListener: AnyObject {
   func popGenderVC(with popType: PopType)
   func pushAgeVC()
+  func checkedGender(gender: GenderType)
 }
 
 final class GenderViewController: UIViewController, GenderPresentable, GenderViewControllable {
   
   weak var listener: GenderPresentableListener?
   
-  private let disposeBag = DisposeBag()
+  private let disposeBag: DisposeBag = DisposeBag()
   
-  private let navigationBar = NavigationBar(
+  private let navigationBar: NavigationBar = NavigationBar(
     navTitle: "회원가입하기",
     showGuideLine: true
   )
   
-  private let titleSubtitleView = TitleSubtitleView(
+  private let titleSubtitleView: TitleSubtitleView = TitleSubtitleView(
     title: "00님, 성별을 알려주실래요?",
     subTitle: "00님의 취향을 파악하는데 도움이 될 것 같아요."
   )
   
-  private let womanButton = CheckButton(title: "여성")
-  private let manButton = CheckButton(title: "남성")
-  private let noneButton = CheckButton(title: "선택하지 않음")
+  private let womanButton: CheckButton = CheckButton(title: "여성")
+  private let manButton: CheckButton = CheckButton(title: "남성")
+  private let noneButton: CheckButton = CheckButton(title: "선택하지 않음")
   
-  private let nextButton = DefaultButton(title: "다음")
+  private let nextButton: DefaultButton = DefaultButton(title: "다음").then {
+    $0.isEnabled = false
+  }
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -103,10 +106,36 @@ final class GenderViewController: UIViewController, GenderPresentable, GenderVie
       self.listener?.popGenderVC(with: .BackButton)
     }
     
+    self.womanButton.tap()
+      .subscribe(onNext: { [weak self] in
+        guard let self else { return }
+        self.listener?.checkedGender(gender: .Woman)
+      }).disposed(by: disposeBag)
+    
+    self.manButton.tap()
+      .subscribe(onNext: { [weak self] in
+        guard let self else { return }
+        self.listener?.checkedGender(gender: .Man)
+      }).disposed(by: disposeBag)
+    
+    self.noneButton.tap()
+      .subscribe(onNext: { [weak self] in
+        guard let self else { return }
+        self.listener?.checkedGender(gender: .None)
+      }).disposed(by: disposeBag)
+    
     self.nextButton.tap()
       .bind { [weak self] in
         guard let self else { return }
         self.listener?.pushAgeVC()
       }.disposed(by: disposeBag)
+  }
+  
+  func selectedUserGenderType(genderType: GenderType) {
+    self.womanButton.changeIconImage(icon: genderType == .Woman ? .DecoImage.checkSec : .DecoImage.checkLightgray1)
+    self.manButton.changeIconImage(icon: genderType == .Man ? .DecoImage.checkSec : .DecoImage.checkLightgray1)
+    self.noneButton.changeIconImage(icon: genderType == .None ? .DecoImage.checkSec : .DecoImage.checkLightgray1)
+    
+    self.nextButton.isEnabled = true
   }
 }

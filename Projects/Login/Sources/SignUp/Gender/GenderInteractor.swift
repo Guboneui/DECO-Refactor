@@ -9,12 +9,20 @@ import RIBs
 import RxSwift
 import Util
 
+enum GenderType {
+  case Woman
+  case Man
+  case None
+}
+
 protocol GenderRouting: ViewableRouting {
   // TODO: Declare methods the interactor can invoke to manage sub-tree via the router.
 }
 
 protocol GenderPresentable: Presentable {
   var listener: GenderPresentableListener? { get set }
+  
+  func selectedUserGenderType(genderType: GenderType)
   // TODO: Declare methods the interactor can invoke the presenter to present data.
 }
 
@@ -51,5 +59,9 @@ final class GenderInteractor: PresentableInteractor<GenderPresentable>, GenderIn
   
   func pushAgeVC() {
     listener?.attachAgeVC()
+  }
+  
+  func checkedGender(gender: GenderType) {
+    presenter.selectedUserGenderType(genderType: gender)
   }
 }

@@ -3,11 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		05ABEBAF530FE13F5452BB60 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BA03B8D05AAC62E0AD725D /* LoginView.swift */; };
+		06D26CFCE285EE51CD0B0B0E /* Networking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82F5162632CDD6A8BBCCCC3C /* Networking.framework */; platformFilter = ios; };
 		188511661225A901CA6C2279 /* GenderRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7DB39AA7585F22001CA703C /* GenderRouter.swift */; };
 		1F57EAA006EF40F8B6F5028C /* AgeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F2F8DD6D1A6BE3DE4F4967 /* AgeInteractor.swift */; };
 		29591AAD3FFD33357A7F0572 /* LoginMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E714AD57768426CD6CDEAD /* LoginMainViewController.swift */; };
@@ -65,6 +66,7 @@
 		4496B476440F18F44389F0B6 /* MoodBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodBuilder.swift; sourceTree = "<group>"; };
 		4FA7A9D90F63851CF86F986A /* NickNameRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameRouter.swift; sourceTree = "<group>"; };
 		78718CD1513C4208CA14B11C /* GenderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderViewController.swift; sourceTree = "<group>"; };
+		82F5162632CDD6A8BBCCCC3C /* Networking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Networking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		83E714AD57768426CD6CDEAD /* LoginMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginMainViewController.swift; sourceTree = "<group>"; };
 		86BA03B8D05AAC62E0AD725D /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		9EF692959895875AEE24D2E2 /* AgeBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgeBuilder.swift; sourceTree = "<group>"; };
@@ -84,6 +86,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F841FF334E1C6034EABAEDCB /* CommonUI.framework in Frameworks */,
+				06D26CFCE285EE51CD0B0B0E /* Networking.framework in Frameworks */,
 				AA66CE4D6213C35ECFA384DC /* Util.framework in Frameworks */,
 				E01367743430A57E02252E16 /* RxGesture in Frameworks */,
 				BA1447347F172DE4651EB9A6 /* Hero in Frameworks */,
@@ -107,6 +110,7 @@
 			children = (
 				21D6E91FA13D3D7D7989E850 /* CommonUI.framework */,
 				28C6E6787DFAF624F53D6F5B /* Login.framework */,
+				82F5162632CDD6A8BBCCCC3C /* Networking.framework */,
 				111D1A79CB7EAB7BDA369813 /* Util.framework */,
 			);
 			name = Products;
@@ -262,6 +266,8 @@
 		353B4020F35CB9C9FFC126AA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				TargetAttributes = {
+				};
 			};
 			buildConfigurationList = 6C10079AF94881EFE73379E4 /* Build configuration list for PBXProject "Login" */;
 			compatibilityVersion = "Xcode 13.0";

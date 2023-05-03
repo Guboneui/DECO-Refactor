@@ -36,8 +36,7 @@ public var baseSettings: [String: SettingValue] = [
   "DEVELOPMENT_TEAM": "VKGAQDGK5R",
   "INFOPLIST_KEY_CFBundleDisplayName": "DECO",
   "ENABLE_BITCODE": "NO",
-  "CODE_SIGN_STYLE": "Automatic",
-//  "OTHER_LDFLAGS": "-ObjC"
+  "CODE_SIGN_STYLE": "Automatic"
 ]
 
 public let settings: Settings = .settings(

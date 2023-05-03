@@ -8,21 +8,11 @@ import ProjectDescription
 import ProjectDescriptionHelpers
 
 private let projectName: String = "CommonUI"
-//private let iOSTargetVersion: String = "15.0"
-//
-//let project = Project.framework(
-//  name: projectName,
-//  platform: .iOS,
-//  iOSTargetVersion: "15.0",
-//  isDynamic: true,
-//  dependencies: []
-//)
 
 let setting: Settings = .settings(
   base: [
     "GCC_PREPROCESSOR_DEFINITIONS" : "FLEXLAYOUT_SWIFT_PACKAGE=1",
-    "DEVELOPMENT_TEAM": "VKGAQDGK5R",
-//    "OTHER_LDFLAGS": "-ObjC"
+    "DEVELOPMENT_TEAM": "VKGAQDGK5R"
   ],
   configurations: [],
   defaultSettings: .recommended

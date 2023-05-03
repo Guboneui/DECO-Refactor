@@ -19,7 +19,6 @@ final public class LoginMainComponent:
   AgeDependency,
   MoodDependency
 {
-  
 }
 
 // MARK: - Builder

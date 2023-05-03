@@ -2,7 +2,7 @@
 //  Project.swift
 //  ProjectDescriptionHelpers
 //
-//  Created by 구본의 on 2023/04/21.
+//  Created by 구본의 on 2023/05/04.
 //
 
 import ProjectDescription
@@ -10,7 +10,6 @@ import ProjectDescriptionHelpers
 
 let setting: Settings = .settings(
   base: [
-    "GCC_PREPROCESSOR_DEFINITIONS" : "FLEXLAYOUT_SWIFT_PACKAGE=1",
     "DEVELOPMENT_TEAM": "VKGAQDGK5R"
   ],
   configurations: [],
@@ -18,26 +17,19 @@ let setting: Settings = .settings(
 )
 
 let packages: [Package] = [
-  .RxGesture,
-  .Hero,
-  .RxSwift
+  .Moya
 ]
 
 let dependencies: [TargetDependency] = [
-  .project(target: "CommonUI", path: "../CommonUI"),
-  .project(target: "Util", path: "../Util"),
-  .project(target: "Networking", path: "../Networking"),
-  .RxGesture,
-  .Hero,
-  .RxSwift
+  .Moya
 ]
 
-let login = Target(
-  name: "Login",
+let networking = Target(
+  name: "Networking",
   platform: .iOS,
-  product: .framework,
-  productName: "Login",
-  bundleId: "com.deco.ios.login",
+  product: .staticFramework,
+  productName: "Networking",
+  bundleId: "com.deco.ios.Networking",
   deploymentTarget: .iOS(targetVersion: "15.0", devices: [.iphone]),
   infoPlist: .default,
   sources: ["Sources/**"],
@@ -47,7 +39,8 @@ let login = Target(
 )
 
 let project = Project(
-  name: "Login",
+  name: "Networking",
   packages: packages,
-  targets: [login]
+  targets: [networking]
 )
+

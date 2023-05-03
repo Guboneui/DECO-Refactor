@@ -8,26 +8,9 @@
 import ProjectDescription
 import ProjectDescriptionHelpers
 
-//private let projectName: String = "Util"
-//private let iOSTargetVersion: String = "15.0"
-//
-//let project = Project.framework(
-//  name: projectName,
-//  platform: .iOS,
-//  iOSTargetVersion: "15.0",
-//  isDynamic: true,
-//  packages: [
-//    .RIBs
-//  ],
-//  dependencies: [
-//    .RIBs
-//  ]
-//)
-
 let setting: Settings = .settings(
   base: [
-    "DEVELOPMENT_TEAM": "VKGAQDGK5R",
-//    "OTHER_LDFLAGS": "-ObjC"
+    "DEVELOPMENT_TEAM": "VKGAQDGK5R"
   ],
   configurations: [],
   defaultSettings: .recommended

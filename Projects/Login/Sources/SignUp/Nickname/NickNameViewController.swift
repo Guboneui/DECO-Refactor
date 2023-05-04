@@ -150,7 +150,8 @@ final class NickNameViewController:
       }).disposed(by: disposeBag)
     
     listener?.isEnableNickname
-      .bind { [weak self] isEnable in
+      .asDriver(onErrorJustReturn: false)
+      .drive { [weak self] isEnable in
         guard let self else { return }
         self.nextButton.isEnabled = isEnable
         self.warningLabel.isHidden = isEnable

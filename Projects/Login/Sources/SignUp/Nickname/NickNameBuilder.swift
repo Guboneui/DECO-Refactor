@@ -6,12 +6,14 @@
 //
 
 import RIBs
+import Networking
 
 protocol NickNameDependency: Dependency {
-  
+  var userControlRepository: UserControlRepositoryImpl { get }
 }
 
-final class NickNameComponent: Component<NickNameDependency> {
+final class NickNameComponent: Component<NickNameDependency>, NicknameInteractorDependency {
+  var userControlRepository: UserControlRepositoryImpl { dependency.userControlRepository }
   
 }
 
@@ -30,7 +32,10 @@ final class NickNameBuilder: Builder<NickNameDependency>, NickNameBuildable {
   func build(withListener listener: NickNameListener) -> NickNameRouting {
     let component = NickNameComponent(dependency: dependency)
     let viewController = NickNameViewController()
-    let interactor = NickNameInteractor(presenter: viewController)
+    let interactor = NickNameInteractor(
+      presenter: viewController,
+      dependency: component
+    )
     interactor.listener = listener
     return NickNameRouter(interactor: interactor, viewController: viewController)
   }

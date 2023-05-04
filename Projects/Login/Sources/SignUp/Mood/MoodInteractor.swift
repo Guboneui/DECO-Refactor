@@ -11,11 +11,8 @@ import RxRelay
 import Util
 import UIKit
 import CommonUI
-
-struct StyleModel: Hashable {
-  let id: Int
-  let image: UIImage
-}
+import Networking
+import Entity
 
 protocol MoodRouting: ViewableRouting {
   // TODO: Declare methods the interactor can invoke to manage sub-tree via the router.

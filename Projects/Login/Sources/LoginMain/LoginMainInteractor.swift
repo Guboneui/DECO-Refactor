@@ -9,6 +9,7 @@ import RIBs
 import RxSwift
 import Util
 import UIKit
+import Networking
 
 enum LoginType {
   case KAKAO
@@ -41,19 +42,25 @@ public protocol LoginMainListener: AnyObject {
   // TODO: Declare methods the interactor can invoke to communicate with other RIBs.
 }
 
+public protocol LoginMainInteractorDependency {
+  var userControlRepository: UserControlRepositoryImpl { get }
+}
+
 final class LoginMainInteractor:
   PresentableInteractor<LoginMainPresentable>,
   LoginMainInteractable,
   LoginMainPresentableListener
 {
-
   weak var router: LoginMainRouting?
   weak var listener: LoginMainListener?
   
+  private let dependency: LoginMainInteractorDependency
   
-  // TODO: Add additional dependencies to constructor. Do not perform any logic
-  // in constructor.
-  override init(presenter: LoginMainPresentable) {
+  init(
+    presenter: LoginMainPresentable,
+    dependency: LoginMainInteractorDependency
+  ) {
+    self.dependency = dependency
     super.init(presenter: presenter)
     presenter.listener = self
   }
@@ -61,7 +68,6 @@ final class LoginMainInteractor:
   override func didBecomeActive() {
     super.didBecomeActive()
     // TODO: Implement business logic here.
-  
   }
   
   override func willResignActive() {
@@ -100,4 +106,5 @@ final class LoginMainInteractor:
   func detachMoodVC(with popType: PopType) {
     router?.detachMoodVC(with: popType)
   }
+  
 }

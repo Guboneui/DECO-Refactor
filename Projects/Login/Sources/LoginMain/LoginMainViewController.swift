@@ -14,7 +14,7 @@ import PinLayout
 import CommonUI
 import FlexLayout
 import Util
-import Hero
+import Networking
 
 protocol LoginMainPresentableListener: AnyObject {
   // TODO: Declare properties and methods that the view controller can invoke to perform
@@ -49,10 +49,11 @@ final public class LoginMainViewController:
   
   // MARK: - LifeCycle
   
+  
   override public func viewDidLoad() {
     super.viewDidLoad()
     self.setupViews()
-    self.setupGestures()
+    self.setupGestures()     
   }
   
   override public func viewDidLayoutSubviews() {

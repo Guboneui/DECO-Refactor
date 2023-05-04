@@ -8,8 +8,9 @@
 import RIBs
 import Util
 import UIKit
+import Networking
 
-public protocol LoginMainDependency: Dependency {
+public protocol LoginMainDependency: Dependency, LoginMainInteractorDependency {
 }
 
 final public class LoginMainComponent:
@@ -19,6 +20,7 @@ final public class LoginMainComponent:
   AgeDependency,
   MoodDependency
 {
+  var userControlRepository: UserControlRepositoryImpl { dependency.userControlRepository }
 }
 
 // MARK: - Builder
@@ -28,7 +30,6 @@ public protocol LoginMainBuildable: Buildable {
 }
 
 final public class LoginMainBuilder: Builder<LoginMainDependency>, LoginMainBuildable {
-  
   
   override public init(dependency: LoginMainDependency) {
     super.init(dependency: dependency)
@@ -40,7 +41,7 @@ final public class LoginMainBuilder: Builder<LoginMainDependency>, LoginMainBuil
     let nav = NavigationControllerable(root: viewController)
     nav.navigationController.navigationBar.isHidden = true
     
-    let interactor = LoginMainInteractor(presenter: viewController)
+    let interactor = LoginMainInteractor(presenter: viewController, dependency: dependency)
     
     let nicknameBuilder = NickNameBuilder(dependency: component)
     let genderBuilder = GenderBuilder(dependency: component)

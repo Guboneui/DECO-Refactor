@@ -15,17 +15,17 @@ enum AgeType {
 }
 
 protocol AgeRouting: ViewableRouting {
-  // TODO: Declare methods the interactor can invoke to manage sub-tree via the router.
+  func attachMoodVC()
+  func detachMoodVC(with popType: PopType)
 }
 
 protocol AgePresentable: Presentable {
   var listener: AgePresentableListener? { get set }
-  // TODO: Declare methods the interactor can invoke the presenter to present data.
 }
 
 protocol AgeListener: AnyObject {
   func detachAgeVC(with popType: PopType)
-  func attachMoodVC()
+  
 }
 
 final class AgeInteractor: PresentableInteractor<AgePresentable>, AgeInteractable, AgePresentableListener {
@@ -42,12 +42,12 @@ final class AgeInteractor: PresentableInteractor<AgePresentable>, AgeInteractabl
   
   override func didBecomeActive() {
     super.didBecomeActive()
-    // TODO: Implement business logic here.
+
   }
   
   override func willResignActive() {
     super.willResignActive()
-    // TODO: Pause any business logic.
+
   }
   
   func popAgeVC(with popType: PopType) {
@@ -55,7 +55,11 @@ final class AgeInteractor: PresentableInteractor<AgePresentable>, AgeInteractabl
   }
   
   func pushMoodVC() {
-    self.listener?.attachMoodVC()
+    self.router?.attachMoodVC()
+  }
+  
+  func detachMoodVC(with popType: PopType) {
+    self.router?.detachMoodVC(with: popType)
   }
   
   func checkedAge(ageType: AgeType) {

@@ -19,7 +19,6 @@ protocol MoodPresentableListener: AnyObject {
   func update(index: Int)
   
   func popMoodVC(with popType: PopType)
-  func signUp()
 }
 
 final class MoodViewController: UIViewController, MoodPresentable, MoodViewControllable {
@@ -132,7 +131,7 @@ final class MoodViewController: UIViewController, MoodPresentable, MoodViewContr
     self.nextButton.tap()
       .subscribe(onNext: { [weak self] in
         guard let self else { return }
-        self.listener?.signUp()
+        print("🔊[DEBUG]: TODO 회원가입")
       }).disposed(by: disposeBag)
   }
   

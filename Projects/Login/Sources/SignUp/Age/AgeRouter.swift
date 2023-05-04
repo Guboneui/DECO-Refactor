@@ -6,21 +6,49 @@
 //
 
 import RIBs
+import Util
 
-protocol AgeInteractable: Interactable {
-    var router: AgeRouting? { get set }
-    var listener: AgeListener? { get set }
+protocol AgeInteractable:
+  Interactable,
+  MoodListener
+{
+  var router: AgeRouting? { get set }
+  var listener: AgeListener? { get set }
 }
 
 protocol AgeViewControllable: ViewControllable {
-    // TODO: Declare methods the router invokes to manipulate the view hierarchy.
+
 }
 
 final class AgeRouter: ViewableRouter<AgeInteractable, AgeViewControllable>, AgeRouting {
-
-    // TODO: Constructor inject child builder protocols to allow building children.
-    override init(interactor: AgeInteractable, viewController: AgeViewControllable) {
-        super.init(interactor: interactor, viewController: viewController)
-        interactor.router = self
+  
+  private let moodBuildable: MoodBuildable
+  private var moodRouting: Routing?
+  
+  init(
+    interactor: AgeInteractable,
+    viewController: AgeViewControllable,
+    moodBuildable: MoodBuildable
+  ) {
+    self.moodBuildable = moodBuildable
+    super.init(interactor: interactor, viewController: viewController)
+    interactor.router = self
+  }
+  
+  func attachMoodVC() {
+    if moodRouting != nil { return }
+    let router = moodBuildable.build(withListener: interactor)
+    self.viewControllable.pushViewController(router.viewControllable, animated: true)
+    attachChild(router)
+    self.moodRouting = router
+  }
+  
+  func detachMoodVC(with popType: PopType) {
+    guard let router = moodRouting else { return }
+    if popType == .BackButton {
+      self.viewControllable.popViewController(animated: true)
     }
+    detachChild(router)
+    moodRouting = nil
+  }
 }

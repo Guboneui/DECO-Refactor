@@ -8,13 +8,14 @@
 import RIBs
 
 protocol GenderDependency: Dependency {
-  // TODO: Declare the set of dependencies required by this RIB, but cannot be
-  // created by this RIB.
+  
 }
 
-final class GenderComponent: Component<GenderDependency> {
+final class GenderComponent:
+  Component<GenderDependency>,
+  AgeDependency
+{
   
-  // TODO: Declare 'fileprivate' dependencies that are only used by this RIB.
 }
 
 // MARK: - Builder
@@ -34,6 +35,12 @@ final class GenderBuilder: Builder<GenderDependency>, GenderBuildable {
     let viewController = GenderViewController()
     let interactor = GenderInteractor(presenter: viewController)
     interactor.listener = listener
-    return GenderRouter(interactor: interactor, viewController: viewController)
+    
+    let ageBuilder = AgeBuilder(dependency: component)
+    return GenderRouter(
+      interactor: interactor,
+      viewController: viewController,
+      ageBuildable: ageBuilder
+    )
   }
 }

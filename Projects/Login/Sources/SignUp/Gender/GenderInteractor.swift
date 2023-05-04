@@ -16,7 +16,8 @@ enum GenderType {
 }
 
 protocol GenderRouting: ViewableRouting {
-  // TODO: Declare methods the interactor can invoke to manage sub-tree via the router.
+  func attachAgeVC()
+  func detachAgeVC(with popType: PopType)
 }
 
 protocol GenderPresentable: Presentable {
@@ -25,7 +26,6 @@ protocol GenderPresentable: Presentable {
 
 protocol GenderListener: AnyObject {
   func detachGenderVC(with popType: PopType)
-  func attachAgeVC()
 }
 
 final class GenderInteractor: PresentableInteractor<GenderPresentable>, GenderInteractable, GenderPresentableListener {
@@ -35,8 +35,6 @@ final class GenderInteractor: PresentableInteractor<GenderPresentable>, GenderIn
   
   var selectedGenderType: PublishSubject<GenderType> = .init()
   
-  // TODO: Add additional dependencies to constructor. Do not perform any logic
-  // in constructor.
   override init(presenter: GenderPresentable) {
     super.init(presenter: presenter)
     presenter.listener = self
@@ -44,12 +42,10 @@ final class GenderInteractor: PresentableInteractor<GenderPresentable>, GenderIn
   
   override func didBecomeActive() {
     super.didBecomeActive()
-    // TODO: Implement business logic here.
   }
   
   override func willResignActive() {
     super.willResignActive()
-    // TODO: Pause any business logic.
   }
   
   func popGenderVC(with popType: PopType) {
@@ -57,8 +53,13 @@ final class GenderInteractor: PresentableInteractor<GenderPresentable>, GenderIn
   }
   
   func pushAgeVC() {
-    listener?.attachAgeVC()
+    router?.attachAgeVC()
   }
+  
+  func detachAgeVC(with popType: PopType) {
+    router?.detachAgeVC(with: popType)
+  }
+  
   
   func checkedGender(gender: GenderType) {
     selectedGenderType.onNext(gender)

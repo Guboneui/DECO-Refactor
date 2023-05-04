@@ -15,12 +15,11 @@ import Networking
 import Entity
 
 protocol MoodRouting: ViewableRouting {
-  // TODO: Declare methods the interactor can invoke to manage sub-tree via the router.
+
 }
 
 protocol MoodPresentable: Presentable {
   var listener: MoodPresentableListener? { get set }
-  // TODO: Declare methods the interactor can invoke the presenter to present data.
 }
 
 protocol MoodListener: AnyObject {
@@ -47,12 +46,14 @@ final class MoodInteractor: PresentableInteractor<MoodPresentable>, MoodInteract
   
   override func didBecomeActive() {
     super.didBecomeActive()
-    // TODO: Implement business logic here.
   }
   
   override func willResignActive() {
     super.willResignActive()
-    // TODO: Pause any business logic.
+  }
+  
+  func popMoodVC(with popType: PopType) {
+    self.listener?.detachMoodVC(with: popType)
   }
   
   func update(index: Int) {
@@ -66,10 +67,5 @@ final class MoodInteractor: PresentableInteractor<MoodPresentable>, MoodInteract
   func signUp() {
     let filteredData = moods.value.filter{$0.isSelected}
     print(filteredData)
-//    print(filteredData.count)
-  }
-  
-  func popMoodVC(with popType: PopType) {
-    listener?.detachMoodVC(with: popType)
   }
 }

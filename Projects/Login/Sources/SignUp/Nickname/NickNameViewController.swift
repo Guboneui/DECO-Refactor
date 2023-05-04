@@ -31,7 +31,6 @@ final class NickNameViewController:
   weak var listener: NickNamePresentableListener?
   private let disposeBag: DisposeBag = DisposeBag()
   
-  
   private let navigationBar: NavigationBar = NavigationBar(
     navTitle: "회원가입하기",
     showGuideLine: true

@@ -6,21 +6,49 @@
 //
 
 import RIBs
+import Util
 
-protocol GenderInteractable: Interactable {
-    var router: GenderRouting? { get set }
-    var listener: GenderListener? { get set }
+protocol GenderInteractable:
+  Interactable,
+  AgeListener
+{
+  var router: GenderRouting? { get set }
+  var listener: GenderListener? { get set }
 }
 
 protocol GenderViewControllable: ViewControllable {
-    // TODO: Declare methods the router invokes to manipulate the view hierarchy.
+
 }
 
 final class GenderRouter: ViewableRouter<GenderInteractable, GenderViewControllable>, GenderRouting {
-
-    // TODO: Constructor inject child builder protocols to allow building children.
-    override init(interactor: GenderInteractable, viewController: GenderViewControllable) {
-        super.init(interactor: interactor, viewController: viewController)
-        interactor.router = self
+  
+  private let ageBuildable: AgeBuildable
+  private var ageRouting: Routing?
+  
+  init(
+    interactor: GenderInteractable,
+    viewController: GenderViewControllable,
+    ageBuildable: AgeBuildable
+  ) {
+    self.ageBuildable = ageBuildable
+    super.init(interactor: interactor, viewController: viewController)
+    interactor.router = self
+  }
+  
+  func attachAgeVC() {
+    if ageRouting != nil { return }
+    let router = ageBuildable.build(withListener: interactor)
+    self.viewControllable.pushViewController(router.viewControllable, animated: true)
+    attachChild(router)
+    self.ageRouting = router
+  }
+  
+  func detachAgeVC(with popType: PopType) {
+    guard let router = ageRouting else { return }
+    if popType == .BackButton {
+      self.viewControllable.popViewController(animated: true)
     }
+    detachChild(router)
+    ageRouting = nil
+  }
 }

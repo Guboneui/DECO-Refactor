@@ -7,15 +7,19 @@
 
 import RIBs
 import UIKit
+import Util
 
-protocol NickNameInteractable: Interactable {
+protocol NickNameInteractable:
+  Interactable,
+  GenderListener
+{
   var router: NickNameRouting? { get set }
   var listener: NickNameListener? { get set }
   
 }
 
 protocol NickNameViewControllable: ViewControllable {
-  // TODO: Declare methods the router invokes to manipulate the view hierarchy.
+
 }
 
 final class NickNameRouter:
@@ -23,9 +27,33 @@ final class NickNameRouter:
   NickNameRouting
 {
   
-  // TODO: Constructor inject child builder protocols to allow building children.
-  override init(interactor: NickNameInteractable, viewController: NickNameViewControllable) {
+  private let genderBuildable: GenderBuildable
+  private var genderRouting: Routing?
+  
+  init(
+    interactor: NickNameInteractable,
+    viewController: NickNameViewControllable,
+    genderBuildable: GenderBuildable
+  ) {
+    self.genderBuildable = genderBuildable
     super.init(interactor: interactor, viewController: viewController)
     interactor.router = self
+  }
+  
+  func attachGenderVC() {
+    if genderRouting != nil { return }
+    let router = genderBuildable.build(withListener: interactor)
+    self.viewControllable.pushViewController(router.viewControllable, animated: true)
+    attachChild(router)
+    self.genderRouting = router
+  }
+  
+  func detachGenderVC(with popType: PopType) {
+    guard let router = genderRouting else { return }
+    if popType == .BackButton {
+      self.viewControllable.popViewController(animated: true)
+    }
+    detachChild(router)
+    genderRouting = nil
   }
 }

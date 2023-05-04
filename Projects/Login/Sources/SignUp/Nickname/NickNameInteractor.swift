@@ -13,7 +13,8 @@ import Util
 import Networking
 
 protocol NickNameRouting: ViewableRouting {
-
+  func attachGenderVC()
+  func detachGenderVC(with popType: PopType)
 }
 
 protocol NickNamePresentable: Presentable {
@@ -22,7 +23,6 @@ protocol NickNamePresentable: Presentable {
 
 protocol NickNameListener: AnyObject {
   func detachNicknameVC(with popType: PopType)
-  func attachGenderVC()
 }
 
 protocol NicknameInteractorDependency {
@@ -65,8 +65,13 @@ final class NickNameInteractor:
   }
   
   func pushGenderVC() {
-    listener?.attachGenderVC()
+    router?.attachGenderVC()
   }
+  
+  func detachGenderVC(with popType: PopType) {
+    router?.detachGenderVC(with: popType)
+  }
+  
   
   func checkNickname(nickName: String) {
     Task { [weak self] in

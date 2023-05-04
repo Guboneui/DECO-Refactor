@@ -12,7 +12,10 @@ protocol NickNameDependency: Dependency {
   var userControlRepository: UserControlRepositoryImpl { get }
 }
 
-final class NickNameComponent: Component<NickNameDependency>, NicknameInteractorDependency {
+final class NickNameComponent:
+  Component<NickNameDependency>,
+  GenderDependency,
+  NicknameInteractorDependency {
   var userControlRepository: UserControlRepositoryImpl { dependency.userControlRepository }
   
 }
@@ -37,6 +40,15 @@ final class NickNameBuilder: Builder<NickNameDependency>, NickNameBuildable {
       dependency: component
     )
     interactor.listener = listener
-    return NickNameRouter(interactor: interactor, viewController: viewController)
+    
+    let genderBuilder = GenderBuilder(dependency: component)
+    
+    
+    return NickNameRouter(
+      interactor: interactor,
+      viewController: viewController,
+      genderBuildable: genderBuilder
+      
+    )
   }
 }

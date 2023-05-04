@@ -15,10 +15,7 @@ public protocol LoginMainDependency: Dependency, LoginMainInteractorDependency {
 
 final public class LoginMainComponent:
   Component<LoginMainDependency>,
-  NickNameDependency,
-  GenderDependency,
-  AgeDependency,
-  MoodDependency
+  NickNameDependency
 {
   var userControlRepository: UserControlRepositoryImpl { dependency.userControlRepository }
 }
@@ -44,18 +41,10 @@ final public class LoginMainBuilder: Builder<LoginMainDependency>, LoginMainBuil
     let interactor = LoginMainInteractor(presenter: viewController, dependency: dependency)
     
     let nicknameBuilder = NickNameBuilder(dependency: component)
-    let genderBuilder = GenderBuilder(dependency: component)
-    let ageBuilder = AgeBuilder(dependency: component)
-    let moodBuilder = MoodBuilder(dependency: component)
-    
     return LoginMainRouter(
       interactor: interactor,
       navigationController: nav,
-      nicknameBuildable: nicknameBuilder,
-      genderBuildable: genderBuilder,
-      ageBuildable: ageBuilder,
-      moodBuildable: moodBuilder
+      nicknameBuildable: nicknameBuilder
     )
   }
-  
 }

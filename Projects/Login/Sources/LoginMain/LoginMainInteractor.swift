@@ -19,27 +19,16 @@ enum LoginType {
 }
 
 public protocol LoginMainRouting: ViewableRouting {
-  // TODO: Declare methods the interactor can invoke to manage sub-tree via the router.
   func attachNicknameVC()
   func detachNicknameVC(with popType: PopType)
-  
-  func attachGenderVC()
-  func detachGenderVC(with popType: PopType)
-  
-  func attachAgeVC()
-  func detachAgeVC(with popType: PopType)
-  
-  func attachMoodVC()
-  func detachMoodVC(with popType: PopType)
 }
 
 protocol LoginMainPresentable: Presentable {
   var listener: LoginMainPresentableListener? { get set }
-  // TODO: Declare methods the interactor can invoke the presenter to present data.
 }
 
 public protocol LoginMainListener: AnyObject {
-  // TODO: Declare methods the interactor can invoke to communicate with other RIBs.
+
 }
 
 public protocol LoginMainInteractorDependency {
@@ -67,44 +56,19 @@ final class LoginMainInteractor:
   
   override func didBecomeActive() {
     super.didBecomeActive()
-    // TODO: Implement business logic here.
+
   }
   
   override func willResignActive() {
     super.willResignActive()
-    // TODO: Pause any business logic.
+
   }
   
   func pushNicknameVC(by loginType: LoginType) {
     router?.attachNicknameVC()
   }
-  
+
   func detachNicknameVC(with popType: PopType) {
     router?.detachNicknameVC(with: popType)
   }
-  
-  func attachGenderVC() {
-    router?.attachGenderVC()
-  }
-  
-  func detachGenderVC(with popType: PopType) {
-    router?.detachGenderVC(with: popType)
-  }
-  
-  func attachAgeVC() {
-    router?.attachAgeVC()
-  }
-  
-  func detachAgeVC(with popType: PopType) {
-    router?.detachAgeVC(with: popType)
-  }
-  
-  func attachMoodVC() {
-    router?.attachMoodVC()
-  }
-  
-  func detachMoodVC(with popType: PopType) {
-    router?.detachMoodVC(with: popType)
-  }
-  
 }

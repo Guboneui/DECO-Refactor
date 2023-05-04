@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -188,6 +188,8 @@
 		84EE7CE17895B79C6F0DF960 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				TargetAttributes = {
+				};
 			};
 			buildConfigurationList = E056F243A6831141BF3C7789 /* Build configuration list for PBXProject "Util" */;
 			compatibilityVersion = "Xcode 13.0";

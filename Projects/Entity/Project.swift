@@ -16,21 +16,16 @@ let setting: Settings = .settings(
   defaultSettings: .recommended
 )
 
-let packages: [Package] = [
-  .Moya
-]
+let packages: [Package] = []
 
-let dependencies: [TargetDependency] = [
-  .project(target: "Entity", path: "../Entity"),
-  .Moya
-]
+let dependencies: [TargetDependency] = []
 
-let networking = Target(
-  name: "Networking",
+let entity = Target(
+  name: "Entity",
   platform: .iOS,
-  product: .staticFramework,
-  productName: "Networking",
-  bundleId: "com.deco.ios.Networking",
+  product: .framework,
+  productName: "Entity",
+  bundleId: "com.deco.ios.Entity",
   deploymentTarget: .iOS(targetVersion: "15.0", devices: [.iphone]),
   infoPlist: .default,
   sources: ["Sources/**"],
@@ -40,8 +35,9 @@ let networking = Target(
 )
 
 let project = Project(
-  name: "Networking",
+  name: "Entity",
   packages: packages,
-  targets: [networking]
+  targets: [entity]
 )
+
 

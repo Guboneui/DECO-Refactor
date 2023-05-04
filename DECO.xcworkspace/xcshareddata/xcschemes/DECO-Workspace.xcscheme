@@ -42,6 +42,20 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
+               BlueprintIdentifier = "042DC66B2D24AF498EE37349"
+               BuildableName = "Entity.framework"
+               BlueprintName = "Entity"
+               ReferencedContainer = "container:Projects/Entity/Entity.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
                BlueprintIdentifier = "EF8CE03A2759141C3B1EAC1D"
                BuildableName = "Login.framework"
                BlueprintName = "Login"

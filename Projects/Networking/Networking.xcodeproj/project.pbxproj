@@ -3,12 +3,19 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		08CEDAC40DB4634AA35A71D6 /* UserControlRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4617E7589C04AEE9F50A167A /* UserControlRepository.swift */; };
+		2CE52DEA2A03B88300E60549 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE52DE92A03B88300E60549 /* NetworkError.swift */; };
+		2CE52DEC2A03BD0600E60549 /* APIMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE52DEB2A03BD0600E60549 /* APIMapper.swift */; };
+		39D189E1D6A6A7A77873657D /* DecoURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = E360643046B75AB26A6C478C /* DecoURL.swift */; };
 		5117508A48085D884149A399 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 3CD5A9450436A57989040C7A /* Moya */; };
-		CEEC883BF28E3AB54313DC65 /* UserControlAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A5C999BC9CC8070D4B3618E /* UserControlAPI.swift */; };
+		5347641D314C8DF36450ACE8 /* UserControlAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7E982C3454878DC62EA7C4 /* UserControlAPI.swift */; };
+		7F4AC783467A41135DE982F1 /* Entity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72D717C3CA55AD50AAD8AA4C /* Entity.framework */; platformFilter = ios; };
+		87A531A6A0FD559701DA9BF9 /* NetworkLogPlugIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC23ADCB0D0B96B71D0BB0C0 /* NetworkLogPlugIn.swift */; };
+		AF9FF3DE1F1AD1AD04DC5969 /* BaseRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316AD36DC658CF5F2B4688ED /* BaseRepository.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -26,8 +33,15 @@
 
 /* Begin PBXFileReference section */
 		00D5AC172276CD51B4D7B6CA /* Networking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Networking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		5A5C999BC9CC8070D4B3618E /* UserControlAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserControlAPI.swift; sourceTree = "<group>"; };
+		0E7E982C3454878DC62EA7C4 /* UserControlAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserControlAPI.swift; sourceTree = "<group>"; };
+		2CE52DE92A03B88300E60549 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		2CE52DEB2A03BD0600E60549 /* APIMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIMapper.swift; sourceTree = "<group>"; };
+		316AD36DC658CF5F2B4688ED /* BaseRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRepository.swift; sourceTree = "<group>"; };
+		4617E7589C04AEE9F50A167A /* UserControlRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserControlRepository.swift; sourceTree = "<group>"; };
+		72D717C3CA55AD50AAD8AA4C /* Entity.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Entity.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		95586702619AFCD66C00D94E /* Networking-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Networking-Info.plist"; sourceTree = "<group>"; };
+		E360643046B75AB26A6C478C /* DecoURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecoURL.swift; sourceTree = "<group>"; };
+		EC23ADCB0D0B96B71D0BB0C0 /* NetworkLogPlugIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkLogPlugIn.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,6 +49,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7F4AC783467A41135DE982F1 /* Entity.framework in Frameworks */,
 				5117508A48085D884149A399 /* Moya in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -65,6 +80,14 @@
 			path = Derived;
 			sourceTree = "<group>";
 		};
+		75FE8CDDC6497435DAB86794 /* APIs */ = {
+			isa = PBXGroup;
+			children = (
+				0E7E982C3454878DC62EA7C4 /* UserControlAPI.swift */,
+			);
+			path = APIs;
+			sourceTree = "<group>";
+		};
 		7E643809634282CE5E4D803C /* Project */ = {
 			isa = PBXGroup;
 			children = (
@@ -86,15 +109,30 @@
 		AFBC324CB1CEBDA5706F4E34 /* Products */ = {
 			isa = PBXGroup;
 			children = (
+				72D717C3CA55AD50AAD8AA4C /* Entity.framework */,
 				00D5AC172276CD51B4D7B6CA /* Networking.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
+		D25C82BCA1555EE14ABA1B04 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				4617E7589C04AEE9F50A167A /* UserControlRepository.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
 		D742642C51EB4E585D4226C6 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				5A5C999BC9CC8070D4B3618E /* UserControlAPI.swift */,
+				75FE8CDDC6497435DAB86794 /* APIs */,
+				D25C82BCA1555EE14ABA1B04 /* Repositories */,
+				316AD36DC658CF5F2B4688ED /* BaseRepository.swift */,
+				2CE52DEB2A03BD0600E60549 /* APIMapper.swift */,
+				E360643046B75AB26A6C478C /* DecoURL.swift */,
+				EC23ADCB0D0B96B71D0BB0C0 /* NetworkLogPlugIn.swift */,
+				2CE52DE92A03B88300E60549 /* NetworkError.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -129,8 +167,6 @@
 		CC04E9F23ECE8BE9BFA0029D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				TargetAttributes = {
-				};
 			};
 			buildConfigurationList = FEB7E731AD1BAD90CD6A8409 /* Build configuration list for PBXProject "Networking" */;
 			compatibilityVersion = "Xcode 13.0";
@@ -168,7 +204,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CEEC883BF28E3AB54313DC65 /* UserControlAPI.swift in Sources */,
+				2CE52DEC2A03BD0600E60549 /* APIMapper.swift in Sources */,
+				5347641D314C8DF36450ACE8 /* UserControlAPI.swift in Sources */,
+				AF9FF3DE1F1AD1AD04DC5969 /* BaseRepository.swift in Sources */,
+				39D189E1D6A6A7A77873657D /* DecoURL.swift in Sources */,
+				2CE52DEA2A03B88300E60549 /* NetworkError.swift in Sources */,
+				87A531A6A0FD559701DA9BF9 /* NetworkLogPlugIn.swift in Sources */,
+				08CEDAC40DB4634AA35A71D6 /* UserControlRepository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

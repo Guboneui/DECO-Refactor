@@ -7,9 +7,14 @@
 //
 
 import RIBs
+import Login
+import Networking
 
 final class AppComponent: Component<EmptyDependency>, AppRootDependency {
+	var userControlRepository: UserControlRepositoryImpl
+	
 	init() {
+		self.userControlRepository = UserControlRepositoryImpl()
 		super.init(dependency: EmptyComponent())
 	}
 }

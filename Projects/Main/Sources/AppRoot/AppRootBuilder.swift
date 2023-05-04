@@ -9,19 +9,20 @@
 import RIBs
 import UIKit
 import Login
+import Networking
 
 protocol AppRootDependency: Dependency {
 	// TODO: Declare the set of dependencies required by this RIB, but cannot be
 	// created by this RIB.
+	var userControlRepository: UserControlRepositoryImpl { get }
 }
 
 final class AppRootComponent:
 	Component<AppRootDependency>,
 	LoginMainDependency
 {
-	
-	
-	
+
+	var userControlRepository: UserControlRepositoryImpl { dependency.userControlRepository }
 }
 
 // MARK: - Builder

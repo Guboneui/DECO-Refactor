@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -23,6 +23,7 @@
 		971F81A40F83E972F4F54B41 /* LoginMainBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293D99C8D142BA60CA47CCC0 /* LoginMainBuilder.swift */; };
 		A616CE0E7FCC8EFF45E6738F /* MoodRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A21591B64537E33E0EE52E9 /* MoodRouter.swift */; };
 		AA66CE4D6213C35ECFA384DC /* Util.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 111D1A79CB7EAB7BDA369813 /* Util.framework */; platformFilter = ios; };
+		B4ADF23E8FD3AEFED229899D /* Entity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DEFA24224FA1A55360A0F48 /* Entity.framework */; platformFilter = ios; };
 		B68F9202993391C2D5E50283 /* MoodBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4496B476440F18F44389F0B6 /* MoodBuilder.swift */; };
 		B6FBEB2958F87677C9FC9557 /* GenderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78718CD1513C4208CA14B11C /* GenderViewController.swift */; };
 		BA1447347F172DE4651EB9A6 /* Hero in Frameworks */ = {isa = PBXBuildFile; productRef = 7839595B2746D0D522C30D90 /* Hero */; };
@@ -56,6 +57,7 @@
 		111D1A79CB7EAB7BDA369813 /* Util.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Util.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A21591B64537E33E0EE52E9 /* MoodRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodRouter.swift; sourceTree = "<group>"; };
 		1B4D244B64542185E6C4829F /* TermView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermView.swift; sourceTree = "<group>"; };
+		1DEFA24224FA1A55360A0F48 /* Entity.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Entity.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F122292170A9B08F370E93A /* Login-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Login-Info.plist"; sourceTree = "<group>"; };
 		21D6E91FA13D3D7D7989E850 /* CommonUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CommonUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		28C6E6787DFAF624F53D6F5B /* Login.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Login.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -86,6 +88,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F841FF334E1C6034EABAEDCB /* CommonUI.framework in Frameworks */,
+				B4ADF23E8FD3AEFED229899D /* Entity.framework in Frameworks */,
 				06D26CFCE285EE51CD0B0B0E /* Networking.framework in Frameworks */,
 				AA66CE4D6213C35ECFA384DC /* Util.framework in Frameworks */,
 				E01367743430A57E02252E16 /* RxGesture in Frameworks */,
@@ -109,6 +112,7 @@
 			isa = PBXGroup;
 			children = (
 				21D6E91FA13D3D7D7989E850 /* CommonUI.framework */,
+				1DEFA24224FA1A55360A0F48 /* Entity.framework */,
 				28C6E6787DFAF624F53D6F5B /* Login.framework */,
 				82F5162632CDD6A8BBCCCC3C /* Networking.framework */,
 				111D1A79CB7EAB7BDA369813 /* Util.framework */,
@@ -266,8 +270,6 @@
 		353B4020F35CB9C9FFC126AA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				TargetAttributes = {
-				};
 			};
 			buildConfigurationList = 6C10079AF94881EFE73379E4 /* Build configuration list for PBXProject "Login" */;
 			compatibilityVersion = "Xcode 13.0";

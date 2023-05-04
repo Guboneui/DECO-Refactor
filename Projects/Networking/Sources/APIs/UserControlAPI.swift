@@ -9,12 +9,12 @@ import Foundation
 import Moya
 
 enum UserControlAPI {
-  case checkNickname(String)
+  case checkNickname(nickname: String)
 }
 
 extension UserControlAPI: TargetType {
   var baseURL: URL {
-    return URL(string: "Test")!
+    return DecoURL.API.url
   }
   
   var path: String {

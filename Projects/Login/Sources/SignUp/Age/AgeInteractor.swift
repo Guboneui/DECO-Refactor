@@ -21,7 +21,6 @@ protocol AgeRouting: ViewableRouting {
 protocol AgePresentable: Presentable {
   var listener: AgePresentableListener? { get set }
   // TODO: Declare methods the interactor can invoke the presenter to present data.
-  func selectedUserAgeType(ageType: AgeType)
 }
 
 protocol AgeListener: AnyObject {
@@ -34,8 +33,8 @@ final class AgeInteractor: PresentableInteractor<AgePresentable>, AgeInteractabl
   weak var router: AgeRouting?
   weak var listener: AgeListener?
   
-  // TODO: Add additional dependencies to constructor. Do not perform any logic
-  // in constructor.
+  var selectedAgeType: PublishSubject<AgeType> = .init()
+  
   override init(presenter: AgePresentable) {
     super.init(presenter: presenter)
     presenter.listener = self
@@ -60,6 +59,6 @@ final class AgeInteractor: PresentableInteractor<AgePresentable>, AgeInteractabl
   }
   
   func checkedAge(ageType: AgeType) {
-    self.presenter.selectedUserAgeType(ageType: ageType)
+    self.selectedAgeType.onNext(ageType)
   }
 }

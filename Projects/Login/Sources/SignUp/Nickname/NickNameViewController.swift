@@ -7,6 +7,7 @@
 
 import RIBs
 import RxSwift
+import RxRelay
 import UIKit
 import RxGesture
 import PinLayout
@@ -17,6 +18,7 @@ protocol NickNamePresentableListener: AnyObject {
   func popNicknameVC(with popType: PopType)
   func pushGenderVC()
   
+  var isEnableNickname: PublishSubject<Bool> { get }
   func checkNickname(nickName: String)
 }
 
@@ -146,10 +148,12 @@ final class NickNameViewController:
         guard let self else { return }
         self.listener?.checkNickname(nickName: $0)
       }).disposed(by: disposeBag)
-  }
-  
-  func isEnableNickname(isEnable: Bool) {
-    self.nextButton.isEnabled = isEnable
-    self.warningLabel.isHidden = isEnable
+    
+    listener?.isEnableNickname
+      .bind { [weak self] isEnable in
+        guard let self else { return }
+        self.nextButton.isEnabled = isEnable
+        self.warningLabel.isHidden = isEnable
+      }.disposed(by: disposeBag)
   }
 }

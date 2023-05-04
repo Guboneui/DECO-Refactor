@@ -7,6 +7,7 @@
 
 import RIBs
 import RxSwift
+import RxRelay
 import Util
 
 protocol NickNameRouting: ViewableRouting {
@@ -15,7 +16,6 @@ protocol NickNameRouting: ViewableRouting {
 
 protocol NickNamePresentable: Presentable {
   var listener: NickNamePresentableListener? { get set }
-  func isEnableNickname(isEnable: Bool)
 }
 
 protocol NickNameListener: AnyObject {
@@ -31,6 +31,9 @@ final class NickNameInteractor:
   
   weak var router: NickNameRouting?
   weak var listener: NickNameListener?
+  
+  // MARK: - Stream
+  var isEnableNickname: PublishSubject<Bool> = .init()
   
   override init(presenter: NickNamePresentable) {
     super.init(presenter: presenter)
@@ -58,8 +61,7 @@ final class NickNameInteractor:
     // 2. 받아온 결과 값으로 presenter로 VC에 값 전달
     // 3. 다음 버튼 클릭 시 00에 닉네임 저장해야함 -> attach로직에 들어가야 함.(pushGenderVC)
     
-    if nickName == "test" { presenter.isEnableNickname(isEnable: false) }
-    else { presenter.isEnableNickname(isEnable: true) }
+    isEnableNickname.onNext(nickName != "test")
   }
   
 }

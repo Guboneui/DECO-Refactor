@@ -21,9 +21,6 @@ protocol GenderRouting: ViewableRouting {
 
 protocol GenderPresentable: Presentable {
   var listener: GenderPresentableListener? { get set }
-  
-  func selectedUserGenderType(genderType: GenderType)
-  // TODO: Declare methods the interactor can invoke the presenter to present data.
 }
 
 protocol GenderListener: AnyObject {
@@ -35,6 +32,8 @@ final class GenderInteractor: PresentableInteractor<GenderPresentable>, GenderIn
   
   weak var router: GenderRouting?
   weak var listener: GenderListener?
+  
+  var selectedGenderType: PublishSubject<GenderType> = .init()
   
   // TODO: Add additional dependencies to constructor. Do not perform any logic
   // in constructor.
@@ -62,6 +61,6 @@ final class GenderInteractor: PresentableInteractor<GenderPresentable>, GenderIn
   }
   
   func checkedGender(gender: GenderType) {
-    presenter.selectedUserGenderType(genderType: gender)
+    selectedGenderType.onNext(gender)
   }
 }

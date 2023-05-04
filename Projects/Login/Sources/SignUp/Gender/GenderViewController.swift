@@ -14,6 +14,8 @@ import CommonUI
 protocol GenderPresentableListener: AnyObject {
   func popGenderVC(with popType: PopType)
   func pushAgeVC()
+  
+  var selectedGenderType: PublishSubject<GenderType> { get }
   func checkedGender(gender: GenderType)
 }
 
@@ -46,6 +48,7 @@ final class GenderViewController: UIViewController, GenderPresentable, GenderVie
     self.view.backgroundColor = .DecoColor.whiteColor
     self.setupViews()
     self.setupGestures()
+    self.setupBindings()
   }
   
   override func viewDidDisappear(_ animated: Bool) {
@@ -131,11 +134,15 @@ final class GenderViewController: UIViewController, GenderPresentable, GenderVie
       }.disposed(by: disposeBag)
   }
   
-  func selectedUserGenderType(genderType: GenderType) {
-    self.womanButton.changeIconImage(icon: genderType == .Woman ? .DecoImage.checkSec : .DecoImage.checkLightgray1)
-    self.manButton.changeIconImage(icon: genderType == .Man ? .DecoImage.checkSec : .DecoImage.checkLightgray1)
-    self.noneButton.changeIconImage(icon: genderType == .None ? .DecoImage.checkSec : .DecoImage.checkLightgray1)
-    
-    self.nextButton.isEnabled = true
+  private func setupBindings() {
+    self.listener?.selectedGenderType
+      .bind { [weak self] genderType in
+        guard let self else { return }
+        self.womanButton.changeIconImage(icon: genderType == .Woman ? .DecoImage.checkSec : .DecoImage.checkLightgray1)
+        self.manButton.changeIconImage(icon: genderType == .Man ? .DecoImage.checkSec : .DecoImage.checkLightgray1)
+        self.noneButton.changeIconImage(icon: genderType == .None ? .DecoImage.checkSec : .DecoImage.checkLightgray1)
+        
+        self.nextButton.isEnabled = true
+      }.disposed(by: disposeBag)
   }
 }

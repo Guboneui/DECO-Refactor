@@ -15,6 +15,7 @@ protocol AgePresentableListener: AnyObject {
   func popAgeVC(with popType: PopType)
   func pushMoodVC()
   
+  var selectedAgeType: PublishSubject<AgeType> { get }
   func checkedAge(ageType: AgeType)
 }
 
@@ -24,9 +25,12 @@ final class AgeViewController:
   AgeViewControllable
 {
   
+  // MARK: - Property
+  
   weak var listener: AgePresentableListener?
   private let disposeBag: DisposeBag = DisposeBag()
   
+  // MARK: - UIComponent
   private let navigationBar: NavigationBar = NavigationBar(
     navTitle: "회원가입하기",
     showGuideLine: true
@@ -44,11 +48,14 @@ final class AgeViewController:
     $0.isEnabled = false
   }
   
+  // MARK: - LifeCycle
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     self.view.backgroundColor = .DecoColor.whiteColor
     self.setupViews()
     self.setupGestures()
+    self.setupBindings()
   }
   
   override func viewDidDisappear(_ animated: Bool) {
@@ -123,9 +130,13 @@ final class AgeViewController:
       }.disposed(by: disposeBag)
   }
   
-  func selectedUserAgeType(ageType: AgeType) {
-    self.yesButton.changeIconImage(icon: ageType == .More ? .DecoImage.checkSec : .DecoImage.checkLightgray1)
-    self.noButton.changeIconImage(icon: ageType == .Less ? .DecoImage.checkSec : .DecoImage.checkLightgray1)
-    self.nextButton.isEnabled = true
+  private func setupBindings() {
+    self.listener?.selectedAgeType
+      .bind { [weak self] ageType in
+        guard let self else { return }
+        self.yesButton.changeIconImage(icon: ageType == .More ? .DecoImage.checkSec : .DecoImage.checkLightgray1)
+        self.noButton.changeIconImage(icon: ageType == .Less ? .DecoImage.checkSec : .DecoImage.checkLightgray1)
+        self.nextButton.isEnabled = true
+      }.disposed(by: disposeBag)
   }
 }

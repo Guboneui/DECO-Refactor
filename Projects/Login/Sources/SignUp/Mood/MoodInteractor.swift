@@ -7,7 +7,15 @@
 
 import RIBs
 import RxSwift
+import RxRelay
 import Util
+import UIKit
+import CommonUI
+
+struct StyleModel: Hashable {
+  let id: Int
+  let image: UIImage
+}
 
 protocol MoodRouting: ViewableRouting {
   // TODO: Declare methods the interactor can invoke to manage sub-tree via the router.
@@ -27,8 +35,14 @@ final class MoodInteractor: PresentableInteractor<MoodPresentable>, MoodInteract
   weak var router: MoodRouting?
   weak var listener: MoodListener?
   
-  // TODO: Add additional dependencies to constructor. Do not perform any logic
-  // in constructor.
+  var moods: BehaviorRelay<[(styleInfo: StyleModel, isSelected: Bool)]> = .init(value: [
+    (StyleModel(id: 9, image: .DecoImage.simple), false),
+    (StyleModel(id: 10, image: .DecoImage.vintage), false),
+    (StyleModel(id: 12, image: .DecoImage.kitch), false),
+    (StyleModel(id: 13, image: .DecoImage.sense), false),
+    (StyleModel(id: 17, image: .DecoImage.cute), false)
+  ])
+  
   override init(presenter: MoodPresentable) {
     super.init(presenter: presenter)
     presenter.listener = self
@@ -42,6 +56,20 @@ final class MoodInteractor: PresentableInteractor<MoodPresentable>, MoodInteract
   override func willResignActive() {
     super.willResignActive()
     // TODO: Pause any business logic.
+  }
+  
+  func update(index: Int) {
+    let selectedData: (styleInfo: StyleModel, isSelected: Bool) = moods.value[index]
+    let changedData: (StyleModel, Bool) = (selectedData.styleInfo, !selectedData.isSelected)
+    var newValue = moods.value
+    newValue[index] = changedData
+    moods.accept(newValue)
+  }
+  
+  func signUp() {
+    let filteredData = moods.value.filter{$0.isSelected}
+    print(filteredData)
+//    print(filteredData.count)
   }
   
   func popMoodVC(with popType: PopType) {

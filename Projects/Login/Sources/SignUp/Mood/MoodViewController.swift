@@ -7,12 +7,17 @@
 
 import RIBs
 import RxSwift
+import RxRelay
 import UIKit
 import CommonUI
 import Util
 
 protocol MoodPresentableListener: AnyObject {
+  var moods: BehaviorRelay<[(styleInfo: StyleModel, isSelected: Bool)]> { get }
+  func update(index: Int)
+  
   func popMoodVC(with popType: PopType)
+  func signUp()
 }
 
 final class MoodViewController: UIViewController, MoodPresentable, MoodViewControllable {
@@ -20,8 +25,7 @@ final class MoodViewController: UIViewController, MoodPresentable, MoodViewContr
   weak var listener: MoodPresentableListener?
   private let disposeBag = DisposeBag()
   private let cellSize: CGFloat = (UIScreen.main.bounds.width - 4) / 2.0
-  
-  
+ 
   private let navigationBar = NavigationBar(
     navTitle: "회원가입하기",
     showGuideLine: true
@@ -42,8 +46,6 @@ final class MoodViewController: UIViewController, MoodPresentable, MoodViewContr
   private lazy var moodCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: .init()).then {
 
     $0.register(ImageCell.self, forCellWithReuseIdentifier: ImageCell.identifier)
-    $0.delegate = self
-    $0.dataSource = self
 
     let layout = UICollectionViewFlowLayout()
     layout.scrollDirection = .vertical
@@ -61,6 +63,8 @@ final class MoodViewController: UIViewController, MoodPresentable, MoodViewContr
     self.view.backgroundColor = .DecoColor.whiteColor
     self.setupViews()
     self.setupGestures()
+    self.setupCollectionView()
+    self.setupBindings()
   }
   
   override func viewDidDisappear(_ animated: Bool) {
@@ -122,25 +126,39 @@ final class MoodViewController: UIViewController, MoodPresentable, MoodViewContr
       guard let self else { return }
       self.listener?.popMoodVC(with: .BackButton)
     }
+    
+    self.nextButton.tap()
+      .subscribe(onNext: { [weak self] in
+        guard let self else { return }
+        self.listener?.signUp()
+      }).disposed(by: disposeBag)
   }
   
+  private func setupBindings() {
+    listener?.moods
+      .map{!($0.filter{$0.isSelected}.isEmpty)}
+      .bind(to: nextButton.rx.isEnabled)
+      .disposed(by: disposeBag)
+  }
+  
+  private func setupCollectionView() {
+    listener?.moods.bind(to: moodCollectionView.rx.items(cellIdentifier: ImageCell.identifier, cellType: ImageCell.self)) { (index, data, cell) in
+      cell.setupCellData(type: .SelectedType, image: data.styleInfo.image, isSelected: data.isSelected)
+    }.disposed(by: disposeBag)
+    
+    moodCollectionView.rx.setDelegate(self)
+      .disposed(by: disposeBag)
+
+    moodCollectionView.rx.itemSelected
+      .throttle(.milliseconds(300), latest: false, scheduler: MainScheduler.instance)
+      .bind { [weak self] indexPath in
+        guard let self else { return }
+        self.listener?.update(index: indexPath.row)
+      }.disposed(by: disposeBag)
+  }
 }
 
-extension MoodViewController:
-  UICollectionViewDataSource,
-  UICollectionViewDelegate,
-  UICollectionViewDelegateFlowLayout
-{
-  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return 5
-  }
-
-  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImageCell.identifier, for: indexPath) as! ImageCell
-    cell.setupCellData(type: .SelectedType, isSelected: indexPath.row % 2 == 0 ? true : false)
-    return cell
-  }
-
+extension MoodViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
     return CGSize(width: cellSize, height: cellSize)
   }

@@ -88,5 +88,11 @@ public extension UIImage {
     public static let uploadFull = CommonUIAsset.Image.uploadFull.image
     public static let uploadSec = CommonUIAsset.Image.uploadSec.image
     public static let uploadWhite = CommonUIAsset.Image.uploadWhite.image
+    public static let kitch = CommonUIAsset.Image.kitch.image
+    public static let simple = CommonUIAsset.Image.simple.image
+    public static let vintage = CommonUIAsset.Image.vintage.image
+    public static let sense = CommonUIAsset.Image.sense.image
+    public static let cute = CommonUIAsset.Image.cute.image
+    
   }
 }

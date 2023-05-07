@@ -43,6 +43,7 @@ public enum CommonUIAsset {
   }
   public enum Image {
     public static let again = CommonUIImages(name: "again")
+    public static let appleLogo = CommonUIImages(name: "appleLogo")
     public static let arrow = CommonUIImages(name: "arrow")
     public static let arrowDarkgrey2 = CommonUIImages(name: "arrow_darkgrey_2")
     public static let arrowRight = CommonUIImages(name: "arrow_right")

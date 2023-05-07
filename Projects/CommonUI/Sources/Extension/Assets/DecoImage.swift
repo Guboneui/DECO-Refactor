@@ -93,6 +93,7 @@ public extension UIImage {
     public static let vintage = CommonUIAsset.Image.vintage.image
     public static let sense = CommonUIAsset.Image.sense.image
     public static let cute = CommonUIAsset.Image.cute.image
+    public static let appleLogo = CommonUIAsset.Image.appleLogo.image
     
   }
 }

@@ -76,7 +76,7 @@ class LoginView: UIView {
   }
   
   private let appleLogoImageView = UIImageView().then {
-    $0.backgroundColor = .lightGray
+    $0.image = .DecoImage.appleLogo
   }
   
   private let appleLoginLabel = UILabel().then {

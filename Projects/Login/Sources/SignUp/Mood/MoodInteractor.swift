@@ -59,6 +59,7 @@ final class MoodInteractor: PresentableInteractor<MoodPresentable>, MoodInteract
     super.willResignActive()
   }
   
+  // MARK: - Private Method
   private func showUserNickname() {
     userSignUpInfoStream.signupInfo
       .compactMap{$0.nickname}
@@ -68,6 +69,12 @@ final class MoodInteractor: PresentableInteractor<MoodPresentable>, MoodInteract
       }).disposeOnDeactivate(interactor: self)
   }
   
+  private func filteredSelectedMoods() -> [Int] {
+    let filteredMoods = moods.value.filter{$0.isSelected}.map{$0.styleInfo.id}
+    return filteredMoods
+  }
+  
+  // MARK: - MoodPresentableListener
   func popMoodVC(with popType: PopType) {
     userSignUpInfoStream.updateMoods(moods: nil)
     self.listener?.detachMoodVC(with: popType)
@@ -85,11 +92,6 @@ final class MoodInteractor: PresentableInteractor<MoodPresentable>, MoodInteract
     let selectedMoods = filteredSelectedMoods()
     listener?.didSelectedMoods(moods: selectedMoods)
     router?.signUp()
-  }
-  
-  private func filteredSelectedMoods() -> [Int] {
-    let filteredMoods = moods.value.filter{$0.isSelected}.map{$0.styleInfo.id}
-    return filteredMoods
   }
   
   // MARK: - 

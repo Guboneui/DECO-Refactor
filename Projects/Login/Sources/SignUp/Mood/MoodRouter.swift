@@ -24,6 +24,6 @@ final class MoodRouter: ViewableRouter<MoodInteractable, MoodViewControllable>, 
   }
   
   func signUp() {
-    
+    print("🔊[DEBUG]: 메인 화면 이동 로직 만들기")
   }
 }

@@ -57,6 +57,7 @@ final class MoodViewController: UIViewController, MoodPresentable, MoodViewContr
     $0.showsVerticalScrollIndicator = false
   }
   
+  // MARK: - LifeCycle
   override func viewDidLoad() {
     super.viewDidLoad()
     self.view.backgroundColor = .DecoColor.whiteColor
@@ -78,6 +79,7 @@ final class MoodViewController: UIViewController, MoodPresentable, MoodViewContr
     self.setupLayouts()
   }
   
+  // MARK: - Private Method
   private func setupViews() {
     self.view.addSubview(navigationBar)
     self.view.addSubview(nextButton)
@@ -156,6 +158,7 @@ final class MoodViewController: UIViewController, MoodPresentable, MoodViewContr
       }.disposed(by: disposeBag)
   }
   
+  // MARK: - MoodPresentable
   func set(nickname: String) {
     self.titleSubtitleView.setupTitleSubtitle(
       title: "마음에 드는 무드를 1개 이상 골라주세요!",

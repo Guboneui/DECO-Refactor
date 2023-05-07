@@ -56,6 +56,7 @@ final class AgeInteractor: PresentableInteractor<AgePresentable>, AgeInteractabl
 
   }
   
+  // MARK: - Private Method
   private func showUserNickname() {
     userSignUpInfoStream.signupInfo
       .compactMap{$0.nickname}
@@ -65,6 +66,7 @@ final class AgeInteractor: PresentableInteractor<AgePresentable>, AgeInteractabl
       }).disposeOnDeactivate(interactor: self)
   }
   
+  // MARK: - AgePresentableListener
   func popAgeVC(with popType: PopType) {
     userSignUpInfoStream.updateAge(age: nil)
     self.listener?.detachAgeVC(with: popType)
@@ -81,7 +83,7 @@ final class AgeInteractor: PresentableInteractor<AgePresentable>, AgeInteractabl
     self.selectedAgeType.accept(ageType)
   }
   
-  // MARK: - Mood Listener
+  // MARK: - MoodListener
   func detachMoodVC(with popType: PopType) {
     self.router?.detachMoodVC(with: popType)
   }

@@ -39,6 +39,7 @@ final class LoginMainRouter: ViewableRouter<LoginMainInteractable, NavigationCon
     self.navigationControllable = viewController
   }
   
+  // MARK: - LoginMainRouting
   func attachNicknameVC() {
     if nicknameRouting != nil { return }
     let router = nicknameBuildable.build(withListener: interactor)

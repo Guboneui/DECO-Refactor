@@ -65,6 +65,7 @@ final class NickNameInteractor:
     super.willResignActive()
   }
   
+  // MARK: - NickNamePresentableListener
   func popNicknameVC(with popType: PopType) {
     userSignUpInfoStream.updateNickname(nickname: nil)
     listener?.detachNicknameVC(with: popType)
@@ -87,7 +88,7 @@ final class NickNameInteractor:
     }
   }
   
-  // MARK: - Gender Listener
+  // MARK: - GenderListener
   func detachGenderVC(with popType: PopType) {
     router?.detachGenderVC(with: popType)
   }

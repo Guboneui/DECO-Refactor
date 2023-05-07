@@ -35,6 +35,7 @@ final class AgeRouter: ViewableRouter<AgeInteractable, AgeViewControllable>, Age
     interactor.router = self
   }
   
+  // MARK: - AgeRouting
   func attachMoodVC() {
     if moodRouting != nil { return }
     let router = moodBuildable.build(withListener: interactor)

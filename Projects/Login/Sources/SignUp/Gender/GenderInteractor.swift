@@ -58,6 +58,7 @@ final class GenderInteractor: PresentableInteractor<GenderPresentable>, GenderIn
     super.willResignActive()
   }
   
+  // MARK: - Private Method
   private func showUserNickname() {
     userSignUpInfoStream.signupInfo
       .compactMap{$0.nickname}
@@ -67,6 +68,8 @@ final class GenderInteractor: PresentableInteractor<GenderPresentable>, GenderIn
       }).disposeOnDeactivate(interactor: self)
   }
   
+  
+  // MARK: - GenderPresentableListener
   func popGenderVC(with popType: PopType) {
     userSignUpInfoStream.updateGender(gender: nil)
     listener?.detachGenderVC(with: popType)
@@ -83,7 +86,7 @@ final class GenderInteractor: PresentableInteractor<GenderPresentable>, GenderIn
     selectedGenderType.accept(gender)
   }
   
-  // MARK: - Age Listener
+  // MARK: - AgeListener
   func detachAgeVC(with popType: PopType) {
     router?.detachAgeVC(with: popType)
   }

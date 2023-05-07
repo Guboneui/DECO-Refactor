@@ -68,6 +68,8 @@ final class AgeViewController:
     self.setupLayouts()
   }
   
+  
+  // MARK: - Private Method
   private func setupViews() {
     self.view.addSubview(navigationBar)
     self.view.addSubview(titleSubtitleView)
@@ -139,6 +141,7 @@ final class AgeViewController:
       }.disposed(by: disposeBag)
   }
   
+  // MARK: - AgePresentable
   func set(nickname: String) {
     self.titleSubtitleView.setupTitleSubtitle(
       title: "\(nickname)님, 만 14세 이상이신가요?",

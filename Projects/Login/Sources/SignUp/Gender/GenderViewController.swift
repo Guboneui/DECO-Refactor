@@ -61,6 +61,7 @@ final class GenderViewController: UIViewController, GenderPresentable, GenderVie
     self.setupLayouts()
   }
   
+  // MARK: - Private Method
   private func setupViews() {
     self.view.addSubview(navigationBar)
     self.view.addSubview(titleSubtitleView)
@@ -145,6 +146,7 @@ final class GenderViewController: UIViewController, GenderPresentable, GenderVie
       }.disposed(by: disposeBag)
   }
   
+  // MARK: - GenderPresentable
   func set(nickname: String) {
     self.titleSubtitleView.setupTitleSubtitle(
       title: "\(nickname)님, 성별을 알려주실래요?",

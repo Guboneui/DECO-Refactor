@@ -44,8 +44,6 @@ final public class LoginMainViewController:
   
   
   // MARK: - LifeCycle
-  
-  
   override public func viewDidLoad() {
     super.viewDidLoad()
     self.setupViews()
@@ -66,8 +64,7 @@ final public class LoginMainViewController:
     self.view.addSubview(socialLoginView)
   }
   
-  // MARK: - Method
-  
+  // MARK: - Private Method
   private func setupLayouts() {
     
     logoImageView.pin

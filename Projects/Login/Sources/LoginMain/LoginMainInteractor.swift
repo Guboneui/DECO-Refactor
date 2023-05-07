@@ -66,11 +66,12 @@ final class LoginMainInteractor:
     super.willResignActive()
   }
   
+  // MARK: - LoginMainPresentableListener Method
   func pushNicknameVC(by loginType: LoginType) {
     router?.attachNicknameVC()
   }
 
-  // MARK: - Nickname Listener
+  // MARK: - NickNameListener Method
   func detachNicknameVC(with popType: PopType) {
     router?.detachNicknameVC(with: popType)
   }
@@ -78,5 +79,4 @@ final class LoginMainInteractor:
   func nicknameDidChecked(withNickname nickname: String) {
     userSignUpInfoStream.updateNickname(nickname: nickname)
   }
-  
 }

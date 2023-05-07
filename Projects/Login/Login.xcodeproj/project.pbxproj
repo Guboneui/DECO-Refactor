@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -12,6 +12,7 @@
 		188511661225A901CA6C2279 /* GenderRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7DB39AA7585F22001CA703C /* GenderRouter.swift */; };
 		1F57EAA006EF40F8B6F5028C /* AgeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F2F8DD6D1A6BE3DE4F4967 /* AgeInteractor.swift */; };
 		29591AAD3FFD33357A7F0572 /* LoginMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E714AD57768426CD6CDEAD /* LoginMainViewController.swift */; };
+		2CE52DF42A07F32C00E60549 /* UserSignUpInfoStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE52DF32A07F32C00E60549 /* UserSignUpInfoStream.swift */; };
 		33F7153E7375AC679AD43144 /* NickNameRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA7A9D90F63851CF86F986A /* NickNameRouter.swift */; };
 		39333C0D64BE1CDCF09F21C5 /* NickNameBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2A0E129B15AAB06E6F6894 /* NickNameBuilder.swift */; };
 		3D32C45E2AF788C9D8EA1466 /* AgeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F7AE2595F532F96EA79FE /* AgeRouter.swift */; };
@@ -63,6 +64,7 @@
 		28C6E6787DFAF624F53D6F5B /* Login.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Login.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		293D99C8D142BA60CA47CCC0 /* LoginMainBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginMainBuilder.swift; sourceTree = "<group>"; };
 		2ABF66364914A10602DA34FB /* GenderInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderInteractor.swift; sourceTree = "<group>"; };
+		2CE52DF32A07F32C00E60549 /* UserSignUpInfoStream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSignUpInfoStream.swift; sourceTree = "<group>"; };
 		3395FFE1CC585A27CB8F9725 /* AgeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgeViewController.swift; sourceTree = "<group>"; };
 		416F7AE2595F532F96EA79FE /* AgeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgeRouter.swift; sourceTree = "<group>"; };
 		4496B476440F18F44389F0B6 /* MoodBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodBuilder.swift; sourceTree = "<group>"; };
@@ -120,9 +122,18 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		2CE52DF22A07F31E00E60549 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2CE52DF32A07F32C00E60549 /* UserSignUpInfoStream.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		3CC3CD51502C2286540DF4F5 /* LoginMain */ = {
 			isa = PBXGroup;
 			children = (
+				2CE52DF22A07F31E00E60549 /* Model */,
 				A690E7D4041124AB9A085D83 /* View */,
 				293D99C8D142BA60CA47CCC0 /* LoginMainBuilder.swift */,
 				E1B037B55F4CC6B5BB890396 /* LoginMainInteractor.swift */,
@@ -270,8 +281,6 @@
 		353B4020F35CB9C9FFC126AA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				TargetAttributes = {
-				};
 			};
 			buildConfigurationList = 6C10079AF94881EFE73379E4 /* Build configuration list for PBXProject "Login" */;
 			compatibilityVersion = "Xcode 13.0";
@@ -322,6 +331,7 @@
 				3D32C45E2AF788C9D8EA1466 /* AgeRouter.swift in Sources */,
 				F62869DC1641F14C65C92F9C /* AgeViewController.swift in Sources */,
 				FB885C465F0A1E2AE29F19EB /* GenderBuilder.swift in Sources */,
+				2CE52DF42A07F32C00E60549 /* UserSignUpInfoStream.swift in Sources */,
 				BC06FEAF029E1F8C0C84ED85 /* GenderInteractor.swift in Sources */,
 				188511661225A901CA6C2279 /* GenderRouter.swift in Sources */,
 				B6FBEB2958F87677C9FC9557 /* GenderViewController.swift in Sources */,

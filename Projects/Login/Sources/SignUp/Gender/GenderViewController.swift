@@ -7,6 +7,7 @@
 
 import RIBs
 import RxSwift
+import RxRelay
 import UIKit
 import Util
 import CommonUI
@@ -15,7 +16,7 @@ protocol GenderPresentableListener: AnyObject {
   func popGenderVC(with popType: PopType)
   func pushAgeVC()
   
-  var selectedGenderType: PublishSubject<GenderType> { get }
+  var selectedGenderType: BehaviorRelay<GenderType?> { get }
   func checkedGender(gender: GenderType)
 }
 
@@ -30,10 +31,7 @@ final class GenderViewController: UIViewController, GenderPresentable, GenderVie
     showGuideLine: true
   )
   
-  private let titleSubtitleView: TitleSubtitleView = TitleSubtitleView(
-    title: "00님, 성별을 알려주실래요?",
-    subTitle: "00님의 취향을 파악하는데 도움이 될 것 같아요."
-  )
+  private let titleSubtitleView: TitleSubtitleView = TitleSubtitleView()
   
   private let womanButton: CheckButton = CheckButton(title: "여성")
   private let manButton: CheckButton = CheckButton(title: "남성")
@@ -136,6 +134,7 @@ final class GenderViewController: UIViewController, GenderPresentable, GenderVie
   
   private func setupBindings() {
     self.listener?.selectedGenderType
+      .compactMap{$0}
       .bind { [weak self] genderType in
         guard let self else { return }
         self.womanButton.changeIconImage(icon: genderType == .Woman ? .DecoImage.checkSec : .DecoImage.checkLightgray1)
@@ -144,5 +143,12 @@ final class GenderViewController: UIViewController, GenderPresentable, GenderVie
         
         self.nextButton.isEnabled = true
       }.disposed(by: disposeBag)
+  }
+  
+  func set(nickname: String) {
+    self.titleSubtitleView.setupTitleSubtitle(
+      title: "\(nickname)님, 성별을 알려주실래요?",
+      subTitle: "\(nickname)님의 취향을 파악하는데 도움이 될 것 같아요."
+    )
   }
 }

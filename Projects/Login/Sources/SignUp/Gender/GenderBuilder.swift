@@ -8,14 +8,14 @@
 import RIBs
 
 protocol GenderDependency: Dependency {
-  
+  var signUpInfoStream: MutableSignUpStream { get }
 }
 
 final class GenderComponent:
   Component<GenderDependency>,
   AgeDependency
 {
-  
+  var signUpInfoStream: MutableSignUpStream { dependency.signUpInfoStream }
 }
 
 // MARK: - Builder
@@ -33,10 +33,15 @@ final class GenderBuilder: Builder<GenderDependency>, GenderBuildable {
   func build(withListener listener: GenderListener) -> GenderRouting {
     let component = GenderComponent(dependency: dependency)
     let viewController = GenderViewController()
-    let interactor = GenderInteractor(presenter: viewController)
+    
+    let interactor = GenderInteractor(
+      presenter: viewController,
+      signUpInfo: component.signUpInfoStream
+    )
     interactor.listener = listener
     
     let ageBuilder = AgeBuilder(dependency: component)
+    
     return GenderRouter(
       interactor: interactor,
       viewController: viewController,

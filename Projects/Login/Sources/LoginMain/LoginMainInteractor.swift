@@ -40,35 +40,43 @@ final class LoginMainInteractor:
   LoginMainInteractable,
   LoginMainPresentableListener
 {
+
   weak var router: LoginMainRouting?
   weak var listener: LoginMainListener?
   
   private let dependency: LoginMainInteractorDependency
+  private let userSignUpInfoStream: MutableSignUpStream
   
   init(
     presenter: LoginMainPresentable,
-    dependency: LoginMainInteractorDependency
+    dependency: LoginMainInteractorDependency,
+    userSignUpInfoStream: MutableSignUpStream
   ) {
     self.dependency = dependency
+    self.userSignUpInfoStream = userSignUpInfoStream
     super.init(presenter: presenter)
     presenter.listener = self
   }
   
   override func didBecomeActive() {
     super.didBecomeActive()
-
   }
   
   override func willResignActive() {
     super.willResignActive()
-
   }
   
   func pushNicknameVC(by loginType: LoginType) {
     router?.attachNicknameVC()
   }
 
+  // MARK: - Nickname Listener
   func detachNicknameVC(with popType: PopType) {
     router?.detachNicknameVC(with: popType)
   }
+  
+  func nicknameDidChecked(withNickname nickname: String) {
+    userSignUpInfoStream.updateNickname(nickname: nickname)
+  }
+  
 }

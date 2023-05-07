@@ -23,6 +23,7 @@ protocol NickNamePresentable: Presentable {
 
 protocol NickNameListener: AnyObject {
   func detachNicknameVC(with popType: PopType)
+  func nicknameDidChecked(withNickname nickname: String)
 }
 
 protocol NicknameInteractorDependency {
@@ -38,16 +39,20 @@ final class NickNameInteractor:
   weak var router: NickNameRouting?
   weak var listener: NickNameListener?
   
+  private var userNickname: String?
   private var dependency: NicknameInteractorDependency
   
   // MARK: - Stream
   var isEnableNickname: PublishSubject<Bool> = .init()
+  private let userSignUpInfoStream: MutableSignUpStream
   
   init(
     presenter: NickNamePresentable,
-    dependency: NicknameInteractorDependency
+    dependency: NicknameInteractorDependency,
+    signUpInfo: MutableSignUpStream
   ) {
     self.dependency = dependency
+    self.userSignUpInfoStream = signUpInfo
     super.init(presenter: presenter)
     presenter.listener = self
   }
@@ -61,24 +66,33 @@ final class NickNameInteractor:
   }
   
   func popNicknameVC(with popType: PopType) {
+    userSignUpInfoStream.updateNickname(nickname: nil)
     listener?.detachNicknameVC(with: popType)
   }
   
   func pushGenderVC() {
-    router?.attachGenderVC()
+    if let userNickname {
+      listener?.nicknameDidChecked(withNickname: userNickname)
+      router?.attachGenderVC()
+    }
   }
-  
-  func detachGenderVC(with popType: PopType) {
-    router?.detachGenderVC(with: popType)
-  }
-  
   
   func checkNickname(nickName: String) {
     Task { [weak self] in
       guard let self else { return }
       if let isEnable = await self.dependency.userControlRepository.checkNickname(nickname: nickName) {
+        self.userNickname = nickName
         self.isEnableNickname.onNext(!isEnable)
       }
     }
+  }
+  
+  // MARK: - Gender Listener
+  func detachGenderVC(with popType: PopType) {
+    router?.detachGenderVC(with: popType)
+  }
+  
+  func didSelectedGender(gender: GenderType) {
+    userSignUpInfoStream.updateGender(gender: gender)
   }
 }

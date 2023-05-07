@@ -15,15 +15,17 @@ import Networking
 import Entity
 
 protocol MoodRouting: ViewableRouting {
-
+  func signUp()
 }
 
 protocol MoodPresentable: Presentable {
   var listener: MoodPresentableListener? { get set }
+  func set(nickname: String)
 }
 
 protocol MoodListener: AnyObject {
   func detachMoodVC(with popType: PopType)
+  func didSelectedMoods(moods: [Int])
 }
 
 final class MoodInteractor: PresentableInteractor<MoodPresentable>, MoodInteractable, MoodPresentableListener {
@@ -38,21 +40,36 @@ final class MoodInteractor: PresentableInteractor<MoodPresentable>, MoodInteract
     (StyleModel(id: 13, image: .DecoImage.sense), false),
     (StyleModel(id: 17, image: .DecoImage.cute), false)
   ])
+  private let userSignUpInfoStream: MutableSignUpStream
   
-  override init(presenter: MoodPresentable) {
+  init(presenter: MoodPresentable,
+       signUpInfo: MutableSignUpStream
+  ) {
+    self.userSignUpInfoStream = signUpInfo
     super.init(presenter: presenter)
     presenter.listener = self
   }
   
   override func didBecomeActive() {
     super.didBecomeActive()
+    self.showUserNickname()
   }
   
   override func willResignActive() {
     super.willResignActive()
   }
   
+  private func showUserNickname() {
+    userSignUpInfoStream.signupInfo
+      .compactMap{$0.nickname}
+      .subscribe(onNext: { [weak self] (nickname: String) in
+        guard let self else { return }
+        self.presenter.set(nickname: nickname)
+      }).disposeOnDeactivate(interactor: self)
+  }
+  
   func popMoodVC(with popType: PopType) {
+    userSignUpInfoStream.updateMoods(moods: nil)
     self.listener?.detachMoodVC(with: popType)
   }
   
@@ -64,8 +81,16 @@ final class MoodInteractor: PresentableInteractor<MoodPresentable>, MoodInteract
     moods.accept(newValue)
   }
   
-  func signUp() {
-    let filteredData = moods.value.filter{$0.isSelected}
-    print(filteredData)
+  func signUpDidTap() {
+    let selectedMoods = filteredSelectedMoods()
+    listener?.didSelectedMoods(moods: selectedMoods)
+    router?.signUp()
   }
+  
+  private func filteredSelectedMoods() -> [Int] {
+    let filteredMoods = moods.value.filter{$0.isSelected}.map{$0.styleInfo.id}
+    return filteredMoods
+  }
+  
+  // MARK: - 
 }

@@ -19,6 +19,7 @@ protocol MoodPresentableListener: AnyObject {
   func update(index: Int)
   
   func popMoodVC(with popType: PopType)
+  func signUpDidTap()
 }
 
 final class MoodViewController: UIViewController, MoodPresentable, MoodViewControllable {
@@ -39,10 +40,7 @@ final class MoodViewController: UIViewController, MoodPresentable, MoodViewContr
     $0.showsVerticalScrollIndicator = false
   }
   
-  private let titleSubtitleView = TitleSubtitleView(
-    title: "마음에 드는 무드를 1개 이상 골라주세요!",
-    subTitle: "00님의 취향에 맞는 콘텐츠를 보여드릴게요 :)"
-  )
+  private let titleSubtitleView = TitleSubtitleView()
 
   private lazy var moodCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: .init()).then {
 
@@ -131,7 +129,7 @@ final class MoodViewController: UIViewController, MoodPresentable, MoodViewContr
     self.nextButton.tap()
       .subscribe(onNext: { [weak self] in
         guard let self else { return }
-        print("🔊[DEBUG]: TODO 회원가입")
+        self.listener?.signUpDidTap()
       }).disposed(by: disposeBag)
   }
   
@@ -156,6 +154,13 @@ final class MoodViewController: UIViewController, MoodPresentable, MoodViewContr
         guard let self else { return }
         self.listener?.update(index: indexPath.row)
       }.disposed(by: disposeBag)
+  }
+  
+  func set(nickname: String) {
+    self.titleSubtitleView.setupTitleSubtitle(
+      title: "마음에 드는 무드를 1개 이상 골라주세요!",
+      subTitle: "\(nickname)님의 취향에 맞는 콘텐츠를 보여드릴게요 :)"
+    )
   }
 }
 

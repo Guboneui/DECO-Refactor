@@ -18,7 +18,9 @@ final public class LoginMainComponent:
   NickNameDependency
 {
   var userControlRepository: UserControlRepositoryImpl { dependency.userControlRepository }
+  var signUpInfoStream: MutableSignUpStream = UserSignUpStreamImpl()
 }
+
 
 // MARK: - Builder
 
@@ -38,9 +40,14 @@ final public class LoginMainBuilder: Builder<LoginMainDependency>, LoginMainBuil
     let nav = NavigationControllerable(root: viewController)
     nav.navigationController.navigationBar.isHidden = true
     
-    let interactor = LoginMainInteractor(presenter: viewController, dependency: dependency)
+    let interactor = LoginMainInteractor(
+      presenter: viewController,
+      dependency: dependency,
+      userSignUpInfoStream: component.signUpInfoStream
+    )
     
     let nicknameBuilder = NickNameBuilder(dependency: component)
+    
     return LoginMainRouter(
       interactor: interactor,
       navigationController: nav,

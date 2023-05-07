@@ -7,11 +7,12 @@
 
 import RIBs
 import RxSwift
+import RxRelay
 import Util
 
 enum AgeType {
-  case More
-  case Less
+  case Upper
+  case Lower
 }
 
 protocol AgeRouting: ViewableRouting {
@@ -21,11 +22,12 @@ protocol AgeRouting: ViewableRouting {
 
 protocol AgePresentable: Presentable {
   var listener: AgePresentableListener? { get set }
+  func set(nickname: String)
 }
 
 protocol AgeListener: AnyObject {
   func detachAgeVC(with popType: PopType)
-  
+  func didSelectedAge(age: AgeType)
 }
 
 final class AgeInteractor: PresentableInteractor<AgePresentable>, AgeInteractable, AgePresentableListener {
@@ -33,16 +35,20 @@ final class AgeInteractor: PresentableInteractor<AgePresentable>, AgeInteractabl
   weak var router: AgeRouting?
   weak var listener: AgeListener?
   
-  var selectedAgeType: PublishSubject<AgeType> = .init()
+  var selectedAgeType: BehaviorRelay<AgeType?> = .init(value: nil)
+  private let userSignUpInfoStream: MutableSignUpStream
   
-  override init(presenter: AgePresentable) {
+  init(presenter: AgePresentable,
+       signUpInfo: MutableSignUpStream
+  ) {
+    self.userSignUpInfoStream = signUpInfo
     super.init(presenter: presenter)
     presenter.listener = self
   }
   
   override func didBecomeActive() {
     super.didBecomeActive()
-
+    self.showUserNickname()
   }
   
   override func willResignActive() {
@@ -50,19 +56,37 @@ final class AgeInteractor: PresentableInteractor<AgePresentable>, AgeInteractabl
 
   }
   
+  private func showUserNickname() {
+    userSignUpInfoStream.signupInfo
+      .compactMap{$0.nickname}
+      .subscribe(onNext: { [weak self] (nickname: String) in
+        guard let self else { return }
+        self.presenter.set(nickname: nickname)
+      }).disposeOnDeactivate(interactor: self)
+  }
+  
   func popAgeVC(with popType: PopType) {
+    userSignUpInfoStream.updateAge(age: nil)
     self.listener?.detachAgeVC(with: popType)
   }
   
   func pushMoodVC() {
-    self.router?.attachMoodVC()
+    if let age = selectedAgeType.value {
+      listener?.didSelectedAge(age: age)
+      router?.attachMoodVC()
+    }
   }
   
+  func checkedAge(ageType: AgeType) {
+    self.selectedAgeType.accept(ageType)
+  }
+  
+  // MARK: - Mood Listener
   func detachMoodVC(with popType: PopType) {
     self.router?.detachMoodVC(with: popType)
   }
   
-  func checkedAge(ageType: AgeType) {
-    self.selectedAgeType.onNext(ageType)
+  func didSelectedMoods(moods: [Int]) {
+    userSignUpInfoStream.updateMoods(moods: moods)
   }
 }

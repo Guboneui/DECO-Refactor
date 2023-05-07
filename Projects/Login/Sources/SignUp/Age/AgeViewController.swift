@@ -7,6 +7,7 @@
 
 import RIBs
 import RxSwift
+import RxRelay
 import UIKit
 import CommonUI
 import Util
@@ -15,7 +16,7 @@ protocol AgePresentableListener: AnyObject {
   func popAgeVC(with popType: PopType)
   func pushMoodVC()
   
-  var selectedAgeType: PublishSubject<AgeType> { get }
+  var selectedAgeType: BehaviorRelay<AgeType?> { get }
   func checkedAge(ageType: AgeType)
 }
 
@@ -36,10 +37,7 @@ final class AgeViewController:
     showGuideLine: true
   )
   
-  private let titleSubtitleView: TitleSubtitleView = TitleSubtitleView(
-    title: "00님, 만 14세 이상이신가요?",
-    subTitle: "앱 정책 상 만 14세 미만은 이용이 불가해요."
-  )
+  private let titleSubtitleView: TitleSubtitleView = TitleSubtitleView()
   
   private let yesButton: CheckButton = CheckButton(title: "네")
   private let noButton: CheckButton = CheckButton(title: "아니오")
@@ -114,13 +112,13 @@ final class AgeViewController:
     self.yesButton.tap()
       .subscribe(onNext: { [weak self] in
         guard let self else { return }
-        self.listener?.checkedAge(ageType: .More)
+        self.listener?.checkedAge(ageType: .Upper)
       }).disposed(by: disposeBag)
     
     self.noButton.tap()
       .subscribe(onNext: { [weak self] in
         guard let self else { return }
-        self.listener?.checkedAge(ageType: .Less)
+        self.listener?.checkedAge(ageType: .Lower)
       }).disposed(by: disposeBag)
     
     self.nextButton.tap()
@@ -132,11 +130,19 @@ final class AgeViewController:
   
   private func setupBindings() {
     self.listener?.selectedAgeType
+      .compactMap{$0}
       .bind { [weak self] ageType in
         guard let self else { return }
-        self.yesButton.changeIconImage(icon: ageType == .More ? .DecoImage.checkSec : .DecoImage.checkLightgray1)
-        self.noButton.changeIconImage(icon: ageType == .Less ? .DecoImage.checkSec : .DecoImage.checkLightgray1)
+        self.yesButton.changeIconImage(icon: ageType == .Upper ? .DecoImage.checkSec : .DecoImage.checkLightgray1)
+        self.noButton.changeIconImage(icon: ageType == .Lower ? .DecoImage.checkSec : .DecoImage.checkLightgray1)
         self.nextButton.isEnabled = true
       }.disposed(by: disposeBag)
+  }
+  
+  func set(nickname: String) {
+    self.titleSubtitleView.setupTitleSubtitle(
+      title: "\(nickname)님, 만 14세 이상이신가요?",
+      subTitle: "앱 정책 상 만 14세 미만은 이용이 불가해요."
+    )
   }
 }

@@ -8,11 +8,11 @@
 import RIBs
 
 protocol MoodDependency: Dependency {
-  
+  var signUpInfoStream: MutableSignUpStream { get }
 }
 
 final class MoodComponent: Component<MoodDependency> {
-  
+  var signUpInfoStream: MutableSignUpStream { dependency.signUpInfoStream }
 }
 
 // MARK: - Builder
@@ -30,8 +30,13 @@ final class MoodBuilder: Builder<MoodDependency>, MoodBuildable {
   func build(withListener listener: MoodListener) -> MoodRouting {
     let component = MoodComponent(dependency: dependency)
     let viewController = MoodViewController()
-    let interactor = MoodInteractor(presenter: viewController)
+    
+    let interactor = MoodInteractor(
+      presenter: viewController,
+      signUpInfo: component.signUpInfoStream
+    )
     interactor.listener = listener
+    
     return MoodRouter(interactor: interactor, viewController: viewController)
   }
 }

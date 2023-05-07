@@ -22,4 +22,8 @@ final class MoodRouter: ViewableRouter<MoodInteractable, MoodViewControllable>, 
     super.init(interactor: interactor, viewController: viewController)
     interactor.router = self
   }
+  
+  func signUp() {
+    
+  }
 }

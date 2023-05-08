@@ -25,7 +25,7 @@ final public class LoginMainComponent:
 // MARK: - Builder
 
 public protocol LoginMainBuildable: Buildable {
-  func build() -> LoginMainRouting
+  func build(withListener listener: LoginMainListener) -> LoginMainRouting
 }
 
 final public class LoginMainBuilder: Builder<LoginMainDependency>, LoginMainBuildable {
@@ -34,7 +34,7 @@ final public class LoginMainBuilder: Builder<LoginMainDependency>, LoginMainBuil
     super.init(dependency: dependency)
   }
   
-  public func build() -> LoginMainRouting {
+  public func build(withListener listener: LoginMainListener) -> LoginMainRouting {
     let component = LoginMainComponent(dependency: dependency)
     let viewController = LoginMainViewController()
     let nav = NavigationControllerable(root: viewController)
@@ -45,6 +45,7 @@ final public class LoginMainBuilder: Builder<LoginMainDependency>, LoginMainBuil
       dependency: dependency,
       userSignUpInfoStream: component.signUpInfoStream
     )
+    interactor.listener = listener
     
     let nicknameBuilder = NickNameBuilder(dependency: component)
     

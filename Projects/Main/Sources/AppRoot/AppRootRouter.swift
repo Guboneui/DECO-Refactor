@@ -39,7 +39,7 @@ final class AppRootRouter: LaunchRouter<AppRootInteractable, AppRootViewControll
 	
 	func attachLogin() {
 		if loginRouting != nil { return }
-		let router = loginBuildable.build()
+		let router = loginBuildable.build(withListener: interactor)
 		window.rootViewController = router.viewControllable.uiviewController
 		window.makeKeyAndVisible()
 		attachChild(router)

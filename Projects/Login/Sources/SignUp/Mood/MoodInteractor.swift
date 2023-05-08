@@ -15,7 +15,6 @@ import Networking
 import Entity
 
 protocol MoodRouting: ViewableRouting {
-  func signUp()
 }
 
 protocol MoodPresentable: Presentable {
@@ -26,6 +25,7 @@ protocol MoodPresentable: Presentable {
 protocol MoodListener: AnyObject {
   func detachMoodVC(with popType: PopType)
   func didSelectedMoods(moods: [Int])
+  func moveToMain()
 }
 
 final class MoodInteractor: PresentableInteractor<MoodPresentable>, MoodInteractable, MoodPresentableListener {
@@ -91,7 +91,7 @@ final class MoodInteractor: PresentableInteractor<MoodPresentable>, MoodInteract
   func signUpDidTap() {
     let selectedMoods = filteredSelectedMoods()
     listener?.didSelectedMoods(moods: selectedMoods)
-    router?.signUp()
+    listener?.moveToMain()
   }
   
   // MARK: - 

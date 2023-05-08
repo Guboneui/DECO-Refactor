@@ -28,7 +28,7 @@ protocol LoginMainPresentable: Presentable {
 }
 
 public protocol LoginMainListener: AnyObject {
-
+  func moveToMainRIB()
 }
 
 public protocol LoginMainInteractorDependency {
@@ -78,5 +78,9 @@ final class LoginMainInteractor:
   
   func nicknameDidChecked(withNickname nickname: String) {
     userSignUpInfoStream.updateNickname(nickname: nickname)
+  }
+  
+  func moveToMain() {
+    listener?.moveToMainRIB()
   }
 }

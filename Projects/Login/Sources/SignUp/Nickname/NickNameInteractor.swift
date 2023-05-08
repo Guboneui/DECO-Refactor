@@ -24,6 +24,7 @@ protocol NickNamePresentable: Presentable {
 protocol NickNameListener: AnyObject {
   func detachNicknameVC(with popType: PopType)
   func nicknameDidChecked(withNickname nickname: String)
+  func moveToMain()
 }
 
 protocol NicknameInteractorDependency {
@@ -95,5 +96,9 @@ final class NickNameInteractor:
   
   func didSelectedGender(gender: GenderType) {
     userSignUpInfoStream.updateGender(gender: gender)
+  }
+  
+  func moveToMain() {
+    listener?.moveToMain()
   }
 }

@@ -29,6 +29,7 @@ protocol GenderPresentable: Presentable {
 protocol GenderListener: AnyObject {
   func detachGenderVC(with popType: PopType)
   func didSelectedGender(gender: GenderType)
+  func moveToMain()
 }
 
 final class GenderInteractor: PresentableInteractor<GenderPresentable>, GenderInteractable, GenderPresentableListener {
@@ -93,5 +94,9 @@ final class GenderInteractor: PresentableInteractor<GenderPresentable>, GenderIn
   
   func didSelectedAge(age: AgeType) {
     userSignUpInfoStream.updateAge(age: age)
+  }
+  
+  func moveToMain() {
+    listener?.moveToMain()
   }
 }

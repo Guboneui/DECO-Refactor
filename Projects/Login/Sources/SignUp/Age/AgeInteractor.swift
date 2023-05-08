@@ -28,6 +28,7 @@ protocol AgePresentable: Presentable {
 protocol AgeListener: AnyObject {
   func detachAgeVC(with popType: PopType)
   func didSelectedAge(age: AgeType)
+  func moveToMain()
 }
 
 final class AgeInteractor: PresentableInteractor<AgePresentable>, AgeInteractable, AgePresentableListener {
@@ -90,5 +91,9 @@ final class AgeInteractor: PresentableInteractor<AgePresentable>, AgeInteractabl
   
   func didSelectedMoods(moods: [Int]) {
     userSignUpInfoStream.updateMoods(moods: moods)
+  }
+  
+  func moveToMain() {
+    self.listener?.moveToMain()
   }
 }

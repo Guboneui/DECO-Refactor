@@ -2,7 +2,7 @@
 //  Project.swift
 //  ProjectDescriptionHelpers
 //
-//  Created by 구본의 on 2023/04/21.
+//  Created by 구본의 on 2023/05/09.
 //
 
 import ProjectDescription
@@ -17,25 +17,18 @@ let setting: Settings = .settings(
   defaultSettings: .recommended
 )
 
-let packages: [Package] = [
-  .RxGesture,
-  .RxSwift
-]
+let packages: [Package] = []
 
 let dependencies: [TargetDependency] = [
-  .project(target: "CommonUI", path: "../CommonUI"),
-  .project(target: "Util", path: "../Util"),
-  .project(target: "Networking", path: "../Networking"),
-  .RxGesture,
-  .RxSwift
+  .project(target: "Login", path: .relativeToCurrentFile("../Login")),
 ]
 
-let login = Target(
-  name: "Login",
+let home = Target(
+  name: "Home",
   platform: .iOS,
   product: .framework,
-  productName: "Login",
-  bundleId: "com.deco.ios.login",
+  productName: "Home",
+  bundleId: "com.deco.ios.home",
   deploymentTarget: .iOS(targetVersion: "15.0", devices: [.iphone]),
   infoPlist: .default,
   sources: ["Sources/**"],
@@ -45,7 +38,8 @@ let login = Target(
 )
 
 let project = Project(
-  name: "Login",
+  name: "Home",
   packages: packages,
-  targets: [login]
+  targets: [home]
 )
+

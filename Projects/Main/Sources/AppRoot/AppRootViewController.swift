@@ -14,7 +14,6 @@ import Login
 
 protocol AppRootPresentableListener: AnyObject {
 	func moveToLogin()
-	func moveToHome()
 }
 
 final class AppRootViewController:

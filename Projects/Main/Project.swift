@@ -57,7 +57,7 @@ let appTarget = Target(
     sources: ["Sources/**"],
     resources: ["Resources/**"],
     dependencies: [
-      .project(target: "Login", path: .relativeToCurrentFile("../Login")),
+      .project(target: "Home", path: .relativeToCurrentFile("../Home")),
     ],
     settings: settings,
     environment: ["OS_ACTIVITY_MODE": "disable"] // 불필요 로그 제거

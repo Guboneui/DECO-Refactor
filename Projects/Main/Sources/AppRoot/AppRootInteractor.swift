@@ -12,6 +12,7 @@ import RxSwift
 
 protocol AppRootRouting: ViewableRouting {
 	func attachLogin()
+	func attachHome()
 }
 
 protocol AppRootPresentable: Presentable {
@@ -45,7 +46,7 @@ final class AppRootInteractor: PresentableInteractor<AppRootPresentable>, AppRoo
 		router?.attachLogin()
 	}
 	
-	func moveToHome() {
-		// 홈 화면 이동 로직 구성하기
+	func moveToMainRIB() {
+		router?.attachHome()
 	}
 }

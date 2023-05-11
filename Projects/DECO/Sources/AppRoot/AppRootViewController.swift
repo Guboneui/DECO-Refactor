@@ -38,8 +38,8 @@ final class AppRootViewController:
 		
 		DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: { [weak self] in
 			guard let self else { return }
-			//self.listener?.moveToLogin()
-			self.listener?.moveToMain()
+			self.listener?.moveToLogin()
+//			self.listener?.moveToMain()
 		})
 	}
 	

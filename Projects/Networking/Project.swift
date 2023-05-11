@@ -28,7 +28,7 @@ let dependencies: [TargetDependency] = [
 let networking = Target(
   name: "Networking",
   platform: .iOS,
-  product: .staticFramework,
+  product: .framework,
   productName: "Networking",
   bundleId: "com.deco.ios.Networking",
   deploymentTarget: .iOS(targetVersion: "15.0", devices: [.iphone]),

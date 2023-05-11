@@ -2,7 +2,7 @@
 //  Project.swift
 //  ProjectDescriptionHelpers
 //
-//  Created by 구본의 on 2023/04/24.
+//  Created by 구본의 on 2023/05/11.
 //
 
 import ProjectDescription
@@ -10,6 +10,7 @@ import ProjectDescriptionHelpers
 
 let setting: Settings = .settings(
   base: [
+    "GCC_PREPROCESSOR_DEFINITIONS" : "FLEXLAYOUT_SWIFT_PACKAGE=1",
     "DEVELOPMENT_TEAM": "VKGAQDGK5R"
   ],
   configurations: [],
@@ -17,23 +18,26 @@ let setting: Settings = .settings(
 )
 
 let packages: [Package] = [
-  .RIBs,
-//  .RxSwift,
-  .RxGesture
+//  .RxGesture,
+//  .RxSwift
+//  .RIBs
 ]
 
 let dependencies: [TargetDependency] = [
-  .RIBs,
-//  .RxSwift,
-  .RxGesture
+  .project(target: "CommonUI", path: "../CommonUI"),
+  .project(target: "Util", path: "../Util"),
+  .project(target: "Networking", path: "../Networking"),
+//  .RxGesture,
+//  .RxSwift
+//    .RIBs
 ]
 
-let util = Target(
-  name: "Util",
+let home = Target(
+  name: "Home",
   platform: .iOS,
   product: .framework,
-  productName: "Util",
-  bundleId: "com.deco.ios.Util",
+  productName: "Home",
+  bundleId: "com.deco.ios.home",
   deploymentTarget: .iOS(targetVersion: "15.0", devices: [.iphone]),
   infoPlist: .default,
   sources: ["Sources/**"],
@@ -43,7 +47,8 @@ let util = Target(
 )
 
 let project = Project(
-  name: "Util",
+  name: "Home",
   packages: packages,
-  targets: [util]
+  targets: [home]
 )
+

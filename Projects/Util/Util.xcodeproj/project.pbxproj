@@ -7,13 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		058E37201D433AA007E6F0BD /* RxGesture in Frameworks */ = {isa = PBXBuildFile; productRef = 0B5A7B259E9689D19FD1DC75 /* RxGesture */; };
 		1E6C6C8599B67E915445F168 /* UINavigationControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8860B9B6C9E2293549E4321A /* UINavigationControllerDelegate.swift */; };
 		2B95FA17BE9FF17FEDEFC286 /* UIButton+Gesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A4D501A3D6D4AEDCBA78C6 /* UIButton+Gesture.swift */; };
 		32DDDE75F0C350232BD7369F /* UIView+Gesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89467AE2F6ACB22D4F02E1F1 /* UIView+Gesture.swift */; };
 		63B6E2060F77B02FA4CB0CD8 /* AdaptivePresentationControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D43B0C2E27477B0719ABDCC /* AdaptivePresentationControllerDelegate.swift */; };
 		7BA8BAFB7B8B6B56EFE55904 /* RIBTreeViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77CA5F7B27065F031A1FBB4E /* RIBTreeViewer.swift */; };
-		B5D2577B92306A51F38D8DB7 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 6E6A99468A8C462C926BF4D8 /* RxSwift */; };
+		B5D2577B92306A51F38D8DB7 /* RxGesture in Frameworks */ = {isa = PBXBuildFile; productRef = 0B5A7B259E9689D19FD1DC75 /* RxGesture */; };
 		D80A24ED3B757D6FBB85E800 /* RIBs in Frameworks */ = {isa = PBXBuildFile; productRef = 508F34CEAFAFBEBBF73C1AE0 /* RIBs */; };
 		DA4D9D4AF6E9ED3DF47CFBA4 /* RIBs+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FA1C3D3DAD8B14E62DDCB6 /* RIBs+Util.swift */; };
 		F83F24F300D8B67DC848A9DD /* DecoURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25B620E990FC8B32E8B1A18 /* DecoURL.swift */; };
@@ -52,8 +51,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D80A24ED3B757D6FBB85E800 /* RIBs in Frameworks */,
-				B5D2577B92306A51F38D8DB7 /* RxSwift in Frameworks */,
-				058E37201D433AA007E6F0BD /* RxGesture in Frameworks */,
+				B5D2577B92306A51F38D8DB7 /* RxGesture in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -175,7 +173,6 @@
 			name = Util;
 			packageProductDependencies = (
 				508F34CEAFAFBEBBF73C1AE0 /* RIBs */,
-				6E6A99468A8C462C926BF4D8 /* RxSwift */,
 				0B5A7B259E9689D19FD1DC75 /* RxGesture */,
 			);
 			productName = Util;
@@ -201,7 +198,6 @@
 			);
 			mainGroup = 2134EFEDDE27A3C7943EE7D0;
 			packageReferences = (
-				4C6A0E022FB93D9F9D4CD3B8 /* XCRemoteSwiftPackageReference "RxSwift" */,
 				F9BCA62FA22CA832DDB7D0D7 /* XCRemoteSwiftPackageReference "RxGesture" */,
 				CB184464D646AB22544EBBBE /* XCRemoteSwiftPackageReference "RIBs" */,
 			);
@@ -320,7 +316,6 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACH_O_TYPE = staticlib;
 				PRODUCT_BUNDLE_IDENTIFIER = com.deco.ios.Util;
 				PRODUCT_NAME = Util;
 				SDKROOT = iphoneos;
@@ -407,7 +402,6 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACH_O_TYPE = staticlib;
 				PRODUCT_BUNDLE_IDENTIFIER = com.deco.ios.Util;
 				PRODUCT_NAME = Util;
 				SDKROOT = iphoneos;
@@ -448,14 +442,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		4C6A0E022FB93D9F9D4CD3B8 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
-			requirement = {
-				kind = exactVersion;
-				version = 6.5.0;
-			};
-		};
 		CB184464D646AB22544EBBBE /* XCRemoteSwiftPackageReference "RIBs" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/uber/RIBs";
@@ -482,10 +468,6 @@
 		508F34CEAFAFBEBBF73C1AE0 /* RIBs */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = RIBs;
-		};
-		6E6A99468A8C462C926BF4D8 /* RxSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = RxSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

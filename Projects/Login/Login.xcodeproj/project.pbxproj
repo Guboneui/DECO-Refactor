@@ -24,13 +24,10 @@
 		971F81A40F83E972F4F54B41 /* LoginMainBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293D99C8D142BA60CA47CCC0 /* LoginMainBuilder.swift */; };
 		A616CE0E7FCC8EFF45E6738F /* MoodRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A21591B64537E33E0EE52E9 /* MoodRouter.swift */; };
 		AA66CE4D6213C35ECFA384DC /* Util.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 111D1A79CB7EAB7BDA369813 /* Util.framework */; platformFilter = ios; };
-		B4ADF23E8FD3AEFED229899D /* Entity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DEFA24224FA1A55360A0F48 /* Entity.framework */; platformFilter = ios; };
 		B68F9202993391C2D5E50283 /* MoodBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4496B476440F18F44389F0B6 /* MoodBuilder.swift */; };
 		B6FBEB2958F87677C9FC9557 /* GenderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78718CD1513C4208CA14B11C /* GenderViewController.swift */; };
-		BA1447347F172DE4651EB9A6 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = BA1C87B88199D0AD7FE70894 /* RxSwift */; };
 		BC06FEAF029E1F8C0C84ED85 /* GenderInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ABF66364914A10602DA34FB /* GenderInteractor.swift */; };
 		C0B044FCE2BE487261281923 /* TermView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4D244B64542185E6C4829F /* TermView.swift */; };
-		E01367743430A57E02252E16 /* RxGesture in Frameworks */ = {isa = PBXBuildFile; productRef = 77718C3206BFD086913A6F71 /* RxGesture */; };
 		E58BF95A090B4CA68E530901 /* AgeBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF692959895875AEE24D2E2 /* AgeBuilder.swift */; };
 		F62869DC1641F14C65C92F9C /* AgeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3395FFE1CC585A27CB8F9725 /* AgeViewController.swift */; };
 		F841FF334E1C6034EABAEDCB /* CommonUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21D6E91FA13D3D7D7989E850 /* CommonUI.framework */; platformFilter = ios; };
@@ -57,7 +54,6 @@
 		111D1A79CB7EAB7BDA369813 /* Util.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Util.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A21591B64537E33E0EE52E9 /* MoodRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodRouter.swift; sourceTree = "<group>"; };
 		1B4D244B64542185E6C4829F /* TermView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermView.swift; sourceTree = "<group>"; };
-		1DEFA24224FA1A55360A0F48 /* Entity.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Entity.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F122292170A9B08F370E93A /* Login-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Login-Info.plist"; sourceTree = "<group>"; };
 		21D6E91FA13D3D7D7989E850 /* CommonUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CommonUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		28C6E6787DFAF624F53D6F5B /* Login.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Login.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -89,11 +85,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				F841FF334E1C6034EABAEDCB /* CommonUI.framework in Frameworks */,
-				B4ADF23E8FD3AEFED229899D /* Entity.framework in Frameworks */,
 				06D26CFCE285EE51CD0B0B0E /* Networking.framework in Frameworks */,
 				AA66CE4D6213C35ECFA384DC /* Util.framework in Frameworks */,
-				E01367743430A57E02252E16 /* RxGesture in Frameworks */,
-				BA1447347F172DE4651EB9A6 /* RxSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,7 +105,6 @@
 			isa = PBXGroup;
 			children = (
 				21D6E91FA13D3D7D7989E850 /* CommonUI.framework */,
-				1DEFA24224FA1A55360A0F48 /* Entity.framework */,
 				28C6E6787DFAF624F53D6F5B /* Login.framework */,
 				82F5162632CDD6A8BBCCCC3C /* Networking.framework */,
 				111D1A79CB7EAB7BDA369813 /* Util.framework */,
@@ -264,10 +256,6 @@
 			dependencies = (
 			);
 			name = Login;
-			packageProductDependencies = (
-				77718C3206BFD086913A6F71 /* RxGesture */,
-				BA1C87B88199D0AD7FE70894 /* RxSwift */,
-			);
 			productName = Login;
 			productReference = 28C6E6787DFAF624F53D6F5B /* Login.framework */;
 			productType = "com.apple.product-type.framework";
@@ -290,10 +278,6 @@
 				en,
 			);
 			mainGroup = E31225F45B959E9057547147;
-			packageReferences = (
-				2D4CE23D11E14AFAB1E332F6 /* XCRemoteSwiftPackageReference "RxSwift" */,
-				1334CD3542B3D6A26709FC3F /* XCRemoteSwiftPackageReference "RxGesture" */,
-			);
 			productRefGroup = 275CA20C12D61868FDE00BD5 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -550,36 +534,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		1334CD3542B3D6A26709FC3F /* XCRemoteSwiftPackageReference "RxGesture" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/RxSwiftCommunity/RxGesture";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 4.0.0;
-			};
-		};
-		2D4CE23D11E14AFAB1E332F6 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
-			requirement = {
-				kind = exactVersion;
-				version = 6.5.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		77718C3206BFD086913A6F71 /* RxGesture */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = RxGesture;
-		};
-		BA1C87B88199D0AD7FE70894 /* RxSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = RxSwift;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 353B4020F35CB9C9FFC126AA /* Project object */;
 }

@@ -237,7 +237,6 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACH_O_TYPE = staticlib;
 				PRODUCT_BUNDLE_IDENTIFIER = com.deco.ios.Networking;
 				PRODUCT_NAME = Networking;
 				SDKROOT = iphoneos;
@@ -325,7 +324,6 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACH_O_TYPE = staticlib;
 				PRODUCT_BUNDLE_IDENTIFIER = com.deco.ios.Networking;
 				PRODUCT_NAME = Networking;
 				SDKROOT = iphoneos;

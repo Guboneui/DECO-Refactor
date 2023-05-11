@@ -1,6 +1,6 @@
 //
 //  TabbarView.swift
-//  Home
+//  Main
 //
 //  Created by 구본의 on 2023/05/11.
 //

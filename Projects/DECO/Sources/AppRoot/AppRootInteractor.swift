@@ -8,11 +8,11 @@
 
 import RIBs
 import RxSwift
-
+import Home
 
 protocol AppRootRouting: ViewableRouting {
 	func attachLogin()
-	func attachHome()
+	func attachMain()
 }
 
 protocol AppRootPresentable: Presentable {
@@ -47,10 +47,10 @@ final class AppRootInteractor: PresentableInteractor<AppRootPresentable>, AppRoo
 	}
 	
 	func moveToMain() {
-		router?.attachHome()
+		router?.attachMain()
 	}
 	
 	func moveToMainRIB() {
-		router?.attachHome()
+		router?.attachMain()
 	}
 }

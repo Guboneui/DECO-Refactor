@@ -7,14 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		00FE57C7F58F07F066AB5244 /* Main.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD23680AB7E061F92C3E315A /* Main.framework */; platformFilter = ios; };
 		0501DD244E7145F91982FE46 /* AppRootRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61EB0154CEBAD1FA96E5290 /* AppRootRouter.swift */; };
-		117AA82F3B71B2FB73140A60 /* Home.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 23F3995B7E481C32B68A0DD2 /* Home.framework */; platformFilter = ios; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3A049772C15648D1C826521C /* AppRootInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41868A1039E1752591863AA6 /* AppRootInteractor.swift */; };
 		41CF09C6F9A4820C1D57E0FD /* AppRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F03EA36D8E99BA964DA7B7F /* AppRootViewController.swift */; };
 		6ABD43ADEA446D2AE1E006AE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41ACEE68352FF01E741559F /* AppDelegate.swift */; };
 		87C12D7181027F947E754013 /* Entity.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AAA9A2B96B820652C5C3709F /* Entity.framework */; platformFilter = ios; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B5E72EF612A62946A9CA3FCD /* Home.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23F3995B7E481C32B68A0DD2 /* Home.framework */; platformFilter = ios; };
 		B8E941A134C8B8076666919F /* AppComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9555C4DC9DBE2E005B175B0 /* AppComponent.swift */; };
+		C0884C8F3D34D048AB9EAF0F /* Main.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FD23680AB7E061F92C3E315A /* Main.framework */; platformFilter = ios; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		ECFE1BD8132C50064B86D257 /* CommonUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0BDC1A48960A2B5B50EE808C /* CommonUI.framework */; platformFilter = ios; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		ED17F669EF8C74C22AD521EE /* AppRootBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF930340D3A6E9B0D6D2EF0B /* AppRootBuilder.swift */; };
 		F93F35E3A1ACDDE5648FCD83 /* Login.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0B6686109E67E5AF15338F03 /* Login.framework */; platformFilter = ios; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -29,8 +29,8 @@
 			files = (
 				ECFE1BD8132C50064B86D257 /* CommonUI.framework in Embed Frameworks */,
 				87C12D7181027F947E754013 /* Entity.framework in Embed Frameworks */,
-				117AA82F3B71B2FB73140A60 /* Home.framework in Embed Frameworks */,
 				F93F35E3A1ACDDE5648FCD83 /* Login.framework in Embed Frameworks */,
+				C0884C8F3D34D048AB9EAF0F /* Main.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -41,7 +41,6 @@
 		0B6686109E67E5AF15338F03 /* Login.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Login.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0BDC1A48960A2B5B50EE808C /* CommonUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CommonUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F03EA36D8E99BA964DA7B7F /* AppRootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRootViewController.swift; sourceTree = "<group>"; };
-		23F3995B7E481C32B68A0DD2 /* Home.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Home.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B5B47F76E0624DB4B0A1406 /* DECO-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "DECO-Info.plist"; sourceTree = "<group>"; };
 		41868A1039E1752591863AA6 /* AppRootInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRootInteractor.swift; sourceTree = "<group>"; };
 		AAA9A2B96B820652C5C3709F /* Entity.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Entity.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -50,6 +49,7 @@
 		CF930340D3A6E9B0D6D2EF0B /* AppRootBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRootBuilder.swift; sourceTree = "<group>"; };
 		E61EB0154CEBAD1FA96E5290 /* AppRootRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRootRouter.swift; sourceTree = "<group>"; };
 		E9555C4DC9DBE2E005B175B0 /* AppComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppComponent.swift; sourceTree = "<group>"; };
+		FD23680AB7E061F92C3E315A /* Main.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Main.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,7 +57,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B5E72EF612A62946A9CA3FCD /* Home.framework in Frameworks */,
+				00FE57C7F58F07F066AB5244 /* Main.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -135,8 +135,8 @@
 				0BDC1A48960A2B5B50EE808C /* CommonUI.framework */,
 				B8B48B1EF47A5C5EDF44940B /* DECO.app */,
 				AAA9A2B96B820652C5C3709F /* Entity.framework */,
-				23F3995B7E481C32B68A0DD2 /* Home.framework */,
 				0B6686109E67E5AF15338F03 /* Login.framework */,
+				FD23680AB7E061F92C3E315A /* Main.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -253,7 +253,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 2305090142009;
+				CURRENT_PROJECT_VERSION = 2305111616009;
 				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = VKGAQDGK5R;
@@ -283,7 +283,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2305090142009;
+				CURRENT_PROJECT_VERSION = 2305111616009;
 				DEVELOPMENT_TEAM = VKGAQDGK5R;
 				ENABLE_BITCODE = NO;
 				ENABLE_PREVIEWS = YES;
@@ -345,7 +345,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 2305090142009;
+				CURRENT_PROJECT_VERSION = 2305111616009;
 				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = VKGAQDGK5R;
@@ -377,7 +377,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2305090142009;
+				CURRENT_PROJECT_VERSION = 2305111616009;
 				DEVELOPMENT_TEAM = VKGAQDGK5R;
 				ENABLE_BITCODE = NO;
 				ENABLE_PREVIEWS = YES;

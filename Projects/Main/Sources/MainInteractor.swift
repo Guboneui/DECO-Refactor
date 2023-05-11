@@ -1,6 +1,6 @@
 //
-//  HomeInteractor.swift
-//  Home
+//  MainInteractor.swift
+//  Main
 //
 //  Created by 구본의 on 2023/05/09.
 //
@@ -8,27 +8,27 @@
 import RIBs
 import RxSwift
 
-public protocol HomeRouting: ViewableRouting {
+public protocol MainRouting: ViewableRouting {
     // TODO: Declare methods the interactor can invoke to manage sub-tree via the router.
 }
 
-protocol HomePresentable: Presentable {
-    var listener: HomePresentableListener? { get set }
+protocol MainPresentable: Presentable {
+    var listener: MainPresentableListener? { get set }
     // TODO: Declare methods the interactor can invoke the presenter to present data.
 }
 
-public protocol HomeListener: AnyObject {
+public protocol MainListener: AnyObject {
     // TODO: Declare methods the interactor can invoke to communicate with other RIBs.
 }
 
-final class HomeInteractor: PresentableInteractor<HomePresentable>, HomeInteractable, HomePresentableListener {
+final class MainInteractor: PresentableInteractor<MainPresentable>, MainInteractable, MainPresentableListener {
 
-    weak var router: HomeRouting?
-    weak var listener: HomeListener?
+    weak var router: MainRouting?
+    weak var listener: MainListener?
 
     // TODO: Add additional dependencies to constructor. Do not perform any logic
     // in constructor.
-    override init(presenter: HomePresentable) {
+    override init(presenter: MainPresentable) {
         super.init(presenter: presenter)
         presenter.listener = self
     }

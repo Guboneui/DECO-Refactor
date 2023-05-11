@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "52E844066D197E3B81FA748F"
-               BuildableName = "Home.framework"
-               BlueprintName = "Home"
-               ReferencedContainer = "container:Home.xcodeproj">
+               BlueprintIdentifier = "10BC0BAF427BB570BB3E5632"
+               BuildableName = "Main.framework"
+               BlueprintName = "Main"
+               ReferencedContainer = "container:Main.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -44,10 +44,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "52E844066D197E3B81FA748F"
-            BuildableName = "Home.framework"
-            BlueprintName = "Home"
-            ReferencedContainer = "container:Home.xcodeproj">
+            BlueprintIdentifier = "10BC0BAF427BB570BB3E5632"
+            BuildableName = "Main.framework"
+            BlueprintName = "Main"
+            ReferencedContainer = "container:Main.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </LaunchAction>
@@ -60,10 +60,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "52E844066D197E3B81FA748F"
-            BuildableName = "Home.framework"
-            BlueprintName = "Home"
-            ReferencedContainer = "container:Home.xcodeproj">
+            BlueprintIdentifier = "10BC0BAF427BB570BB3E5632"
+            BuildableName = "Main.framework"
+            BlueprintName = "Main"
+            ReferencedContainer = "container:Main.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>

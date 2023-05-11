@@ -31,7 +31,7 @@
                BlueprintIdentifier = "7811CB0177222590338F6A41"
                BuildableName = "DECO.app"
                BlueprintName = "DECO"
-               ReferencedContainer = "container:Projects/Main/DECO.xcodeproj">
+               ReferencedContainer = "container:Projects/DECO/DECO.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -56,10 +56,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "52E844066D197E3B81FA748F"
-               BuildableName = "Home.framework"
-               BlueprintName = "Home"
-               ReferencedContainer = "container:Projects/Home/Home.xcodeproj">
+               BlueprintIdentifier = "EF8CE03A2759141C3B1EAC1D"
+               BuildableName = "Login.framework"
+               BlueprintName = "Login"
+               ReferencedContainer = "container:Projects/Login/Login.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -70,10 +70,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "EF8CE03A2759141C3B1EAC1D"
-               BuildableName = "Login.framework"
-               BlueprintName = "Login"
-               ReferencedContainer = "container:Projects/Login/Login.xcodeproj">
+               BlueprintIdentifier = "10BC0BAF427BB570BB3E5632"
+               BuildableName = "Main.framework"
+               BlueprintName = "Main"
+               ReferencedContainer = "container:Projects/Main/Main.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry

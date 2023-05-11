@@ -8,10 +8,10 @@
 
 import RIBs
 import Login
-import Home
+import Main
 import UIKit
 
-protocol AppRootInteractable: Interactable, LoginMainListener, HomeListener {
+protocol AppRootInteractable: Interactable, LoginMainListener, MainListener {
 	var router: AppRootRouting? { get set }
 	var listener: AppRootListener? { get set }
 }
@@ -26,18 +26,18 @@ final class AppRootRouter: LaunchRouter<AppRootInteractable, AppRootViewControll
 	private let loginBuildable: LoginMainBuildable
 	private var loginRouting: Routing?
 	
-	private let homeBuildable: HomeBuildable
-	private var homeRouting: Routing?
+	private let mainBuildable: MainBuildable
+	private var mainRouting: Routing?
 	
 	init(
 		interactor: AppRootInteractable,
 		viewController: AppRootViewControllable,
 		loginBuildable: LoginMainBuildable,
-		homeBuildable: HomeBuildable,
+		mainBuildable: MainBuildable,
 		window: UIWindow
 	) {
 		self.loginBuildable = loginBuildable
-		self.homeBuildable = homeBuildable
+		self.mainBuildable = mainBuildable
 		self.window = window
 		super.init(interactor: interactor, viewController: viewController)
 		interactor.router = self
@@ -59,14 +59,14 @@ final class AppRootRouter: LaunchRouter<AppRootInteractable, AppRootViewControll
 		}
 	}
 	
-	func attachHome() {
+	func attachMain() {
 		self.detachLogin()
-		if homeRouting != nil { return }
-		let router = homeBuildable.build(withListener: interactor)
+		if mainRouting != nil { return }
+		let router = mainBuildable.build(withListener: interactor)
 		window.rootViewController = router.viewControllable.uiviewController
 		window.makeKeyAndVisible()
 		attachChild(router)
-		homeRouting = router
+		mainRouting = router
 		
 	}
 }

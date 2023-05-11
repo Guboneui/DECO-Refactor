@@ -8,16 +8,16 @@
          location = "group:CommonUI/CommonUI.xcodeproj">
       </FileRef>
       <FileRef
-         location = "group:Entity/Entity.xcodeproj">
+         location = "group:DECO/DECO.xcodeproj">
       </FileRef>
       <FileRef
-         location = "group:Home/Home.xcodeproj">
+         location = "group:Entity/Entity.xcodeproj">
       </FileRef>
       <FileRef
          location = "group:Login/Login.xcodeproj">
       </FileRef>
       <FileRef
-         location = "group:Main/DECO.xcodeproj">
+         location = "group:Main/Main.xcodeproj">
       </FileRef>
       <FileRef
          location = "group:Networking/Networking.xcodeproj">

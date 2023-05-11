@@ -11,6 +11,7 @@ import RxSwift
 import UIKit
 import CommonUI
 import Login
+import Home
 
 protocol AppRootPresentableListener: AnyObject {
 	func moveToLogin()

@@ -9,7 +9,7 @@
 import RIBs
 import UIKit
 import Login
-import Home
+import Main
 import Networking
 
 protocol AppRootDependency: Dependency {
@@ -19,7 +19,7 @@ protocol AppRootDependency: Dependency {
 final class AppRootComponent:
 	Component<AppRootDependency>,
 	LoginMainDependency,
-	HomeDependency
+	MainDependency
 {
 	var userControlRepository: UserControlRepositoryImpl { dependency.userControlRepository }
 }
@@ -43,14 +43,14 @@ final class AppRootBuilder: Builder<AppRootDependency>, AppRootBuildable {
 		let interactor = AppRootInteractor(presenter: viewController)
 		
 		let loginBuilder = LoginMainBuilder(dependency: component)
-		let homeBuilder = HomeBuilder(dependency: component)
+		let mainBuilder = MainBuilder(dependency: component)
 		
 		
 		return AppRootRouter(
 			interactor: interactor,
 			viewController: viewController,
 			loginBuildable: loginBuilder,
-			homeBuildable: homeBuilder,
+			mainBuildable: mainBuilder,
 			window: window
 		)
 	}

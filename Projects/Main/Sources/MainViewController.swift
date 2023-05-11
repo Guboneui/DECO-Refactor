@@ -1,6 +1,6 @@
 //
-//  HomeViewController.swift
-//  Home
+//  MainViewController.swift
+//  Main
 //
 //  Created by 구본의 on 2023/05/09.
 //
@@ -11,15 +11,15 @@ import UIKit
 import Util
 import CommonUI
 
-protocol HomePresentableListener: AnyObject {
+protocol MainPresentableListener: AnyObject {
   // TODO: Declare properties and methods that the view controller can invoke to perform
   // business logic, such as signIn(). This protocol is implemented by the corresponding
   // interactor class.
 }
 
-final class HomeViewController: UIViewController, HomePresentable, HomeViewControllable {
+final class MainViewController: UIViewController, MainPresentable, MainViewControllable {
 
-  weak var listener: HomePresentableListener?
+  weak var listener: MainPresentableListener?
 
   private let disposeBag: DisposeBag = DisposeBag()
 

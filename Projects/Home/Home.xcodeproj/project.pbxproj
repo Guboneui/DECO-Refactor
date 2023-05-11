@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2CE52E102A0C072900E60549 /* TabbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE52E0F2A0C072900E60549 /* TabbarView.swift */; };
 		9554F00337ACA3B04211E621 /* Login.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4CF0FECC69CB7BBF4489695 /* Login.framework */; platformFilter = ios; };
 		969AE3FC67639657050B796A /* HomeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC9D00E6250394A9E0CC7EC /* HomeRouter.swift */; };
 		9E5E2B3F30DD9698E7DA138C /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAFEFB4CCEB4FBFFF16CA05 /* HomeViewController.swift */; };
@@ -29,6 +30,7 @@
 
 /* Begin PBXFileReference section */
 		1F62D067FC82E37F588B2D29 /* HomeInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeInteractor.swift; sourceTree = "<group>"; };
+		2CE52E0F2A0C072900E60549 /* TabbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarView.swift; sourceTree = "<group>"; };
 		3CC9D00E6250394A9E0CC7EC /* HomeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRouter.swift; sourceTree = "<group>"; };
 		61EC700930D1096A1F12C0D7 /* Home-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Home-Info.plist"; sourceTree = "<group>"; };
 		7CAFEFB4CCEB4FBFFF16CA05 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -56,6 +58,14 @@
 				A4CF0FECC69CB7BBF4489695 /* Login.framework */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		2CE52E0E2A0C071D00E60549 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2CE52E0F2A0C072900E60549 /* TabbarView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		440337F7B58BC84FCBC5A96E /* Frameworks */ = {
@@ -94,6 +104,7 @@
 		B74810073A3D8A4993EE22B2 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				2CE52E0E2A0C071D00E60549 /* View */,
 				9879BE437F14BB2EB41CC295 /* HomeBuilder.swift */,
 				1F62D067FC82E37F588B2D29 /* HomeInteractor.swift */,
 				3CC9D00E6250394A9E0CC7EC /* HomeRouter.swift */,
@@ -137,8 +148,6 @@
 		F648A09DF594BC533BCA5FD3 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				TargetAttributes = {
-				};
 			};
 			buildConfigurationList = AA685C1613CFBDFB4ED6BAE7 /* Build configuration list for PBXProject "Home" */;
 			compatibilityVersion = "Xcode 13.0";
@@ -176,6 +185,7 @@
 				A428098AD615CD3B5F694A31 /* HomeBuilder.swift in Sources */,
 				F7FB1076CF30671B49BE611D /* HomeInteractor.swift in Sources */,
 				969AE3FC67639657050B796A /* HomeRouter.swift in Sources */,
+				2CE52E102A0C072900E60549 /* TabbarView.swift in Sources */,
 				9E5E2B3F30DD9698E7DA138C /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

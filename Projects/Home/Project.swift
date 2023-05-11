@@ -20,7 +20,7 @@ let setting: Settings = .settings(
 let packages: [Package] = []
 
 let dependencies: [TargetDependency] = [
-  .project(target: "Login", path: .relativeToCurrentFile("../Login")),
+  .project(target: "Login", path: .relativeToCurrentFile("../Login"))
 ]
 
 let home = Target(

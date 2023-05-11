@@ -14,6 +14,7 @@ import Login
 
 protocol AppRootPresentableListener: AnyObject {
 	func moveToLogin()
+	func moveToMain()
 }
 
 final class AppRootViewController:
@@ -34,10 +35,10 @@ final class AppRootViewController:
 		super.viewDidLoad()
 		self.setupViews()
 		
-		DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: { [weak self] in
+		DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: { [weak self] in
 			guard let self else { return }
-			self.listener?.moveToLogin()
-			
+			//self.listener?.moveToLogin()
+			self.listener?.moveToMain()
 		})
 	}
 	

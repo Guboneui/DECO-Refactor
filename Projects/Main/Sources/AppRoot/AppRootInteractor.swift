@@ -46,6 +46,10 @@ final class AppRootInteractor: PresentableInteractor<AppRootPresentable>, AppRoo
 		router?.attachLogin()
 	}
 	
+	func moveToMain() {
+		router?.attachHome()
+	}
+	
 	func moveToMainRIB() {
 		router?.attachHome()
 	}

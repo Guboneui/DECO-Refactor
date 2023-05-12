@@ -13,9 +13,7 @@ import CommonUI
 import Home
 
 protocol MainPresentableListener: AnyObject {
-  func showNewChildVC(with type: TabType)
-  func hidePrevChildVC()
-  func removeChildVCRib()
+  func showHome()
 }
 
 final class MainViewController: UIViewController, MainPresentable, MainViewControllable {
@@ -78,72 +76,51 @@ final class MainViewController: UIViewController, MainPresentable, MainViewContr
       .horizontally()
   }
 
-  private func setupGestures() {
+  private func setupGestures() {    
     homeTab.tap()
       .bind { [weak self] _ in
         guard let self else { return }
-        if let currentChildVC = self.children.first,
-           currentChildVC != HomeViewController() {
-          self.removeLayoutPrevChildVC()
-          self.setLayoutNewChildVC(with: .Home)
-          self.listener?.showNewChildVC(with: .Home)
-        }
+        print("🔊[DEBUG]: HOME")
+        self.listener?.showHome()
       }.disposed(by: disposeBag)
-    
+
     productTab.tap()
       .bind { [weak self] _ in
         guard let self else { return }
-        self.removeLayoutPrevChildVC()
-        self.setLayoutNewChildVC(with: .Product)
-        self.listener?.showNewChildVC(with: .Product)
+        print("🔊[DEBUG]: Product")
       }.disposed(by: disposeBag)
-    
-    
+
     uploadTab.tap()
       .bind { [weak self] _ in
         guard let self else { return }
         print("UPLOAD")
-        
       }.disposed(by: disposeBag)
-    
+
     bookmarkTab.tap()
       .bind { [weak self] _ in
         guard let self else { return }
-        self.removeLayoutPrevChildVC()
-        self.setLayoutNewChildVC(with: .Bookmark)
-        self.listener?.showNewChildVC(with: .Bookmark)
+        print("🔊[DEBUG]: BOOKMARK")
       }.disposed(by: disposeBag)
-    
+
     profileTab.tap()
       .bind { [weak self] _ in
         guard let self else { return }
-        self.removeLayoutPrevChildVC()
-        self.setLayoutNewChildVC(with: .Profile)
-        self.listener?.showNewChildVC(with: .Profile)
+        print("🔊[DEBUG]: PROFILE")
       }.disposed(by: disposeBag)
 
   }
   
-  func startWithHomeVC(vc: ViewControllable) {
-    self.addChild(vc.uiviewController)
-    parentVCContainerView.addSubview(vc.uiviewController.view)
-    vc.uiviewController.view.frame = self.parentVCContainerView.bounds // childVC Frame 설정
-    vc.uiviewController.view.pin.pinEdges()
-    vc.uiviewController.didMove(toParent: self)
-  }
-  
-  
-  private func setLayoutNewChildVC(with type: TabType) {
-    listener?.showNewChildVC(with: type)
-  }
-  
-  private func removeLayoutPrevChildVC() {
-    self.children.forEach { prevChildVC in
-      prevChildVC.willMove(toParent: nil)
-      prevChildVC.view.removeFromSuperview()
-      prevChildVC.removeFromParent()
-    }
-    
-    self.listener?.removeChildVCRib()
+  func setChildVCLayout(childVC: ViewControllable) {
+    self.addChild(childVC.uiviewController)
+    self.parentVCContainerView.addSubview(childVC.uiviewController.view)
+    childVC.uiviewController.view.frame = self.parentVCContainerView.bounds
+    childVC.uiviewController.view.pin.pinEdges()
+    childVC.uiviewController.didMove(toParent: self)
   }
 }
+
+//self.addChild(vc.uiviewController)
+//parentVCContainerView.addSubview(vc.uiviewController.view)
+//vc.uiviewController.view.frame = self.parentVCContainerView.bounds // childVC Frame 설정
+//vc.uiviewController.view.pin.pinEdges()
+//vc.uiviewController.didMove(toParent: self)

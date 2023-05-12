@@ -10,6 +10,7 @@ import Home
 import Product
 import Bookmark
 import Profile
+import UIKit
 
 public protocol MainInteractable:
   Interactable,
@@ -24,6 +25,7 @@ public protocol MainInteractable:
 }
 
 public protocol MainViewControllable: ViewControllable {
+  func setChildVCLayout(childVC: ViewControllable)
 }
 
 final class MainRouter: ViewableRouter<MainInteractable, MainViewControllable>, MainRouting {
@@ -57,26 +59,37 @@ final class MainRouter: ViewableRouter<MainInteractable, MainViewControllable>, 
     
   }
   
-  func attachNewChildVC(with type: TabType) {
-    switch type {
-    case .Home:
-      self.attachHomeRIB()
-    case .Product:
-      self.attachProductRIB()
-    case .Bookmark:
-      self.attachBookmarkRIB()
-    case .Profile:
-      self.attachProfileRIB()
-    default: break
-    }
+ 
+  func attachHome() {
+    if homeRouting != nil { return }
+    let router = homeBuildable.build(withListener: interactor)
+    attachChild(router)
+    self.homeRouting = router
+    self.viewController.setChildVCLayout(childVC: router.viewControllable)
   }
   
-  func detachPrevChildRib() {
-    self.detachHomeRIB()
-    self.detachProductRIB()
-    self.detachBookmarkRIB()
-    self.detachProfileRIB()
-  }
+  
+  
+//  func attachNewChildVC(with type: TabType) {
+//    switch type {
+//    case .Home:
+//      self.attachHomeRIB()
+//    case .Product:
+//      self.attachProductRIB()
+//    case .Bookmark:
+//      self.attachBookmarkRIB()
+//    case .Profile:
+//      self.attachProfileRIB()
+//    default: break
+//    }
+//  }
+//
+//  func detachPrevChildRib() {
+//    self.detachHomeRIB()
+//    self.detachProductRIB()
+//    self.detachBookmarkRIB()
+//    self.detachProfileRIB()
+//  }
 }
 
 // MARK: - Private Method
@@ -112,6 +125,7 @@ extension MainRouter {
   private func attachBookmarkRIB() {
     if bookmarkRouting != nil { return }
     let router = bookmarkBuildable.build(withListener: interactor)
+
     attachChild(router)
     self.bookmarkRouting = router
   }
@@ -136,4 +150,13 @@ extension MainRouter {
       self.profileRouting = nil
     }
   }
+
+//  func test() {
+//    if productRouting != nil { return }
+//    let router = productBuildable.build(withListener: interactor)
+//    //self.viewControllable.prese(router.viewControllable, animated: true)
+//    self.viewControllable.present(router.viewControllable, animated: true, completion: nil)
+//    attachChild(router)
+//    self.productRouting = router
+//  }
 }

@@ -5,6 +5,9 @@
       location = "group:Projects"
       name = "Projects">
       <FileRef
+         location = "group:Bookmark/Bookmark.xcodeproj">
+      </FileRef>
+      <FileRef
          location = "group:CommonUI/CommonUI.xcodeproj">
       </FileRef>
       <FileRef
@@ -24,6 +27,12 @@
       </FileRef>
       <FileRef
          location = "group:Networking/Networking.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:Product/Product.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:Profile/Profile.xcodeproj">
       </FileRef>
       <FileRef
          location = "group:Util/Util.xcodeproj">

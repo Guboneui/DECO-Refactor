@@ -14,6 +14,20 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
+               BlueprintIdentifier = "CA3BDA5CCBC32BFCAFE328FB"
+               BuildableName = "Bookmark.framework"
+               BlueprintName = "Bookmark"
+               ReferencedContainer = "container:Projects/Bookmark/Bookmark.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
                BlueprintIdentifier = "CFD7DEB690E20277121FAD5C"
                BuildableName = "CommonUI.framework"
                BlueprintName = "CommonUI"
@@ -112,6 +126,34 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
+               BlueprintIdentifier = "0E98FC44376F920983508268"
+               BuildableName = "Product.framework"
+               BlueprintName = "Product"
+               ReferencedContainer = "container:Projects/Product/Product.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "A1A9B9ADD24CE94AF2019CFC"
+               BuildableName = "Profile.framework"
+               BlueprintName = "Profile"
+               ReferencedContainer = "container:Projects/Profile/Profile.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
                BlueprintIdentifier = "D5BAEF0EE03F09D494B7E734"
                BuildableName = "Util.framework"
                BlueprintName = "Util"
@@ -141,10 +183,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "CFD7DEB690E20277121FAD5C"
-            BuildableName = "CommonUI.framework"
-            BlueprintName = "CommonUI"
-            ReferencedContainer = "container:Projects/CommonUI/CommonUI.xcodeproj">
+            BlueprintIdentifier = "CA3BDA5CCBC32BFCAFE328FB"
+            BuildableName = "Bookmark.framework"
+            BlueprintName = "Bookmark"
+            ReferencedContainer = "container:Projects/Bookmark/Bookmark.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </LaunchAction>
@@ -157,10 +199,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "CFD7DEB690E20277121FAD5C"
-            BuildableName = "CommonUI.framework"
-            BlueprintName = "CommonUI"
-            ReferencedContainer = "container:Projects/CommonUI/CommonUI.xcodeproj">
+            BlueprintIdentifier = "CA3BDA5CCBC32BFCAFE328FB"
+            BuildableName = "Bookmark.framework"
+            BlueprintName = "Bookmark"
+            ReferencedContainer = "container:Projects/Bookmark/Bookmark.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>

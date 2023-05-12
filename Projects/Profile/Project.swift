@@ -2,7 +2,7 @@
 //  Project.swift
 //  ProjectDescriptionHelpers
 //
-//  Created by 구본의 on 2023/05/09.
+//  Created by 구본의 on 2023/05/12.
 //
 
 import ProjectDescription
@@ -17,22 +17,21 @@ let setting: Settings = .settings(
   defaultSettings: .recommended
 )
 
-let packages: [Package] = []
-
-let dependencies: [TargetDependency] = [
-  .project(target: "Login", path: .relativeToCurrentFile("../Login")),
-  .project(target: "Home", path: .relativeToCurrentFile("../Home")),
-  .project(target: "Product", path: .relativeToCurrentFile("../Product")),
-  .project(target: "Bookmark", path: .relativeToCurrentFile("../Bookmark")),
-  .project(target: "Profile", path: .relativeToCurrentFile("../Profile"))
+let packages: [Package] = [
 ]
 
-let main = Target(
-  name: "Main",
+let dependencies: [TargetDependency] = [
+  .project(target: "CommonUI", path: "../CommonUI"),
+  .project(target: "Util", path: "../Util"),
+  .project(target: "Networking", path: "../Networking"),
+]
+
+let profile = Target(
+  name: "Profile",
   platform: .iOS,
   product: .framework,
-  productName: "Main",
-  bundleId: "com.deco.ios.main",
+  productName: "Profile",
+  bundleId: "com.deco.ios.profile",
   deploymentTarget: .iOS(targetVersion: "15.0", devices: [.iphone]),
   infoPlist: .default,
   sources: ["Sources/**"],
@@ -42,8 +41,11 @@ let main = Target(
 )
 
 let project = Project(
-  name: "Main",
+  name: "Profile",
   packages: packages,
-  targets: [main]
+  targets: [profile]
 )
+
+
+
 

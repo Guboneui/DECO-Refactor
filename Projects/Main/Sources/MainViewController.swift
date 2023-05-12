@@ -10,15 +10,16 @@ import RxSwift
 import UIKit
 import Util
 import CommonUI
+import Home
 
 protocol MainPresentableListener: AnyObject {
-  // TODO: Declare properties and methods that the view controller can invoke to perform
-  // business logic, such as signIn(). This protocol is implemented by the corresponding
-  // interactor class.
+  func showNewChildVC(with type: TabType)
+  func hidePrevChildVC()
+  func removeChildVCRib()
 }
 
 final class MainViewController: UIViewController, MainPresentable, MainViewControllable {
-
+  
   weak var listener: MainPresentableListener?
 
   private let disposeBag: DisposeBag = DisposeBag()
@@ -27,6 +28,10 @@ final class MainViewController: UIViewController, MainPresentable, MainViewContr
     $0.backgroundColor = .DecoColor.whiteColor
   }
 
+  private let parentVCContainerView: UIView = UIView().then {
+    $0.backgroundColor = .blue
+  }
+  
   private let homeTab: TabbarView = TabbarView(image: .DecoImage.home, title: "홈")
   private let productTab: TabbarView = TabbarView(image: .DecoImage.findlist, title: "상품")
   private let uploadTab: TabbarView = TabbarView(image: .DecoImage.upload, title: "업로드")
@@ -47,6 +52,9 @@ final class MainViewController: UIViewController, MainPresentable, MainViewContr
 
   private func setupViews() {
 
+    self.view.addSubview(tabbarContainer)
+    self.view.addSubview(parentVCContainerView)
+    
     tabbarContainer.flex.direction(.row).define { flex in
       flex.addItem(homeTab).grow(1)
       flex.addItem(productTab).grow(1)
@@ -54,9 +62,6 @@ final class MainViewController: UIViewController, MainPresentable, MainViewContr
       flex.addItem(bookmarkTab).grow(1)
       flex.addItem(profileTab).grow(1)
     }
-
-    self.view.addSubview(tabbarContainer)
-
   }
 
   private func setupLayouts() {
@@ -66,22 +71,33 @@ final class MainViewController: UIViewController, MainPresentable, MainViewContr
       .height(56)
 
     tabbarContainer.flex.layout()
+    
+    parentVCContainerView.pin
+      .top(view.pin.safeArea.top)
+      .above(of: tabbarContainer)
+      .horizontally()
   }
 
   private func setupGestures() {
     homeTab.tap()
       .bind { [weak self] _ in
         guard let self else { return }
-        print("HOME")
-        
+        if let currentChildVC = self.children.first,
+           currentChildVC != HomeViewController() {
+          self.removeLayoutPrevChildVC()
+          self.setLayoutNewChildVC(with: .Home)
+          self.listener?.showNewChildVC(with: .Home)
+        }
       }.disposed(by: disposeBag)
     
     productTab.tap()
       .bind { [weak self] _ in
         guard let self else { return }
-        print("PRODUCT")
-        
+        self.removeLayoutPrevChildVC()
+        self.setLayoutNewChildVC(with: .Product)
+        self.listener?.showNewChildVC(with: .Product)
       }.disposed(by: disposeBag)
+    
     
     uploadTab.tap()
       .bind { [weak self] _ in
@@ -93,16 +109,41 @@ final class MainViewController: UIViewController, MainPresentable, MainViewContr
     bookmarkTab.tap()
       .bind { [weak self] _ in
         guard let self else { return }
-        print("BOOKMARK")
-        
+        self.removeLayoutPrevChildVC()
+        self.setLayoutNewChildVC(with: .Bookmark)
+        self.listener?.showNewChildVC(with: .Bookmark)
       }.disposed(by: disposeBag)
     
     profileTab.tap()
       .bind { [weak self] _ in
         guard let self else { return }
-        print("PROFILE")
-        
+        self.removeLayoutPrevChildVC()
+        self.setLayoutNewChildVC(with: .Profile)
+        self.listener?.showNewChildVC(with: .Profile)
       }.disposed(by: disposeBag)
 
+  }
+  
+  func startWithHomeVC(vc: ViewControllable) {
+    self.addChild(vc.uiviewController)
+    parentVCContainerView.addSubview(vc.uiviewController.view)
+    vc.uiviewController.view.frame = self.parentVCContainerView.bounds // childVC Frame 설정
+    vc.uiviewController.view.pin.pinEdges()
+    vc.uiviewController.didMove(toParent: self)
+  }
+  
+  
+  private func setLayoutNewChildVC(with type: TabType) {
+    listener?.showNewChildVC(with: type)
+  }
+  
+  private func removeLayoutPrevChildVC() {
+    self.children.forEach { prevChildVC in
+      prevChildVC.willMove(toParent: nil)
+      prevChildVC.view.removeFromSuperview()
+      prevChildVC.removeFromParent()
+    }
+    
+    self.listener?.removeChildVCRib()
   }
 }

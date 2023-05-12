@@ -15,11 +15,11 @@ protocol HomePresentableListener: AnyObject {
   // interactor class.
 }
 
-final class HomeViewController: UIViewController, HomePresentable, HomeViewControllable {
+final public class HomeViewController: UIViewController, HomePresentable, HomeViewControllable {
   
   weak var listener: HomePresentableListener?
   
-  override func viewDidLoad() {
+  public override func viewDidLoad() {
     super.viewDidLoad()
     self.view.backgroundColor = .orange
   }

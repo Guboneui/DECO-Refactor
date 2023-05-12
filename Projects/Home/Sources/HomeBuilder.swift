@@ -23,13 +23,13 @@ public protocol HomeBuildable: Buildable {
   func build(withListener listener: HomeListener) -> HomeRouting
 }
 
-final class HomeBuilder: Builder<HomeDependency>, HomeBuildable {
+final public class HomeBuilder: Builder<HomeDependency>, HomeBuildable {
   
-  override init(dependency: HomeDependency) {
+  override public init(dependency: HomeDependency) {
     super.init(dependency: dependency)
   }
   
-  func build(withListener listener: HomeListener) -> HomeRouting {
+  public func build(withListener listener: HomeListener) -> HomeRouting {
     let component = HomeComponent(dependency: dependency)
     let viewController = HomeViewController()
     let interactor = HomeInteractor(presenter: viewController)

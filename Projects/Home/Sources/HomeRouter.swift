@@ -12,7 +12,7 @@ protocol HomeInteractable: Interactable {
   var listener: HomeListener? { get set }
 }
 
-protocol HomeViewControllable: ViewControllable {
+public protocol HomeViewControllable: ViewControllable {
   // TODO: Declare methods the router invokes to manipulate the view hierarchy.
 }
 

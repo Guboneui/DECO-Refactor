@@ -7,9 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0107624FACF7F1790F7263C1 /* Product.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35A811FF2C8FAB7BCCEFA19E /* Product.framework */; platformFilter = ios; };
+		2E432E7648D450B0D218BEA2 /* Bookmark.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC3E2027DFB2B95895DA3327 /* Bookmark.framework */; platformFilter = ios; };
 		39E8D34562F4BA134A2AE921 /* Home.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E06D739A6E4DCAA58003038 /* Home.framework */; platformFilter = ios; };
 		446F26CDBE83D2BC613A3E25 /* MainRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB54B97D879335F7BDFA21EE /* MainRouter.swift */; };
 		5A52D3651E44BB781AAC7B5E /* MainBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C9C403166AE47C62C400CD /* MainBuilder.swift */; };
+		5EE477866416BE5E05E14049 /* Profile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48C796A2DFFD207EFC683F12 /* Profile.framework */; platformFilter = ios; };
 		700A58E983C0490545CA7523 /* MainInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF95D55786B5DB37117B1101 /* MainInteractor.swift */; };
 		9E0550A62B4712F4232CB5F1 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479E7BCDF8D95A181996B12F /* MainViewController.swift */; };
 		A1C99AC5BE902E3A63C97943 /* TabbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3522DFC72F511F7485CBD074 /* TabbarView.swift */; };
@@ -31,11 +34,14 @@
 
 /* Begin PBXFileReference section */
 		3522DFC72F511F7485CBD074 /* TabbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarView.swift; sourceTree = "<group>"; };
+		35A811FF2C8FAB7BCCEFA19E /* Product.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Product.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E06D739A6E4DCAA58003038 /* Home.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Home.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		42578D356C2E74B8794C6E8C /* Main-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Main-Info.plist"; sourceTree = "<group>"; };
 		479E7BCDF8D95A181996B12F /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		48C796A2DFFD207EFC683F12 /* Profile.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Profile.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		48C9C403166AE47C62C400CD /* MainBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainBuilder.swift; sourceTree = "<group>"; };
 		9E11738420117498E7B6EBB3 /* Main.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Main.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BC3E2027DFB2B95895DA3327 /* Bookmark.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Bookmark.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0CD89A43541FA3B078C3D40 /* Login.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Login.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB54B97D879335F7BDFA21EE /* MainRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainRouter.swift; sourceTree = "<group>"; };
 		EF95D55786B5DB37117B1101 /* MainInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainInteractor.swift; sourceTree = "<group>"; };
@@ -46,8 +52,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2E432E7648D450B0D218BEA2 /* Bookmark.framework in Frameworks */,
 				39E8D34562F4BA134A2AE921 /* Home.framework in Frameworks */,
 				A926A798BE01F7D591B53C7D /* Login.framework in Frameworks */,
+				0107624FACF7F1790F7263C1 /* Product.framework in Frameworks */,
+				5EE477866416BE5E05E14049 /* Profile.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -118,9 +127,12 @@
 		8D8D958FD1354739D6F497E8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
+				BC3E2027DFB2B95895DA3327 /* Bookmark.framework */,
 				3E06D739A6E4DCAA58003038 /* Home.framework */,
 				C0CD89A43541FA3B078C3D40 /* Login.framework */,
 				9E11738420117498E7B6EBB3 /* Main.framework */,
+				35A811FF2C8FAB7BCCEFA19E /* Product.framework */,
+				48C796A2DFFD207EFC683F12 /* Profile.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";

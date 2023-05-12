@@ -8,7 +8,6 @@
 
 import RIBs
 import RxSwift
-import Home
 
 protocol AppRootRouting: ViewableRouting {
 	func attachLogin()

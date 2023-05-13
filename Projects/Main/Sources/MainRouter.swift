@@ -56,40 +56,49 @@ final class MainRouter: ViewableRouter<MainInteractable, MainViewControllable>, 
     self.profileBuildable = profileBuildable
     super.init(interactor: interactor, viewController: viewController)
     interactor.router = self
-    
   }
   
- 
-  func attachHome() {
-    if homeRouting != nil { return }
-    let router = homeBuildable.build(withListener: interactor)
-    attachChild(router)
-    self.homeRouting = router
-    self.viewController.setChildVCLayout(childVC: router.viewControllable)
+  override func didLoad() {
+    super.didLoad()
+    attachHomeRIB()
   }
   
+  func attachChildVCRib(with type: TabType) {
+    switch type {
+    case .Home:
+      attachHomeRIB()
+      detachProductRIB()
+      detachBookmarkRIB()
+      detachProfileRIB()
+    case .Product:
+      attachProductRIB()
+      detachHomeRIB()
+      detachBookmarkRIB()
+      detachProfileRIB()
+    case .Upload: break
+    case .Bookmark:
+      attachBookmarkRIB()
+      detachHomeRIB()
+      detachProductRIB()
+      detachProfileRIB()
+    case .Profile:
+      attachProfileRIB()
+      detachHomeRIB()
+      detachProductRIB()
+      detachBookmarkRIB()
+    }
+  }
   
+  func detachChildVCRib() {
+    self.detachAllChildRIB()
+  }
   
-//  func attachNewChildVC(with type: TabType) {
-//    switch type {
-//    case .Home:
-//      self.attachHomeRIB()
-//    case .Product:
-//      self.attachProductRIB()
-//    case .Bookmark:
-//      self.attachBookmarkRIB()
-//    case .Profile:
-//      self.attachProfileRIB()
-//    default: break
-//    }
-//  }
-//
-//  func detachPrevChildRib() {
-//    self.detachHomeRIB()
-//    self.detachProductRIB()
-//    self.detachBookmarkRIB()
-//    self.detachProfileRIB()
-//  }
+  private func detachAllChildRIB() {
+    self.detachHomeRIB()
+    self.detachProductRIB()
+    self.detachBookmarkRIB()
+    self.detachProfileRIB()
+  }
 }
 
 // MARK: - Private Method
@@ -99,6 +108,7 @@ extension MainRouter {
     let router = homeBuildable.build(withListener: interactor)
     attachChild(router)
     self.homeRouting = router
+    self.viewController.setChildVCLayout(childVC: router.viewControllable)
   }
   
   private func detachHomeRIB() {
@@ -113,6 +123,7 @@ extension MainRouter {
     let router = productBuildable.build(withListener: interactor)
     attachChild(router)
     self.productRouting = router
+    self.viewController.setChildVCLayout(childVC: router.viewControllable)
   }
   
   private func detachProductRIB() {
@@ -125,9 +136,9 @@ extension MainRouter {
   private func attachBookmarkRIB() {
     if bookmarkRouting != nil { return }
     let router = bookmarkBuildable.build(withListener: interactor)
-
     attachChild(router)
     self.bookmarkRouting = router
+    self.viewController.setChildVCLayout(childVC: router.viewControllable)
   }
   
   private func detachBookmarkRIB() {
@@ -142,6 +153,7 @@ extension MainRouter {
     let router = profileBuildable.build(withListener: interactor)
     attachChild(router)
     self.profileRouting = router
+    self.viewController.setChildVCLayout(childVC: router.viewControllable)
   }
   
   private func detachProfileRIB() {
@@ -150,13 +162,4 @@ extension MainRouter {
       self.profileRouting = nil
     }
   }
-
-//  func test() {
-//    if productRouting != nil { return }
-//    let router = productBuildable.build(withListener: interactor)
-//    //self.viewControllable.prese(router.viewControllable, animated: true)
-//    self.viewControllable.present(router.viewControllable, animated: true, completion: nil)
-//    attachChild(router)
-//    self.productRouting = router
-//  }
 }

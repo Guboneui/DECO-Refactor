@@ -23,7 +23,8 @@ public enum TabType {
 }
 
 public protocol MainRouting: ViewableRouting {
-  func attachHome()
+  func attachChildVCRib(with type: TabType)
+  func detachChildVCRib()
 }
 
 protocol MainPresentable: Presentable {
@@ -54,8 +55,12 @@ final class MainInteractor: PresentableInteractor<MainPresentable>, MainInteract
   override func willResignActive() {
     super.willResignActive()
   }
- 
-  func showHome() {
-    router?.attachHome()
+  
+  func addChildVCLayout(with type: TabType) {
+    router?.attachChildVCRib(with: type)
+  }
+  
+  func removeChildVCLayout() {
+    router?.detachChildVCRib()
   }
 }

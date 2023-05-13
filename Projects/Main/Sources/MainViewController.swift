@@ -13,7 +13,8 @@ import CommonUI
 import Home
 
 protocol MainPresentableListener: AnyObject {
-  func showHome()
+  func addChildVCLayout(with type: TabType)
+  func removeChildVCLayout()
 }
 
 final class MainViewController: UIViewController, MainPresentable, MainViewControllable {
@@ -27,7 +28,7 @@ final class MainViewController: UIViewController, MainPresentable, MainViewContr
   }
 
   private let parentVCContainerView: UIView = UIView().then {
-    $0.backgroundColor = .blue
+    $0.backgroundColor = .DecoColor.whiteColor
   }
   
   private let homeTab: TabbarView = TabbarView(image: .DecoImage.home, title: "홈")
@@ -81,13 +82,14 @@ final class MainViewController: UIViewController, MainPresentable, MainViewContr
       .bind { [weak self] _ in
         guard let self else { return }
         print("🔊[DEBUG]: HOME")
-        self.listener?.showHome()
+        self.listener?.addChildVCLayout(with: .Home)
       }.disposed(by: disposeBag)
 
     productTab.tap()
       .bind { [weak self] _ in
         guard let self else { return }
         print("🔊[DEBUG]: Product")
+        self.listener?.addChildVCLayout(with: .Product)
       }.disposed(by: disposeBag)
 
     uploadTab.tap()
@@ -99,28 +101,40 @@ final class MainViewController: UIViewController, MainPresentable, MainViewContr
     bookmarkTab.tap()
       .bind { [weak self] _ in
         guard let self else { return }
-        print("🔊[DEBUG]: BOOKMARK")
+        self.listener?.addChildVCLayout(with: .Bookmark)
       }.disposed(by: disposeBag)
 
     profileTab.tap()
       .bind { [weak self] _ in
         guard let self else { return }
-        print("🔊[DEBUG]: PROFILE")
+        self.listener?.addChildVCLayout(with: .Profile)
       }.disposed(by: disposeBag)
 
   }
   
   func setChildVCLayout(childVC: ViewControllable) {
+    if let child = self.children.first,
+       childVC.uiviewController != child {
+      self.removeChildVCLayout()
+      self.addChildVCLayout(with: childVC)
+    } else {
+      self.addChildVCLayout(with: childVC)
+    }
+  }
+  
+  private func addChildVCLayout(with childVC: ViewControllable) {
     self.addChild(childVC.uiviewController)
     self.parentVCContainerView.addSubview(childVC.uiviewController.view)
     childVC.uiviewController.view.frame = self.parentVCContainerView.bounds
     childVC.uiviewController.view.pin.pinEdges()
     childVC.uiviewController.didMove(toParent: self)
   }
+  
+  private func removeChildVCLayout() {
+    self.children.forEach { childVC in
+      childVC.willMove(toParent: nil)
+      childVC.removeFromParent()
+      childVC.view.removeFromSuperview()
+    }
+  }
 }
-
-//self.addChild(vc.uiviewController)
-//parentVCContainerView.addSubview(vc.uiviewController.view)
-//vc.uiviewController.view.frame = self.parentVCContainerView.bounds // childVC Frame 설정
-//vc.uiviewController.view.pin.pinEdges()
-//vc.uiviewController.didMove(toParent: self)

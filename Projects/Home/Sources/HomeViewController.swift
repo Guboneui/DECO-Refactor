@@ -22,11 +22,6 @@ final public class HomeViewController: UIViewController, HomePresentable, HomeVi
   public override func viewDidLoad() {
     super.viewDidLoad()
     self.view.backgroundColor = .orange
-    
-    self.view.tap()
-      .bind { [weak self] _ in
-        guard let self else { return }
-        print("🔊[DEBUG]: HomeViewController listener(HomePresentableListener? = \(self.listener)")
-      }.disposed(by: disposeBag)
+   
   }
 }

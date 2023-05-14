@@ -135,6 +135,7 @@ final public class ProductViewController: UIViewController, ProductPresentable, 
       .bind { [weak self] _ in
         guard let self else { return }
         print("button click listner: \(self.listener)")
+        print(self.navigationController)
       }.disposed(by: disposeBag)
   }
   

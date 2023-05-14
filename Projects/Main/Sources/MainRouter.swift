@@ -11,6 +11,7 @@ import Product
 import Bookmark
 import Profile
 import UIKit
+import Util
 
 public protocol MainInteractable:
   Interactable,
@@ -121,9 +122,11 @@ extension MainRouter {
   private func attachProductRIB() {
     if productRouting != nil { return }
     let router = productBuildable.build(withListener: interactor)
+    let navigation: NavigationControllerable = NavigationControllerable(root: router.viewControllable)
+    navigation.navigationController.navigationBar.isHidden = true
     attachChild(router)
     self.productRouting = router
-    self.viewController.setChildVCLayout(childVC: router.viewControllable)
+    self.viewController.setChildVCLayout(childVC: navigation)
   }
   
   private func detachProductRIB() {

@@ -15,15 +15,17 @@ public class TitleSubtitleView: UIView {
   private let title: String
   private let subTitle: String
   
-  private let titleLabel = UILabel().then {
+  private let titleLabel: UILabel = UILabel().then {
     $0.font = CommonUIFontFamily.NotoSansKR.medium.font(size: 18)
     $0.textColor = .DecoColor.darkGray2
     $0.numberOfLines = 0
+    $0.sizeToFit()
   }
   
-  private let subTitleLabel = UILabel().then {
+  private let subTitleLabel: UILabel = UILabel().then {
     $0.font = CommonUIFontFamily.NotoSansKR.medium.font(size: 12)
     $0.textColor = .DecoColor.lightGray2
+    $0.sizeToFit()
   }
   
   public init(title: String = "", subTitle: String = "") {
@@ -57,6 +59,7 @@ public class TitleSubtitleView: UIView {
   
   private func setupLayouts() {
     self.pin.horizontally()
+    self.pin.wrapContent(.vertically)
     
     titleLabel.pin
       .top()
@@ -72,7 +75,5 @@ public class TitleSubtitleView: UIView {
       .marginTop(12)
       .marginLeft(38)
       .sizeToFit()
-    
-    self.pin.wrapContent(.vertically)
   }
 }

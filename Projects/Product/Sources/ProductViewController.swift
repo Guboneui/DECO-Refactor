@@ -67,10 +67,7 @@ final public class ProductViewController: UIViewController, ProductPresentable, 
     super.viewDidLoad()
     self.view.backgroundColor = .DecoColor.whiteColor
     self.setupViews()
-    self.setupGestures()
-    
-    print("productViewCOntroller listner: \(self.listener)")
-    
+    self.setupGestures()  
   }
   
   public override func viewDidLayoutSubviews() {

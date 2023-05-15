@@ -16,6 +16,7 @@ public extension TargetDependency {
   static let FlexLayout: TargetDependency = .package(product: "FlexLayout")
   static let PinLayout: TargetDependency = .package(product: "PinLayout")
   static let Hero: TargetDependency = .package(product: "Hero")
+  static let RxDataSources: TargetDependency = .package(product: "RxDataSources")
 }
 
 public extension Package {
@@ -33,4 +34,5 @@ public extension Package {
   static let RIBs: Package = .remote(url: "https://github.com/uber/RIBs", requirement: .upToNextMajor(from: "0.12.1"))
   static let FlexLayout: Package = .remote(url: "https://github.com/layoutBox/FlexLayout", requirement: .exact("1.3.24"))
   static let PinLayout: Package = .remote(url: "https://github.com/layoutBox/PinLayout", requirement: .upToNextMajor(from: "1.0.0"))
+  static let RxDataSources: Package = .remote(url: "https://github.com/RxSwiftCommunity/RxDataSources.git", requirement: .upToNextMajor(from: "5.0.0"))
   }

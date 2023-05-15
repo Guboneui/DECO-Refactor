@@ -3,16 +3,16 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2C7CE9E52A0E119100F84C31 /* BookmarkRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7CE9E12A0E119100F84C31 /* BookmarkRouter.swift */; };
-		2C7CE9E62A0E119100F84C31 /* BookmarkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7CE9E22A0E119100F84C31 /* BookmarkViewController.swift */; };
-		2C7CE9E72A0E119100F84C31 /* BookmarkBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7CE9E32A0E119100F84C31 /* BookmarkBuilder.swift */; };
-		2C7CE9E82A0E119100F84C31 /* BookmarkInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7CE9E42A0E119100F84C31 /* BookmarkInteractor.swift */; };
 		481BE3294A31AEE37155AE2B /* Networking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D17469EDE7F8C422DF99572 /* Networking.framework */; platformFilter = ios; };
+		6437DACF7B50E593CA716034 /* BookmarkRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95226F467173820E15EC548E /* BookmarkRouter.swift */; };
+		6764521952156DC3ABF130FB /* BookmarkInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2459F9C889361D4DC4F8566 /* BookmarkInteractor.swift */; };
+		6811622B2A3944472B82263B /* BookmarkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA4A659928B385446EFF60C /* BookmarkViewController.swift */; };
 		8B108EA5C7390BE217A25AF8 /* CommonUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B9C644AB5532D0F6F6D7549 /* CommonUI.framework */; platformFilter = ios; };
+		8E2AA545E351C1CFC4F6C213 /* BookmarkBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A929591859C2325718864003 /* BookmarkBuilder.swift */; };
 		AA9EE3E8F40F861DDDB9FDFF /* Util.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F202FE6CC70163E81F44315F /* Util.framework */; platformFilter = ios; };
 /* End PBXBuildFile section */
 
@@ -31,12 +31,12 @@
 
 /* Begin PBXFileReference section */
 		0D17469EDE7F8C422DF99572 /* Networking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Networking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		2C7CE9E12A0E119100F84C31 /* BookmarkRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkRouter.swift; sourceTree = "<group>"; };
-		2C7CE9E22A0E119100F84C31 /* BookmarkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkViewController.swift; sourceTree = "<group>"; };
-		2C7CE9E32A0E119100F84C31 /* BookmarkBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkBuilder.swift; sourceTree = "<group>"; };
-		2C7CE9E42A0E119100F84C31 /* BookmarkInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkInteractor.swift; sourceTree = "<group>"; };
 		6B9C644AB5532D0F6F6D7549 /* CommonUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CommonUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		76BD577AD93EFB89FF1662CC /* Bookmark.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Bookmark.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		95226F467173820E15EC548E /* BookmarkRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkRouter.swift; sourceTree = "<group>"; };
+		A929591859C2325718864003 /* BookmarkBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkBuilder.swift; sourceTree = "<group>"; };
+		ACA4A659928B385446EFF60C /* BookmarkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkViewController.swift; sourceTree = "<group>"; };
+		B2459F9C889361D4DC4F8566 /* BookmarkInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkInteractor.swift; sourceTree = "<group>"; };
 		F202FE6CC70163E81F44315F /* Util.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Util.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA7E6E621EE96CAB99C31F5D /* Bookmark-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Bookmark-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -69,10 +69,10 @@
 		548D75079954AD79DF67E9EF /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				2C7CE9E12A0E119100F84C31 /* BookmarkRouter.swift */,
-				2C7CE9E22A0E119100F84C31 /* BookmarkViewController.swift */,
-				2C7CE9E32A0E119100F84C31 /* BookmarkBuilder.swift */,
-				2C7CE9E42A0E119100F84C31 /* BookmarkInteractor.swift */,
+				A929591859C2325718864003 /* BookmarkBuilder.swift */,
+				B2459F9C889361D4DC4F8566 /* BookmarkInteractor.swift */,
+				95226F467173820E15EC548E /* BookmarkRouter.swift */,
+				ACA4A659928B385446EFF60C /* BookmarkViewController.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -145,6 +145,8 @@
 		BA9CA0EB5A140F1EAC9980AE /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				TargetAttributes = {
+				};
 			};
 			buildConfigurationList = 5E7FAF207DA55656789124BA /* Build configuration list for PBXProject "Bookmark" */;
 			compatibilityVersion = "Xcode 13.0";
@@ -179,10 +181,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C7CE9E82A0E119100F84C31 /* BookmarkInteractor.swift in Sources */,
-				2C7CE9E62A0E119100F84C31 /* BookmarkViewController.swift in Sources */,
-				2C7CE9E52A0E119100F84C31 /* BookmarkRouter.swift in Sources */,
-				2C7CE9E72A0E119100F84C31 /* BookmarkBuilder.swift in Sources */,
+				8E2AA545E351C1CFC4F6C213 /* BookmarkBuilder.swift in Sources */,
+				6764521952156DC3ABF130FB /* BookmarkInteractor.swift in Sources */,
+				6437DACF7B50E593CA716034 /* BookmarkRouter.swift in Sources */,
+				6811622B2A3944472B82263B /* BookmarkViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

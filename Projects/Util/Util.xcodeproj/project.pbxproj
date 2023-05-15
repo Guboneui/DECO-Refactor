@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		058E37201D433AA007E6F0BD /* RxDataSources in Frameworks */ = {isa = PBXBuildFile; productRef = 6982B9FACB34182B1A4A4748 /* RxDataSources */; };
 		1E6C6C8599B67E915445F168 /* UINavigationControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8860B9B6C9E2293549E4321A /* UINavigationControllerDelegate.swift */; };
 		2B95FA17BE9FF17FEDEFC286 /* UIButton+Gesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A4D501A3D6D4AEDCBA78C6 /* UIButton+Gesture.swift */; };
 		32DDDE75F0C350232BD7369F /* UIView+Gesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89467AE2F6ACB22D4F02E1F1 /* UIView+Gesture.swift */; };
@@ -52,6 +53,7 @@
 			files = (
 				D80A24ED3B757D6FBB85E800 /* RIBs in Frameworks */,
 				B5D2577B92306A51F38D8DB7 /* RxGesture in Frameworks */,
+				058E37201D433AA007E6F0BD /* RxDataSources in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -174,6 +176,7 @@
 			packageProductDependencies = (
 				508F34CEAFAFBEBBF73C1AE0 /* RIBs */,
 				0B5A7B259E9689D19FD1DC75 /* RxGesture */,
+				6982B9FACB34182B1A4A4748 /* RxDataSources */,
 			);
 			productName = Util;
 			productReference = 0781288D32C1DA856C886534 /* Util.framework */;
@@ -198,6 +201,7 @@
 			);
 			mainGroup = 2134EFEDDE27A3C7943EE7D0;
 			packageReferences = (
+				0128164F7F3B3AA6C50E48A2 /* XCRemoteSwiftPackageReference "RxDataSources" */,
 				F9BCA62FA22CA832DDB7D0D7 /* XCRemoteSwiftPackageReference "RxGesture" */,
 				CB184464D646AB22544EBBBE /* XCRemoteSwiftPackageReference "RIBs" */,
 			);
@@ -442,6 +446,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		0128164F7F3B3AA6C50E48A2 /* XCRemoteSwiftPackageReference "RxDataSources" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RxSwiftCommunity/RxDataSources.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 		CB184464D646AB22544EBBBE /* XCRemoteSwiftPackageReference "RIBs" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/uber/RIBs";
@@ -468,6 +480,10 @@
 		508F34CEAFAFBEBBF73C1AE0 /* RIBs */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = RIBs;
+		};
+		6982B9FACB34182B1A4A4748 /* RxDataSources */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = RxDataSources;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

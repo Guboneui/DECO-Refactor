@@ -28,6 +28,7 @@ final class MoodViewController: UIViewController, MoodPresentable, MoodViewContr
   private let disposeBag = DisposeBag()
   private let cellSize: CGFloat = (UIScreen.main.bounds.width - 4) / 2.0
  
+  
   private let navigationBar = NavigationBar(
     navTitle: "회원가입하기",
     showGuideLine: true

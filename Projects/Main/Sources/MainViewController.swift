@@ -88,7 +88,6 @@ final class MainViewController: UIViewController, MainPresentable, MainViewContr
     productTab.tap()
       .bind { [weak self] _ in
         guard let self else { return }
-        print("🔊[DEBUG]: Product")
         self.listener?.addChildVCLayout(with: .Product)
       }.disposed(by: disposeBag)
 

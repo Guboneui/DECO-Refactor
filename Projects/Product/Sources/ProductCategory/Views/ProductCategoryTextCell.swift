@@ -14,7 +14,7 @@ class ProductCategoryTextCell: UICollectionViewCell {
   static let identifier = "ProductCategoryTextCell"
   
   private let label: UILabel = UILabel().then {
-    $0.font = .DecoFont.getFont(with: .Suit, type: .bold, size: 16)
+    $0.font = .DecoFont.getFont(with: .Suit, type: .medium, size: 14)
     $0.textColor = .DecoColor.darkGray2
     $0.sizeToFit()
   }
@@ -34,7 +34,7 @@ class ProductCategoryTextCell: UICollectionViewCell {
   }
   
   private func setupViews() {
-    self.contentView.backgroundColor = .orange
+    self.backgroundColor = .DecoColor.whiteColor
     self.contentView.addSubview(label)
   }
   
@@ -47,5 +47,3 @@ class ProductCategoryTextCell: UICollectionViewCell {
     self.label.text = text
   }
 }
-
-

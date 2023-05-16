@@ -12,48 +12,6 @@ import RxDataSources
 import RxCocoa
 import UIKit
 
-//final class BoardHeaderView: UICollectionReusableView {
-//  
-//  // MARK: - Property
-//  
-//  private lazy var titleLabel = UILabel().then {
-//    $0.translatesAutoresizingMaskIntoConstraints = false
-//    $0.font = .systemFont(ofSize: 16.0, weight: .bold)
-//  }
-//  
-//  override init(frame: CGRect) {
-//    super.init(frame: .zero)
-//    
-//    backgroundColor = .systemGreen
-//    addSubview(titleLabel)
-//    
-//    NSLayoutConstraint.activate([
-//      titleLabel.topAnchor.constraint(equalTo: self.topAnchor),
-//      titleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-//      titleLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-//      titleLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-//      titleLabel.widthAnchor.constraint(equalToConstant: 100),
-//      titleLabel.heightAnchor.constraint(equalToConstant: 100)
-//      
-//    ])
-//      
-////    titleLabel.snp.makeConstraints {
-////      $0.leading.equalToSuperview().inset(16.0)
-////      $0.centerY.equalToSuperview()
-////    }
-//  }
-//  
-//  required init?(coder: NSCoder) {
-//    fatalError("init(coder:) has not been implemented")
-//  }
-//  
-//  func configureHeader(with title: String) {
-//    self.titleLabel.text = title
-//  }
-//}
-
-
-
 public typealias ProductCategorySection = SectionModel<String, ProductCategoryModel>
 
 public struct ProductCategoryModel {
@@ -76,27 +34,84 @@ final class ProductCategoryViewController: UIViewController, ProductCategoryPres
   
   private let disposeBag: DisposeBag = DisposeBag()
   
+  private struct CollectionViewMetric {
+    let deviceWidth: CGFloat = UIScreen.main.bounds.width
+    
+    let headerHeight: CGFloat = 24
+    
+    let categoryListTopEdgeSpacing: CGFloat = 24.0
+    let categoryListBottomEdgeSpacing: CGFloat = 44.0
+    let categoryListHorizontalEdgeSpacing: CGFloat = 32.0
+    let categoryListLineSpacing: CGFloat = 16.0
+    let categoryListItemSpacing: CGFloat = 8.0
+    var categoryListItemWidth: CGFloat { (deviceWidth - (categoryListHorizontalEdgeSpacing*2) - categoryListItemSpacing) / 2.0 }
+    let categoryListItemHeight: CGFloat = 20.0
+    
+    let moodListTopEdgeSpacing: CGFloat = 24.0
+    let moodListBottomEdgeSpacing: CGFloat = 44.0
+    let moodListHorizontalEdgeSpacing: CGFloat = 24.0
+    let moodListLineSpacing: CGFloat = 12.0
+    let moodListItemSpacing: CGFloat = 12.0
+    var moodListItemWidth: CGFloat { (deviceWidth - (moodListHorizontalEdgeSpacing*2) - moodListItemSpacing) / 2.0 }
+    let moodListItemHeight: CGFloat = 70.0
+  }
+  
+  private let collectionViewMetric: CollectionViewMetric = CollectionViewMetric()
   
   private let collectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: .init()).then {
-    //$0.register(ProductCategoryHeaderCell.self, forCellWithReuseIdentifier: ProductCategoryHeaderCell.identifier)
+    $0.register(
+      ProductCategoryTextCell.self,
+      forCellWithReuseIdentifier: ProductCategoryTextCell.identifier
+    )
     
-    $0.register(ProductCategoryTextCell.self, forCellWithReuseIdentifier: ProductCategoryTextCell.identifier)
+    $0.register(
+      ProductCategoryImageCell.self,
+      forCellWithReuseIdentifier: ProductCategoryImageCell.identifier
+    )
+    
+    $0.register(
+      ProductCategoryHeaderCell.self,
+      forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+      withReuseIdentifier: ProductCategoryHeaderCell.identifier
+    )
     
     let layout = UICollectionViewFlowLayout()
     layout.scrollDirection = .vertical
-    layout.minimumLineSpacing = 4
-    layout.minimumInteritemSpacing = 4
-    layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+    layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     $0.collectionViewLayout = layout
     $0.showsVerticalScrollIndicator = false
-    $0.backgroundColor = .DecoColor.kakaoColor
+    $0.backgroundColor = .DecoColor.whiteColor
   }
   
-  
-    private var sections: [ProductCategorySection] = [
-      ProductCategorySection(model: "AAA", items: [ProductCategoryModel(text: "1"), ProductCategoryModel(text: "2"), ProductCategoryModel(text: "3")]),
-      ProductCategorySection(model: "BBB", items: [ProductCategoryModel(text: "111"), ProductCategoryModel(text: "222"), ProductCategoryModel(text: "333")]),
-    ]
+  private var sections: [ProductCategorySection] = [
+    ProductCategorySection(
+      model: "카테고리별",
+      items: [
+        ProductCategoryModel(text: "스티커"),
+        ProductCategoryModel(text: "노트"),
+        ProductCategoryModel(text: "메모지"),
+        ProductCategoryModel(text: "플래너"),
+        ProductCategoryModel(text: "마스킹테이프"),
+        ProductCategoryModel(text: "캘린더"),
+        ProductCategoryModel(text: "엽서"),
+        ProductCategoryModel(text: "포스터"),
+        ProductCategoryModel(text: "다이어리"),
+        ProductCategoryModel(text: "디지털 악세사리"),
+        ProductCategoryModel(text: "디지털 다이어리"),
+        ProductCategoryModel(text: "기타")
+      ]
+    ),
+    ProductCategorySection(
+      model: "무드별",
+      items: [
+        ProductCategoryModel(text: "감성"),
+        ProductCategoryModel(text: "큐트"),
+        ProductCategoryModel(text: "빈티지"),
+        ProductCategoryModel(text: "심플"),
+        ProductCategoryModel(text: "키치")
+      ]
+    ),
+  ]
   
   
   override func viewDidLoad() {
@@ -104,23 +119,8 @@ final class ProductCategoryViewController: UIViewController, ProductCategoryPres
     self.view.backgroundColor = .link
     collectionView.rx.setDelegate(self).disposed(by: disposeBag)
     
-    self.collectionView.register(
-      ProductCategoryTextCell.self,
-      forCellWithReuseIdentifier: ProductCategoryTextCell.identifier
-    )
-    self.collectionView.register(
-      ProductCategoryHeaderCell.self,
-      forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
-      withReuseIdentifier: ProductCategoryHeaderCell.identifier
-    )
-    
-    
-    
     self.setupViews()
     setupBind()
-    
-    
-    
     
   }
   
@@ -139,14 +139,30 @@ final class ProductCategoryViewController: UIViewController, ProductCategoryPres
   
   let dataSource = RxCollectionViewSectionedReloadDataSource<ProductCategorySection>(
     configureCell: { dataSource, collectionView, indexPath, item in
+            
+      switch indexPath.section {
+      case 0:
+        let cell = collectionView.dequeueReusableCell(
+          withReuseIdentifier: ProductCategoryTextCell.identifier,
+          for: indexPath
+        ) as? ProductCategoryTextCell
+        cell?.setCellConfigure(text: item.text)
+
+        return cell ?? UICollectionViewCell()
+        
+      case 1:
+        let cell = collectionView.dequeueReusableCell(
+          withReuseIdentifier: ProductCategoryImageCell.identifier,
+          for: indexPath
+        ) as? ProductCategoryImageCell
+        cell?.setCellConfigure(image: "", text: item.text)
+
+        return cell ?? UICollectionViewCell()
+        
+      default:
+        return UICollectionViewCell()
+      }
       
-      let cell = collectionView.dequeueReusableCell(
-        withReuseIdentifier: ProductCategoryTextCell.identifier,
-        for: indexPath
-      ) as? ProductCategoryTextCell
-      cell?.setCellConfigure(text: item.text)
-      
-      return cell ?? UICollectionViewCell()
       
     }, configureSupplementaryView: { dataSource, collectionview, title, indexPath in
       
@@ -174,19 +190,79 @@ final class ProductCategoryViewController: UIViewController, ProductCategoryPres
         print("\($0)")
       })
       .disposed(by: disposeBag)
-    
   }
-  
-  
 }
 
 extension ProductCategoryViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-
+  
+  func collectionView(
+    _ collectionView: UICollectionView,
+    layout collectionViewLayout: UICollectionViewLayout,
+    sizeForItemAt indexPath: IndexPath
+  ) -> CGSize {
+    switch indexPath.section {
+    case 0: // 카테고리 별 TextCell
+      return CGSize(width: collectionViewMetric.categoryListItemWidth, height: collectionViewMetric.categoryListItemHeight)
+    case 1:
+      return CGSize(width: collectionViewMetric.categoryListItemWidth, height: collectionViewMetric.moodListItemHeight)
+    default:
+      return CGSize(width: 0, height: 0)
+    }
+  }
+  
   func collectionView(
     _ collectionView: UICollectionView,
     layout collectionViewLayout: UICollectionViewLayout,
     referenceSizeForHeaderInSection section: Int
   ) -> CGSize {
-    return CGSize(width: view.frame.width, height: 40)
+    return CGSize(
+      width: collectionViewMetric.deviceWidth,
+      height: collectionViewMetric.headerHeight
+    )
+  }
+  
+  func collectionView(
+    _ collectionView: UICollectionView,
+    layout collectionViewLayout: UICollectionViewLayout,
+    insetForSectionAt section: Int
+  ) -> UIEdgeInsets {
+    switch section {
+    case 0:
+      return UIEdgeInsets(
+        top: collectionViewMetric.categoryListTopEdgeSpacing,
+        left: collectionViewMetric.categoryListHorizontalEdgeSpacing,
+        bottom: collectionViewMetric.categoryListBottomEdgeSpacing,
+        right: collectionViewMetric.categoryListHorizontalEdgeSpacing
+      )
+    case 1:
+      return UIEdgeInsets(
+        top: collectionViewMetric.moodListTopEdgeSpacing,
+        left: collectionViewMetric.moodListHorizontalEdgeSpacing,
+        bottom: collectionViewMetric.moodListBottomEdgeSpacing,
+        right: collectionViewMetric.moodListHorizontalEdgeSpacing
+      )
+    default:
+      return UIEdgeInsets.init()
+    }
+  }
+  
+  func collectionView(
+    _ collectionView: UICollectionView,
+    layout collectionViewLayout: UICollectionViewLayout,
+    minimumLineSpacingForSectionAt section: Int
+  ) -> CGFloat {
+    switch section {
+    case 0: return collectionViewMetric.categoryListLineSpacing
+    case 1: return collectionViewMetric.moodListLineSpacing
+    default: return 0.0
+    }
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+    switch section {
+    case 0: return collectionViewMetric.categoryListItemSpacing
+    case 1: return collectionViewMetric.moodListItemSpacing
+    default: return 0.0
+    }
   }
 }

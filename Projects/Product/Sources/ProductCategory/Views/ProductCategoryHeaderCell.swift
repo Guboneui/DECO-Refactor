@@ -13,7 +13,7 @@ class ProductCategoryHeaderCell: UICollectionReusableView {
   private let label: UILabel = UILabel().then {
     $0.translatesAutoresizingMaskIntoConstraints = false
     $0.font = .DecoFont.getFont(with: .Suit, type: .bold, size: 16)
-    $0.textColor = .DecoColor.warningColor
+    $0.textColor = .DecoColor.darkGray2
     $0.sizeToFit()
   }
   
@@ -32,13 +32,17 @@ class ProductCategoryHeaderCell: UICollectionReusableView {
   }
   
   private func setupViews() {
-    self.backgroundColor = .orange
+    self.backgroundColor = .DecoColor.whiteColor
     self.addSubview(label)
   }
   
   private func setupLayouts() {
-    label.pin.all()
-    self.pin.wrapContent()
+    label.pin
+      .marginLeft(32)
+      .all()
+      
+    
+    self.pin.wrapContent(.vertically)
   }
   
   func setCellConfigure(text: String) {

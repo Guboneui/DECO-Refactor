@@ -18,16 +18,16 @@ let setting: Settings = .settings(
 
 let packages: [Package] = [
   .RIBs,
-//  .RxSwift,
   .RxGesture,
-  .RxDataSources
+  .RxDataSources,
+  .Nuke
 ]
 
 let dependencies: [TargetDependency] = [
   .RIBs,
-//  .RxSwift,
   .RxGesture,
-  .RxDataSources
+  .RxDataSources,
+  .Nuke
 ]
 
 let util = Target(

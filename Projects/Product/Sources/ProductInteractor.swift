@@ -7,10 +7,10 @@
 
 import RIBs
 import RxSwift
+import Networking
 
 public protocol ProductRouting: ViewableRouting {
   func attachChildVCRib(with type: ProductTabType)
-  
   func attachSearchVC()
 }
 
@@ -28,16 +28,20 @@ final class ProductInteractor: PresentableInteractor<ProductPresentable>, Produc
   weak var router: ProductRouting?
   weak var listener: ProductListener?
   
-  // TODO: Add additional dependencies to constructor. Do not perform any logic
-  // in constructor.
-  override init(presenter: ProductPresentable) {
+  private let productRepository: ProductRepository
+  
+  init(
+    presenter: ProductPresentable,
+    productRepository: ProductRepository
+  ) {
+    self.productRepository = productRepository
     super.init(presenter: presenter)
     presenter.listener = self    
   }
   
   override func didBecomeActive() {
     super.didBecomeActive()
-    // TODO: Implement business logic here.
+    // TODO: Implement business logic here. 
   }
   
   override func willResignActive() {

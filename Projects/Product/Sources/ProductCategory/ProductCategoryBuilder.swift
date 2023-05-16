@@ -6,34 +6,40 @@
 //
 
 import RIBs
+import Networking
 
 protocol ProductCategoryDependency: Dependency {
-    // TODO: Declare the set of dependencies required by this RIB, but cannot be
-    // created by this RIB.
+  // TODO: Declare the set of dependencies required by this RIB, but cannot be
+  // created by this RIB.
+  
+  var productRepositoryImpl: ProductRepository { get }
 }
 
 final class ProductCategoryComponent: Component<ProductCategoryDependency> {
-
-    // TODO: Declare 'fileprivate' dependencies that are only used by this RIB.
+  
+  // TODO: Declare 'fileprivate' dependencies that are only used by this RIB.
 }
 
 // MARK: - Builder
 
 protocol ProductCategoryBuildable: Buildable {
-    func build(withListener listener: ProductCategoryListener) -> ProductCategoryRouting
+  func build(withListener listener: ProductCategoryListener) -> ProductCategoryRouting
 }
 
 final class ProductCategoryBuilder: Builder<ProductCategoryDependency>, ProductCategoryBuildable {
-
-    override init(dependency: ProductCategoryDependency) {
-        super.init(dependency: dependency)
-    }
-
-    func build(withListener listener: ProductCategoryListener) -> ProductCategoryRouting {
-        let component = ProductCategoryComponent(dependency: dependency)
-        let viewController = ProductCategoryViewController()
-        let interactor = ProductCategoryInteractor(presenter: viewController)
-        interactor.listener = listener
-        return ProductCategoryRouter(interactor: interactor, viewController: viewController)
-    }
+  
+  override init(dependency: ProductCategoryDependency) {
+    super.init(dependency: dependency)
+  }
+  
+  func build(withListener listener: ProductCategoryListener) -> ProductCategoryRouting {
+    let component = ProductCategoryComponent(dependency: dependency)
+    let viewController = ProductCategoryViewController()
+    let interactor = ProductCategoryInteractor(
+      presenter: viewController,
+      productRepository: dependency.productRepositoryImpl
+    )
+    interactor.listener = listener
+    return ProductCategoryRouter(interactor: interactor, viewController: viewController)
+  }
 }

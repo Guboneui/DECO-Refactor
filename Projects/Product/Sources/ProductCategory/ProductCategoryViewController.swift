@@ -12,20 +12,8 @@ import RxDataSources
 import RxCocoa
 import UIKit
 
-public typealias ProductCategorySection = SectionModel<String, ProductCategoryModel>
-
-public struct ProductCategoryModel {
-  var text: String
-  var image: String?
-}
-
-extension ProductCategoryModel: IdentifiableType {
-  public var identity: String {
-    return UUID().uuidString
-  }
-}
-
 protocol ProductCategoryPresentableListener: AnyObject {
+  var productCategorySections: BehaviorRelay<[ProductCategorySection]> { get }
 }
 
 final class ProductCategoryViewController: UIViewController, ProductCategoryPresentable, ProductCategoryViewControllable {
@@ -83,45 +71,14 @@ final class ProductCategoryViewController: UIViewController, ProductCategoryPres
     $0.backgroundColor = .DecoColor.whiteColor
   }
   
-  private var sections: [ProductCategorySection] = [
-    ProductCategorySection(
-      model: "카테고리별",
-      items: [
-        ProductCategoryModel(text: "스티커"),
-        ProductCategoryModel(text: "노트"),
-        ProductCategoryModel(text: "메모지"),
-        ProductCategoryModel(text: "플래너"),
-        ProductCategoryModel(text: "마스킹테이프"),
-        ProductCategoryModel(text: "캘린더"),
-        ProductCategoryModel(text: "엽서"),
-        ProductCategoryModel(text: "포스터"),
-        ProductCategoryModel(text: "다이어리"),
-        ProductCategoryModel(text: "디지털 악세사리"),
-        ProductCategoryModel(text: "디지털 다이어리"),
-        ProductCategoryModel(text: "기타")
-      ]
-    ),
-    ProductCategorySection(
-      model: "무드별",
-      items: [
-        ProductCategoryModel(text: "감성"),
-        ProductCategoryModel(text: "큐트"),
-        ProductCategoryModel(text: "빈티지"),
-        ProductCategoryModel(text: "심플"),
-        ProductCategoryModel(text: "키치")
-      ]
-    ),
-  ]
-  
-  
   override func viewDidLoad() {
     super.viewDidLoad()
     self.view.backgroundColor = .link
     collectionView.rx.setDelegate(self).disposed(by: disposeBag)
     
     self.setupViews()
-    setupBind()
-    
+    self.setupCollectionView()
+   
   }
   
   override func viewDidLayoutSubviews() {
@@ -146,7 +103,7 @@ final class ProductCategoryViewController: UIViewController, ProductCategoryPres
           withReuseIdentifier: ProductCategoryTextCell.identifier,
           for: indexPath
         ) as? ProductCategoryTextCell
-        cell?.setCellConfigure(text: item.text)
+        cell?.setCellConfigure(text: item.title)
 
         return cell ?? UICollectionViewCell()
         
@@ -155,15 +112,13 @@ final class ProductCategoryViewController: UIViewController, ProductCategoryPres
           withReuseIdentifier: ProductCategoryImageCell.identifier,
           for: indexPath
         ) as? ProductCategoryImageCell
-        cell?.setCellConfigure(image: "", text: item.text)
+        cell?.setCellConfigure(imageURL: item.imageURL, text: item.title)
 
         return cell ?? UICollectionViewCell()
         
       default:
         return UICollectionViewCell()
       }
-      
-      
     }, configureSupplementaryView: { dataSource, collectionview, title, indexPath in
       
       let header = collectionview.dequeueReusableSupplementaryView(
@@ -179,9 +134,8 @@ final class ProductCategoryViewController: UIViewController, ProductCategoryPres
   )
   
   
-  private func setupBind() {
-    
-    Observable.just(sections)
+  private func setupCollectionView() {
+    listener?.productCategorySections
       .bind(to: collectionView.rx.items(dataSource: dataSource))
       .disposed(by: disposeBag)
     

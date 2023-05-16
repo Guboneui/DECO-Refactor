@@ -14,6 +14,10 @@ struct UserSignUpModel {
   let gender: GenderType?
   let age: AgeType?
   let moods: [Int]?
+  
+  public static func equals(lhs: UserSignUpModel, rhs: UserSignUpModel) -> Bool {
+    return lhs.nickname == rhs.nickname
+  }
 }
 
 protocol UserSignUpStream: AnyObject {
@@ -36,8 +40,9 @@ class UserSignUpStreamImpl: MutableSignUpStream {
   var signupInfo: Observable<UserSignUpModel> {
     return userInfo
       .asObservable()
-      
-    
+      .distinctUntilChanged { (lhs: UserSignUpModel, rhs: UserSignUpModel) -> Bool in
+        UserSignUpModel.equals(lhs: lhs, rhs: rhs)
+      }
   }
   
   func updateEmail(email: String?) {

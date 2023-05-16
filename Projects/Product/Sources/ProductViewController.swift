@@ -12,6 +12,7 @@ import Then
 import PinLayout
 import CommonUI
 import Util
+import Networking
 
 public enum ProductTabType {
   case Product
@@ -62,12 +63,12 @@ final public class ProductViewController: UIViewController, ProductPresentable, 
     $0.backgroundColor = .DecoColor.whiteColor
   }
   
-  
   public override func viewDidLoad() {
     super.viewDidLoad()
     self.view.backgroundColor = .DecoColor.whiteColor
     self.setupViews()
-    self.setupGestures()  
+    self.setupGestures()
+    
   }
   
   public override func viewDidLayoutSubviews() {

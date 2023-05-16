@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		855A421F32C03F545FB382D2 /* ProductMoodDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE93EF3E19458F0DA0DF65C /* ProductMoodDTO.swift */; };
+		9AE39D9CDF446C67A7B6BABD /* ProductCategoryDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = D540ACB77C679308558B3054 /* ProductCategoryDTO.swift */; };
 		F184D2E4086EA05EA17369B5 /* StyleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EC3A6EC954B9DC704C8182 /* StyleModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -25,7 +27,9 @@
 
 /* Begin PBXFileReference section */
 		6D3D722D8A39C97CE4035A34 /* Entity.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Entity.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BFE93EF3E19458F0DA0DF65C /* ProductMoodDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductMoodDTO.swift; sourceTree = "<group>"; };
 		D0EC3A6EC954B9DC704C8182 /* StyleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleModel.swift; sourceTree = "<group>"; };
+		D540ACB77C679308558B3054 /* ProductCategoryDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCategoryDTO.swift; sourceTree = "<group>"; };
 		EC3F3B371A50B9040A79757C /* Entity-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Entity-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -46,6 +50,15 @@
 				EC3F3B371A50B9040A79757C /* Entity-Info.plist */,
 			);
 			path = InfoPlists;
+			sourceTree = "<group>";
+		};
+		60E4D900D215E318860ADE75 /* DTOs */ = {
+			isa = PBXGroup;
+			children = (
+				D540ACB77C679308558B3054 /* ProductCategoryDTO.swift */,
+				BFE93EF3E19458F0DA0DF65C /* ProductMoodDTO.swift */,
+			);
+			path = DTOs;
 			sourceTree = "<group>";
 		};
 		94848A92B2439CAF097F53A8 = {
@@ -69,6 +82,7 @@
 		9F2ABDD0B5B6CB83D1DB0B26 /* DataModel */ = {
 			isa = PBXGroup;
 			children = (
+				60E4D900D215E318860ADE75 /* DTOs */,
 				D0EC3A6EC954B9DC704C8182 /* StyleModel.swift */,
 			);
 			path = DataModel;
@@ -168,6 +182,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9AE39D9CDF446C67A7B6BABD /* ProductCategoryDTO.swift in Sources */,
+				855A421F32C03F545FB382D2 /* ProductMoodDTO.swift in Sources */,
 				F184D2E4086EA05EA17369B5 /* StyleModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

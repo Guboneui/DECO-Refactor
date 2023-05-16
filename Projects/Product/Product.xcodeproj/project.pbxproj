@@ -18,6 +18,7 @@
 		573E16086C7BB5DADCACA1FC /* ProductCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A43D284B94574D790769205 /* ProductCategoryViewController.swift */; };
 		5A9D6DFFD86CC8273502FCE5 /* ProductCategoryHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA402472027263AE06D9DA18 /* ProductCategoryHeaderCell.swift */; };
 		649DA0F8438C0FF6CBA7EF65 /* BrandListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9D8BC17A068B8850F43E16 /* BrandListRouter.swift */; };
+		817C6A71E78290DF3C734024 /* ProductCategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEA724BC76689AAA4756508 /* ProductCategoryModel.swift */; };
 		897A832FFFB647EA4DB4AE48 /* CommonUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 987C4A30594EDFE0E299D392 /* CommonUI.framework */; platformFilter = ios; };
 		9C6A30B0CA9D015A73E64866 /* ProductBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949150F4188B46B2EAA3CBCF /* ProductBuilder.swift */; };
 		AA0BA23F35227038F2025948 /* BrandListBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCB001040AAC9265050F3F7 /* BrandListBuilder.swift */; };
@@ -61,6 +62,7 @@
 		EA402472027263AE06D9DA18 /* ProductCategoryHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCategoryHeaderCell.swift; sourceTree = "<group>"; };
 		EFCC1C42C3BCCF64DC870A64 /* BrandListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandListViewController.swift; sourceTree = "<group>"; };
 		F4D46A8D887A34DAA05C5545 /* Product.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Product.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FCEA724BC76689AAA4756508 /* ProductCategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCategoryModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,14 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		55A5818AB0ED47B595EBFC5F /* DataModels */ = {
+			isa = PBXGroup;
+			children = (
+				FCEA724BC76689AAA4756508 /* ProductCategoryModel.swift */,
+			);
+			path = DataModels;
 			sourceTree = "<group>";
 		};
 		889C7548573562A06804D2EB /* BrandList */ = {
@@ -156,6 +166,7 @@
 		EB55482231542A078848F5A0 /* ProductCategory */ = {
 			isa = PBXGroup;
 			children = (
+				55A5818AB0ED47B595EBFC5F /* DataModels */,
 				FB0E4BA3FFC780BD8D7BBF9E /* Views */,
 				6CBB484BBA054E8DF26C8DEB /* ProductCategoryBuilder.swift */,
 				71933DC053E514929648A577 /* ProductCategoryInteractor.swift */,
@@ -243,6 +254,7 @@
 				649DA0F8438C0FF6CBA7EF65 /* BrandListRouter.swift in Sources */,
 				2C48008CAE97D699D4738DE0 /* BrandListViewController.swift in Sources */,
 				9C6A30B0CA9D015A73E64866 /* ProductBuilder.swift in Sources */,
+				817C6A71E78290DF3C734024 /* ProductCategoryModel.swift in Sources */,
 				B2B54F6A431D1C81D2046103 /* ProductCategoryBuilder.swift in Sources */,
 				2EBD5E5E75C9FB7A78270589 /* ProductCategoryInteractor.swift in Sources */,
 				1F23000A880B83F5FA800EDD /* ProductCategoryRouter.swift in Sources */,

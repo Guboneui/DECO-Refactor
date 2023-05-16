@@ -9,12 +9,13 @@ import UIKit
 import Then
 import PinLayout
 import CommonUI
+import Util
 
 class ProductCategoryImageCell: UICollectionViewCell {
   static let identifier = "ProductCategoryImageCell"
   
   private let imageView: UIImageView = UIImageView().then {
-    $0.backgroundColor = .orange
+    $0.backgroundColor = .DecoColor.whiteColor
   }
 
   private let alphaView: UIView = UIView().then {
@@ -57,8 +58,11 @@ class ProductCategoryImageCell: UICollectionViewCell {
     self.label.pin.all()
   }
   
-  func setCellConfigure(image: String, text: String) {
+  func setCellConfigure(imageURL: String?, text: String) {
     self.label.text = text
+    if let imageURL {
+      self.imageView.loadImage(imageUrl: imageURL)
+    }
   }
 }
 

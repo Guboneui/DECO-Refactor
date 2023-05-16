@@ -11,7 +11,9 @@
 		1E6C6C8599B67E915445F168 /* UINavigationControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8860B9B6C9E2293549E4321A /* UINavigationControllerDelegate.swift */; };
 		2B95FA17BE9FF17FEDEFC286 /* UIButton+Gesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A4D501A3D6D4AEDCBA78C6 /* UIButton+Gesture.swift */; };
 		32DDDE75F0C350232BD7369F /* UIView+Gesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89467AE2F6ACB22D4F02E1F1 /* UIView+Gesture.swift */; };
+		433544AA48C6515854D1016E /* Nuke in Frameworks */ = {isa = PBXBuildFile; productRef = CCBE8DB87EF02328C18D6FE4 /* Nuke */; };
 		63B6E2060F77B02FA4CB0CD8 /* AdaptivePresentationControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D43B0C2E27477B0719ABDCC /* AdaptivePresentationControllerDelegate.swift */; };
+		7A89F0937FF7641E5B33C322 /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B9A4A91B25092CD28A3282 /* UIImageView+Extension.swift */; };
 		7BA8BAFB7B8B6B56EFE55904 /* RIBTreeViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77CA5F7B27065F031A1FBB4E /* RIBTreeViewer.swift */; };
 		B5D2577B92306A51F38D8DB7 /* RxGesture in Frameworks */ = {isa = PBXBuildFile; productRef = 0B5A7B259E9689D19FD1DC75 /* RxGesture */; };
 		D80A24ED3B757D6FBB85E800 /* RIBs in Frameworks */ = {isa = PBXBuildFile; productRef = 508F34CEAFAFBEBBF73C1AE0 /* RIBs */; };
@@ -41,6 +43,7 @@
 		77CA5F7B27065F031A1FBB4E /* RIBTreeViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RIBTreeViewer.swift; sourceTree = "<group>"; };
 		8860B9B6C9E2293549E4321A /* UINavigationControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationControllerDelegate.swift; sourceTree = "<group>"; };
 		89467AE2F6ACB22D4F02E1F1 /* UIView+Gesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Gesture.swift"; sourceTree = "<group>"; };
+		A0B9A4A91B25092CD28A3282 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
 		B25B620E990FC8B32E8B1A18 /* DecoURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecoURL.swift; sourceTree = "<group>"; };
 		E6A4D501A3D6D4AEDCBA78C6 /* UIButton+Gesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Gesture.swift"; sourceTree = "<group>"; };
 		F7FA1C3D3DAD8B14E62DDCB6 /* RIBs+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RIBs+Util.swift"; sourceTree = "<group>"; };
@@ -54,6 +57,7 @@
 				D80A24ED3B757D6FBB85E800 /* RIBs in Frameworks */,
 				B5D2577B92306A51F38D8DB7 /* RxGesture in Frameworks */,
 				058E37201D433AA007E6F0BD /* RxDataSources in Frameworks */,
+				433544AA48C6515854D1016E /* Nuke in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -151,6 +155,7 @@
 			isa = PBXGroup;
 			children = (
 				E6A4D501A3D6D4AEDCBA78C6 /* UIButton+Gesture.swift */,
+				A0B9A4A91B25092CD28A3282 /* UIImageView+Extension.swift */,
 				89467AE2F6ACB22D4F02E1F1 /* UIView+Gesture.swift */,
 			);
 			path = Extensions;
@@ -177,6 +182,7 @@
 				508F34CEAFAFBEBBF73C1AE0 /* RIBs */,
 				0B5A7B259E9689D19FD1DC75 /* RxGesture */,
 				6982B9FACB34182B1A4A4748 /* RxDataSources */,
+				CCBE8DB87EF02328C18D6FE4 /* Nuke */,
 			);
 			productName = Util;
 			productReference = 0781288D32C1DA856C886534 /* Util.framework */;
@@ -203,6 +209,7 @@
 			packageReferences = (
 				0128164F7F3B3AA6C50E48A2 /* XCRemoteSwiftPackageReference "RxDataSources" */,
 				F9BCA62FA22CA832DDB7D0D7 /* XCRemoteSwiftPackageReference "RxGesture" */,
+				619C650FDBB7C6D5822CC69C /* XCRemoteSwiftPackageReference "Nuke" */,
 				CB184464D646AB22544EBBBE /* XCRemoteSwiftPackageReference "RIBs" */,
 			);
 			productRefGroup = 567884D2FBA89A709DEEE54C /* Products */;
@@ -235,6 +242,7 @@
 				1E6C6C8599B67E915445F168 /* UINavigationControllerDelegate.swift in Sources */,
 				F83F24F300D8B67DC848A9DD /* DecoURL.swift in Sources */,
 				2B95FA17BE9FF17FEDEFC286 /* UIButton+Gesture.swift in Sources */,
+				7A89F0937FF7641E5B33C322 /* UIImageView+Extension.swift in Sources */,
 				32DDDE75F0C350232BD7369F /* UIView+Gesture.swift in Sources */,
 				F9E71ED93F03810CAEB89C68 /* SafariLoader.swift in Sources */,
 			);
@@ -454,6 +462,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		619C650FDBB7C6D5822CC69C /* XCRemoteSwiftPackageReference "Nuke" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kean/Nuke";
+			requirement = {
+				kind = exactVersion;
+				version = 10.6.1;
+			};
+		};
 		CB184464D646AB22544EBBBE /* XCRemoteSwiftPackageReference "RIBs" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/uber/RIBs";
@@ -484,6 +500,10 @@
 		6982B9FACB34182B1A4A4748 /* RxDataSources */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = RxDataSources;
+		};
+		CCBE8DB87EF02328C18D6FE4 /* Nuke */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Nuke;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

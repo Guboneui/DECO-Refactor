@@ -45,6 +45,7 @@ public class NavigationBar: UIView {
   
   public override func layoutSubviews() {
     super.layoutSubviews()
+    self.frame.size.height = 45
     self.setupLayouts()
   }
   

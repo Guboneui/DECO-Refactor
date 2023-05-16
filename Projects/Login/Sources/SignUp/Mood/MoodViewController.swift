@@ -96,17 +96,14 @@ final class MoodViewController: UIViewController, MoodPresentable, MoodViewContr
       .sizeToFit(.width)
     
     nextButton.pin
-      .bottom(view.pin.safeArea)
-      .horizontally()
-      .marginHorizontal(32)
-      .marginBottom(UIDevice.current.hasNotch ? 34 : 43)
+      .bottom(view.pin.safeArea.bottom + (UIDevice.current.hasNotch ? 34 : 43))
+      .horizontally(32)
     
     scrollView.pin
-      .below(of: navigationBar)
-      .bottom(to: nextButton.edge.top)
+      .verticallyBetween(navigationBar, and: nextButton)
       .horizontally()
       .marginBottom(35)
-    
+      
     titleSubtitleView.pin
       .top(76)
       .horizontally()

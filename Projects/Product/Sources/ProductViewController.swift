@@ -55,7 +55,7 @@ final public class ProductViewController: UIViewController, ProductPresentable, 
   private let brandButton: UIButton = UIButton(type: .system).then {
     $0.setTitle("브랜드", for: .normal)
     $0.titleLabel?.font = .DecoFont.getFont(with: .Suit, type: .bold, size: 14)
-    $0.tintColor = .DecoColor.darkGray2
+    $0.tintColor = .DecoColor.lightGray2
     $0.sizeToFit()
   }
   
@@ -68,7 +68,6 @@ final public class ProductViewController: UIViewController, ProductPresentable, 
     self.view.backgroundColor = .DecoColor.whiteColor
     self.setupViews()
     self.setupGestures()
-    
   }
   
   public override func viewDidLayoutSubviews() {
@@ -121,12 +120,14 @@ final public class ProductViewController: UIViewController, ProductPresentable, 
       .bind { [weak self] in
         guard let self else { return }
         self.listener?.addChildVCLayout(with: .Product)
+        self.categoryButtonDidSelected(with: .Product)
       }.disposed(by: disposeBag)
     
     brandButton.tap()
       .bind { [weak self] in
         guard let self else { return }
         self.listener?.addChildVCLayout(with: .Brand)
+        self.categoryButtonDidSelected(with: .Brand)
       }.disposed(by: disposeBag)
     
     searchView.tap()
@@ -160,6 +161,17 @@ final public class ProductViewController: UIViewController, ProductPresentable, 
       childVC.willMove(toParent: nil)
       childVC.removeFromParent()
       childVC.view.removeFromSuperview()
+    }
+  }
+  
+  private func categoryButtonDidSelected(with type: ProductTabType) {
+    switch type {
+    case .Product:
+      self.productButton.tintColor = .DecoColor.darkGray2
+      self.brandButton.tintColor = .DecoColor.lightGray2
+    case .Brand:
+      self.productButton.tintColor = .DecoColor.lightGray2
+      self.brandButton.tintColor = .DecoColor.darkGray2
     }
   }
 }

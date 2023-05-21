@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2CE664B32A1A8D4E00EC2C9F /* BrandDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE664B22A1A8D4E00EC2C9F /* BrandDTO.swift */; };
 		855A421F32C03F545FB382D2 /* ProductMoodDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE93EF3E19458F0DA0DF65C /* ProductMoodDTO.swift */; };
 		9AE39D9CDF446C67A7B6BABD /* ProductCategoryDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = D540ACB77C679308558B3054 /* ProductCategoryDTO.swift */; };
 		F184D2E4086EA05EA17369B5 /* StyleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EC3A6EC954B9DC704C8182 /* StyleModel.swift */; };
@@ -26,6 +27,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2CE664B22A1A8D4E00EC2C9F /* BrandDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandDTO.swift; sourceTree = "<group>"; };
 		6D3D722D8A39C97CE4035A34 /* Entity.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Entity.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFE93EF3E19458F0DA0DF65C /* ProductMoodDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductMoodDTO.swift; sourceTree = "<group>"; };
 		D0EC3A6EC954B9DC704C8182 /* StyleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleModel.swift; sourceTree = "<group>"; };
@@ -57,6 +59,7 @@
 			children = (
 				D540ACB77C679308558B3054 /* ProductCategoryDTO.swift */,
 				BFE93EF3E19458F0DA0DF65C /* ProductMoodDTO.swift */,
+				2CE664B22A1A8D4E00EC2C9F /* BrandDTO.swift */,
 			);
 			path = DTOs;
 			sourceTree = "<group>";
@@ -146,8 +149,6 @@
 		C0331ED0A44E915A96750580 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				TargetAttributes = {
-				};
 			};
 			buildConfigurationList = C85ABA34F5262643211DAA3D /* Build configuration list for PBXProject "Entity" */;
 			compatibilityVersion = "Xcode 13.0";
@@ -185,6 +186,7 @@
 				9AE39D9CDF446C67A7B6BABD /* ProductCategoryDTO.swift in Sources */,
 				855A421F32C03F545FB382D2 /* ProductMoodDTO.swift in Sources */,
 				F184D2E4086EA05EA17369B5 /* StyleModel.swift in Sources */,
+				2CE664B32A1A8D4E00EC2C9F /* BrandDTO.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

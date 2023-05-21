@@ -28,8 +28,6 @@ protocol ProductCategoryListener: AnyObject {
 
 final class ProductCategoryInteractor: PresentableInteractor<ProductCategoryPresentable>, ProductCategoryInteractable, ProductCategoryPresentableListener {
   
-  
-  
   weak var router: ProductCategoryRouting?
   weak var listener: ProductCategoryListener?
   
@@ -53,8 +51,9 @@ final class ProductCategoryInteractor: PresentableInteractor<ProductCategoryPres
     super.didBecomeActive()
     
     
-    Task {
-      await fetchProductCategoryAPI()
+    Task.detached(priority: .background) { [weak self] in
+      guard let self else { return }
+      await self.fetchProductCategoryAPI()
     }
   }
   
@@ -65,7 +64,7 @@ final class ProductCategoryInteractor: PresentableInteractor<ProductCategoryPres
   
   private func fetchProductCategoryAPI() async {
     let productCategoryList = Observable.just(await productRepository.getProductCategoryList())
-    let productMoodList = Observable.just(await productRepository.getPductMoodList())
+    let productMoodList = Observable.just(await productRepository.getProductMoodList())
     
     Observable.zip(productCategoryList, productMoodList)
       .observe(on: MainScheduler.instance)

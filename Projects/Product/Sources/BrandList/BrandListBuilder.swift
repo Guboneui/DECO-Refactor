@@ -6,10 +6,12 @@
 //
 
 import RIBs
+import Networking
 
 protocol BrandListDependency: Dependency {
     // TODO: Declare the set of dependencies required by this RIB, but cannot be
     // created by this RIB.
+  var brandRepositoryImpl: BrandRepository { get }
 }
 
 final class BrandListComponent: Component<BrandListDependency> {
@@ -32,7 +34,10 @@ final class BrandListBuilder: Builder<BrandListDependency>, BrandListBuildable {
     func build(withListener listener: BrandListListener) -> BrandListRouting {
         let component = BrandListComponent(dependency: dependency)
         let viewController = BrandListViewController()
-        let interactor = BrandListInteractor(presenter: viewController)
+        let interactor = BrandListInteractor(
+          presenter: viewController,
+          brandRepository: dependency.brandRepositoryImpl
+        )
         interactor.listener = listener
         return BrandListRouter(interactor: interactor, viewController: viewController)
     }

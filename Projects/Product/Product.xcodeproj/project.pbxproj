@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -12,6 +12,7 @@
 		27657EFE248AC6FC4522F185 /* ProductInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649F5C631F66E5514370552C /* ProductInteractor.swift */; };
 		2B8B632496B4639B39A69F47 /* ProductCategoryImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D17D28A4231CCB22DFD450 /* ProductCategoryImageCell.swift */; };
 		2C48008CAE97D699D4738DE0 /* BrandListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFCC1C42C3BCCF64DC870A64 /* BrandListViewController.swift */; };
+		2CE664BA2A1A91CD00EC2C9F /* BrandListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE664B92A1A91CD00EC2C9F /* BrandListCell.swift */; };
 		2EBD5E5E75C9FB7A78270589 /* ProductCategoryInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71933DC053E514929648A577 /* ProductCategoryInteractor.swift */; };
 		36CAAB980BED9F54C7D0516D /* BrandListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91DC162E2D0652147FFE9003 /* BrandListInteractor.swift */; };
 		4FF2BF9D7AF2E98A97A87A47 /* ProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E10C59E4CAF1CC5CE80851 /* ProductViewController.swift */; };
@@ -46,6 +47,7 @@
 		1A43D284B94574D790769205 /* ProductCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCategoryViewController.swift; sourceTree = "<group>"; };
 		22E10C59E4CAF1CC5CE80851 /* ProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductViewController.swift; sourceTree = "<group>"; };
 		28D17D28A4231CCB22DFD450 /* ProductCategoryImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCategoryImageCell.swift; sourceTree = "<group>"; };
+		2CE664B92A1A91CD00EC2C9F /* BrandListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandListCell.swift; sourceTree = "<group>"; };
 		34FF2365AF08B4B702EA16AE /* ProductCategoryTextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCategoryTextCell.swift; sourceTree = "<group>"; };
 		482388B64229E6B697ADE49B /* Networking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Networking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BFDE6406D740281538FC204 /* ProductCategoryRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCategoryRouter.swift; sourceTree = "<group>"; };
@@ -96,6 +98,14 @@
 			);
 			sourceTree = "<group>";
 		};
+		2CE664B82A1A91BA00EC2C9F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2CE664B92A1A91CD00EC2C9F /* BrandListCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		2D281BD54962D2855F13A74E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -114,6 +124,7 @@
 		889C7548573562A06804D2EB /* BrandList */ = {
 			isa = PBXGroup;
 			children = (
+				2CE664B82A1A91BA00EC2C9F /* Views */,
 				7CCB001040AAC9265050F3F7 /* BrandListBuilder.swift */,
 				91DC162E2D0652147FFE9003 /* BrandListInteractor.swift */,
 				9A9D8BC17A068B8850F43E16 /* BrandListRouter.swift */,
@@ -213,8 +224,6 @@
 		4B52B969D772FB185834D24B /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				TargetAttributes = {
-				};
 			};
 			buildConfigurationList = F041E9888DA1CC69894C8AF4 /* Build configuration list for PBXProject "Product" */;
 			compatibilityVersion = "Xcode 13.0";
@@ -261,6 +270,7 @@
 				573E16086C7BB5DADCACA1FC /* ProductCategoryViewController.swift in Sources */,
 				5A9D6DFFD86CC8273502FCE5 /* ProductCategoryHeaderCell.swift in Sources */,
 				2B8B632496B4639B39A69F47 /* ProductCategoryImageCell.swift in Sources */,
+				2CE664BA2A1A91CD00EC2C9F /* BrandListCell.swift in Sources */,
 				B690F4F0F82DFC8467168C7C /* ProductCategoryTextCell.swift in Sources */,
 				27657EFE248AC6FC4522F185 /* ProductInteractor.swift in Sources */,
 				D153E99649E24D25E63CC24A /* ProductRouter.swift in Sources */,

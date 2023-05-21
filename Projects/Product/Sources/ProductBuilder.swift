@@ -25,7 +25,12 @@ final class ProductComponent:
     return ProductRepositoryImpl()
   }
   
+  fileprivate var brandRepository: BrandRepository {
+    return BrandRepositoryImpl()
+  }
+  
   var productRepositoryImpl: ProductRepository { return productRepository }
+  var brandRepositoryImpl: BrandRepository { return brandRepository }
 }
 
 // MARK: - Builder

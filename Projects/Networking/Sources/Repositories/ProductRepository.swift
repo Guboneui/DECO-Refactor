@@ -11,7 +11,7 @@ import Entity
 
 public protocol ProductRepository {
   func getProductCategoryList() async -> [ProductCategoryDTO]?
-  func getPductMoodList() async -> [ProductMoodDTO]?
+  func getProductMoodList() async -> [ProductMoodDTO]?
 }
 
 public class ProductRepositoryImpl: BaseRepository, ProductRepository {
@@ -23,7 +23,7 @@ public class ProductRepositoryImpl: BaseRepository, ProductRepository {
     await provider.request(.productCategoryList)
   }
   
-  public func getPductMoodList() async -> [ProductMoodDTO]? {
+  public func getProductMoodList() async -> [ProductMoodDTO]? {
     await provider.request(.productMoodList)
   }
 }

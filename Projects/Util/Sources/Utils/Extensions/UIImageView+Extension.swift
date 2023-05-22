@@ -32,5 +32,18 @@ public extension UIImageView {
       completion?()
     }
   }
+  
+  func loadImageWithThumbnail(thumbnail: UIImage, imageUrl: String, _ completion: (() -> Void)? = nil) {
+    Nuke.DataLoader.sharedUrlCache.removeAllCachedResponses()
+    (ImagePipeline.shared.configuration.dataLoader as? DataLoader)?.session.configuration.urlCache?.removeAllCachedResponses()
+    let options = ImageLoadingOptions(placeholder: thumbnail, transition: .fadeIn(duration: 0.2))
+    let resizeProcessor = ImageProcessors.Resize(size: CGSize(width: 300, height: 300))
+    let request = ImageRequest(url: URL(string: imageUrl),
+                               processors: [resizeProcessor],
+                               priority: .high)
+    Nuke.loadImage(with: request, options: options, into: self) { _ in
+      completion?()
+    }
+  }
 }
 

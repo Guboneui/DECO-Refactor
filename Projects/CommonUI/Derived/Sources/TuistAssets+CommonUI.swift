@@ -121,6 +121,7 @@ public enum CommonUIAsset {
     public static let textalignRightWhite = CommonUIImages(name: "textalign_right_white")
     public static let textcolor = CommonUIImages(name: "textcolor")
     public static let textcolorWhite = CommonUIImages(name: "textcolor_white")
+    public static let thumbnail = CommonUIImages(name: "thumbnail")
     public static let upload = CommonUIImages(name: "upload")
     public static let uploadDarkgrey2 = CommonUIImages(name: "upload_darkgrey_2")
     public static let uploadFull = CommonUIImages(name: "upload_full")

@@ -122,11 +122,9 @@ extension MainRouter {
   private func attachProductRIB() {
     if productRouting != nil { return }
     let router = productBuildable.build(withListener: interactor)
-    let navigation: NavigationControllerable = NavigationControllerable(root: router.viewControllable)
-    navigation.navigationController.navigationBar.isHidden = true
     attachChild(router)
     self.productRouting = router
-    self.viewController.setChildVCLayout(childVC: navigation)
+    self.viewController.setChildVCLayout(childVC: router.viewControllable)
   }
   
   private func detachProductRIB() {

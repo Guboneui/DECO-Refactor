@@ -15,6 +15,8 @@ import RxRelay
 import Entity
 
 protocol BrandListPresentableListener: AnyObject {
+  func pushBrandDetailVC(brandInfo: BrandDTO)
+  
   var brandList: BehaviorRelay<[BrandDTO]> { get }
 }
 
@@ -70,7 +72,9 @@ final class BrandListViewController: UIViewController, BrandListPresentable, Bra
     
     collectionView.rx
       .modelSelected(BrandDTO.self)
-      .subscribe(onNext: {
+      .subscribe(onNext: { [weak self] in
+        guard let self else { return }
+        self.listener?.pushBrandDetailVC(brandInfo: $0)
         print("\($0)")
       })
       .disposed(by: disposeBag)

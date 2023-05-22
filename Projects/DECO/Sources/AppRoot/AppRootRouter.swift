@@ -10,6 +10,7 @@ import RIBs
 import Login
 import Main
 import UIKit
+import Util
 
 protocol AppRootInteractable: Interactable, LoginMainListener, MainListener {
 	var router: AppRootRouting? { get set }
@@ -63,10 +64,11 @@ final class AppRootRouter: LaunchRouter<AppRootInteractable, AppRootViewControll
 		self.detachLogin()
 		if mainRouting != nil { return }
 		let router = mainBuildable.build(withListener: interactor)
-		window.rootViewController = router.viewControllable.uiviewController
+		let navigation: NavigationControllerable = NavigationControllerable(root: router.viewControllable)
+		navigation.navigationController.navigationBar.isHidden = true
+		window.rootViewController = navigation.uiviewController
 		window.makeKeyAndVisible()
 		attachChild(router)
 		mainRouting = router
-		
 	}
 }

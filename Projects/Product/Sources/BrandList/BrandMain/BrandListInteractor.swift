@@ -5,8 +5,10 @@
 //  Created by 구본의 on 2023/05/13.
 //
 
-import Networking
+import Util
 import Entity
+import Networking
+
 
 
 import RIBs
@@ -15,6 +17,8 @@ import RxRelay
 
 protocol BrandListRouting: ViewableRouting {
   // TODO: Declare methods the interactor can invoke to manage sub-tree via the router.
+  func attachBrandDetailVC(brandInfo: BrandDTO)
+  func detachBrandDetailVC(with popType: PopType)
 }
 
 protocol BrandListPresentable: Presentable {
@@ -65,5 +69,13 @@ final class BrandListInteractor: PresentableInteractor<BrandListPresentable>, Br
     if let brandList {
       self.brandList.accept(brandList)
     }
+  }
+  
+  func pushBrandDetailVC(brandInfo: BrandDTO) {
+    self.router?.attachBrandDetailVC(brandInfo: brandInfo)
+  }
+  
+  func detachBrandDetailVC(with popType: PopType) {
+    self.router?.detachBrandDetailVC(with: popType)
   }
 }

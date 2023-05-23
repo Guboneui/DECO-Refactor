@@ -5,11 +5,15 @@
 //  Created by 구본의 on 2023/05/22.
 //
 
+import Util
 import Entity
 
 import RIBs
 
-protocol BrandDetailInteractable: Interactable {
+protocol BrandDetailInteractable:
+  Interactable,
+  BrandProductUsageListener
+{
   var router: BrandDetailRouting? { get set }
   var listener: BrandDetailListener? { get set }
 }
@@ -20,9 +24,33 @@ protocol BrandDetailViewControllable: ViewControllable {
 
 final class BrandDetailRouter: ViewableRouter<BrandDetailInteractable, BrandDetailViewControllable>, BrandDetailRouting {
   
-  // TODO: Constructor inject child builder protocols to allow building children.
-  override init(interactor: BrandDetailInteractable, viewController: BrandDetailViewControllable) {
+  private let brandProductUsageBuildable: BrandProductUsageBuildable
+  private var brandProductUsageRouting: Routing?
+  
+  init(
+    interactor: BrandDetailInteractable,
+    viewController: BrandDetailViewControllable,
+    brandProductUsageBuildable: BrandProductUsageBuildable
+  ) {
+    self.brandProductUsageBuildable = brandProductUsageBuildable
     super.init(interactor: interactor, viewController: viewController)
     interactor.router = self
+  }
+  
+  func attachBrandProductUsage(brandInfo: BrandDTO) {
+    if brandProductUsageRouting != nil { return }
+    let router = brandProductUsageBuildable.build(withListener: interactor, brandInfo: brandInfo)
+    attachChild(router)
+    self.brandProductUsageRouting = router
+    self.viewControllable.pushViewController(router.viewControllable, animated: true)
+  }
+  
+  func detachBrandProductUsageVC(with popType: PopType) {
+    guard let router = brandProductUsageRouting else { return }
+    if popType == .BackButton {
+      self.viewControllable.popViewController(animated: true)
+    }
+    detachChild(router)
+    brandProductUsageRouting = nil
   }
 }

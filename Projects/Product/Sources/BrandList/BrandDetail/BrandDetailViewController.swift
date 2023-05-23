@@ -21,6 +21,7 @@ import FlexLayout
 
 protocol BrandDetailPresentableListener: AnyObject {
   func popBrandDetailVC(with popType: PopType)
+  func pushBrandProductUsageVC()
   
   func fetchBrandPostings(brandID: Int, userID: Int, createdAt: Int) async
   
@@ -198,7 +199,7 @@ final class BrandDetailViewController: UIViewController, BrandDetailPresentable,
     
     self.brandProductUsageHeaderView.didTapLinkButton = { [weak self] in
       guard let self else { return }
-      print("상세 화면 이동")
+      self.listener?.pushBrandProductUsageVC()
     }
   }
   

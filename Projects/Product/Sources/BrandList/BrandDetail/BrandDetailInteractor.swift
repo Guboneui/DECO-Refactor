@@ -16,7 +16,8 @@ import RxRelay
 import Foundation
 
 protocol BrandDetailRouting: ViewableRouting {
-  
+  func attachBrandProductUsage(brandInfo: BrandDTO)
+  func detachBrandProductUsageVC(with popType: Util.PopType)
 }
 
 protocol BrandDetailPresentable: Presentable {
@@ -31,7 +32,7 @@ protocol BrandDetailListener: AnyObject {
 }
 
 final class BrandDetailInteractor: PresentableInteractor<BrandDetailPresentable>, BrandDetailInteractable, BrandDetailPresentableListener {
-  
+
   weak var router: BrandDetailRouting?
   weak var listener: BrandDetailListener?
   
@@ -98,5 +99,14 @@ final class BrandDetailInteractor: PresentableInteractor<BrandDetailPresentable>
         self.productCategory.accept([ProductCategoryDTO(categoryName: "전체", id: 0)] + productCategory)
       }
     }
+  }
+  
+  func pushBrandProductUsageVC() {
+    router?.attachBrandProductUsage(brandInfo: brandInfo)
+  }
+  
+  
+  func detachBrandProductUsageVC(with popType: Util.PopType) {
+    router?.detachBrandProductUsageVC(with: popType)
   }
 }

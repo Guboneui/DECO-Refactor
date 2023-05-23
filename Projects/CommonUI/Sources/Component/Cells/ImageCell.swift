@@ -23,6 +23,7 @@ public class ImageCell: UICollectionViewCell {
   private let mainImageView: UIImageView = UIImageView().then {
     $0.contentMode = .scaleAspectFill
     $0.backgroundColor = .DecoColor.lightBackground
+    $0.layer.masksToBounds = true
   }
   
   private let selectedView = UIView().then {

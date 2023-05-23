@@ -10,4 +10,9 @@ import Foundation
 public struct ProductCategoryDTO: Codable {
   public let categoryName: String
   public let id: Int
+  
+  public init(categoryName: String, id: Int) {
+    self.categoryName = categoryName
+    self.id = id
+  }
 }

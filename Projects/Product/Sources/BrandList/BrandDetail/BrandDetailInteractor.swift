@@ -37,18 +37,21 @@ final class BrandDetailInteractor: PresentableInteractor<BrandDetailPresentable>
   
   private let brandInfo: BrandDTO
   private let brandRepository: BrandRepository
+  private let productRepository: ProductRepository
 
-  //var brandInfoData: PublishSubject<BrandDTO> = .init()
   var brandInfoData: BehaviorRelay<BrandDTO?> = .init(value: nil)
   var brandProductUsagePostings: BehaviorRelay<[PostingDTO]> = .init(value: [])
+  var productCategory: BehaviorRelay<[ProductCategoryDTO]> = .init(value: [])
   
   init(
     presenter: BrandDetailPresentable,
     brandInfo: BrandDTO,
-    brandRepository: BrandRepository
+    brandRepository: BrandRepository,
+    productRepository: ProductRepository
   ) {
     self.brandInfo = brandInfo
     self.brandRepository = brandRepository
+    self.productRepository = productRepository
     super.init(presenter: presenter)
     presenter.listener = self
     
@@ -57,19 +60,16 @@ final class BrandDetailInteractor: PresentableInteractor<BrandDetailPresentable>
   override func didBecomeActive() {
     super.didBecomeActive()
 
-    
-//    DispatchQueue.main.asyncAfter(deadline: .now()+4, execute: {
-      //self.brandInfoData.onNext(self.brandInfo)
-      self.brandInfoData.accept(brandInfo)
-//    })
+    self.brandInfoData.accept(brandInfo)
 
-    
     Task {
       await fetchBrandPostings(
         brandID: brandInfo.id,
         userID: 326,
         createdAt: Int.max
       )
+      
+      await fetchProductCategory()
     }
   }
   
@@ -87,6 +87,15 @@ final class BrandDetailInteractor: PresentableInteractor<BrandDetailPresentable>
       guard let self else { return }
       if let usagePosting = await self.brandRepository.getBrandProductUsagePosting(brandID: brandID, userID: userID, createdAt: createdAt) {
         self.brandProductUsagePostings.accept(usagePosting)
+      }
+    }
+  }
+  
+  private func fetchProductCategory() async {
+    Task.detached { [weak self] in
+      guard let self else { return }
+      if let productCategory = await self.productRepository.getProductCategoryList() {
+        self.productCategory.accept([ProductCategoryDTO(categoryName: "전체", id: 0)] + productCategory)
       }
     }
   }

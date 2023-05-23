@@ -14,7 +14,7 @@ public class SegmentTableViewCell: UITableViewCell {
   public static let identifier: String = "SegmentTableViewCell"
   
   private let segmentCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: .init()).then {
-    $0.backgroundColor = .red
+    $0.backgroundColor = .DecoColor.whiteColor
   }
   
   public override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

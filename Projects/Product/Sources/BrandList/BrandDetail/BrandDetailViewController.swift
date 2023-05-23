@@ -26,6 +26,7 @@ protocol BrandDetailPresentableListener: AnyObject {
   
   var brandInfoData: BehaviorRelay<BrandDTO?> { get }
   var brandProductUsagePostings: BehaviorRelay<[PostingDTO]> { get }
+  var productCategory: BehaviorRelay<[ProductCategoryDTO]> { get }
 }
 
 final class BrandDetailViewController: UIViewController, BrandDetailPresentable, BrandDetailViewControllable {
@@ -41,7 +42,7 @@ final class BrandDetailViewController: UIViewController, BrandDetailPresentable,
   )
   
   private let scrollView: UIScrollView = UIScrollView().then {
-    $0.backgroundColor = .green
+    $0.backgroundColor = .DecoColor.whiteColor
     $0.bounces = false
     $0.showsVerticalScrollIndicator = false
   }
@@ -49,15 +50,15 @@ final class BrandDetailViewController: UIViewController, BrandDetailPresentable,
   private let brandInfoHeaderView: BrandInfoHeaderView = BrandInfoHeaderView()
   
   private let brandProductUsageBaseView: UIView = UIView().then {
-    $0.backgroundColor = .yellow
+    $0.backgroundColor = .DecoColor.whiteColor
     $0.alpha = 0
     
   }
   private let brandProductUsageHeaderView: BrandProductUsageHeaderView = BrandProductUsageHeaderView().then {
-    $0.backgroundColor = .orange
+    $0.backgroundColor = .DecoColor.whiteColor
   }
   private let brandProductUsageCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: .init()).then {
-    $0.backgroundColor = .red
+    $0.backgroundColor = .DecoColor.whiteColor
     $0.register(ImageCell.self, forCellWithReuseIdentifier: ImageCell.identifier)
     let layout = UICollectionViewFlowLayout()
     layout.scrollDirection = .horizontal
@@ -68,17 +69,34 @@ final class BrandDetailViewController: UIViewController, BrandDetailPresentable,
   }
   
   private let brandProductCategoryCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: .init()).then {
-    $0.backgroundColor = .blue
+    $0.backgroundColor = .DecoColor.whiteColor
+    $0.register(SmallTextCell.self, forCellWithReuseIdentifier: SmallTextCell.identifier)
+    let layout = UICollectionViewFlowLayout()
+    layout.scrollDirection = .horizontal
+    
+    $0.collectionViewLayout = layout
+    $0.showsHorizontalScrollIndicator = false
+    $0.bounces = false
+    $0.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
   }
   
   private let brandProductCollectionView : UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: .init()).then {
     $0.backgroundColor = .cyan
   }
   
-  private let stickView: UIView = UIView().then {
-    $0.backgroundColor = .brown
+  private let stickyCategoryCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: .init()).then {
+    $0.register(SmallTextCell.self, forCellWithReuseIdentifier: SmallTextCell.identifier)
+    let layout = UICollectionViewFlowLayout()
+    layout.scrollDirection = .horizontal
+    
+    $0.collectionViewLayout = layout
+    $0.showsHorizontalScrollIndicator = false
+    $0.bounces = false
+    $0.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+    
     $0.isHidden = true
   }
+  
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -87,6 +105,8 @@ final class BrandDetailViewController: UIViewController, BrandDetailPresentable,
     self.setupGestures()
     self.setupBinds()
     self.setupBrandProductUsageCollectionView()
+    self.setupProductCategoryCollectionView()
+    self.setupStickyCategoryCollectionView()
   }
   
   override func viewDidDisappear(_ animated: Bool) {
@@ -109,7 +129,7 @@ final class BrandDetailViewController: UIViewController, BrandDetailPresentable,
     self.scrollView.addSubview(brandProductUsageBaseView)
     self.scrollView.addSubview(brandProductCategoryCollectionView)
     self.scrollView.addSubview(brandProductCollectionView)
-    self.view.addSubview(stickView)
+    self.view.addSubview(stickyCategoryCollectionView)
     
     brandProductUsageBaseView.flex.direction(.column).define { flex in
       flex.addItem(brandProductUsageHeaderView)
@@ -154,7 +174,7 @@ final class BrandDetailViewController: UIViewController, BrandDetailPresentable,
       .horizontally()
       .height(brandProductCollectionViewHeight)
     
-    stickView.pin
+    stickyCategoryCollectionView.pin
       .below(of: navigationBar)
       .horizontally()
       .height(18)
@@ -167,7 +187,7 @@ final class BrandDetailViewController: UIViewController, BrandDetailPresentable,
       height: brandProductCollectionView.frame.maxY
     )
     
-   
+    
   }
   
   private func setupGestures() {
@@ -189,7 +209,7 @@ final class BrandDetailViewController: UIViewController, BrandDetailPresentable,
         guard let self else { return }
         self.brandInfoHeaderView.setConfigure(brandInfo: info)
       }.disposed(by: disposeBag)
-      
+    
     
     scrollView.rx.contentOffset
       .map { $0.y }
@@ -199,7 +219,7 @@ final class BrandDetailViewController: UIViewController, BrandDetailPresentable,
         let categoryCollectionViewMinY: CGFloat = self.brandProductCategoryCollectionView.frame.minY
         let isStickyOffset: Bool = (offsetY > categoryCollectionViewMinY)
         
-        self.stickView.isHidden = !isStickyOffset
+        self.stickyCategoryCollectionView.isHidden = !isStickyOffset
       }.disposed(by: disposeBag)
   }
 }
@@ -214,7 +234,7 @@ extension BrandDetailViewController {
       .map{$0.isEmpty}
       .bind { [weak self] isEmpty in
         guard let self else { return }
-        UIView.animate(withDuration: 0.15, delay: 0.0, options: .curveEaseInOut) {
+        UIView.animate(withDuration: 0.05, delay: 0.0, options: .curveEaseInOut) {
           self.brandProductUsageBaseView.alpha = isEmpty ? 0 : 1
           self.setupLayouts()
         }
@@ -232,6 +252,37 @@ extension BrandDetailViewController {
   }
 }
 
+// MARK: - ProductCategoryCollectionView
+
+extension BrandDetailViewController {
+  private func setupProductCategoryCollectionView() {
+    listener?.productCategory
+      .bind(to: brandProductCategoryCollectionView.rx.items(
+        cellIdentifier: SmallTextCell.identifier,
+        cellType: SmallTextCell.self)
+      ) { (index, data, cell) in
+        cell.setupCellData(text: data.categoryName)
+      }.disposed(by: disposeBag)
+    
+    brandProductCategoryCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
+  }
+}
+
+// MARK: - StickyCategoryCollectionView
+
+extension BrandDetailViewController {
+  private func setupStickyCategoryCollectionView() {
+    listener?.productCategory
+      .bind(to: stickyCategoryCollectionView.rx.items(
+        cellIdentifier: SmallTextCell.identifier,
+        cellType: SmallTextCell.self)
+      ) { (index, data, cell) in
+        cell.setupCellData(text: data.categoryName)
+      }.disposed(by: disposeBag)
+    
+    stickyCategoryCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
+  }
+}
 
 
 // MARK: - CollectionView
@@ -242,7 +293,24 @@ extension BrandDetailViewController: UICollectionViewDelegate, UICollectionViewD
     layout collectionViewLayout: UICollectionViewLayout,
     sizeForItemAt indexPath: IndexPath
   ) -> CGSize {
-    return CGSize(width: usageCollectionViewHeight, height: usageCollectionViewHeight)
+    
+    switch collectionView {
+    case brandProductUsageCollectionView:
+      return CGSize(width: usageCollectionViewHeight, height: usageCollectionViewHeight)
+    case brandProductCategoryCollectionView, stickyCategoryCollectionView:
+      let font: UIFont = UIFont.DecoFont.getFont(with: .Suit, type: .medium, size: 12)
+      
+      if let productCategory = listener?.productCategory.value {
+        return CGSize(
+          width: productCategory[indexPath.row].categoryName.size(withAttributes: [NSAttributedString.Key.font:font]).width + 20,
+          height: 15
+        )
+      } else {
+        return .zero
+      }
+    default:
+      return .zero
+    }
   }
   
   func collectionView(
@@ -250,7 +318,14 @@ extension BrandDetailViewController: UICollectionViewDelegate, UICollectionViewD
     layout collectionViewLayout: UICollectionViewLayout,
     minimumLineSpacingForSectionAt section: Int
   ) -> CGFloat {
-    return 20.0
+    switch collectionView {
+    case brandProductUsageCollectionView:
+      return 8.0
+    case brandProductCategoryCollectionView, stickyCategoryCollectionView:
+      return 24.0
+    default:
+      return .zero
+    }
   }
   
   func collectionView(
@@ -260,5 +335,4 @@ extension BrandDetailViewController: UICollectionViewDelegate, UICollectionViewD
   ) -> UIEdgeInsets {
     return UIEdgeInsets(top: 0, left: 28, bottom: 0, right: 28)
   }
-  
 }

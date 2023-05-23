@@ -80,8 +80,7 @@ class BrandInfoHeaderView: UIView {
       imageUrl: brandInfo.imageUrl
     )
     self.brandNameLabel.text = brandInfo.name
-    //self.brandDescriptionLabel.text = brandInfo.description
-    self.brandDescriptionLabel.text = "DescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescription"
+    self.brandDescriptionLabel.text = brandInfo.description
   }
   
   override func sizeThatFits(_ size: CGSize) -> CGSize {

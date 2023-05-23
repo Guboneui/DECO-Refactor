@@ -18,6 +18,7 @@ protocol BrandDetailDependency: Dependency {
 
 final class BrandDetailComponent: Component<BrandDetailDependency> {
   var brandRepository: BrandRepository { dependency.brandRepository }
+  var productRepository: ProductRepository { ProductRepositoryImpl() }
 }
 
 // MARK: - Builder
@@ -44,7 +45,8 @@ final class BrandDetailBuilder: Builder<BrandDetailDependency>, BrandDetailBuild
     let interactor = BrandDetailInteractor(
       presenter: viewController,
       brandInfo: brandInfo,
-      brandRepository: component.brandRepository
+      brandRepository: component.brandRepository,
+      productRepository: component.productRepository
     )
     interactor.listener = listener
     return BrandDetailRouter(interactor: interactor, viewController: viewController)

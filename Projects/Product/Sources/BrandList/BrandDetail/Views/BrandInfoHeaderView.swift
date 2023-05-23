@@ -1,8 +1,8 @@
 //
-//  BrandInfoCell.swift
+//  BrandInfoHeaderView.swift
 //  Product
 //
-//  Created by 구본의 on 2023/05/22.
+//  Created by 구본의 on 2023/05/23.
 //
 
 import UIKit
@@ -13,8 +13,7 @@ import Then
 import PinLayout
 import FlexLayout
 
-class BrandInfoCell: UITableViewCell {
-  static let identifier: String = "BrandInfoCell"
+class BrandInfoHeaderView: UIView {
   
   private let brandImageView: UIImageView = UIImageView().then {
     $0.backgroundColor = .DecoColor.lightBackground
@@ -31,9 +30,8 @@ class BrandInfoCell: UITableViewCell {
     $0.numberOfLines = 0
   }
   
-  override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-    super.init(style: style, reuseIdentifier: reuseIdentifier)
-    self.selectionStyle = .none
+  override init(frame: CGRect) {
+    super.init(frame: frame)
     self.setupViews()
   }
   
@@ -47,9 +45,9 @@ class BrandInfoCell: UITableViewCell {
   }
   
   private func setupViews() {
-    self.contentView.addSubview(brandImageView)
-    self.contentView.addSubview(brandNameLabel)
-    self.contentView.addSubview(brandDescriptionLabel)
+    self.addSubview(brandImageView)
+    self.addSubview(brandNameLabel)
+    self.addSubview(brandDescriptionLabel)
   }
   
   private func setupLayouts() {
@@ -73,21 +71,23 @@ class BrandInfoCell: UITableViewCell {
       .marginTop(8)
       .sizeToFit(.width)
     
-    contentView.pin.wrapContent(.vertically)
+    self.pin.wrapContent(.vertically)
   }
   
-  public func setCellConfigure(brandInfo: BrandDTO) {
+  public func setConfigure(brandInfo: BrandDTO) {
     self.brandImageView.loadImageWithThumbnail(
       thumbnail: .DecoImage.thumbnail,
       imageUrl: brandInfo.imageUrl
     )
     self.brandNameLabel.text = brandInfo.name
-    self.brandDescriptionLabel.text = brandInfo.description
+    //self.brandDescriptionLabel.text = brandInfo.description
+    self.brandDescriptionLabel.text = "DescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescription"
   }
   
   override func sizeThatFits(_ size: CGSize) -> CGSize {
     self.pin.width(size.width)
     self.setupLayouts()
-    return CGSize(width: 200, height: contentView.frame.maxY + 40)
+    return CGSize(width: 200, height: self.frame.maxY + 40)
   }
 }
+

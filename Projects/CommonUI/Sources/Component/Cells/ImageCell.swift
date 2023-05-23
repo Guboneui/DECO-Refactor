@@ -9,6 +9,8 @@ import UIKit
 import Then
 import PinLayout
 
+import Util
+
 public enum ImageCellType {
   case DefaultType
   case SelectedType
@@ -56,7 +58,7 @@ public class ImageCell: UICollectionViewCell {
   ) {
     switch type {
     case .DefaultType:
-      print("디폴트 타입")
+      self.mainImageView.loadImage(imageUrl: imageURL)
     case .SelectedType:
       self.contentView.addSubview(selectedView)
       self.selectedView.pin.all()
@@ -64,8 +66,6 @@ public class ImageCell: UICollectionViewCell {
       
       if let image {
         self.mainImageView.image = image
-      } else {
-
       }
     }
   }

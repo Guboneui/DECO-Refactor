@@ -27,7 +27,8 @@ let packages: [Package] = [
 let dependencies: [TargetDependency] = [
   .FlexLayout,
   .PinLayout,
-  .Then
+  .Then,
+  .project(target: "Util", path: "../Util"),
 ]
 
 let commonUI = Target(

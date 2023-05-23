@@ -18,16 +18,13 @@ let setting: Settings = .settings(
 )
 
 let packages: [Package] = [
-//  .RxGesture,
-//  .RxSwift
+
 ]
 
 let dependencies: [TargetDependency] = [
   .project(target: "CommonUI", path: "../CommonUI"),
   .project(target: "Util", path: "../Util"),
   .project(target: "Networking", path: "../Networking"),
-//  .RxGesture,
-//  .RxSwift
 ]
 
 let login = Target(

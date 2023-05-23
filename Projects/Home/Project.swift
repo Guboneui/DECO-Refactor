@@ -18,18 +18,12 @@ let setting: Settings = .settings(
 )
 
 let packages: [Package] = [
-//  .RxGesture,
-//  .RxSwift
-//  .RIBs
 ]
 
 let dependencies: [TargetDependency] = [
   .project(target: "CommonUI", path: "../CommonUI"),
   .project(target: "Util", path: "../Util"),
   .project(target: "Networking", path: "../Networking"),
-//  .RxGesture,
-//  .RxSwift
-//    .RIBs
 ]
 
 let home = Target(

@@ -6,15 +6,18 @@
 //
 
 import Entity
+import Networking
 
 import RIBs
 
 protocol BrandDetailDependency: Dependency {
   // TODO: Declare the set of dependencies required by this RIB, but cannot be
   // created by this RIB.
+  var brandRepository: BrandRepository { get }
 }
 
 final class BrandDetailComponent: Component<BrandDetailDependency> {
+  var brandRepository: BrandRepository { dependency.brandRepository }
 }
 
 // MARK: - Builder
@@ -40,7 +43,8 @@ final class BrandDetailBuilder: Builder<BrandDetailDependency>, BrandDetailBuild
     let viewController = BrandDetailViewController()
     let interactor = BrandDetailInteractor(
       presenter: viewController,
-      brandInfo: brandInfo
+      brandInfo: brandInfo,
+      brandRepository: component.brandRepository
     )
     interactor.listener = listener
     return BrandDetailRouter(interactor: interactor, viewController: viewController)

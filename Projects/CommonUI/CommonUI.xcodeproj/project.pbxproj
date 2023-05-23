@@ -10,6 +10,7 @@
 		0A48B28CDDEE8CE6C65B174A /* DecoImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D2AA4476DC8DFC702A8DB3 /* DecoImage.swift */; };
 		0DDB27BFF7A1632F03B3F0EA /* SUIT-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = F26FF844FFFBE6F04FE82E77 /* SUIT-Medium.otf */; };
 		132E71F17B1D363766B88B84 /* NotoSansKR-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 15CD4B8F263EBED9EE862DEC /* NotoSansKR-Bold.otf */; };
+		25D11A48D5BD5B11E545DC64 /* SmallTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBC5C9522A829AB27CB37F0 /* SmallTextCell.swift */; };
 		26A89C8ABDA7272793E1DF1A /* Image.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42C46A1D137F6D04C3967B64 /* Image.xcassets */; };
 		39EC6BCA36C6D9020E2FBEEE /* SUIT-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7D7B839FF2BD4170FF0A7D18 /* SUIT-Bold.otf */; };
 		3B93A3AC2360B6AA4211F43D /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB2A151EF61A0078BCB1E57 /* UILabel+Extension.swift */; };
@@ -24,9 +25,11 @@
 		7B588595AF49828E89039740 /* NotoSansKR-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = F7B93756B58D9D39B4C97D24 /* NotoSansKR-Medium.otf */; };
 		7B701FE62D4EF108880CB632 /* DecoColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC34201AF7778D74864863C /* DecoColor.swift */; };
 		7DC59B80630854028C7C80F4 /* TuistBundle+CommonUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EF204F3CD6F86C6167C300 /* TuistBundle+CommonUI.swift */; };
+		7EEACB832494A5A6432EEC72 /* SegmentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93EB304198EF95CFC2A6D7CE /* SegmentTableViewCell.swift */; };
 		8015832F17AC96CA7BBDEA57 /* TuistFonts+CommonUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65557C5B1D459C06F72A1C53 /* TuistFonts+CommonUI.swift */; };
 		80DD6C7C45A37C7EC93058D7 /* PinLayout in Frameworks */ = {isa = PBXBuildFile; productRef = 63E4D729D36EC9DD73DAA701 /* PinLayout */; };
 		81598275117F4F1EAEE6B7A3 /* SUIT-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1006E85895DAE7BD2F9C0138 /* SUIT-ExtraBold.otf */; };
+		8D6E7EA6F5968DD7FD3D9BE7 /* Util.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D21743CD883A652FEBCA274F /* Util.framework */; platformFilter = ios; };
 		926300E34AAEEDDCAF9DFBEA /* DecoFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E091AB76783B3931B2DF8B /* DecoFont.swift */; };
 		93996CA08EDB1D537507DCA3 /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80EED652CD9730D72F01A29B /* ImageCell.swift */; };
 		A94C310233472B7075DB333A /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 5B2370A8BB08E22DA85E65B0 /* Then */; };
@@ -82,14 +85,17 @@
 		80EED652CD9730D72F01A29B /* ImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
 		86E3FD9C981C1524E3907F57 /* SUIT-Heavy.otf */ = {isa = PBXFileReference; path = "SUIT-Heavy.otf"; sourceTree = "<group>"; };
 		92B162ACA7CC5EBDFC92444E /* NotoSansKR-Thin.otf */ = {isa = PBXFileReference; path = "NotoSansKR-Thin.otf"; sourceTree = "<group>"; };
+		93EB304198EF95CFC2A6D7CE /* SegmentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentTableViewCell.swift; sourceTree = "<group>"; };
 		94EF204F3CD6F86C6167C300 /* TuistBundle+CommonUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TuistBundle+CommonUI.swift"; sourceTree = "<group>"; };
 		AAB2A151EF61A0078BCB1E57 /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
 		BBDFCECD69448A84AA99E9F7 /* SUIT-Regular.otf */ = {isa = PBXFileReference; path = "SUIT-Regular.otf"; sourceTree = "<group>"; };
 		BDB70CAC85ED852AB55C26DD /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
+		BEBC5C9522A829AB27CB37F0 /* SmallTextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallTextCell.swift; sourceTree = "<group>"; };
 		C0E091AB76783B3931B2DF8B /* DecoFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecoFont.swift; sourceTree = "<group>"; };
 		CDBD62030B65AE3A6A7F34D6 /* CommonUI-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "CommonUI-Info.plist"; sourceTree = "<group>"; };
 		CED5695C335D5BB3770DFCCF /* SUIT-ExtraLight.otf */ = {isa = PBXFileReference; path = "SUIT-ExtraLight.otf"; sourceTree = "<group>"; };
 		D08B2B67BBE804590138C890 /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
+		D21743CD883A652FEBCA274F /* Util.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Util.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D22F34DD4818748CBA3B0760 /* DefaultButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultButton.swift; sourceTree = "<group>"; };
 		DCC34201AF7778D74864863C /* DecoColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecoColor.swift; sourceTree = "<group>"; };
 		E38DB27C3893FC63485E721B /* NotoSansKR-Regular.otf */ = {isa = PBXFileReference; path = "NotoSansKR-Regular.otf"; sourceTree = "<group>"; };
@@ -103,6 +109,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8D6E7EA6F5968DD7FD3D9BE7 /* Util.framework in Frameworks */,
 				CDCF6B004F010F8C75410A5A /* FlexLayout in Frameworks */,
 				80DD6C7C45A37C7EC93058D7 /* PinLayout in Frameworks */,
 				A94C310233472B7075DB333A /* Then in Frameworks */,
@@ -197,6 +204,8 @@
 			isa = PBXGroup;
 			children = (
 				80EED652CD9730D72F01A29B /* ImageCell.swift */,
+				93EB304198EF95CFC2A6D7CE /* SegmentTableViewCell.swift */,
+				BEBC5C9522A829AB27CB37F0 /* SmallTextCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -250,6 +259,7 @@
 			isa = PBXGroup;
 			children = (
 				F0F7A08F911F04FE3F6FE36B /* CommonUI.framework */,
+				D21743CD883A652FEBCA274F /* Util.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -386,6 +396,8 @@
 				3E07DEB89DFB0D7F64B67BC4 /* CheckButton.swift in Sources */,
 				5BC51719418FAA2AD3BB1042 /* DefaultButton.swift in Sources */,
 				93996CA08EDB1D537507DCA3 /* ImageCell.swift in Sources */,
+				7EEACB832494A5A6432EEC72 /* SegmentTableViewCell.swift in Sources */,
+				25D11A48D5BD5B11E545DC64 /* SmallTextCell.swift in Sources */,
 				BD2791A8A43540ABE53FA350 /* NavigationBar.swift in Sources */,
 				B5E72C89D542D08B4257C73C /* TitleSubtitleView.swift in Sources */,
 				4D05256CA52D034DF54104C2 /* TouchAnimationView.swift in Sources */,

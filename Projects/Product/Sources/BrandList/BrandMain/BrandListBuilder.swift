@@ -20,8 +20,8 @@ final class BrandListComponent:
   Component<BrandListDependency>,
   BrandDetailDependency
 {
-
-  var brandInfo: BrandDTO { brandInfo }
+  var brandRepository: Networking.BrandRepository { dependency.brandRepositoryImpl }
+  
   
   //var brandInfo: BrandDTO = BrandDTO(desecription
   // TODO: Declare 'fileprivate' dependencies that are only used by this RIB.

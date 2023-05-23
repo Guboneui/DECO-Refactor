@@ -95,4 +95,8 @@ public class NavigationBar: UIView {
   @objc private func didTapButton() {
     didTapBackButton?()
   }
+  
+  public func setNavigationBarTitle(with title: String) {
+    self.titleLabel.text = title
+  }
 }

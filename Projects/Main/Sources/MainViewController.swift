@@ -72,7 +72,7 @@ final class MainViewController: UIViewController, MainPresentable, MainViewContr
     tabbarContainer.flex.layout()
     
     parentVCContainerView.pin
-      .top(view.pin.safeArea.top)
+      .top()
       .above(of: tabbarContainer)
       .horizontally()
   }

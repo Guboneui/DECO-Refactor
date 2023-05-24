@@ -3,12 +3,14 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		0DCA45F973C344E48BB702D0 /* ProfileRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048B39FA5519E7450755E0E9 /* ProfileRouter.swift */; };
 		2688F33D0ED1093602AA60CC /* CommonUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34BED36F89AF8CC9CFCF3C97 /* CommonUI.framework */; platformFilter = ios; };
+		2C7BBD4D2A1D7D48001B4E08 /* ProfileInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7BBD4C2A1D7D48001B4E08 /* ProfileInfoView.swift */; };
+		2C7BBD5D2A1D89DF001B4E08 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7BBD5C2A1D89DF001B4E08 /* ProfileView.swift */; };
 		5F3AD90B1754D2940382AFB7 /* Util.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 915876E7527D4AC682D00A43 /* Util.framework */; platformFilter = ios; };
 		A8ACCD5C5DD92A3D577C8115 /* Networking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 869497CD2AD12D27DD3C20BA /* Networking.framework */; platformFilter = ios; };
 		B550F88AB70C987593440492 /* ProfileBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A770A2BE4BE98DDE755F29 /* ProfileBuilder.swift */; };
@@ -32,6 +34,8 @@
 /* Begin PBXFileReference section */
 		048B39FA5519E7450755E0E9 /* ProfileRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRouter.swift; sourceTree = "<group>"; };
 		11DE3B8E9924CCDB8E826805 /* ProfileInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInteractor.swift; sourceTree = "<group>"; };
+		2C7BBD4C2A1D7D48001B4E08 /* ProfileInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInfoView.swift; sourceTree = "<group>"; };
+		2C7BBD5C2A1D89DF001B4E08 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		34BED36F89AF8CC9CFCF3C97 /* CommonUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CommonUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		869497CD2AD12D27DD3C20BA /* Networking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Networking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		915876E7527D4AC682D00A43 /* Util.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Util.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -55,6 +59,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2C7BBD4A2A1D7D21001B4E08 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2C7BBD4C2A1D7D48001B4E08 /* ProfileInfoView.swift */,
+				2C7BBD5C2A1D89DF001B4E08 /* ProfileView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		2C7BBD4B2A1D7D29001B4E08 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				2C7BBD4A2A1D7D21001B4E08 /* Views */,
+				B3A770A2BE4BE98DDE755F29 /* ProfileBuilder.swift */,
+				11DE3B8E9924CCDB8E826805 /* ProfileInteractor.swift */,
+				048B39FA5519E7450755E0E9 /* ProfileRouter.swift */,
+				AA184CE6BB05899BAD69EE10 /* ProfileViewController.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
 		3FEC19802DA26B12A5AF8561 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -86,10 +111,7 @@
 		87183548EBB011E464D5B23E /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				B3A770A2BE4BE98DDE755F29 /* ProfileBuilder.swift */,
-				11DE3B8E9924CCDB8E826805 /* ProfileInteractor.swift */,
-				048B39FA5519E7450755E0E9 /* ProfileRouter.swift */,
-				AA184CE6BB05899BAD69EE10 /* ProfileViewController.swift */,
+				2C7BBD4B2A1D7D29001B4E08 /* Profile */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -145,8 +167,6 @@
 		B6EE1CF9B565DBF4925659E6 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				TargetAttributes = {
-				};
 			};
 			buildConfigurationList = 1924FDE5F30B65F484E696E7 /* Build configuration list for PBXProject "Profile" */;
 			compatibilityVersion = "Xcode 13.0";
@@ -185,6 +205,8 @@
 				B75FFB5BBB99756FB3D0DDDC /* ProfileInteractor.swift in Sources */,
 				0DCA45F973C344E48BB702D0 /* ProfileRouter.swift in Sources */,
 				C1ACFEF10E83276191FEB841 /* ProfileViewController.swift in Sources */,
+				2C7BBD5D2A1D89DF001B4E08 /* ProfileView.swift in Sources */,
+				2C7BBD4D2A1D7D48001B4E08 /* ProfileInfoView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

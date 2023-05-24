@@ -89,9 +89,10 @@ final public class ProductViewController: UIViewController, ProductPresentable, 
   
   private func setupLayouts() {
     searchView.pin
-      .top(10)
+      .top(view.pin.safeArea)
       .horizontally()
       .marginHorizontal(22)
+      .marginTop(10)
       .height(32)
     
     searchView.flex.layout()

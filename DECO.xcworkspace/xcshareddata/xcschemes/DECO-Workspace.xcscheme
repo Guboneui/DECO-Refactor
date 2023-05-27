@@ -154,6 +154,20 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
+               BlueprintIdentifier = "5F9A3E363621471A275570DD"
+               BuildableName = "User.framework"
+               BlueprintName = "User"
+               ReferencedContainer = "container:Projects/User/User.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
                BlueprintIdentifier = "D5BAEF0EE03F09D494B7E734"
                BuildableName = "Util.framework"
                BlueprintName = "Util"

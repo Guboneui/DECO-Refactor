@@ -7,6 +7,7 @@
 
 import UIKit
 
+import User
 import Entity
 import CommonUI
 
@@ -86,7 +87,7 @@ class ProfileInfoView: UIView {
     return CGSize(width: size.width, height: guideLineView.frame.maxY)
   }
   
-  public func setProfileInfo(with profileInfo: ProfileDTO) {
+  public func setProfileInfo(with profileInfo: UserManagerModel) {
     self.followerInfoView.setupText(title: "\(profileInfo.followCount)명", info: ProfileInfoType.FOLLOWER.rawValue)
     self.followingInfoView.setupText(title: "\(profileInfo.followingCount)명", info: ProfileInfoType.FOLLOWING.rawValue)
     self.postingInfoView.setupText(title: "\(profileInfo.boardCount)건", info: ProfileInfoType.POSTING.rawValue)

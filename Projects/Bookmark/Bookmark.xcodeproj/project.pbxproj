@@ -14,6 +14,7 @@
 		8B108EA5C7390BE217A25AF8 /* CommonUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B9C644AB5532D0F6F6D7549 /* CommonUI.framework */; platformFilter = ios; };
 		8E2AA545E351C1CFC4F6C213 /* BookmarkBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A929591859C2325718864003 /* BookmarkBuilder.swift */; };
 		AA9EE3E8F40F861DDDB9FDFF /* Util.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F202FE6CC70163E81F44315F /* Util.framework */; platformFilter = ios; };
+		F5747F21A688CBB1B4C48AC1 /* User.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3486B0578768E731DB7D58AB /* User.framework */; platformFilter = ios; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -31,6 +32,7 @@
 
 /* Begin PBXFileReference section */
 		0D17469EDE7F8C422DF99572 /* Networking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Networking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3486B0578768E731DB7D58AB /* User.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = User.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B9C644AB5532D0F6F6D7549 /* CommonUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CommonUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		76BD577AD93EFB89FF1662CC /* Bookmark.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Bookmark.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		95226F467173820E15EC548E /* BookmarkRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkRouter.swift; sourceTree = "<group>"; };
@@ -48,6 +50,7 @@
 			files = (
 				8B108EA5C7390BE217A25AF8 /* CommonUI.framework in Frameworks */,
 				481BE3294A31AEE37155AE2B /* Networking.framework in Frameworks */,
+				F5747F21A688CBB1B4C48AC1 /* User.framework in Frameworks */,
 				AA9EE3E8F40F861DDDB9FDFF /* Util.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -61,6 +64,7 @@
 				76BD577AD93EFB89FF1662CC /* Bookmark.framework */,
 				6B9C644AB5532D0F6F6D7549 /* CommonUI.framework */,
 				0D17469EDE7F8C422DF99572 /* Networking.framework */,
+				3486B0578768E731DB7D58AB /* User.framework */,
 				F202FE6CC70163E81F44315F /* Util.framework */,
 			);
 			name = Products;

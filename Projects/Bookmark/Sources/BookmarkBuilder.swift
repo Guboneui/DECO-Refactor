@@ -2,7 +2,7 @@
 //  BookmarkBuilder.swift
 //  Bookmark
 //
-//  Created by 구본의 on 2023/05/12.
+//  Created by 구본의 on 2023/05/28.
 //
 
 import RIBs

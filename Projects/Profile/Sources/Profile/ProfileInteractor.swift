@@ -6,6 +6,7 @@
 //
 
 import Util
+import User
 import Entity
 import Networking
 
@@ -24,7 +25,7 @@ public protocol ProfileRouting: ViewableRouting {
 protocol ProfilePresentable: Presentable {
   var listener: ProfilePresentableListener? { get set }
   
-  @MainActor func setUserProfile(with profileInfo: ProfileDTO)
+  func setUserProfile(with profileInfo: UserManagerModel)
 }
 
 public protocol ProfileListener: AnyObject {
@@ -37,47 +38,62 @@ final class ProfileInteractor: PresentableInteractor<ProfilePresentable>, Profil
   weak var router: ProfileRouting?
   weak var listener: ProfileListener?
   
+  private let disposeBag: DisposeBag = DisposeBag()
+  
   private let userProfileRepository: UserProfileRepository
+  private let userManager: MutableUserManagerStream
   var userPostings: BehaviorRelay<[PostingDTO]> = .init(value: [])
   
   init(
     presenter: ProfilePresentable,
-    userProfileRepository: UserProfileRepository
+    userProfileRepository: UserProfileRepository,
+    userManager: MutableUserManagerStream
   ) {
     self.userProfileRepository = userProfileRepository
+    self.userManager = userManager
     super.init(presenter: presenter)
     presenter.listener = self
   }
   
   override func didBecomeActive() {
     super.didBecomeActive()
-    self.fetchUserPostings(id: 72, userID: 72, createdAt: Int.max)
-    self.fetchUserProfile(id: 72, userID: 72)
+    self.setUserProfile()
+    self.fetchUserPostings(
+      id: userManager.userID,
+      userID: userManager.userID,
+      createdAt: Int.max
+    )
   }
   
   override func willResignActive() {
     super.willResignActive()
     // TODO: Pause any business logic.
   }
+ 
   
-  private func fetchUserProfile(id: Int, userID: Int) {
-//    Task.detached { [weak self] in
-//      guard let self else { return }
-//      if let profile = await self.userProfileRepository.userProfile(id: id, userID: userID) {
-//        await self.presenter.setUserProfile(with: profile)
-//      }
-//    }
+  private func setUserProfile() {
+    self.userManager.userInfo
+      .observe(on: MainScheduler.instance)
+      .subscribe(onNext: { [weak self] in
+        guard let self else { return }
+        self.presenter.setUserProfile(with: $0)
+        
+      }).disposed(by: disposeBag)
   }
   
   func fetchUserPostings(id: Int, userID: Int, createdAt: Int) {
-//    Task.detached { [weak self] in
-//      guard let self else { return }
-//      let postings = await self.userProfileRepository.userPostings(id: id, userID: userID, createdAt: createdAt)
-//      let prevData = self.userPostings.value
-//      if let postings, !postings.isEmpty {
-//        self.userPostings.accept(prevData + postings)
-//      }
-//    }
+    Task.detached { [weak self] in
+      guard let self else { return }
+      let postings = await self.userProfileRepository.userPostings(
+        id: userID,
+        userID: userID,
+        createdAt: createdAt
+      )
+      let prevData = self.userPostings.value
+      if let postings, !postings.isEmpty {
+        self.userPostings.accept(prevData + postings)
+      }
+    }
   }
   
   func pushAppSettingVC() {

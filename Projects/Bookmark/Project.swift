@@ -2,7 +2,7 @@
 //  Project.swift
 //  ProjectDescriptionHelpers
 //
-//  Created by 구본의 on 2023/05/12.
+//  Created by 구본의 on 2023/05/28.
 //
 
 import ProjectDescription
@@ -22,8 +22,8 @@ let packages: [Package] = [
 
 let dependencies: [TargetDependency] = [
   .project(target: "CommonUI", path: "../CommonUI"),
-  .project(target: "Util", path: "../Util"),
-  .project(target: "Networking", path: "../Networking"),
+  .project(target: "User", path: "../User"),
+  .project(target: "Networking", path: "../Networking")
 ]
 
 let bookmark = Target(
@@ -45,6 +45,5 @@ let project = Project(
   packages: packages,
   targets: [bookmark]
 )
-
 
 

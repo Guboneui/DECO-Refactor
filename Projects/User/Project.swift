@@ -2,7 +2,7 @@
 //  Project.swift
 //  ProjectDescriptionHelpers
 //
-//  Created by 구본의 on 2023/05/11.
+//  Created by 구본의 on 2023/05/28.
 //
 
 import ProjectDescription
@@ -10,7 +10,6 @@ import ProjectDescriptionHelpers
 
 let setting: Settings = .settings(
   base: [
-    "GCC_PREPROCESSOR_DEFINITIONS" : "FLEXLAYOUT_SWIFT_PACKAGE=1",
     "DEVELOPMENT_TEAM": "VKGAQDGK5R"
   ],
   configurations: [],
@@ -21,17 +20,15 @@ let packages: [Package] = [
 ]
 
 let dependencies: [TargetDependency] = [
-  .project(target: "CommonUI", path: "../CommonUI"),
-  .project(target: "User", path: "../User"),
-  .project(target: "Networking", path: "../Networking"),
+  .project(target: "Util", path: "../Util")
 ]
 
-let home = Target(
-  name: "Home",
+let user = Target(
+  name: "User",
   platform: .iOS,
-  product: .framework,
-  productName: "Home",
-  bundleId: "com.deco.ios.home",
+  product: .staticFramework,
+  productName: "User",
+  bundleId: "com.deco.ios.user",
   deploymentTarget: .iOS(targetVersion: "15.0", devices: [.iphone]),
   infoPlist: .default,
   sources: ["Sources/**"],
@@ -41,8 +38,8 @@ let home = Target(
 )
 
 let project = Project(
-  name: "Home",
+  name: "User",
   packages: packages,
-  targets: [home]
+  targets: [user]
 )
 

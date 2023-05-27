@@ -7,6 +7,7 @@
 
 import UIKit
 
+import User
 import CommonUI
 import Entity
 
@@ -19,7 +20,6 @@ import RxRelay
 protocol ProfilePresentableListener: AnyObject {
   var userPostings: BehaviorRelay<[PostingDTO]> { get }
   func fetchUserPostings(id: Int, userID: Int, createdAt: Int)
-  
   func pushAppSettingVC()
   func pushProfileEditVC()
 }
@@ -230,7 +230,7 @@ final public class ProfileViewController: UIViewController, ProfilePresentable, 
       }.disposed(by: disposeBag)
   }
   
-  func setUserProfile(with profileInfo: ProfileDTO) {
+  func setUserProfile(with profileInfo: UserManagerModel) {
     self.stickyNavTitleLabel.text = profileInfo.nickname
     self.profileView.setProfile(with: profileInfo)
     self.profileInfoView.setProfileInfo(with: profileInfo)

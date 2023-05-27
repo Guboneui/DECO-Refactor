@@ -6,14 +6,20 @@
 //  Copyright © 2023 boni. All rights reserved.
 //
 
-import RIBs
+
 import UIKit
-import Login
+
 import Main
+import Login
+import User
+import Profile
 import Networking
+
+import RIBs
 
 protocol AppRootDependency: Dependency {
 	var userControlRepository: UserControlRepositoryImpl { get }
+	var userManager: MutableUserManagerStream { get }
 }
 
 final class AppRootComponent:
@@ -21,7 +27,10 @@ final class AppRootComponent:
 	LoginMainDependency,
 	MainDependency
 {
+	
 	var userControlRepository: UserControlRepositoryImpl { dependency.userControlRepository }
+	var userProfileRepository: UserProfileRepository { UserProfileRepositoryImpl() }
+	var userManager: MutableUserManagerStream { dependency.userManager }
 }
 
 // MARK: - Builder
@@ -40,7 +49,11 @@ final class AppRootBuilder: Builder<AppRootDependency>, AppRootBuildable {
 	func build(with window: UIWindow) -> LaunchRouting {
 		let viewController = AppRootViewController()
 		let component = AppRootComponent(dependency: dependency)
-		let interactor = AppRootInteractor(presenter: viewController)
+		let interactor = AppRootInteractor(
+			presenter: viewController,
+			userProfileRepository: component.userProfileRepository,
+			userManager: component.userManager
+		)
 		
 		let loginBuilder = LoginMainBuilder(dependency: component)
 		let mainBuilder = MainBuilder(dependency: component)

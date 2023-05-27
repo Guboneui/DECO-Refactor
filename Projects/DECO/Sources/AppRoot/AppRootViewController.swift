@@ -12,7 +12,6 @@ import UIKit
 import CommonUI
 import Login
 
-
 protocol AppRootPresentableListener: AnyObject {
 	func moveToLogin()
 	func moveToMain()

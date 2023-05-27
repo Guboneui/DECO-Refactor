@@ -5,14 +5,14 @@
 //  Created by 구본의 on 2023/05/12.
 //
 
+import User
 import Networking
 
 import RIBs
 
 public protocol ProfileDependency: Dependency
 {
-  // TODO: Declare the set of dependencies required by this RIB, but cannot be
-  // created by this RIB.
+  var userManager: MutableUserManagerStream { get }
 }
 
 final class ProfileComponent:
@@ -47,7 +47,8 @@ final public class ProfileBuilder: Builder<ProfileDependency>, ProfileBuildable 
     
     let interactor = ProfileInteractor(
       presenter: viewController,
-      userProfileRepository: component.userProfileRepository
+      userProfileRepository: component.userProfileRepository,
+      userManager: dependency.userManager
     )
     interactor.listener = listener
     return ProfileRouter(

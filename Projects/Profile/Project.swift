@@ -22,8 +22,9 @@ let packages: [Package] = [
 
 let dependencies: [TargetDependency] = [
   .project(target: "CommonUI", path: "../CommonUI"),
-  .project(target: "Util", path: "../Util"),
+  .project(target: "User", path: "../User"),
   .project(target: "Networking", path: "../Networking"),
+  
 ]
 
 let profile = Target(

@@ -8,6 +8,7 @@
 import UIKit
 
 import Util
+import User
 import Entity
 import CommonUI
 
@@ -121,7 +122,7 @@ class ProfileView: UIView {
     return CGSize(width: size.width, height: size.width)
   }
   
-  public func setProfile(with profileInfo: ProfileDTO) {    
+  public func setProfile(with profileInfo: UserManagerModel) {    
     self.backgroundImageView.loadImage(imageUrl: profileInfo.backgroundUrl)
     self.profileImageView.loadImage(imageUrl: profileInfo.profileUrl)
     self.profileTitleLabel.text = profileInfo.profileName

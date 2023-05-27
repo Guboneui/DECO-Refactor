@@ -32,6 +32,10 @@ class ProfileInfoView: UIView {
     $0.distribution = .fillEqually
   }
   
+  private let guideLineView: UIView = UIView().then {
+    $0.backgroundColor = .DecoColor.lightGray1
+  }
+  
   override init(frame: CGRect) {
     super.init(frame: frame)
     self.setupViews()
@@ -51,7 +55,7 @@ class ProfileInfoView: UIView {
   private func setupViews() {
     self.addSubview(segmentView)
     self.addSubview(profileStackView)
-
+    self.addSubview(guideLineView)
   }
   
   private func setupLayouts() {
@@ -64,9 +68,16 @@ class ProfileInfoView: UIView {
     profileStackView.pin
       .all()
       .height(52)
+    
+    guideLineView.pin
+      .below(of: profileStackView)
+      .horizontally()
+      .height(0.25)
+    
+    
   }
   
   override func sizeThatFits(_ size: CGSize) -> CGSize {
-    return CGSize(width: size.width, height: profileStackView.frame.maxY)
+    return CGSize(width: size.width, height: guideLineView.frame.maxY)
   }
 }

@@ -8,7 +8,7 @@
 import Moya
 import Foundation
 
-protocol UserControlRepository {
+public protocol UserControlRepository {
   func checkNickname(nickname: String) async -> Bool?
 }
 

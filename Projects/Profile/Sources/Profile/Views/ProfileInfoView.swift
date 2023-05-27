@@ -7,10 +7,17 @@
 
 import UIKit
 
+import Entity
 import CommonUI
 
 import Then
 import PinLayout
+
+enum ProfileInfoType: String {
+  case FOLLOWER = "팔로워"
+  case FOLLOWING = "팔로잉"
+  case POSTING = "게시글"
+}
 
 class ProfileInfoView: UIView {
   
@@ -59,12 +66,12 @@ class ProfileInfoView: UIView {
   }
   
   private func setupLayouts() {
-
+    
     segmentView.pin
       .vCenter()
       .horizontally()
       .height(11)
-  
+    
     profileStackView.pin
       .all()
       .height(52)
@@ -73,11 +80,15 @@ class ProfileInfoView: UIView {
       .below(of: profileStackView)
       .horizontally()
       .height(0.25)
-    
-    
   }
   
   override func sizeThatFits(_ size: CGSize) -> CGSize {
     return CGSize(width: size.width, height: guideLineView.frame.maxY)
+  }
+  
+  public func setProfileInfo(with profileInfo: ProfileDTO) {
+    self.followerInfoView.setupText(title: "\(profileInfo.followCount)명", info: ProfileInfoType.FOLLOWER.rawValue)
+    self.followingInfoView.setupText(title: "\(profileInfo.followingCount)명", info: ProfileInfoType.FOLLOWING.rawValue)
+    self.postingInfoView.setupText(title: "\(profileInfo.boardCount)건", info: ProfileInfoType.POSTING.rawValue)
   }
 }

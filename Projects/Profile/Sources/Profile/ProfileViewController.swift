@@ -31,6 +31,10 @@ final public class ProfileViewController: UIViewController, ProfilePresentable, 
   }
   
   private let profileView: ProfileView = ProfileView()
+  private let settingButton: UIButton = UIButton(type: .system).then {
+    $0.setImage(.DecoImage.setting, for: .normal)
+    $0.tintColor = .white
+  }
   
   private let profileEditButton: UIButton = UIButton(type: .system).then {
     $0.setTitle("프로필 수정", for: .normal)
@@ -88,6 +92,7 @@ final public class ProfileViewController: UIViewController, ProfilePresentable, 
   private func setupViews() {
     self.view.addSubview(scrollView)
     self.scrollView.addSubview(profileView)
+    self.profileView.addSubview(settingButton)
     self.scrollView.addSubview(profileEditButton)
     self.scrollView.addSubview(profileInfoView)
     self.scrollView.addSubview(userPostingCollectionView)
@@ -103,6 +108,12 @@ final public class ProfileViewController: UIViewController, ProfilePresentable, 
       .top(topMargin)
       .horizontally()
       .height(UIScreen.main.bounds.width)
+    
+    settingButton.pin
+      .topRight()
+      .size(35)
+      .marginTop(UIDevice.current.hasNotch ? 48 : 20)
+      .marginRight(16)
     
     profileEditButton.pin
       .below(of: profileView)
@@ -207,6 +218,13 @@ final public class ProfileViewController: UIViewController, ProfilePresentable, 
         print("aksdjfa;l")
       }.disposed(by: disposeBag)
     
+  }
+  
+  func setUserProfile(with profileInfo: ProfileDTO) {
+    self.stickyNavTitleLabel.text = profileInfo.nickname
+    self.profileView.setProfile(with: profileInfo)
+    self.profileInfoView.setProfileInfo(with: profileInfo)
+    self.stickyProfileInfoView.setProfileInfo(with: profileInfo)
   }
 }
 

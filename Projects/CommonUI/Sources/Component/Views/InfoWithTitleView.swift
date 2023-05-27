@@ -13,14 +13,12 @@ public class InfowithTitleVlew: UIView {
     $0.font = .DecoFont.getFont(with: .Suit, type: .bold, size: 12)
     $0.textColor = .DecoColor.darkGray1
     $0.textAlignment = .center
-    $0.text = "aa명"
   }
   
   private let infoLabel: UILabel = UILabel().then {
     $0.font = .DecoFont.getFont(with: .Suit, type: .medium, size: 12)
     $0.textColor = .DecoColor.darkGray1
     $0.textAlignment = .center
-    $0.text = "팔로워"
   }
   
   public override init(frame: CGRect) {
@@ -55,6 +53,11 @@ public class InfowithTitleVlew: UIView {
       .marginTop(4)
       .bottom(12)
       .sizeToFit(.width)
-    
+  }
+  
+  public func setupText(title: String, info: String) {
+    self.titleLabel.text = title
+    self.infoLabel.text = info
+    self.setupLayouts()
   }
 }

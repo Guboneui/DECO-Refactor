@@ -18,10 +18,12 @@ public protocol ProfileRouting: ViewableRouting {
 
 protocol ProfilePresentable: Presentable {
   var listener: ProfilePresentableListener? { get set }
-  // TODO: Declare methods the interactor can invoke the presenter to present data.
+  
+  @MainActor func setUserProfile(with profileInfo: ProfileDTO)
 }
 
 public protocol ProfileListener: AnyObject {
+  
   // TODO: Declare methods the interactor can invoke to communicate with other RIBs.
 }
 
@@ -45,12 +47,21 @@ final class ProfileInteractor: PresentableInteractor<ProfilePresentable>, Profil
   override func didBecomeActive() {
     super.didBecomeActive()
     self.fetchUserPostings(id: 72, userID: 72, createdAt: Int.max)
-    // TODO: Implement business logic here.
+    self.fetchUserProfile(id: 72, userID: 72)
   }
   
   override func willResignActive() {
     super.willResignActive()
     // TODO: Pause any business logic.
+  }
+  
+  private func fetchUserProfile(id: Int, userID: Int) {
+    Task.detached { [weak self] in
+      guard let self else { return }
+      if let profile = await self.userProfileRepository.userProfile(id: id, userID: userID) {
+        await self.presenter.setUserProfile(with: profile)
+      }
+    }
   }
   
   func fetchUserPostings(id: Int, userID: Int, createdAt: Int) {

@@ -7,6 +7,8 @@
 
 import UIKit
 
+import Util
+import Entity
 import CommonUI
 
 import Then
@@ -23,31 +25,32 @@ class ProfileView: UIView {
     $0.backgroundColor = .DecoColor.blackColor.withAlphaComponent(0.2)
   }
   
-  private let profileImageView: UIImageView = UIImageView().then {
-    $0.backgroundColor = .white
-    $0.layer.cornerRadius = 45
+  private let profileImageShadowView: UIView = UIView().then {
     $0.layer.shadowColor = UIColor.DecoColor.blackColor.withAlphaComponent(0.25).cgColor
     $0.layer.shadowOffset = CGSize(width: 0, height: 3)
     $0.layer.shadowOpacity = 1.0
     $0.layer.shadowRadius = 4
+    $0.layer.cornerRadius = 45
+  }
+  
+  private let profileImageView: UIImageView = UIImageView().then {
+    $0.backgroundColor = .white
+    $0.makeCornerRadius(radius: 45)
   }
   
   private let profileTitleLabel: UILabel = UILabel().then {
-    $0.text = "Description"
     $0.textAlignment = .center
     $0.font = .DecoFont.getFont(with: .Suit, type: .bold, size: 20)
     $0.textColor = .white
   }
   
   private let profileNicknameLabel: UILabel = UILabel().then {
-    $0.text = "Nickname"
     $0.textAlignment = .center
     $0.font = .DecoFont.getFont(with: .Suit, type: .bold, size: 16)
     $0.textColor = .white
   }
   
   private let profileDescriptionLabel: UILabel = UILabel().then {
-    $0.text = "abcdeabcdeabcdeabcdeabcdeabcdeabcdeabcdeabcdeabcde"
     $0.textAlignment = .center
     $0.font = .DecoFont.getFont(with: .Suit, type: .medium, size: 12)
     $0.textColor = .white
@@ -71,7 +74,8 @@ class ProfileView: UIView {
   private func setupViews() {
     self.addSubview(backgroundImageView)
     self.addSubview(backgroundGrayView)
-    self.addSubview(profileImageView)
+    self.addSubview(profileImageShadowView)
+    self.profileImageShadowView.addSubview(profileImageView)
     self.addSubview(profileTitleLabel)
     self.addSubview(profileNicknameLabel)
     self.addSubview(profileDescriptionLabel)
@@ -81,10 +85,13 @@ class ProfileView: UIView {
     backgroundImageView.pin.all()
     backgroundGrayView.pin.all()
     
-    profileImageView.pin
+    profileImageShadowView.pin
       .center()
       .size(90)
       .marginBottom(12)
+    
+    profileImageView.pin
+      .all()
     
     profileTitleLabel.pin
       .above(of: profileImageView)
@@ -112,6 +119,14 @@ class ProfileView: UIView {
   
   override func sizeThatFits(_ size: CGSize) -> CGSize {
     return CGSize(width: size.width, height: size.width)
+  }
+  
+  public func setProfile(with profileInfo: ProfileDTO) {    
+    self.backgroundImageView.loadImage(imageUrl: profileInfo.backgroundUrl)
+    self.profileImageView.loadImage(imageUrl: profileInfo.profileUrl)
+    self.profileTitleLabel.text = profileInfo.profileName
+    self.profileNicknameLabel.text = profileInfo.nickname
+    self.profileDescriptionLabel.text = profileInfo.profileDescription
   }
 }
 

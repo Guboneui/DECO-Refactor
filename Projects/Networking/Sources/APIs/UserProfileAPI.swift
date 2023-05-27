@@ -9,7 +9,9 @@ import Foundation
 import Moya
 
 enum UserProfileAPI {
+  case userProfile(Int, Int)
   case userPostings(Int, Int, Int)
+  
 }
 
 extension UserProfileAPI: TargetType {
@@ -19,6 +21,8 @@ extension UserProfileAPI: TargetType {
   
   var path: String {
     switch self {
+    case .userProfile(let id, _):
+      return "/profile/\(id)"
     case .userPostings(let id, _, _):
       return "/board/list/\(id)"
     }
@@ -26,13 +30,15 @@ extension UserProfileAPI: TargetType {
   
   var method: Moya.Method {
     switch self {
-    case .userPostings:
+    case .userProfile, .userPostings:
       return .get
     }
   }
   
   var task: Task {
     switch self {
+    case .userProfile(_, let userID):
+      return .requestParameters(parameters: ["userId":userID], encoding: URLEncoding.queryString)
     case .userPostings(_, let userID, let createdAt):
       return .requestParameters(parameters: ["userId":userID, "createdAt":createdAt], encoding: URLEncoding.queryString)
     }

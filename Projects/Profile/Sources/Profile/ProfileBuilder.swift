@@ -9,12 +9,16 @@ import Networking
 
 import RIBs
 
-public protocol ProfileDependency: Dependency {
+public protocol ProfileDependency: Dependency
+{
   // TODO: Declare the set of dependencies required by this RIB, but cannot be
   // created by this RIB.
 }
 
-final class ProfileComponent: Component<ProfileDependency> {
+final class ProfileComponent:
+  Component<ProfileDependency>,
+  AppSettingDependency
+{
   fileprivate var userProfileRepository: UserProfileRepository { UserProfileRepositoryImpl() }
   
   // TODO: Declare 'fileprivate' dependencies that are only used by this RIB.
@@ -36,11 +40,17 @@ final public class ProfileBuilder: Builder<ProfileDependency>, ProfileBuildable 
     let component = ProfileComponent(dependency: dependency)
     let viewController = ProfileViewController()
 
+    let appSettingBuildable = AppSettingBuilder(dependency: component)
+    
     let interactor = ProfileInteractor(
       presenter: viewController,
       userProfileRepository: component.userProfileRepository
     )
     interactor.listener = listener
-    return ProfileRouter(interactor: interactor, viewController: viewController)
+    return ProfileRouter(
+      interactor: interactor,
+      viewController: viewController,
+      appSettingBuildable: appSettingBuildable
+    )
   }
 }

@@ -13,6 +13,7 @@
 		25D11A48D5BD5B11E545DC64 /* SmallTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBC5C9522A829AB27CB37F0 /* SmallTextCell.swift */; };
 		26A89C8ABDA7272793E1DF1A /* Image.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42C46A1D137F6D04C3967B64 /* Image.xcassets */; };
 		2C7BBD5F2A1D8C7C001B4E08 /* InfoWithTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7BBD5E2A1D8C7C001B4E08 /* InfoWithTitleView.swift */; };
+		2C7BBD702A2215E9001B4E08 /* LinkWithImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7BBD6F2A2215E9001B4E08 /* LinkWithImageView.swift */; };
 		39EC6BCA36C6D9020E2FBEEE /* SUIT-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7D7B839FF2BD4170FF0A7D18 /* SUIT-Bold.otf */; };
 		3B93A3AC2360B6AA4211F43D /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB2A151EF61A0078BCB1E57 /* UILabel+Extension.swift */; };
 		3E07DEB89DFB0D7F64B67BC4 /* CheckButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E42D1D3EF0292998585D8C3 /* CheckButton.swift */; };
@@ -70,6 +71,7 @@
 		15CD4B8F263EBED9EE862DEC /* NotoSansKR-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Bold.otf"; sourceTree = "<group>"; };
 		2AAA16EB10167F4F8A589DF2 /* SUIT-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUIT-Light.otf"; sourceTree = "<group>"; };
 		2C7BBD5E2A1D8C7C001B4E08 /* InfoWithTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoWithTitleView.swift; sourceTree = "<group>"; };
+		2C7BBD6F2A2215E9001B4E08 /* LinkWithImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkWithImageView.swift; sourceTree = "<group>"; };
 		2EA530434C111C4BB344B33F /* NotoSansKR-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Black.otf"; sourceTree = "<group>"; };
 		411996B5464DF570E5FFE779 /* TouchAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchAnimationView.swift; sourceTree = "<group>"; };
 		42C46A1D137F6D04C3967B64 /* Image.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Image.xcassets; sourceTree = "<group>"; };
@@ -251,8 +253,6 @@
 				FFD1446DE747CE010D4268D6 /* Buttons */,
 				869D9F17D0C5CE03A4161A0C /* Cells */,
 				EAEAEB2B0A978F44126F19FA /* Views */,
-				D08B2B67BBE804590138C890 /* NavigationBar.swift */,
-				4A5A7A886CEA9E4C08C898EF /* TitleSubtitleView.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -269,8 +269,11 @@
 		EAEAEB2B0A978F44126F19FA /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				D08B2B67BBE804590138C890 /* NavigationBar.swift */,
+				4A5A7A886CEA9E4C08C898EF /* TitleSubtitleView.swift */,
 				411996B5464DF570E5FFE779 /* TouchAnimationView.swift */,
 				2C7BBD5E2A1D8C7C001B4E08 /* InfoWithTitleView.swift */,
+				2C7BBD6F2A2215E9001B4E08 /* LinkWithImageView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -395,6 +398,7 @@
 				7DC59B80630854028C7C80F4 /* TuistBundle+CommonUI.swift in Sources */,
 				8015832F17AC96CA7BBDEA57 /* TuistFonts+CommonUI.swift in Sources */,
 				3E07DEB89DFB0D7F64B67BC4 /* CheckButton.swift in Sources */,
+				2C7BBD702A2215E9001B4E08 /* LinkWithImageView.swift in Sources */,
 				5BC51719418FAA2AD3BB1042 /* DefaultButton.swift in Sources */,
 				93996CA08EDB1D537507DCA3 /* ImageCell.swift in Sources */,
 				7EEACB832494A5A6432EEC72 /* SegmentTableViewCell.swift in Sources */,

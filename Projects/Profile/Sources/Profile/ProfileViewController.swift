@@ -19,6 +19,8 @@ import RxRelay
 protocol ProfilePresentableListener: AnyObject {
   var userPostings: BehaviorRelay<[PostingDTO]> { get }
   func fetchUserPostings(id: Int, userID: Int, createdAt: Int)
+  
+  func pushAppSettingVC()
 }
 
 final public class ProfileViewController: UIViewController, ProfilePresentable, ProfileViewControllable {
@@ -80,8 +82,8 @@ final public class ProfileViewController: UIViewController, ProfilePresentable, 
     super.viewDidLoad()
     self.setupViews()
     self.setupBinds()
+    self.setupGestures()
     self.setupProfilePostingCollectionView()
-    
   }
   
   public override func viewDidLayoutSubviews() {
@@ -218,6 +220,14 @@ final public class ProfileViewController: UIViewController, ProfilePresentable, 
         print("aksdjfa;l")
       }.disposed(by: disposeBag)
     
+  }
+  
+  private func setupGestures() {
+    self.settingButton.tap()
+      .bind { [weak self] in
+        guard let self else { return }
+        self.listener?.pushAppSettingVC()
+      }.disposed(by: disposeBag)
   }
   
   func setUserProfile(with profileInfo: ProfileDTO) {

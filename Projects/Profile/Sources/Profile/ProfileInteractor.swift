@@ -5,6 +5,7 @@
 //  Created by 구본의 on 2023/05/12.
 //
 
+import Util
 import Entity
 import Networking
 
@@ -13,7 +14,8 @@ import RxSwift
 import RxRelay
 
 public protocol ProfileRouting: ViewableRouting {
-  // TODO: Declare methods the interactor can invoke to manage sub-tree via the router.
+  func attachAppSettingVC()
+  func detachAppSettingVC(with popType: PopType)
 }
 
 protocol ProfilePresentable: Presentable {
@@ -73,5 +75,13 @@ final class ProfileInteractor: PresentableInteractor<ProfilePresentable>, Profil
         self.userPostings.accept(prevData + postings)
       }
     }
+  }
+  
+  func pushAppSettingVC() {
+    router?.attachAppSettingVC()
+  }
+  
+  func detachAppSettingVC(with popType: PopType) {
+    router?.detachAppSettingVC(with: popType)
   }
 }

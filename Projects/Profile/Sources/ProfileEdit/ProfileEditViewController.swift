@@ -29,6 +29,12 @@ final class ProfileEditViewController: UIViewController, ProfileEditPresentable,
     showGuideLine: false
   )
   
+  private let confirmButton: UIButton = UIButton(type: .system).then {
+    $0.setTitle("확인", for: .normal)
+    $0.titleLabel?.font = .DecoFont.getFont(with: .Suit, type: .medium, size: 12)
+    $0.tintColor = .DecoColor.darkGray2
+  }
+  
   private let backgroundImageView: UIImageView = UIImageView().then {
     $0.backgroundColor = .white
     $0.contentMode = .scaleAspectFill
@@ -141,6 +147,7 @@ final class ProfileEditViewController: UIViewController, ProfileEditPresentable,
   
   private func setupViews() {
     self.view.addSubview(navigationBar)
+    self.navigationBar.addSubview(confirmButton)
     self.view.addSubview(backgroundImageView)
     self.view.addSubview(backgroundGrayView)
     self.backgroundGrayView.addSubview(profileImageShadowView)
@@ -163,6 +170,11 @@ final class ProfileEditViewController: UIViewController, ProfileEditPresentable,
       .top(view.pin.safeArea)
       .horizontally()
       .sizeToFit(.width)
+    
+    confirmButton.pin
+      .vCenter()
+      .right(16)
+      .sizeToFit()
     
     backgroundImageView.pin
       .below(of: navigationBar)

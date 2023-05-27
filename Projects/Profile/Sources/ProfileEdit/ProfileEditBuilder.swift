@@ -5,11 +5,12 @@
 //  Created by 구본의 on 2023/05/28.
 //
 
+import User
+
 import RIBs
 
 protocol ProfileEditDependency: Dependency {
-    // TODO: Declare the set of dependencies required by this RIB, but cannot be
-    // created by this RIB.
+  var userManager: MutableUserManagerStream { get }
 }
 
 final class ProfileEditComponent: Component<ProfileEditDependency> {
@@ -29,11 +30,14 @@ final class ProfileEditBuilder: Builder<ProfileEditDependency>, ProfileEditBuild
         super.init(dependency: dependency)
     }
 
-    func build(withListener listener: ProfileEditListener) -> ProfileEditRouting {
-        let component = ProfileEditComponent(dependency: dependency)
-        let viewController = ProfileEditViewController()
-        let interactor = ProfileEditInteractor(presenter: viewController)
-        interactor.listener = listener
-        return ProfileEditRouter(interactor: interactor, viewController: viewController)
-    }
+  func build(withListener listener: ProfileEditListener) -> ProfileEditRouting {
+    let component = ProfileEditComponent(dependency: dependency)
+    let viewController = ProfileEditViewController()
+    let interactor = ProfileEditInteractor(
+      presenter: viewController,
+      userManager: dependency.userManager
+    )
+    interactor.listener = listener
+    return ProfileEditRouter(interactor: interactor, viewController: viewController)
+  }
 }

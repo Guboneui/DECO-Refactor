@@ -7,6 +7,7 @@
 
 import UIKit
 
+import User
 import Util
 import CommonUI
 
@@ -305,6 +306,14 @@ final class ProfileEditViewController: UIViewController, ProfileEditPresentable,
         guard let self else { return }
         self.setDescriptionTextViewAutoHeight()
       }.disposed(by: disposeBag)
+  }
+  
+  func defaultUserProfileInfo(with userInfo: UserManagerModel) {
+    self.editProfileNameTextField.text = userInfo.profileName
+    self.editProfileNickNameTextField.text = userInfo.nickname
+    self.backgroundImageView.loadImage(imageUrl: userInfo.backgroundUrl)
+    self.profileImageView.loadImage(imageUrl: userInfo.profileUrl)
+    self.editProfileDescriptionTextView.text = userInfo.profileDescription
   }
 }
 

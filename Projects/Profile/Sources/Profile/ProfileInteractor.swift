@@ -16,6 +16,9 @@ import RxRelay
 public protocol ProfileRouting: ViewableRouting {
   func attachAppSettingVC()
   func detachAppSettingVC(with popType: PopType)
+  
+  func attachProfileEditVC()
+  func detachProfileEditVC(with popType: PopType)
 }
 
 protocol ProfilePresentable: Presentable {
@@ -58,23 +61,23 @@ final class ProfileInteractor: PresentableInteractor<ProfilePresentable>, Profil
   }
   
   private func fetchUserProfile(id: Int, userID: Int) {
-    Task.detached { [weak self] in
-      guard let self else { return }
-      if let profile = await self.userProfileRepository.userProfile(id: id, userID: userID) {
-        await self.presenter.setUserProfile(with: profile)
-      }
-    }
+//    Task.detached { [weak self] in
+//      guard let self else { return }
+//      if let profile = await self.userProfileRepository.userProfile(id: id, userID: userID) {
+//        await self.presenter.setUserProfile(with: profile)
+//      }
+//    }
   }
   
   func fetchUserPostings(id: Int, userID: Int, createdAt: Int) {
-    Task.detached { [weak self] in
-      guard let self else { return }
-      let postings = await self.userProfileRepository.userPostings(id: id, userID: userID, createdAt: createdAt)
-      let prevData = self.userPostings.value
-      if let postings, !postings.isEmpty {
-        self.userPostings.accept(prevData + postings)
-      }
-    }
+//    Task.detached { [weak self] in
+//      guard let self else { return }
+//      let postings = await self.userProfileRepository.userPostings(id: id, userID: userID, createdAt: createdAt)
+//      let prevData = self.userPostings.value
+//      if let postings, !postings.isEmpty {
+//        self.userPostings.accept(prevData + postings)
+//      }
+//    }
   }
   
   func pushAppSettingVC() {
@@ -83,5 +86,13 @@ final class ProfileInteractor: PresentableInteractor<ProfilePresentable>, Profil
   
   func detachAppSettingVC(with popType: PopType) {
     router?.detachAppSettingVC(with: popType)
+  }
+  
+  func pushProfileEditVC() {
+    router?.attachProfileEditVC()
+  }
+  
+  func detachProfileEditVC(with popType: PopType) {
+    router?.detachProfileEditVC(with: popType)
   }
 }

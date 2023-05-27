@@ -21,6 +21,7 @@ protocol ProfilePresentableListener: AnyObject {
   func fetchUserPostings(id: Int, userID: Int, createdAt: Int)
   
   func pushAppSettingVC()
+  func pushProfileEditVC()
 }
 
 final public class ProfileViewController: UIViewController, ProfilePresentable, ProfileViewControllable {
@@ -213,13 +214,6 @@ final public class ProfileViewController: UIViewController, ProfilePresentable, 
         self.profileInfoView.isHidden = isStickyOffset
         
       }.disposed(by: disposeBag)
-    
-    
-    profileEditButton.rx.tap
-      .bind {
-        print("aksdjfa;l")
-      }.disposed(by: disposeBag)
-    
   }
   
   private func setupGestures() {
@@ -227,6 +221,12 @@ final public class ProfileViewController: UIViewController, ProfilePresentable, 
       .bind { [weak self] in
         guard let self else { return }
         self.listener?.pushAppSettingVC()
+      }.disposed(by: disposeBag)
+    
+    self.profileEditButton.tap()
+      .bind { [weak self] in
+        guard let self else { return }
+        self.listener?.pushProfileEditVC()
       }.disposed(by: disposeBag)
   }
   

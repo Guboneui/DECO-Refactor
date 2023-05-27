@@ -17,7 +17,9 @@ public protocol ProfileDependency: Dependency
 
 final class ProfileComponent:
   Component<ProfileDependency>,
-  AppSettingDependency
+  AppSettingDependency,
+  ProfileEditDependency
+
 {
   fileprivate var userProfileRepository: UserProfileRepository { UserProfileRepositoryImpl() }
   
@@ -41,6 +43,7 @@ final public class ProfileBuilder: Builder<ProfileDependency>, ProfileBuildable 
     let viewController = ProfileViewController()
 
     let appSettingBuildable = AppSettingBuilder(dependency: component)
+    let profileEditBuildable = ProfileEditBuilder(dependency: component)
     
     let interactor = ProfileInteractor(
       presenter: viewController,
@@ -50,7 +53,8 @@ final public class ProfileBuilder: Builder<ProfileDependency>, ProfileBuildable 
     return ProfileRouter(
       interactor: interactor,
       viewController: viewController,
-      appSettingBuildable: appSettingBuildable
+      appSettingBuildable: appSettingBuildable,
+      profileEditBuildable: profileEditBuildable
     )
   }
 }

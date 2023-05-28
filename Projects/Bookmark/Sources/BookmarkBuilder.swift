@@ -12,7 +12,11 @@ public protocol BookmarkDependency: Dependency {
   // created by this RIB.
 }
 
-final class BookmarkComponent: Component<BookmarkDependency> {
+final class BookmarkComponent:
+  Component<BookmarkDependency>,
+  PhotoBookmarkDependency,
+  ProductBookmarkDependency
+{
   
   // TODO: Declare 'fileprivate' dependencies that are only used by this RIB.
 }
@@ -32,8 +36,17 @@ final public class BookmarkBuilder: Builder<BookmarkDependency>, BookmarkBuildab
   public func build(withListener listener: BookmarkListener) -> BookmarkRouting {
     let component = BookmarkComponent(dependency: dependency)
     let viewController = BookmarkViewController()
-    let interactor = BookmarkInteractor(presenter: viewController)
+    let interactor = BookmarkInteractor(presenter: viewController, viewControllerables: [])
     interactor.listener = listener
-    return BookmarkRouter(interactor: interactor, viewController: viewController)
+    
+    let photoBookmarkBuildable = PhotoBookmarkBuilder(dependency: component)
+    let productBookmarkBuildable = ProductBookmarkBuilder(dependency: component)
+    
+    return BookmarkRouter(
+      interactor: interactor,
+      viewController: viewController,
+      photoBookmarkBuildable: photoBookmarkBuildable,
+      productBookmarkBuildable: productBookmarkBuildable 
+    )
   }
 }

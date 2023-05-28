@@ -3,10 +3,18 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2CF3067E2A23BEC100745CE9 /* ProductBookmarkRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF3067A2A23BEC100745CE9 /* ProductBookmarkRouter.swift */; };
+		2CF3067F2A23BEC100745CE9 /* ProductBookmarkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF3067B2A23BEC100745CE9 /* ProductBookmarkViewController.swift */; };
+		2CF306802A23BEC100745CE9 /* ProductBookmarkBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF3067C2A23BEC100745CE9 /* ProductBookmarkBuilder.swift */; };
+		2CF306812A23BEC100745CE9 /* ProductBookmarkInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF3067D2A23BEC100745CE9 /* ProductBookmarkInteractor.swift */; };
+		2CF306862A23BED800745CE9 /* PhotoBookmarkRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF306822A23BED800745CE9 /* PhotoBookmarkRouter.swift */; };
+		2CF306872A23BED800745CE9 /* PhotoBookmarkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF306832A23BED800745CE9 /* PhotoBookmarkViewController.swift */; };
+		2CF306882A23BED800745CE9 /* PhotoBookmarkBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF306842A23BED800745CE9 /* PhotoBookmarkBuilder.swift */; };
+		2CF306892A23BED800745CE9 /* PhotoBookmarkInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF306852A23BED800745CE9 /* PhotoBookmarkInteractor.swift */; };
 		481BE3294A31AEE37155AE2B /* Networking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D17469EDE7F8C422DF99572 /* Networking.framework */; platformFilter = ios; };
 		6437DACF7B50E593CA716034 /* BookmarkRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95226F467173820E15EC548E /* BookmarkRouter.swift */; };
 		6764521952156DC3ABF130FB /* BookmarkInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2459F9C889361D4DC4F8566 /* BookmarkInteractor.swift */; };
@@ -32,6 +40,14 @@
 
 /* Begin PBXFileReference section */
 		0D17469EDE7F8C422DF99572 /* Networking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Networking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2CF3067A2A23BEC100745CE9 /* ProductBookmarkRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductBookmarkRouter.swift; sourceTree = "<group>"; };
+		2CF3067B2A23BEC100745CE9 /* ProductBookmarkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductBookmarkViewController.swift; sourceTree = "<group>"; };
+		2CF3067C2A23BEC100745CE9 /* ProductBookmarkBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductBookmarkBuilder.swift; sourceTree = "<group>"; };
+		2CF3067D2A23BEC100745CE9 /* ProductBookmarkInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductBookmarkInteractor.swift; sourceTree = "<group>"; };
+		2CF306822A23BED800745CE9 /* PhotoBookmarkRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoBookmarkRouter.swift; sourceTree = "<group>"; };
+		2CF306832A23BED800745CE9 /* PhotoBookmarkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoBookmarkViewController.swift; sourceTree = "<group>"; };
+		2CF306842A23BED800745CE9 /* PhotoBookmarkBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoBookmarkBuilder.swift; sourceTree = "<group>"; };
+		2CF306852A23BED800745CE9 /* PhotoBookmarkInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoBookmarkInteractor.swift; sourceTree = "<group>"; };
 		3486B0578768E731DB7D58AB /* User.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = User.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B9C644AB5532D0F6F6D7549 /* CommonUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CommonUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		76BD577AD93EFB89FF1662CC /* Bookmark.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Bookmark.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -58,6 +74,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2CF306782A23BEA200745CE9 /* PhotoBookmark */ = {
+			isa = PBXGroup;
+			children = (
+				2CF306822A23BED800745CE9 /* PhotoBookmarkRouter.swift */,
+				2CF306832A23BED800745CE9 /* PhotoBookmarkViewController.swift */,
+				2CF306842A23BED800745CE9 /* PhotoBookmarkBuilder.swift */,
+				2CF306852A23BED800745CE9 /* PhotoBookmarkInteractor.swift */,
+			);
+			path = PhotoBookmark;
+			sourceTree = "<group>";
+		};
+		2CF306792A23BEAD00745CE9 /* ProductBookmark */ = {
+			isa = PBXGroup;
+			children = (
+				2CF3067A2A23BEC100745CE9 /* ProductBookmarkRouter.swift */,
+				2CF3067B2A23BEC100745CE9 /* ProductBookmarkViewController.swift */,
+				2CF3067C2A23BEC100745CE9 /* ProductBookmarkBuilder.swift */,
+				2CF3067D2A23BEC100745CE9 /* ProductBookmarkInteractor.swift */,
+			);
+			path = ProductBookmark;
+			sourceTree = "<group>";
+		};
 		349FAF58BCF75F1E87F887B1 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -73,6 +111,8 @@
 		548D75079954AD79DF67E9EF /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				2CF306792A23BEAD00745CE9 /* ProductBookmark */,
+				2CF306782A23BEA200745CE9 /* PhotoBookmark */,
 				A929591859C2325718864003 /* BookmarkBuilder.swift */,
 				B2459F9C889361D4DC4F8566 /* BookmarkInteractor.swift */,
 				95226F467173820E15EC548E /* BookmarkRouter.swift */,
@@ -149,8 +189,6 @@
 		BA9CA0EB5A140F1EAC9980AE /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				TargetAttributes = {
-				};
 			};
 			buildConfigurationList = 5E7FAF207DA55656789124BA /* Build configuration list for PBXProject "Bookmark" */;
 			compatibilityVersion = "Xcode 13.0";
@@ -185,10 +223,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2CF3067E2A23BEC100745CE9 /* ProductBookmarkRouter.swift in Sources */,
 				8E2AA545E351C1CFC4F6C213 /* BookmarkBuilder.swift in Sources */,
+				2CF306882A23BED800745CE9 /* PhotoBookmarkBuilder.swift in Sources */,
+				2CF306892A23BED800745CE9 /* PhotoBookmarkInteractor.swift in Sources */,
+				2CF306862A23BED800745CE9 /* PhotoBookmarkRouter.swift in Sources */,
 				6764521952156DC3ABF130FB /* BookmarkInteractor.swift in Sources */,
 				6437DACF7B50E593CA716034 /* BookmarkRouter.swift in Sources */,
+				2CF306812A23BEC100745CE9 /* ProductBookmarkInteractor.swift in Sources */,
+				2CF3067F2A23BEC100745CE9 /* ProductBookmarkViewController.swift in Sources */,
 				6811622B2A3944472B82263B /* BookmarkViewController.swift in Sources */,
+				2CF306802A23BEC100745CE9 /* ProductBookmarkBuilder.swift in Sources */,
+				2CF306872A23BED800745CE9 /* PhotoBookmarkViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

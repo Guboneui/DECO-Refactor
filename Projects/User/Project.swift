@@ -20,13 +20,16 @@ let packages: [Package] = [
 ]
 
 let dependencies: [TargetDependency] = [
-  .project(target: "Util", path: "../Util")
+  .project(target: "Util", path: "../Util"),
+  .project(target: "CommonUI", path: "../CommonUI"),
+  .project(target: "Networking", path: "../Networking"),
+  
 ]
 
 let user = Target(
   name: "User",
   platform: .iOS,
-  product: .staticFramework,
+  product: .framework,
   productName: "User",
   bundleId: "com.deco.ios.user",
   deploymentTarget: .iOS(targetVersion: "15.0", devices: [.iphone]),

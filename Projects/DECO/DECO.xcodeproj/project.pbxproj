@@ -21,6 +21,7 @@
 		B8E941A134C8B8076666919F /* AppComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9555C4DC9DBE2E005B175B0 /* AppComponent.swift */; };
 		C0884C8F3D34D048AB9EAF0F /* Main.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FD23680AB7E061F92C3E315A /* Main.framework */; platformFilter = ios; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C416EFC9BE0DC2641E36B0DC /* Product.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9C0AA6775D47E87C6A8D48C1 /* Product.framework */; platformFilter = ios; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		C7A76AC17E6309403D3649DF /* User.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 139AA4720838D21F6953CFB0 /* User.framework */; platformFilter = ios; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		ECFE1BD8132C50064B86D257 /* CommonUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0BDC1A48960A2B5B50EE808C /* CommonUI.framework */; platformFilter = ios; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		ED17F669EF8C74C22AD521EE /* AppRootBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF930340D3A6E9B0D6D2EF0B /* AppRootBuilder.swift */; };
 		F93F35E3A1ACDDE5648FCD83 /* Login.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0B6686109E67E5AF15338F03 /* Login.framework */; platformFilter = ios; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -42,6 +43,7 @@
 				A4945E8D9D2D52B4B29ED6BF /* Networking.framework in Embed Frameworks */,
 				C416EFC9BE0DC2641E36B0DC /* Product.framework in Embed Frameworks */,
 				4960B8A7F961BF20E13537C0 /* Profile.framework in Embed Frameworks */,
+				C7A76AC17E6309403D3649DF /* User.framework in Embed Frameworks */,
 				2CD17D44FB4C1CCB9C3C0E1B /* Util.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -52,6 +54,7 @@
 /* Begin PBXFileReference section */
 		0B6686109E67E5AF15338F03 /* Login.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Login.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0BDC1A48960A2B5B50EE808C /* CommonUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CommonUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		139AA4720838D21F6953CFB0 /* User.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = User.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F03EA36D8E99BA964DA7B7F /* AppRootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRootViewController.swift; sourceTree = "<group>"; };
 		23F3995B7E481C32B68A0DD2 /* Home.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Home.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B5B47F76E0624DB4B0A1406 /* DECO-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "DECO-Info.plist"; sourceTree = "<group>"; };
@@ -160,6 +163,7 @@
 				34E89B21C2E11C1DE9D11C24 /* Networking.framework */,
 				9C0AA6775D47E87C6A8D48C1 /* Product.framework */,
 				A725135C854EEFB23AF3AB6A /* Profile.framework */,
+				139AA4720838D21F6953CFB0 /* User.framework */,
 				49CD77C53DC92A1E666BAEA4 /* Util.framework */,
 			);
 			name = Products;
@@ -277,7 +281,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 2305280555009;
+				CURRENT_PROJECT_VERSION = 2305300132009;
 				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = VKGAQDGK5R;
@@ -307,7 +311,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2305280555009;
+				CURRENT_PROJECT_VERSION = 2305300132009;
 				DEVELOPMENT_TEAM = VKGAQDGK5R;
 				ENABLE_BITCODE = NO;
 				ENABLE_PREVIEWS = YES;
@@ -369,7 +373,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 2305280555009;
+				CURRENT_PROJECT_VERSION = 2305300132009;
 				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = VKGAQDGK5R;
@@ -401,7 +405,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2305280555009;
+				CURRENT_PROJECT_VERSION = 2305300132009;
 				DEVELOPMENT_TEAM = VKGAQDGK5R;
 				ENABLE_BITCODE = NO;
 				ENABLE_PREVIEWS = YES;

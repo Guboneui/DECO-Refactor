@@ -20,19 +20,19 @@ enum NetworkError: Error {
 func handleError(_ statusCode: Int) -> NetworkError {
   switch (statusCode) {
     case 400:
-      print("[400 BADREQUEST ERROR]")
+      print("🔴 FAILURE: [400 BADREQUEST ERROR]")
       return NetworkError.BadRequest
     case 401, 403:
-      print("[\(statusCode) UNAUTHORIZED ERROR]")
+      print("🔴 FAILURE: [\(statusCode) UNAUTHORIZED ERROR]")
       return NetworkError.UnAuthorized
     case 500..<599:
-      print("[\(statusCode) INTERNAL ERROR]")
+      print("🔴 FAILURE: [\(statusCode) INTERNAL ERROR]")
       return NetworkError.Internal(code: statusCode)
     case NSURLErrorTimedOut:
-      print("[\(statusCode), TIMEOUT ERROR]")
+      print("🔴 FAILURE: [\(statusCode), TIMEOUT ERROR]")
       return NetworkError.Timeout
     default:
-      print("[599] 기타 ERROR")
+      print("🔴 FAILURE: [599] 기타 ERROR")
       return NetworkError.Internal(code: 599)
   }
 }

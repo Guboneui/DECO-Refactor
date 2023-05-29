@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		CBDF720493789C3B141B0A8B /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5528A675415DF8E4E65669F3 /* UserManager.swift */; };
+		5ED3A6AA4F2E013C362AA07F /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30B4AA06D6076C526080BF0 /* UserManager.swift */; };
+		87205C3E17CE7EF70C101B40 /* Networking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF3E52C6E860F55137B8FCCC /* Networking.framework */; platformFilter = ios; };
+		AC1A0C20DA028D71FAC0CE06 /* CommonUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69B1866FC989FD5A714CB415 /* CommonUI.framework */; platformFilter = ios; };
 		E3B54D51FE63ECFC3EB2B6EC /* Util.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A645B8FAFF3BBDA946A6912F /* Util.framework */; platformFilter = ios; };
 /* End PBXBuildFile section */
 
@@ -26,8 +28,10 @@
 
 /* Begin PBXFileReference section */
 		15C426FF9BF1D4D161BF3ADF /* User.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = User.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		5528A675415DF8E4E65669F3 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
+		69B1866FC989FD5A714CB415 /* CommonUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CommonUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A30B4AA06D6076C526080BF0 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		A645B8FAFF3BBDA946A6912F /* Util.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Util.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BF3E52C6E860F55137B8FCCC /* Networking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Networking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1D3D510391B692AC3D11D09 /* User-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "User-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -36,6 +40,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC1A0C20DA028D71FAC0CE06 /* CommonUI.framework in Frameworks */,
+				87205C3E17CE7EF70C101B40 /* Networking.framework in Frameworks */,
 				E3B54D51FE63ECFC3EB2B6EC /* Util.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -46,7 +52,7 @@
 		386A2BD1E47F5BD73DAB0788 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				5528A675415DF8E4E65669F3 /* UserManager.swift */,
+				758EDFBDDC7C2C3487C236F4 /* Stream */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -65,6 +71,14 @@
 				D1D3D510391B692AC3D11D09 /* User-Info.plist */,
 			);
 			path = InfoPlists;
+			sourceTree = "<group>";
+		};
+		758EDFBDDC7C2C3487C236F4 /* Stream */ = {
+			isa = PBXGroup;
+			children = (
+				A30B4AA06D6076C526080BF0 /* UserManager.swift */,
+			);
+			path = Stream;
 			sourceTree = "<group>";
 		};
 		BE761688D310AFF848014498 /* Frameworks */ = {
@@ -86,6 +100,8 @@
 		EE28CF20A20C13B83878B268 /* Products */ = {
 			isa = PBXGroup;
 			children = (
+				69B1866FC989FD5A714CB415 /* CommonUI.framework */,
+				BF3E52C6E860F55137B8FCCC /* Networking.framework */,
 				15C426FF9BF1D4D161BF3ADF /* User.framework */,
 				A645B8FAFF3BBDA946A6912F /* Util.framework */,
 			);
@@ -164,7 +180,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CBDF720493789C3B141B0A8B /* UserManager.swift in Sources */,
+				5ED3A6AA4F2E013C362AA07F /* UserManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -189,7 +205,6 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACH_O_TYPE = staticlib;
 				PRODUCT_BUNDLE_IDENTIFIER = com.deco.ios.user;
 				PRODUCT_NAME = User;
 				SDKROOT = iphoneos;
@@ -336,7 +351,6 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACH_O_TYPE = staticlib;
 				PRODUCT_BUNDLE_IDENTIFIER = com.deco.ios.user;
 				PRODUCT_NAME = User;
 				SDKROOT = iphoneos;

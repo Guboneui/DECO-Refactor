@@ -5,11 +5,13 @@
 //  Created by 구본의 on 2023/05/28.
 //
 
+import User
+import Networking
+
 import RIBs
 
 public protocol BookmarkDependency: Dependency {
-  // TODO: Declare the set of dependencies required by this RIB, but cannot be
-  // created by this RIB.
+  var userManager: MutableUserManagerStream { get }
 }
 
 final class BookmarkComponent:
@@ -17,8 +19,10 @@ final class BookmarkComponent:
   PhotoBookmarkDependency,
   ProductBookmarkDependency
 {
-  
-  // TODO: Declare 'fileprivate' dependencies that are only used by this RIB.
+  var userManager: MutableUserManagerStream { dependency.userManager }
+  var boardRepository: BoardRepository { BoardRepositoryImpl() }
+  var productRepository: ProductRepository { ProductRepositoryImpl() }
+  var bookmarkRepository: BookmarkRepository { BookmarkRepositoryImpl() }
 }
 
 // MARK: - Builder

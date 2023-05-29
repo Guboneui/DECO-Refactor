@@ -30,8 +30,6 @@ final class BookmarkRouter: ViewableRouter<BookmarkInteractable, BookmarkViewCon
   private let productBookmarkBuildable: ProductBookmarkBuildable
   private var productBookmarkRouting: Routing?
   
-  
-  // TODO: Constructor inject child builder protocols to allow building children.
   init(
     interactor: BookmarkInteractable,
     viewController: BookmarkViewControllable,
@@ -44,7 +42,11 @@ final class BookmarkRouter: ViewableRouter<BookmarkInteractable, BookmarkViewCon
     interactor.router = self
     self.attachPhotoBookmarkRIB()
     self.attachProductBookmarkRIB()
-    
+  }
+  
+  deinit {
+    self.detachPhotoBookmarkRIB()
+    self.detachProductBookmarkRIB()
   }
   
   private func attachPhotoBookmarkRIB() {
@@ -53,7 +55,12 @@ final class BookmarkRouter: ViewableRouter<BookmarkInteractable, BookmarkViewCon
     attachChild(router)
     self.interactor.photoBookmarkViewControllerable = router.viewControllable
     self.photoBookmarkRouting = router
-
+  }
+  
+  private func detachPhotoBookmarkRIB() {
+    guard let router = photoBookmarkRouting else { return }
+    self.detachChild(router)
+    self.photoBookmarkRouting = nil
   }
   
   private func attachProductBookmarkRIB() {
@@ -62,7 +69,11 @@ final class BookmarkRouter: ViewableRouter<BookmarkInteractable, BookmarkViewCon
     attachChild(router)
     self.interactor.productBookmarkViewControllerable = router.viewControllable
     self.productBookmarkRouting = router
-    
+  }
+  
+  private func detachProductBookmarkRIB() {
+    guard let router = productBookmarkRouting else { return }
+    self.detachChild(router)
+    self.productBookmarkRouting = nil
   }
 }
-

@@ -7,35 +7,191 @@
 
 import UIKit
 
+import Entity
+import CommonUI
+
 import RIBs
 import RxSwift
+import RxRelay
 import PinLayout
 
 protocol ProductBookmarkPresentableListener: AnyObject {
-  // TODO: Declare properties and methods that the view controller can invoke to perform
-  // business logic, such as signIn(). This protocol is implemented by the corresponding
-  // interactor class.
+  var currentSelectedCategory: Int { get }
+  var productBookMarkCategory: BehaviorRelay<[(category: ProductCategoryDTO, isSelected: Bool)]> { get }
+  var productBookmarkList: BehaviorRelay<[BookmarkDTO]> { get }
+  
+  func selectProductBookmarkCategory(categoryID: Int, index: Int)
+  func fetchBookmarkListWithCategory(categoryID: Int, createdAt: Int)
 }
 
 final class ProductBookmarkViewController: UIViewController, ProductBookmarkPresentable, ProductBookmarkViewControllable {
   
   weak var listener: ProductBookmarkPresentableListener?
   
-  let productBookmarkLabel: UILabel = UILabel().then {
-    $0.text = "Product"
-    $0.textAlignment = .center
+  private let disposeBag: DisposeBag = DisposeBag()
+  
+  private let productBookmarkCategoryCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: .init()).then {
+    $0.backgroundColor = .DecoColor.whiteColor
+    
+    $0.register(SmallTextCell.self, forCellWithReuseIdentifier: SmallTextCell.identifier)
+    $0.showsHorizontalScrollIndicator = false
+    $0.bounces = false
+    let layout = UICollectionViewFlowLayout()
+    layout.scrollDirection = .horizontal
+    $0.collectionViewLayout = layout
+  }
+  
+  private let productBookmarkCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: .init()).then {
+    $0.backgroundColor = .DecoColor.whiteColor
+    $0.register(BookmarkImageCell.self, forCellWithReuseIdentifier: BookmarkImageCell.identifier)
+    $0.bounces = false
+    let layout = UICollectionViewFlowLayout()
+    layout.scrollDirection = .vertical
+    $0.collectionViewLayout = layout
+    $0.showsVerticalScrollIndicator = false
   }
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    self.view.backgroundColor = .lightGray
-    self.view.addSubview(productBookmarkLabel)
+    self.view.backgroundColor = .DecoColor.whiteColor
+    self.setupViews()
+    self.setupCategoryCollectionView()
+    self.setupBookmarkCollectionView()
   }
   
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
-    self.productBookmarkLabel.pin
-      .center()
-      .size(100)
+    self.setupLayouts()
+  }
+  
+  private func setupViews() {
+    self.view.addSubview(productBookmarkCategoryCollectionView)
+    self.view.addSubview(productBookmarkCollectionView)
+  }
+  
+  private func setupLayouts() {
+    productBookmarkCategoryCollectionView.pin
+      .top()
+      .horizontally()
+      .height(18)
+    
+    productBookmarkCollectionView.pin
+      .below(of: productBookmarkCategoryCollectionView)
+      .horizontally()
+      .bottom()
+      .marginTop(10)
+  }
+  
+  private func setupCategoryCollectionView() {
+    listener?.productBookMarkCategory
+      .bind(to: productBookmarkCategoryCollectionView.rx.items(
+        cellIdentifier: SmallTextCell.identifier,
+        cellType: SmallTextCell.self)
+      ) { index, data, cell in
+        cell.setupCellData(text: data.category.categoryName, isSelected: data.isSelected)
+      }.disposed(by: disposeBag)
+    
+    Observable.zip(
+      productBookmarkCategoryCollectionView.rx.modelSelected((category: ProductCategoryDTO, Bool).self),
+      productBookmarkCategoryCollectionView.rx.itemSelected
+    ).throttle(.milliseconds(300), latest: false, scheduler: MainScheduler.instance)
+      .map{($0.0.category.id, $0.1.row)}
+    .subscribe(onNext: { [weak self] (selectedCategoryID, selectedIndex) in
+      guard let self else { return }
+      self.listener?.productBookmarkList.accept([])
+      self.listener?.fetchBookmarkListWithCategory(categoryID: selectedCategoryID, createdAt: Int.max)
+      self.listener?.selectProductBookmarkCategory(categoryID: selectedCategoryID, index: selectedIndex)
+    }).disposed(by: disposeBag)
+    
+    productBookmarkCategoryCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
+  }
+  
+  private func setupBookmarkCollectionView() {
+    listener?.productBookmarkList
+      .bind(to: productBookmarkCollectionView.rx.items(
+      cellIdentifier: BookmarkImageCell.identifier,
+      cellType: BookmarkImageCell.self)
+    ) { index, bookmarkData, cell in
+        cell.setupCellData(
+          imageURL: bookmarkData.imageUrl,
+          isBookmarked: true
+        )
+      
+      cell.didTapBookmarkButton = {
+        print("DidTabBookmarkButton")
+      }
+      
+    }.disposed(by: disposeBag)
+    
+    productBookmarkCollectionView.rx.willDisplayCell
+      .map{$0.at.row}
+      .subscribe(onNext: { [weak self] index in
+        guard let self else { return }
+        if let bookmarkLists = self.listener?.productBookmarkList.value,
+           bookmarkLists.count - 1 == index {
+          let lastCreatedAt = bookmarkLists[index].scrap.createdAt
+          self.listener?.fetchBookmarkListWithCategory(
+            categoryID: self.listener?.currentSelectedCategory ?? -1,
+            createdAt: lastCreatedAt
+          )
+        }
+      }).disposed(by: disposeBag)
+    
+    productBookmarkCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
+  }
+}
+
+extension ProductBookmarkViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+  func collectionView(
+    _ collectionView: UICollectionView,
+    layout collectionViewLayout: UICollectionViewLayout,
+    sizeForItemAt indexPath: IndexPath
+  ) -> CGSize {
+    switch collectionView {
+    case productBookmarkCategoryCollectionView:
+      let font: UIFont = UIFont.DecoFont.getFont(with: .Suit, type: .medium, size: 12)
+      if let productBookmarkCategory = listener?.productBookMarkCategory.value {
+        return CGSize(
+          width: productBookmarkCategory[indexPath.row].category.categoryName.size(withAttributes: [NSAttributedString.Key.font:font]).width + 20,
+          height: 15
+        )
+      } else {
+        return .zero
+      }
+    case productBookmarkCollectionView:
+      let cellSize: CGFloat = (UIScreen.main.bounds.width - 5.0) / 2.0
+      return CGSize(width: cellSize, height: cellSize)
+    default:
+      return .zero
+    }
+  }
+  
+  func collectionView(
+    _ collectionView: UICollectionView,
+    layout collectionViewLayout: UICollectionViewLayout,
+    insetForSectionAt section: Int
+  ) -> UIEdgeInsets {
+    switch collectionView {
+    case productBookmarkCategoryCollectionView:
+      return UIEdgeInsets(top: 0, left: 28, bottom: 0, right: 4)
+    default:
+      return .zero
+    }
+  }
+  
+  func collectionView(
+    _ collectionView: UICollectionView,
+    layout collectionViewLayout: UICollectionViewLayout,
+    minimumLineSpacingForSectionAt section: Int
+  ) -> CGFloat {
+    return 5.0
+  }
+  
+  func collectionView(
+    _ collectionView: UICollectionView,
+    layout collectionViewLayout: UICollectionViewLayout,
+    minimumInteritemSpacingForSectionAt section: Int
+  ) -> CGFloat {
+    return 5.0
   }
 }

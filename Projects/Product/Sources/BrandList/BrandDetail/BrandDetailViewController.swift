@@ -262,7 +262,7 @@ extension BrandDetailViewController {
         cellIdentifier: SmallTextCell.identifier,
         cellType: SmallTextCell.self)
       ) { (index, data, cell) in
-        cell.setupCellData(text: data.categoryName)
+        cell.setupCellData(text: data.categoryName, isSelected: true)
       }.disposed(by: disposeBag)
     
     brandProductCategoryCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
@@ -278,7 +278,7 @@ extension BrandDetailViewController {
         cellIdentifier: SmallTextCell.identifier,
         cellType: SmallTextCell.self)
       ) { (index, data, cell) in
-        cell.setupCellData(text: data.categoryName)
+        cell.setupCellData(text: data.categoryName, isSelected: true)
       }.disposed(by: disposeBag)
     
     stickyCategoryCollectionView.rx.setDelegate(self).disposed(by: disposeBag)

@@ -3,10 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2CF306902A24B3B700745CE9 /* BoardCategoryDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF3068F2A24B3B700745CE9 /* BoardCategoryDTO.swift */; };
+		2CF306982A24D77400745CE9 /* BookmarkDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF306972A24D77400745CE9 /* BookmarkDTO.swift */; };
 		676381263AAD42E57F467F4D /* PostingDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25F9F9CA091D22A1FD4E987 /* PostingDTO.swift */; };
 		855A421F32C03F545FB382D2 /* ProductMoodDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE93EF3E19458F0DA0DF65C /* ProductMoodDTO.swift */; };
 		8F8C667522DE0DF500D0E0E9 /* BrandDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02A85EB8455629B1BB05379 /* BrandDTO.swift */; };
@@ -29,6 +31,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2CF3068F2A24B3B700745CE9 /* BoardCategoryDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardCategoryDTO.swift; sourceTree = "<group>"; };
+		2CF306972A24D77400745CE9 /* BookmarkDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkDTO.swift; sourceTree = "<group>"; };
 		6D3D722D8A39C97CE4035A34 /* Entity.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Entity.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B25F9F9CA091D22A1FD4E987 /* PostingDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostingDTO.swift; sourceTree = "<group>"; };
 		BB381273D96A2ADB7934FF1D /* ProfileDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDTO.swift; sourceTree = "<group>"; };
@@ -64,8 +68,10 @@
 				F02A85EB8455629B1BB05379 /* BrandDTO.swift */,
 				B25F9F9CA091D22A1FD4E987 /* PostingDTO.swift */,
 				D540ACB77C679308558B3054 /* ProductCategoryDTO.swift */,
+				2CF3068F2A24B3B700745CE9 /* BoardCategoryDTO.swift */,
 				BFE93EF3E19458F0DA0DF65C /* ProductMoodDTO.swift */,
 				BB381273D96A2ADB7934FF1D /* ProfileDTO.swift */,
+				2CF306972A24D77400745CE9 /* BookmarkDTO.swift */,
 			);
 			path = DTOs;
 			sourceTree = "<group>";
@@ -155,8 +161,6 @@
 		C0331ED0A44E915A96750580 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				TargetAttributes = {
-				};
 			};
 			buildConfigurationList = C85ABA34F5262643211DAA3D /* Build configuration list for PBXProject "Entity" */;
 			compatibilityVersion = "Xcode 13.0";
@@ -191,6 +195,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2CF306902A24B3B700745CE9 /* BoardCategoryDTO.swift in Sources */,
+				2CF306982A24D77400745CE9 /* BookmarkDTO.swift in Sources */,
 				8F8C667522DE0DF500D0E0E9 /* BrandDTO.swift in Sources */,
 				676381263AAD42E57F467F4D /* PostingDTO.swift in Sources */,
 				9AE39D9CDF446C67A7B6BABD /* ProductCategoryDTO.swift in Sources */,

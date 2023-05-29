@@ -9,9 +9,9 @@ import RIBs
 import RxSwift
 import RxRelay
 
-enum BookMarkSegmentType {
-  case Photo
-  case Product
+enum BookMarkSegmentType: String {
+  case Photo = "BOARD"
+  case Product = "ITEM"
 }
 
 public protocol BookmarkRouting: ViewableRouting {

@@ -50,9 +50,11 @@ public class SmallTextCell: UICollectionViewCell {
   }
   
   public func setupCellData(
-    text: String
+    text: String,
+    isSelected: Bool
   ) {
     self.textLabel.text = text
+    self.textLabel.textColor = isSelected ? .DecoColor.darkGray2 : .DecoColor.lightGray2
   }
 }
 

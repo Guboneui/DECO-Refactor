@@ -5,41 +5,96 @@
 //  Created by 구본의 on 2023/05/29.
 //
 
+import User
+import Entity
+import Networking
+
 import RIBs
 import RxSwift
+import RxRelay
 
 protocol PhotoBookmarkRouting: ViewableRouting {
-    // TODO: Declare methods the interactor can invoke to manage sub-tree via the router.
+
 }
 
 protocol PhotoBookmarkPresentable: Presentable {
-    var listener: PhotoBookmarkPresentableListener? { get set }
-    // TODO: Declare methods the interactor can invoke the presenter to present data.
+  var listener: PhotoBookmarkPresentableListener? { get set }
+
 }
 
 protocol PhotoBookmarkListener: AnyObject {
-    // TODO: Declare methods the interactor can invoke to communicate with other RIBs.
+  
 }
 
 final class PhotoBookmarkInteractor: PresentableInteractor<PhotoBookmarkPresentable>, PhotoBookmarkInteractable, PhotoBookmarkPresentableListener {
-
-    weak var router: PhotoBookmarkRouting?
-    weak var listener: PhotoBookmarkListener?
-
-    // TODO: Add additional dependencies to constructor. Do not perform any logic
-    // in constructor.
-    override init(presenter: PhotoBookmarkPresentable) {
-        super.init(presenter: presenter)
-        presenter.listener = self
+  
+  weak var router: PhotoBookmarkRouting?
+  weak var listener: PhotoBookmarkListener?
+  
+  var currentSelectedCategory: Int = -1
+  var photoBookmarkCategory: BehaviorRelay<[(category: BoardCategoryDTO, isSelected: Bool)]> = .init(value: [])
+  var photoBookmarkList: BehaviorRelay<[BookmarkDTO]> = .init(value: [])
+  
+  private let userManager: MutableUserManagerStream
+  private let boardRepository: BoardRepository
+  private let bookmarkRepository: BookmarkRepository
+  
+  init(
+    presenter: PhotoBookmarkPresentable,
+    userManager: MutableUserManagerStream,
+    boardRepository: BoardRepository,
+    bookmarkRepository: BookmarkRepository
+  ) {
+    self.userManager = userManager
+    self.boardRepository = boardRepository
+    self.bookmarkRepository = bookmarkRepository
+    super.init(presenter: presenter)
+    presenter.listener = self
+  }
+  
+  override func didBecomeActive() {
+    super.didBecomeActive()
+    self.fetchBoardCategoryList()
+    
+    self.fetchBookmarkListWithCategory(categoryID: 6, createdAt: Int.max)
+  }
+  
+  override func willResignActive() {
+    super.willResignActive()
+  }
+  
+  private func fetchBoardCategoryList() {
+    Task.detached { [weak self] in
+      guard let self else { return }
+      if let boardCategory = await self.boardRepository.boardCategoryList() {
+        self.photoBookmarkCategory.accept(
+          [(BoardCategoryDTO(categoryName: "전체", id: -1), true)] +
+          boardCategory.sorted{$0.id < $1.id}.map{($0, false)}
+        )
+      }
     }
-
-    override func didBecomeActive() {
-        super.didBecomeActive()
-        // TODO: Implement business logic here.
+  }
+  
+  func fetchBookmarkListWithCategory(categoryID: Int, createdAt: Int) {
+    Task.detached { [weak self] in
+      guard let self else { return }
+      if let bookmarkList = await self.bookmarkRepository.bookmarkList(
+        userId: self.userManager.userID,
+        scrapType: BookMarkSegmentType.Photo.rawValue,
+        itemCategoryId: 0,
+        boardCategoryId: categoryID,
+        createdAt: createdAt
+      ), !bookmarkList.isEmpty {
+        let prevBookmarkList = self.photoBookmarkList.value
+        self.photoBookmarkList.accept(prevBookmarkList + bookmarkList)
+      }
     }
-
-    override func willResignActive() {
-        super.willResignActive()
-        // TODO: Pause any business logic.
-    }
+  }
+  
+  func selectPhotoBookmarkCategory(categoryID: Int, index: Int) {
+    var categoryList: [(category: BoardCategoryDTO, isSelected: Bool)] = photoBookmarkCategory.value.map{($0.category, false)}
+    categoryList[index].isSelected = true
+    self.currentSelectedCategory = categoryID
+    self.photoBookmarkCategory.accept(categoryList)
+  }
 }

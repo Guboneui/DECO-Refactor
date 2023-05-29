@@ -10,6 +10,8 @@ import Moya
 
 enum BookmarkAPI {
   case bookmarkList(Int, String, Int, Int, Int)
+  case addBookmark(Int, Int, Int)
+  case deleteBookmark(Int, Int, Int)
 }
 
 extension BookmarkAPI: TargetType {
@@ -22,6 +24,10 @@ extension BookmarkAPI: TargetType {
     switch self {
     case .bookmarkList:
       return "\(defaultURL)/list"
+    case .addBookmark:
+      return "\(defaultURL)/"
+    case .deleteBookmark:
+      return "\(defaultURL)/delete"
     }
   }
   
@@ -29,6 +35,8 @@ extension BookmarkAPI: TargetType {
     switch self {
     case .bookmarkList:
       return .get
+    case .addBookmark, .deleteBookmark:
+      return .post
     }
   }
   
@@ -43,6 +51,20 @@ extension BookmarkAPI: TargetType {
           "boardCategoryId":boardCategoryId,
           "createdAt":createdAt
         ], encoding: URLEncoding.queryString)
+      
+    case .addBookmark(let productId, let boardId, let userId):
+      return .requestParameters(parameters: [
+        "productId":productId,
+        "boardId":boardId,
+        "userId":userId
+      ], encoding: JSONEncoding.default)
+      
+    case .deleteBookmark(let productId, let boardId, let userId):
+      return .requestParameters(parameters: [
+        "productId":productId,
+        "boardId":boardId,
+        "userId":userId
+      ], encoding: JSONEncoding.default)
     }
   }
   

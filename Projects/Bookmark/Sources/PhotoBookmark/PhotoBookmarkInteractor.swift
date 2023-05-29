@@ -33,7 +33,7 @@ final class PhotoBookmarkInteractor: PresentableInteractor<PhotoBookmarkPresenta
   
   var currentSelectedCategory: Int = -1
   var photoBookmarkCategory: BehaviorRelay<[(category: BoardCategoryDTO, isSelected: Bool)]> = .init(value: [])
-  var photoBookmarkList: BehaviorRelay<[BookmarkDTO]> = .init(value: [])
+  var photoBookmarkList: BehaviorRelay<[(bookmarkData: BookmarkDTO, isBookmark: Bool)]> = .init(value: [])
   
   private let userManager: MutableUserManagerStream
   private let boardRepository: BoardRepository
@@ -56,7 +56,10 @@ final class PhotoBookmarkInteractor: PresentableInteractor<PhotoBookmarkPresenta
     super.didBecomeActive()
     self.fetchBoardCategoryList()
     
-    self.fetchBookmarkListWithCategory(categoryID: 6, createdAt: Int.max)
+    self.fetchBookmarkListWithCategory(
+      categoryID: self.currentSelectedCategory,
+      createdAt: Int.max
+    )
   }
   
   override func willResignActive() {
@@ -86,7 +89,8 @@ final class PhotoBookmarkInteractor: PresentableInteractor<PhotoBookmarkPresenta
         createdAt: createdAt
       ), !bookmarkList.isEmpty {
         let prevBookmarkList = self.photoBookmarkList.value
-        self.photoBookmarkList.accept(prevBookmarkList + bookmarkList)
+        let fetchedBookmarkList: [(BookmarkDTO, Bool)] = bookmarkList.map{($0, true)}
+        self.photoBookmarkList.accept(prevBookmarkList + fetchedBookmarkList)
       }
     }
   }
@@ -96,5 +100,27 @@ final class PhotoBookmarkInteractor: PresentableInteractor<PhotoBookmarkPresenta
     categoryList[index].isSelected = true
     self.currentSelectedCategory = categoryID
     self.photoBookmarkCategory.accept(categoryList)
+  }
+  
+  func fetchAddBookmark(with boardID: Int) {
+    Task.detached { [weak self] in
+      guard let self else { return }
+      _ = await self.bookmarkRepository.addBookmark(
+        productId: 0,
+        boardId: boardID,
+        userId: self.userManager.userID
+      )
+    }
+  }
+  
+  func fetchDeleteBookmark(with boardID: Int) {
+    Task.detached { [weak self] in
+      guard let self else { return }
+      _ = await self.bookmarkRepository.deleteBookmark(
+        productId: 0,
+        boardId: boardID,
+        userId: self.userManager.userID
+      )
+    }
   }
 }

@@ -27,14 +27,13 @@ protocol ProductBookmarkListener: AnyObject {
 }
 
 final class ProductBookmarkInteractor: PresentableInteractor<ProductBookmarkPresentable>, ProductBookmarkInteractable, ProductBookmarkPresentableListener {
- 
   
   weak var router: ProductBookmarkRouting?
   weak var listener: ProductBookmarkListener?
   
   var currentSelectedCategory: Int = -1
   var productBookMarkCategory: BehaviorRelay<[(category: ProductCategoryDTO, isSelected: Bool)]> = .init(value: [])
-  var productBookmarkList: BehaviorRelay<[BookmarkDTO]> = .init(value: [])
+  var productBookmarkList: BehaviorRelay<[(bookmarkData: BookmarkDTO, isBookmark: Bool)]> = .init(value: [])
   
   private let userManager: MutableUserManagerStream
   private let productRepository: ProductRepository
@@ -57,7 +56,10 @@ final class ProductBookmarkInteractor: PresentableInteractor<ProductBookmarkPres
     super.didBecomeActive()
     self.fetchProductCategoryList()
     
-    
+    self.fetchBookmarkListWithCategory(
+      categoryID: self.currentSelectedCategory,
+      createdAt: Int.max
+    )
   }
   
   override func willResignActive() {
@@ -88,7 +90,8 @@ final class ProductBookmarkInteractor: PresentableInteractor<ProductBookmarkPres
         createdAt: createdAt
       ), !bookmarkList.isEmpty {
         let prevBookmarkList = self.productBookmarkList.value
-        self.productBookmarkList.accept(prevBookmarkList + bookmarkList)
+        let fetchedBookmarkList: [(BookmarkDTO, Bool)] = bookmarkList.map{($0, true)}
+        self.productBookmarkList.accept(prevBookmarkList + fetchedBookmarkList)
       }
     }
   }
@@ -99,4 +102,27 @@ final class ProductBookmarkInteractor: PresentableInteractor<ProductBookmarkPres
     self.currentSelectedCategory = categoryID
     self.productBookMarkCategory.accept(categoryList)
   }
+  
+  func fetchAddBookmark(with productID: Int) {
+    Task.detached { [weak self] in
+      guard let self else { return }
+      _ = await self.bookmarkRepository.addBookmark(
+        productId: productID,
+        boardId: 0,
+        userId: self.userManager.userID
+      )
+    }
+  }
+  
+  func fetchDeleteBookmark(with productID: Int) {
+    Task.detached { [weak self] in
+      guard let self else { return }
+      _ = await self.bookmarkRepository.deleteBookmark(
+        productId: productID,
+        boardId: 0,
+        userId: self.userManager.userID
+      )
+    }
+  }
+  
 }

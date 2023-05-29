@@ -17,10 +17,12 @@ import RxRelay
 protocol PhotoBookmarkPresentableListener: AnyObject {
   var currentSelectedCategory: Int { get }
   var photoBookmarkCategory: BehaviorRelay<[(category: BoardCategoryDTO, isSelected: Bool)]> { get }
-  var photoBookmarkList: BehaviorRelay<[BookmarkDTO]> { get }
+  var photoBookmarkList: BehaviorRelay<[(bookmarkData: BookmarkDTO, isBookmark: Bool)]> { get }
   
   func selectPhotoBookmarkCategory(categoryID: Int, index: Int)
   func fetchBookmarkListWithCategory(categoryID: Int, createdAt: Int)
+  func fetchAddBookmark(with boardID: Int)
+  func fetchDeleteBookmark(with boardID: Int)
 }
 
 final class PhotoBookmarkViewController: UIViewController, PhotoBookmarkPresentable, PhotoBookmarkViewControllable {
@@ -78,7 +80,6 @@ final class PhotoBookmarkViewController: UIViewController, PhotoBookmarkPresenta
       .horizontally()
       .bottom()
       .marginTop(10)
-    
   }
   
   private func setupCategoryCollectionView() {
@@ -110,14 +111,24 @@ final class PhotoBookmarkViewController: UIViewController, PhotoBookmarkPresenta
       .bind(to: photoBookmarkCollectionView.rx.items(
         cellIdentifier: BookmarkImageCell.identifier,
         cellType: BookmarkImageCell.self)
-      ) { index, bookmarkData, cell in
+      ) { [weak self] index, data, cell in
+        guard let self else { return }
         cell.setupCellData(
-          imageURL: bookmarkData.imageUrl,
-          isBookmarked: true
+          imageURL: data.bookmarkData.imageUrl,
+          isBookmarked: data.isBookmark
         )
         
         cell.didTapBookmarkButton = {
-          print("DidTabBookmarkButton")
+          if data.isBookmark {
+            self.listener?.fetchDeleteBookmark(with: data.bookmarkData.scrap.boardId)
+          } else {
+            self.listener?.fetchAddBookmark(with: data.bookmarkData.scrap.boardId)
+          }
+          
+          let shouldInputData: (BookmarkDTO, Bool) = (data.bookmarkData, !data.isBookmark)
+          var bookmarkList = self.listener?.photoBookmarkList.value ?? []
+          bookmarkList[index] = shouldInputData
+          self.listener?.photoBookmarkList.accept(bookmarkList)
         }
       }.disposed(by: disposeBag)
     
@@ -126,8 +137,8 @@ final class PhotoBookmarkViewController: UIViewController, PhotoBookmarkPresenta
       .subscribe(onNext: { [weak self] index in
         guard let self else { return }
         if let bookmarkLists = self.listener?.photoBookmarkList.value,
-           bookmarkLists.count - 1 == index {
-          let lastCreatedAt = bookmarkLists[index].scrap.createdAt
+        bookmarkLists.count - 1 == index {
+          let lastCreatedAt = bookmarkLists[index].bookmarkData.scrap.createdAt
           self.listener?.fetchBookmarkListWithCategory(
             categoryID: self.listener?.currentSelectedCategory ?? -1,
             createdAt: lastCreatedAt

@@ -117,18 +117,19 @@ final class PhotoBookmarkViewController: UIViewController, PhotoBookmarkPresenta
           imageURL: data.bookmarkData.imageUrl,
           isBookmarked: data.isBookmark
         )
-        
-        cell.didTapBookmarkButton = {
+
+        cell.didTapBookmarkButton = { [weak self] in
+          guard let inSelf = self else { return }
           if data.isBookmark {
-            self.listener?.fetchDeleteBookmark(with: data.bookmarkData.scrap.boardId)
+            inSelf.listener?.fetchDeleteBookmark(with: data.bookmarkData.scrap.boardId)
           } else {
-            self.listener?.fetchAddBookmark(with: data.bookmarkData.scrap.boardId)
+            inSelf.listener?.fetchAddBookmark(with: data.bookmarkData.scrap.boardId)
           }
-          
+
           let shouldInputData: (BookmarkDTO, Bool) = (data.bookmarkData, !data.isBookmark)
-          var bookmarkList = self.listener?.photoBookmarkList.value ?? []
+          var bookmarkList = inSelf.listener?.photoBookmarkList.value ?? []
           bookmarkList[index] = shouldInputData
-          self.listener?.photoBookmarkList.accept(bookmarkList)
+          inSelf.listener?.photoBookmarkList.accept(bookmarkList)
         }
       }.disposed(by: disposeBag)
     

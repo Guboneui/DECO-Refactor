@@ -17,7 +17,7 @@ import PinLayout
 
 protocol ProductBookmarkPresentableListener: AnyObject {
   var currentSelectedCategory: Int { get }
-  var productBookMarkCategory: BehaviorRelay<[(category: ProductCategoryDTO, isSelected: Bool)]> { get }
+  var productBookmarkCategory: BehaviorRelay<[(category: ProductCategoryDTO, isSelected: Bool)]> { get }
   var productBookmarkList: BehaviorRelay<[(bookmarkData: BookmarkDTO, isBookmark: Bool)]> { get }
   
   func selectProductBookmarkCategory(categoryID: Int, index: Int)
@@ -85,7 +85,7 @@ final class ProductBookmarkViewController: UIViewController, ProductBookmarkPres
   }
   
   private func setupCategoryCollectionView() {
-    listener?.productBookMarkCategory
+    listener?.productBookmarkCategory
       .bind(to: productBookmarkCategoryCollectionView.rx.items(
         cellIdentifier: SmallTextCell.identifier,
         cellType: SmallTextCell.self)
@@ -98,12 +98,12 @@ final class ProductBookmarkViewController: UIViewController, ProductBookmarkPres
       productBookmarkCategoryCollectionView.rx.itemSelected
     ).throttle(.milliseconds(300), latest: false, scheduler: MainScheduler.instance)
       .map{($0.0.category.id, $0.1.row)}
-    .subscribe(onNext: { [weak self] (selectedCategoryID, selectedIndex) in
-      guard let self else { return }
-      self.listener?.productBookmarkList.accept([])
-      self.listener?.fetchBookmarkListWithCategory(categoryID: selectedCategoryID, createdAt: Int.max)
-      self.listener?.selectProductBookmarkCategory(categoryID: selectedCategoryID, index: selectedIndex)
-    }).disposed(by: disposeBag)
+      .subscribe(onNext: { [weak self] (selectedCategoryID, selectedIndex) in
+        guard let self else { return }
+        self.listener?.productBookmarkList.accept([])
+        self.listener?.fetchBookmarkListWithCategory(categoryID: selectedCategoryID, createdAt: Int.max)
+        self.listener?.selectProductBookmarkCategory(categoryID: selectedCategoryID, index: selectedIndex)
+      }).disposed(by: disposeBag)
     
     productBookmarkCategoryCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
   }
@@ -111,28 +111,29 @@ final class ProductBookmarkViewController: UIViewController, ProductBookmarkPres
   private func setupBookmarkCollectionView() {
     listener?.productBookmarkList
       .bind(to: productBookmarkCollectionView.rx.items(
-      cellIdentifier: BookmarkImageCell.identifier,
-      cellType: BookmarkImageCell.self)
-    ) { index, data, cell in
+        cellIdentifier: BookmarkImageCell.identifier,
+        cellType: BookmarkImageCell.self)
+      ) { [weak self] index, data, cell in
+        guard let self else { return }
         cell.setupCellData(
           imageURL: data.bookmarkData.imageUrl,
           isBookmarked: data.isBookmark
         )
-      
-      cell.didTapBookmarkButton = {
-        if data.isBookmark {
-          self.listener?.fetchDeleteBookmark(with: data.bookmarkData.scrap.productId)
-        } else {
-          self.listener?.fetchAddBookmark(with: data.bookmarkData.scrap.productId)
+        
+        cell.didTapBookmarkButton = { [weak self] in
+          guard let inSelf = self else { return }
+          if data.isBookmark {
+            inSelf.listener?.fetchDeleteBookmark(with: data.bookmarkData.scrap.productId)
+          } else {
+            inSelf.listener?.fetchAddBookmark(with: data.bookmarkData.scrap.productId)
+          }
+          
+          let shouldInputData: (BookmarkDTO, Bool) = (data.bookmarkData, !data.isBookmark)
+          var bookmarkList = inSelf.listener?.productBookmarkList.value ?? []
+          bookmarkList[index] = shouldInputData
+          inSelf.listener?.productBookmarkList.accept(bookmarkList)
         }
-
-        let shouldInputData: (BookmarkDTO, Bool) = (data.bookmarkData, !data.isBookmark)
-        var bookmarkList = self.listener?.productBookmarkList.value ?? []
-        bookmarkList[index] = shouldInputData
-        self.listener?.productBookmarkList.accept(bookmarkList)
-      }
-
-    }.disposed(by: disposeBag)
+      }.disposed(by: disposeBag)
     
     productBookmarkCollectionView.rx.willDisplayCell
       .map{$0.at.row}
@@ -161,9 +162,9 @@ extension ProductBookmarkViewController: UICollectionViewDelegate, UICollectionV
     switch collectionView {
     case productBookmarkCategoryCollectionView:
       let font: UIFont = UIFont.DecoFont.getFont(with: .Suit, type: .medium, size: 12)
-      if let productBookmarkCategory = listener?.productBookMarkCategory.value {
+      if let productBookmarkCategory = listener?.productBookmarkCategory.value {
         return CGSize(
-          width: productBookmarkCategory[indexPath.row].category.categoryName.size(withAttributes: [NSAttributedString.Key.font:font]).width + 20,
+          width: productBookmarkCategory[indexPath.row].category.categoryName.size(withAttributes: [NSAttributedString.Key.font:font]).width + 24,
           height: 15
         )
       } else {

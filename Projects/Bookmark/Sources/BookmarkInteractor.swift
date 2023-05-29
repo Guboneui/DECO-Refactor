@@ -29,19 +29,16 @@ public protocol BookmarkListener: AnyObject {
 
 final class BookmarkInteractor: PresentableInteractor<BookmarkPresentable>, BookmarkInteractable, BookmarkPresentableListener {
   
-  
-  
   weak var router: BookmarkRouting?
   weak var listener: BookmarkListener?
   var photoBookmarkViewControllerable: ViewControllable?
   var productBookmarkViewControllerable: ViewControllable?
   
-  var bookmarkVCs: RxRelay.BehaviorRelay<[ViewControllable]> = .init(value: [])
+  var bookmarkVCs: BehaviorRelay<[ViewControllable]> = .init(value: [])
   var currentSegmentTab: BehaviorRelay<BookMarkSegmentType> = .init(value: .Photo)
   
-  init(
-    presenter: BookmarkPresentable,
-    viewControllerables: [ViewControllable]
+  override init(
+    presenter: BookmarkPresentable
   ) {
     super.init(presenter: presenter)
     presenter.listener = self 

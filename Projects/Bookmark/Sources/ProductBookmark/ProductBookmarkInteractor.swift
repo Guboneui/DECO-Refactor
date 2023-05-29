@@ -32,7 +32,7 @@ final class ProductBookmarkInteractor: PresentableInteractor<ProductBookmarkPres
   weak var listener: ProductBookmarkListener?
   
   var currentSelectedCategory: Int = -1
-  var productBookMarkCategory: BehaviorRelay<[(category: ProductCategoryDTO, isSelected: Bool)]> = .init(value: [])
+  var productBookmarkCategory: BehaviorRelay<[(category: ProductCategoryDTO, isSelected: Bool)]> = .init(value: [])
   var productBookmarkList: BehaviorRelay<[(bookmarkData: BookmarkDTO, isBookmark: Bool)]> = .init(value: [])
   
   private let userManager: MutableUserManagerStream
@@ -71,7 +71,7 @@ final class ProductBookmarkInteractor: PresentableInteractor<ProductBookmarkPres
     Task.detached { [weak self] in
       guard let self else { return }
       if let productCategory = await self.productRepository.getProductCategoryList() {
-        self.productBookMarkCategory.accept(
+        self.productBookmarkCategory.accept(
           [(ProductCategoryDTO(categoryName: "전체", id: -1), true)] +
           productCategory.sorted{$0.id < $1.id}.map{($0, false)}
         )
@@ -79,7 +79,7 @@ final class ProductBookmarkInteractor: PresentableInteractor<ProductBookmarkPres
     }
   }
   
-  func fetchBookmarkListWithCategory(categoryID: Int, createdAt: Int) {
+  func fetchBookmarkListWithCategory (categoryID: Int, createdAt: Int) {
     Task.detached { [weak self] in
       guard let self else { return }
       if let bookmarkList = await self.bookmarkRepository.bookmarkList(
@@ -97,10 +97,10 @@ final class ProductBookmarkInteractor: PresentableInteractor<ProductBookmarkPres
   }
   
   func selectProductBookmarkCategory(categoryID: Int, index: Int) {
-    var categoryList: [(category: ProductCategoryDTO, isSelected: Bool)] = productBookMarkCategory.value.map{($0.category, false)}
+    var categoryList: [(category: ProductCategoryDTO, isSelected: Bool)] = productBookmarkCategory.value.map{($0.category, false)}
     categoryList[index].isSelected = true
     self.currentSelectedCategory = categoryID
-    self.productBookMarkCategory.accept(categoryList)
+    self.productBookmarkCategory.accept(categoryList)
   }
   
   func fetchAddBookmark(with productID: Int) {
@@ -124,5 +124,4 @@ final class ProductBookmarkInteractor: PresentableInteractor<ProductBookmarkPres
       )
     }
   }
-  
 }

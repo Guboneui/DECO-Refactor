@@ -40,7 +40,7 @@ final public class BookmarkBuilder: Builder<BookmarkDependency>, BookmarkBuildab
   public func build(withListener listener: BookmarkListener) -> BookmarkRouting {
     let component = BookmarkComponent(dependency: dependency)
     let viewController = BookmarkViewController()
-    let interactor = BookmarkInteractor(presenter: viewController, viewControllerables: [])
+    let interactor = BookmarkInteractor(presenter: viewController)
     interactor.listener = listener
     
     let photoBookmarkBuildable = PhotoBookmarkBuilder(dependency: component)
@@ -50,7 +50,7 @@ final public class BookmarkBuilder: Builder<BookmarkDependency>, BookmarkBuildab
       interactor: interactor,
       viewController: viewController,
       photoBookmarkBuildable: photoBookmarkBuildable,
-      productBookmarkBuildable: productBookmarkBuildable 
+      productBookmarkBuildable: productBookmarkBuildable
     )
   }
 }

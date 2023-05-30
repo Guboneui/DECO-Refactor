@@ -5,6 +5,7 @@
 //  Created by 구본의 on 2023/05/30.
 //
 
+import Entity
 import Networking
 
 import RIBs
@@ -27,7 +28,11 @@ final class FollowComponent:
 // MARK: - Builder
 
 public protocol FollowBuildable: Buildable {
-  func build(withListener listener: FollowListener, targetUserID: Int, firstFollowTabStatus: FollowTabType) -> FollowRouting
+  func build(
+    withListener listener: FollowListener,
+    targetUserID: Int,
+    targetUserNickname: String,
+    firstFollowTabStatus: FollowTabType) -> FollowRouting
 }
 
 final public class FollowBuilder: Builder<FollowDependency>, FollowBuildable {
@@ -39,6 +44,7 @@ final public class FollowBuilder: Builder<FollowDependency>, FollowBuildable {
   public func build(
     withListener listener: FollowListener,
     targetUserID: Int,
+    targetUserNickname: String,
     firstFollowTabStatus: FollowTabType
   ) -> FollowRouting {
     let component = FollowComponent(dependency: dependency)
@@ -46,6 +52,7 @@ final public class FollowBuilder: Builder<FollowDependency>, FollowBuildable {
     let interactor = FollowInteractor(
       presenter: viewController,
       userManager: dependency.userManager,
+      targetUserNickname: targetUserNickname,
       firstFollowTabStatus: firstFollowTabStatus
     )
     interactor.listener = listener

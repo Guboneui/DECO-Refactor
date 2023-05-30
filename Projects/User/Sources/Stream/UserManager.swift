@@ -43,7 +43,9 @@ public struct UserManagerModel {
 public protocol UserManagerStream: AnyObject {
   var userInfo: Observable<UserManagerModel> { get }
   var userID: Int { get }
+  var userNickname: String { get }
   func castingUserInfoModel(with userInfo: ProfileDTO) -> UserManagerModel
+  
 }
 
 public protocol MutableUserManagerStream: UserManagerStream {
@@ -62,6 +64,7 @@ public class UserManagerStreamImpl: MutableUserManagerStream {
   public init() {}
   
   public var userID: Int = 0
+  public var userNickname: String = ""
   
   public var userInfo: Observable<UserManagerModel> {
     return userProfile
@@ -73,6 +76,7 @@ public class UserManagerStreamImpl: MutableUserManagerStream {
   
   public func updateUserInfo(with user: UserManagerModel) {
     userID = user.userId
+    userNickname = user.nickname
     userProfile.accept(user)
   }
   

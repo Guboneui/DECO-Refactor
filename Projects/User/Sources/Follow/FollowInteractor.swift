@@ -43,14 +43,17 @@ final class FollowInteractor: PresentableInteractor<FollowPresentable>, FollowIn
   
   private let disposeBag: DisposeBag = DisposeBag()
   private let userManager: MutableUserManagerStream
+  private let targetUserNickname: String
   private let firstFollowTabStatus: FollowTabType
   
   init(
     presenter: FollowPresentable,
     userManager: MutableUserManagerStream,
+    targetUserNickname: String,
     firstFollowTabStatus: FollowTabType
   ) {
     self.userManager = userManager
+    self.targetUserNickname = targetUserNickname
     self.firstFollowTabStatus = firstFollowTabStatus
     super.init(presenter: presenter)
     presenter.listener = self
@@ -62,23 +65,13 @@ final class FollowInteractor: PresentableInteractor<FollowPresentable>, FollowIn
        let followingListViewControllerable {
       self.followVCs.accept([followerListViewControllerable, followingListViewControllerable])
     }
-    self.setupBindings()
+    self.presenter.setNavTitle(with: targetUserNickname)
     self.presenter.setFirstFollowStatus(with: firstFollowTabStatus)
   }
   
   override func willResignActive() {
     super.willResignActive()
     // TODO: Pause any business logic.
-  }
-  
-  private func setupBindings() {
-    self.userManager.userInfo
-      .map{$0.nickname}
-      .observe(on: MainScheduler.instance)
-      .subscribe(onNext: { [weak self] nickname in
-        guard let self else { return }
-        self.presenter.setNavTitle(with: nickname)
-      }).disposed(by: disposeBag)
   }
   
   func popFollowVC(with popType: PopType) {

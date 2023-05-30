@@ -7,6 +7,7 @@
 
 import Util
 import User
+import Entity
 
 import RIBs
 
@@ -83,9 +84,14 @@ final class ProfileRouter: ViewableRouter<ProfileInteractable, ProfileViewContro
     self.profileEditRouting = nil
   }
   
-  func attachFollowVC(with targetUserID: Int, firstFollowTabStatus: FollowTabType) {
+  func attachFollowVC(targetUserID: Int, targetUserNickname: String, firstFollowTabStatus: FollowTabType) {
     if followRouting != nil { return }
-    let router = followBuildable.build(withListener: interactor, targetUserID: targetUserID, firstFollowTabStatus: firstFollowTabStatus)
+    let router = followBuildable.build(
+      withListener: interactor,
+      targetUserID: targetUserID,
+      targetUserNickname: targetUserNickname,
+      firstFollowTabStatus: firstFollowTabStatus
+    )
     attachChild(router)
     self.followRouting = router
     self.viewController.pushViewController(router.viewControllable, animated: true)

@@ -19,7 +19,8 @@ protocol FollowingListRouting: ViewableRouting {
 
 protocol FollowingListPresentable: Presentable {
   var listener: FollowingListPresentableListener? { get set }
-  // TODO: Declare methods the interactor can invoke the presenter to present data.
+  
+  func showNoticeLabel(isEmptyArray: Bool)
 }
 
 protocol FollowingListListener: AnyObject {
@@ -28,12 +29,11 @@ protocol FollowingListListener: AnyObject {
 
 final class FollowingListInteractor: PresentableInteractor<FollowingListPresentable>, FollowingListInteractable, FollowingListPresentableListener {
   
-  
-  
   weak var router: FollowingListRouting?
   weak var listener: FollowingListListener?
   
   var followingList: BehaviorRelay<[UserDTO]> = .init(value: [])
+  var copiedFollowingList:[UserDTO] = []
   lazy var userID: Int = userManager.userID
   
   private let userManager: MutableUserManagerStream
@@ -58,7 +58,7 @@ final class FollowingListInteractor: PresentableInteractor<FollowingListPresenta
   
   override func didBecomeActive() {
     super.didBecomeActive()
-    self.fetchFollowingList()
+    self.fetchFollowingList(with: "")
   }
   
   override func willResignActive() {
@@ -66,14 +66,15 @@ final class FollowingListInteractor: PresentableInteractor<FollowingListPresenta
     // TODO: Pause any business logic.
   }
   
-  func fetchFollowingList() {
+  func fetchFollowingList(with name: String) {
     Task.detached { [weak self] in
       guard let self else { return }
       if let followingList = await self.followRepository.followingList(
         targetID: self.targetUserID,
-        userID: self.userManager.userID, name: ""
+        userID: self.userManager.userID, name: name
       ) {
         self.followingList.accept(followingList)
+        self.copiedFollowingList = followingList
       }
     }
   }
@@ -112,5 +113,16 @@ final class FollowingListInteractor: PresentableInteractor<FollowingListPresenta
     var shouldChangedData = followingList.value
     shouldChangedData[index] = shouldInputData
     followingList.accept(shouldChangedData)
+  }
+  
+  func showOriginFollowingList() {
+    self.followingList.accept(copiedFollowingList)
+    self.presenter.showNoticeLabel(isEmptyArray: false)
+  }
+  
+  func showFilteredFollowingList(with nickname: String) {
+    let filteredList = self.copiedFollowingList.filter{$0.nickName.contains(nickname)}
+    self.followingList.accept(filteredList)
+    self.presenter.showNoticeLabel(isEmptyArray: filteredList.isEmpty)
   }
 }

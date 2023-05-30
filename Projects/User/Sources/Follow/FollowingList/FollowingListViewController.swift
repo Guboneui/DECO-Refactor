@@ -16,11 +16,14 @@ import RxRelay
 protocol FollowingListPresentableListener: AnyObject {
   var userID: Int { get }
   var followingList: BehaviorRelay<[UserDTO]> { get }
+  var copiedFollowingList: [UserDTO] { get }
   
-  func fetchFollowingList()
+  func fetchFollowingList(with name: String)
   func follow(targetUserID: Int)
   func unfollow(targetUserID: Int)
   func changeFollowersState(with userInfo: UserDTO, index: Int)
+  func showOriginFollowingList()
+  func showFilteredFollowingList(with nickname: String)
 }
 
 final class FollowingListViewController: UIViewController, FollowingListPresentable, FollowingListViewControllable {
@@ -54,11 +57,36 @@ final class FollowingListViewController: UIViewController, FollowingListPresenta
     $0.collectionViewLayout = layout
   }
   
+  private let emptyListNoticeTitleLabel: UILabel = UILabel().then {
+    $0.text = "앗! 내가 찾는 유저가 없어요."
+    $0.font = .DecoFont.getFont(with: .Suit, type: .medium, size: 14)
+    $0.textAlignment = .center
+    $0.textColor = .DecoColor.darkGray2
+  }
+  
+  private let emptyListNoticeSubtitleLabel: UILabel = UILabel().then {
+    $0.text = "유저 이름을 바르게 입력했는지 확인해 보세요."
+    $0.font = .DecoFont.getFont(with: .Suit, type: .medium, size: 12)
+    $0.textAlignment = .center
+    $0.textColor = .DecoColor.gray2
+  }
+  
+  private lazy var emptyListNoticeStackView: UIStackView = UIStackView(
+    arrangedSubviews: [
+      emptyListNoticeTitleLabel,
+      emptyListNoticeSubtitleLabel
+    ]).then {
+      $0.axis = .vertical
+      $0.spacing = 8
+      $0.isHidden = true
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     self.view.backgroundColor = .DecoColor.whiteColor
     self.setupViews()
     self.setFollowingListCollectionView()
+    self.searchTextFieldBinding()
   }
   
   override func viewDidLayoutSubviews() {
@@ -71,6 +99,7 @@ final class FollowingListViewController: UIViewController, FollowingListPresenta
     self.searchBarBaseView.addSubview(searchImageView)
     self.searchBarBaseView.addSubview(searchTextField)
     self.view.addSubview(followingListCollectionView)
+    self.view.addSubview(emptyListNoticeStackView)
   }
   
   private func setupLayouts() {
@@ -96,6 +125,12 @@ final class FollowingListViewController: UIViewController, FollowingListPresenta
       .horizontally()
       .bottom()
       .marginTop(10)
+    
+    emptyListNoticeStackView.pin
+      .horizontally()
+      .vCenter()
+      .height(45)
+      .marginBottom(50)
   }
   
   private func setFollowingListCollectionView() {
@@ -109,7 +144,7 @@ final class FollowingListViewController: UIViewController, FollowingListPresenta
         
         cell.didTapFollowButton = { [weak self] in
           guard let inSelf = self else { return }
-
+          
           if userInfo.followStatus { inSelf.listener?.unfollow(targetUserID: userInfo.userId) }
           else { inSelf.listener?.follow(targetUserID: userInfo.userId) }
           
@@ -119,6 +154,24 @@ final class FollowingListViewController: UIViewController, FollowingListPresenta
     }.disposed(by: disposeBag)
     
     followingListCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
+  }
+  
+  private func searchTextFieldBinding() {
+    searchTextField.rx.text
+      .observe(on: MainScheduler.instance)
+      .distinctUntilChanged()
+      .skip(1)
+      .compactMap{$0}
+      .map{$0.trimmingCharacters(in: .whitespacesAndNewlines)}
+      .subscribe(onNext: { [weak self] searchText in
+        guard let self else { return }
+        if searchText == "" { self.listener?.showOriginFollowingList() }
+        else { self.listener?.showFilteredFollowingList(with: searchText) }
+      }).disposed(by: disposeBag)
+  }
+  
+  func showNoticeLabel(isEmptyArray: Bool) {
+    self.emptyListNoticeStackView.isHidden = !isEmptyArray
   }
 }
 

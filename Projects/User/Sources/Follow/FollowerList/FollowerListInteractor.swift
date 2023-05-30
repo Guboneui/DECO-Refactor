@@ -18,7 +18,8 @@ protocol FollowerListRouting: ViewableRouting {
 
 protocol FollowerListPresentable: Presentable {
   var listener: FollowerListPresentableListener? { get set }
-  // TODO: Declare methods the interactor can invoke the presenter to present data.
+  
+  func showNoticeLabel(isEmptyArray: Bool)
 }
 
 protocol FollowerListListener: AnyObject {
@@ -31,6 +32,7 @@ final class FollowerListInteractor: PresentableInteractor<FollowerListPresentabl
   weak var listener: FollowerListListener?
   
   var followerList: BehaviorRelay<[UserDTO]> = .init(value: [])
+  var copiedFollowerList:[UserDTO] = []
   lazy var userID: Int = userManager.userID
   
   private let userManager: MutableUserManagerStream
@@ -71,6 +73,7 @@ final class FollowerListInteractor: PresentableInteractor<FollowerListPresentabl
         userID: self.userManager.userID
       ) {
         self.followerList.accept(followerList)
+        self.copiedFollowerList = followerList
       }
     }
   }
@@ -109,5 +112,16 @@ final class FollowerListInteractor: PresentableInteractor<FollowerListPresentabl
     var shouldChangedData = self.followerList.value
     shouldChangedData[index] = shouldInputData
     followerList.accept(shouldChangedData)
+  }
+  
+  func showOriginFollowerList() {
+    self.followerList.accept(copiedFollowerList)
+    self.presenter.showNoticeLabel(isEmptyArray: false)
+  }
+  
+  func showFilteredFollowerList(with nickname: String) {
+    let filteredList = self.copiedFollowerList.filter{$0.nickName.contains(nickname)}
+    self.followerList.accept(filteredList)
+    self.presenter.showNoticeLabel(isEmptyArray: filteredList.isEmpty)
   }
 }

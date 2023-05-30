@@ -13,6 +13,8 @@ import CommonUI
 
 import Then
 import PinLayout
+import RxSwift
+import RxGesture
 
 enum ProfileInfoType: String {
   case FOLLOWER = "팔로워"
@@ -24,7 +26,8 @@ class ProfileInfoView: UIView {
   
   var didTapFollowerView: (()->())?
   var didTapFollowingView: (()->())?
-  var didTapPostingView: (()->())?
+  
+  private let disposeBag: DisposeBag = DisposeBag()
   
   private let segmentView: UIView = UIView().then {
     $0.backgroundColor = .DecoColor.darkGray1
@@ -46,9 +49,9 @@ class ProfileInfoView: UIView {
   
   override init(frame: CGRect) {
     super.init(frame: frame)
-    self.setupViews()
     self.backgroundColor = .white
-    
+    self.setupViews()
+    self.setupGestures()
   }
   
   override func layoutSubviews() {
@@ -81,6 +84,20 @@ class ProfileInfoView: UIView {
       .below(of: profileStackView)
       .horizontally()
       .height(0.25)
+  }
+  
+  private func setupGestures() {
+    self.followerInfoView.tap()
+      .bind { [weak self] _ in
+        guard let self else { return }
+        self.didTapFollowerView?()
+      }.disposed(by: disposeBag)
+    
+    self.followingInfoView.tap()
+      .bind { [weak self] _ in
+        guard let self else { return }
+        self.didTapFollowingView?()
+      }.disposed(by: disposeBag)
   }
   
   override func sizeThatFits(_ size: CGSize) -> CGSize {

@@ -49,6 +49,10 @@ public class NavigationBar: UIView {
     self.setupLayouts()
   }
   
+  public override func sizeThatFits(_ size: CGSize) -> CGSize {
+    return CGSize(width: size.width, height: 48)
+  }
+  
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }

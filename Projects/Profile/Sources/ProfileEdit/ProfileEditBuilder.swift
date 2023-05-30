@@ -9,7 +9,7 @@ import User
 
 import RIBs
 
-protocol ProfileEditDependency: Dependency {
+public protocol ProfileEditDependency: Dependency {
   var userManager: MutableUserManagerStream { get }
 }
 
@@ -24,7 +24,7 @@ protocol ProfileEditBuildable: Buildable {
     func build(withListener listener: ProfileEditListener) -> ProfileEditRouting
 }
 
-final class ProfileEditBuilder: Builder<ProfileEditDependency>, ProfileEditBuildable {
+public final class ProfileEditBuilder: Builder<ProfileEditDependency>, ProfileEditBuildable {
 
     override init(dependency: ProfileEditDependency) {
         super.init(dependency: dependency)

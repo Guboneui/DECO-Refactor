@@ -246,7 +246,7 @@ extension BrandDetailViewController {
         cellIdentifier: ImageCell.identifier,
         cellType: ImageCell.self)
       ) { (index, data, cell) in
-        cell.setupCellData(type: .DefaultType, imageURL: data.imageUrl ?? "")
+        cell.setupCellConfigure(type: .DefaultType, imageURL: data.imageUrl ?? "")
       }.disposed(by: disposeBag)
     
     brandProductUsageCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
@@ -262,7 +262,7 @@ extension BrandDetailViewController {
         cellIdentifier: SmallTextCell.identifier,
         cellType: SmallTextCell.self)
       ) { (index, data, cell) in
-        cell.setupCellData(text: data.categoryName, isSelected: true)
+        cell.setupCellConfigure(text: data.categoryName, isSelected: true)
       }.disposed(by: disposeBag)
     
     brandProductCategoryCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
@@ -278,7 +278,7 @@ extension BrandDetailViewController {
         cellIdentifier: SmallTextCell.identifier,
         cellType: SmallTextCell.self)
       ) { (index, data, cell) in
-        cell.setupCellData(text: data.categoryName, isSelected: true)
+        cell.setupCellConfigure(text: data.categoryName, isSelected: true)
       }.disposed(by: disposeBag)
     
     stickyCategoryCollectionView.rx.setDelegate(self).disposed(by: disposeBag)

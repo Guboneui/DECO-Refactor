@@ -109,7 +109,7 @@ final class BrandProductUsageViewController: UIViewController, BrandProductUsage
         cellIdentifier: ImageCell.identifier,
         cellType: ImageCell.self)
       ) { (index, data, cell) in
-        cell.setupCellData(type: .DefaultType, imageURL: data.imageUrl ?? "")
+        cell.setupCellConfigure(type: .DefaultType, imageURL: data.imageUrl ?? "")
       }.disposed(by: disposeBag)
 
     brandProductUsageCollectionView.rx.willDisplayCell

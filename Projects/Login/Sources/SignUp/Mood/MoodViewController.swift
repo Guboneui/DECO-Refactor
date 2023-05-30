@@ -142,7 +142,7 @@ final class MoodViewController: UIViewController, MoodPresentable, MoodViewContr
   
   private func setupCollectionView() {
     listener?.moods.bind(to: moodCollectionView.rx.items(cellIdentifier: ImageCell.identifier, cellType: ImageCell.self)) { (index, data, cell) in
-      cell.setupCellData(type: .SelectedType, image: data.styleInfo.image, isSelected: data.isSelected)
+      cell.setupCellConfigure(type: .SelectedType, image: data.styleInfo.image, isSelected: data.isSelected)
     }.disposed(by: disposeBag)
     
     moodCollectionView.rx.setDelegate(self)

@@ -51,7 +51,7 @@ public class ImageCell: UICollectionViewCell {
     self.contentView.pin.wrapContent()
   }
   
-  public func setupCellData(
+  public func setupCellConfigure(
     type: ImageCellType,
     image: UIImage? = nil,
     isSelected: Bool = false,

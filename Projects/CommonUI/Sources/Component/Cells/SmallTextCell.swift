@@ -49,7 +49,7 @@ public class SmallTextCell: UICollectionViewCell {
     return CGSize(width: size.width, height: 18)
   }
   
-  public func setupCellData(
+  public func setupCellConfigure(
     text: String,
     isSelected: Bool
   ) {

@@ -60,7 +60,7 @@ public class BookmarkImageCell: UICollectionViewCell {
     self.didTapBookmarkButton?()
   }
   
-  public func setupCellData(
+  public func setupCellConfigure(
     imageURL: String,
     isBookmarked: Bool
   ) {

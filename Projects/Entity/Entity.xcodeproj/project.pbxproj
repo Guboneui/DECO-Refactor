@@ -3,11 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		19D8E7418656174171CBF568 /* BoardCategoryDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D94ACD94B96A521CE3B8CB4 /* BoardCategoryDTO.swift */; };
+		2CE46F6D2A257F1C009A1017 /* UserDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE46F6C2A257F1C009A1017 /* UserDTO.swift */; };
 		676381263AAD42E57F467F4D /* PostingDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25F9F9CA091D22A1FD4E987 /* PostingDTO.swift */; };
 		6D0D2710109C33742790EA27 /* BookmarkDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0568F2A388548B91161519 /* BookmarkDTO.swift */; };
 		855A421F32C03F545FB382D2 /* ProductMoodDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE93EF3E19458F0DA0DF65C /* ProductMoodDTO.swift */; };
@@ -31,6 +32,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2CE46F6C2A257F1C009A1017 /* UserDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDTO.swift; sourceTree = "<group>"; };
 		4D94ACD94B96A521CE3B8CB4 /* BoardCategoryDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardCategoryDTO.swift; sourceTree = "<group>"; };
 		6D3D722D8A39C97CE4035A34 /* Entity.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Entity.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B0568F2A388548B91161519 /* BookmarkDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkDTO.swift; sourceTree = "<group>"; };
@@ -72,6 +74,7 @@
 				D540ACB77C679308558B3054 /* ProductCategoryDTO.swift */,
 				BFE93EF3E19458F0DA0DF65C /* ProductMoodDTO.swift */,
 				BB381273D96A2ADB7934FF1D /* ProfileDTO.swift */,
+				2CE46F6C2A257F1C009A1017 /* UserDTO.swift */,
 			);
 			path = DTOs;
 			sourceTree = "<group>";
@@ -161,8 +164,6 @@
 		C0331ED0A44E915A96750580 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				TargetAttributes = {
-				};
 			};
 			buildConfigurationList = C85ABA34F5262643211DAA3D /* Build configuration list for PBXProject "Entity" */;
 			compatibilityVersion = "Xcode 13.0";
@@ -203,6 +204,7 @@
 				676381263AAD42E57F467F4D /* PostingDTO.swift in Sources */,
 				9AE39D9CDF446C67A7B6BABD /* ProductCategoryDTO.swift in Sources */,
 				855A421F32C03F545FB382D2 /* ProductMoodDTO.swift in Sources */,
+				2CE46F6D2A257F1C009A1017 /* UserDTO.swift in Sources */,
 				BC6132654699C46A9C4BC795 /* ProfileDTO.swift in Sources */,
 				F184D2E4086EA05EA17369B5 /* StyleModel.swift in Sources */,
 			);

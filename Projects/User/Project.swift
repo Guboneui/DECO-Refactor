@@ -10,6 +10,7 @@ import ProjectDescriptionHelpers
 
 let setting: Settings = .settings(
   base: [
+    "GCC_PREPROCESSOR_DEFINITIONS" : "FLEXLAYOUT_SWIFT_PACKAGE=1",
     "DEVELOPMENT_TEAM": "VKGAQDGK5R"
   ],
   configurations: [],

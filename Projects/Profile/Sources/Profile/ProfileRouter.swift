@@ -6,13 +6,15 @@
 //
 
 import Util
+import User
 
 import RIBs
 
 protocol ProfileInteractable:
   Interactable,
   AppSettingListener,
-  ProfileEditListener
+  ProfileEditListener,
+  FollowListener
 {
   var router: ProfileRouting? { get set }
   var listener: ProfileListener? { get set }
@@ -29,14 +31,20 @@ final class ProfileRouter: ViewableRouter<ProfileInteractable, ProfileViewContro
   
   private let profileEditBuildable: ProfileEditBuildable
   private var profileEditRouting: Routing?
-//
-  init(interactor: ProfileInteractable,
-       viewController: ProfileViewControllable,
-       appSettingBuildable: AppSettingBuildable,
-       profileEditBuildable: ProfileEditBuildable
+  
+  private let followBuildable: FollowBuildable
+  private var followRouting: Routing?
+  
+  init(
+    interactor: ProfileInteractable,
+    viewController: ProfileViewControllable,
+    appSettingBuildable: AppSettingBuildable,
+    profileEditBuildable: ProfileEditBuildable,
+    followBuildable: FollowBuildable
   ) {
     self.appSettingBuildable = appSettingBuildable
     self.profileEditBuildable = profileEditBuildable
+    self.followBuildable = followBuildable
     super.init(interactor: interactor, viewController: viewController)
     interactor.router = self
   }
@@ -65,7 +73,7 @@ final class ProfileRouter: ViewableRouter<ProfileInteractable, ProfileViewContro
     self.profileEditRouting = router
     self.viewController.pushViewController(router.viewControllable, animated: true)
   }
-//
+  
   func detachProfileEditVC(with popType: PopType) {
     guard let router = profileEditRouting else { return }
     if popType == .BackButton {
@@ -73,5 +81,22 @@ final class ProfileRouter: ViewableRouter<ProfileInteractable, ProfileViewContro
     }
     self.detachChild(router)
     self.profileEditRouting = nil
+  }
+  
+  func attachFollowVC(with targetUserID: Int) {
+    if followRouting != nil { return }
+    let router = followBuildable.build(withListener: interactor, targetUserID: targetUserID)
+    attachChild(router)
+    self.followRouting = router
+    self.viewController.pushViewController(router.viewControllable, animated: true)
+  }
+  
+  func detachFollowVC(with popType: PopType) {
+    guard let router = followRouting else { return }
+    if popType == .BackButton {
+      self.viewControllable.popViewController(animated: true)
+    }
+    self.detachChild(router)
+    self.followRouting = nil
   }
 }

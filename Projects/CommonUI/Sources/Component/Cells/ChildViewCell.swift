@@ -26,7 +26,7 @@ public class ChildViewCell: UICollectionViewCell {
     return CGSize(width: size.width, height: size.height)
   }
   
-  public func setupCellData(childVC: UIViewController) {
+  public func setupCellConfigure(childVC: UIViewController) {
     contentView.addSubview(childVC.view)
     childVC.view.frame = self.contentView.bounds
     childVC.view.pin.all()

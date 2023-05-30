@@ -22,6 +22,7 @@ protocol ProfilePresentableListener: AnyObject {
   func fetchUserPostings(id: Int, userID: Int, createdAt: Int)
   func pushAppSettingVC()
   func pushProfileEditVC()
+  func pushFollowVC()
 }
 
 final public class ProfileViewController: UIViewController, ProfilePresentable, ProfileViewControllable {
@@ -177,7 +178,7 @@ final public class ProfileViewController: UIViewController, ProfilePresentable, 
         cellIdentifier: ImageCell.identifier,
         cellType: ImageCell.self)
       ) { (index, data, cell) in
-        cell.setupCellData(type: .DefaultType, imageURL: data.imageUrl ?? "")
+        cell.setupCellConfigure(type: .DefaultType, imageURL: data.imageUrl ?? "")
       }.disposed(by: disposeBag)
     
     self.userPostingCollectionView.rx.willDisplayCell
@@ -222,6 +223,26 @@ final public class ProfileViewController: UIViewController, ProfilePresentable, 
         guard let self else { return }
         self.listener?.pushAppSettingVC()
       }.disposed(by: disposeBag)
+    
+    self.profileInfoView.didTapFollowerView = { [weak self] in
+      guard let self else { return }
+      self.listener?.pushFollowVC()
+    }
+    
+    self.profileInfoView.didTapFollowingView = { [weak self] in
+      guard let self else { return }
+      self.listener?.pushFollowVC()
+    }
+    
+    self.stickyProfileInfoView.didTapFollowerView = { [weak self] in
+      guard let self else { return }
+      self.listener?.pushFollowVC()
+    }
+    
+    self.stickyProfileInfoView.didTapFollowingView = { [weak self] in
+      guard let self else { return }
+      self.listener?.pushFollowVC()
+    }
     
     self.profileEditButton.tap()
       .bind { [weak self] in

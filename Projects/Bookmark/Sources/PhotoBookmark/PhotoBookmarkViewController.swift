@@ -88,7 +88,7 @@ final class PhotoBookmarkViewController: UIViewController, PhotoBookmarkPresenta
         cellIdentifier: SmallTextCell.identifier,
         cellType: SmallTextCell.self)
       ) { index, data, cell in
-        cell.setupCellData(text: data.category.categoryName, isSelected: data.isSelected)
+        cell.setupCellConfigure(text: data.category.categoryName, isSelected: data.isSelected)
       }.disposed(by: disposeBag)
     
     Observable.zip(
@@ -113,7 +113,7 @@ final class PhotoBookmarkViewController: UIViewController, PhotoBookmarkPresenta
         cellType: BookmarkImageCell.self)
       ) { [weak self] index, data, cell in
         guard let self else { return }
-        cell.setupCellData(
+        cell.setupCellConfigure(
           imageURL: data.bookmarkData.imageUrl,
           isBookmarked: data.isBookmark
         )

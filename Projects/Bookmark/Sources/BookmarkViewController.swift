@@ -70,6 +70,7 @@ final class BookmarkViewController: UIViewController, BookmarkPresentable, Bookm
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    self.view.backgroundColor = .DecoColor.whiteColor
     self.setupViews()
     self.setupGestures()
     self.setupBindings()
@@ -156,7 +157,7 @@ final class BookmarkViewController: UIViewController, BookmarkPresentable, Bookm
         guard let self else { return }
         self.addChild(childViewControllerable.uiviewController)
         childViewControllerable.uiviewController.didMove(toParent: self)
-        cell.setupCellData(childVC: childViewControllerable.uiviewController)
+        cell.setupCellConfigure(childVC: childViewControllerable.uiviewController)
       }.disposed(by: disposeBag)
     
     segmentCollectionView.rx.contentOffset

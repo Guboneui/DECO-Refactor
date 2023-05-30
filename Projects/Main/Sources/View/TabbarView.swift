@@ -44,4 +44,8 @@ class TabbarView: TouchAnimationView {
       flex.addItem(tabbarTitleLabel).marginTop(6)
     }
   }
+  
+  public func changeTabbarImage(with image: UIImage) {
+    self.tabbarImageView.image = image
+  }
 }

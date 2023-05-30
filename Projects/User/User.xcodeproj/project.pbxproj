@@ -3,27 +3,27 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2CE46F5A2A255C6F009A1017 /* FollowingListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE46F562A255C6F009A1017 /* FollowingListRouter.swift */; };
-		2CE46F5B2A255C6F009A1017 /* FollowingListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE46F572A255C6F009A1017 /* FollowingListViewController.swift */; };
-		2CE46F5C2A255C6F009A1017 /* FollowingListBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE46F582A255C6F009A1017 /* FollowingListBuilder.swift */; };
-		2CE46F5D2A255C6F009A1017 /* FollowingListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE46F592A255C6F009A1017 /* FollowingListInteractor.swift */; };
-		2CE46F622A255C7B009A1017 /* FollowerListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE46F5E2A255C7B009A1017 /* FollowerListRouter.swift */; };
-		2CE46F632A255C7B009A1017 /* FollowerListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE46F5F2A255C7B009A1017 /* FollowerListViewController.swift */; };
-		2CE46F642A255C7B009A1017 /* FollowerListBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE46F602A255C7B009A1017 /* FollowerListBuilder.swift */; };
-		2CE46F652A255C7B009A1017 /* FollowerListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE46F612A255C7B009A1017 /* FollowerListInteractor.swift */; };
-		2CE46F682A25705D009A1017 /* FollowListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE46F672A25705D009A1017 /* FollowListCell.swift */; };
+		00F1867AE57B2AFE708A9BA6 /* FollowerListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 856B0725CA35DA37E9A0C38F /* FollowerListViewController.swift */; };
+		3103DCFF933FE7771DA3C36C /* FollowerListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7923D3D7204C257DD759F7 /* FollowerListInteractor.swift */; };
+		316ECCA0B8FA35171383483E /* FollowingListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDEA74E357613472BF47325 /* FollowingListInteractor.swift */; };
 		4C4CD08D921615B389CCD44E /* FollowBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECAF36F93487021C99857EF /* FollowBuilder.swift */; };
 		5ED3A6AA4F2E013C362AA07F /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30B4AA06D6076C526080BF0 /* UserManager.swift */; };
+		73E3D3C847B7D421798F3B68 /* FollowListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5146E03610D11D74F94D05A7 /* FollowListCell.swift */; };
 		850C21F98C107E401F74FD0D /* FollowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB72BC38088F836EB2586CB /* FollowViewController.swift */; };
 		87205C3E17CE7EF70C101B40 /* Networking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF3E52C6E860F55137B8FCCC /* Networking.framework */; platformFilter = ios; };
 		87BD516143A480B929E10378 /* FollowInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635E5CD52A4738B9151B7696 /* FollowInteractor.swift */; };
 		AC1A0C20DA028D71FAC0CE06 /* CommonUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69B1866FC989FD5A714CB415 /* CommonUI.framework */; platformFilter = ios; };
 		C05F7A58284A90F243693E8F /* FollowRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70DEB5D55D32C69155ADCFA0 /* FollowRouter.swift */; };
+		DD3549E73E5EF4093D08184E /* FollowerListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 604C078A9103BB5320428741 /* FollowerListRouter.swift */; };
+		E22DBF21E237696534476ECC /* FollowerListBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2F1283AED58BA09A8728A8 /* FollowerListBuilder.swift */; };
 		E3B54D51FE63ECFC3EB2B6EC /* Util.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A645B8FAFF3BBDA946A6912F /* Util.framework */; platformFilter = ios; };
+		E4DCEDD09B3BA402EF36720F /* FollowingListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 514BBB0674AE7E05AB4030AB /* FollowingListViewController.swift */; };
+		E5985B013538203AC7119AD8 /* FollowingListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164D2D6AAFD6807CE1D5D658 /* FollowingListRouter.swift */; };
+		F45F0EE42F8A2F972E8E48A6 /* FollowingListBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731AC1E4AD85F069D1C83A60 /* FollowingListBuilder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -41,22 +41,22 @@
 
 /* Begin PBXFileReference section */
 		15C426FF9BF1D4D161BF3ADF /* User.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = User.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		2CE46F562A255C6F009A1017 /* FollowingListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingListRouter.swift; sourceTree = "<group>"; };
-		2CE46F572A255C6F009A1017 /* FollowingListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingListViewController.swift; sourceTree = "<group>"; };
-		2CE46F582A255C6F009A1017 /* FollowingListBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingListBuilder.swift; sourceTree = "<group>"; };
-		2CE46F592A255C6F009A1017 /* FollowingListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingListInteractor.swift; sourceTree = "<group>"; };
-		2CE46F5E2A255C7B009A1017 /* FollowerListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerListRouter.swift; sourceTree = "<group>"; };
-		2CE46F5F2A255C7B009A1017 /* FollowerListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerListViewController.swift; sourceTree = "<group>"; };
-		2CE46F602A255C7B009A1017 /* FollowerListBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerListBuilder.swift; sourceTree = "<group>"; };
-		2CE46F612A255C7B009A1017 /* FollowerListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerListInteractor.swift; sourceTree = "<group>"; };
-		2CE46F672A25705D009A1017 /* FollowListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowListCell.swift; sourceTree = "<group>"; };
+		164D2D6AAFD6807CE1D5D658 /* FollowingListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingListRouter.swift; sourceTree = "<group>"; };
+		5146E03610D11D74F94D05A7 /* FollowListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowListCell.swift; sourceTree = "<group>"; };
+		514BBB0674AE7E05AB4030AB /* FollowingListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingListViewController.swift; sourceTree = "<group>"; };
+		604C078A9103BB5320428741 /* FollowerListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerListRouter.swift; sourceTree = "<group>"; };
 		635E5CD52A4738B9151B7696 /* FollowInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowInteractor.swift; sourceTree = "<group>"; };
 		69B1866FC989FD5A714CB415 /* CommonUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CommonUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		70DEB5D55D32C69155ADCFA0 /* FollowRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowRouter.swift; sourceTree = "<group>"; };
+		731AC1E4AD85F069D1C83A60 /* FollowingListBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingListBuilder.swift; sourceTree = "<group>"; };
+		856B0725CA35DA37E9A0C38F /* FollowerListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerListViewController.swift; sourceTree = "<group>"; };
+		9E7923D3D7204C257DD759F7 /* FollowerListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerListInteractor.swift; sourceTree = "<group>"; };
+		9F2F1283AED58BA09A8728A8 /* FollowerListBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerListBuilder.swift; sourceTree = "<group>"; };
 		A30B4AA06D6076C526080BF0 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		A645B8FAFF3BBDA946A6912F /* Util.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Util.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF3E52C6E860F55137B8FCCC /* Networking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Networking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1D3D510391B692AC3D11D09 /* User-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "User-Info.plist"; sourceTree = "<group>"; };
+		DBDEA74E357613472BF47325 /* FollowingListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingListInteractor.swift; sourceTree = "<group>"; };
 		ECB72BC38088F836EB2586CB /* FollowViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowViewController.swift; sourceTree = "<group>"; };
 		EECAF36F93487021C99857EF /* FollowBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowBuilder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -75,42 +75,12 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2CE46F542A255C54009A1017 /* FollowerList */ = {
-			isa = PBXGroup;
-			children = (
-				2CE46F5E2A255C7B009A1017 /* FollowerListRouter.swift */,
-				2CE46F5F2A255C7B009A1017 /* FollowerListViewController.swift */,
-				2CE46F602A255C7B009A1017 /* FollowerListBuilder.swift */,
-				2CE46F612A255C7B009A1017 /* FollowerListInteractor.swift */,
-			);
-			path = FollowerList;
-			sourceTree = "<group>";
-		};
-		2CE46F552A255C5C009A1017 /* FollowingList */ = {
-			isa = PBXGroup;
-			children = (
-				2CE46F562A255C6F009A1017 /* FollowingListRouter.swift */,
-				2CE46F572A255C6F009A1017 /* FollowingListViewController.swift */,
-				2CE46F582A255C6F009A1017 /* FollowingListBuilder.swift */,
-				2CE46F592A255C6F009A1017 /* FollowingListInteractor.swift */,
-			);
-			path = FollowingList;
-			sourceTree = "<group>";
-		};
-		2CE46F662A257052009A1017 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				2CE46F672A25705D009A1017 /* FollowListCell.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
 		386A2BD1E47F5BD73DAB0788 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				2CE46F662A257052009A1017 /* Views */,
 				5B1DEBF50F09379835DC89FD /* Follow */,
 				758EDFBDDC7C2C3487C236F4 /* Stream */,
+				DE80969E214A8E2B2755AADB /* Views */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -126,14 +96,25 @@
 		5B1DEBF50F09379835DC89FD /* Follow */ = {
 			isa = PBXGroup;
 			children = (
-				2CE46F552A255C5C009A1017 /* FollowingList */,
-				2CE46F542A255C54009A1017 /* FollowerList */,
+				EF9AA0AE8C514F452B89D1B4 /* FollowerList */,
+				647B1C0A32499C9A0DF070D6 /* FollowingList */,
 				EECAF36F93487021C99857EF /* FollowBuilder.swift */,
 				635E5CD52A4738B9151B7696 /* FollowInteractor.swift */,
 				70DEB5D55D32C69155ADCFA0 /* FollowRouter.swift */,
 				ECB72BC38088F836EB2586CB /* FollowViewController.swift */,
 			);
 			path = Follow;
+			sourceTree = "<group>";
+		};
+		647B1C0A32499C9A0DF070D6 /* FollowingList */ = {
+			isa = PBXGroup;
+			children = (
+				731AC1E4AD85F069D1C83A60 /* FollowingListBuilder.swift */,
+				DBDEA74E357613472BF47325 /* FollowingListInteractor.swift */,
+				164D2D6AAFD6807CE1D5D658 /* FollowingListRouter.swift */,
+				514BBB0674AE7E05AB4030AB /* FollowingListViewController.swift */,
+			);
+			path = FollowingList;
 			sourceTree = "<group>";
 		};
 		73482E07890F249015300B0C /* InfoPlists */ = {
@@ -168,6 +149,14 @@
 			name = Project;
 			sourceTree = "<group>";
 		};
+		DE80969E214A8E2B2755AADB /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				5146E03610D11D74F94D05A7 /* FollowListCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		EE28CF20A20C13B83878B268 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -177,6 +166,17 @@
 				A645B8FAFF3BBDA946A6912F /* Util.framework */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		EF9AA0AE8C514F452B89D1B4 /* FollowerList */ = {
+			isa = PBXGroup;
+			children = (
+				9F2F1283AED58BA09A8728A8 /* FollowerListBuilder.swift */,
+				9E7923D3D7204C257DD759F7 /* FollowerListInteractor.swift */,
+				604C078A9103BB5320428741 /* FollowerListRouter.swift */,
+				856B0725CA35DA37E9A0C38F /* FollowerListViewController.swift */,
+			);
+			path = FollowerList;
 			sourceTree = "<group>";
 		};
 		FF057A1556D7A10021E8B38E = {
@@ -215,6 +215,8 @@
 		3A6A0A184C3B8EBB58E1939A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				TargetAttributes = {
+				};
 			};
 			buildConfigurationList = E3ED70C4A029603234460CD8 /* Build configuration list for PBXProject "User" */;
 			compatibilityVersion = "Xcode 13.0";
@@ -249,20 +251,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2CE46F622A255C7B009A1017 /* FollowerListRouter.swift in Sources */,
-				2CE46F642A255C7B009A1017 /* FollowerListBuilder.swift in Sources */,
-				2CE46F652A255C7B009A1017 /* FollowerListInteractor.swift in Sources */,
 				4C4CD08D921615B389CCD44E /* FollowBuilder.swift in Sources */,
-				2CE46F5C2A255C6F009A1017 /* FollowingListBuilder.swift in Sources */,
-				2CE46F632A255C7B009A1017 /* FollowerListViewController.swift in Sources */,
-				2CE46F682A25705D009A1017 /* FollowListCell.swift in Sources */,
 				87BD516143A480B929E10378 /* FollowInteractor.swift in Sources */,
 				C05F7A58284A90F243693E8F /* FollowRouter.swift in Sources */,
 				850C21F98C107E401F74FD0D /* FollowViewController.swift in Sources */,
-				2CE46F5B2A255C6F009A1017 /* FollowingListViewController.swift in Sources */,
-				2CE46F5A2A255C6F009A1017 /* FollowingListRouter.swift in Sources */,
+				E22DBF21E237696534476ECC /* FollowerListBuilder.swift in Sources */,
+				3103DCFF933FE7771DA3C36C /* FollowerListInteractor.swift in Sources */,
+				DD3549E73E5EF4093D08184E /* FollowerListRouter.swift in Sources */,
+				00F1867AE57B2AFE708A9BA6 /* FollowerListViewController.swift in Sources */,
+				F45F0EE42F8A2F972E8E48A6 /* FollowingListBuilder.swift in Sources */,
+				316ECCA0B8FA35171383483E /* FollowingListInteractor.swift in Sources */,
+				E5985B013538203AC7119AD8 /* FollowingListRouter.swift in Sources */,
+				E4DCEDD09B3BA402EF36720F /* FollowingListViewController.swift in Sources */,
 				5ED3A6AA4F2E013C362AA07F /* UserManager.swift in Sources */,
-				2CE46F5D2A255C6F009A1017 /* FollowingListInteractor.swift in Sources */,
+				73E3D3C847B7D421798F3B68 /* FollowListCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

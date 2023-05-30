@@ -27,6 +27,7 @@ final class FollowViewController: UIViewController, FollowPresentable, FollowVie
   
   weak var listener: FollowPresentableListener?
   private let disposeBag: DisposeBag = DisposeBag()
+  private var onlyOnceCollectionViewWillDisplay: Bool = false
   
   private let navigationBar: NavigationBar = NavigationBar(
     navTitle: "",
@@ -199,6 +200,22 @@ final class FollowViewController: UIViewController, FollowPresentable, FollowVie
   
   func setNavTitle(with title: String) {
     self.navigationBar.setNavigationBarTitle(with: title)
+  }
+  
+  func setFirstFollowStatus(with tabType: FollowTabType) {
+    followCollectionView.rx.willDisplayCell
+      .subscribe(onNext: { [weak self] _ in
+        guard let self else { return }
+        if !self.onlyOnceCollectionViewWillDisplay {
+          switch tabType {
+          case .Following:
+            self.followCollectionView.scrollToItem(at: IndexPath(row: 1, section: 0), at: .right, animated: false)
+          default:
+            break
+          }
+        }
+        self.onlyOnceCollectionViewWillDisplay = true
+      }).disposed(by: disposeBag)
   }
 }
 

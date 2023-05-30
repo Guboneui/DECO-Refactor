@@ -21,7 +21,7 @@ public protocol ProfileRouting: ViewableRouting {
   func attachProfileEditVC()
   func detachProfileEditVC(with popType: PopType)
   
-  func attachFollowVC(with targetUserID: Int)
+  func attachFollowVC(with targetUserID: Int, firstFollowTabStatus: FollowTabType)
   func detachFollowVC(with popType: PopType)
 }
 
@@ -115,8 +115,8 @@ final class ProfileInteractor: PresentableInteractor<ProfilePresentable>, Profil
     router?.detachProfileEditVC(with: popType)
   }
   
-  func pushFollowVC() {
-    router?.attachFollowVC(with: userManager.userID)
+  func pushFollowVC(with selectedFollowType: FollowTabType) {
+    router?.attachFollowVC(with: userManager.userID, firstFollowTabStatus: selectedFollowType)
   }
   
   func detachFollowVC(with popType: PopType) {

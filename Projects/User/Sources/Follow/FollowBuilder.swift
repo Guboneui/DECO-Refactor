@@ -27,7 +27,7 @@ final class FollowComponent:
 // MARK: - Builder
 
 public protocol FollowBuildable: Buildable {
-  func build(withListener listener: FollowListener, targetUserID: Int) -> FollowRouting
+  func build(withListener listener: FollowListener, targetUserID: Int, firstFollowTabStatus: FollowTabType) -> FollowRouting
 }
 
 final public class FollowBuilder: Builder<FollowDependency>, FollowBuildable {
@@ -38,13 +38,15 @@ final public class FollowBuilder: Builder<FollowDependency>, FollowBuildable {
   
   public func build(
     withListener listener: FollowListener,
-    targetUserID: Int
+    targetUserID: Int,
+    firstFollowTabStatus: FollowTabType
   ) -> FollowRouting {
     let component = FollowComponent(dependency: dependency)
     let viewController = FollowViewController()
     let interactor = FollowInteractor(
       presenter: viewController,
-      userManager: dependency.userManager
+      userManager: dependency.userManager,
+      firstFollowTabStatus: firstFollowTabStatus
     )
     interactor.listener = listener
     

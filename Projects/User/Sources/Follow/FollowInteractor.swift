@@ -23,6 +23,7 @@ public protocol FollowRouting: ViewableRouting {
 protocol FollowPresentable: Presentable {
   var listener: FollowPresentableListener? { get set }
   func setNavTitle(with title: String)
+  func setFirstFollowStatus(with tabType: FollowTabType)
 }
 
 public protocol FollowListener: AnyObject {
@@ -42,12 +43,15 @@ final class FollowInteractor: PresentableInteractor<FollowPresentable>, FollowIn
   
   private let disposeBag: DisposeBag = DisposeBag()
   private let userManager: MutableUserManagerStream
+  private let firstFollowTabStatus: FollowTabType
   
   init(
     presenter: FollowPresentable,
-    userManager: MutableUserManagerStream
+    userManager: MutableUserManagerStream,
+    firstFollowTabStatus: FollowTabType
   ) {
     self.userManager = userManager
+    self.firstFollowTabStatus = firstFollowTabStatus
     super.init(presenter: presenter)
     presenter.listener = self
   }
@@ -59,6 +63,7 @@ final class FollowInteractor: PresentableInteractor<FollowPresentable>, FollowIn
       self.followVCs.accept([followerListViewControllerable, followingListViewControllerable])
     }
     self.setupBindings()
+    self.presenter.setFirstFollowStatus(with: firstFollowTabStatus)
   }
   
   override func willResignActive() {

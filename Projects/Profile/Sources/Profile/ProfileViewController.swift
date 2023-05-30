@@ -22,7 +22,7 @@ protocol ProfilePresentableListener: AnyObject {
   func fetchUserPostings(id: Int, userID: Int, createdAt: Int)
   func pushAppSettingVC()
   func pushProfileEditVC()
-  func pushFollowVC()
+  func pushFollowVC(with selectedFollowType: FollowTabType)
 }
 
 final public class ProfileViewController: UIViewController, ProfilePresentable, ProfileViewControllable {
@@ -226,22 +226,22 @@ final public class ProfileViewController: UIViewController, ProfilePresentable, 
     
     self.profileInfoView.didTapFollowerView = { [weak self] in
       guard let self else { return }
-      self.listener?.pushFollowVC()
+      self.listener?.pushFollowVC(with: .Follower)
     }
     
     self.profileInfoView.didTapFollowingView = { [weak self] in
       guard let self else { return }
-      self.listener?.pushFollowVC()
+      self.listener?.pushFollowVC(with: .Following)
     }
     
     self.stickyProfileInfoView.didTapFollowerView = { [weak self] in
       guard let self else { return }
-      self.listener?.pushFollowVC()
+      self.listener?.pushFollowVC(with: .Follower)
     }
     
     self.stickyProfileInfoView.didTapFollowingView = { [weak self] in
       guard let self else { return }
-      self.listener?.pushFollowVC()
+      self.listener?.pushFollowVC(with: .Following)
     }
     
     self.profileEditButton.tap()

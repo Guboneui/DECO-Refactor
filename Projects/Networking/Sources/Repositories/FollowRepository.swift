@@ -14,6 +14,8 @@ import Moya
 public protocol FollowRepository {
   func followerList(targetID: Int, userID: Int) async -> [UserDTO]?
   func followingList(targetID: Int, userID: Int, name: String) async -> [UserDTO]?
+  func follow(targetID: Int, userID: Int, follow: Bool) async -> Bool?
+  func unfollow(targetID: Int, userID: Int, follow: Bool) async -> Bool?
 }
 
 public class FollowRepositoryImpl: BaseRepository, FollowRepository {
@@ -27,6 +29,14 @@ public class FollowRepositoryImpl: BaseRepository, FollowRepository {
   
   public func followingList(targetID: Int, userID: Int, name: String) async -> [UserDTO]? {
     await provider.request(.followingList(targetID, userID, name))
+  }
+  
+  public func follow(targetID: Int, userID: Int, follow: Bool) async -> Bool? {
+    await provider.request(.follow(targetID, userID, follow))
+  }
+  
+  public func unfollow(targetID: Int, userID: Int, follow: Bool) async -> Bool? {
+    await provider.request(.unfollow(targetID, userID, follow))
   }
 }
 

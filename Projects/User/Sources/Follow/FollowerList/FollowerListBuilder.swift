@@ -12,6 +12,7 @@ import RIBs
 protocol FollowerListDependency: Dependency {
   var userManager: MutableUserManagerStream { get }
   var followRepository: FollowRepository { get }
+  var userProfileRepository: UserProfileRepository { get }
 }
 
 final class FollowerListComponent: Component<FollowerListDependency> {
@@ -41,6 +42,7 @@ final class FollowerListBuilder: Builder<FollowerListDependency>, FollowerListBu
       presenter: viewController,
       userManager: dependency.userManager,
       followRepository: dependency.followRepository,
+      userProfileRepository: dependency.userProfileRepository,
       targetUserID: targetUserID
     )
     interactor.listener = listener

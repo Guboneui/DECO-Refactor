@@ -35,16 +35,19 @@ final class FollowerListInteractor: PresentableInteractor<FollowerListPresentabl
   
   private let userManager: MutableUserManagerStream
   private let followRepository: FollowRepository
+  private let userProfileRepository: UserProfileRepository
   private let targetUserID: Int
   
   init(
     presenter: FollowerListPresentable,
     userManager: MutableUserManagerStream,
     followRepository: FollowRepository,
+    userProfileRepository: UserProfileRepository,
     targetUserID: Int
   ) {
     self.userManager = userManager
     self.followRepository = followRepository
+    self.userProfileRepository = userProfileRepository
     self.targetUserID = targetUserID 
     super.init(presenter: presenter)
     presenter.listener = self
@@ -70,5 +73,41 @@ final class FollowerListInteractor: PresentableInteractor<FollowerListPresentabl
         self.followerList.accept(followerList)
       }
     }
+  }
+  
+  func follow(targetUserID: Int) {
+    Task.detached { [weak self] in
+      guard let self else { return }
+      _ = await self.followRepository.follow(targetID: targetUserID, userID: self.userID, follow: true)
+      
+      if let userInfo = await self.userProfileRepository.userProfile(id: self.userID, userID: self.userID) {
+        self.userManager.updateUserInfo(with: self.userManager.castingUserInfoModel(with: userInfo))
+      }
+    }
+  }
+  
+  func unfollow(targetUserID: Int) {
+    Task.detached { [weak self] in
+      guard let self else { return }
+      _ = await self.followRepository.unfollow(targetID: targetUserID, userID: self.userID, follow: false)
+      
+      if let userInfo = await self.userProfileRepository.userProfile(id: self.userID, userID: self.userID) {
+        self.userManager.updateUserInfo(with: self.userManager.castingUserInfoModel(with: userInfo))
+      }
+    }
+  }
+  
+  func changeFollowersState(with userInfo: UserDTO, index: Int) {
+    let shouldInputData: UserDTO = UserDTO(
+      profileUrl: userInfo.profileUrl,
+      followStatus: !userInfo.followStatus,
+      nickName: userInfo.nickName,
+      userId: userInfo.userId,
+      profileName: userInfo.profileName
+    )
+    
+    var shouldChangedData = self.followerList.value
+    shouldChangedData[index] = shouldInputData
+    followerList.accept(shouldChangedData)
   }
 }

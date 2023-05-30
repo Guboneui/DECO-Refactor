@@ -11,6 +11,8 @@ import Moya
 enum FollowAPI {
   case followerList(Int, Int)
   case followingList(Int, Int, String)
+  case follow(Int, Int, Bool)
+  case unfollow(Int, Int, Bool)
 }
 
 extension FollowAPI: TargetType {
@@ -25,6 +27,10 @@ extension FollowAPI: TargetType {
       return "\(defaultPath)/\(targetID)"
     case .followingList(let targetID, _, _):
       return "following/search/\(targetID)"
+    case .follow(let targetID, _, _):
+      return "follow/\(targetID)"
+    case .unfollow(let targetID, _, _):
+      return "unfollow/\(targetID)"
     }
   }
   
@@ -32,6 +38,8 @@ extension FollowAPI: TargetType {
     switch self {
     case .followerList, .followingList:
       return .get
+    case .follow, .unfollow:
+      return .post
     }
   }
   
@@ -41,6 +49,10 @@ extension FollowAPI: TargetType {
       return .requestParameters(parameters: ["userId":userId, "pageIndex":0, "pageSize":1000], encoding: URLEncoding.queryString)
     case .followingList(_, let userId, let name):
       return .requestParameters(parameters: ["userId":userId, "name":name], encoding: URLEncoding.queryString)
+    case .follow(_, let userID, let follow):
+      return .requestParameters(parameters: ["userId":userID, "follow":follow], encoding: JSONEncoding.default)
+    case .unfollow(_, let userID, let follow):
+      return .requestParameters(parameters: ["userId":userID, "follow":follow], encoding: JSONEncoding.default)
     }
   }
   

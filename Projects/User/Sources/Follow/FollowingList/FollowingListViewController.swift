@@ -18,6 +18,9 @@ protocol FollowingListPresentableListener: AnyObject {
   var followingList: BehaviorRelay<[UserDTO]> { get }
   
   func fetchFollowingList()
+  func follow(targetUserID: Int)
+  func unfollow(targetUserID: Int)
+  func changeFollowersState(with userInfo: UserDTO, index: Int)
 }
 
 final class FollowingListViewController: UIViewController, FollowingListPresentable, FollowingListViewControllable {
@@ -103,6 +106,15 @@ final class FollowingListViewController: UIViewController, FollowingListPresenta
       guard let self else { return }
       if let userID = self.listener?.userID {
         cell.setupCellConfigure(with: userInfo, userID: userID)
+        
+        cell.didTapFollowButton = { [weak self] in
+          guard let inSelf = self else { return }
+
+          if userInfo.followStatus { inSelf.listener?.unfollow(targetUserID: userInfo.userId) }
+          else { inSelf.listener?.follow(targetUserID: userInfo.userId) }
+          
+          inSelf.listener?.changeFollowersState(with: userInfo, index: index)
+        }
       }
     }.disposed(by: disposeBag)
     

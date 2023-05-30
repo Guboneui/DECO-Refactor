@@ -5,6 +5,8 @@
 //  Created by 구본의 on 2023/05/28.
 //
 
+import Entity
+
 import RxSwift
 import RxRelay
 
@@ -41,6 +43,7 @@ public struct UserManagerModel {
 public protocol UserManagerStream: AnyObject {
   var userInfo: Observable<UserManagerModel> { get }
   var userID: Int { get }
+  func castingUserInfoModel(with userInfo: ProfileDTO) -> UserManagerModel
 }
 
 public protocol MutableUserManagerStream: UserManagerStream {
@@ -101,6 +104,23 @@ public class UserManagerStreamImpl: MutableUserManagerStream {
     var userProfile = userProfile.value
     userProfile.profileName = profileName
     self.userProfile.accept(userProfile)
+  }
+  
+  public func castingUserInfoModel(with userInfo: ProfileDTO) -> UserManagerModel {
+    let user: UserManagerModel = UserManagerModel(
+      nickname: userInfo.nickname,
+      profileUrl: userInfo.profileUrl,
+      backgroundUrl: userInfo.backgroundUrl,
+      profileDescription: userInfo.profileDescription,
+      profileName: userInfo.profileName,
+      followCount: userInfo.followCount,
+      followingCount: userInfo.followingCount,
+      boardCount: userInfo.boardCount,
+      userId: userInfo.userId,
+      followStatus: userInfo.followStatus
+    )
+    
+    return user
   }
   
   private let userProfile = BehaviorRelay<UserManagerModel>(

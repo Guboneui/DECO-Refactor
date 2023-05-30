@@ -69,6 +69,7 @@ final class FollowInteractor: PresentableInteractor<FollowPresentable>, FollowIn
   private func setupBindings() {
     self.userManager.userInfo
       .map{$0.nickname}
+      .observe(on: MainScheduler.instance)
       .subscribe(onNext: { [weak self] nickname in
         guard let self else { return }
         self.presenter.setNavTitle(with: nickname)

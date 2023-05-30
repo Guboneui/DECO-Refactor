@@ -17,6 +17,10 @@ import PinLayout
 class FollowListCell: UICollectionViewCell {
   static let identifier: String = "FollowListCell"
   
+  private let disposeBag: DisposeBag = DisposeBag()
+  
+  public var didTapFollowButton: (()->())?
+  
   private let profileImageView: UIImageView = UIImageView().then {
     $0.contentMode = .scaleAspectFill
     $0.makeCornerRadius(radius: 27)
@@ -53,6 +57,7 @@ class FollowListCell: UICollectionViewCell {
   override init(frame: CGRect) {
     super.init(frame: frame)
     self.setupViews()
+    self.setupGestures()
   }
   
   required init?(coder: NSCoder) {
@@ -92,6 +97,14 @@ class FollowListCell: UICollectionViewCell {
       .horizontallyBetween(profileImageView, and: followButton, aligned: .center)
       .marginHorizontal(10)
       .height(36)
+  }
+  
+  private func setupGestures() {
+    self.followButton.tap()
+      .bind { [weak self] in
+        guard let self else { return }
+        self.didTapFollowButton?()
+      }.disposed(by: disposeBag)
   }
   
   public func setupCellConfigure(with userInfo: UserDTO, userID: Int) {

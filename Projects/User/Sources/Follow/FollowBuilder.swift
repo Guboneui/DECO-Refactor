@@ -19,7 +19,9 @@ final class FollowComponent:
   FollowingListDependency
 {
   var followRepository: FollowRepository { FollowRepositoryImpl() }
+  var userProfileRepository: UserProfileRepository { UserProfileRepositoryImpl() }
   var userManager: MutableUserManagerStream { dependency.userManager }
+
 }
 
 // MARK: - Builder

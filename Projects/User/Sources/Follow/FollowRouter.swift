@@ -92,7 +92,7 @@ final class FollowRouter: ViewableRouter<FollowInteractable, FollowViewControlla
     if targetUserProfileRouting != nil { return }
     let router = targetUserProfileBuildable.build(withListener: interactor, targetUserInfo: targetUserInfo)
     attachChild(router)
-    self.viewController.pushViewController(router.viewControllable, animated: true)
+    self.viewControllable.pushViewController(router.viewControllable, animated: true)
     self.targetUserProfileRouting = router
   }
   

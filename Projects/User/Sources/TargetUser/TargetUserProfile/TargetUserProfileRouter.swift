@@ -44,7 +44,7 @@ final class TargetUserProfileRouter: ViewableRouter<TargetUserProfileInteractabl
     )
     attachChild(router)
     self.followRouting = router
-    self.viewController.pushViewController(router.viewControllable, animated: true)
+    self.viewControllable.pushViewController(router.viewControllable, animated: true)
   }
   
   func detachFollowVC(with popType: PopType) {

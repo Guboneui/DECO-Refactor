@@ -55,7 +55,7 @@ final class ProfileRouter: ViewableRouter<ProfileInteractable, ProfileViewContro
     let router = appSettingBuildable.build(withListener: interactor)
     attachChild(router)
     self.appSettingRouting = router
-    self.viewController.pushViewController(router.viewControllable, animated: true)
+    self.viewControllable.pushViewController(router.viewControllable, animated: true)
   }
   
   func detachAppSettingVC(with popType: PopType) {
@@ -72,7 +72,7 @@ final class ProfileRouter: ViewableRouter<ProfileInteractable, ProfileViewContro
     let router = profileEditBuildable.build(withListener: interactor)
     attachChild(router)
     self.profileEditRouting = router
-    self.viewController.pushViewController(router.viewControllable, animated: true)
+    self.viewControllable.pushViewController(router.viewControllable, animated: true)
   }
   
   func detachProfileEditVC(with popType: PopType) {
@@ -94,7 +94,7 @@ final class ProfileRouter: ViewableRouter<ProfileInteractable, ProfileViewContro
     )
     attachChild(router)
     self.followRouting = router
-    self.viewController.pushViewController(router.viewControllable, animated: true)
+    self.viewControllable.pushViewController(router.viewControllable, animated: true)
   }
   
   func detachFollowVC(with popType: PopType) {

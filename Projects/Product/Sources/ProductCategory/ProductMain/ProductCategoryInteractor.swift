@@ -7,6 +7,8 @@
 
 import Foundation
 
+import Util
+
 import RIBs
 import RxSwift
 import RxRelay
@@ -14,7 +16,11 @@ import Networking
 import Entity
 
 protocol ProductCategoryRouting: ViewableRouting {
-  // TODO: Declare methods the interactor can invoke to manage sub-tree via the router.
+  func attachProductCategoryDetailVC()
+  func detachProductCategoryDetailVC(with popType: PopType)
+  
+  func attachProductMoodDetailVC()
+  func detachProductMoodDetailVC(with popType: PopType)
 }
 
 protocol ProductCategoryPresentable: Presentable {
@@ -80,5 +86,21 @@ final class ProductCategoryInteractor: PresentableInteractor<ProductCategoryPres
           self.productCategorySections.accept([category, mood])
         }
       }).disposed(by: disposeBag)
+  }
+  
+  func pushProductCategoryDetailVC() {
+    router?.attachProductCategoryDetailVC()
+  }
+  
+  func popProductCategoryDetailVC(with popType: PopType) {
+    router?.detachProductCategoryDetailVC(with: popType)
+  }
+  
+  func pushProductMoodDetailVC() {
+    router?.attachProductMoodDetailVC()
+  }
+  
+  func popProductMoodDetailVC(with popType: PopType) {
+    router?.detachProductMoodDetailVC(with: popType)
   }
 }

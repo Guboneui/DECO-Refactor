@@ -14,6 +14,9 @@ import UIKit
 
 protocol ProductCategoryPresentableListener: AnyObject {
   var productCategorySections: BehaviorRelay<[ProductCategorySection]> { get }
+  
+  func pushProductCategoryDetailVC()
+  func pushProductMoodDetailVC()
 }
 
 final class ProductCategoryViewController: UIViewController, ProductCategoryPresentable, ProductCategoryViewControllable {
@@ -140,8 +143,16 @@ final class ProductCategoryViewController: UIViewController, ProductCategoryPres
       .disposed(by: disposeBag)
     
     collectionView.rx.itemSelected
-      .subscribe(onNext: {
-        print("\($0)")
+      .subscribe(onNext: { [weak self] indexPath in
+        guard let self else { return }
+        switch indexPath.section {
+        case 0:
+          self.listener?.pushProductCategoryDetailVC()
+        case 1:
+          self.listener?.pushProductMoodDetailVC()
+        default:
+          break
+        }
       })
       .disposed(by: disposeBag)
   }

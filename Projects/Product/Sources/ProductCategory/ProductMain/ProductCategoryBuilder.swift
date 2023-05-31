@@ -15,7 +15,11 @@ protocol ProductCategoryDependency: Dependency {
   var productRepositoryImpl: ProductRepository { get }
 }
 
-final class ProductCategoryComponent: Component<ProductCategoryDependency> {
+final class ProductCategoryComponent:
+  Component<ProductCategoryDependency>,
+  ProductCategoryDetailDependency,
+  ProductMoodDetailDependency
+{
   
   // TODO: Declare 'fileprivate' dependencies that are only used by this RIB.
 }
@@ -40,6 +44,15 @@ final class ProductCategoryBuilder: Builder<ProductCategoryDependency>, ProductC
       productRepository: dependency.productRepositoryImpl
     )
     interactor.listener = listener
-    return ProductCategoryRouter(interactor: interactor, viewController: viewController)
+    
+    let productCategoryDetailBuilder = ProductCategoryDetailBuilder(dependency: component)
+    let productMoodDetailBuilder = ProductMoodDetailBuilder(dependency: component)
+    
+    return ProductCategoryRouter(
+      interactor: interactor,
+      viewController: viewController,
+      productCategoryDetailBuildable: productCategoryDetailBuilder,
+      productMoodDetailBuildable: productMoodDetailBuilder
+    )
   }
 }

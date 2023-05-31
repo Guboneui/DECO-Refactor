@@ -29,7 +29,6 @@ public protocol MainRouting: ViewableRouting {
 
 protocol MainPresentable: Presentable {
   var listener: MainPresentableListener? { get set }
- 
 }
 
 public protocol MainListener: AnyObject {
@@ -37,8 +36,6 @@ public protocol MainListener: AnyObject {
 }
 
 final class MainInteractor: PresentableInteractor<MainPresentable>, MainInteractable, MainPresentableListener {
-  
-  
   
   weak var router: MainRouting?
   weak var listener: MainListener?

@@ -18,5 +18,18 @@ public struct ProfileDTO: Codable {
   public let boardCount: Int
   public let userId: Int
   public let followStatus: Bool
+  
+  public init(nickname: String, profileUrl: String, backgroundUrl: String, profileDescription: String, profileName: String, followCount: Int, followingCount: Int, boardCount: Int, userId: Int, followStatus: Bool) {
+    self.nickname = nickname
+    self.profileUrl = profileUrl
+    self.backgroundUrl = backgroundUrl
+    self.profileDescription = profileDescription
+    self.profileName = profileName
+    self.followCount = followCount
+    self.followingCount = followingCount
+    self.boardCount = boardCount
+    self.userId = userId
+    self.followStatus = followStatus
+  }
 }
 

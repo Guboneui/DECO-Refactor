@@ -10,13 +10,18 @@
 		00F1867AE57B2AFE708A9BA6 /* FollowerListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 856B0725CA35DA37E9A0C38F /* FollowerListViewController.swift */; };
 		3103DCFF933FE7771DA3C36C /* FollowerListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7923D3D7204C257DD759F7 /* FollowerListInteractor.swift */; };
 		316ECCA0B8FA35171383483E /* FollowingListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDEA74E357613472BF47325 /* FollowingListInteractor.swift */; };
+		443664E21B9BCECAD3F8EB92 /* ProfileInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5F928827EDC791E758757D /* ProfileInfoView.swift */; };
 		4C4CD08D921615B389CCD44E /* FollowBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECAF36F93487021C99857EF /* FollowBuilder.swift */; };
 		5ED3A6AA4F2E013C362AA07F /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30B4AA06D6076C526080BF0 /* UserManager.swift */; };
+		606D5187364F86DEACC23901 /* TargetUserProfileBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 677B98084C598D42DA171097 /* TargetUserProfileBuilder.swift */; };
 		73E3D3C847B7D421798F3B68 /* FollowListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5146E03610D11D74F94D05A7 /* FollowListCell.swift */; };
+		7FCC5843EED2B26FE875C514 /* TargetUserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9323E0083FB19727E2E4F238 /* TargetUserProfileViewController.swift */; };
 		850C21F98C107E401F74FD0D /* FollowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB72BC38088F836EB2586CB /* FollowViewController.swift */; };
 		87205C3E17CE7EF70C101B40 /* Networking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF3E52C6E860F55137B8FCCC /* Networking.framework */; platformFilter = ios; };
 		87BD516143A480B929E10378 /* FollowInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635E5CD52A4738B9151B7696 /* FollowInteractor.swift */; };
+		A97FFA7DA76F3A6169F2F75C /* TargetUserProfileRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB18022487C85AE3E1AF213 /* TargetUserProfileRouter.swift */; };
 		AC1A0C20DA028D71FAC0CE06 /* CommonUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69B1866FC989FD5A714CB415 /* CommonUI.framework */; platformFilter = ios; };
+		B7C949CD9BE5F49CF7F27C2E /* TargetUserProfileInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6217AC3F22C8C96FEF22A4EB /* TargetUserProfileInteractor.swift */; };
 		C05F7A58284A90F243693E8F /* FollowRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70DEB5D55D32C69155ADCFA0 /* FollowRouter.swift */; };
 		DD3549E73E5EF4093D08184E /* FollowerListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 604C078A9103BB5320428741 /* FollowerListRouter.swift */; };
 		E22DBF21E237696534476ECC /* FollowerListBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2F1283AED58BA09A8728A8 /* FollowerListBuilder.swift */; };
@@ -45,20 +50,25 @@
 		5146E03610D11D74F94D05A7 /* FollowListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowListCell.swift; sourceTree = "<group>"; };
 		514BBB0674AE7E05AB4030AB /* FollowingListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingListViewController.swift; sourceTree = "<group>"; };
 		604C078A9103BB5320428741 /* FollowerListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerListRouter.swift; sourceTree = "<group>"; };
+		6217AC3F22C8C96FEF22A4EB /* TargetUserProfileInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetUserProfileInteractor.swift; sourceTree = "<group>"; };
 		635E5CD52A4738B9151B7696 /* FollowInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowInteractor.swift; sourceTree = "<group>"; };
+		677B98084C598D42DA171097 /* TargetUserProfileBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetUserProfileBuilder.swift; sourceTree = "<group>"; };
 		69B1866FC989FD5A714CB415 /* CommonUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CommonUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		70DEB5D55D32C69155ADCFA0 /* FollowRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowRouter.swift; sourceTree = "<group>"; };
 		731AC1E4AD85F069D1C83A60 /* FollowingListBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingListBuilder.swift; sourceTree = "<group>"; };
 		856B0725CA35DA37E9A0C38F /* FollowerListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerListViewController.swift; sourceTree = "<group>"; };
+		9323E0083FB19727E2E4F238 /* TargetUserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetUserProfileViewController.swift; sourceTree = "<group>"; };
 		9E7923D3D7204C257DD759F7 /* FollowerListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerListInteractor.swift; sourceTree = "<group>"; };
 		9F2F1283AED58BA09A8728A8 /* FollowerListBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerListBuilder.swift; sourceTree = "<group>"; };
 		A30B4AA06D6076C526080BF0 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		A645B8FAFF3BBDA946A6912F /* Util.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Util.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF3E52C6E860F55137B8FCCC /* Networking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Networking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BF5F928827EDC791E758757D /* ProfileInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInfoView.swift; sourceTree = "<group>"; };
 		D1D3D510391B692AC3D11D09 /* User-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "User-Info.plist"; sourceTree = "<group>"; };
 		DBDEA74E357613472BF47325 /* FollowingListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingListInteractor.swift; sourceTree = "<group>"; };
 		ECB72BC38088F836EB2586CB /* FollowViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowViewController.swift; sourceTree = "<group>"; };
 		EECAF36F93487021C99857EF /* FollowBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowBuilder.swift; sourceTree = "<group>"; };
+		FBB18022487C85AE3E1AF213 /* TargetUserProfileRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetUserProfileRouter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,9 +90,18 @@
 			children = (
 				5B1DEBF50F09379835DC89FD /* Follow */,
 				758EDFBDDC7C2C3487C236F4 /* Stream */,
+				469CB964EA31B68288BD85B6 /* TargetUser */,
 				DE80969E214A8E2B2755AADB /* Views */,
 			);
 			path = Sources;
+			sourceTree = "<group>";
+		};
+		469CB964EA31B68288BD85B6 /* TargetUser */ = {
+			isa = PBXGroup;
+			children = (
+				5A504523D80236C125FF9677 /* TargetUserProfile */,
+			);
+			path = TargetUser;
 			sourceTree = "<group>";
 		};
 		570D00B2FF2B1FB2BB6B91BE /* Derived */ = {
@@ -91,6 +110,17 @@
 				73482E07890F249015300B0C /* InfoPlists */,
 			);
 			path = Derived;
+			sourceTree = "<group>";
+		};
+		5A504523D80236C125FF9677 /* TargetUserProfile */ = {
+			isa = PBXGroup;
+			children = (
+				677B98084C598D42DA171097 /* TargetUserProfileBuilder.swift */,
+				6217AC3F22C8C96FEF22A4EB /* TargetUserProfileInteractor.swift */,
+				FBB18022487C85AE3E1AF213 /* TargetUserProfileRouter.swift */,
+				9323E0083FB19727E2E4F238 /* TargetUserProfileViewController.swift */,
+			);
+			path = TargetUserProfile;
 			sourceTree = "<group>";
 		};
 		5B1DEBF50F09379835DC89FD /* Follow */ = {
@@ -153,6 +183,7 @@
 			isa = PBXGroup;
 			children = (
 				5146E03610D11D74F94D05A7 /* FollowListCell.swift */,
+				BF5F928827EDC791E758757D /* ProfileInfoView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -264,7 +295,12 @@
 				E5985B013538203AC7119AD8 /* FollowingListRouter.swift in Sources */,
 				E4DCEDD09B3BA402EF36720F /* FollowingListViewController.swift in Sources */,
 				5ED3A6AA4F2E013C362AA07F /* UserManager.swift in Sources */,
+				606D5187364F86DEACC23901 /* TargetUserProfileBuilder.swift in Sources */,
+				B7C949CD9BE5F49CF7F27C2E /* TargetUserProfileInteractor.swift in Sources */,
+				A97FFA7DA76F3A6169F2F75C /* TargetUserProfileRouter.swift in Sources */,
+				7FCC5843EED2B26FE875C514 /* TargetUserProfileViewController.swift in Sources */,
 				73E3D3C847B7D421798F3B68 /* FollowListCell.swift in Sources */,
+				443664E21B9BCECAD3F8EB92 /* ProfileInfoView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

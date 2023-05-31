@@ -28,7 +28,7 @@ public protocol ProfileRouting: ViewableRouting {
 protocol ProfilePresentable: Presentable {
   var listener: ProfilePresentableListener? { get set }
   
-  func setUserProfile(with profileInfo: UserManagerModel)
+  func setUserProfile(with profileInfo: ProfileDTO)
 }
 
 public protocol ProfileListener: AnyObject {
@@ -62,8 +62,6 @@ final class ProfileInteractor: PresentableInteractor<ProfilePresentable>, Profil
     super.didBecomeActive()
     self.setUserProfile()
     self.fetchUserPostings(
-      id: userManager.userID,
-      userID: userManager.userID,
       createdAt: Int.max
     )
   }
@@ -77,19 +75,18 @@ final class ProfileInteractor: PresentableInteractor<ProfilePresentable>, Profil
   private func setUserProfile() {
     self.userManager.userInfo
       .observe(on: MainScheduler.instance)
-      .subscribe(onNext: { [weak self] in
+      .subscribe(onNext: { [weak self] userModel in
         guard let self else { return }
-        self.presenter.setUserProfile(with: $0)
-        
+        self.presenter.setUserProfile(with: self.userManager.castingProfileDTOModel(with: userModel))
       }).disposed(by: disposeBag)
   }
   
-  func fetchUserPostings(id: Int, userID: Int, createdAt: Int) {
+  func fetchUserPostings(createdAt: Int) {
     Task.detached { [weak self] in
       guard let self else { return }
       let postings = await self.userProfileRepository.userPostings(
-        id: userID,
-        userID: userID,
+        id: self.userManager.userID,
+        userID: self.userManager.userID,
         createdAt: createdAt
       )
       let prevData = self.userPostings.value

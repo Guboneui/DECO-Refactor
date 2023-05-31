@@ -1,13 +1,12 @@
 //
 //  ProfileInfoView.swift
-//  Profile
+//  CommonUI
 //
-//  Created by 구본의 on 2023/05/24.
+//  Created by 구본의 on 2023/05/31.
 //
 
 import UIKit
 
-import User
 import Entity
 import CommonUI
 
@@ -22,10 +21,10 @@ enum ProfileInfoType: String {
   case POSTING = "게시글"
 }
 
-class ProfileInfoView: UIView {
+public class ProfileInfoView: UIView {
   
-  var didTapFollowerView: (()->())?
-  var didTapFollowingView: (()->())?
+  public var didTapFollowerView: (()->())?
+  public var didTapFollowingView: (()->())?
   
   private let disposeBag: DisposeBag = DisposeBag()
   
@@ -47,14 +46,14 @@ class ProfileInfoView: UIView {
     $0.backgroundColor = .DecoColor.lightGray1
   }
   
-  override init(frame: CGRect) {
+  override public init(frame: CGRect) {
     super.init(frame: frame)
     self.backgroundColor = .white
     self.setupViews()
     self.setupGestures()
   }
   
-  override func layoutSubviews() {
+  override public func layoutSubviews() {
     super.layoutSubviews()
     self.setupLayouts()
   }
@@ -100,13 +99,15 @@ class ProfileInfoView: UIView {
       }.disposed(by: disposeBag)
   }
   
-  override func sizeThatFits(_ size: CGSize) -> CGSize {
+  override public func sizeThatFits(_ size: CGSize) -> CGSize {
     return CGSize(width: size.width, height: guideLineView.frame.maxY)
   }
   
-  public func setProfileInfo(with profileInfo: UserManagerModel) {
+  public func setProfileInfo(with profileInfo: ProfileDTO) {
     self.followerInfoView.setupText(title: "\(profileInfo.followCount)명", info: ProfileInfoType.FOLLOWER.rawValue)
     self.followingInfoView.setupText(title: "\(profileInfo.followingCount)명", info: ProfileInfoType.FOLLOWING.rawValue)
     self.postingInfoView.setupText(title: "\(profileInfo.boardCount)건", info: ProfileInfoType.POSTING.rawValue)
   }
 }
+
+

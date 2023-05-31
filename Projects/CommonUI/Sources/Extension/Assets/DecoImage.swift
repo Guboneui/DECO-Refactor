@@ -97,18 +97,18 @@ public extension UIImage {
     public static let thumbnail = CommonUIAsset.Image.thumbnail.image
     
     // MARK: Bottom TabBar Image
-    public static let defaultHomeTab = CommonUIAsset.Image.home.image
+    public static let defaultHomeTab = CommonUIAsset.Image.defaultHome.image
     public static let selectedHomeTab = CommonUIAsset.Image.homeNavi.image
     
-    public static let defaultProductTab = CommonUIAsset.Image.findlist.image
+    public static let defaultProductTab = CommonUIAsset.Image.defaultProduct.image
     public static let selectedProductTab = CommonUIAsset.Image.findlistNavi.image
     
-    public static let defaultUploadTab = CommonUIAsset.Image.upload.image
+    public static let defaultUploadTab = CommonUIAsset.Image.defaultUpload.image
     
-    public static let defaultBookmarkTab = CommonUIAsset.Image.save.image
+    public static let defaultBookmarkTab = CommonUIAsset.Image.defaultBookmark.image
     public static let selectedBookmarkTab = CommonUIAsset.Image.saveFull.image
     
-    public static let defaultProfileTab = CommonUIAsset.Image.profile.image
+    public static let defaultProfileTab = CommonUIAsset.Image.defaultProfile.image
     public static let selectedProfileTab = CommonUIAsset.Image.profileNavi.image
   }
 }

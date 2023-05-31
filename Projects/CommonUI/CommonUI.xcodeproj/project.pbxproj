@@ -12,6 +12,7 @@
 		132E71F17B1D363766B88B84 /* NotoSansKR-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 15CD4B8F263EBED9EE862DEC /* NotoSansKR-Bold.otf */; };
 		259FD2F714D7E710266810E9 /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4B13DE094902818E514DD7 /* NavigationBar.swift */; };
 		25D11A48D5BD5B11E545DC64 /* SmallTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBC5C9522A829AB27CB37F0 /* SmallTextCell.swift */; };
+		265FA00318D779BDB6F197EA /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8532B1B24B020BF76AEDFF76 /* ProfileView.swift */; };
 		26A89C8ABDA7272793E1DF1A /* Image.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42C46A1D137F6D04C3967B64 /* Image.xcassets */; };
 		39EC6BCA36C6D9020E2FBEEE /* SUIT-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7D7B839FF2BD4170FF0A7D18 /* SUIT-Bold.otf */; };
 		3B93A3AC2360B6AA4211F43D /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB2A151EF61A0078BCB1E57 /* UILabel+Extension.swift */; };
@@ -44,6 +45,7 @@
 		BF3B1D53FB6A082F6BE50966 /* SUIT-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = CED5695C335D5BB3770DFCCF /* SUIT-ExtraLight.otf */; };
 		C6379C9A1F1988F5E6924D77 /* NotoSansKR-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7C05DBB465D60BCA13477EF8 /* NotoSansKR-Light.otf */; };
 		C657246CEF8452B4CEA5C60C /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE8D92AE9CC47C9A81DDC00 /* UIView+Extension.swift */; };
+		C70C23839F262CD7B4A5C3F5 /* ProfileInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99087EBC2430BEDBBC95C5F7 /* ProfileInfoView.swift */; };
 		C7DE771C5F434A22FB302FA6 /* SUIT-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2AAA16EB10167F4F8A589DF2 /* SUIT-Light.otf */; };
 		C94951E661D9DC9D28B56273 /* TuistAssets+CommonUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F625FE1E640FBDB817D76A3 /* TuistAssets+CommonUI.swift */; };
 		CBF9EB191E353B25C3DDC36E /* NotoSansKR-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 92B162ACA7CC5EBDFC92444E /* NotoSansKR-Thin.otf */; };
@@ -90,10 +92,12 @@
 		7D7B839FF2BD4170FF0A7D18 /* SUIT-Bold.otf */ = {isa = PBXFileReference; path = "SUIT-Bold.otf"; sourceTree = "<group>"; };
 		80EED652CD9730D72F01A29B /* ImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
 		823B5C9949AC3082E546F866 /* TitleSubtitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleSubtitleView.swift; sourceTree = "<group>"; };
+		8532B1B24B020BF76AEDFF76 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		86E3FD9C981C1524E3907F57 /* SUIT-Heavy.otf */ = {isa = PBXFileReference; path = "SUIT-Heavy.otf"; sourceTree = "<group>"; };
 		92B162ACA7CC5EBDFC92444E /* NotoSansKR-Thin.otf */ = {isa = PBXFileReference; path = "NotoSansKR-Thin.otf"; sourceTree = "<group>"; };
 		93EB304198EF95CFC2A6D7CE /* SegmentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentTableViewCell.swift; sourceTree = "<group>"; };
 		94EF204F3CD6F86C6167C300 /* TuistBundle+CommonUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TuistBundle+CommonUI.swift"; sourceTree = "<group>"; };
+		99087EBC2430BEDBBC95C5F7 /* ProfileInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInfoView.swift; sourceTree = "<group>"; };
 		AAB2A151EF61A0078BCB1E57 /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
 		BBDFCECD69448A84AA99E9F7 /* SUIT-Regular.otf */ = {isa = PBXFileReference; path = "SUIT-Regular.otf"; sourceTree = "<group>"; };
 		BDB70CAC85ED852AB55C26DD /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
@@ -228,6 +232,15 @@
 			path = Image;
 			sourceTree = "<group>";
 		};
+		A60664CAE36A32F91A6EAB45 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				99087EBC2430BEDBBC95C5F7 /* ProfileInfoView.swift */,
+				8532B1B24B020BF76AEDFF76 /* ProfileView.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
 		B7342C91FB26C6BB1D507B58 = {
 			isa = PBXGroup;
 			children = (
@@ -275,6 +288,7 @@
 		EAEAEB2B0A978F44126F19FA /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				A60664CAE36A32F91A6EAB45 /* Profile */,
 				C53E01A173E441AF6929DC13 /* InfoWithTitleView.swift */,
 				C730598E1B4A23369A89A00C /* LinkWithImageView.swift */,
 				6A4B13DE094902818E514DD7 /* NavigationBar.swift */,
@@ -415,6 +429,8 @@
 				9DA268FB6D09BB0089BAAC0C /* InfoWithTitleView.swift in Sources */,
 				915E8F0D979DABD002B163AC /* LinkWithImageView.swift in Sources */,
 				259FD2F714D7E710266810E9 /* NavigationBar.swift in Sources */,
+				C70C23839F262CD7B4A5C3F5 /* ProfileInfoView.swift in Sources */,
+				265FA00318D779BDB6F197EA /* ProfileView.swift in Sources */,
 				957B65F97FE384B4AFD4F050 /* TitleSubtitleView.swift in Sources */,
 				4D05256CA52D034DF54104C2 /* TouchAnimationView.swift in Sources */,
 				7B701FE62D4EF108880CB632 /* DecoColor.swift in Sources */,

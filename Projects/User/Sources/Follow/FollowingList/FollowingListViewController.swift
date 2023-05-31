@@ -24,6 +24,8 @@ protocol FollowingListPresentableListener: AnyObject {
   func changeFollowersState(with userInfo: UserDTO, index: Int)
   func showOriginFollowingList()
   func showFilteredFollowingList(with nickname: String)
+  
+  func pushTargetUserProfileVC(with targetUserInfo: UserDTO)
 }
 
 final class FollowingListViewController: UIViewController, FollowingListPresentable, FollowingListViewControllable {
@@ -149,6 +151,11 @@ final class FollowingListViewController: UIViewController, FollowingListPresenta
           else { inSelf.listener?.follow(targetUserID: userInfo.userId) }
           
           inSelf.listener?.changeFollowersState(with: userInfo, index: index)
+        }
+        
+        cell.didTapProfileImageView = { [weak self] in
+          guard let inSelf = self else { return }
+          inSelf.listener?.pushTargetUserProfileVC(with: userInfo)
         }
       }
     }.disposed(by: disposeBag)

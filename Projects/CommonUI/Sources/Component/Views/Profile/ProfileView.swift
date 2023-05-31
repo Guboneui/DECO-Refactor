@@ -1,21 +1,20 @@
 //
 //  ProfileView.swift
-//  Profile
+//  CommonUI
 //
-//  Created by 구본의 on 2023/05/24.
+//  Created by 구본의 on 2023/05/31.
 //
 
 import UIKit
 
 import Util
-import User
 import Entity
 import CommonUI
 
 import Then
 import PinLayout
 
-class ProfileView: UIView {
+public class ProfileView: UIView {
   
   private let backgroundImageView: UIImageView = UIImageView().then {
     $0.backgroundColor = .white
@@ -58,12 +57,12 @@ class ProfileView: UIView {
     $0.numberOfLines = 0
   }
   
-  override init(frame: CGRect) {
+  override public init(frame: CGRect) {
     super.init(frame: frame)
     self.setupViews()
   }
   
-  override func layoutSubviews() {
+  override public func layoutSubviews() {
     super.layoutSubviews()
     self.setupLayouts()
   }
@@ -89,7 +88,7 @@ class ProfileView: UIView {
     profileImageShadowView.pin
       .center()
       .size(90)
-      .marginBottom(12)
+      .marginTop(12)
     
     profileImageView.pin
       .all()
@@ -118,16 +117,20 @@ class ProfileView: UIView {
       .size(UIScreen.main.bounds.width)
   }
   
-  override func sizeThatFits(_ size: CGSize) -> CGSize {
+  override public func sizeThatFits(_ size: CGSize) -> CGSize {
     return CGSize(width: size.width, height: size.width)
   }
   
-  public func setProfile(with profileInfo: UserManagerModel) {    
+  public func setProfile(with profileInfo: ProfileDTO) {
     self.backgroundImageView.loadImage(imageUrl: profileInfo.backgroundUrl)
     self.profileImageView.loadImage(imageUrl: profileInfo.profileUrl)
     self.profileTitleLabel.text = profileInfo.profileName
     self.profileNicknameLabel.text = profileInfo.nickname
     self.profileDescriptionLabel.text = profileInfo.profileDescription
+    
+    self.setupLayouts()
   }
 }
+
+
 

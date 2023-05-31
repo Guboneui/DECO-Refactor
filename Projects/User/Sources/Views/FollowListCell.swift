@@ -20,6 +20,7 @@ class FollowListCell: UICollectionViewCell {
   private let disposeBag: DisposeBag = DisposeBag()
   
   public var didTapFollowButton: (()->())?
+  public var didTapProfileImageView: (()->())?
   
   private let profileImageView: UIImageView = UIImageView().then {
     $0.contentMode = .scaleAspectFill
@@ -104,6 +105,12 @@ class FollowListCell: UICollectionViewCell {
       .bind { [weak self] in
         guard let self else { return }
         self.didTapFollowButton?()
+      }.disposed(by: disposeBag)
+    
+    self.profileImageView.tap()
+      .bind { [weak self] _ in
+        guard let self else { return }
+        self.didTapProfileImageView?()
       }.disposed(by: disposeBag)
   }
   

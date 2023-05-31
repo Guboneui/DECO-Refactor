@@ -45,6 +45,7 @@ public protocol UserManagerStream: AnyObject {
   var userID: Int { get }
   var userNickname: String { get }
   func castingUserInfoModel(with userInfo: ProfileDTO) -> UserManagerModel
+  func castingProfileDTOModel(with userInfo: UserManagerModel) -> ProfileDTO
   
 }
 
@@ -112,6 +113,23 @@ public class UserManagerStreamImpl: MutableUserManagerStream {
   
   public func castingUserInfoModel(with userInfo: ProfileDTO) -> UserManagerModel {
     let user: UserManagerModel = UserManagerModel(
+      nickname: userInfo.nickname,
+      profileUrl: userInfo.profileUrl,
+      backgroundUrl: userInfo.backgroundUrl,
+      profileDescription: userInfo.profileDescription,
+      profileName: userInfo.profileName,
+      followCount: userInfo.followCount,
+      followingCount: userInfo.followingCount,
+      boardCount: userInfo.boardCount,
+      userId: userInfo.userId,
+      followStatus: userInfo.followStatus
+    )
+    
+    return user
+  }
+  
+  public func castingProfileDTOModel(with userInfo: UserManagerModel) -> ProfileDTO {
+    let user: ProfileDTO = ProfileDTO(
       nickname: userInfo.nickname,
       profileUrl: userInfo.profileUrl,
       backgroundUrl: userInfo.backgroundUrl,

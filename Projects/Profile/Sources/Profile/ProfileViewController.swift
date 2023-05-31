@@ -19,7 +19,7 @@ import RxRelay
 
 protocol ProfilePresentableListener: AnyObject {
   var userPostings: BehaviorRelay<[PostingDTO]> { get }
-  func fetchUserPostings(id: Int, userID: Int, createdAt: Int)
+  func fetchUserPostings(createdAt: Int)
   func pushAppSettingVC()
   func pushProfileEditVC()
   func pushFollowVC(with selectedFollowType: FollowTabType)
@@ -64,7 +64,6 @@ final public class ProfileViewController: UIViewController, ProfilePresentable, 
   private var topMargin: CGFloat = 0.0
   
   private let stickyNavTitleLabel: UILabel = UILabel().then {
-    $0.text = "TITLE"
     $0.font = .DecoFont.getFont(with: .Suit, type: .bold, size: 16)
     $0.textAlignment = .center
     $0.backgroundColor = .DecoColor.whiteColor
@@ -189,7 +188,7 @@ final public class ProfileViewController: UIViewController, ProfilePresentable, 
         if let potings = self.listener?.userPostings.value,
            potings.count - 1 == indexPath.row,
            let lastCreatedAt = potings[indexPath.row].createdAt {
-          self.listener?.fetchUserPostings(id: 72, userID: 72, createdAt: lastCreatedAt)
+          self.listener?.fetchUserPostings(createdAt: lastCreatedAt)
         }
       }).disposed(by: disposeBag)
     
@@ -251,7 +250,7 @@ final public class ProfileViewController: UIViewController, ProfilePresentable, 
       }.disposed(by: disposeBag)
   }
   
-  func setUserProfile(with profileInfo: UserManagerModel) {
+  func setUserProfile(with profileInfo: ProfileDTO) {
     self.stickyNavTitleLabel.text = profileInfo.nickname
     self.profileView.setProfile(with: profileInfo)
     self.profileInfoView.setProfileInfo(with: profileInfo)

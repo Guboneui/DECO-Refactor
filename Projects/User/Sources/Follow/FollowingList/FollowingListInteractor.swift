@@ -7,6 +7,7 @@
 
 import Networking
 
+import Util
 import Entity
 
 import RIBs
@@ -14,7 +15,8 @@ import RxSwift
 import RxRelay
 
 protocol FollowingListRouting: ViewableRouting {
-  // TODO: Declare methods the interactor can invoke to manage sub-tree via the router.
+  func attachTargetUserProfileVC(with targetUserInfo: UserDTO)
+  func detachTargetUserProfileVC(with popType: PopType)
 }
 
 protocol FollowingListPresentable: Presentable {
@@ -124,5 +126,13 @@ final class FollowingListInteractor: PresentableInteractor<FollowingListPresenta
     let filteredList = self.copiedFollowingList.filter{$0.nickName.contains(nickname)}
     self.followingList.accept(filteredList)
     self.presenter.showNoticeLabel(isEmptyArray: filteredList.isEmpty)
+  }
+  
+  func pushTargetUserProfileVC(with targetUserInfo: UserDTO) {
+    router?.attachTargetUserProfileVC(with: targetUserInfo)
+  }
+  
+  func popTargetUserProfileVC(with popType: PopType) {
+    router?.detachTargetUserProfileVC(with: popType)
   }
 }

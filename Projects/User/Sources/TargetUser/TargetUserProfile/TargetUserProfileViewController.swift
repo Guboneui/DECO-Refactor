@@ -20,9 +20,10 @@ protocol TargetUserProfilePresentableListener: AnyObject {
   var targetUserProfileInfo: BehaviorRelay<ProfileDTO?> { get }
   var targetUserPostings: BehaviorRelay<[PostingDTO]> { get }
   func popTargetUserProfileVC(with popType: PopType)
+  
   func fetchTargetUserPostings(createdAt: Int)
   func showAlertCurrentUserStatus()
-  func fetchTargetUserFollowUnfollow()
+  func didTapFollowButton()
   func pushFollowVC(with selectedFollowType: FollowTabType)
 }
 
@@ -226,7 +227,7 @@ final class TargetUserProfileViewController: UIViewController, TargetUserProfile
     self.followStatusButton.tap()
       .bind { [weak self] in
         guard let self else { return }
-        self.listener?.fetchTargetUserFollowUnfollow()
+        self.listener?.didTapFollowButton()
       }.disposed(by: disposeBag)
     
     self.profileInfoView.didTapFollowerView = { [weak self] in
@@ -242,7 +243,7 @@ final class TargetUserProfileViewController: UIViewController, TargetUserProfile
     self.stickyFollowStatusButton.tap()
       .bind { [weak self] in
         guard let self else { return }
-        self.listener?.fetchTargetUserFollowUnfollow()
+        self.listener?.didTapFollowButton()
       }.disposed(by: disposeBag)
   }
   
@@ -318,6 +319,21 @@ final class TargetUserProfileViewController: UIViewController, TargetUserProfile
   
   // MARK: - TargetUserProfilePresentable
   
+  func setUserProfileInfo(with profileInfo: ProfileDTO) {
+    self.stickyNavTitleLabel.text = profileInfo.nickname
+    self.followStatusButton.imageEdgeInsets = .zero
+    self.followStatusButton.titleEdgeInsets = .zero
+    self.followStatusButton.setTitle("프로필 수정", for: .normal)
+    self.followStatusButton.backgroundColor = .DecoColor.secondaryColor
+    self.followStatusButton.tintColor = .DecoColor.whiteColor
+    
+    self.stickyFollowStatusButton.setTitle("수정", for: .normal)
+    self.stickyFollowStatusButton.tintColor = .DecoColor.gray2
+    
+    self.profileView.setProfile(with: profileInfo)
+    self.profileInfoView.setProfileInfo(with: profileInfo)
+  }
+  
   func setTargetUserProfileInfo(with profileInfo: ProfileDTO) {
     self.setUIWithFollowStatus(followStatus: profileInfo.followStatus, targetUserName: profileInfo.nickname)
     self.profileView.setProfile(with: profileInfo)
@@ -369,7 +385,19 @@ final class TargetUserProfileViewController: UIViewController, TargetUserProfile
   }
   
   func showEditProfileAlert() {
-    print("프로필 수정")
+    let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+    
+    let editButton = UIAlertAction(title: "수정하기", style: .default) { _ in
+      print("수정하기")
+    }
+    editButton.setValue(UIColor.DecoColor.darkGray1, forKey: "titleTextColor")
+    
+    let cancelButton = UIAlertAction(title: "취소", style: .cancel)
+    cancelButton.setValue(UIColor.DecoColor.warningColor, forKey: "titleTextColor")
+    
+    alert.addAction(editButton)
+    alert.addAction(cancelButton)
+    self.present(alert, animated: true)
   }
 }
 

@@ -20,6 +20,7 @@ protocol TargetUserProfileRouting: ViewableRouting {
 
 protocol TargetUserProfilePresentable: Presentable {
   var listener: TargetUserProfilePresentableListener? { get set }
+  func setUserProfileInfo(with profileInfo: ProfileDTO)
   func setTargetUserProfileInfo(with profileInfo: ProfileDTO)
   @MainActor func showEditProfileAlert()
   @MainActor func showBlockAlert()
@@ -93,9 +94,14 @@ final class TargetUserProfileInteractor: PresentableInteractor<TargetUserProfile
     targetUserProfileInfo
       .observe(on: MainScheduler.instance)
       .compactMap{$0}
-      .bind { [weak self] in
+      .bind { [weak self] targetUserInfo in
         guard let self else { return }
-        self.presenter.setTargetUserProfileInfo(with: $0)
+        if targetUserInfo.userId == self.userManager.userID {
+          self.presenter.setUserProfileInfo(with: targetUserInfo)
+        } else {
+          self.presenter.setTargetUserProfileInfo(with: targetUserInfo)
+        }
+
       }.disposed(by: disposeBag)
   }
   
@@ -131,7 +137,15 @@ final class TargetUserProfileInteractor: PresentableInteractor<TargetUserProfile
     }
   }
   
-  func fetchTargetUserFollowUnfollow() {
+  func didTapFollowButton() {
+    if targetUserInfo.userId == userManager.userID {
+      print("프로필 수정")
+    } else {
+      self.fetchTargetUserFollowUnfollow()
+    }
+  }
+  
+  private func fetchTargetUserFollowUnfollow() {
     if let targetUserProfileInfo = targetUserProfileInfo.value {
       if targetUserProfileInfo.followStatus {
         Task.detached { [weak self] in

@@ -31,11 +31,11 @@ final class MainViewController: UIViewController, MainPresentable, MainViewContr
     $0.backgroundColor = .DecoColor.whiteColor
   }
   
-  private let homeTab: TabbarView = TabbarView(image: .DecoImage.selectedHomeTab, title: "홈")
-  private let productTab: TabbarView = TabbarView(image: .DecoImage.defaultProductTab, title: "상품")
-  private let uploadTab: TabbarView = TabbarView(image: .DecoImage.defaultUploadTab, title: "업로드")
-  private let bookmarkTab: TabbarView = TabbarView(image: .DecoImage.defaultBookmarkTab, title: "저장목록")
-  private let profileTab: TabbarView = TabbarView(image: .DecoImage.defaultProfileTab, title: "프로필")
+  private let homeTab: TabbarView = TabbarView(image: .DecoImage.selectedHomeTab, title: "홈", isSelected: true)
+  private let productTab: TabbarView = TabbarView(image: .DecoImage.defaultProductTab, title: "상품", isSelected: false)
+  private let uploadTab: TabbarView = TabbarView(image: .DecoImage.defaultUploadTab, title: "업로드", isSelected: false)
+  private let bookmarkTab: TabbarView = TabbarView(image: .DecoImage.defaultBookmarkTab, title: "저장목록", isSelected: false)
+  private let profileTab: TabbarView = TabbarView(image: .DecoImage.defaultProfileTab, title: "프로필", isSelected: false)
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -143,8 +143,12 @@ final class MainViewController: UIViewController, MainPresentable, MainViewContr
   
   private func setTabbarImage(with tab: TabType) {
     self.homeTab.changeTabbarImage(with: tab == .Home ? .DecoImage.selectedHomeTab : .DecoImage.defaultHomeTab)
+    self.homeTab.changeTabbarTextColor(isSelected: tab == .Home)
     self.productTab.changeTabbarImage(with: tab == .Product ? .DecoImage.selectedProductTab : .DecoImage.defaultProductTab)
+    self.productTab.changeTabbarTextColor(isSelected: tab == .Product)
     self.bookmarkTab.changeTabbarImage(with: tab == .Bookmark ? .DecoImage.selectedBookmarkTab : .DecoImage.defaultBookmarkTab)
+    self.bookmarkTab.changeTabbarTextColor(isSelected: tab == .Bookmark)
     self.profileTab.changeTabbarImage(with: tab == .Profile ? .DecoImage.selectedProfileTab : .DecoImage.defaultProfileTab)
+    self.profileTab.changeTabbarTextColor(isSelected: tab == .Profile)
   }
 }

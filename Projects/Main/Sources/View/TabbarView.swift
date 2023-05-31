@@ -13,6 +13,7 @@ import PinLayout
 class TabbarView: TouchAnimationView {
   private let image: UIImage
   private let title: String
+  private let isSelected: Bool
   
   private let tabbarImageView: UIImageView = UIImageView().then {
     $0.contentMode = .scaleAspectFit
@@ -20,17 +21,18 @@ class TabbarView: TouchAnimationView {
   }
   
   private let tabbarTitleLabel: UILabel = UILabel().then {
-    $0.textColor = .DecoColor.darkGray1
     $0.textAlignment = .center
     $0.font = .DecoFont.getFont(with: .Suit, type: .medium, size: 10)
   }
   
-  init(image: UIImage, title: String) {
+  init(image: UIImage, title: String, isSelected: Bool) {
     self.image = image
     self.title = title
+    self.isSelected = isSelected
     super.init(frame: .zero)
     self.tabbarImageView.image = image
     self.tabbarTitleLabel.text = title
+    self.tabbarTitleLabel.textColor = isSelected ? .DecoColor.darkGray1 : .DecoColor.gray2
     self.setupLayouts()
   }
   
@@ -47,5 +49,9 @@ class TabbarView: TouchAnimationView {
   
   public func changeTabbarImage(with image: UIImage) {
     self.tabbarImageView.image = image
+  }
+  
+  public func changeTabbarTextColor(isSelected: Bool) {
+    self.tabbarTitleLabel.textColor = isSelected ? .DecoColor.darkGray1 : .DecoColor.gray2
   }
 }

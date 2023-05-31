@@ -17,7 +17,9 @@ protocol TargetUserProfileDependency: Dependency {
   
 }
 
-final class TargetUserProfileComponent: Component<TargetUserProfileDependency> {
+final class TargetUserProfileComponent: Component<TargetUserProfileDependency>, FollowDependency {
+  var userManager: MutableUserManagerStream { dependency.userManager }
+  
   
   // TODO: Declare 'fileprivate' dependencies that are only used by this RIB.
 }
@@ -48,6 +50,13 @@ final class TargetUserProfileBuilder: Builder<TargetUserProfileDependency>, Targ
       followRepository: dependency.followRepository
     )
     interactor.listener = listener
-    return TargetUserProfileRouter(interactor: interactor, viewController: viewController)
+    
+    let followBuildable = FollowBuilder(dependency: component)
+    
+    return TargetUserProfileRouter(
+      interactor: interactor,
+      viewController: viewController,
+      followBuildable: followBuildable
+    )
   }
 }

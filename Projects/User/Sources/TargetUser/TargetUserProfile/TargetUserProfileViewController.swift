@@ -23,6 +23,7 @@ protocol TargetUserProfilePresentableListener: AnyObject {
   func fetchTargetUserPostings(createdAt: Int)
   func showAlertCurrentUserStatus()
   func fetchTargetUserFollowUnfollow()
+  func pushFollowVC(with selectedFollowType: FollowTabType)
 }
 
 final class TargetUserProfileViewController: UIViewController, TargetUserProfilePresentable, TargetUserProfileViewControllable {
@@ -227,6 +228,16 @@ final class TargetUserProfileViewController: UIViewController, TargetUserProfile
         guard let self else { return }
         self.listener?.fetchTargetUserFollowUnfollow()
       }.disposed(by: disposeBag)
+    
+    self.profileInfoView.didTapFollowerView = { [weak self] in
+      guard let self else { return }
+      self.listener?.pushFollowVC(with: .Follower)
+    }
+    
+    self.profileInfoView.didTapFollowingView = { [weak self] in
+      guard let self else { return }
+      self.listener?.pushFollowVC(with: .Following)
+    }
     
     self.stickyFollowStatusButton.tap()
       .bind { [weak self] in

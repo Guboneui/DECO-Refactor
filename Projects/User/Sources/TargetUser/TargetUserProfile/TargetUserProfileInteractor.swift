@@ -14,7 +14,8 @@ import RxSwift
 import RxRelay
 
 protocol TargetUserProfileRouting: ViewableRouting {
-  // TODO: Declare methods the interactor can invoke to manage sub-tree via the router.
+  func attachFollowVC(targetUserID: Int, targetUserNickname: String, firstFollowTabStatus: FollowTabType)
+  func detachFollowVC(with popType: PopType)
 }
 
 protocol TargetUserProfilePresentable: Presentable {
@@ -31,6 +32,8 @@ protocol TargetUserProfileListener: AnyObject {
 
 final class TargetUserProfileInteractor: PresentableInteractor<TargetUserProfilePresentable>, TargetUserProfileInteractable, TargetUserProfilePresentableListener {
   
+  
+  
   weak var router: TargetUserProfileRouting?
   weak var listener: TargetUserProfileListener?
   private let disposeBag: DisposeBag = DisposeBag()
@@ -39,7 +42,7 @@ final class TargetUserProfileInteractor: PresentableInteractor<TargetUserProfile
   var targetUserPostings: BehaviorRelay<[PostingDTO]> = .init(value: [])
   
   private let targetUserInfo: UserDTO
-  private let userManger: MutableUserManagerStream
+  private let userManager: MutableUserManagerStream
   private let userProfileRepository: UserProfileRepository
   private let followRepository: FollowRepository
   
@@ -51,7 +54,7 @@ final class TargetUserProfileInteractor: PresentableInteractor<TargetUserProfile
     followRepository: FollowRepository
   ) {
     self.targetUserInfo = targetUserInfo
-    self.userManger = userManager
+    self.userManager = userManager
     self.userProfileRepository = userProfileRepository
     self.followRepository = followRepository
     super.init(presenter: presenter)
@@ -79,7 +82,7 @@ final class TargetUserProfileInteractor: PresentableInteractor<TargetUserProfile
       guard let self else { return }
       if let profileInfo = await self.userProfileRepository.userProfile(
         id: self.targetUserInfo.userId,
-        userID: self.userManger.userID
+        userID: self.userManager.userID
       ) {
         self.targetUserProfileInfo.accept(profileInfo)
       }
@@ -101,7 +104,7 @@ final class TargetUserProfileInteractor: PresentableInteractor<TargetUserProfile
       guard let self else { return }
       let postings = await self.userProfileRepository.userPostings(
         id: self.targetUserInfo.userId,
-        userID: self.userManger.userID,
+        userID: self.userManager.userID,
         createdAt: createdAt
       )
       let prevData = self.targetUserPostings.value
@@ -112,13 +115,13 @@ final class TargetUserProfileInteractor: PresentableInteractor<TargetUserProfile
   }
   
   @MainActor func showAlertCurrentUserStatus() {
-    if targetUserInfo.userId == userManger.userID {
+    if targetUserInfo.userId == userManager.userID {
       presenter.showEditProfileAlert()
     } else {
       Task.detached { [weak self] in
         guard let self else { return }
         if let status = await self.userProfileRepository.checkUserBlockStatus(
-          userID: self.userManger.userID,
+          userID: self.userManager.userID,
           targetUserID: self.targetUserInfo.userId
         ) {
           if status { await self.presenter.showUnblockAlert() }
@@ -135,16 +138,16 @@ final class TargetUserProfileInteractor: PresentableInteractor<TargetUserProfile
           guard let self else { return }
           _ = await self.followRepository.unfollow(
             targetID: self.targetUserInfo.userId,
-            userID: self.userManger.userID,
+            userID: self.userManager.userID,
             follow: false
           )
         
           self.fetchTargetUserProfileInfo()
           if let userInfo = await self.userProfileRepository.userProfile(
-            id: self.userManger.userID,
-            userID: self.userManger.userID
+            id: self.userManager.userID,
+            userID: self.userManager.userID
           ) {
-            self.userManger.updateUserInfo(with: self.userManger.castingUserInfoModel(with: userInfo))
+            self.userManager.updateUserInfo(with: self.userManager.castingUserInfoModel(with: userInfo))
           }
         }
       } else {
@@ -152,18 +155,30 @@ final class TargetUserProfileInteractor: PresentableInteractor<TargetUserProfile
           guard let self else { return }
           _ = await self.followRepository.follow (
             targetID: self.targetUserInfo.userId,
-            userID: self.userManger.userID,
+            userID: self.userManager.userID,
             follow: true
           )
           self.fetchTargetUserProfileInfo()
           if let userInfo = await self.userProfileRepository.userProfile(
-            id: self.userManger.userID,
-            userID: self.userManger.userID
+            id: self.userManager.userID,
+            userID: self.userManager.userID
           ) {
-            self.userManger.updateUserInfo(with: self.userManger.castingUserInfoModel(with: userInfo))
+            self.userManager.updateUserInfo(with: self.userManager.castingUserInfoModel(with: userInfo))
           }
         }
       }
     }
+  }
+  
+  func pushFollowVC(with selectedFollowType: FollowTabType) {
+    router?.attachFollowVC(
+      targetUserID: targetUserInfo.userId,
+      targetUserNickname: targetUserInfo.nickName,
+      firstFollowTabStatus: selectedFollowType
+    )
+  }
+  
+  func detachFollowVC(with popType: Util.PopType) {
+    router?.detachFollowVC(with: popType)
   }
 }

@@ -6,6 +6,7 @@
 //
 
 import Util
+import Entity
 
 import RIBs
 import RxSwift
@@ -17,7 +18,8 @@ public enum FollowTabType {
 }
 
 public protocol FollowRouting: ViewableRouting {
-  
+  func attachTargetUserProfileVC(with targetUserInfo: UserDTO)
+  func detachTargetUserProfileVC(with popType: PopType)
 }
 
 protocol FollowPresentable: Presentable {
@@ -32,6 +34,8 @@ public protocol FollowListener: AnyObject {
 }
 
 final class FollowInteractor: PresentableInteractor<FollowPresentable>, FollowInteractable, FollowPresentableListener {
+  
+  
   
   weak var router: FollowRouting?
   weak var listener: FollowListener?
@@ -72,6 +76,14 @@ final class FollowInteractor: PresentableInteractor<FollowPresentable>, FollowIn
   override func willResignActive() {
     super.willResignActive()
     // TODO: Pause any business logic.
+  }
+  
+  func attachTargetUserProfileVC(with targetUserInfo: UserDTO) {
+    router?.attachTargetUserProfileVC(with: targetUserInfo)
+  }
+  
+  func popTargetUserProfileVC(with popType: Util.PopType) {
+    router?.detachTargetUserProfileVC(with: popType)
   }
   
   func popFollowVC(with popType: PopType) {

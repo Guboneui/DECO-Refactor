@@ -5,12 +5,15 @@
 //  Created by 구본의 on 2023/05/30.
 //
 
+import Entity
+import Util
 import RIBs
 
 protocol FollowInteractable:
   Interactable,
   FollowerListListener,
-  FollowingListListener
+  FollowingListListener,
+  TargetUserProfileListener
 {
   var router: FollowRouting? { get set }
   var listener: FollowListener? { get set }
@@ -31,15 +34,20 @@ final class FollowRouter: ViewableRouter<FollowInteractable, FollowViewControlla
   private let followingListBuildable: FollowingListBuildable
   private var followingListRouting: Routing?
   
+  private let targetUserProfileBuildable: TargetUserProfileBuildable
+  private var targetUserProfileRouting: Routing?
+  
   init(
     interactor: FollowInteractable,
     viewController: FollowViewControllable,
     followerListBuildable: FollowerListBuildable,
     followingListBuildable: FollowingListBuildable,
+    targetUserProfileBuildable: TargetUserProfileBuildable,
     targetUserID: Int
   ) {
     self.followerListBuildable = followerListBuildable
     self.followingListBuildable = followingListBuildable
+    self.targetUserProfileBuildable = targetUserProfileBuildable
     super.init(interactor: interactor, viewController: viewController)
     interactor.router = self
     self.attachFollowerListRIB(targetUserID: targetUserID)
@@ -77,5 +85,23 @@ final class FollowRouter: ViewableRouter<FollowInteractable, FollowViewControlla
     guard let router = followingListRouting else { return }
     self.detachChild(router)
     self.followingListRouting = nil
+  }
+  
+  
+  func attachTargetUserProfileVC(with targetUserInfo: UserDTO) {
+    if targetUserProfileRouting != nil { return }
+    let router = targetUserProfileBuildable.build(withListener: interactor, targetUserInfo: targetUserInfo)
+    attachChild(router)
+    self.viewController.pushViewController(router.viewControllable, animated: true)
+    self.targetUserProfileRouting = router
+  }
+  
+  func detachTargetUserProfileVC(with popType: PopType) {
+    guard let router = targetUserProfileRouting else { return }
+    if popType == .BackButton {
+      self.viewControllable.popViewController(animated: true)
+    }
+    self.detachChild(router)
+    self.targetUserProfileRouting = nil
   }
 }

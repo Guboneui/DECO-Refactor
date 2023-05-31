@@ -15,8 +15,7 @@ import RxSwift
 import RxRelay
 
 protocol FollowingListRouting: ViewableRouting {
-  func attachTargetUserProfileVC(with targetUserInfo: UserDTO)
-  func detachTargetUserProfileVC(with popType: PopType)
+  
 }
 
 protocol FollowingListPresentable: Presentable {
@@ -26,7 +25,7 @@ protocol FollowingListPresentable: Presentable {
 }
 
 protocol FollowingListListener: AnyObject {
-  // TODO: Declare methods the interactor can invoke to communicate with other RIBs.
+  func attachTargetUserProfileVC(with targetUserInfo: UserDTO)
 }
 
 final class FollowingListInteractor: PresentableInteractor<FollowingListPresentable>, FollowingListInteractable, FollowingListPresentableListener {
@@ -129,10 +128,6 @@ final class FollowingListInteractor: PresentableInteractor<FollowingListPresenta
   }
   
   func pushTargetUserProfileVC(with targetUserInfo: UserDTO) {
-    router?.attachTargetUserProfileVC(with: targetUserInfo)
-  }
-  
-  func popTargetUserProfileVC(with popType: PopType) {
-    router?.detachTargetUserProfileVC(with: popType)
+    listener?.attachTargetUserProfileVC(with: targetUserInfo)
   }
 }

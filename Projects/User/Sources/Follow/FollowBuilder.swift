@@ -17,7 +17,8 @@ public protocol FollowDependency: Dependency {
 final class FollowComponent:
   Component<FollowDependency>,
   FollowerListDependency,
-  FollowingListDependency
+  FollowingListDependency,
+  TargetUserProfileDependency
 {
   var followRepository: FollowRepository { FollowRepositoryImpl() }
   var userProfileRepository: UserProfileRepository { UserProfileRepositoryImpl() }
@@ -60,12 +61,14 @@ final public class FollowBuilder: Builder<FollowDependency>, FollowBuildable {
     let followerListBuildable = FollowerListBuilder(dependency: component)
     let followingListBuildable = FollowingListBuilder(dependency: component)
     
+    let targetUserProfileBuildable = TargetUserProfileBuilder(dependency: component)
     
     return FollowRouter(
       interactor: interactor,
       viewController: viewController,
       followerListBuildable: followerListBuildable,
       followingListBuildable: followingListBuildable,
+      targetUserProfileBuildable: targetUserProfileBuildable,
       targetUserID: targetUserID
     )
   }

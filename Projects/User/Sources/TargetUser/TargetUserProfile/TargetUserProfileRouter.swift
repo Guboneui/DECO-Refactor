@@ -5,22 +5,54 @@
 //  Created by 구본의 on 2023/05/31.
 //
 
+import Util
+
 import RIBs
 
-protocol TargetUserProfileInteractable: Interactable {
-    var router: TargetUserProfileRouting? { get set }
-    var listener: TargetUserProfileListener? { get set }
+protocol TargetUserProfileInteractable: Interactable, FollowListener {
+  var router: TargetUserProfileRouting? { get set }
+  var listener: TargetUserProfileListener? { get set }
 }
 
 protocol TargetUserProfileViewControllable: ViewControllable {
-    // TODO: Declare methods the router invokes to manipulate the view hierarchy.
+  // TODO: Declare methods the router invokes to manipulate the view hierarchy.
 }
 
 final class TargetUserProfileRouter: ViewableRouter<TargetUserProfileInteractable, TargetUserProfileViewControllable>, TargetUserProfileRouting {
-
-    // TODO: Constructor inject child builder protocols to allow building children.
-    override init(interactor: TargetUserProfileInteractable, viewController: TargetUserProfileViewControllable) {
-        super.init(interactor: interactor, viewController: viewController)
-        interactor.router = self
+  
+  private let followBuildable: FollowBuildable
+  private var followRouting: Routing?
+  
+  // TODO: Constructor inject child builder protocols to allow building children.
+  init(
+    interactor: TargetUserProfileInteractable,
+    viewController: TargetUserProfileViewControllable,
+    followBuildable: FollowBuildable
+  ) {
+    self.followBuildable = followBuildable
+    super.init(interactor: interactor, viewController: viewController)
+    interactor.router = self
+  }
+  
+  func attachFollowVC(targetUserID: Int, targetUserNickname: String, firstFollowTabStatus: FollowTabType) {
+    if followRouting != nil { return }
+    let router = followBuildable.build(
+      withListener: interactor,
+      targetUserID: targetUserID,
+      targetUserNickname: targetUserNickname,
+      firstFollowTabStatus: firstFollowTabStatus
+    )
+    attachChild(router)
+    self.followRouting = router
+    self.viewController.pushViewController(router.viewControllable, animated: true)
+  }
+  
+  func detachFollowVC(with popType: PopType) {
+    guard let router = followRouting else { return }
+    if popType == .BackButton {
+      self.viewControllable.popViewController(animated: true)
     }
+    self.detachChild(router)
+    self.followRouting = nil
+  }
 }

@@ -16,13 +16,11 @@ protocol FollowingListDependency: Dependency {
 }
 
 final class FollowingListComponent:
-  Component<FollowingListDependency>,
-  TargetUserProfileDependency
+  Component<FollowingListDependency>
 {
-  var userManager: MutableUserManagerStream { dependency.userManager }
-  var userProfileRepository: UserProfileRepository { dependency.userProfileRepository }
-  var followRepository: FollowRepository { dependency.followRepository }
-  // TODO: Declare 'fileprivate' dependencies that are only used by this RIB.
+//  var userManager: MutableUserManagerStream { dependency.userManager }
+//  var userProfileRepository: UserProfileRepository { dependency.userProfileRepository }
+//  var followRepository: FollowRepository { dependency.followRepository }
 }
 
 // MARK: - Builder
@@ -52,12 +50,9 @@ final class FollowingListBuilder: Builder<FollowingListDependency>, FollowingLis
     )
     interactor.listener = listener
     
-    let targetUserProfileBuildable = TargetUserProfileBuilder(dependency: component)
-    
     return FollowingListRouter(
       interactor: interactor,
-      viewController: viewController,
-      targetUserProfileBuildable: targetUserProfileBuildable
+      viewController: viewController
     )
   }
 }

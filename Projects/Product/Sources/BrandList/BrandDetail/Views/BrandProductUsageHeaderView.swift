@@ -23,7 +23,7 @@ class BrandProductUsageHeaderView: UIView {
   private let linkedButton: UIButton = UIButton(type: .system).then {
     $0.backgroundColor = .DecoColor.whiteColor
     $0.tintColor = .DecoColor.darkGray2
-    $0.setImage(.DecoImage.arrowRight, for: .normal)
+    $0.setImage(.DecoImage.arrowRight)
   }
   
   override init(frame: CGRect) {

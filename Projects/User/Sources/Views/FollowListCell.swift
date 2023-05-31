@@ -52,7 +52,6 @@ class FollowListCell: UICollectionViewCell {
     $0.layer.masksToBounds = true
     $0.layer.cornerRadius = 8
     $0.backgroundColor = .gray
-    $0.setTitle("팔로우", for: .normal)
   }
   
   override init(frame: CGRect) {
@@ -123,7 +122,7 @@ class FollowListCell: UICollectionViewCell {
       followButton.isHidden = true
     } else {
       followButton.isHidden = false
-      followButton.setTitle(userInfo.followStatus ? "팔로잉" : "팔로우", for: .normal)
+      followButton.setTitle(userInfo.followStatus ? "팔로잉" : "팔로우")
       followButton.tintColor = userInfo.followStatus ? .DecoColor.darkGray2 : .DecoColor.whiteColor
       followButton.backgroundColor = userInfo.followStatus ? .DecoColor.whiteColor : .DecoColor.secondaryColor
       followButton.layer.borderColor = userInfo.followStatus ? UIColor.DecoColor.gray1.cgColor : UIColor.clear.cgColor

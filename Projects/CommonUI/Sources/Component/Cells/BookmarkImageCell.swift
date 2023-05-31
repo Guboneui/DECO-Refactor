@@ -65,7 +65,7 @@ public class BookmarkImageCell: UICollectionViewCell {
     isBookmarked: Bool
   ) {
     self.mainImageView.loadImage(imageUrl: imageURL)
-    self.bookmarkButton.setImage(isBookmarked ? .DecoImage.saveFullWhite : .DecoImage.saveThick, for: .normal)
+    self.bookmarkButton.setImage(isBookmarked ? .DecoImage.saveFullWhite : .DecoImage.saveThick)
     self.bookmarkButton.tintColor = isBookmarked ? .DecoColor.secondaryColor : .DecoColor.gray4
 
   }

@@ -46,14 +46,14 @@ final public class ProductViewController: UIViewController, ProductPresentable, 
   }
   
   private let productButton: UIButton = UIButton(type: .system).then {
-    $0.setTitle("상품", for: .normal)
+    $0.setTitle("상품")
     $0.titleLabel?.font = .DecoFont.getFont(with: .Suit, type: .bold, size: 14)
     $0.tintColor = .DecoColor.darkGray2
     $0.sizeToFit()
   }
   
   private let brandButton: UIButton = UIButton(type: .system).then {
-    $0.setTitle("브랜드", for: .normal)
+    $0.setTitle("브랜드")
     $0.titleLabel?.font = .DecoFont.getFont(with: .Suit, type: .bold, size: 14)
     $0.tintColor = .DecoColor.lightGray2
     $0.sizeToFit()

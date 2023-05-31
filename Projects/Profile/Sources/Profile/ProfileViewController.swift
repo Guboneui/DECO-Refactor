@@ -36,12 +36,12 @@ final public class ProfileViewController: UIViewController, ProfilePresentable, 
   
   private let profileView: ProfileView = ProfileView()
   private let settingButton: UIButton = UIButton(type: .system).then {
-    $0.setImage(.DecoImage.setting, for: .normal)
+    $0.setImage(.DecoImage.setting)
     $0.tintColor = .white
   }
   
   private let profileEditButton: UIButton = UIButton(type: .system).then {
-    $0.setTitle("프로필 수정", for: .normal)
+    $0.setTitle("프로필 수정")
     $0.titleLabel?.font = .DecoFont.getFont(with: .Suit, type: .bold, size: 14)
     $0.tintColor = .DecoColor.whiteColor
     $0.backgroundColor = .DecoColor.secondaryColor

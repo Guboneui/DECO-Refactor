@@ -20,7 +20,7 @@ public class NavigationBar: UIView {
   public var didTapBackButton: (()->())?
   
   private let backButton = UIButton(type: .system).then {
-    $0.setImage(.DecoImage.arrowDarkgray2, for: .normal)
+    $0.setImage(.DecoImage.arrowDarkgray2)
     $0.tintColor = .DecoColor.darkGray1
     $0.imageEdgeInsets = UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)
   }

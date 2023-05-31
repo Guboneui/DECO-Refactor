@@ -37,14 +37,14 @@ final class FollowViewController: UIViewController, FollowPresentable, FollowVie
   private let segmentContainerView: UIView = UIView()
   
   private let followerButton: UIButton = UIButton(type: .system).then {
-    $0.setTitle("팔로워", for: .normal)
+    $0.setTitle("팔로워")
     $0.titleLabel?.font = .DecoFont.getFont(with: .Suit, type: .medium, size: 12)
     $0.titleLabel?.textAlignment = .center
     $0.tintColor = .DecoColor.gray1
   }
   
   private let followingButton: UIButton = UIButton(type: .system).then {
-    $0.setTitle("팔로잉", for: .normal)
+    $0.setTitle("팔로잉")
     $0.titleLabel?.font = .DecoFont.getFont(with: .Suit, type: .medium, size: 12)
     $0.titleLabel?.textAlignment = .center
     $0.tintColor = .DecoColor.gray1

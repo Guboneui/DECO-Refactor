@@ -34,14 +34,14 @@ final class BookmarkViewController: UIViewController, BookmarkPresentable, Bookm
   private let segmentContainerView: UIView = UIView()
   
   private let photoButton: UIButton = UIButton(type: .system).then {
-    $0.setTitle("사진", for: .normal)
+    $0.setTitle("사진")
     $0.titleLabel?.font = .DecoFont.getFont(with: .Suit, type: .bold, size: 12)
     $0.titleLabel?.textAlignment = .center
     $0.tintColor = .DecoColor.secondaryColor
   }
   
   private let productButton: UIButton = UIButton(type: .system).then {
-    $0.setTitle("상품", for: .normal)
+    $0.setTitle("상품")
     $0.titleLabel?.font = .DecoFont.getFont(with: .Suit, type: .bold, size: 12)
     $0.titleLabel?.textAlignment = .center
     $0.tintColor = .DecoColor.secondaryColor

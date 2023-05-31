@@ -39,12 +39,12 @@ final class TargetUserProfileViewController: UIViewController, TargetUserProfile
   
   private let profileView: ProfileView = ProfileView()
   private let backButton: UIButton = UIButton().then {
-    $0.setImage(.DecoImage.arrowWhite, for: .normal)
+    $0.setImage(.DecoImage.arrowWhite)
     $0.imageEdgeInsets = UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)
   }
   
   private let optionButton: UIButton = UIButton().then {
-    $0.setImage(.DecoImage.moreWhite, for: .normal)
+    $0.setImage(.DecoImage.moreWhite)
     $0.imageEdgeInsets = UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)
   }
   
@@ -81,7 +81,7 @@ final class TargetUserProfileViewController: UIViewController, TargetUserProfile
   }
   
   private let stickyBackButton: UIButton = UIButton().then {
-    $0.setImage(.DecoImage.arrowDarkgray2, for: .normal)
+    $0.setImage(.DecoImage.arrowDarkgray2)
     $0.imageEdgeInsets = UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)
   }
   
@@ -308,12 +308,12 @@ final class TargetUserProfileViewController: UIViewController, TargetUserProfile
   private func setUIWithFollowStatus(followStatus: Bool, targetUserName: String) {
     self.stickyNavTitleLabel.text = targetUserName
     
-    self.followStatusButton.setTitle(followStatus ? "팔로잉" : "팔로우", for: .normal)
-    self.followStatusButton.setImage(followStatus ? .DecoImage.checkColor : .DecoImage.uploadWhite, for: .normal)
+    self.followStatusButton.setTitle(followStatus ? "팔로잉" : "팔로우")
+    self.followStatusButton.setImage(followStatus ? .DecoImage.checkColor : .DecoImage.uploadWhite)
     self.followStatusButton.backgroundColor = followStatus ? .DecoColor.lightGray1 : .DecoColor.secondaryColor
     self.followStatusButton.tintColor = followStatus ? .DecoColor.gray2 : .DecoColor.whiteColor
     
-    self.stickyFollowStatusButton.setTitle(followStatus ? "팔로잉" : "팔로우", for: .normal)
+    self.stickyFollowStatusButton.setTitle(followStatus ? "팔로잉" : "팔로우")
     self.stickyFollowStatusButton.tintColor = followStatus ? .DecoColor.gray2 : .DecoColor.secondaryColor
   }
   
@@ -323,11 +323,11 @@ final class TargetUserProfileViewController: UIViewController, TargetUserProfile
     self.stickyNavTitleLabel.text = profileInfo.nickname
     self.followStatusButton.imageEdgeInsets = .zero
     self.followStatusButton.titleEdgeInsets = .zero
-    self.followStatusButton.setTitle("프로필 수정", for: .normal)
+    self.followStatusButton.setTitle("프로필 수정")
     self.followStatusButton.backgroundColor = .DecoColor.secondaryColor
     self.followStatusButton.tintColor = .DecoColor.whiteColor
     
-    self.stickyFollowStatusButton.setTitle("수정", for: .normal)
+    self.stickyFollowStatusButton.setTitle("수정")
     self.stickyFollowStatusButton.tintColor = .DecoColor.gray2
     
     self.profileView.setProfile(with: profileInfo)

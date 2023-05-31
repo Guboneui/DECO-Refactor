@@ -31,7 +31,7 @@ final class ProfileEditViewController: UIViewController, ProfileEditPresentable,
   )
   
   private let confirmButton: UIButton = UIButton(type: .system).then {
-    $0.setTitle("확인", for: .normal)
+    $0.setTitle("확인")
     $0.titleLabel?.font = .DecoFont.getFont(with: .Suit, type: .medium, size: 12)
     $0.tintColor = .DecoColor.darkGray2
   }
@@ -60,7 +60,7 @@ final class ProfileEditViewController: UIViewController, ProfileEditPresentable,
   }
   
   private let editProfileImageButton: UIButton = UIButton(type: .system).then {
-    $0.setImage(.DecoImage.cameraWhite, for: .normal)
+    $0.setImage(.DecoImage.cameraWhite)
     $0.tintColor = .DecoColor.whiteColor
   }
   
@@ -98,7 +98,7 @@ final class ProfileEditViewController: UIViewController, ProfileEditPresentable,
   
   
   private let editProfileBackgroundImageButton: UIButton = UIButton(type: .system).then {
-    $0.setImage(.DecoImage.cameraWhite, for: .normal)
+    $0.setImage(.DecoImage.cameraWhite)
     $0.tintColor = .DecoColor.whiteColor
   }
   

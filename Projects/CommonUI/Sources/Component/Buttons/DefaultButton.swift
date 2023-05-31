@@ -22,7 +22,7 @@ public class DefaultButton: UIButton {
   
   public init(title: String? = nil) {
     super.init(frame: .zero)
-    self.setTitle(title, for: .normal)
+    self.setTitle(title)
     self.setupDesign()
   }
   
@@ -37,7 +37,7 @@ public class DefaultButton: UIButton {
   
   private func setupDesign() {
     self.titleLabel?.font = .DecoFont.getFont(with: .Suit, type: .medium, size: 16)
-    self.setTitleColor(.DecoColor.darkGray2, for: .normal)
+    self.setTitleColor(.DecoColor.darkGray2)
     self.layer.masksToBounds = true
     self.layer.cornerRadius = 8
     self.backgroundColor = .DecoColor.primaryColor

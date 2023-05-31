@@ -23,7 +23,7 @@ public extension UITextField {
   
   func setClearButton(with image: UIImage, mode: UITextField.ViewMode) {
     let clearButton = UIButton(type: .custom)
-    clearButton.setImage(image, for: .normal)
+    clearButton.setImage(image)
     clearButton.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
     clearButton.contentMode = .scaleAspectFit
     clearButton.addTarget(self, action: #selector(UITextField.clear(sender:)), for: .touchUpInside)

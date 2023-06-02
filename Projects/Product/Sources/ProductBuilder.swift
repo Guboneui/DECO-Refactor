@@ -7,12 +7,13 @@
 
 import RIBs
 import Util
+import User
 import Networking
 
 public protocol ProductDependency: Dependency {
   // TODO: Declare the set of dependencies required by this RIB, but cannot be
   // created by this RIB.
-
+  var userManager: MutableUserManagerStream { get }
 }
 
 final class ProductComponent:
@@ -28,6 +29,8 @@ final class ProductComponent:
   fileprivate var brandRepository: BrandRepository {
     return BrandRepositoryImpl()
   }
+  
+  var userManager: MutableUserManagerStream { dependency.userManager }
   
   var productRepositoryImpl: ProductRepository { return productRepository }
   var brandRepositoryImpl: BrandRepository { return brandRepository }

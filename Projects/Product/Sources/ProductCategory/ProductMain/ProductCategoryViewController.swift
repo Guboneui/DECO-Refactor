@@ -15,7 +15,7 @@ import UIKit
 protocol ProductCategoryPresentableListener: AnyObject {
   var productCategorySections: BehaviorRelay<[ProductCategorySection]> { get }
   
-  func pushProductCategoryDetailVC()
+  func pushProductCategoryDetailVC(selectedCategory: ProductCategoryModel)
   func pushProductMoodDetailVC()
 }
 
@@ -142,19 +142,19 @@ final class ProductCategoryViewController: UIViewController, ProductCategoryPres
       .bind(to: collectionView.rx.items(dataSource: dataSource))
       .disposed(by: disposeBag)
     
-    collectionView.rx.itemSelected
-      .subscribe(onNext: { [weak self] indexPath in
-        guard let self else { return }
-        switch indexPath.section {
-        case 0:
-          self.listener?.pushProductCategoryDetailVC()
-        case 1:
-          self.listener?.pushProductMoodDetailVC()
-        default:
-          break
-        }
-      })
-      .disposed(by: disposeBag)
+    Observable.zip(
+      collectionView.rx.itemSelected,
+      collectionView.rx.modelSelected(ProductCategoryModel.self)
+    ).subscribe(onNext: { indexPath, category in
+      switch indexPath.section {
+      case 0:
+        self.listener?.pushProductCategoryDetailVC(selectedCategory: category)
+      case 1:
+        self.listener?.pushProductMoodDetailVC()
+      default:
+        break
+      }
+    }).disposed(by: disposeBag)
   }
 }
 

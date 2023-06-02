@@ -14,6 +14,12 @@ public extension UIView {
     self.layer.cornerRadius = radius
   }
   
+  func makeCornerRadiusOnlyTop(radius: CGFloat) {
+    layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+    layer.cornerRadius = radius
+    clipsToBounds = true
+  }
+  
   func makeBorder(width: CGFloat, borderColor: UIColor) {
     self.layer.masksToBounds = true
     self.layer.borderWidth = width

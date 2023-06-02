@@ -75,5 +75,6 @@ open class ModalViewController: UIViewController, ModalAnimation {
       }.disposed(by: disposeBag)
   }
   
+  
   open func didTapBackgroundView() { }
 }

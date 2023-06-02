@@ -7,16 +7,25 @@
 
 import UIKit
 
-import CommonUI
 import Util
+import Entity
+import CommonUI
+
 
 import RIBs
 import RxSwift
+import RxRelay
 import PinLayout
 import FlexLayout
 
 protocol ProductCategoryDetailPresentableListener: AnyObject {
+  var productLists: BehaviorRelay<[ProductDTO]> { get }
+  
   func popProductCategoryDetailDetailVC(with popType: PopType)
+  func showCategoryModalVC()
+  func showMoodColorModalVC()
+  
+  func fetchProductList(createdAt: Int)
 }
 
 final class ProductCategoryDetailViewController: UIViewController, ProductCategoryDetailPresentable, ProductCategoryDetailViewControllable {
@@ -69,7 +78,8 @@ final class ProductCategoryDetailViewController: UIViewController, ProductCatego
   }
   
   private let productCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: .init()).then {
-    $0.backgroundColor = .green
+    $0.register(BookmarkImageCell.self, forCellWithReuseIdentifier: BookmarkImageCell.identifier)
+    $0.backgroundColor = .DecoColor.whiteColor
     
     let layout = UICollectionViewFlowLayout()
     layout.scrollDirection = .horizontal
@@ -81,13 +91,12 @@ final class ProductCategoryDetailViewController: UIViewController, ProductCatego
     self.view.backgroundColor = .DecoColor.whiteColor
     self.setupViews()
     self.setupGestures()
+    self.setProductListCollectionView()
     
     DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: { [weak self] in
       guard let self else { return }
-      self.navCategoryLabel.text = "FlexLayout MarkDirty"
-      self.navCategoryLabel.flex.markDirty()
-      self.navCategoryView.flex.layout(mode: .adjustWidth)
       self.selectedFilterCollectionView.isHidden = false
+      self.setupLayouts()
     })
   }
   
@@ -149,7 +158,7 @@ final class ProductCategoryDetailViewController: UIViewController, ProductCatego
       .horizontally()
       .bottom()
       .marginTop(12)
-      
+    
     navCategoryView.flex.layout(mode: .adjustWidth)
     filterView.flex.layout(mode: .adjustWidth)
   }
@@ -163,14 +172,60 @@ final class ProductCategoryDetailViewController: UIViewController, ProductCatego
     self.navCategoryView.tap()
       .bind { [weak self] _ in
         guard let self else { return }
-        print("카테고리 팝업")
+        self.listener?.showCategoryModalVC()
       }.disposed(by: disposeBag)
     
     self.filterView.tap()
       .bind { [weak self] _ in
         guard let self else { return }
-        print("필터 팝업")
+        self.listener?.showMoodColorModalVC()
         
       }.disposed(by: disposeBag)
+  }
+  
+  private func setProductListCollectionView() {
+    listener?.productLists
+      .bind(to: productCollectionView.rx.items(
+        cellIdentifier: BookmarkImageCell.identifier,
+        cellType: BookmarkImageCell.self)
+      ) { index, product, cell in
+        cell.setupCellConfigure(imageURL: product.imageUrl, isBookmarked: product.scrap)
+      }.disposed(by: disposeBag)
+    
+    productCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
+  }
+  
+  // MARK: - ProductCategoryDetailPresentable
+  func setCurrentCategory(category: String) {
+    self.navCategoryLabel.text = category
+    self.navCategoryLabel.flex.markDirty()
+    self.navCategoryView.flex.layout(mode: .adjustWidth)
+  }
+}
+
+extension ProductCategoryDetailViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+  func collectionView(
+    _ collectionView: UICollectionView,
+    layout collectionViewLayout: UICollectionViewLayout,
+    sizeForItemAt indexPath: IndexPath
+  ) -> CGSize {
+    let cellSize: CGFloat = (UIScreen.main.bounds.width - 5.0) / 2.0
+    return CGSize(width: cellSize, height: cellSize)
+  }
+  
+  func collectionView(
+    _ collectionView: UICollectionView,
+    layout collectionViewLayout: UICollectionViewLayout,
+    minimumLineSpacingForSectionAt section: Int
+  ) -> CGFloat {
+    return 5.0
+  }
+  
+  func collectionView(
+    _ collectionView: UICollectionView,
+    layout collectionViewLayout: UICollectionViewLayout,
+    minimumInteritemSpacingForSectionAt section: Int
+  ) -> CGFloat {
+    return 5.0
   }
 }

@@ -6,11 +6,14 @@
 //
 
 import Foundation
+import Entity
 import Moya
 
 enum ProductAPI {
   case productCategoryList
   case productMoodList
+  
+  case productOfCategory(ItemFilterRequest)
 }
 
 extension ProductAPI: TargetType {
@@ -24,6 +27,8 @@ extension ProductAPI: TargetType {
       return "/itemCategory/list"
     case .productMoodList:
       return "/style/second/list"
+    case .productOfCategory:
+      return "/item/filter"
     }
   }
   
@@ -31,6 +36,8 @@ extension ProductAPI: TargetType {
     switch self {
     case .productCategoryList, .productMoodList:
       return .get
+    case .productOfCategory:
+      return .post
     }
   }
   
@@ -38,6 +45,8 @@ extension ProductAPI: TargetType {
     switch self {
     case .productCategoryList, .productMoodList:
       return .requestPlain
+    case .productOfCategory(let param):
+      return .requestParameters(parameters: param.toDictionary, encoding: JSONEncoding.default)
     }
   }
   

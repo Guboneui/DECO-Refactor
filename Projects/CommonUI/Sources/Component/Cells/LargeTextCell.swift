@@ -1,19 +1,17 @@
 //
-//  SmallTextCell.swift
+//  LargeTextCell.swift
 //  CommonUI
 //
-//  Created by 구본의 on 2023/05/23.
+//  Created by 구본의 on 2023/06/03.
 //
 
 import UIKit
 
-public class SmallTextCell: UICollectionViewCell {
+public class LargeTextCell: UICollectionViewCell {
   
-  public static let identifier = "SmallTextCell"
+  public static let identifier = "LargeTextCell"
   
-  private let textLabel: UILabel = UILabel().then {
-    $0.font = .DecoFont.getFont(with: .Suit, type: .medium, size: 12)
-  }
+  private let textLabel: UILabel = UILabel()
   
   private let selectedView = UIView().then {
     $0.backgroundColor = .DecoColor.secondaryColor
@@ -45,7 +43,7 @@ public class SmallTextCell: UICollectionViewCell {
   }
   
   public override func sizeThatFits(_ size: CGSize) -> CGSize {
-    return CGSize(width: size.width, height: 18)
+    return CGSize(width: size.width, height: 20)
   }
   
   public func setupCellConfigure(
@@ -53,9 +51,11 @@ public class SmallTextCell: UICollectionViewCell {
     isSelected: Bool
   ) {
     self.textLabel.text = text
-    self.textLabel.textColor = isSelected ? .DecoColor.darkGray2 : .DecoColor.lightGray2
+    self.textLabel.font = .DecoFont.getFont(with: .Suit, type: isSelected ? .bold : .medium, size: 14)
+    self.textLabel.textColor = isSelected ? .DecoColor.darkGray2 : .DecoColor.gray1
   }
 }
+
 
 
 

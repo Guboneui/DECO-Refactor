@@ -23,8 +23,14 @@ final class CategoryModalViewController: ModalViewController, CategoryModalPrese
   
   
   weak var listener: CategoryModalPresentableListener?
+  
   private let disposeBag: DisposeBag = DisposeBag()
   
+  private let cellHorizontalEdgeInset: CGFloat = 32.0
+  private let cellVerticalEdgeInset: CGFloat = 28.0
+  private let cellLineSpacing: CGFloat = 18.0
+  private let cellWidth: CGFloat = (UIScreen.main.bounds.width-64) / 2.0
+  private let cellHeight: CGFloat = 20.0
   
   private let modalView: UIView = UIView().then {
     $0.backgroundColor = .DecoColor.whiteColor
@@ -32,8 +38,8 @@ final class CategoryModalViewController: ModalViewController, CategoryModalPrese
   }
   
   private let categoryCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: .init()).then {
-    $0.backgroundColor = .orange
-    $0.register(SmallTextCell.self, forCellWithReuseIdentifier: SmallTextCell.identifier)
+    $0.backgroundColor = .DecoColor.whiteColor
+    $0.register(LargeTextCell.self, forCellWithReuseIdentifier: LargeTextCell.identifier)
     
     let layout = UICollectionViewFlowLayout()
     layout.scrollDirection = .vertical
@@ -44,7 +50,6 @@ final class CategoryModalViewController: ModalViewController, CategoryModalPrese
     super.viewDidLoad()
     self.setupViews()
     self.setupGestures()
-    print("AAAAA")
   }
   
   override func viewWillLayoutSubviews() {
@@ -59,10 +64,15 @@ final class CategoryModalViewController: ModalViewController, CategoryModalPrese
     if isShow == false {
       UIView.animate(withDuration: 0.3) { [weak self] in
         guard let self else { return }
+        let categoryCount: Int = self.listener?.categoryList.value.count ?? 0
+        let collectionViewTotalLine: Int = Int(ceil(Double(categoryCount) / 2.0)) + 1
+        let collectionViewHeight: Int = (collectionViewTotalLine*20) + (collectionViewTotalLine-1) * 18
+        let bottomMargin: Int = 60
+        
         self.modalView.pin
           .horizontally()
           .bottom()
-          .height(300)
+          .height(CGFloat(collectionViewHeight + bottomMargin))
         
         self.categoryCollectionView.pin.all()
       } completion: { [weak self] _ in
@@ -81,7 +91,6 @@ final class CategoryModalViewController: ModalViewController, CategoryModalPrese
     modalView.pin
       .horizontally()
       .bottom()
-      .height(0)
     
     categoryCollectionView.pin.all()
   }
@@ -94,13 +103,14 @@ final class CategoryModalViewController: ModalViewController, CategoryModalPrese
     categoryCollectionView.delegate = nil
     listener?.categoryList
       .bind(to: categoryCollectionView.rx.items(
-        cellIdentifier: SmallTextCell.identifier,
-        cellType: SmallTextCell.self)
+        cellIdentifier: LargeTextCell.identifier,
+        cellType: LargeTextCell.self)
       ) { index, category, cell in
         cell.setupCellConfigure(text: category.category.title, isSelected: category.isSelected)
       }.disposed(by: disposeBag)
     
-    categoryCollectionView.rx.modelSelected((category: ProductCategoryModel, Bool).self)
+    categoryCollectionView.rx
+      .modelSelected((category: ProductCategoryModel, Bool).self)
       .subscribe(onNext: { [weak self] in
         guard let self else { return }
         self.listener?.selectedCategory(category: $0.category) { [weak self] in
@@ -125,12 +135,12 @@ final class CategoryModalViewController: ModalViewController, CategoryModalPrese
         .bottom()
         .height(0)
       
+      self.categoryCollectionView.pin.all()
+      
     } completion: { [weak self] _ in
       guard let self else { return }
       self.listener?.dismissCategoryModalVC()
     }
-    
-    
   }
 }
 
@@ -140,8 +150,7 @@ extension CategoryModalViewController: UICollectionViewDelegate, UICollectionVie
     layout collectionViewLayout: UICollectionViewLayout,
     sizeForItemAt indexPath: IndexPath
   ) -> CGSize {
-    let deviceWidth: CGFloat = UIScreen.main.bounds.width
-    return CGSize(width: (deviceWidth-64) / 2.0, height: 20)
+    return CGSize(width: cellWidth, height: cellHeight)
   }
   
   func collectionView(
@@ -149,7 +158,7 @@ extension CategoryModalViewController: UICollectionViewDelegate, UICollectionVie
     layout collectionViewLayout: UICollectionViewLayout,
     minimumLineSpacingForSectionAt section: Int
   ) -> CGFloat {
-    return 18.0
+    return cellLineSpacing
   }
   
   func collectionView(
@@ -160,7 +169,16 @@ extension CategoryModalViewController: UICollectionViewDelegate, UICollectionVie
     return 0.0
   }
   
-  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-    return UIEdgeInsets(top: 28, left: 32, bottom: 28, right: 32)
+  func collectionView(
+    _ collectionView: UICollectionView,
+    layout collectionViewLayout: UICollectionViewLayout,
+    insetForSectionAt section: Int
+  ) -> UIEdgeInsets {
+    return UIEdgeInsets(
+      top: cellVerticalEdgeInset,
+      left: cellHorizontalEdgeInset,
+      bottom: cellVerticalEdgeInset,
+      right: cellHorizontalEdgeInset
+    )
   }
 }

@@ -15,6 +15,7 @@
 		265FA00318D779BDB6F197EA /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8532B1B24B020BF76AEDFF76 /* ProfileView.swift */; };
 		26A89C8ABDA7272793E1DF1A /* Image.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42C46A1D137F6D04C3967B64 /* Image.xcassets */; };
 		2C937B512A292E3F002AB9BB /* ModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C937B502A292E3F002AB9BB /* ModalViewController.swift */; };
+		2C937B5F2A2ADBBA002AB9BB /* LargeTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C937B5E2A2ADBBA002AB9BB /* LargeTextCell.swift */; };
 		39EC6BCA36C6D9020E2FBEEE /* SUIT-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7D7B839FF2BD4170FF0A7D18 /* SUIT-Bold.otf */; };
 		3B93A3AC2360B6AA4211F43D /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB2A151EF61A0078BCB1E57 /* UILabel+Extension.swift */; };
 		3E07DEB89DFB0D7F64B67BC4 /* CheckButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E42D1D3EF0292998585D8C3 /* CheckButton.swift */; };
@@ -76,6 +77,7 @@
 		15CD4B8F263EBED9EE862DEC /* NotoSansKR-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Bold.otf"; sourceTree = "<group>"; };
 		2AAA16EB10167F4F8A589DF2 /* SUIT-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUIT-Light.otf"; sourceTree = "<group>"; };
 		2C937B502A292E3F002AB9BB /* ModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalViewController.swift; sourceTree = "<group>"; };
+		2C937B5E2A2ADBBA002AB9BB /* LargeTextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeTextCell.swift; sourceTree = "<group>"; };
 		2EA530434C111C4BB344B33F /* NotoSansKR-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Black.otf"; sourceTree = "<group>"; };
 		411996B5464DF570E5FFE779 /* TouchAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchAnimationView.swift; sourceTree = "<group>"; };
 		42C46A1D137F6D04C3967B64 /* Image.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Image.xcassets; sourceTree = "<group>"; };
@@ -230,6 +232,7 @@
 				80EED652CD9730D72F01A29B /* ImageCell.swift */,
 				93EB304198EF95CFC2A6D7CE /* SegmentTableViewCell.swift */,
 				BEBC5C9522A829AB27CB37F0 /* SmallTextCell.swift */,
+				2C937B5E2A2ADBBA002AB9BB /* LargeTextCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -448,6 +451,7 @@
 				6CF0328438A761B1FD6A8710 /* UIButton+Extension.swift in Sources */,
 				CC264CDFB484CE6F26F3012A /* UIDevice+Extension.swift in Sources */,
 				2C937B512A292E3F002AB9BB /* ModalViewController.swift in Sources */,
+				2C937B5F2A2ADBBA002AB9BB /* LargeTextCell.swift in Sources */,
 				3B93A3AC2360B6AA4211F43D /* UILabel+Extension.swift in Sources */,
 				B8E0FC8C06F6503FF33AB1B7 /* UITextField+Extension.swift in Sources */,
 				C657246CEF8452B4CEA5C60C /* UIView+Extension.swift in Sources */,

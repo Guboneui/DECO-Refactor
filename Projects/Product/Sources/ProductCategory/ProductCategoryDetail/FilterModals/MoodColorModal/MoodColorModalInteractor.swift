@@ -7,6 +7,7 @@
 
 import RIBs
 import RxSwift
+import RxRelay
 
 protocol MoodColorModalRouting: ViewableRouting {
   // TODO: Declare methods the interactor can invoke to manage sub-tree via the router.
@@ -23,21 +24,35 @@ protocol MoodColorModalListener: AnyObject {
 
 final class MoodColorModalInteractor: PresentableInteractor<MoodColorModalPresentable>, MoodColorModalInteractable, MoodColorModalPresentableListener {
   
-  
-  
   weak var router: MoodColorModalRouting?
   weak var listener: MoodColorModalListener?
   
-  // TODO: Add additional dependencies to constructor. Do not perform any logic
-  // in constructor.
-  override init(presenter: MoodColorModalPresentable) {
+  private let disposeBag: DisposeBag = DisposeBag()
+  private let selectedFilterInProductCategory: MutableSelectedFilterInProductCategoryStream
+  
+  var moodList: BehaviorRelay<[(category: ProductCategoryModel, isSelected: Bool)]> = .init(value: [])
+  
+  init(
+    presenter: MoodColorModalPresentable,
+    selectedFilterInProductCategory: MutableSelectedFilterInProductCategoryStream
+  ) {
+    self.selectedFilterInProductCategory = selectedFilterInProductCategory
     super.init(presenter: presenter)
     presenter.listener = self
   }
   
   override func didBecomeActive() {
     super.didBecomeActive()
-    // TODO: Implement business logic here.
+    
+    let moodList = selectedFilterInProductCategory.productMoodList.map{($0, false)}
+    self.moodList.accept(moodList)
+    
+//    selectedFilterInProductCategory.selectedFilter
+//      .subscribe(onNext: { [weak self] filter in
+//        guard let self else { return }
+//        let moodList: [(ProductCategoryModel, Bool)] = filt.map{($0, false)}
+//        self.moodList.accept(moodList)
+//      }).disposed(by: disposeBag)
   }
   
   override func willResignActive() {

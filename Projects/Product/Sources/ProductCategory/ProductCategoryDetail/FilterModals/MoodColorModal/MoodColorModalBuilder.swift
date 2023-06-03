@@ -8,8 +8,7 @@
 import RIBs
 
 protocol MoodColorModalDependency: Dependency {
-    // TODO: Declare the set of dependencies required by this RIB, but cannot be
-    // created by this RIB.
+  var selectedFilterInProductCategory: MutableSelectedFilterInProductCategoryStream { get }
 }
 
 final class MoodColorModalComponent: Component<MoodColorModalDependency> {
@@ -32,7 +31,10 @@ final class MoodColorModalBuilder: Builder<MoodColorModalDependency>, MoodColorM
     func build(withListener listener: MoodColorModalListener) -> MoodColorModalRouting {
         let component = MoodColorModalComponent(dependency: dependency)
         let viewController = MoodColorModalViewController()
-        let interactor = MoodColorModalInteractor(presenter: viewController)
+        let interactor = MoodColorModalInteractor(
+          presenter: viewController,
+          selectedFilterInProductCategory: dependency.selectedFilterInProductCategory
+        )
         interactor.listener = listener
         return MoodColorModalRouter(interactor: interactor, viewController: viewController)
     }

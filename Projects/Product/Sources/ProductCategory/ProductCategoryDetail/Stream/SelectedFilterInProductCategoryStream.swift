@@ -22,7 +22,9 @@ protocol SelectedFilterInProductCategoryStream: AnyObject {
 
 protocol MutableSelectedFilterInProductCategoryStream: SelectedFilterInProductCategoryStream {
   var productCategoryList: [ProductCategoryModel] { get }
+  var productMoodList: [ProductCategoryModel] { get }
   func setProductCategoryList(categoryList: [ProductCategoryModel])
+  func setProductMoodList(moodList: [ProductCategoryModel])
   func updateSelectedCategory(category: ProductCategoryModel)
   func updateSelectedMoods(mood: [ProductCategoryModel])
   func updateSelectedColors(colors: [(colorId: Int, colorName: String)])
@@ -35,7 +37,7 @@ class SelectedFilterInProductCategoryStreamImpl: MutableSelectedFilterInProductC
   private let disposeBag: DisposeBag = DisposeBag()
   
   var productCategoryList: [ProductCategoryModel] = []
-  
+  var productMoodList: [ProductCategoryModel] = []
   private let filter = BehaviorRelay<SelectedFilterInProductCategoryStreamModel>(
     value: SelectedFilterInProductCategoryStreamModel(
       selectedCategory: nil,
@@ -50,6 +52,10 @@ class SelectedFilterInProductCategoryStreamImpl: MutableSelectedFilterInProductC
   
   func setProductCategoryList(categoryList: [ProductCategoryModel]) {
     productCategoryList = categoryList
+  }
+  
+  func setProductMoodList(moodList: [ProductCategoryModel]) {
+    productMoodList = moodList
   }
   
   func updateSelectedCategory(category: ProductCategoryModel) {

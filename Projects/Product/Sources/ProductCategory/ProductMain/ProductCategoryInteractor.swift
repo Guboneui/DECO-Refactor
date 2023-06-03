@@ -85,7 +85,9 @@ final class ProductCategoryInteractor: PresentableInteractor<ProductCategoryPres
           let categoryList: [ProductCategoryModel] = categoryList.map{ProductCategoryModel(id: $0.id, title: $0.categoryName)}
           let category: ProductCategorySection = ProductCategorySection(model: "카테고리별", items: categoryList)
           self.selectedFilterInProductCategory.setProductCategoryList(categoryList: categoryList)
-          let mood: ProductCategorySection = ProductCategorySection(model: "무드별", items: moodList.map{ProductCategoryModel(id: $0.id, title: $0.name, imageURL: $0.url)})
+          let moodList: [ProductCategoryModel] = moodList.map{ProductCategoryModel(id: $0.id, title: $0.name, imageURL: $0.url)}
+          let mood: ProductCategorySection = ProductCategorySection(model: "무드별", items: moodList)
+          self.selectedFilterInProductCategory.setProductMoodList(moodList: moodList)
           
           self.productCategorySections.accept([category, mood])
         }
@@ -93,7 +95,6 @@ final class ProductCategoryInteractor: PresentableInteractor<ProductCategoryPres
   }
   
   func pushProductCategoryDetailVC(selectedCategory: ProductCategoryModel) {
-    
     selectedFilterInProductCategory.updateSelectedCategory(category: selectedCategory)
     router?.attachProductCategoryDetailVC()
   }

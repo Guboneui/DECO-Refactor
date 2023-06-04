@@ -47,11 +47,21 @@ final class MoodColorModalInteractor: PresentableInteractor<MoodColorModalPresen
   override func didBecomeActive() {
     super.didBecomeActive()
     
-    let moodList = selectedFilterInProductCategory.productMoodList.map{($0, false)}
-    self.moodList.accept(moodList)
+    let productMoodList = selectedFilterInProductCategory.productMoodList
+    let colorList = Util.ProductColorModels
     
-    let colorList = Util.ProductColorModels.map{($0, false)}
-    self.colorList.accept(colorList)
+    selectedFilterInProductCategory.selectedFilter
+      .subscribe(onNext: { [weak self] filter in
+        guard let self else { return }
+        let selectedMoodIds: [Int] = filter.selectedMoods.map{$0.id}
+        let currentMoodList = productMoodList.map{($0, selectedMoodIds.contains($0.id))}
+        
+        let selectedColorIds: [Int] = filter.selectedColors.map{$0.id}
+        let currentColorList = colorList.map{($0, selectedColorIds.contains($0.id))}
+        
+        self.moodList.accept(currentMoodList)
+        self.colorList.accept(currentColorList)
+      }).disposed(by: disposeBag)
   }
   
   override func willResignActive() {

@@ -9,6 +9,13 @@ import RIBs
 import RxSwift
 import Networking
 
+public enum Filter {
+  case Category
+  case Mood
+  case Color
+  case None
+}
+
 public protocol ProductRouting: ViewableRouting {
   func attachChildVCRib(with type: ProductTabType)
   func attachSearchVC()

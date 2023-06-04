@@ -19,7 +19,9 @@ public class SelectedFilterCell: UICollectionViewCell {
     $0.sizeToFit()
   }
   
-  private let imageView: UIImageView = UIImageView()
+  private let imageView: UIImageView = UIImageView().then {
+    $0.contentMode = .scaleAspectFit
+  }
   
   private let selectedView: UIView = UIView()
   

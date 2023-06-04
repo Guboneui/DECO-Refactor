@@ -32,12 +32,21 @@ protocol ProductCategoryDetailListener: AnyObject {
 }
 
 final class ProductCategoryDetailInteractor: PresentableInteractor<ProductCategoryDetailPresentable>, ProductCategoryDetailInteractable, ProductCategoryDetailPresentableListener {
+  func updateFilter(moodList: [(name: String, id: Int, filterType: Filter, isSelected: Bool)], colorList: [(name: String, id: Int, filterType: Filter, isSelected: Bool)]) {
+    let moods: [ProductCategoryModel] = moodList.map{ProductCategoryModel(id: $0.id, title: $0.name)}
+    let colors: [ProductColorModel] = colorList.map{ProductColorModel(name: $0.name, image: Util.getColorImage(id: $0.id), id: $0.id)}
+    self.selectedFilterInProductCategory.updateFilterStream(moods: moods, colors: colors)
+  }
+  
+  
+  
+  
   
   weak var router: ProductCategoryDetailRouting?
   weak var listener: ProductCategoryDetailListener?
   
   var productLists: BehaviorRelay<[ProductDTO]> = .init(value: [])
-  var selectedFilter: BehaviorRelay<[(name: String, id: Int, isSelected: Bool)]> = .init(value: [])
+  var selectedFilter: BehaviorRelay<[(name: String, id: Int, filterType: Filter, isSelected: Bool)]> = .init(value: [])
   
   private let disposeBag: DisposeBag = DisposeBag()
   private let userManager: MutableUserManagerStream
@@ -81,13 +90,13 @@ final class ProductCategoryDetailInteractor: PresentableInteractor<ProductCatego
       .subscribe(onNext: { [weak self] filter in
         guard let self else { return }
         
-        let moods: [(String, Int, Bool)] = filter.selectedMoods.map{($0.title, $0.id, true)}
-        let colors: [(String, Int, Bool)] = filter.selectedColors.map{($0.name, $0.id, true)}
+        let moods: [(String, Int, Filter, Bool)] = filter.selectedMoods.map{($0.title, $0.id, Filter.Mood, true)}
+        let colors: [(String, Int, Filter, Bool)] = filter.selectedColors.map{($0.name, $0.id, Filter.Color, true)}
         
         if (moods + colors).isEmpty {
           self.selectedFilter.accept(moods + colors)
         } else {
-          self.selectedFilter.accept([("초기화", -1, false)] + moods + colors)
+          self.selectedFilter.accept([("초기화", -1, Filter.None, false)] + moods + colors)
         }
         
         Task.detached { [weak self] in

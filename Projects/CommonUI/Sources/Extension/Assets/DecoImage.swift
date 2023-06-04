@@ -10,6 +10,7 @@ import UIKit
 public extension UIImage {
   struct DecoImage {
     public static let again = CommonUIAsset.Image.again.image
+    public static let againDarkgrey = CommonUIAsset.Image.againDarkgrey2.image
     public static let arrow = CommonUIAsset.Image.arrow.image
     public static let arrowDarkgray2 = CommonUIAsset.Image.arrowDarkgrey2.image
     public static let arrowRight = CommonUIAsset.Image.arrowRight.image

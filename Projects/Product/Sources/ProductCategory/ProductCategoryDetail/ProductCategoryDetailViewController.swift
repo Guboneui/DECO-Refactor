@@ -21,11 +21,13 @@ import FlexLayout
 protocol ProductCategoryDetailPresentableListener: AnyObject {
   var productLists: BehaviorRelay<[ProductDTO]> { get }
   
-  var selectedFilter: BehaviorRelay<[(name: String, id: Int, isSelected: Bool)]> { get }
+  var selectedFilter: BehaviorRelay<[(name: String, id: Int, filterType: Filter, isSelected: Bool)]> { get }
   
   func popProductCategoryDetailDetailVC(with popType: PopType)
   func showCategoryModalVC()
   func showMoodColorModalVC()
+  
+  func updateFilter(moodList: [(name: String, id: Int, filterType: Filter, isSelected: Bool)], colorList: [(name: String, id: Int, filterType: Filter, isSelected: Bool)])
   
   func fetchProductList(createdAt: Int)
 }
@@ -52,7 +54,7 @@ final class ProductCategoryDetailViewController: UIViewController, ProductCatego
   }
   
   private var navCategoryView: TouchAnimationView = TouchAnimationView().then {
-    $0.backgroundColor = .orange
+    $0.backgroundColor = .DecoColor.whiteColor
   }
   
   private let filterLabel: UILabel = UILabel().then {
@@ -67,12 +69,13 @@ final class ProductCategoryDetailViewController: UIViewController, ProductCatego
   }
   
   private let filterView: TouchAnimationView = TouchAnimationView().then {
-    $0.backgroundColor = .green
+    $0.backgroundColor = .DecoColor.whiteColor
   }
   
   private let selectedFilterCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: .init()).then {
     $0.register(SelectedFilterCell.self, forCellWithReuseIdentifier: SelectedFilterCell.identifier)
-    $0.backgroundColor = .yellow
+    $0.backgroundColor = .DecoColor.whiteColor
+    $0.bounces = false
     
     let layout = UICollectionViewFlowLayout()
     layout.scrollDirection = .horizontal
@@ -200,6 +203,28 @@ final class ProductCategoryDetailViewController: UIViewController, ProductCatego
         cell.setupCellConfigure(text: filter.name, isSelected: filter.isSelected)
       }.disposed(by: disposeBag)
     
+    
+    Observable.zip(
+      selectedFilterCollectionView.rx.itemSelected,
+      selectedFilterCollectionView.rx.modelSelected((name: String, id: Int, filterType: Filter, isSelected: Bool).self)
+    ).subscribe(onNext: { [weak self] index, model in
+      guard let self else { return }
+      if index.row == 0 { self.listener?.updateFilter(moodList: [], colorList: []) }
+      else {
+        var filterList = self.listener?.selectedFilter.value ?? []
+        filterList.remove(at: index.row)
+        
+        if filterList.count == 1 { self.listener?.updateFilter(moodList: [], colorList: []) }
+        else {
+          var filterList = self.listener?.selectedFilter.value ?? []
+          filterList.remove(at: index.row)
+          let moodList = filterList.filter{$0.filterType == .Mood}
+          let colorList = filterList.filter{$0.filterType == .Color}
+          self.listener?.updateFilter(moodList: moodList, colorList: colorList)
+        }
+      }
+    }).disposed(by: disposeBag)
+    
     selectedFilterCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
   }
   
@@ -231,9 +256,6 @@ extension ProductCategoryDetailViewController: UICollectionViewDelegate, UIColle
   ) -> CGSize {
     switch collectionView {
     case selectedFilterCollectionView:
-      //      let cellSize: CGFloat = (UIScreen.main.bounds.width - 5.0) / 2.0
-      //      return CGSize(width: cellSize, height: cellSize)
-      
       let font: UIFont = UIFont.DecoFont.getFont(with: .Suit, type: .medium, size: 12)
       if let moodList = listener?.selectedFilter.value {
         return CGSize(
@@ -247,9 +269,6 @@ extension ProductCategoryDetailViewController: UICollectionViewDelegate, UIColle
         )
       }
       return .zero
-      
-      
-      
       
     case productCollectionView:
       let cellSize: CGFloat = (UIScreen.main.bounds.width - 5.0) / 2.0

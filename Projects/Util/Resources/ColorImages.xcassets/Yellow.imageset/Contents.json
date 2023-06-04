@@ -1,17 +1,15 @@
 {
   "images" : [
     {
-      "filename" : "reset_darkgrey_2.png",
+      "filename" : "Yellow.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "reset_darkgrey_2@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "reset_darkgrey_2@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

@@ -8,13 +8,16 @@
 import RIBs
 import RxSwift
 import UIKit
+import Util
 import CommonUI
 import RxRelay
 
 protocol MoodColorModalPresentableListener: AnyObject {
   
   var moodList: BehaviorRelay<[(category: ProductCategoryModel, isSelected: Bool)]> { get }
+  var colorList: BehaviorRelay<[(color: ProductColorModel, isSelected: Bool)]> { get }
   
+  func updateSelectedFilterStream(moodList: [ProductCategoryModel], colorList: [ProductColorModel])
   func dismissMoodColorModalVC()
 }
 
@@ -24,19 +27,59 @@ final class MoodColorModalViewController: ModalViewController, MoodColorModalPre
   private let disposeBag: DisposeBag = DisposeBag()
   
   private let modalView: UIView = UIView().then {
-    $0.backgroundColor = .DecoColor.warningColor
+    $0.backgroundColor = .DecoColor.whiteColor
     $0.makeCornerRadiusOnlyTop(radius: 16)
+  }
+  
+  private let moodLabel: UILabel = UILabel().then {
+    $0.text = "무드"
+    $0.textColor = .DecoColor.darkGray2
+    $0.font = .DecoFont.getFont(with: .Suit, type: .bold, size: 12)
   }
   
   private let moodCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: .init()).then {
     $0.backgroundColor = .DecoColor.whiteColor
     $0.register(FilterCell.self, forCellWithReuseIdentifier: FilterCell.identifier)
+    $0.bounces = false
     
+    $0.showsHorizontalScrollIndicator = false
     let layout = UICollectionViewFlowLayout()
     layout.scrollDirection = .horizontal
-    $0.showsHorizontalScrollIndicator = false
     $0.collectionViewLayout = layout
   }
+  
+  private let colorLabel: UILabel = UILabel().then {
+    $0.text = "컬러"
+    $0.textColor = .DecoColor.darkGray2
+    $0.font = .DecoFont.getFont(with: .Suit, type: .bold, size: 12)
+  }
+  
+  private let colorCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: .init()).then {
+    $0.backgroundColor = .DecoColor.whiteColor
+    $0.register(ColorFilterCell.self, forCellWithReuseIdentifier: ColorFilterCell.identifier)
+    $0.bounces = false
+    
+    $0.showsHorizontalScrollIndicator = false
+    let layout = UICollectionViewFlowLayout()
+    layout.scrollDirection = .vertical
+    $0.collectionViewLayout = layout
+  }
+  
+  private let editFilterButtonView: EditFilterButtonView = EditFilterButtonView()
+  
+  private let deviceWidth: CGFloat = UIScreen.main.bounds.width
+  
+  private let moodCvHeight: CGFloat = 30
+  private let moodCvItemHeight: CGFloat = 30
+  private let moodCvHorizontalItemSpacing: CGFloat = 8
+  private let moodCvHorizontalEdgeSpacing: CGFloat = 28
+  
+  private let colorCvHorizontalItemSpacing: CGFloat = 36
+  private let colorCvVerticalItemSpacing: CGFloat = 24
+  private let colorCvHorizontalEdgeSpacing: CGFloat = 34
+  private let colorCvHeight: CGFloat = 228
+  private let colorCvItemHeight: CGFloat = 60
+  private lazy var colorCvItemWidth: CGFloat = (deviceWidth - (colorCvHorizontalEdgeSpacing * 2) - (colorCvHorizontalItemSpacing * 4)) / 5
   
   
   override func viewDidLoad() {
@@ -44,6 +87,7 @@ final class MoodColorModalViewController: ModalViewController, MoodColorModalPre
     self.setupViews()
     self.setupGestures()
     self.setupMoodCollectionView()
+    self.setupColorCollectionView()
   }
   
   override func viewWillLayoutSubviews() {
@@ -60,8 +104,8 @@ final class MoodColorModalViewController: ModalViewController, MoodColorModalPre
         self.modalView.pin
           .horizontally()
           .bottom()
-          .height(300)
-  
+          .height(self.editFilterButtonView.frame.maxY + (UIDevice.current.hasNotch ? 40 : 24))
+        
       } completion: { [weak self] _ in
         guard let self else { return }
         self.isShow = true
@@ -71,7 +115,11 @@ final class MoodColorModalViewController: ModalViewController, MoodColorModalPre
   
   private func setupViews() {
     self.view.addSubview(modalView)
+    self.modalView.addSubview(moodLabel)
     self.modalView.addSubview(moodCollectionView)
+    self.modalView.addSubview(colorLabel)
+    self.modalView.addSubview(colorCollectionView)
+    self.modalView.addSubview(editFilterButtonView)
   }
   
   private func setupLayouts() {
@@ -80,16 +128,58 @@ final class MoodColorModalViewController: ModalViewController, MoodColorModalPre
       .bottom()
       .height(0)
     
+    moodLabel.pin
+      .topLeft(28)
+      .sizeToFit()
+    
     moodCollectionView.pin
-      .top(40)
+      .below(of: moodLabel)
       .horizontally()
-      .height(30)
+      .height(moodCvHeight)
+      .marginTop(16)
+    
+    colorLabel.pin
+      .below(of: moodCollectionView)
+      .left(28)
+      .marginTop(28)
+      .sizeToFit()
+    
+    colorCollectionView.pin
+      .below(of: colorLabel)
+      .horizontally()
+      .height(colorCvHeight)
+      .marginTop(16)
+    
+    editFilterButtonView.pin
+      .below(of: colorCollectionView)
+      .horizontally()
+      .marginTop(28)
+      .sizeToFit()
   }
   
   private func setupGestures() {
+    editFilterButtonView.didTapResetButton = { [weak self] in
+      guard let self else { return }
+      let clearMoodList = self.listener?.moodList.value.map{($0.category, false)}
+      let clearColorList = self.listener?.colorList.value.map{($0.color, false)}
+      self.listener?.moodList.accept(clearMoodList ?? [])
+      self.listener?.colorList.accept(clearColorList ?? [])
+    }
+    
+    editFilterButtonView.didTapSelectButton = { [weak self] in
+      guard let self else { return }
+      let selectedMoodList: [ProductCategoryModel] = self.listener?.moodList.value.filter{$0.isSelected}.map{$0.category} ?? []
+      let selectedColorList: [ProductColorModel] = self.listener?.colorList.value.filter{$0.isSelected}.map{$0.color} ?? []
+      self.listener?.updateSelectedFilterStream(moodList: selectedMoodList, colorList: selectedColorList)
+      self.dismissModalAnimation()
+    }
   }
   
   override func didTapBackgroundView() {
+    self.dismissModalAnimation()
+  }
+  
+  private func dismissModalAnimation() {
     UIView.animate(
       withDuration: dismissAnimationDuration,
       delay: dismissAnimationDelay,
@@ -109,7 +199,7 @@ final class MoodColorModalViewController: ModalViewController, MoodColorModalPre
   }
   
   private func setupMoodCollectionView() {
-
+    
     moodCollectionView.delegate = nil
     moodCollectionView.dataSource = nil
     
@@ -118,11 +208,56 @@ final class MoodColorModalViewController: ModalViewController, MoodColorModalPre
         cellIdentifier: FilterCell.identifier,
         cellType: FilterCell.self)
       ) { index, data, cell in
-        cell.setupCellConfigure(text: data.category.title, isSelected: data.isSelected)
+        cell.setupCellConfigure(
+          text: data.category.title,
+          isSelected: data.isSelected
+        )
       }.disposed(by: disposeBag)
+    
+    Observable.zip(
+      moodCollectionView.rx.itemSelected,
+      moodCollectionView.rx.modelSelected((category: ProductCategoryModel, isSelected: Bool).self)
+    ).subscribe(onNext: { [weak self] index, model in
+      guard let self else { return }
+      var prevData: [(ProductCategoryModel, Bool)] = self.listener?.moodList.value ?? []
+      let selectedData: (ProductCategoryModel, Bool) = (model.category, !model.isSelected)
+      prevData[index.row] = selectedData
+      self.listener?.moodList.accept(prevData)
+    }).disposed(by: disposeBag)
     
     moodCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
   }
+  
+  private func setupColorCollectionView() {
+    colorCollectionView.delegate = nil
+    colorCollectionView.dataSource = nil
+    
+    listener?.colorList
+      .bind(to: colorCollectionView.rx.items(
+      cellIdentifier: ColorFilterCell.identifier,
+      cellType: ColorFilterCell.self)
+    ) { index, data, cell in
+      cell.setupCellConfigure(
+        text: data.color.name,
+        image: data.color.image,
+        isSelected: data.isSelected
+      )
+    }.disposed(by: disposeBag)
+    
+    Observable.zip(
+      colorCollectionView.rx.itemSelected,
+      colorCollectionView.rx.modelSelected((color: ProductColorModel, isSelected: Bool).self)
+    ).subscribe(onNext: { [weak self] index, model in
+      guard let self else { return }
+      var prevData: [(ProductColorModel, Bool)] = self.listener?.colorList.value ?? []
+      let selectedData: (ProductColorModel, Bool) = (model.color, !model.isSelected)
+      prevData[index.row] = selectedData
+      self.listener?.colorList.accept(prevData)
+    }).disposed(by: disposeBag)
+    
+    colorCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
+  }
+  
 }
 
 extension MoodColorModalViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
@@ -131,14 +266,23 @@ extension MoodColorModalViewController: UICollectionViewDelegate, UICollectionVi
     layout collectionViewLayout: UICollectionViewLayout,
     sizeForItemAt indexPath: IndexPath
   ) -> CGSize {
-    let font: UIFont = UIFont.DecoFont.getFont(with: .Suit, type: .bold, size: 12)
-    if let moodList = listener?.moodList.value {
+    switch collectionView {
+    case moodCollectionView:
+      let font: UIFont = UIFont.DecoFont.getFont(with: .Suit, type: .bold, size: 12)
+      if let moodList = listener?.moodList.value {
+        return CGSize(
+          width: moodList[indexPath.row].category.title.size(withAttributes: [NSAttributedString.Key.font:font]).width + (FilterCell.horizontalMargin * 2),
+          height: moodCvItemHeight
+        )
+      }
+      return .zero
+    case colorCollectionView:
       return CGSize(
-        width: moodList[indexPath.row].category.title.size(withAttributes: [NSAttributedString.Key.font:font]).width + 24,
-        height: 30
+        width: colorCvItemWidth,
+        height: colorCvItemHeight
       )
+    default: return .zero
     }
-    return .zero
   }
   
   func collectionView(
@@ -146,7 +290,23 @@ extension MoodColorModalViewController: UICollectionViewDelegate, UICollectionVi
     layout collectionViewLayout: UICollectionViewLayout,
     minimumLineSpacingForSectionAt section: Int
   ) -> CGFloat {
-    return 8.0
+    switch collectionView {
+    case moodCollectionView: return moodCvHorizontalItemSpacing
+    case colorCollectionView: return colorCvVerticalItemSpacing
+    default: return .zero
+    }
+  }
+  
+  func collectionView(
+    _ collectionView: UICollectionView,
+    layout collectionViewLayout: UICollectionViewLayout,
+    minimumInteritemSpacingForSectionAt section: Int
+  ) -> CGFloat {
+    switch collectionView {
+    case moodCollectionView: return moodCvHorizontalItemSpacing
+    case colorCollectionView: return colorCvHorizontalItemSpacing
+    default: return .zero
+    }
   }
   
   func collectionView(
@@ -154,6 +314,24 @@ extension MoodColorModalViewController: UICollectionViewDelegate, UICollectionVi
     layout collectionViewLayout: UICollectionViewLayout,
     insetForSectionAt section: Int
   ) -> UIEdgeInsets {
-    return UIEdgeInsets(top: 0, left: 28, bottom: 0, right: 28)
+    switch collectionView {
+    case moodCollectionView:
+      return UIEdgeInsets(
+        top: 0,
+        left: moodCvHorizontalEdgeSpacing,
+        bottom: 0,
+        right: moodCvHorizontalEdgeSpacing
+      )
+    case colorCollectionView:
+      return UIEdgeInsets(
+        top: 0,
+        left: colorCvHorizontalEdgeSpacing,
+        bottom: 0,
+        right: colorCvHorizontalEdgeSpacing
+      )
+    default: return .zero
+    }
+    
+    
   }
 }

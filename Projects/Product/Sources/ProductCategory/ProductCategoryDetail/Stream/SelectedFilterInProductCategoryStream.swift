@@ -7,13 +7,15 @@
 
 import Foundation
 
+import Util
+
 import RxSwift
 import RxRelay
 
 struct SelectedFilterInProductCategoryStreamModel {
   let selectedCategory: ProductCategoryModel?
   let selectedMoods: [ProductCategoryModel]
-  let selectedColors: [(colorId: Int, colorName: String)]
+  let selectedColors: [ProductColorModel]
 }
 
 protocol SelectedFilterInProductCategoryStream: AnyObject {
@@ -27,7 +29,8 @@ protocol MutableSelectedFilterInProductCategoryStream: SelectedFilterInProductCa
   func setProductMoodList(moodList: [ProductCategoryModel])
   func updateSelectedCategory(category: ProductCategoryModel)
   func updateSelectedMoods(mood: [ProductCategoryModel])
-  func updateSelectedColors(colors: [(colorId: Int, colorName: String)])
+  func updateSelectedColors(colors: [ProductColorModel])
+  func updateFilterStream(moods: [ProductCategoryModel], colors: [ProductColorModel])
 }
 
 class SelectedFilterInProductCategoryStreamImpl: MutableSelectedFilterInProductCategoryStream {
@@ -82,12 +85,24 @@ class SelectedFilterInProductCategoryStreamImpl: MutableSelectedFilterInProductC
     filter.accept(updatedInfo)
   }
   
-  func updateSelectedColors(colors: [(colorId: Int, colorName: String)]) {
+  func updateSelectedColors(colors: [ProductColorModel]) {
     let updatedInfo: SelectedFilterInProductCategoryStreamModel = {
       let currentInfo = filter.value
       return SelectedFilterInProductCategoryStreamModel(
         selectedCategory: currentInfo.selectedCategory,
         selectedMoods: currentInfo.selectedMoods,
+        selectedColors: colors
+      )
+    }()
+    filter.accept(updatedInfo)
+  }
+  
+  func updateFilterStream(moods: [ProductCategoryModel], colors: [ProductColorModel]) {
+    let updatedInfo: SelectedFilterInProductCategoryStreamModel = {
+      let currentInfo = filter.value
+      return SelectedFilterInProductCategoryStreamModel(
+        selectedCategory: currentInfo.selectedCategory,
+        selectedMoods: moods,
         selectedColors: colors
       )
     }()

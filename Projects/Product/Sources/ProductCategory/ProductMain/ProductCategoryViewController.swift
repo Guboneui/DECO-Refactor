@@ -145,7 +145,8 @@ final class ProductCategoryViewController: UIViewController, ProductCategoryPres
     Observable.zip(
       collectionView.rx.itemSelected,
       collectionView.rx.modelSelected(ProductCategoryModel.self)
-    ).subscribe(onNext: { indexPath, category in
+    ).subscribe(onNext: { [weak self] indexPath, category in
+      guard let self else { return }
       switch indexPath.section {
       case 0:
         self.listener?.pushProductCategoryDetailVC(selectedCategory: category)

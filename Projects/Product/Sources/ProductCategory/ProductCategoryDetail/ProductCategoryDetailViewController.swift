@@ -21,6 +21,8 @@ import FlexLayout
 protocol ProductCategoryDetailPresentableListener: AnyObject {
   var productLists: BehaviorRelay<[ProductDTO]> { get }
   
+  var selectedFilter: BehaviorRelay<[(name: String, id: Int, isSelected: Bool)]> { get }
+  
   func popProductCategoryDetailDetailVC(with popType: PopType)
   func showCategoryModalVC()
   func showMoodColorModalVC()
@@ -69,11 +71,13 @@ final class ProductCategoryDetailViewController: UIViewController, ProductCatego
   }
   
   private let selectedFilterCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: .init()).then {
+    $0.register(SelectedFilterCell.self, forCellWithReuseIdentifier: SelectedFilterCell.identifier)
     $0.backgroundColor = .yellow
     
     let layout = UICollectionViewFlowLayout()
     layout.scrollDirection = .horizontal
     $0.collectionViewLayout = layout
+    $0.showsHorizontalScrollIndicator = false
     $0.isHidden = true
   }
   
@@ -91,13 +95,8 @@ final class ProductCategoryDetailViewController: UIViewController, ProductCatego
     self.view.backgroundColor = .DecoColor.whiteColor
     self.setupViews()
     self.setupGestures()
+    self.setSelectedFilterCollectionView()
     self.setProductListCollectionView()
-    
-    DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: { [weak self] in
-      guard let self else { return }
-      self.selectedFilterCollectionView.isHidden = false
-      self.setupLayouts()
-    })
   }
   
   override func viewDidDisappear(_ animated: Bool) {
@@ -183,6 +182,27 @@ final class ProductCategoryDetailViewController: UIViewController, ProductCatego
       }.disposed(by: disposeBag)
   }
   
+  private func setSelectedFilterCollectionView() {
+    self.listener?.selectedFilter
+      .observe(on: MainScheduler.instance)
+      .share()
+      .bind { [weak self] selectedFilter in
+        guard let self else { return }
+        self.selectedFilterCollectionView.isHidden = selectedFilter.isEmpty
+        self.setupLayouts()
+      }.disposed(by: disposeBag)
+    
+    listener?.selectedFilter
+      .bind(to: selectedFilterCollectionView.rx.items(
+        cellIdentifier: SelectedFilterCell.identifier,
+        cellType: SelectedFilterCell.self)
+      ) { index, filter, cell in
+        cell.setupCellConfigure(text: filter.name, isSelected: filter.isSelected)
+      }.disposed(by: disposeBag)
+    
+    selectedFilterCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
+  }
+  
   private func setProductListCollectionView() {
     listener?.productLists
       .bind(to: productCollectionView.rx.items(
@@ -209,8 +229,33 @@ extension ProductCategoryDetailViewController: UICollectionViewDelegate, UIColle
     layout collectionViewLayout: UICollectionViewLayout,
     sizeForItemAt indexPath: IndexPath
   ) -> CGSize {
-    let cellSize: CGFloat = (UIScreen.main.bounds.width - 5.0) / 2.0
-    return CGSize(width: cellSize, height: cellSize)
+    switch collectionView {
+    case selectedFilterCollectionView:
+      //      let cellSize: CGFloat = (UIScreen.main.bounds.width - 5.0) / 2.0
+      //      return CGSize(width: cellSize, height: cellSize)
+      
+      let font: UIFont = UIFont.DecoFont.getFont(with: .Suit, type: .medium, size: 12)
+      if let moodList = listener?.selectedFilter.value {
+        return CGSize(
+          width: (
+            (moodList[indexPath.row].name.size(withAttributes: [NSAttributedString.Key.font:font]).width) +
+            (SelectedFilterCell.horizontalMargin * 2) +
+            (SelectedFilterCell.imageSize) +
+            (SelectedFilterCell.itemSpacing)
+          ),
+          height: 30
+        )
+      }
+      return .zero
+      
+      
+      
+      
+    case productCollectionView:
+      let cellSize: CGFloat = (UIScreen.main.bounds.width - 5.0) / 2.0
+      return CGSize(width: cellSize, height: cellSize)
+    default: return .zero
+    }
   }
   
   func collectionView(
@@ -218,7 +263,12 @@ extension ProductCategoryDetailViewController: UICollectionViewDelegate, UIColle
     layout collectionViewLayout: UICollectionViewLayout,
     minimumLineSpacingForSectionAt section: Int
   ) -> CGFloat {
-    return 5.0
+    switch collectionView {
+    case selectedFilterCollectionView: return 8.0
+    case productCollectionView: return 5.0
+    default: return .zero
+    }
+    
   }
   
   func collectionView(
@@ -226,6 +276,22 @@ extension ProductCategoryDetailViewController: UICollectionViewDelegate, UIColle
     layout collectionViewLayout: UICollectionViewLayout,
     minimumInteritemSpacingForSectionAt section: Int
   ) -> CGFloat {
-    return 5.0
+    switch collectionView {
+    case selectedFilterCollectionView: return 8.0
+    case productCollectionView: return 5.0
+    default: return .zero
+    }
+  }
+  
+  func collectionView(
+    _ collectionView: UICollectionView,
+    layout collectionViewLayout: UICollectionViewLayout,
+    insetForSectionAt section: Int
+  ) -> UIEdgeInsets {
+    switch collectionView {
+    case selectedFilterCollectionView: return UIEdgeInsets(top: 0, left: 18, bottom: 0, right: 18)
+    case productCollectionView: return UIEdgeInsets.zero
+    default: return UIEdgeInsets.zero
+    }
   }
 }

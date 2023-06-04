@@ -9,12 +9,16 @@
 /* Begin PBXBuildFile section */
 		058E37201D433AA007E6F0BD /* RxDataSources in Frameworks */ = {isa = PBXBuildFile; productRef = 6982B9FACB34182B1A4A4748 /* RxDataSources */; };
 		1E6C6C8599B67E915445F168 /* UINavigationControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8860B9B6C9E2293549E4321A /* UINavigationControllerDelegate.swift */; };
+		23231BDBA84953E3BFA8C2FE /* ColorImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4AF3337B02CFB3A7E37ED2DE /* ColorImages.xcassets */; };
 		2B95FA17BE9FF17FEDEFC286 /* UIButton+Gesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A4D501A3D6D4AEDCBA78C6 /* UIButton+Gesture.swift */; };
+		2E49A6BC7C00C9ABB51316F8 /* TuistAssets+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C29D7B238B3E0208114F5B6 /* TuistAssets+Util.swift */; };
+		2F7150C6E4501A54EF68BB0F /* TuistBundle+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 051632D612DF7D2931CC434F /* TuistBundle+Util.swift */; };
 		32DDDE75F0C350232BD7369F /* UIView+Gesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89467AE2F6ACB22D4F02E1F1 /* UIView+Gesture.swift */; };
 		433544AA48C6515854D1016E /* Nuke in Frameworks */ = {isa = PBXBuildFile; productRef = CCBE8DB87EF02328C18D6FE4 /* Nuke */; };
 		63B6E2060F77B02FA4CB0CD8 /* AdaptivePresentationControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D43B0C2E27477B0719ABDCC /* AdaptivePresentationControllerDelegate.swift */; };
 		7A89F0937FF7641E5B33C322 /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B9A4A91B25092CD28A3282 /* UIImageView+Extension.swift */; };
 		7BA8BAFB7B8B6B56EFE55904 /* RIBTreeViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77CA5F7B27065F031A1FBB4E /* RIBTreeViewer.swift */; };
+		81811A012095C5CACD9B6406 /* ColorFilters.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76B7401500BABB60C4BB75B /* ColorFilters.swift */; };
 		B5D2577B92306A51F38D8DB7 /* RxGesture in Frameworks */ = {isa = PBXBuildFile; productRef = 0B5A7B259E9689D19FD1DC75 /* RxGesture */; };
 		D80A24ED3B757D6FBB85E800 /* RIBs in Frameworks */ = {isa = PBXBuildFile; productRef = 508F34CEAFAFBEBBF73C1AE0 /* RIBs */; };
 		DA4D9D4AF6E9ED3DF47CFBA4 /* RIBs+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FA1C3D3DAD8B14E62DDCB6 /* RIBs+Util.swift */; };
@@ -36,15 +40,19 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		051632D612DF7D2931CC434F /* TuistBundle+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TuistBundle+Util.swift"; sourceTree = "<group>"; };
 		0781288D32C1DA856C886534 /* Util.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Util.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0D43B0C2E27477B0719ABDCC /* AdaptivePresentationControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptivePresentationControllerDelegate.swift; sourceTree = "<group>"; };
 		20817C47831C01A4EB21B3A2 /* Util-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Util-Info.plist"; sourceTree = "<group>"; };
+		4AF3337B02CFB3A7E37ED2DE /* ColorImages.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ColorImages.xcassets; sourceTree = "<group>"; };
+		5C29D7B238B3E0208114F5B6 /* TuistAssets+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TuistAssets+Util.swift"; sourceTree = "<group>"; };
 		7415DE751D1BB8E618356A06 /* SafariLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariLoader.swift; sourceTree = "<group>"; };
 		77CA5F7B27065F031A1FBB4E /* RIBTreeViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RIBTreeViewer.swift; sourceTree = "<group>"; };
 		8860B9B6C9E2293549E4321A /* UINavigationControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationControllerDelegate.swift; sourceTree = "<group>"; };
 		89467AE2F6ACB22D4F02E1F1 /* UIView+Gesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Gesture.swift"; sourceTree = "<group>"; };
 		A0B9A4A91B25092CD28A3282 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
 		B25B620E990FC8B32E8B1A18 /* DecoURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecoURL.swift; sourceTree = "<group>"; };
+		C76B7401500BABB60C4BB75B /* ColorFilters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorFilters.swift; sourceTree = "<group>"; };
 		E6A4D501A3D6D4AEDCBA78C6 /* UIButton+Gesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Gesture.swift"; sourceTree = "<group>"; };
 		F7FA1C3D3DAD8B14E62DDCB6 /* RIBs+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RIBs+Util.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -64,6 +72,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		061AFA7ADF78825C22AC1219 /* ETCs */ = {
+			isa = PBXGroup;
+			children = (
+				C76B7401500BABB60C4BB75B /* ColorFilters.swift */,
+			);
+			path = ETCs;
+			sourceTree = "<group>";
+		};
 		2134EFEDDE27A3C7943EE7D0 = {
 			isa = PBXGroup;
 			children = (
@@ -83,6 +99,7 @@
 		399DABBC4C0C548BC3EE8E0C /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				061AFA7ADF78825C22AC1219 /* ETCs */,
 				C1CEFDDCEDA44C71470BAB4B /* RIBs */,
 				61715144D15897F2078F6647 /* URL */,
 				B0FE03B275D423F434A5D9E8 /* Utils */,
@@ -104,6 +121,23 @@
 				B25B620E990FC8B32E8B1A18 /* DecoURL.swift */,
 			);
 			path = URL;
+			sourceTree = "<group>";
+		};
+		6442425BA1C33E465CAA2B69 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				4AF3337B02CFB3A7E37ED2DE /* ColorImages.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		8EDAA8700FF0568B296AB296 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				5C29D7B238B3E0208114F5B6 /* TuistAssets+Util.swift */,
+				051632D612DF7D2931CC434F /* TuistBundle+Util.swift */,
+			);
+			path = Sources;
 			sourceTree = "<group>";
 		};
 		B0FE03B275D423F434A5D9E8 /* Utils */ = {
@@ -138,6 +172,7 @@
 			isa = PBXGroup;
 			children = (
 				DEB0BD106AC335F2CAD369AE /* Derived */,
+				6442425BA1C33E465CAA2B69 /* Resources */,
 				399DABBC4C0C548BC3EE8E0C /* Sources */,
 			);
 			name = Project;
@@ -147,6 +182,7 @@
 			isa = PBXGroup;
 			children = (
 				BA74F2B8679DCCD11D79E00F /* InfoPlists */,
+				8EDAA8700FF0568B296AB296 /* Sources */,
 			);
 			path = Derived;
 			sourceTree = "<group>";
@@ -226,6 +262,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				23231BDBA84953E3BFA8C2FE /* ColorImages.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -236,6 +273,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2E49A6BC7C00C9ABB51316F8 /* TuistAssets+Util.swift in Sources */,
+				2F7150C6E4501A54EF68BB0F /* TuistBundle+Util.swift in Sources */,
+				81811A012095C5CACD9B6406 /* ColorFilters.swift in Sources */,
 				63B6E2060F77B02FA4CB0CD8 /* AdaptivePresentationControllerDelegate.swift in Sources */,
 				7BA8BAFB7B8B6B56EFE55904 /* RIBTreeViewer.swift in Sources */,
 				DA4D9D4AF6E9ED3DF47CFBA4 /* RIBs+Util.swift in Sources */,

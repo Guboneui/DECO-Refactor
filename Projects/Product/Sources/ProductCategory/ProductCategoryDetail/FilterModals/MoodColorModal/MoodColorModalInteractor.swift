@@ -5,6 +5,8 @@
 //  Created by 구본의 on 2023/06/02.
 //
 
+import Util
+
 import RIBs
 import RxSwift
 import RxRelay
@@ -31,6 +33,7 @@ final class MoodColorModalInteractor: PresentableInteractor<MoodColorModalPresen
   private let selectedFilterInProductCategory: MutableSelectedFilterInProductCategoryStream
   
   var moodList: BehaviorRelay<[(category: ProductCategoryModel, isSelected: Bool)]> = .init(value: [])
+  var colorList: BehaviorRelay<[(color: ProductColorModel, isSelected: Bool)]> = .init(value: [])
   
   init(
     presenter: MoodColorModalPresentable,
@@ -47,12 +50,8 @@ final class MoodColorModalInteractor: PresentableInteractor<MoodColorModalPresen
     let moodList = selectedFilterInProductCategory.productMoodList.map{($0, false)}
     self.moodList.accept(moodList)
     
-//    selectedFilterInProductCategory.selectedFilter
-//      .subscribe(onNext: { [weak self] filter in
-//        guard let self else { return }
-//        let moodList: [(ProductCategoryModel, Bool)] = filt.map{($0, false)}
-//        self.moodList.accept(moodList)
-//      }).disposed(by: disposeBag)
+    let colorList = Util.ProductColorModels.map{($0, false)}
+    self.colorList.accept(colorList)
   }
   
   override func willResignActive() {
@@ -62,5 +61,15 @@ final class MoodColorModalInteractor: PresentableInteractor<MoodColorModalPresen
   
   func dismissMoodColorModalVC() {
     self.listener?.dismissMoodColorModalVC()
+  }
+  
+  func updateSelectedFilterStream(
+    moodList: [ProductCategoryModel],
+    colorList: [ProductColorModel]
+  ) {
+    selectedFilterInProductCategory.updateFilterStream(
+      moods: moodList,
+      colors: colorList
+    )
   }
 }

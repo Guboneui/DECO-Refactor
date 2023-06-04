@@ -37,6 +37,7 @@ final class ProductCategoryDetailInteractor: PresentableInteractor<ProductCatego
   weak var listener: ProductCategoryDetailListener?
   
   var productLists: BehaviorRelay<[ProductDTO]> = .init(value: [])
+  var selectedFilter: BehaviorRelay<[(name: String, id: Int, isSelected: Bool)]> = .init(value: [])
   
   private let disposeBag: DisposeBag = DisposeBag()
   private let userManager: MutableUserManagerStream
@@ -79,13 +80,23 @@ final class ProductCategoryDetailInteractor: PresentableInteractor<ProductCatego
     self.selectedFilterInProductCategory.selectedFilter
       .subscribe(onNext: { [weak self] filter in
         guard let self else { return }
+        
+        let moods: [(String, Int, Bool)] = filter.selectedMoods.map{($0.title, $0.id, true)}
+        let colors: [(String, Int, Bool)] = filter.selectedColors.map{($0.name, $0.id, true)}
+        
+        if (moods + colors).isEmpty {
+          self.selectedFilter.accept(moods + colors)
+        } else {
+          self.selectedFilter.accept([("초기화", -1, false)] + moods + colors)
+        }
+        
         Task.detached { [weak self] in
           guard let inSelf = self else { return }
           if let productList = await inSelf.productRepository.getProductOfCategory(
             param: ItemFilterRequest(
               userId: inSelf.userManager.userID,
               itemCategoryIds: [filter.selectedCategory?.id ?? 0],
-              colorIds: filter.selectedColors.map{$0.colorId},
+              colorIds: filter.selectedColors.map{$0.id},
               styleIds: filter.selectedMoods.map{$0.id},
               createdAt: Int.max,
               name: "")
@@ -104,6 +115,7 @@ final class ProductCategoryDetailInteractor: PresentableInteractor<ProductCatego
     selectedFilterInProductCategory.selectedFilter
       .subscribe(onNext: {
         print($0.selectedCategory)
+
       }).disposed(by: disposeBag)
     
 //    Task.detached { [weak self] in

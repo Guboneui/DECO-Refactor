@@ -11,6 +11,12 @@ public struct ProductColorModel {
   public let name: String
   public let image: UIImage
   public let id: Int
+  
+  public init(name: String, image: UIImage, id: Int) {
+    self.name = name
+    self.image = image
+    self.id = id
+  }
 }
 
 public let ProductColorModels: [ProductColorModel] = [
@@ -30,3 +36,21 @@ public let ProductColorModels: [ProductColorModel] = [
   ProductColorModel(name: "화이트", image: UtilAsset.white.image, id: 14),
   ProductColorModel(name: "다색", image: UtilAsset.rainbow.image, id: 15)
 ]
+
+public func getColorImage(id: Int) -> UIImage {
+  if id == 0 { return UtilAsset.bw.image }
+  else if id == 1 { return UtilAsset.red.image }
+  else if id == 2 { return UtilAsset.orange.image }
+  else if id == 3 { return UtilAsset.yellow.image }
+  else if id == 4 { return UtilAsset.green.image }
+  else if id == 5 { return UtilAsset.blue.image }
+  else if id == 7 { return UtilAsset.navy.image }
+  else if id == 8 { return UtilAsset.beige.image }
+  else if id == 9 { return UtilAsset.brown.image }
+  else if id == 10 { return UtilAsset.purple.image }
+  else if id == 11 { return UtilAsset.pink.image }
+  else if id == 12 { return UtilAsset.black.image }
+  else if id == 13 { return UtilAsset.grey.image }
+  else if id == 14 { return UtilAsset.white.image }
+  else { return UtilAsset.rainbow.image }
+}

@@ -8,15 +8,24 @@
 import UIKit
 
 import CommonUI
+import Entity
 import Util
 
 import RIBs
 import RxSwift
+import RxRelay
 import PinLayout
 import FlexLayout
 
 protocol ProductMoodDetailPresentableListener: AnyObject {
+  var productLists: BehaviorRelay<[ProductDTO]> { get }
+  var selectedFilter: BehaviorRelay<[(name: String, id: Int, filterType: Filter, isSelected: Bool)]> { get }
+  
   func popProductMoodDetailVC(with popType: PopType)
+  func showMoodModalVC()
+  func showCategoryColorModalVC()
+  
+  func updateFilter(categoryList: [(name: String, id: Int, filterType: Filter, isSelected: Bool)], colorList: [(name: String, id: Int, filterType: Filter, isSelected: Bool)])
 }
 
 final class ProductMoodDetailViewController: UIViewController, ProductMoodDetailPresentable, ProductMoodDetailViewControllable {
@@ -41,7 +50,7 @@ final class ProductMoodDetailViewController: UIViewController, ProductMoodDetail
   }
   
   private var navCategoryView: TouchAnimationView = TouchAnimationView().then {
-    $0.backgroundColor = .orange
+    $0.backgroundColor = .DecoColor.whiteColor
   }
   
   private let filterLabel: UILabel = UILabel().then {
@@ -56,20 +65,24 @@ final class ProductMoodDetailViewController: UIViewController, ProductMoodDetail
   }
   
   private let filterView: TouchAnimationView = TouchAnimationView().then {
-    $0.backgroundColor = .green
+    $0.backgroundColor = .DecoColor.whiteColor
   }
   
   private let selectedFilterCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: .init()).then {
-    $0.backgroundColor = .yellow
+    $0.register(SelectedFilterCell.self, forCellWithReuseIdentifier: SelectedFilterCell.identifier)
+    $0.backgroundColor = .DecoColor.whiteColor
+    $0.bounces = false
     
     let layout = UICollectionViewFlowLayout()
     layout.scrollDirection = .horizontal
     $0.collectionViewLayout = layout
+    $0.showsHorizontalScrollIndicator = false
     $0.isHidden = true
   }
   
   private let productCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: .init()).then {
-    $0.backgroundColor = .green
+    $0.register(BookmarkImageCell.self, forCellWithReuseIdentifier: BookmarkImageCell.identifier)
+    $0.backgroundColor = .DecoColor.whiteColor
     
     let layout = UICollectionViewFlowLayout()
     layout.scrollDirection = .horizontal
@@ -81,14 +94,8 @@ final class ProductMoodDetailViewController: UIViewController, ProductMoodDetail
     self.view.backgroundColor = .DecoColor.whiteColor
     self.setupViews()
     self.setupGestures()
-    
-    DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: { [weak self] in
-      guard let self else { return }
-      self.navCategoryLabel.text = "FlexLayout MarkDirty"
-      self.navCategoryLabel.flex.markDirty()
-      self.navCategoryView.flex.layout(mode: .adjustWidth)
-      self.selectedFilterCollectionView.isHidden = false
-    })
+    self.setSelectedFilterCollectionView()
+    self.setProductListCollectionView()
   }
   
   override func viewDidDisappear(_ animated: Bool) {
@@ -164,14 +171,142 @@ final class ProductMoodDetailViewController: UIViewController, ProductMoodDetail
     self.navCategoryView.tap()
       .bind { [weak self] _ in
         guard let self else { return }
-        print("카테고리 팝업")
+        self.listener?.showMoodModalVC()
       }.disposed(by: disposeBag)
     
     self.filterView.tap()
       .bind { [weak self] _ in
         guard let self else { return }
-        print("필터 팝업")
-        
+        self.listener?.showCategoryColorModalVC()
       }.disposed(by: disposeBag)
+  }
+  
+  private func setSelectedFilterCollectionView() {
+    self.listener?.selectedFilter
+      .observe(on: MainScheduler.instance)
+      .share()
+      .bind { [weak self] selectedFilter in
+        guard let self else { return }
+        self.selectedFilterCollectionView.isHidden = selectedFilter.isEmpty
+        self.setupLayouts()
+      }.disposed(by: disposeBag)
+    
+    listener?.selectedFilter
+      .bind(to: selectedFilterCollectionView.rx.items(
+        cellIdentifier: SelectedFilterCell.identifier,
+        cellType: SelectedFilterCell.self)
+      ) { index, filter, cell in
+        cell.setupCellConfigure(text: filter.name, isSelected: filter.isSelected)
+      }.disposed(by: disposeBag)
+    
+    
+    Observable.zip(
+      selectedFilterCollectionView.rx.itemSelected,
+      selectedFilterCollectionView.rx.modelSelected((name: String, id: Int, filterType: Filter, isSelected: Bool).self)
+    ).subscribe(onNext: { [weak self] index, model in
+      guard let self else { return }
+      if index.row == 0 { self.listener?.updateFilter(categoryList: [], colorList: []) }
+      else {
+        var filterList = self.listener?.selectedFilter.value ?? []
+        filterList.remove(at: index.row)
+        
+        if filterList.count == 1 { self.listener?.updateFilter(categoryList: [], colorList: []) }
+        else {
+          var filterList = self.listener?.selectedFilter.value ?? []
+          filterList.remove(at: index.row)
+          let categoryList = filterList.filter{$0.filterType == .Category}
+          let colorList = filterList.filter{$0.filterType == .Color}
+          self.listener?.updateFilter(categoryList: categoryList, colorList: colorList)
+        }
+      }
+    }).disposed(by: disposeBag)
+    
+    selectedFilterCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
+  }
+  
+  private func setProductListCollectionView() {
+    listener?.productLists
+      .bind(to: productCollectionView.rx.items(
+        cellIdentifier: BookmarkImageCell.identifier,
+        cellType: BookmarkImageCell.self)
+      ) { index, product, cell in
+        cell.setupCellConfigure(imageURL: product.imageUrl, isBookmarked: product.scrap)
+      }.disposed(by: disposeBag)
+    
+    productCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
+  }
+  
+  
+  func setCurrentMood(mood: String) {
+    self.navCategoryLabel.text = mood
+    self.navCategoryLabel.flex.markDirty()
+    self.navCategoryView.flex.layout(mode: .adjustWidth)
+  }
+}
+
+extension ProductMoodDetailViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+  func collectionView(
+    _ collectionView: UICollectionView,
+    layout collectionViewLayout: UICollectionViewLayout,
+    sizeForItemAt indexPath: IndexPath
+  ) -> CGSize {
+    switch collectionView {
+    case selectedFilterCollectionView:
+      let font: UIFont = UIFont.DecoFont.getFont(with: .Suit, type: .medium, size: 12)
+      if let categoryList = listener?.selectedFilter.value {
+        return CGSize(
+          width: (
+            (categoryList[indexPath.row].name.size(withAttributes: [NSAttributedString.Key.font:font]).width) +
+            (SelectedFilterCell.horizontalMargin * 2) +
+            (SelectedFilterCell.imageSize) +
+            (SelectedFilterCell.itemSpacing)
+          ),
+          height: 30
+        )
+      }
+      return .zero
+      
+    case productCollectionView:
+      let cellSize: CGFloat = (UIScreen.main.bounds.width - 5.0) / 2.0
+      return CGSize(width: cellSize, height: cellSize)
+    default: return .zero
+    }
+  }
+  
+  func collectionView(
+    _ collectionView: UICollectionView,
+    layout collectionViewLayout: UICollectionViewLayout,
+    minimumLineSpacingForSectionAt section: Int
+  ) -> CGFloat {
+    switch collectionView {
+    case selectedFilterCollectionView: return 8.0
+    case productCollectionView: return 5.0
+    default: return .zero
+    }
+    
+  }
+  
+  func collectionView(
+    _ collectionView: UICollectionView,
+    layout collectionViewLayout: UICollectionViewLayout,
+    minimumInteritemSpacingForSectionAt section: Int
+  ) -> CGFloat {
+    switch collectionView {
+    case selectedFilterCollectionView: return 8.0
+    case productCollectionView: return 5.0
+    default: return .zero
+    }
+  }
+  
+  func collectionView(
+    _ collectionView: UICollectionView,
+    layout collectionViewLayout: UICollectionViewLayout,
+    insetForSectionAt section: Int
+  ) -> UIEdgeInsets {
+    switch collectionView {
+    case selectedFilterCollectionView: return UIEdgeInsets(top: 0, left: 18, bottom: 0, right: 18)
+    case productCollectionView: return UIEdgeInsets.zero
+    default: return UIEdgeInsets.zero
+    }
   }
 }

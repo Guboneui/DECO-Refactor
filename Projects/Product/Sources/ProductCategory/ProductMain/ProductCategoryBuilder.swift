@@ -25,6 +25,7 @@ final class ProductCategoryComponent:
   var userManager: MutableUserManagerStream { dependency.userManager }
   var productRepository: ProductRepository { dependency.productRepositoryImpl }
   var selectedFilterInProductCategory: MutableSelectedFilterInProductCategoryStream = SelectedFilterInProductCategoryStreamImpl()
+  var selectedFilterInProductMood: MutableSelectedFilterInProductMoodStream = SelectedFilterInProductMoodStreamImpl()
 }
 
 // MARK: - Builder
@@ -45,7 +46,8 @@ final class ProductCategoryBuilder: Builder<ProductCategoryDependency>, ProductC
     let interactor = ProductCategoryInteractor(
       presenter: viewController,
       productRepository: dependency.productRepositoryImpl,
-      selectedFilterInProductCategory: component.selectedFilterInProductCategory
+      selectedFilterInProductCategory: component.selectedFilterInProductCategory,
+      selectedFilterInProductMood: component.selectedFilterInProductMood
     )
     interactor.listener = listener
     

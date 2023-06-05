@@ -13,7 +13,15 @@
 		27657EFE248AC6FC4522F185 /* ProductInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649F5C631F66E5514370552C /* ProductInteractor.swift */; };
 		287CFCCB230C91855597444E /* BrandDetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200FB0635A5D6F0247070678 /* BrandDetailInteractor.swift */; };
 		2B8B632496B4639B39A69F47 /* ProductCategoryImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D17D28A4231CCB22DFD450 /* ProductCategoryImageCell.swift */; };
-		2C2F49052A2CEB490011CC86 /* SelectedFilterInProductMoodStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F49042A2CEB490011CC86 /* SelectedFilterInProductMoodStream.swift */; };
+		2C2F49092A2CEE270011CC86 /* SelectedFilterInProductMoodStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F49082A2CEE270011CC86 /* SelectedFilterInProductMoodStream.swift */; };
+		2C2F49102A2CEE4D0011CC86 /* MoodModalRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F490C2A2CEE4D0011CC86 /* MoodModalRouter.swift */; };
+		2C2F49112A2CEE4D0011CC86 /* MoodModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F490D2A2CEE4D0011CC86 /* MoodModalViewController.swift */; };
+		2C2F49122A2CEE4D0011CC86 /* MoodModalBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F490E2A2CEE4D0011CC86 /* MoodModalBuilder.swift */; };
+		2C2F49132A2CEE4D0011CC86 /* MoodModalInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F490F2A2CEE4D0011CC86 /* MoodModalInteractor.swift */; };
+		2C2F49182A2D24C00011CC86 /* CategoryColorModalRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F49142A2D24C00011CC86 /* CategoryColorModalRouter.swift */; };
+		2C2F49192A2D24C00011CC86 /* CategoryColorModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F49152A2D24C00011CC86 /* CategoryColorModalViewController.swift */; };
+		2C2F491A2A2D24C00011CC86 /* CategoryColorModalBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F49162A2D24C00011CC86 /* CategoryColorModalBuilder.swift */; };
+		2C2F491B2A2D24C00011CC86 /* CategoryColorModalInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F49172A2D24C00011CC86 /* CategoryColorModalInteractor.swift */; };
 		2E201D22B48634BC3B1F93B3 /* User.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50C54C2D62E1CDE74BF87053 /* User.framework */; platformFilter = ios; };
 		30DBBB317B17886DDC13090A /* ProductCategoryRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98B6654CFA5B61563631CB1 /* ProductCategoryRouter.swift */; };
 		3C9FC96E9B38D08254D9A3FF /* ProductCategoryInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D937062459801C0282EB28 /* ProductCategoryInteractor.swift */; };
@@ -79,7 +87,15 @@
 		24D937062459801C0282EB28 /* ProductCategoryInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCategoryInteractor.swift; sourceTree = "<group>"; };
 		28D17D28A4231CCB22DFD450 /* ProductCategoryImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCategoryImageCell.swift; sourceTree = "<group>"; };
 		2A1C7AB72153BCA881017400 /* BrandProductUsageBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandProductUsageBuilder.swift; sourceTree = "<group>"; };
-		2C2F49042A2CEB490011CC86 /* SelectedFilterInProductMoodStream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedFilterInProductMoodStream.swift; sourceTree = "<group>"; };
+		2C2F49082A2CEE270011CC86 /* SelectedFilterInProductMoodStream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedFilterInProductMoodStream.swift; sourceTree = "<group>"; };
+		2C2F490C2A2CEE4D0011CC86 /* MoodModalRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodModalRouter.swift; sourceTree = "<group>"; };
+		2C2F490D2A2CEE4D0011CC86 /* MoodModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodModalViewController.swift; sourceTree = "<group>"; };
+		2C2F490E2A2CEE4D0011CC86 /* MoodModalBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodModalBuilder.swift; sourceTree = "<group>"; };
+		2C2F490F2A2CEE4D0011CC86 /* MoodModalInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodModalInteractor.swift; sourceTree = "<group>"; };
+		2C2F49142A2D24C00011CC86 /* CategoryColorModalRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryColorModalRouter.swift; sourceTree = "<group>"; };
+		2C2F49152A2D24C00011CC86 /* CategoryColorModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryColorModalViewController.swift; sourceTree = "<group>"; };
+		2C2F49162A2D24C00011CC86 /* CategoryColorModalBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryColorModalBuilder.swift; sourceTree = "<group>"; };
+		2C2F49172A2D24C00011CC86 /* CategoryColorModalInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryColorModalInteractor.swift; sourceTree = "<group>"; };
 		2F5764EDAEEB32AA793DAEA2 /* SelectedFilterInProductCategoryStream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedFilterInProductCategoryStream.swift; sourceTree = "<group>"; };
 		34FF2365AF08B4B702EA16AE /* ProductCategoryTextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCategoryTextCell.swift; sourceTree = "<group>"; };
 		3949D36315A08397C6BD7D70 /* BrandDetailBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandDetailBuilder.swift; sourceTree = "<group>"; };
@@ -157,6 +173,45 @@
 			);
 			sourceTree = "<group>";
 		};
+		2C2F49062A2CEDEF0011CC86 /* FilterModals */ = {
+			isa = PBXGroup;
+			children = (
+				2C2F490B2A2CEE3A0011CC86 /* CategoryColorModal */,
+				2C2F490A2A2CEE2F0011CC86 /* MoodModal */,
+			);
+			path = FilterModals;
+			sourceTree = "<group>";
+		};
+		2C2F49072A2CEE000011CC86 /* Stream */ = {
+			isa = PBXGroup;
+			children = (
+				2C2F49082A2CEE270011CC86 /* SelectedFilterInProductMoodStream.swift */,
+			);
+			path = Stream;
+			sourceTree = "<group>";
+		};
+		2C2F490A2A2CEE2F0011CC86 /* MoodModal */ = {
+			isa = PBXGroup;
+			children = (
+				2C2F490C2A2CEE4D0011CC86 /* MoodModalRouter.swift */,
+				2C2F490D2A2CEE4D0011CC86 /* MoodModalViewController.swift */,
+				2C2F490E2A2CEE4D0011CC86 /* MoodModalBuilder.swift */,
+				2C2F490F2A2CEE4D0011CC86 /* MoodModalInteractor.swift */,
+			);
+			path = MoodModal;
+			sourceTree = "<group>";
+		};
+		2C2F490B2A2CEE3A0011CC86 /* CategoryColorModal */ = {
+			isa = PBXGroup;
+			children = (
+				2C2F49142A2D24C00011CC86 /* CategoryColorModalRouter.swift */,
+				2C2F49152A2D24C00011CC86 /* CategoryColorModalViewController.swift */,
+				2C2F49162A2D24C00011CC86 /* CategoryColorModalBuilder.swift */,
+				2C2F49172A2D24C00011CC86 /* CategoryColorModalInteractor.swift */,
+			);
+			path = CategoryColorModal;
+			sourceTree = "<group>";
+		};
 		2C5FADEF18F0E9A881274B58 /* BrandMain */ = {
 			isa = PBXGroup;
 			children = (
@@ -200,6 +255,8 @@
 		534F596C19231BD528105D22 /* ProductMoodDetail */ = {
 			isa = PBXGroup;
 			children = (
+				2C2F49072A2CEE000011CC86 /* Stream */,
+				2C2F49062A2CEDEF0011CC86 /* FilterModals */,
 				DB9839C672198B2FB5D36503 /* ProductMoodDetailBuilder.swift */,
 				89154966E7C4EF49B7EA012A /* ProductMoodDetailInteractor.swift */,
 				50352A43AB6B2FC172655EA5 /* ProductMoodDetailRouter.swift */,
@@ -271,7 +328,6 @@
 			isa = PBXGroup;
 			children = (
 				2F5764EDAEEB32AA793DAEA2 /* SelectedFilterInProductCategoryStream.swift */,
-				2C2F49042A2CEB490011CC86 /* SelectedFilterInProductMoodStream.swift */,
 			);
 			path = Stream;
 			sourceTree = "<group>";
@@ -426,14 +482,18 @@
 				287CFCCB230C91855597444E /* BrandDetailInteractor.swift in Sources */,
 				C1C408B8B00E153F20CC8A74 /* BrandDetailRouter.swift in Sources */,
 				82A673789E7CCA545E8D704B /* BrandDetailViewController.swift in Sources */,
+				2C2F49182A2D24C00011CC86 /* CategoryColorModalRouter.swift in Sources */,
 				FEA61937ECAC0C7413A31A20 /* BrandInfoHeaderView.swift in Sources */,
+				2C2F491B2A2D24C00011CC86 /* CategoryColorModalInteractor.swift in Sources */,
 				266C40B477FF5FB4DBD39189 /* BrandProductUsageHeaderView.swift in Sources */,
+				2C2F49192A2D24C00011CC86 /* CategoryColorModalViewController.swift in Sources */,
 				CD7738026CDD02B416575EB4 /* BrandListBuilder.swift in Sources */,
 				6B5321650916DF02CC35D1D0 /* BrandListInteractor.swift in Sources */,
 				B18A6D215824F56D826E8664 /* BrandListRouter.swift in Sources */,
+				2C2F491A2A2D24C00011CC86 /* CategoryColorModalBuilder.swift in Sources */,
 				7C9A753BB528DD17EBD6A36E /* BrandListViewController.swift in Sources */,
 				9D3F3824C962F1ED7439A897 /* BrandListCell.swift in Sources */,
-				2C2F49052A2CEB490011CC86 /* SelectedFilterInProductMoodStream.swift in Sources */,
+				2C2F49092A2CEE270011CC86 /* SelectedFilterInProductMoodStream.swift in Sources */,
 				D57208C7A9EDE257A809A67D /* BrandProductUsageBuilder.swift in Sources */,
 				19B916D21719D8D37FECE124 /* BrandProductUsageInteractor.swift in Sources */,
 				FF44F4C487639ACA2DC79F6B /* BrandProductUsageRouter.swift in Sources */,
@@ -443,8 +503,10 @@
 				BF5CA96AC7E8C9212899056D /* CategoryModalBuilder.swift in Sources */,
 				5683A8D48F2EFE6C254F315E /* CategoryModalInteractor.swift in Sources */,
 				98210AE2B8892A4CAEFDF898 /* CategoryModalRouter.swift in Sources */,
+				2C2F49132A2CEE4D0011CC86 /* MoodModalInteractor.swift in Sources */,
 				EDAF3C0297B35C7C460138BE /* CategoryModalViewController.swift in Sources */,
 				AEBD97C6E28FE59D6AC93AB5 /* MoodColorModalBuilder.swift in Sources */,
+				2C2F49102A2CEE4D0011CC86 /* MoodModalRouter.swift in Sources */,
 				733E05CB4DACC2126C4A7EA1 /* MoodColorModalInteractor.swift in Sources */,
 				F96163097E6FEAC0CBF712D7 /* MoodColorModalRouter.swift in Sources */,
 				54B2DEA83AFD1D34385373E6 /* MoodColorModalViewController.swift in Sources */,
@@ -452,10 +514,12 @@
 				977BB465B3BB5DB89B77D3EF /* ProductCategoryDetailInteractor.swift in Sources */,
 				F250C42825270C256A2A04AE /* ProductCategoryDetailRouter.swift in Sources */,
 				1DD9D3EFEE17365E304661CB /* ProductCategoryDetailViewController.swift in Sources */,
+				2C2F49112A2CEE4D0011CC86 /* MoodModalViewController.swift in Sources */,
 				A70D98D414C67CE60393E444 /* SelectedFilterInProductCategoryStream.swift in Sources */,
 				5AD3EDC9CA4426A5AD952DEE /* ProductCategoryBuilder.swift in Sources */,
 				3C9FC96E9B38D08254D9A3FF /* ProductCategoryInteractor.swift in Sources */,
 				30DBBB317B17886DDC13090A /* ProductCategoryRouter.swift in Sources */,
+				2C2F49122A2CEE4D0011CC86 /* MoodModalBuilder.swift in Sources */,
 				75D088AC1E5C2384737C458B /* ProductCategoryViewController.swift in Sources */,
 				B01C8637B5687C5A0F2A2D0F /* ProductMoodDetailBuilder.swift in Sources */,
 				7F9B964AB4FB5DB57FCA2ECD /* ProductMoodDetailInteractor.swift in Sources */,

@@ -16,7 +16,7 @@ protocol ProductCategoryPresentableListener: AnyObject {
   var productCategorySections: BehaviorRelay<[ProductCategorySection]> { get }
   
   func pushProductCategoryDetailVC(selectedCategory: ProductCategoryModel)
-  func pushProductMoodDetailVC()
+  func pushProductMoodDetailVC(selectedMood: ProductCategoryModel)
 }
 
 final class ProductCategoryViewController: UIViewController, ProductCategoryPresentable, ProductCategoryViewControllable {
@@ -151,7 +151,7 @@ final class ProductCategoryViewController: UIViewController, ProductCategoryPres
       case 0:
         self.listener?.pushProductCategoryDetailVC(selectedCategory: category)
       case 1:
-        self.listener?.pushProductMoodDetailVC()
+        self.listener?.pushProductMoodDetailVC(selectedMood: category)
       default:
         break
       }

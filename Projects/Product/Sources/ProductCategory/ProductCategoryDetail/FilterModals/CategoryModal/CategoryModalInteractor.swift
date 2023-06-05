@@ -51,8 +51,6 @@ final class CategoryModalInteractor: PresentableInteractor<CategoryModalPresenta
         let categoryList: [(ProductCategoryModel, Bool)] = self.selectedFilterInProductCategory.productCategoryList.map{($0, $0.id == currentSelectedId ? true : false)}
         self.categoryList.accept(categoryList)
       }).disposed(by: disposeBag)
-    
-    print(selectedFilterInProductCategory.productCategoryList)
   }
   
   override func willResignActive() {

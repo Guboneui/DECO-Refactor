@@ -12,11 +12,15 @@ public class FilterCell: UICollectionViewCell {
   public static let identifier = "FilterCell"
   public static let horizontalMargin: CGFloat = 12
   
+  private let textLabelBaseFont: UIFont = UIFont.DecoFont.getFont(with: .Suit, type: .bold, size: 12)
+  
   private let textLabel: UILabel = UILabel().then {
     $0.textAlignment = .center
     $0.sizeToFit()
   }
-  private let selectedView: UIView = UIView()
+  private let selectedView: UIView = UIView().then {
+    $0.backgroundColor = .blue
+  }
   
   public override init(frame: CGRect) {
     super.init(frame: frame)
@@ -30,23 +34,34 @@ public class FilterCell: UICollectionViewCell {
     self.setupLayouts()
   }
   
+  public override func prepareForReuse() {
+    super.prepareForReuse()
+    self.textLabel.text = nil
+  }
+  
   private func setupViews() {
     self.contentView.addSubview(selectedView)
-    self.contentView.addSubview(textLabel)
+    self.selectedView.addSubview(textLabel)
 
-    self.contentView.makeCornerRadius(radius: 14)
+    self.selectedView.makeCornerRadius(radius: 14)
     
   }
   
   private func setupLayouts() {
-    self.selectedView.pin.all()
+    self.selectedView.pin
+      .left()
+      .vertically()
+      .width(getTextLabelWidth())
     
     self.textLabel.pin
       .horizontally(FilterCell.horizontalMargin)
       .vCenter()
       .sizeToFit(.width)
-    
-    self.contentView.pin.wrapContent()
+  }
+  
+  private func getTextLabelWidth() -> CGFloat {
+    let labelWidth: CGFloat = (textLabel.text ?? "").size(withAttributes: [NSAttributedString.Key.font:textLabelBaseFont]).width
+    return labelWidth + (2*FilterCell.horizontalMargin)
   }
   
   public override func sizeThatFits(_ size: CGSize) -> CGSize {
@@ -60,7 +75,7 @@ public class FilterCell: UICollectionViewCell {
     self.textLabel.text = text
     self.textLabel.font = .DecoFont.getFont(with: .Suit, type: isSelected ? .bold : .medium, size: 12)
     self.textLabel.textColor = isSelected ? .DecoColor.secondaryColor : .DecoColor.gray2
-    self.contentView.makeBorder(width: 1.0, borderColor: isSelected ? .DecoColor.secondaryColor : .DecoColor.lightGray1)
+    self.selectedView.makeBorder(width: 1.0, borderColor: isSelected ? .DecoColor.secondaryColor : .DecoColor.lightGray1)
     self.selectedView.backgroundColor = isSelected ? .DecoColor.lightSecondaryColor : .clear
   }
 }

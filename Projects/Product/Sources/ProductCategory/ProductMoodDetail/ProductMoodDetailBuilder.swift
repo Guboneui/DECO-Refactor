@@ -5,35 +5,58 @@
 //  Created by 구본의 on 2023/06/01.
 //
 
+import User
+import Util
+import Networking
+
 import RIBs
 
 protocol ProductMoodDetailDependency: Dependency {
-    // TODO: Declare the set of dependencies required by this RIB, but cannot be
-    // created by this RIB.
+  var userManager: MutableUserManagerStream { get }
+  var productRepository: ProductRepository { get }
+  var selectedFilterInProductMood: MutableSelectedFilterInProductMoodStream { get }
+  
 }
 
-final class ProductMoodDetailComponent: Component<ProductMoodDetailDependency> {
-
-    // TODO: Declare 'fileprivate' dependencies that are only used by this RIB.
+final class ProductMoodDetailComponent:
+  Component<ProductMoodDetailDependency>,
+  MoodModalDependency,
+  CategoryColorModalDependency
+{
+  
+  var selectedFilterInProductMood: MutableSelectedFilterInProductMoodStream { dependency.selectedFilterInProductMood }
 }
 
 // MARK: - Builder
 
 protocol ProductMoodDetailBuildable: Buildable {
-    func build(withListener listener: ProductMoodDetailListener) -> ProductMoodDetailRouting
+  func build(withListener listener: ProductMoodDetailListener) -> ProductMoodDetailRouting
 }
 
 final class ProductMoodDetailBuilder: Builder<ProductMoodDetailDependency>, ProductMoodDetailBuildable {
-
-    override init(dependency: ProductMoodDetailDependency) {
-        super.init(dependency: dependency)
-    }
-
-    func build(withListener listener: ProductMoodDetailListener) -> ProductMoodDetailRouting {
-        let component = ProductMoodDetailComponent(dependency: dependency)
-        let viewController = ProductMoodDetailViewController()
-        let interactor = ProductMoodDetailInteractor(presenter: viewController)
-        interactor.listener = listener
-        return ProductMoodDetailRouter(interactor: interactor, viewController: viewController)
-    }
+  
+  override init(dependency: ProductMoodDetailDependency) {
+    super.init(dependency: dependency)
+  }
+  
+  func build(withListener listener: ProductMoodDetailListener) -> ProductMoodDetailRouting {
+    let component = ProductMoodDetailComponent(dependency: dependency)
+    let viewController = ProductMoodDetailViewController()
+    let interactor = ProductMoodDetailInteractor(
+      presenter: viewController,
+      productRepository: dependency.productRepository,
+      userManager: dependency.userManager,
+      selectedFilterInProductMood: dependency.selectedFilterInProductMood
+    )
+    interactor.listener = listener
+    
+    let moodModalBuilder = MoodModalBuilder(dependency: component)
+    let categoryColorModalBuilder = CategoryColorModalBuilder(dependency: component)
+    return ProductMoodDetailRouter(
+      interactor: interactor,
+      viewController: viewController,
+      moodModalBuildable: moodModalBuilder,
+      categoryColorModalBuildable: categoryColorModalBuilder
+    )
+  }
 }

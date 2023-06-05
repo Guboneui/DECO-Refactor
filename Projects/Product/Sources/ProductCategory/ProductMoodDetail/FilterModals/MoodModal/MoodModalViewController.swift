@@ -1,35 +1,34 @@
 //
-//  CategoryModalViewController.swift
+//  MoodModalViewController.swift
 //  Product
 //
-//  Created by 구본의 on 2023/06/02.
+//  Created by 구본의 on 2023/06/05.
 //
+
+import UIKit
+
+import CommonUI
 
 import RIBs
 import RxSwift
-import UIKit
-import CommonUI
 import RxRelay
 
-protocol CategoryModalPresentableListener: AnyObject {
+protocol MoodModalPresentableListener: AnyObject {
+  var moodList: BehaviorRelay<[(mood: ProductCategoryModel, isSelected: Bool)]> { get }
   
-  var categoryList: BehaviorRelay<[(category: ProductCategoryModel, isSelected: Bool)]> { get }
-  
-  func selectedCategory(category: ProductCategoryModel, _ completion: (()->())?)
-  func dismissCategoryModalVC()
+  func selectedMood(mood: ProductCategoryModel, _ completion: (()->())?)
+  func dismissMoodModalVC()
 }
 
-final class CategoryModalViewController: ModalViewController, CategoryModalPresentable, CategoryModalViewControllable {
+final class MoodModalViewController: ModalViewController, MoodModalPresentable, MoodModalViewControllable {
   
-  
-  weak var listener: CategoryModalPresentableListener?
-  
+  weak var listener: MoodModalPresentableListener?
   private let disposeBag: DisposeBag = DisposeBag()
   
   private let cellHorizontalEdgeInset: CGFloat = 32.0
-  private let cellVerticalEdgeInset: CGFloat = 28.0
+  private let cellVerticalEdgeInset: CGFloat = 24
   private let cellLineSpacing: CGFloat = 18.0
-  private let cellWidth: CGFloat = (UIScreen.main.bounds.width-64) / 2.0
+  private let cellWidth: CGFloat = (UIScreen.main.bounds.width-64)
   private let cellHeight: CGFloat = 20.0
   
   private let modalView: UIView = UIView().then {
@@ -37,10 +36,10 @@ final class CategoryModalViewController: ModalViewController, CategoryModalPrese
     $0.makeCornerRadiusOnlyTop(radius: 16)
   }
   
-  private let categoryCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: .init()).then {
+  private let moodCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: .init()).then {
+    $0.register(LargeTextCell.self, forCellWithReuseIdentifier: LargeTextCell.identifier)
     $0.backgroundColor = .DecoColor.whiteColor
     $0.bounces = false
-    $0.register(LargeTextCell.self, forCellWithReuseIdentifier: LargeTextCell.identifier)
     
     let layout = UICollectionViewFlowLayout()
     layout.scrollDirection = .vertical
@@ -51,7 +50,7 @@ final class CategoryModalViewController: ModalViewController, CategoryModalPrese
     super.viewDidLoad()
     self.setupViews()
     self.setupGestures()
-    self.setupCategoryCollectionView()
+    self.setupMoodCollectionView()
   }
   
   override func viewWillLayoutSubviews() {
@@ -62,16 +61,11 @@ final class CategoryModalViewController: ModalViewController, CategoryModalPrese
   
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
-    
     if isShow == false {
       UIView.animate(withDuration: 0.3) { [weak self] in
         guard let self else { return }
-        let categoryCount: Int = self.listener?.categoryList.value.count ?? 0
-        var collectionViewTotalLine: Int
-        
-        if categoryCount % 2 == 0 { collectionViewTotalLine = categoryCount / 2}
-        else { collectionViewTotalLine = categoryCount / 2 + 1}
-        let collectionViewHeight: Int = (collectionViewTotalLine*Int(self.cellHeight)) + (collectionViewTotalLine-1) * Int(self.cellLineSpacing) + (2 * Int(self.cellVerticalEdgeInset))
+        let categoryCount: Int = self.listener?.moodList.value.count ?? 0
+        let collectionViewHeight: Int = (categoryCount*Int(self.cellHeight)) + (categoryCount-1) * Int(self.cellLineSpacing) + (2 * Int(self.cellVerticalEdgeInset))
         let bottomMargin: Int = UIDevice.current.hasNotch ? 60 - Int(self.cellVerticalEdgeInset) : 0
         
         self.modalView.pin
@@ -79,7 +73,7 @@ final class CategoryModalViewController: ModalViewController, CategoryModalPrese
           .bottom()
           .height(CGFloat(collectionViewHeight + bottomMargin))
         
-        self.categoryCollectionView.pin.all()
+        self.moodCollectionView.pin.all()
       } completion: { [weak self] _ in
         guard let self else { return }
         self.isShow = true
@@ -89,7 +83,7 @@ final class CategoryModalViewController: ModalViewController, CategoryModalPrese
   
   private func setupViews() {
     self.view.addSubview(modalView)
-    self.modalView.addSubview(categoryCollectionView)
+    self.modalView.addSubview(moodCollectionView)
   }
   
   private func setupLayouts() {
@@ -97,34 +91,35 @@ final class CategoryModalViewController: ModalViewController, CategoryModalPrese
       .horizontally()
       .bottom()
     
-    categoryCollectionView.pin.all()
+    moodCollectionView.pin.all()
   }
   
   private func setupGestures() {
   }
   
-  private func setupCategoryCollectionView() {
-    categoryCollectionView.dataSource = nil
-    categoryCollectionView.delegate = nil
-    listener?.categoryList
-      .bind(to: categoryCollectionView.rx.items(
+  private func setupMoodCollectionView() {
+    moodCollectionView.dataSource = nil
+    moodCollectionView.delegate = nil
+    
+    listener?.moodList
+      .bind(to: moodCollectionView.rx.items(
         cellIdentifier: LargeTextCell.identifier,
         cellType: LargeTextCell.self)
       ) { index, category, cell in
-        cell.setupCellConfigure(text: category.category.title, isSelected: category.isSelected)
+        cell.setupCellConfigure(text: category.mood.title, isSelected: category.isSelected)
       }.disposed(by: disposeBag)
     
-    categoryCollectionView.rx
-      .modelSelected((category: ProductCategoryModel, Bool).self)
+    moodCollectionView.rx
+      .modelSelected((mood: ProductCategoryModel, Bool).self)
       .subscribe(onNext: { [weak self] in
         guard let self else { return }
-        self.listener?.selectedCategory(category: $0.category) { [weak self] in
+        self.listener?.selectedMood(mood: $0.mood, { [weak self] in
           guard let inSelf = self else { return }
           inSelf.didTapBackgroundView()
-        }
+        })
       }).disposed(by: disposeBag)
     
-    categoryCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
+    moodCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
   }
   
   override func didTapBackgroundView() {
@@ -140,16 +135,16 @@ final class CategoryModalViewController: ModalViewController, CategoryModalPrese
         .bottom()
         .height(0)
       
-      self.categoryCollectionView.pin.all()
+      self.moodCollectionView.pin.all()
       
     } completion: { [weak self] _ in
       guard let self else { return }
-      self.listener?.dismissCategoryModalVC()
+      self.listener?.dismissMoodModalVC()
     }
   }
 }
 
-extension CategoryModalViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+extension MoodModalViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
   func collectionView(
     _ collectionView: UICollectionView,
     layout collectionViewLayout: UICollectionViewLayout,

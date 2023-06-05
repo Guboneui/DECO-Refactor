@@ -32,15 +32,6 @@ protocol ProductCategoryDetailListener: AnyObject {
 }
 
 final class ProductCategoryDetailInteractor: PresentableInteractor<ProductCategoryDetailPresentable>, ProductCategoryDetailInteractable, ProductCategoryDetailPresentableListener {
-  func updateFilter(moodList: [(name: String, id: Int, filterType: Filter, isSelected: Bool)], colorList: [(name: String, id: Int, filterType: Filter, isSelected: Bool)]) {
-    let moods: [ProductCategoryModel] = moodList.map{ProductCategoryModel(id: $0.id, title: $0.name)}
-    let colors: [ProductColorModel] = colorList.map{ProductColorModel(name: $0.name, image: Util.getColorImage(id: $0.id), id: $0.id)}
-    self.selectedFilterInProductCategory.updateFilterStream(moods: moods, colors: colors)
-  }
-  
-  
-  
-  
   
   weak var router: ProductCategoryDetailRouting?
   weak var listener: ProductCategoryDetailListener?
@@ -126,23 +117,15 @@ final class ProductCategoryDetailInteractor: PresentableInteractor<ProductCatego
         print($0.selectedCategory)
 
       }).disposed(by: disposeBag)
-    
-//    Task.detached { [weak self] in
-//      guard let self else { return }
-//      if let productList = await self.productRepository.getProductOfCategory(
-//        param:
-//          ItemFilterRequest(
-//            userId: self.userManager.userID,
-//            itemCategoryIds: [self.itemCategoryId],
-//            colorIds: [],
-//            styleIds: [],
-//            createdAt: createdAt,
-//            name: "")
-//      ) {
-//        self.productLists.accept(productList)
-//      }
-//    }
   }
+  
+  
+  func updateFilter(moodList: [(name: String, id: Int, filterType: Filter, isSelected: Bool)], colorList: [(name: String, id: Int, filterType: Filter, isSelected: Bool)]) {
+    let moods: [ProductCategoryModel] = moodList.map{ProductCategoryModel(id: $0.id, title: $0.name)}
+    let colors: [ProductColorModel] = colorList.map{ProductColorModel(name: $0.name, image: Util.getColorImage(id: $0.id), id: $0.id)}
+    self.selectedFilterInProductCategory.updateFilterStream(moods: moods, colors: colors)
+  }
+  
   
   func showCategoryModalVC() {
     router?.attachCategoryModalVC()

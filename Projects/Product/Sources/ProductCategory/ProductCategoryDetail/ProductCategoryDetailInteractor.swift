@@ -116,9 +116,24 @@ final class ProductCategoryDetailInteractor: PresentableInteractor<ProductCatego
   
   func fetchProductList(createdAt: Int) {
     selectedFilterInProductCategory.selectedFilter
-      .subscribe(onNext: {
-        print($0.selectedCategory)
-
+      .subscribe(onNext: { [weak self] filter in
+        guard let self else { return }
+        
+        Task.detached { [weak self] in
+          guard let inSelf = self else { return }
+          if let productList = await inSelf.productRepository.getProductOfCategory(
+            param: ItemFilterRequest(
+              userId: inSelf.userManager.userID,
+              itemCategoryIds: [filter.selectedCategory?.id ?? 0],
+              colorIds: filter.selectedColors.map{$0.id},
+              styleIds: filter.selectedMoods.map{$0.id},
+              createdAt: createdAt,
+              name: "")
+          ), !productList.isEmpty {
+            let prevData = inSelf.productLists.value
+            inSelf.productLists.accept(prevData + productList)
+          }
+        }
       }).disposed(by: disposeBag)
   }
   

@@ -24,6 +24,7 @@ protocol ProductMoodDetailPresentableListener: AnyObject {
   func popProductMoodDetailVC(with popType: PopType)
   func showMoodModalVC()
   func showCategoryColorModalVC()
+  func fetchProductList(createdAt: Int)
   func fetchAddBookmark(with productID: Int)
   func fetchDeleteBookmark(with productID: Int)
   
@@ -257,6 +258,17 @@ final class ProductMoodDetailViewController: UIViewController, ProductMoodDetail
         }
         
       }.disposed(by: disposeBag)
+    
+    productCollectionView.rx.willDisplayCell
+      .map{$0.at.row}
+      .subscribe(onNext: { [weak self] index in
+        guard let self else { return }
+        if let productList = self.listener?.productLists.value,
+           productList.count - 1 == index {
+          let lastCreatedAt = productList[index].createdAt
+          self.listener?.fetchProductList(createdAt: lastCreatedAt)
+        }
+      }).disposed(by: disposeBag)
     
     productCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
   }

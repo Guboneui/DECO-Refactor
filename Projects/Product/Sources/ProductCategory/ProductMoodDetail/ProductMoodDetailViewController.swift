@@ -24,6 +24,8 @@ protocol ProductMoodDetailPresentableListener: AnyObject {
   func popProductMoodDetailVC(with popType: PopType)
   func showMoodModalVC()
   func showCategoryColorModalVC()
+  func fetchAddBookmark(with productID: Int)
+  func fetchDeleteBookmark(with productID: Int)
   
   func updateFilter(categoryList: [(name: String, id: Int, filterType: Filter, isSelected: Bool)], colorList: [(name: String, id: Int, filterType: Filter, isSelected: Bool)])
 }
@@ -229,8 +231,31 @@ final class ProductMoodDetailViewController: UIViewController, ProductMoodDetail
       .bind(to: productCollectionView.rx.items(
         cellIdentifier: BookmarkImageCell.identifier,
         cellType: BookmarkImageCell.self)
-      ) { index, product, cell in
+      ) { [weak self] index, product, cell in
+        guard let self else { return }
         cell.setupCellConfigure(imageURL: product.imageUrl, isBookmarked: product.scrap)
+        
+        cell.didTapBookmarkButton = { [weak self] in
+          guard let inSelf = self else { return }
+          if product.scrap {
+            inSelf.listener?.fetchDeleteBookmark(with: product.id)
+          } else {
+            inSelf.listener?.fetchAddBookmark(with: product.id)
+          }
+         
+          let shouldInputData: ProductDTO = ProductDTO(
+            name: product.name,
+            imageUrl: product.imageUrl,
+            brandName: product.brandName,
+            id: product.id,
+            scrap: !product.scrap,
+            createdAt: product.createdAt
+          )
+          var productList = inSelf.listener?.productLists.value ?? []
+          productList[index] = shouldInputData
+          inSelf.listener?.productLists.accept(productList)
+        }
+        
       }.disposed(by: disposeBag)
     
     productCollectionView.rx.setDelegate(self).disposed(by: disposeBag)

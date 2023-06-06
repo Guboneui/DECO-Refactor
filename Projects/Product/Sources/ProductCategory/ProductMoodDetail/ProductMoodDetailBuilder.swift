@@ -14,6 +14,7 @@ import RIBs
 protocol ProductMoodDetailDependency: Dependency {
   var userManager: MutableUserManagerStream { get }
   var productRepository: ProductRepository { get }
+  var bookmarkRepository: BookmarkRepository { get }
   var selectedFilterInProductMood: MutableSelectedFilterInProductMoodStream { get }
   
 }
@@ -45,6 +46,7 @@ final class ProductMoodDetailBuilder: Builder<ProductMoodDetailDependency>, Prod
     let interactor = ProductMoodDetailInteractor(
       presenter: viewController,
       productRepository: dependency.productRepository,
+      bookmarkRepository: dependency.bookmarkRepository,
       userManager: dependency.userManager,
       selectedFilterInProductMood: dependency.selectedFilterInProductMood
     )

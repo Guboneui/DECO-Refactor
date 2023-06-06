@@ -30,12 +30,15 @@ protocol ProductCategoryDetailPresentableListener: AnyObject {
   func updateFilter(moodList: [(name: String, id: Int, filterType: Filter, isSelected: Bool)], colorList: [(name: String, id: Int, filterType: Filter, isSelected: Bool)])
   
   func fetchProductList(createdAt: Int)
+  func fetchAddBookmark(with productID: Int)
+  func fetchDeleteBookmark(with productID: Int)
+  
 }
 
 final class ProductCategoryDetailViewController: UIViewController, ProductCategoryDetailPresentable, ProductCategoryDetailViewControllable {
   
   weak var listener: ProductCategoryDetailPresentableListener?
-  private let disposeBag: DisposeBag = DisposeBag()
+  private var disposeBag: DisposeBag = DisposeBag()
   
   private let navigationBar: NavigationBar = NavigationBar(
     navTitle: "",
@@ -43,7 +46,6 @@ final class ProductCategoryDetailViewController: UIViewController, ProductCatego
   )
   
   private let navCategoryLabel: UILabel = UILabel().then {
-    $0.text = "카테고리"
     $0.font = .DecoFont.getFont(with: .Suit, type: .medium, size: 14)
     $0.textColor = .DecoColor.darkGray2
   }
@@ -233,8 +235,30 @@ final class ProductCategoryDetailViewController: UIViewController, ProductCatego
       .bind(to: productCollectionView.rx.items(
         cellIdentifier: BookmarkImageCell.identifier,
         cellType: BookmarkImageCell.self)
-      ) { index, product, cell in
+      ) { [weak self] index, product, cell in
+        guard let self else { return }
         cell.setupCellConfigure(imageURL: product.imageUrl, isBookmarked: product.scrap)
+        cell.didTapBookmarkButton = { [weak self] in
+          guard let inSelf = self else { return }
+          if product.scrap {
+            inSelf.listener?.fetchDeleteBookmark(with: product.id)
+          } else {
+            inSelf.listener?.fetchAddBookmark(with: product.id)
+          }
+         
+          let shouldInputData: ProductDTO = ProductDTO(
+            name: product.name,
+            imageUrl: product.imageUrl,
+            brandName: product.brandName,
+            id: product.id,
+            scrap: !product.scrap,
+            createdAt: product.createdAt
+          )
+          var productList = inSelf.listener?.productLists.value ?? []
+          productList[index] = shouldInputData
+          inSelf.listener?.productLists.accept(productList)
+        }
+        
       }.disposed(by: disposeBag)
     
     productCollectionView.rx.setDelegate(self).disposed(by: disposeBag)

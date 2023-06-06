@@ -42,16 +42,19 @@ final class ProductCategoryDetailInteractor: PresentableInteractor<ProductCatego
   private let disposeBag: DisposeBag = DisposeBag()
   private let userManager: MutableUserManagerStream
   private let productRepository: ProductRepository
+  private let bookmarkRepository: BookmarkRepository
   private let selectedFilterInProductCategory: MutableSelectedFilterInProductCategoryStream
   
   init(
     presenter: ProductCategoryDetailPresentable,
     productRepository: ProductRepository,
+    bookmarkRepository: BookmarkRepository,
     userManager: MutableUserManagerStream,
     selectedFilterInProductCategory: MutableSelectedFilterInProductCategoryStream
   ) {
     self.userManager = userManager
     self.productRepository = productRepository
+    self.bookmarkRepository = bookmarkRepository
     self.selectedFilterInProductCategory = selectedFilterInProductCategory
     super.init(presenter: presenter)
     presenter.listener = self
@@ -126,6 +129,27 @@ final class ProductCategoryDetailInteractor: PresentableInteractor<ProductCatego
     self.selectedFilterInProductCategory.updateFilterStream(moods: moods, colors: colors)
   }
   
+  func fetchAddBookmark(with productID: Int) {
+    Task.detached { [weak self] in
+      guard let self else { return }
+      _ = await self.bookmarkRepository.addBookmark(
+        productId: productID,
+        boardId: 0,
+        userId: self.userManager.userID
+      )
+    }
+  }
+  
+  func fetchDeleteBookmark(with productID: Int) {
+    Task.detached { [weak self] in
+      guard let self else { return }
+      _ = await self.bookmarkRepository.deleteBookmark(
+        productId: productID,
+        boardId: 0,
+        userId: self.userManager.userID
+      )
+    }
+  }
   
   func showCategoryModalVC() {
     router?.attachCategoryModalVC()

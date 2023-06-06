@@ -24,6 +24,7 @@ final class ProductCategoryComponent:
 {
   var userManager: MutableUserManagerStream { dependency.userManager }
   var productRepository: ProductRepository { dependency.productRepositoryImpl }
+  var bookmarkRepository: BookmarkRepository = BookmarkRepositoryImpl()
   var selectedFilterInProductCategory: MutableSelectedFilterInProductCategoryStream = SelectedFilterInProductCategoryStreamImpl()
   var selectedFilterInProductMood: MutableSelectedFilterInProductMoodStream = SelectedFilterInProductMoodStreamImpl()
 }

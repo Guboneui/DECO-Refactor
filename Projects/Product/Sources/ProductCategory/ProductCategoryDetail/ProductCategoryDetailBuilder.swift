@@ -14,6 +14,7 @@ import RIBs
 protocol ProductCategoryDetailDependency: Dependency {
   var userManager: MutableUserManagerStream { get }
   var productRepository: ProductRepository { get }
+  var bookmarkRepository: BookmarkRepository { get }
   var selectedFilterInProductCategory: MutableSelectedFilterInProductCategoryStream { get }
 }
 
@@ -44,6 +45,7 @@ final class ProductCategoryDetailBuilder: Builder<ProductCategoryDetailDependenc
     let interactor = ProductCategoryDetailInteractor(
       presenter: viewController,
       productRepository: dependency.productRepository,
+      bookmarkRepository: dependency.bookmarkRepository,
       userManager: dependency.userManager,
       selectedFilterInProductCategory: dependency.selectedFilterInProductCategory
     )

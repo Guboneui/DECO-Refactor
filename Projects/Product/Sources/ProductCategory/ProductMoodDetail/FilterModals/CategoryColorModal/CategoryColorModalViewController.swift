@@ -132,17 +132,13 @@ final class CategoryColorModalViewController: ModalViewController, CategoryColor
       delay: dismissAnimationDelay,
       options: dismissAnimationOption
     ) { [weak self] in
-      guard let self else { return }
-      self.backgroundAlphaView.alpha = 0.0
-      self.modalView.pin
+      self?.backgroundAlphaView.alpha = 0.0
+      self?.modalView.pin
         .horizontally()
         .bottom()
         .height(0)
-      
-      
     } completion: { [weak self] _ in
-      guard let self else { return }
-      self.listener?.dismissCategoryColorModalVC()
+      self?.listener?.dismissCategoryColorModalVC()
     }
   }
   
@@ -160,7 +156,6 @@ final class CategoryColorModalViewController: ModalViewController, CategoryColor
     modalView.pin
       .horizontally()
       .bottom()
-      .height(0)
     
     scrollView.pin
       .top()
@@ -221,6 +216,43 @@ final class CategoryColorModalViewController: ModalViewController, CategoryColor
       self.listener?.updateSelectedFilterStream(categoryList: selectedCategoryList, colorList: selectedColorList)
       self.dismissModalAnimation()
     }
+    
+    scrollView.rx.contentOffset
+      .map{$0.y}
+      .subscribe(onNext: { [weak self] yOffset in
+        guard let self else { return }
+        if yOffset <= 0 {
+          self.modalSwipeDismiss()
+        }
+      }).disposed(by: disposeBag)
+    
+  }
+  
+  private func modalSwipeDismiss() {
+    modalView.rx.panGesture()
+      .when(.began, .changed, .ended)
+      .subscribe(onNext: { [weak self] recognize in
+        guard let self else { return }
+        let transform = recognize.translation(in: self.modalView)
+        switch recognize.state {
+        
+        case .changed:
+
+          if transform.y >= 0 {
+            UIView.animate(withDuration: 0.05, delay: 0, options: .curveEaseOut) { [weak self] in
+              guard let inSelf = self else { return }
+              inSelf.modalView.transform = CGAffineTransform(translationX: 0, y: transform.y)
+            }
+          }
+        case .ended:
+          if transform.y >= 100 {
+            self.dismissModalAnimation()
+          } else {
+            self.modalView.transform = .identity
+          }
+        default: break
+        }
+      }).disposed(by: disposeBag)
   }
   
   private func setupCategoryCollectionView() {

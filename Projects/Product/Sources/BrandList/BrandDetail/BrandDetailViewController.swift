@@ -235,9 +235,10 @@ extension BrandDetailViewController {
       .map{$0.isEmpty}
       .bind { [weak self] isEmpty in
         guard let self else { return }
-        UIView.animate(withDuration: 0.05, delay: 0.0, options: .curveEaseInOut) {
-          self.brandProductUsageBaseView.alpha = isEmpty ? 0 : 1
-          self.setupLayouts()
+        UIView.animate(withDuration: 0.05, delay: 0.0, options: .curveEaseInOut) { [weak self] in
+          guard let inSelf = self else { return }
+          inSelf.brandProductUsageBaseView.alpha = isEmpty ? 0 : 1
+          inSelf.setupLayouts()
         }
       }.disposed(by: disposeBag)
     

@@ -7,6 +7,7 @@
 
 import RIBs
 
+import User
 import Entity
 import Networking
 
@@ -14,6 +15,7 @@ protocol BrandListDependency: Dependency {
   // TODO: Declare the set of dependencies required by this RIB, but cannot be
   // created by this RIB.
   var brandRepositoryImpl: BrandRepository { get }
+  var userManager: MutableUserManagerStream { get }
 }
 
 final class BrandListComponent:
@@ -21,6 +23,7 @@ final class BrandListComponent:
   BrandDetailDependency
 {
   var brandRepository: Networking.BrandRepository { dependency.brandRepositoryImpl }
+  var userManager: MutableUserManagerStream { dependency.userManager }
   
   
   //var brandInfo: BrandDTO = BrandDTO(desecription

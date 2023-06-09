@@ -23,7 +23,7 @@ protocol BrandDetailPresentableListener: AnyObject {
   func popBrandDetailVC(with popType: PopType)
   func pushBrandProductUsageVC()
   
-  func fetchBrandPostings(brandID: Int, userID: Int, createdAt: Int) async
+  func fetchBrandPostings(createdAt: Int)
   
   var brandInfoData: BehaviorRelay<BrandDTO?> { get }
   var brandProductUsagePostings: BehaviorRelay<[PostingDTO]> { get }
@@ -249,6 +249,18 @@ extension BrandDetailViewController {
       ) { (index, data, cell) in
         cell.setupCellConfigure(type: .DefaultType, imageURL: data.imageUrl ?? "")
       }.disposed(by: disposeBag)
+    
+    brandProductUsageCollectionView.rx.willDisplayCell
+      .map{$0.at}
+      .subscribe(onNext: { [weak self] indexPath in
+        guard let self else { return }
+        if let postings = self.listener?.brandProductUsagePostings.value,
+           postings.count - 1 == indexPath.row,
+           let lastCreatedAt = postings[indexPath.row].createdAt {
+          self.listener?.fetchBrandPostings(createdAt: lastCreatedAt)
+        }
+        
+      }).disposed(by: disposeBag)
     
     brandProductUsageCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
   }

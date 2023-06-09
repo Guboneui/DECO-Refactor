@@ -5,6 +5,7 @@
 //  Created by 구본의 on 2023/05/22.
 //
 
+import User
 import Entity
 import Networking
 
@@ -14,6 +15,7 @@ protocol BrandDetailDependency: Dependency {
   // TODO: Declare the set of dependencies required by this RIB, but cannot be
   // created by this RIB.
   var brandRepository: BrandRepository { get }
+  var userManager: MutableUserManagerStream { get }
 }
 
 final class BrandDetailComponent:
@@ -49,6 +51,7 @@ final class BrandDetailBuilder: Builder<BrandDetailDependency>, BrandDetailBuild
     let interactor = BrandDetailInteractor(
       presenter: viewController,
       brandInfo: brandInfo,
+      userManager: dependency.userManager,
       brandRepository: component.brandRepository,
       productRepository: component.productRepository
     )

@@ -5,6 +5,7 @@
 //  Created by 구본의 on 2023/05/22.
 //
 
+import User
 import Util
 import Entity
 import Networking
@@ -37,6 +38,7 @@ final class BrandDetailInteractor: PresentableInteractor<BrandDetailPresentable>
   weak var listener: BrandDetailListener?
   
   private let brandInfo: BrandDTO
+  private let userManager: MutableUserManagerStream
   private let brandRepository: BrandRepository
   private let productRepository: ProductRepository
 
@@ -47,10 +49,12 @@ final class BrandDetailInteractor: PresentableInteractor<BrandDetailPresentable>
   init(
     presenter: BrandDetailPresentable,
     brandInfo: BrandDTO,
+    userManager: MutableUserManagerStream,
     brandRepository: BrandRepository,
     productRepository: ProductRepository
   ) {
     self.brandInfo = brandInfo
+    self.userManager = userManager
     self.brandRepository = brandRepository
     self.productRepository = productRepository
     super.init(presenter: presenter)
@@ -62,14 +66,9 @@ final class BrandDetailInteractor: PresentableInteractor<BrandDetailPresentable>
     super.didBecomeActive()
 
     self.brandInfoData.accept(brandInfo)
-
+    self.fetchBrandPostings(createdAt: Int.max)
+    
     Task {
-      await fetchBrandPostings(
-        brandID: brandInfo.id,
-        userID: 326,
-        createdAt: Int.max
-      )
-      
       await fetchProductCategory()
     }
   }
@@ -83,14 +82,20 @@ final class BrandDetailInteractor: PresentableInteractor<BrandDetailPresentable>
     self.listener?.detachBrandDetailVC(with: popType)
   }
   
-  func fetchBrandPostings(brandID: Int, userID: Int, createdAt: Int) async {
+  func fetchBrandPostings(createdAt: Int) {
     Task.detached { [weak self] in
       guard let self else { return }
-      if let usagePosting = await self.brandRepository.getBrandProductUsagePosting(brandID: brandID, userID: userID, createdAt: createdAt) {
-        self.brandProductUsagePostings.accept(usagePosting)
+      if let usagePostings = await self.brandRepository.getBrandProductUsagePosting(
+        brandID: self.brandInfo.id,
+        userID: self.userManager.userID,
+        createdAt: createdAt
+      ), !usagePostings.isEmpty {
+        let prevData = self.brandProductUsagePostings.value
+        self.brandProductUsagePostings.accept(prevData + usagePostings)
       }
     }
   }
+  
   
   private func fetchProductCategory() async {
     Task.detached { [weak self] in

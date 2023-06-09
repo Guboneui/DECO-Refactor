@@ -44,7 +44,7 @@ final class BrandDetailInteractor: PresentableInteractor<BrandDetailPresentable>
 
   var brandInfoData: BehaviorRelay<BrandDTO?> = .init(value: nil)
   var brandProductUsagePostings: BehaviorRelay<[PostingDTO]> = .init(value: [])
-  var productCategory: BehaviorRelay<[ProductCategoryDTO]> = .init(value: [])
+  var productCategory: BehaviorRelay<[(category: ProductCategoryDTO, isSelected: Bool)]> = .init(value: [])
   
   init(
     presenter: BrandDetailPresentable,

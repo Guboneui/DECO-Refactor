@@ -27,7 +27,12 @@ protocol BrandDetailPresentableListener: AnyObject {
   
   var brandInfoData: BehaviorRelay<BrandDTO?> { get }
   var brandProductUsagePostings: BehaviorRelay<[PostingDTO]> { get }
-  var productCategory: BehaviorRelay<[ProductCategoryDTO]> { get }
+  var productCategory: BehaviorRelay<[(category: ProductCategoryDTO, isSelected: Bool)]> { get }
+  var categoryVCs: BehaviorRelay<[ViewControllable]> { get }
+  
+  func attachChildVC(with vc: inout ViewControllable)
+  
+//  func testA()
 }
 
 final class BrandDetailViewController: UIViewController, BrandDetailPresentable, BrandDetailViewControllable {
@@ -275,8 +280,21 @@ extension BrandDetailViewController {
         cellIdentifier: SmallTextCell.identifier,
         cellType: SmallTextCell.self)
       ) { (index, data, cell) in
-        cell.setupCellConfigure(text: data.categoryName, isSelected: true)
+        cell.setupCellConfigure(text: data.category.categoryName, isSelected: data.isSelected)
       }.disposed(by: disposeBag)
+    
+    Observable.zip(
+      brandProductCategoryCollectionView.rx.itemSelected,
+      brandProductCategoryCollectionView.rx.modelSelected((category: ProductCategoryDTO, isSelected: Bool).self)
+    ).subscribe(onNext: { [weak self] index, category in
+      guard let self else { return }
+      var updatedCategory = self.listener?.productCategory.value.map{($0.category, false)} ?? []
+      let selectedCategory = (category.category, true)
+      updatedCategory[index.row] = selectedCategory
+      self.listener?.productCategory.accept(updatedCategory)
+    }).disposed(by: disposeBag)
+    
+    
     
     brandProductCategoryCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
   }
@@ -291,9 +309,23 @@ extension BrandDetailViewController {
         cellIdentifier: SmallTextCell.identifier,
         cellType: SmallTextCell.self)
       ) { (index, data, cell) in
-        cell.setupCellConfigure(text: data.categoryName, isSelected: true)
+        cell.setupCellConfigure(text: data.category.categoryName, isSelected: data.isSelected)
       }.disposed(by: disposeBag)
     
+    
+    Observable.zip(
+      stickyCategoryCollectionView.rx.itemSelected,
+      stickyCategoryCollectionView.rx.modelSelected((category: ProductCategoryDTO, isSelected: Bool).self)
+    ).subscribe(onNext: { [weak self] index, category in
+      guard let self else { return }
+      var updatedCategory = self.listener?.productCategory.value.map{($0.category, false)} ?? []
+      let selectedCategory = (category.category, true)
+      updatedCategory[index.row] = selectedCategory
+      self.listener?.productCategory.accept(updatedCategory)
+    }).disposed(by: disposeBag)
+    
+    
+   
     stickyCategoryCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
   }
 }

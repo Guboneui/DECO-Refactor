@@ -27,6 +27,7 @@ public extension UIImage {
     public static let checkLightgray1 = CommonUIAsset.Image.checkLightgrey1.image
     public static let checkSec = CommonUIAsset.Image.checkSec.image
     public static let close = CommonUIAsset.Image.close.image
+    public static let closeFill = CommonUIAsset.Image.closeFill.image
     public static let closeSec = CommonUIAsset.Image.closeSec.image
     public static let closeWhite = CommonUIAsset.Image.closeWhite.image
     public static let coloring = CommonUIAsset.Image.coloring.image

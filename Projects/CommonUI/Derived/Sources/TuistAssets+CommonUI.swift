@@ -60,6 +60,7 @@ public enum CommonUIAsset {
     public static let checkColor = CommonUIImages(name: "check_color")
     public static let checkLightgrey1 = CommonUIImages(name: "check_lightgrey_1")
     public static let checkSec = CommonUIImages(name: "check_sec")
+    public static let closeFill = CommonUIImages(name: "close-fill")
     public static let close = CommonUIImages(name: "close")
     public static let closeSec = CommonUIImages(name: "close_sec")
     public static let closeWhite = CommonUIImages(name: "close_white")

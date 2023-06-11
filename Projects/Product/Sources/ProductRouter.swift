@@ -62,6 +62,15 @@ final class ProductRouter: ViewableRouter<ProductInteractable, ProductViewContro
     self.viewControllable.pushViewController(router.viewControllable, animated: true)
   }
   
+  func detachSearchVC(with popType: PopType) {
+    guard let router = searchRouting else { return }
+    if popType == .BackButton {
+      self.viewControllable.popViewController(animated: true)
+    }
+    self.detachChild(router)
+    self.searchRouting = nil
+  }
+  
   func attachChildVCRib(with type: ProductTabType) {
     switch type {
     case .Product:

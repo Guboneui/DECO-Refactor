@@ -7,6 +7,8 @@
 
 import RIBs
 import RxSwift
+
+import Util
 import Networking
 
 public enum Filter {
@@ -19,6 +21,8 @@ public enum Filter {
 public protocol ProductRouting: ViewableRouting {
   func attachChildVCRib(with type: ProductTabType)
   func attachSearchVC()
+  
+  func detachSearchVC(with popType: PopType)
 }
 
 protocol ProductPresentable: Presentable {
@@ -63,4 +67,10 @@ final class ProductInteractor: PresentableInteractor<ProductPresentable>, Produc
   func pushSearchVC() {
     self.router?.attachSearchVC()
   }
+  
+  func popSearchVC(with popType: PopType) {
+    router?.detachSearchVC(with: popType)
+  }
+  
+  
 }

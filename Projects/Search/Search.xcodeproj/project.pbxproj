@@ -3,16 +3,16 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		115085F2DC30752A31AA3842 /* Util.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96A89F63484351F7FF4807DA /* Util.framework */; platformFilter = ios; };
-		2C246FFD2A35FB7700730D4F /* SearchRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C246FF92A35FB7700730D4F /* SearchRouter.swift */; };
-		2C246FFE2A35FB7700730D4F /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C246FFA2A35FB7700730D4F /* SearchViewController.swift */; };
-		2C246FFF2A35FB7700730D4F /* SearchBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C246FFB2A35FB7700730D4F /* SearchBuilder.swift */; };
-		2C2470002A35FB7700730D4F /* SearchInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C246FFC2A35FB7700730D4F /* SearchInteractor.swift */; };
+		3673F135729326EE0064436C /* SearchInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419087690FD5ED809475BCA6 /* SearchInteractor.swift */; };
 		535F539A53EA64793498B200 /* CommonUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BE09AA7D522F3545086BE5D /* CommonUI.framework */; platformFilter = ios; };
+		6D922AC26BB63FFDD9BB6960 /* SearchRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400F24713D8A84B16827032E /* SearchRouter.swift */; };
+		88D874BEEA4169CD598264B3 /* SearchBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0547A521CAE2E81914EFEFDC /* SearchBuilder.swift */; };
+		98C5AD0B519509658CFCCABF /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E55981027264EFBA638C42 /* SearchViewController.swift */; };
 		B8C95EC645CD35D1387E505D /* Networking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35D44BC270230E934BFEBC8E /* Networking.framework */; platformFilter = ios; };
 /* End PBXBuildFile section */
 
@@ -30,12 +30,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		2C246FF92A35FB7700730D4F /* SearchRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRouter.swift; sourceTree = "<group>"; };
-		2C246FFA2A35FB7700730D4F /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
-		2C246FFB2A35FB7700730D4F /* SearchBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBuilder.swift; sourceTree = "<group>"; };
-		2C246FFC2A35FB7700730D4F /* SearchInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchInteractor.swift; sourceTree = "<group>"; };
+		0547A521CAE2E81914EFEFDC /* SearchBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBuilder.swift; sourceTree = "<group>"; };
 		35D44BC270230E934BFEBC8E /* Networking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Networking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		400F24713D8A84B16827032E /* SearchRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRouter.swift; sourceTree = "<group>"; };
+		419087690FD5ED809475BCA6 /* SearchInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchInteractor.swift; sourceTree = "<group>"; };
 		47506C2B8CF716A0AD1E9198 /* Search-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Search-Info.plist"; sourceTree = "<group>"; };
+		69E55981027264EFBA638C42 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		7BE09AA7D522F3545086BE5D /* CommonUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CommonUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		96A89F63484351F7FF4807DA /* Util.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Util.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCEA3ABCBA70F49C90FFC61F /* Search.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Search.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -110,10 +110,10 @@
 		F71AEF5F9FDF9F2A91959397 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				2C246FF92A35FB7700730D4F /* SearchRouter.swift */,
-				2C246FFA2A35FB7700730D4F /* SearchViewController.swift */,
-				2C246FFB2A35FB7700730D4F /* SearchBuilder.swift */,
-				2C246FFC2A35FB7700730D4F /* SearchInteractor.swift */,
+				0547A521CAE2E81914EFEFDC /* SearchBuilder.swift */,
+				419087690FD5ED809475BCA6 /* SearchInteractor.swift */,
+				400F24713D8A84B16827032E /* SearchRouter.swift */,
+				69E55981027264EFBA638C42 /* SearchViewController.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -145,6 +145,8 @@
 		5A5799AE384BBD104247C169 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				TargetAttributes = {
+				};
 			};
 			buildConfigurationList = 731940972587373E5B45F8C7 /* Build configuration list for PBXProject "Search" */;
 			compatibilityVersion = "Xcode 13.0";
@@ -179,10 +181,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C246FFE2A35FB7700730D4F /* SearchViewController.swift in Sources */,
-				2C246FFD2A35FB7700730D4F /* SearchRouter.swift in Sources */,
-				2C246FFF2A35FB7700730D4F /* SearchBuilder.swift in Sources */,
-				2C2470002A35FB7700730D4F /* SearchInteractor.swift in Sources */,
+				88D874BEEA4169CD598264B3 /* SearchBuilder.swift in Sources */,
+				3673F135729326EE0064436C /* SearchInteractor.swift in Sources */,
+				6D922AC26BB63FFDD9BB6960 /* SearchRouter.swift in Sources */,
+				98C5AD0B519509658CFCCABF /* SearchViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

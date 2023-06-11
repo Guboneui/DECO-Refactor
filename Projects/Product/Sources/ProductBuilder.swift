@@ -8,6 +8,7 @@
 import RIBs
 import Util
 import User
+import Search
 import Networking
 
 public protocol ProductDependency: Dependency {
@@ -19,7 +20,8 @@ public protocol ProductDependency: Dependency {
 final class ProductComponent:
   Component<ProductDependency>,
   ProductCategoryDependency,
-  BrandListDependency
+  BrandListDependency,
+  SearchDependency
 {
   
   fileprivate var productRepository: ProductRepository {
@@ -60,11 +62,14 @@ final public class ProductBuilder: Builder<ProductDependency>, ProductBuildable 
     let productCategoryBuilder = ProductCategoryBuilder(dependency: component)
     let brandListBuilder = BrandListBuilder(dependency: component)
     
+    let searchBuilder = SearchBuilder(dependency: component)
+    
     return ProductRouter(
       interactor: interactor,
       viewController: viewController,
       productCategoryBuildable: productCategoryBuilder,
-      brandListBuildable: brandListBuilder
+      brandListBuildable: brandListBuilder,
+      searchBuildable: searchBuilder
     )
   }
 }

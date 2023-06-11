@@ -8,11 +8,13 @@
 import RIBs
 import Util
 import UIKit
+import Search
 
 protocol ProductInteractable:
   Interactable,
   ProductCategoryListener,
-  BrandListListener
+  BrandListListener,
+SearchListener
 {
   var router: ProductRouting? { get set }
   var listener: ProductListener? { get set }
@@ -30,14 +32,20 @@ final class ProductRouter: ViewableRouter<ProductInteractable, ProductViewContro
   private let brandListBuildable: BrandListBuildable
   private var brandListRouting: Routing?
   
+  private let searchBuildable: SearchBuildable
+  private var searchRouting: Routing?
+  
+  
   init(
     interactor: ProductInteractable,
     viewController: ProductViewControllable,
     productCategoryBuildable: ProductCategoryBuildable,
-    brandListBuildable: BrandListBuildable
+    brandListBuildable: BrandListBuildable,
+    searchBuildable: SearchBuildable
   ) {
     self.productCategoryBuildable = productCategoryBuildable
     self.brandListBuildable = brandListBuildable
+    self.searchBuildable = searchBuildable
     super.init(interactor: interactor, viewController: viewController)
     interactor.router = self
   }
@@ -47,7 +55,11 @@ final class ProductRouter: ViewableRouter<ProductInteractable, ProductViewContro
   }
   
   func attachSearchVC() {
-
+    if searchRouting != nil { return }
+    let router = searchBuildable.build(withListener: interactor)
+    attachChild(router)
+    self.searchRouting = router
+    self.viewControllable.pushViewController(router.viewControllable, animated: true)
   }
   
   func attachChildVCRib(with type: ProductTabType) {

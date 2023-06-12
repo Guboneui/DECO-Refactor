@@ -5,11 +5,14 @@
 //  Created by 구본의 on 2023/06/12.
 //
 
+import User
+import Networking
+
 import RIBs
 
 protocol SearchResultDependency: Dependency {
-  // TODO: Declare the set of dependencies required by this RIB, but cannot be
-  // created by this RIB.
+  var userManager: MutableUserManagerStream { get }
+  var searchRepository: SearchRepository { get }
 }
 
 final class SearchResultComponent:
@@ -19,8 +22,16 @@ final class SearchResultComponent:
   SearchBrandDependency,
   SearchUserDependency
 {
+
+  var searchText: String
   
-  // TODO: Declare 'fileprivate' dependencies that are only used by this RIB.
+  init(dependency: SearchResultDependency, searchText: String) {
+    self.searchText = searchText
+    super.init(dependency: dependency)
+  }
+  
+  var userManager: MutableUserManagerStream { dependency.userManager }
+  var searchRepository: SearchRepository { dependency.searchRepository }
 }
 
 // MARK: - Builder
@@ -36,7 +47,7 @@ final class SearchResultBuilder: Builder<SearchResultDependency>, SearchResultBu
   }
   
   func build(withListener listener: SearchResultListener, searchText: String) -> SearchResultRouting {
-    let component = SearchResultComponent(dependency: dependency)
+    let component = SearchResultComponent(dependency: dependency, searchText: searchText)
     let viewController = SearchResultViewController()
     let interactor = SearchResultInteractor(presenter: viewController, searchText: searchText)
     interactor.listener = listener

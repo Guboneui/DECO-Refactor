@@ -56,26 +56,3 @@ struct NetworkLogPlugin: PluginType {
     "[\(dateFormatter.string(from: Date()))]"
   }
 }
-
-//extension MoyaProvider {
-//  func request<T: Codable>(_ t: Target) async throws -> T {
-//    try await withCheckedThrowingContinuation({ continuation in
-//      request(t) { res in
-//        switch res {
-//        case let .success(successRes):
-//          switch successRes.statusCode {
-//          case 200...399:
-//            continuation.resume(returning: try! successRes.map(T.self))
-//          default:
-//            print("Error")
-//            continuation.resume(throwing: NetworkError.NetworkError)
-//          }
-//        case let .failure(errRes):
-//          print("Error")
-//          continuation.resume(throwing: errRes)
-//        }
-//      }
-//    })
-//  }
-//
-//}

@@ -142,6 +142,8 @@ final class SearchViewController: UIViewController, SearchPresentable, SearchVie
       guard let self else { return }
       self.listener?.popSearchVC(with: .BackButton)
     }
+    
+    
   }
   
   private func setupBindings() {

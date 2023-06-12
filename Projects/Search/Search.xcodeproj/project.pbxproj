@@ -24,6 +24,8 @@
 		2C0BD66E2A37007B00681FB6 /* SearchPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0BD66A2A37007B00681FB6 /* SearchPhotoViewController.swift */; };
 		2C0BD66F2A37007B00681FB6 /* SearchPhotoBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0BD66B2A37007B00681FB6 /* SearchPhotoBuilder.swift */; };
 		2C0BD6702A37007B00681FB6 /* SearchPhotoInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0BD66C2A37007B00681FB6 /* SearchPhotoInteractor.swift */; };
+		2C0BD6982A3785D400681FB6 /* SearchBrandCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0BD6972A3785D400681FB6 /* SearchBrandCell.swift */; };
+		2C0BD69B2A3785E300681FB6 /* SearchUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0BD69A2A3785E300681FB6 /* SearchUserCell.swift */; };
 		2C1D12CD2A36740B00A2C7EB /* SearchResultRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1D12C92A36740B00A2C7EB /* SearchResultRouter.swift */; };
 		2C1D12CE2A36740B00A2C7EB /* SearchResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1D12CA2A36740B00A2C7EB /* SearchResultViewController.swift */; };
 		2C1D12CF2A36740B00A2C7EB /* SearchResultBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1D12CB2A36740B00A2C7EB /* SearchResultBuilder.swift */; };
@@ -67,6 +69,8 @@
 		2C0BD66A2A37007B00681FB6 /* SearchPhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPhotoViewController.swift; sourceTree = "<group>"; };
 		2C0BD66B2A37007B00681FB6 /* SearchPhotoBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPhotoBuilder.swift; sourceTree = "<group>"; };
 		2C0BD66C2A37007B00681FB6 /* SearchPhotoInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPhotoInteractor.swift; sourceTree = "<group>"; };
+		2C0BD6972A3785D400681FB6 /* SearchBrandCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBrandCell.swift; sourceTree = "<group>"; };
+		2C0BD69A2A3785E300681FB6 /* SearchUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserCell.swift; sourceTree = "<group>"; };
 		2C1D12C92A36740B00A2C7EB /* SearchResultRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultRouter.swift; sourceTree = "<group>"; };
 		2C1D12CA2A36740B00A2C7EB /* SearchResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultViewController.swift; sourceTree = "<group>"; };
 		2C1D12CB2A36740B00A2C7EB /* SearchResultBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultBuilder.swift; sourceTree = "<group>"; };
@@ -148,6 +152,15 @@
 			path = SearchUser;
 			sourceTree = "<group>";
 		};
+		2C0BD6992A3785DB00681FB6 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				2C0BD6972A3785D400681FB6 /* SearchBrandCell.swift */,
+				2C0BD69A2A3785E300681FB6 /* SearchUserCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		2C1D12C82A3673FD00A2C7EB /* SearchResult */ = {
 			isa = PBXGroup;
 			children = (
@@ -214,6 +227,7 @@
 				419087690FD5ED809475BCA6 /* SearchInteractor.swift */,
 				400F24713D8A84B16827032E /* SearchRouter.swift */,
 				69E55981027264EFBA638C42 /* SearchViewController.swift */,
+				2C0BD6992A3785DB00681FB6 /* Cells */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -283,6 +297,7 @@
 				2C0BD6652A37005900681FB6 /* SearchProductRouter.swift in Sources */,
 				88D874BEEA4169CD598264B3 /* SearchBuilder.swift in Sources */,
 				2C0BD65E2A37004E00681FB6 /* SearchBrandViewController.swift in Sources */,
+				2C0BD69B2A3785E300681FB6 /* SearchUserCell.swift in Sources */,
 				3673F135729326EE0064436C /* SearchInteractor.swift in Sources */,
 				2C0BD65F2A37004E00681FB6 /* SearchBrandBuilder.swift in Sources */,
 				2C0BD6682A37005900681FB6 /* SearchProductInteractor.swift in Sources */,
@@ -301,6 +316,7 @@
 				2C0BD6572A37003200681FB6 /* SearchUserInteractor.swift in Sources */,
 				2C0BD6562A37003200681FB6 /* SearchUserBuilder.swift in Sources */,
 				2C0BD6602A37004E00681FB6 /* SearchBrandInteractor.swift in Sources */,
+				2C0BD6982A3785D400681FB6 /* SearchBrandCell.swift in Sources */,
 				2C0BD6672A37005900681FB6 /* SearchProductBuilder.swift in Sources */,
 				2C1D12D02A36740B00A2C7EB /* SearchResultInteractor.swift in Sources */,
 			);

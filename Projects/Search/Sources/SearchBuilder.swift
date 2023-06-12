@@ -5,11 +5,13 @@
 //  Created by 구본의 on 2023/06/11.
 //
 
+import User
+import Networking
+
 import RIBs
 
 public protocol SearchDependency: Dependency {
-  // TODO: Declare the set of dependencies required by this RIB, but cannot be
-  // created by this RIB.
+  var userManager: MutableUserManagerStream { get }
 }
 
 final class SearchComponent:
@@ -17,7 +19,8 @@ final class SearchComponent:
   SearchResultDependency
 {
   
-  // TODO: Declare 'fileprivate' dependencies that are only used by this RIB.
+  var userManager: MutableUserManagerStream { dependency.userManager }
+  var searchRepository: SearchRepository { SearchRepositoryImpl() }
 }
 
 // MARK: - Builder

@@ -28,7 +28,7 @@ final class ProductComponent:
     return ProductRepositoryImpl()
   }
   
-  fileprivate var brandRepository: BrandRepository {
+  var brandRepository: BrandRepository {
     return BrandRepositoryImpl()
   }
   

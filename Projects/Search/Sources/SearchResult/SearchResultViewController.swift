@@ -181,7 +181,7 @@ final class SearchResultViewController: UIViewController, SearchResultPresentabl
       .below(of: tabbarContainer)
       .horizontally()
       .bottom()
-      .marginTop(8)
+      .marginTop(1)
     
     tabbarContainer.flex.layout()
   }
@@ -191,6 +191,12 @@ final class SearchResultViewController: UIViewController, SearchResultPresentabl
       guard let self else { return }
       self.listener?.popSearchResultVC(with: .BackButton)
     }
+    
+    searchBarView.tap()
+      .bind { [weak self] _ in
+        guard let self else { return }
+        self.listener?.popSearchResultVC(with: .BackButton)
+      }.disposed(by: disposeBag)
     
     photoButton.tap()
       .bind { [weak self] in

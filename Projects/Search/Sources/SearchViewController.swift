@@ -19,6 +19,7 @@ protocol SearchPresentableListener: AnyObject {
   var searchHistory: BehaviorRelay<[String]> { get }
   
   func popSearchVC(with popType: PopType)
+  func pushSearchResultVC(with searchText: String)
 }
 
 final class SearchViewController: UIViewController, SearchPresentable, SearchViewControllable {
@@ -65,13 +66,17 @@ final class SearchViewController: UIViewController, SearchPresentable, SearchVie
     $0.makeCornerRadius(radius: 8)
   }
   
-  
   override func viewDidLoad() {
     super.viewDidLoad()
     self.view.backgroundColor = .DecoColor.whiteColor
     self.setupViews()
     self.setupGestures()
     self.setupBindings()
+  }
+  
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    self.searchTextField.becomeFirstResponder()
   }
   
   override func viewDidDisappear(_ animated: Bool) {
@@ -143,9 +148,10 @@ final class SearchViewController: UIViewController, SearchPresentable, SearchVie
     searchTextField.rx.controlEvent(.editingDidEndOnExit)
       .subscribe(onNext: { [weak self] in
         guard let self else { return }
-        // TODO: Push result vc
-        
-        
+        if let text = self.searchTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
+           !text.isEmpty {
+          self.listener?.pushSearchResultVC(with: text)
+        }
       }).disposed(by: disposeBag)
     
     listener?.searchHistory

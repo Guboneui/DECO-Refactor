@@ -14,7 +14,8 @@ import RxSwift
 import RxRelay
 
 public protocol SearchRouting: ViewableRouting {
-  // TODO: Declare methods the interactor can invoke to manage sub-tree via the router.
+  func attachSearchResultVC(with searchText: String)
+  func detachSearchResultVC(with popType: PopType)
 }
 
 protocol SearchPresentable: Presentable {
@@ -49,5 +50,13 @@ final class SearchInteractor: PresentableInteractor<SearchPresentable>, SearchIn
   
   func popSearchVC(with popType: PopType) {
     listener?.popSearchVC(with: popType)
+  }
+  
+  func pushSearchResultVC(with searchText: String) {
+    router?.attachSearchResultVC(with: searchText)
+  }
+  
+  func popSearchResultVC(with popType: PopType) {
+    router?.detachSearchResultVC(with: popType)
   }
 }

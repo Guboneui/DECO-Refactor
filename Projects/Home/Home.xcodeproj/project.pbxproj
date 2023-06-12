@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		574949BC5C3B129F71D1FC4A /* User.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72C55A6E6677F4612561798B /* User.framework */; platformFilter = ios; };
 		969AE3FC67639657050B796A /* HomeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC9D00E6250394A9E0CC7EC /* HomeRouter.swift */; };
 		9E5E2B3F30DD9698E7DA138C /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAFEFB4CCEB4FBFFF16CA05 /* HomeViewController.swift */; };
 		A428098AD615CD3B5F694A31 /* HomeBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9879BE437F14BB2EB41CC295 /* HomeBuilder.swift */; };
@@ -32,7 +31,6 @@
 		1F62D067FC82E37F588B2D29 /* HomeInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeInteractor.swift; sourceTree = "<group>"; };
 		3CC9D00E6250394A9E0CC7EC /* HomeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRouter.swift; sourceTree = "<group>"; };
 		61EC700930D1096A1F12C0D7 /* Home-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Home-Info.plist"; sourceTree = "<group>"; };
-		72C55A6E6677F4612561798B /* User.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = User.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7CAFEFB4CCEB4FBFFF16CA05 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		9290645AFD421A6E8E0A3C77 /* Home.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Home.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9879BE437F14BB2EB41CC295 /* HomeBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBuilder.swift; sourceTree = "<group>"; };
@@ -45,7 +43,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				DBFA187FDD847EAA147700EE /* Search.framework in Frameworks */,
-				574949BC5C3B129F71D1FC4A /* User.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -57,7 +54,6 @@
 			children = (
 				9290645AFD421A6E8E0A3C77 /* Home.framework */,
 				A643F0F23AAADCC27C89CE25 /* Search.framework */,
-				72C55A6E6677F4612561798B /* User.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";

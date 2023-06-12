@@ -21,7 +21,6 @@ let packages: [Package] = [
 ]
 
 let dependencies: [TargetDependency] = [
-  .project(target: "User", path: "../User"),
   .project(target: "Search", path: "../Search"),
 ]
 

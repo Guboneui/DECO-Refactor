@@ -22,7 +22,6 @@ let packages: [Package] = [
 
 let dependencies: [TargetDependency] = [
 //  .project(target: "CommonUI", path: "../CommonUI"),
-  .project(target: "User", path: "../User"),
   .project(target: "Search", path: "../Search"),
 //  .project(target: "Networking", path: "../Networking")
 ]

@@ -6,6 +6,7 @@
 //
 
 import Util
+import User
 import Entity
 import Networking
 
@@ -34,16 +35,19 @@ final class BrandProductUsageInteractor: PresentableInteractor<BrandProductUsage
   
   private let brandInfo: BrandDTO
   private let brandRepository: BrandRepository
+  private let userManager: MutableUserManagerStream
   
   var brandProductUsagePosting: BehaviorRelay<[PostingDTO]> = .init(value: [])
   
   init(
     presenter: BrandProductUsagePresentable,
     brandInfo: BrandDTO,
-    brandRepository: BrandRepository
+    brandRepository: BrandRepository,
+    userManager: MutableUserManagerStream
   ) {
     self.brandInfo = brandInfo
     self.brandRepository = brandRepository
+    self.userManager = userManager
     super.init(presenter: presenter)
     presenter.listener = self
   }
@@ -68,7 +72,11 @@ final class BrandProductUsageInteractor: PresentableInteractor<BrandProductUsage
   func fetchBrandPostings(createdAt: Int) async {
     Task.detached { [weak self] in
       guard let self else { return }
-      if let usagePosting = await self.brandRepository.getBrandProductUsagePosting(brandID: self.brandInfo.id, userID: 326, createdAt: createdAt) {
+      if let usagePosting = await self.brandRepository.getBrandProductUsagePosting(
+        brandID: self.brandInfo.id,
+        userID: 326,
+        createdAt: createdAt
+      ) {
         let prevData = self.brandProductUsagePosting.value
         if !usagePosting.isEmpty {
           self.brandProductUsagePosting.accept(prevData + usagePosting)

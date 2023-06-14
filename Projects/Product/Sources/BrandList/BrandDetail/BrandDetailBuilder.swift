@@ -21,10 +21,10 @@ protocol BrandDetailDependency: Dependency {
 final class BrandDetailComponent:
   Component<BrandDetailDependency>,
   BrandProductUsageDependency
-  
 {
   var brandRepository: BrandRepository { dependency.brandRepository }
   var productRepository: ProductRepository { ProductRepositoryImpl() }
+  var userManager: MutableUserManagerStream { dependency.userManager }
 }
 
 // MARK: - Builder
@@ -66,3 +66,4 @@ final class BrandDetailBuilder: Builder<BrandDetailDependency>, BrandDetailBuild
     )
   }
 }
+

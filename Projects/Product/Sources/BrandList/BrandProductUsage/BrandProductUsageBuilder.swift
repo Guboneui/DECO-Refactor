@@ -5,6 +5,7 @@
 //  Created by 구본의 on 2023/05/24.
 //
 
+import User
 import Entity
 import Networking
 
@@ -12,11 +13,12 @@ import RIBs
 
 protocol BrandProductUsageDependency: Dependency {
   var brandRepository: BrandRepository { get }
+  var userManager: MutableUserManagerStream { get }
 }
 
 final class BrandProductUsageComponent: Component<BrandProductUsageDependency> {
   
-  // TODO: Declare 'fileprivate' dependencies that are only used by this RIB.
+  var userManager: MutableUserManagerStream { dependency.userManager }
 }
 
 // MARK: - Builder
@@ -40,7 +42,8 @@ final class BrandProductUsageBuilder: Builder<BrandProductUsageDependency>, Bran
     let interactor = BrandProductUsageInteractor(
       presenter: viewController,
       brandInfo: brandInfo,
-      brandRepository: dependency.brandRepository
+      brandRepository: dependency.brandRepository,
+      userManager: component.userManager
     )
     interactor.listener = listener
     return BrandProductUsageRouter(interactor: interactor, viewController: viewController)

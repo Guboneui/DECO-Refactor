@@ -13,13 +13,15 @@ import Entity
 
 import RIBs
 import RxSwift
-
+import RxRelay
 
 protocol ProductDetailPresentableListener: AnyObject {
+  var productPostings: BehaviorRelay<[PostingDTO]> { get }
+  
   func popProductDetailVC(with popType: PopType)
   func loadToSafariLink()
-  
   func fetchBookmark()
+  func fetchProductPostings(createdAt: Int) async
 }
 
 final class ProductDetailViewController: UIViewController, ProductDetailPresentable, ProductDetailViewControllable {
@@ -67,11 +69,35 @@ final class ProductDetailViewController: UIViewController, ProductDetailPresenta
   private let productInfoView: ProductInfoView = ProductInfoView()
   private let productSailInfoView: ProductSailInfoView = ProductSailInfoView()
   
+  private let otherUserUsedLabel: UILabel = UILabel().then {
+    $0.text = "다른 유저들은 이렇게 활용했어요"
+    $0.font = .DecoFont.getFont(with: .Suit, type: .medium, size: 14)
+    $0.textColor = .DecoColor.darkGray2
+    $0.isHidden = true
+  }
+  
+  private let productPostingCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: .init()).then {
+    $0.register(ImageCell.self, forCellWithReuseIdentifier: ImageCell.identifier)
+    $0.isScrollEnabled = false
+    $0.bounces = false
+    $0.showsVerticalScrollIndicator = false
+    let layout = UICollectionViewFlowLayout()
+    layout.scrollDirection = .vertical
+    $0.collectionViewLayout = layout
+    $0.isHidden = true
+    $0.backgroundColor = .DecoColor.whiteColor
+  }
+  
+  private let cvHorizontalEdge: CGFloat = 18.0
+  private let cvSpacing: CGFloat = 10
+  private var cvHeight: CGFloat = 0.0
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     self.view.backgroundColor = .DecoColor.whiteColor
     self.setupViews()
     self.setupGestures()
+    self.setupProductPostingCollectionView()
   }
   
   override func viewDidDisappear(_ animated: Bool) {
@@ -95,7 +121,8 @@ final class ProductDetailViewController: UIViewController, ProductDetailPresenta
     self.linkBaseView.addSubview(showDetailLabel)
     self.scrollView.addSubview(productInfoView)
     self.scrollView.addSubview(productSailInfoView)
-    
+    self.scrollView.addSubview(otherUserUsedLabel)
+    self.scrollView.addSubview(productPostingCollectionView)
   }
   
   private func setupLayouts() {
@@ -138,10 +165,22 @@ final class ProductDetailViewController: UIViewController, ProductDetailPresenta
     productSailInfoView.pin
       .below(of: productInfoView, aligned: .left)
       .marginTop(20)
-      .marginLeft(20)
+      .marginLeft(24)
       .sizeToFit()
     
-    scrollView.contentSize = CGSize(width: view.frame.width, height: productSailInfoView.frame.maxY)
+    otherUserUsedLabel.pin
+      .below(of: productSailInfoView)
+      .horizontally(20)
+      .marginTop(64)
+      .sizeToFit(.width)
+
+    productPostingCollectionView.pin
+      .below(of: otherUserUsedLabel)
+      .horizontally()
+      .height(cvHeight)
+      .marginTop(28)
+    
+    scrollView.contentSize = CGSize(width: view.frame.width, height: productPostingCollectionView.frame.maxY)
   }
   
   private func setupGestures() {
@@ -181,5 +220,105 @@ final class ProductDetailViewController: UIViewController, ProductDetailPresenta
     productInfoView.setProductInfo(productInfo: productInfo)
     productImageView.loadImage(imageUrl: productInfo.product.imageUrl)
     setupLayouts()
+  }
+  
+  private func setupProductPostingCollectionView() {
+    listener?.productPostings
+      .share()
+      .observe(on: MainScheduler.instance)
+      .bind { [weak self] postings in
+        guard let self else { return }
+        if !postings.isEmpty {
+          self.otherUserUsedLabel.isHidden = false
+          self.productPostingCollectionView.isHidden = false
+        }
+        
+        let postingCount: Int = postings.count
+        var lineCount: Int
+        let cvItemHeight: CGFloat = (view.frame.width - (cvHorizontalEdge*2) - cvSpacing) / 2.0
+        if postingCount % 2 == 0 { lineCount = postingCount / 2 }
+        else { lineCount = postingCount / 2 + 1 }
+        
+        let cvHeight: Int = (lineCount * Int(cvItemHeight)) + (lineCount-1) * Int(cvSpacing)
+        self.cvHeight = CGFloat(cvHeight)
+        
+        self.productPostingCollectionView.pin
+          .below(of: otherUserUsedLabel)
+          .horizontally()
+          .height(CGFloat(cvHeight))
+          .marginTop(28)
+        
+        self.scrollView.contentSize = CGSize(
+          width: view.frame.width,
+          height: productPostingCollectionView.frame.maxY
+        )
+        
+      }.disposed(by: disposeBag)
+    
+    listener?.productPostings
+      .bind(to: productPostingCollectionView.rx.items(
+        cellIdentifier: ImageCell.identifier,
+        cellType: ImageCell.self)
+      ) { [weak self] index, posting, cell in
+        guard let self else { return }
+        cell.setupCellConfigure(type: .DefaultType, imageURL: posting.imageUrl ?? "")
+        cell.contentView.makeCornerRadius(radius: 10)
+      }.disposed(by: disposeBag)
+    
+    productPostingCollectionView.rx.willDisplayCell
+      .map{$0.at.row}
+      .subscribe(onNext: { [weak self] index in
+        guard let self else { return }
+        if let productPostings = listener?.productPostings.value,
+           productPostings.count - 1 == index,
+           let lastCreatedAt = productPostings[index].createdAt
+        {
+          Task.detached { [weak self] in
+            guard let inSelf = self else { return }
+            await
+            inSelf.listener?.fetchProductPostings(createdAt: lastCreatedAt)
+          }
+        }
+        
+      }).disposed(by: disposeBag)
+    
+    productPostingCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
+    
+  }
+}
+
+extension ProductDetailViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+  func collectionView(
+    _ collectionView: UICollectionView,
+    layout collectionViewLayout: UICollectionViewLayout,
+    sizeForItemAt indexPath: IndexPath
+  ) -> CGSize {
+    let screenWidth: CGFloat = view.frame.width
+    let cellSize: CGFloat = (screenWidth - (cvHorizontalEdge*2) - cvSpacing) / 2.0
+    return CGSize(width: cellSize, height: cellSize)
+  }
+  
+  func collectionView(
+    _ collectionView: UICollectionView,
+    layout collectionViewLayout: UICollectionViewLayout,
+    minimumLineSpacingForSectionAt section: Int
+  ) -> CGFloat {
+    return cvSpacing
+  }
+  
+  func collectionView(
+    _ collectionView: UICollectionView,
+    layout collectionViewLayout: UICollectionViewLayout,
+    minimumInteritemSpacingForSectionAt section: Int
+  ) -> CGFloat {
+    return cvSpacing
+  }
+  
+  func collectionView(
+    _ collectionView: UICollectionView,
+    layout collectionViewLayout: UICollectionViewLayout,
+    insetForSectionAt section: Int
+  ) -> UIEdgeInsets {
+    return UIEdgeInsets(top: 0, left: cvHorizontalEdge, bottom: 0, right: cvHorizontalEdge)
   }
 }

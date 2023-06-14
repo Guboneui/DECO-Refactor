@@ -17,7 +17,7 @@ public struct SafariLoder: SafariLoaderInterface {
     if let url = URL(string: url) {
       UIApplication.shared.open(url)
     } else {
-      print("잘못된 url")
+      print("잘못된 url: \(url)")
     }
   }
 }

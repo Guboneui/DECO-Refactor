@@ -33,7 +33,7 @@ protocol BrandDetailListener: AnyObject {
 }
 
 final class BrandDetailInteractor: PresentableInteractor<BrandDetailPresentable>, BrandDetailInteractable, BrandDetailPresentableListener {
-
+  
   weak var router: BrandDetailRouting?
   weak var listener: BrandDetailListener?
   
@@ -41,7 +41,10 @@ final class BrandDetailInteractor: PresentableInteractor<BrandDetailPresentable>
   private let userManager: MutableUserManagerStream
   private let brandRepository: BrandRepository
   private let productRepository: ProductRepository
-
+  
+  private let disposeBag: DisposeBag = DisposeBag()
+  
+  var categoryVCs: BehaviorRelay<[ViewControllable]> = .init(value: [])
   var brandInfoData: BehaviorRelay<BrandDTO?> = .init(value: nil)
   var brandProductUsagePostings: BehaviorRelay<[PostingDTO]> = .init(value: [])
   var productCategory: BehaviorRelay<[(category: ProductCategoryDTO, isSelected: Bool)]> = .init(value: [])
@@ -64,7 +67,7 @@ final class BrandDetailInteractor: PresentableInteractor<BrandDetailPresentable>
   
   override func didBecomeActive() {
     super.didBecomeActive()
-
+    self.setCategoryChildVCs()
     self.brandInfoData.accept(brandInfo)
     self.fetchBrandPostings(createdAt: Int.max)
     
@@ -77,6 +80,20 @@ final class BrandDetailInteractor: PresentableInteractor<BrandDetailPresentable>
     super.willResignActive()
     // TODO: Pause any business logic.
   }
+  
+  private func setCategoryChildVCs() {
+
+    self.productCategory
+      .filter{!$0.isEmpty}
+      .take(1)
+      .map{$0.count}
+      .observe(on: MainScheduler.instance)
+      .bind { [weak self] categoryCount in
+        guard let self else { return }
+      }.disposed(by: disposeBag)
+  }
+  
+  
   
   func popBrandDetailVC(with popType: PopType) {
     self.listener?.detachBrandDetailVC(with: popType)
@@ -101,7 +118,8 @@ final class BrandDetailInteractor: PresentableInteractor<BrandDetailPresentable>
     Task.detached { [weak self] in
       guard let self else { return }
       if let productCategory = await self.productRepository.getProductCategoryList() {
-        self.productCategory.accept([ProductCategoryDTO(categoryName: "전체", id: 0)] + productCategory)
+        self.productCategory.accept([(ProductCategoryDTO(categoryName: "전체", id: 0), true)] + productCategory.map{($0, false)})
+        
       }
     }
   }

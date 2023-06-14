@@ -12,6 +12,7 @@ import Networking
 
 import RIBs
 import RxSwift
+import RxRelay
 
 public protocol ProductDetailRouting: ViewableRouting {
   // TODO: Declare methods the interactor can invoke to manage sub-tree via the router.
@@ -36,9 +37,9 @@ final class ProductDetailInteractor: PresentableInteractor<ProductDetailPresenta
   private let productRepository: ProductRepository
   private let bookmarkRepository: BookmarkRepository
   private let productStreamManager: MutableProductStream
-  
-  
   private var productDetailInfo: ProductDetailDTO?
+  
+  var productPostings: BehaviorRelay<[PostingDTO]> = .init(value: [])
   
   init(
     presenter: ProductDetailPresentable,
@@ -65,8 +66,9 @@ final class ProductDetailInteractor: PresentableInteractor<ProductDetailPresenta
         productID: self.productInfo.id,
         userID: self.userManager.userID
       )
+      
+      await self.fetchProductPostings(createdAt: Int.max)
     }
-    
   }
   
   override func willResignActive() {
@@ -138,6 +140,17 @@ final class ProductDetailInteractor: PresentableInteractor<ProductDetailPresenta
       )
     } else {
       return nil
+    }
+  }
+  
+  func fetchProductPostings(createdAt: Int) async {
+    if let postings = await productRepository.getProductPostings(
+      productID: productInfo.id,
+      userID: userManager.userID,
+      createdAt: createdAt
+    ), !postings.isEmpty {
+      let prevPostings = productPostings.value
+      productPostings.accept(prevPostings + postings)
     }
   }
 }

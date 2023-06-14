@@ -29,10 +29,6 @@ protocol BrandDetailPresentableListener: AnyObject {
   var brandProductUsagePostings: BehaviorRelay<[PostingDTO]> { get }
   var productCategory: BehaviorRelay<[(category: ProductCategoryDTO, isSelected: Bool)]> { get }
   var categoryVCs: BehaviorRelay<[ViewControllable]> { get }
-  
-  func attachChildVC(with vc: inout ViewControllable)
-  
-//  func testA()
 }
 
 final class BrandDetailViewController: UIViewController, BrandDetailPresentable, BrandDetailViewControllable {
@@ -87,7 +83,14 @@ final class BrandDetailViewController: UIViewController, BrandDetailPresentable,
   }
   
   private let brandProductCollectionView : UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: .init()).then {
-    $0.backgroundColor = .cyan
+    $0.backgroundColor = .DecoColor.whiteColor
+    $0.register(ChildViewCell.self, forCellWithReuseIdentifier: ChildViewCell.identifier)
+    $0.bounces = false
+    let layout = UICollectionViewFlowLayout()
+    layout.scrollDirection = .horizontal
+    $0.collectionViewLayout = layout
+    $0.isPagingEnabled = true
+    $0.showsHorizontalScrollIndicator = false
   }
   
   private let stickyCategoryCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: .init()).then {
@@ -103,7 +106,6 @@ final class BrandDetailViewController: UIViewController, BrandDetailPresentable,
     $0.isHidden = true
   }
   
-  
   override func viewDidLoad() {
     super.viewDidLoad()
     self.view.backgroundColor = .DecoColor.whiteColor
@@ -113,6 +115,7 @@ final class BrandDetailViewController: UIViewController, BrandDetailPresentable,
     self.setupBrandProductUsageCollectionView()
     self.setupProductCategoryCollectionView()
     self.setupStickyCategoryCollectionView()
+    self.setupBrandProductCollectionView()
   }
   
   override func viewDidDisappear(_ animated: Bool) {
@@ -170,21 +173,21 @@ final class BrandDetailViewController: UIViewController, BrandDetailPresentable,
       .height(18)
       .marginTop(40)
     
-    
-    let screenHeight: CGFloat = UIScreen.main.bounds.height
-    let navigationOffSet: CGFloat = navigationBar.frame.maxY
-    let brandProductCollectionViewHeight: CGFloat = screenHeight - navigationOffSet
-    
-    brandProductCollectionView.pin
-      .below(of: brandProductCategoryCollectionView, aligned: .left)
-      .horizontally()
-      .height(brandProductCollectionViewHeight)
-    
     stickyCategoryCollectionView.pin
       .below(of: navigationBar)
       .horizontally()
       .height(18)
       .bottom()
+    
+    
+    let screenHeight: CGFloat = UIScreen.main.bounds.height
+    let stickyCategoryCvOffset: CGFloat = stickyCategoryCollectionView.frame.maxY
+    let brandProductCollectionViewHeight: CGFloat = screenHeight - stickyCategoryCvOffset
+    
+    brandProductCollectionView.pin
+      .below(of: brandProductCategoryCollectionView, aligned: .left)
+      .horizontally()
+      .height(brandProductCollectionViewHeight)
     
     brandProductUsageBaseView.flex.layout(mode: .adjustHeight)
     
@@ -264,7 +267,6 @@ extension BrandDetailViewController {
            let lastCreatedAt = postings[indexPath.row].createdAt {
           self.listener?.fetchBrandPostings(createdAt: lastCreatedAt)
         }
-        
       }).disposed(by: disposeBag)
     
     brandProductUsageCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
@@ -330,6 +332,21 @@ extension BrandDetailViewController {
   }
 }
 
+extension BrandDetailViewController {
+  private func setupBrandProductCollectionView() {
+    listener?.categoryVCs
+      .bind(to: brandProductCollectionView.rx.items(
+        cellIdentifier: ChildViewCell.identifier,
+        cellType: ChildViewCell.self)
+      ) { [weak self] index, childVC, cell in
+        guard let self else { return }
+        
+      }.disposed(by: disposeBag)
+    
+    brandProductCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
+  }
+}
+
 
 // MARK: - CollectionView
 extension BrandDetailViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
@@ -345,15 +362,20 @@ extension BrandDetailViewController: UICollectionViewDelegate, UICollectionViewD
       return CGSize(width: usageCollectionViewHeight, height: usageCollectionViewHeight)
     case brandProductCategoryCollectionView, stickyCategoryCollectionView:
       let font: UIFont = UIFont.DecoFont.getFont(with: .Suit, type: .medium, size: 12)
-      
       if let productCategory = listener?.productCategory.value {
         return CGSize(
-          width: productCategory[indexPath.row].categoryName.size(withAttributes: [NSAttributedString.Key.font:font]).width + 20,
+          width: productCategory[indexPath.row].category.categoryName.size(withAttributes: [NSAttributedString.Key.font:font]).width + 20,
           height: 15
         )
       } else {
         return .zero
       }
+    case brandProductCollectionView:
+      print(brandProductCollectionView.frame)
+      return CGSize(
+        width: brandProductCollectionView.frame.width,
+        height: brandProductCollectionView.frame.height
+      )
     default:
       return .zero
     }
@@ -369,6 +391,8 @@ extension BrandDetailViewController: UICollectionViewDelegate, UICollectionViewD
       return 8.0
     case brandProductCategoryCollectionView, stickyCategoryCollectionView:
       return 24.0
+    case brandProductCollectionView:
+      return .zero
     default:
       return .zero
     }
@@ -379,6 +403,11 @@ extension BrandDetailViewController: UICollectionViewDelegate, UICollectionViewD
     layout collectionViewLayout: UICollectionViewLayout,
     insetForSectionAt section: Int
   ) -> UIEdgeInsets {
-    return UIEdgeInsets(top: 0, left: 28, bottom: 0, right: 28)
+    switch collectionView {
+    case brandProductCollectionView:
+      return .zero
+    default: return UIEdgeInsets(top: 0, left: 28, bottom: 0, right: 28)
+    }
+    
   }
 }

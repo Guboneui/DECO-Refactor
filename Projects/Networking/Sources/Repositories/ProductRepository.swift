@@ -14,6 +14,7 @@ public protocol ProductRepository {
   func getProductMoodList() async -> [ProductMoodDTO]?
   func getProductOfCategory(param: ItemFilterRequest) async -> [ProductDTO]?
   func getProductInfo(productID: Int, userID: Int) async -> ProductDetailDTO?
+  func getProductPostings(productID: Int, userID: Int, createdAt: Int) async -> [PostingDTO]?
 }
 
 public class ProductRepositoryImpl: BaseRepository, ProductRepository {
@@ -35,5 +36,9 @@ public class ProductRepositoryImpl: BaseRepository, ProductRepository {
   
   public func getProductInfo(productID: Int, userID: Int) async -> ProductDetailDTO? {
     await provider.request(.productInfo(productID, userID))
+  }
+  
+  public func getProductPostings(productID: Int, userID: Int, createdAt: Int) async -> [PostingDTO]? {
+    await provider.request(.productPostings(productID, userID, createdAt))
   }
 }

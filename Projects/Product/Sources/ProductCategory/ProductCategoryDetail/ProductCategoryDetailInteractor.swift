@@ -20,6 +20,9 @@ protocol ProductCategoryDetailRouting: ViewableRouting {
   
   func attachMoodColorModalVC()
   func detachMoodColorModalVC()
+  
+  func attachProductDetailVC(with productInfo: ProductDTO)
+  func detachProductDetailVC(with popType: PopType)
 }
 
 protocol ProductCategoryDetailPresentable: Presentable {
@@ -180,5 +183,13 @@ final class ProductCategoryDetailInteractor: PresentableInteractor<ProductCatego
   
   func dismissMoodColorModalVC() {
     router?.detachMoodColorModalVC()
+  }
+  
+  func pushProductDetailVC(with productInfo: ProductDTO) {
+    router?.attachProductDetailVC(with: productInfo)
+  }
+  
+  func popProductDetailVC(with popType: PopType) {
+    router?.detachProductDetailVC(with: popType)
   }
 }

@@ -33,6 +33,7 @@ protocol ProductCategoryDetailPresentableListener: AnyObject {
   func fetchAddBookmark(with productID: Int)
   func fetchDeleteBookmark(with productID: Int)
   
+  func pushProductDetailVC(with productInfo: ProductDTO)
 }
 
 final class ProductCategoryDetailViewController: UIViewController, ProductCategoryDetailPresentable, ProductCategoryDetailViewControllable {
@@ -260,6 +261,14 @@ final class ProductCategoryDetailViewController: UIViewController, ProductCatego
         }
         
       }.disposed(by: disposeBag)
+    
+    Observable.zip(
+      productCollectionView.rx.itemSelected,
+      productCollectionView.rx.modelSelected(ProductDTO.self)
+    ).subscribe(onNext: { [weak self] index, product in
+      guard let self else { return }
+      self.listener?.pushProductDetailVC(with: product)
+    }).disposed(by: disposeBag)
     
     productCollectionView.rx.willDisplayCell
       .map{$0.at.row}

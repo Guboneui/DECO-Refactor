@@ -18,8 +18,8 @@
 		94751A23220D96F8DED79763 /* ProductBookmarkBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5165CDBEEB3B9590DBBD37C4 /* ProductBookmarkBuilder.swift */; };
 		A7AAC61D82D9FE9F48F0CC82 /* ProductBookmarkInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D8185CAB6C04BD9409F6F2C /* ProductBookmarkInteractor.swift */; };
 		B5F90A8BB3862D87221C3C53 /* PhotoBookmarkInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A654CCB7592F210B9D382A3 /* PhotoBookmarkInteractor.swift */; };
+		BD50628E51718A6640FC49A7 /* ProductDetail.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8227EDC32AB546C528E2E34 /* ProductDetail.framework */; platformFilter = ios; };
 		EB29F37E0AE43F0A101E24C5 /* PhotoBookmarkRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA22436931192E598DF31C2 /* PhotoBookmarkRouter.swift */; };
-		F5747F21A688CBB1B4C48AC1 /* User.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3486B0578768E731DB7D58AB /* User.framework */; platformFilter = ios; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -39,7 +39,6 @@
 		0322FC9B39C30947353C536E /* ProductBookmarkRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductBookmarkRouter.swift; sourceTree = "<group>"; };
 		0D8185CAB6C04BD9409F6F2C /* ProductBookmarkInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductBookmarkInteractor.swift; sourceTree = "<group>"; };
 		2A654CCB7592F210B9D382A3 /* PhotoBookmarkInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoBookmarkInteractor.swift; sourceTree = "<group>"; };
-		3486B0578768E731DB7D58AB /* User.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = User.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5165CDBEEB3B9590DBBD37C4 /* ProductBookmarkBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductBookmarkBuilder.swift; sourceTree = "<group>"; };
 		5BA22436931192E598DF31C2 /* PhotoBookmarkRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoBookmarkRouter.swift; sourceTree = "<group>"; };
 		644FF65B1DE0C59D01A5A788 /* ProductBookmarkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductBookmarkViewController.swift; sourceTree = "<group>"; };
@@ -49,6 +48,7 @@
 		ACA4A659928B385446EFF60C /* BookmarkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkViewController.swift; sourceTree = "<group>"; };
 		B2459F9C889361D4DC4F8566 /* BookmarkInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkInteractor.swift; sourceTree = "<group>"; };
 		B32F5838EF3E5328C351F603 /* PhotoBookmarkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoBookmarkViewController.swift; sourceTree = "<group>"; };
+		F8227EDC32AB546C528E2E34 /* ProductDetail.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ProductDetail.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA7E6E621EE96CAB99C31F5D /* Bookmark-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Bookmark-Info.plist"; sourceTree = "<group>"; };
 		FFA49FD34D6AFDAEC1AC8B10 /* PhotoBookmarkBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoBookmarkBuilder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -58,7 +58,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F5747F21A688CBB1B4C48AC1 /* User.framework in Frameworks */,
+				BD50628E51718A6640FC49A7 /* ProductDetail.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -91,7 +91,7 @@
 			isa = PBXGroup;
 			children = (
 				76BD577AD93EFB89FF1662CC /* Bookmark.framework */,
-				3486B0578768E731DB7D58AB /* User.framework */,
+				F8227EDC32AB546C528E2E34 /* ProductDetail.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";

@@ -3,12 +3,13 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		004CA85ED0AB530CBB1CC3AE /* BoardFilterRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25E02D4F3CB58086E8FB251 /* BoardFilterRequest.swift */; };
 		19D8E7418656174171CBF568 /* BoardCategoryDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D94ACD94B96A521CE3B8CB4 /* BoardCategoryDTO.swift */; };
+		2C45A4B32A3931FD006FCF8B /* ProductDetailDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C45A4B22A3931FD006FCF8B /* ProductDetailDTO.swift */; };
 		43D5B314C2C163006072F967 /* SearchUserDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C707B6EC3F742A88E11EBF10 /* SearchUserDTO.swift */; };
 		468A437D991263CC15393957 /* Encodable+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7B8D524E857484B5736949 /* Encodable+Extension.swift */; };
 		5F4713DB1EF6DDC93F5DC120 /* UserDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF19610E9CB4833C2220C17 /* UserDTO.swift */; };
@@ -38,6 +39,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2C45A4B22A3931FD006FCF8B /* ProductDetailDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailDTO.swift; sourceTree = "<group>"; };
 		4D94ACD94B96A521CE3B8CB4 /* BoardCategoryDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardCategoryDTO.swift; sourceTree = "<group>"; };
 		4F7B8D524E857484B5736949 /* Encodable+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+Extension.swift"; sourceTree = "<group>"; };
 		6D3D722D8A39C97CE4035A34 /* Entity.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Entity.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -103,6 +105,7 @@
 				B25F9F9CA091D22A1FD4E987 /* PostingDTO.swift */,
 				D540ACB77C679308558B3054 /* ProductCategoryDTO.swift */,
 				84DAF896FBE07994EDED8649 /* ProductDTO.swift */,
+				2C45A4B22A3931FD006FCF8B /* ProductDetailDTO.swift */,
 				BFE93EF3E19458F0DA0DF65C /* ProductMoodDTO.swift */,
 				BB381273D96A2ADB7934FF1D /* ProfileDTO.swift */,
 				C707B6EC3F742A88E11EBF10 /* SearchUserDTO.swift */,
@@ -198,8 +201,6 @@
 		C0331ED0A44E915A96750580 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				TargetAttributes = {
-				};
 			};
 			buildConfigurationList = C85ABA34F5262643211DAA3D /* Build configuration list for PBXProject "Entity" */;
 			compatibilityVersion = "Xcode 13.0";
@@ -246,6 +247,7 @@
 				43D5B314C2C163006072F967 /* SearchUserDTO.swift in Sources */,
 				5F4713DB1EF6DDC93F5DC120 /* UserDTO.swift in Sources */,
 				004CA85ED0AB530CBB1CC3AE /* BoardFilterRequest.swift in Sources */,
+				2C45A4B32A3931FD006FCF8B /* ProductDetailDTO.swift in Sources */,
 				AC813AB84129CD8B73D45F9A /* ItemFilterRequest.swift in Sources */,
 				F184D2E4086EA05EA17369B5 /* StyleModel.swift in Sources */,
 				468A437D991263CC15393957 /* Encodable+Extension.swift in Sources */,

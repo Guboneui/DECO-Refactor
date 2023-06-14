@@ -32,6 +32,9 @@
          location = "group:Product/Product.xcodeproj">
       </FileRef>
       <FileRef
+         location = "group:ProductDetail/ProductDetail.xcodeproj">
+      </FileRef>
+      <FileRef
          location = "group:Profile/Profile.xcodeproj">
       </FileRef>
       <FileRef

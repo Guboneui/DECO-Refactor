@@ -12,7 +12,7 @@ import Moya
 enum ProductAPI {
   case productCategoryList
   case productMoodList
-  
+  case productInfo(Int, Int)
   case productOfCategory(ItemFilterRequest)
 }
 
@@ -27,6 +27,8 @@ extension ProductAPI: TargetType {
       return "/itemCategory/list"
     case .productMoodList:
       return "/style/second/list"
+    case .productInfo(let productID, _):
+      return "/item/\(productID)"
     case .productOfCategory:
       return "/item/filter"
     }
@@ -34,7 +36,7 @@ extension ProductAPI: TargetType {
   
   var method: Moya.Method {
     switch self {
-    case .productCategoryList, .productMoodList:
+    case .productCategoryList, .productMoodList, .productInfo:
       return .get
     case .productOfCategory:
       return .post
@@ -45,6 +47,8 @@ extension ProductAPI: TargetType {
     switch self {
     case .productCategoryList, .productMoodList:
       return .requestPlain
+    case .productInfo(_, let userID):
+      return .requestParameters(parameters: ["userId":userID], encoding: URLEncoding.queryString)
     case .productOfCategory(let param):
       return .requestParameters(parameters: param.toDictionary, encoding: JSONEncoding.default)
     }

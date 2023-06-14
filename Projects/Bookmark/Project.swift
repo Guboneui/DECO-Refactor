@@ -22,7 +22,7 @@ let packages: [Package] = [
 
 let dependencies: [TargetDependency] = [
 //  .project(target: "CommonUI", path: "../CommonUI"),
-  .project(target: "User", path: "../User")
+  .project(target: "ProductDetail", path: "../ProductDetail"),
 //  .project(target: "Networking", path: "../Networking")
 ]
 

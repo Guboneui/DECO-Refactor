@@ -2,7 +2,7 @@
 //  Project.swift
 //  ProjectDescriptionHelpers
 //
-//  Created by 구본의 on 2023/06/11.
+//  Created by 구본의 on 2023/06/14.
 //
 
 import ProjectDescription
@@ -21,15 +21,19 @@ let packages: [Package] = [
 ]
 
 let dependencies: [TargetDependency] = [
-  .project(target: "ProductDetail", path: "../ProductDetail")
+  .project(target: "User", path: "../User"),
+  .project(target: "Util", path: "../Util"),
+  .project(target: "CommonUI", path: "../CommonUI"),
+  .project(target: "Networking", path: "../Networking"),
+  
 ]
 
-let search = Target(
-  name: "Search",
+let productDetail = Target(
+  name: "ProductDetail",
   platform: .iOS,
   product: .framework,
-  productName: "Search",
-  bundleId: "com.deco.ios.search",
+  productName: "ProductDetail",
+  bundleId: "com.deco.ios.productDetail",
   deploymentTarget: .iOS(targetVersion: "15.0", devices: [.iphone]),
   infoPlist: .default,
   sources: ["Sources/**"],
@@ -39,7 +43,8 @@ let search = Target(
 )
 
 let project = Project(
-  name: "Search",
+  name: "ProductDetail",
   packages: packages,
-  targets: [search]
+  targets: [productDetail]
 )
+

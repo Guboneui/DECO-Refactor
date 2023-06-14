@@ -7,7 +7,9 @@
 
 import User
 import Util
+import Entity
 import Networking
+import ProductDetail
 
 import RIBs
 
@@ -21,10 +23,12 @@ protocol ProductCategoryDetailDependency: Dependency {
 final class ProductCategoryDetailComponent:
   Component<ProductCategoryDetailDependency>,
   CategoryModalDependency,
-  MoodColorModalDependency
+  MoodColorModalDependency,
+  ProductDetailDependency
 {
   var selectedFilterInProductCategory: MutableSelectedFilterInProductCategoryStream { dependency.selectedFilterInProductCategory }
-  // TODO: Declare 'fileprivate' dependencies that are only used by this RIB.
+  var userManager: MutableUserManagerStream { dependency.userManager }
+  var productRepository: ProductRepository { dependency.productRepository }
 }
 
 // MARK: - Builder
@@ -53,12 +57,14 @@ final class ProductCategoryDetailBuilder: Builder<ProductCategoryDetailDependenc
     
     let categoryModalBuilder = CategoryModalBuilder(dependency: component)
     let moodColorModalBuilder = MoodColorModalBuilder(dependency: component)
+    let productDetailBuilder = ProductDetailBuilder(dependency: component)
     
     return ProductCategoryDetailRouter(
       interactor: interactor,
       viewController: viewController,
       categoryModalBuildable: categoryModalBuilder,
-      moodColorModalBuildable: moodColorModalBuilder
+      moodColorModalBuildable: moodColorModalBuilder,
+      productDetailBuildable: productDetailBuilder
     )
   }
 }

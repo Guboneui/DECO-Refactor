@@ -51,6 +51,7 @@ final class MoodColorModalInteractor: PresentableInteractor<MoodColorModalPresen
     let colorList = Util.ProductColorModels
     
     selectedFilterInProductCategory.selectedFilter
+      .share()
       .subscribe(onNext: { [weak self] filter in
         guard let self else { return }
         let selectedMoodIds: [Int] = filter.selectedMoods.map{$0.id}

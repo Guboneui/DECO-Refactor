@@ -29,6 +29,8 @@ protocol ProductMoodDetailPresentableListener: AnyObject {
   func fetchDeleteBookmark(with productID: Int)
   
   func updateFilter(categoryList: [(name: String, id: Int, filterType: Filter, isSelected: Bool)], colorList: [(name: String, id: Int, filterType: Filter, isSelected: Bool)])
+  
+  func pushProductDetailVC(at index: Int, with productInfo: ProductDTO)
 }
 
 final class ProductMoodDetailViewController: UIViewController, ProductMoodDetailPresentable, ProductMoodDetailViewControllable {
@@ -88,7 +90,7 @@ final class ProductMoodDetailViewController: UIViewController, ProductMoodDetail
     $0.backgroundColor = .DecoColor.whiteColor
     
     let layout = UICollectionViewFlowLayout()
-    layout.scrollDirection = .horizontal
+    layout.scrollDirection = .vertical
     $0.collectionViewLayout = layout
   }
   
@@ -258,6 +260,14 @@ final class ProductMoodDetailViewController: UIViewController, ProductMoodDetail
         }
         
       }.disposed(by: disposeBag)
+    
+    Observable.zip(
+      productCollectionView.rx.itemSelected,
+      productCollectionView.rx.modelSelected(ProductDTO.self)
+    ).subscribe(onNext: { [weak self] index, product in
+      guard let self else { return }
+      self.listener?.pushProductDetailVC(at: index.row, with: product)
+    }).disposed(by: disposeBag)
     
     productCollectionView.rx.willDisplayCell
       .map{$0.at.row}

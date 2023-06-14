@@ -45,6 +45,7 @@ final class CategoryModalInteractor: PresentableInteractor<CategoryModalPresenta
     super.didBecomeActive()
     
     selectedFilterInProductCategory.selectedFilter
+      .share()
       .subscribe(onNext: { [weak self] filter in
         guard let self else { return }
         let currentSelectedId: Int = filter.selectedCategory?.id ?? 0

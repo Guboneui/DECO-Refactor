@@ -9,6 +9,7 @@ import User
 import Util
 import Entity
 import Networking
+import ProductDetail
 
 import RIBs
 import RxSwift
@@ -47,18 +48,21 @@ final class ProductCategoryDetailInteractor: PresentableInteractor<ProductCatego
   private let productRepository: ProductRepository
   private let bookmarkRepository: BookmarkRepository
   private let selectedFilterInProductCategory: MutableSelectedFilterInProductCategoryStream
+  private let productStreamManager: MutableProductStream
   
   init(
     presenter: ProductCategoryDetailPresentable,
     productRepository: ProductRepository,
     bookmarkRepository: BookmarkRepository,
     userManager: MutableUserManagerStream,
-    selectedFilterInProductCategory: MutableSelectedFilterInProductCategoryStream
+    selectedFilterInProductCategory: MutableSelectedFilterInProductCategoryStream,
+    productStreamManager: MutableProductStream
   ) {
     self.userManager = userManager
     self.productRepository = productRepository
     self.bookmarkRepository = bookmarkRepository
     self.selectedFilterInProductCategory = selectedFilterInProductCategory
+    self.productStreamManager = productStreamManager
     super.init(presenter: presenter)
     presenter.listener = self
   }
@@ -66,6 +70,7 @@ final class ProductCategoryDetailInteractor: PresentableInteractor<ProductCatego
   override func didBecomeActive() {
     super.didBecomeActive()
     setupBindingSelectedFilter()
+    setupProductListStreamBinding()
   }
   
   override func willResignActive() {
@@ -73,8 +78,17 @@ final class ProductCategoryDetailInteractor: PresentableInteractor<ProductCatego
     // TODO: Pause any business logic.
   }
   
+  private func setupProductListStreamBinding() {
+    productStreamManager.productList
+      .subscribe(onNext: { [weak self] list in
+        guard let self else { return }
+        self.productLists.accept(list)
+      }).disposed(by: disposeBag)
+  }
+  
   private func setupBindingSelectedFilter() {
     self.selectedFilterInProductCategory.selectedFilter
+      .share()
       .observe(on: MainScheduler.instance)
       .map{$0.selectedCategory}
       .compactMap{$0}
@@ -84,6 +98,7 @@ final class ProductCategoryDetailInteractor: PresentableInteractor<ProductCatego
       }).disposed(by: disposeBag)
     
     self.selectedFilterInProductCategory.selectedFilter
+      .share()
       .subscribe(onNext: { [weak self] filter in
         guard let self else { return }
         
@@ -107,18 +122,15 @@ final class ProductCategoryDetailInteractor: PresentableInteractor<ProductCatego
               createdAt: Int.max,
               name: "")
           ) {
-            inSelf.productLists.accept(productList)
+            inSelf.productStreamManager.updateProductList(with: productList)
           }
         }
       }).disposed(by: disposeBag)
   }
   
-  func popProductCategoryDetailDetailVC(with popType: PopType) {
-    listener?.popProductCategoryDetailVC(with: popType)
-  }
-  
   func fetchProductList(createdAt: Int) {
     selectedFilterInProductCategory.selectedFilter
+      .take(1)
       .subscribe(onNext: { [weak self] filter in
         guard let self else { return }
         
@@ -134,12 +146,11 @@ final class ProductCategoryDetailInteractor: PresentableInteractor<ProductCatego
               name: "")
           ), !productList.isEmpty {
             let prevData = inSelf.productLists.value
-            inSelf.productLists.accept(prevData + productList)
+            inSelf.productStreamManager.updateProductList(with: prevData + productList)
           }
         }
       }).disposed(by: disposeBag)
   }
-  
   
   func updateFilter(moodList: [(name: String, id: Int, filterType: Filter, isSelected: Bool)], colorList: [(name: String, id: Int, filterType: Filter, isSelected: Bool)]) {
     let moods: [ProductCategoryModel] = moodList.map{ProductCategoryModel(id: $0.id, title: $0.name)}
@@ -169,6 +180,11 @@ final class ProductCategoryDetailInteractor: PresentableInteractor<ProductCatego
     }
   }
   
+  func popProductCategoryDetailDetailVC(with popType: PopType) {
+    selectedFilterInProductCategory.clearStream()
+    listener?.popProductCategoryDetailVC(with: popType)
+  }
+  
   func showCategoryModalVC() {
     router?.attachCategoryModalVC()
   }
@@ -185,7 +201,8 @@ final class ProductCategoryDetailInteractor: PresentableInteractor<ProductCatego
     router?.detachMoodColorModalVC()
   }
   
-  func pushProductDetailVC(with productInfo: ProductDTO) {
+  func pushProductDetailVC(at index: Int, with productInfo: ProductDTO) {
+    productStreamManager.updateSelectedIndex(index: index)
     router?.attachProductDetailVC(with: productInfo)
   }
   

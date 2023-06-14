@@ -26,10 +26,13 @@ final class ProductCategoryDetailComponent:
   MoodColorModalDependency,
   ProductDetailDependency
 {
+  
   var selectedFilterInProductCategory: MutableSelectedFilterInProductCategoryStream { dependency.selectedFilterInProductCategory }
   var userManager: MutableUserManagerStream { dependency.userManager }
   var productRepository: ProductRepository { dependency.productRepository }
   var bookmarkRepository: BookmarkRepository { dependency.bookmarkRepository }
+  
+  var productListStream: MutableProductStream = ProductStreamImpl()
 }
 
 // MARK: - Builder
@@ -49,10 +52,11 @@ final class ProductCategoryDetailBuilder: Builder<ProductCategoryDetailDependenc
     let viewController = ProductCategoryDetailViewController()
     let interactor = ProductCategoryDetailInteractor(
       presenter: viewController,
-      productRepository: dependency.productRepository,
-      bookmarkRepository: dependency.bookmarkRepository,
-      userManager: dependency.userManager,
-      selectedFilterInProductCategory: dependency.selectedFilterInProductCategory
+      productRepository: component.productRepository,
+      bookmarkRepository: component.bookmarkRepository,
+      userManager: component.userManager,
+      selectedFilterInProductCategory: component.selectedFilterInProductCategory,
+      productStreamManager: component.productListStream
     )
     interactor.listener = listener
     

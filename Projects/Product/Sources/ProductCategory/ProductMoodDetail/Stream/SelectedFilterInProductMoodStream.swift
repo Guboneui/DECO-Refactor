@@ -31,6 +31,7 @@ protocol MutableSelectedFilterInProductMoodStream: SelectedFilterInProductMoodSt
   func updateSelectedCategories(categories: [ProductCategoryModel])
   func updateSelectedColors(colors: [ProductColorModel])
   func updateFilterStream(categories: [ProductCategoryModel], colors: [ProductColorModel])
+  func clearStream()
 }
 
 class SelectedFilterInProductMoodStreamImpl: MutableSelectedFilterInProductMoodStream {
@@ -104,6 +105,17 @@ class SelectedFilterInProductMoodStreamImpl: MutableSelectedFilterInProductMoodS
       )
     }()
     filter.accept(updatedInfo)
+  }
+  
+  func clearStream() {
+    let clearData: SelectedFilterInProductMoodStreamModel = {
+      return SelectedFilterInProductMoodStreamModel (
+        selectedMood: nil,
+        selectedCategories: [],
+        selectedColors: []
+      )
+    }()
+    filter.accept(clearData)
   }
 }
 

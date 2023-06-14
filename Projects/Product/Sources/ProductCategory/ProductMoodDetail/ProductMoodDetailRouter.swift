@@ -5,12 +5,17 @@
 //  Created by 구본의 on 2023/06/01.
 //
 
+import Util
+import Entity
+import ProductDetail
+
 import RIBs
 
 protocol ProductMoodDetailInteractable:
   Interactable,
   MoodModalListener,
-  CategoryColorModalListener
+  CategoryColorModalListener,
+  ProductDetailListener
 {
   var router: ProductMoodDetailRouting? { get set }
   var listener: ProductMoodDetailListener? { get set }
@@ -28,14 +33,19 @@ final class ProductMoodDetailRouter: ViewableRouter<ProductMoodDetailInteractabl
   private let categoryColorModalBuildable: CategoryColorModalBuildable
   private var categoryColorModalRouting: Routing?
   
+  private let productDetailBuildable: ProductDetailBuildable
+  private var productDetailRouting: Routing?
+  
   init(
     interactor: ProductMoodDetailInteractable,
     viewController: ProductMoodDetailViewControllable,
     moodModalBuildable: MoodModalBuildable,
-    categoryColorModalBuildable: CategoryColorModalBuildable
+    categoryColorModalBuildable: CategoryColorModalBuildable,
+    productDetailBuildable: ProductDetailBuildable
   ) {
     self.moodModalBuildable = moodModalBuildable
     self.categoryColorModalBuildable = categoryColorModalBuildable
+    self.productDetailBuildable = productDetailBuildable
     super.init(interactor: interactor, viewController: viewController)
     interactor.router = self
   }
@@ -70,5 +80,22 @@ final class ProductMoodDetailRouter: ViewableRouter<ProductMoodDetailInteractabl
     detachChild(router)
     viewControllable.dismiss(animated: false, completion: nil)
     categoryColorModalRouting = nil
+  }
+  
+  func attachProductDetailVC(with productInfo: ProductDTO) {
+    if productDetailRouting != nil { return }
+    let router = productDetailBuildable.build(withListener: interactor, productInfo: productInfo)
+    attachChild(router)
+    self.viewControllable.pushViewController(router.viewControllable, animated: true)
+    self.productDetailRouting = router
+  }
+  
+  func detachProductDetailVC(with popType: PopType) {
+    guard let router = productDetailRouting else { return }
+    if popType == .BackButton {
+      self.viewControllable.popViewController(animated: true)
+    }
+    self.detachChild(router)
+    self.productDetailRouting = nil
   }
 }

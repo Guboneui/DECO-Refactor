@@ -31,6 +31,7 @@ protocol MutableSelectedFilterInProductCategoryStream: SelectedFilterInProductCa
   func updateSelectedMoods(mood: [ProductCategoryModel])
   func updateSelectedColors(colors: [ProductColorModel])
   func updateFilterStream(moods: [ProductCategoryModel], colors: [ProductColorModel])
+  func clearStream()
 }
 
 class SelectedFilterInProductCategoryStreamImpl: MutableSelectedFilterInProductCategoryStream {
@@ -50,7 +51,8 @@ class SelectedFilterInProductCategoryStreamImpl: MutableSelectedFilterInProductC
   )
   
   var selectedFilter: Observable<SelectedFilterInProductCategoryStreamModel> {
-    return filter.asObservable()
+    return filter
+      .asObservable()
   }
   
   func setProductCategoryList(categoryList: [ProductCategoryModel]) {
@@ -107,5 +109,16 @@ class SelectedFilterInProductCategoryStreamImpl: MutableSelectedFilterInProductC
       )
     }()
     filter.accept(updatedInfo)
+  }
+  
+  func clearStream() {
+    let clearData: SelectedFilterInProductCategoryStreamModel = {
+      return SelectedFilterInProductCategoryStreamModel(
+        selectedCategory: nil,
+        selectedMoods: [],
+        selectedColors: []
+      )
+    }()
+    filter.accept(clearData)
   }
 }

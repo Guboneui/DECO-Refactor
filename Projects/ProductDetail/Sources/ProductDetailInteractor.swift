@@ -35,6 +35,8 @@ final class ProductDetailInteractor: PresentableInteractor<ProductDetailPresenta
   private let userManager: MutableUserManagerStream
   private let productRepository: ProductRepository
   private let bookmarkRepository: BookmarkRepository
+  private let productStreamManager: MutableProductStream
+  
   
   private var productDetailInfo: ProductDetailDTO?
   
@@ -43,12 +45,14 @@ final class ProductDetailInteractor: PresentableInteractor<ProductDetailPresenta
     productInfo: ProductDTO,
     userManager: MutableUserManagerStream,
     productRepository: ProductRepository,
-    bookmarkRepository: BookmarkRepository
+    bookmarkRepository: BookmarkRepository,
+    productStreamManager: MutableProductStream
   ) {
     self.productInfo = productInfo
     self.userManager = userManager
     self.productRepository = productRepository
     self.bookmarkRepository = bookmarkRepository
+    self.productStreamManager = productStreamManager
     super.init(presenter: presenter)
     presenter.listener = self
   }
@@ -57,7 +61,7 @@ final class ProductDetailInteractor: PresentableInteractor<ProductDetailPresenta
     super.didBecomeActive()
     Task.detached { [weak self] in
       guard let self else { return }
-      await self.fetchProductInfo(
+      _ = await self.fetchProductInfo(
         productID: self.productInfo.id,
         userID: self.userManager.userID
       )
@@ -106,21 +110,34 @@ final class ProductDetailInteractor: PresentableInteractor<ProductDetailPresenta
           )
         }
         
-        await self.fetchProductInfo(
+        if let product = await self.fetchProductInfo(
           productID: product.id,
           userID: self.userManager.userID
-        )
+        ) {
+          self.productStreamManager.updateProduct(product: product)
+        }
       }
     }
   }
   
-  private func fetchProductInfo(productID: Int, userID: Int) async {
+  private func fetchProductInfo(productID: Int, userID: Int) async -> ProductDTO? {
     if let productInfo = await self.productRepository.getProductInfo(
       productID: productID,
       userID: userID
     ) {
       self.productDetailInfo = productInfo
       await self.presenter.setProductInfo(with: productInfo)
+      let product = productInfo.product
+      return ProductDTO(
+        name: product.name,
+        imageUrl: product.imageUrl,
+        brandName: productInfo.brandName,
+        id: product.id,
+        scrap: productInfo.scrap,
+        createdAt: product.createdAt
+      )
+    } else {
+      return nil
     }
   }
 }

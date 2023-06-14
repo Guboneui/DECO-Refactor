@@ -33,7 +33,7 @@ protocol ProductCategoryDetailPresentableListener: AnyObject {
   func fetchAddBookmark(with productID: Int)
   func fetchDeleteBookmark(with productID: Int)
   
-  func pushProductDetailVC(with productInfo: ProductDTO)
+  func pushProductDetailVC(at index: Int, with productInfo: ProductDTO)
 }
 
 final class ProductCategoryDetailViewController: UIViewController, ProductCategoryDetailPresentable, ProductCategoryDetailViewControllable {
@@ -92,7 +92,7 @@ final class ProductCategoryDetailViewController: UIViewController, ProductCatego
     $0.backgroundColor = .DecoColor.whiteColor
     
     let layout = UICollectionViewFlowLayout()
-    layout.scrollDirection = .horizontal
+    layout.scrollDirection = .vertical
     $0.collectionViewLayout = layout
   }
   
@@ -191,7 +191,6 @@ final class ProductCategoryDetailViewController: UIViewController, ProductCatego
   private func setSelectedFilterCollectionView() {
     self.listener?.selectedFilter
       .observe(on: MainScheduler.instance)
-      .share()
       .bind { [weak self] selectedFilter in
         guard let self else { return }
         self.selectedFilterCollectionView.isHidden = selectedFilter.isEmpty
@@ -267,7 +266,7 @@ final class ProductCategoryDetailViewController: UIViewController, ProductCatego
       productCollectionView.rx.modelSelected(ProductDTO.self)
     ).subscribe(onNext: { [weak self] index, product in
       guard let self else { return }
-      self.listener?.pushProductDetailVC(with: product)
+      self.listener?.pushProductDetailVC(at: index.row, with: product)
     }).disposed(by: disposeBag)
     
     productCollectionView.rx.willDisplayCell

@@ -29,6 +29,7 @@ final class ProductCategoryDetailComponent:
   var selectedFilterInProductCategory: MutableSelectedFilterInProductCategoryStream { dependency.selectedFilterInProductCategory }
   var userManager: MutableUserManagerStream { dependency.userManager }
   var productRepository: ProductRepository { dependency.productRepository }
+  var bookmarkRepository: BookmarkRepository { dependency.bookmarkRepository }
 }
 
 // MARK: - Builder

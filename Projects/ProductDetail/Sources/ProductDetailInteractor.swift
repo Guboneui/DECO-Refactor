@@ -34,6 +34,7 @@ final class ProductDetailInteractor: PresentableInteractor<ProductDetailPresenta
   private let productInfo: ProductDTO
   private let userManager: MutableUserManagerStream
   private let productRepository: ProductRepository
+  private let bookmarkRepository: BookmarkRepository
   
   private var productDetailInfo: ProductDetailDTO?
   
@@ -41,21 +42,27 @@ final class ProductDetailInteractor: PresentableInteractor<ProductDetailPresenta
     presenter: ProductDetailPresentable,
     productInfo: ProductDTO,
     userManager: MutableUserManagerStream,
-    productRepository: ProductRepository
+    productRepository: ProductRepository,
+    bookmarkRepository: BookmarkRepository
   ) {
     self.productInfo = productInfo
     self.userManager = userManager
     self.productRepository = productRepository
+    self.bookmarkRepository = bookmarkRepository
     super.init(presenter: presenter)
     presenter.listener = self
   }
   
   override func didBecomeActive() {
     super.didBecomeActive()
-    self.fetchProductInfo(
-      productID: productInfo.id,
-      userID: userManager.userID
-    )
+    Task.detached { [weak self] in
+      guard let self else { return }
+      await self.fetchProductInfo(
+        productID: self.productInfo.id,
+        userID: self.userManager.userID
+      )
+    }
+    
   }
   
   override func willResignActive() {
@@ -73,21 +80,47 @@ final class ProductDetailInteractor: PresentableInteractor<ProductDetailPresenta
         SafariLoder.loadSafari(with: link)
       } else {
         // TODO:
-        print("구매 링크 없음")
+        print("구매 링크 없음 토스트 띄우기")
       }
     }
   }
   
-  private func fetchProductInfo(productID: Int, userID: Int) {
-    Task.detached { [weak self] in
-      guard let self else { return }
-      if let productInfo = await self.productRepository.getProductInfo(
-        productID: productID,
-        userID: userID
-      ) {
-        self.productDetailInfo = productInfo
-        await self.presenter.setProductInfo(with: productInfo)
+  func fetchBookmark() {
+    if let productDetailInfo {
+      let product = productDetailInfo.product
+      
+      Task.detached { [weak self] in
+        guard let self else { return }
+        
+        if productDetailInfo.scrap {
+          _ = await self.bookmarkRepository.deleteBookmark(
+            productId: product.id,
+            boardId: 0,
+            userId: self.userManager.userID
+          )
+        } else {
+          _ = await self.bookmarkRepository.addBookmark(
+            productId: product.id,
+            boardId: 0,
+            userId: self.userManager.userID
+          )
+        }
+        
+        await self.fetchProductInfo(
+          productID: product.id,
+          userID: self.userManager.userID
+        )
       }
+    }
+  }
+  
+  private func fetchProductInfo(productID: Int, userID: Int) async {
+    if let productInfo = await self.productRepository.getProductInfo(
+      productID: productID,
+      userID: userID
+    ) {
+      self.productDetailInfo = productInfo
+      await self.presenter.setProductInfo(with: productInfo)
     }
   }
 }

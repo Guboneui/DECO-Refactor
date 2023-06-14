@@ -14,11 +14,13 @@ import RIBs
 public protocol ProductDetailDependency: Dependency {
   var userManager: MutableUserManagerStream { get }
   var productRepository: ProductRepository { get }
+  var bookmarkRepository: BookmarkRepository { get }
 }
 
 final class ProductDetailComponent: Component<ProductDetailDependency> {
   var userManager: MutableUserManagerStream { dependency.userManager }
   var productRepository: ProductRepository { dependency.productRepository }
+  var bookmarkRepository: BookmarkRepository { dependency.bookmarkRepository }
 }
 
 // MARK: - Builder
@@ -40,7 +42,8 @@ final public class ProductDetailBuilder: Builder<ProductDetailDependency>, Produ
       presenter: viewController,
       productInfo: productInfo,
       userManager: component.userManager,
-      productRepository: component.productRepository
+      productRepository: component.productRepository,
+      bookmarkRepository: component.bookmarkRepository
     )
     interactor.listener = listener
     return ProductDetailRouter(interactor: interactor, viewController: viewController)

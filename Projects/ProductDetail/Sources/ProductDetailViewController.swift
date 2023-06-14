@@ -18,6 +18,8 @@ import RxSwift
 protocol ProductDetailPresentableListener: AnyObject {
   func popProductDetailVC(with popType: PopType)
   func loadToSafariLink()
+  
+  func fetchBookmark()
 }
 
 final class ProductDetailViewController: UIViewController, ProductDetailPresentable, ProductDetailViewControllable {
@@ -159,6 +161,11 @@ final class ProductDetailViewController: UIViewController, ProductDetailPresenta
         guard let self else { return }
         self.listener?.loadToSafariLink()
       }.disposed(by: disposeBag)
+    
+    self.productInfoView.didTapBookmarkButton = { [weak self] in
+      guard let self else { return }
+      self.listener?.fetchBookmark()
+    }
     
     self.productSailInfoView.tap()
       .bind { [weak self] _ in

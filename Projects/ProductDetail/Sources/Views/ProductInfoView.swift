@@ -10,10 +10,14 @@ import UIKit
 import Entity
 
 import Then
+import RxSwift
 import PinLayout
 import FlexLayout
 
 class ProductInfoView: UIView {
+  
+  public var didTapBookmarkButton: (()->())?
+  private let disposeBag: DisposeBag = DisposeBag()
   
   private let brandNameLabel: UILabel = UILabel().then {
     $0.font = .DecoFont.getFont(with: .Suit, type: .bold, size: 12)
@@ -37,6 +41,7 @@ class ProductInfoView: UIView {
   override init(frame: CGRect) {
     super.init(frame: frame)
     self.setupViews()
+    self.setupGestures()
   }
   
   override func layoutSubviews() {
@@ -77,6 +82,14 @@ class ProductInfoView: UIView {
   
   private func setupLayouts() {
     self.flex.layout(mode: .adjustHeight)
+  }
+  
+  private func setupGestures() {
+    bookmarkButton.tap()
+      .bind { [weak self] in
+        guard let self else { return }
+        self.didTapBookmarkButton?()
+      }.disposed(by: disposeBag)
   }
   
   required init?(coder: NSCoder) {

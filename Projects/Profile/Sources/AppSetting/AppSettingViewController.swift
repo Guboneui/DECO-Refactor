@@ -156,17 +156,17 @@ final class AppSettingViewController: UIViewController, AppSettingPresentable, A
     
     self.appNoticeView.tap()
       .bind { _ in
-        SafariLoderImpl.loadSafari(with: DecoURL.appNoriceURL)
+        SafariLoder.loadSafari(with: DecoURL.appNoriceURL)
       }.disposed(by: disposeBag)
     
     self.termsOfServiceView.tap()
       .bind { _ in
-        SafariLoderImpl.loadSafari(with: DecoURL.appServiceTermURL)
+        SafariLoder.loadSafari(with: DecoURL.appServiceTermURL)
       }.disposed(by: disposeBag)
     
     self.privacyPolicyView.tap()
       .bind { _ in
-        SafariLoderImpl.loadSafari(with: DecoURL.privacyURL)
+        SafariLoder.loadSafari(with: DecoURL.privacyURL)
       }.disposed(by: disposeBag)
   }
 }

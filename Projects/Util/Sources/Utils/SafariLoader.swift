@@ -8,14 +8,16 @@
 
 import UIKit
 
-protocol SafariLoader {
+protocol SafariLoaderInterface {
   static func loadSafari(with url: String)
 }
 
-public struct SafariLoderImpl: SafariLoader {
+public struct SafariLoder: SafariLoaderInterface {
   public static func loadSafari(with url: String) {
     if let url = URL(string: url) {
       UIApplication.shared.open(url)
+    } else {
+      print("잘못된 url")
     }
   }
 }

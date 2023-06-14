@@ -94,12 +94,12 @@ class TermView: UIView {
   private func setupGestures() {
     termLabel.tap()
       .subscribe(onNext: { _ in
-        SafariLoderImpl.loadSafari(with: DecoURL.termURL)
+        SafariLoder.loadSafari(with: DecoURL.termURL)
       }).disposed(by: disposeBag)
     
     privacyLabel.tap()
       .subscribe(onNext: { _ in
-        SafariLoderImpl.loadSafari(with: DecoURL.privacyURL)
+        SafariLoder.loadSafari(with: DecoURL.privacyURL)
       }).disposed(by: disposeBag)
   }
 }

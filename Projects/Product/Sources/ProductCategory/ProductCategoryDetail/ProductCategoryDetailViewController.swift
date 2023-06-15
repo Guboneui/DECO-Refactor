@@ -28,6 +28,7 @@ protocol ProductCategoryDetailPresentableListener: AnyObject {
   func showMoodColorModalVC()
   
   func updateFilter(moodList: [(name: String, id: Int, filterType: Filter, isSelected: Bool)], colorList: [(name: String, id: Int, filterType: Filter, isSelected: Bool)])
+  func updateBookmarkState(at index: Int, product: ProductDTO)
   
   func fetchProductList(createdAt: Int)
   func fetchAddBookmark(with productID: Int)
@@ -246,6 +247,7 @@ final class ProductCategoryDetailViewController: UIViewController, ProductCatego
             inSelf.listener?.fetchAddBookmark(with: product.id)
           }
          
+          // MARK: TODO
           let shouldInputData: ProductDTO = ProductDTO(
             name: product.name,
             imageUrl: product.imageUrl,
@@ -254,9 +256,8 @@ final class ProductCategoryDetailViewController: UIViewController, ProductCatego
             scrap: !product.scrap,
             createdAt: product.createdAt
           )
-          var productList = inSelf.listener?.productLists.value ?? []
-          productList[index] = shouldInputData
-          inSelf.listener?.productLists.accept(productList)
+          
+          inSelf.listener?.updateBookmarkState(at: index, product: shouldInputData)
         }
         
       }.disposed(by: disposeBag)

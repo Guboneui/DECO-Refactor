@@ -29,6 +29,7 @@ protocol ProductMoodDetailPresentableListener: AnyObject {
   func fetchDeleteBookmark(with productID: Int)
   
   func updateFilter(categoryList: [(name: String, id: Int, filterType: Filter, isSelected: Bool)], colorList: [(name: String, id: Int, filterType: Filter, isSelected: Bool)])
+  func updateBookmarkState(at index: Int, product: ProductDTO)
   
   func pushProductDetailVC(at index: Int, with productInfo: ProductDTO)
 }
@@ -254,9 +255,8 @@ final class ProductMoodDetailViewController: UIViewController, ProductMoodDetail
             scrap: !product.scrap,
             createdAt: product.createdAt
           )
-          var productList = inSelf.listener?.productLists.value ?? []
-          productList[index] = shouldInputData
-          inSelf.listener?.productLists.accept(productList)
+          
+          inSelf.listener?.updateBookmarkState(at: index, product: shouldInputData)
         }
         
       }.disposed(by: disposeBag)

@@ -180,6 +180,10 @@ final class ProductCategoryDetailInteractor: PresentableInteractor<ProductCatego
     }
   }
   
+  func updateBookmarkState(at index: Int, product: ProductDTO) {
+    productStreamManager.updateProduct(at: index, product: product)
+  }
+  
   func popProductCategoryDetailDetailVC(with popType: PopType) {
     selectedFilterInProductCategory.clearStream()
     listener?.popProductCategoryDetailVC(with: popType)

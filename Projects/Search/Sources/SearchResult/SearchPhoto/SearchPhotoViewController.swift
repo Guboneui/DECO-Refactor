@@ -122,6 +122,9 @@ final class SearchPhotoViewController: UIViewController, SearchPhotoPresentable,
   }
   
   private func setupPhotoCollectionView() {
+    photoCollectionView.delegate = nil
+    photoCollectionView.dataSource = nil
+    
     listener?.photoList
       .bind(to: photoCollectionView.rx.items(
         cellIdentifier: ImageCell.identifier,

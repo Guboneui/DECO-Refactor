@@ -8,6 +8,7 @@
 import User
 import Entity
 import Networking
+import ProductDetail
 import RIBs
 import RxSwift
 import RxRelay
@@ -22,17 +23,19 @@ protocol SearchProductPresentable: Presentable {
 }
 
 protocol SearchProductListener: AnyObject {
-  // TODO: Declare methods the interactor can invoke to communicate with other RIBs.
+  func pushProductDetailVC(with productInfo: ProductDTO)
 }
 
 final class SearchProductInteractor: PresentableInteractor<SearchProductPresentable>, SearchProductInteractable, SearchProductPresentableListener {
   
   weak var router: SearchProductRouting?
   weak var listener: SearchProductListener?
+  private let disposeBag: DisposeBag = DisposeBag()
   
   private let searchText: String
   private let searchRepository: SearchRepository
   private let userManager: MutableUserManagerStream
+  private let productStreamManager: MutableProductStream
   
   var productList: BehaviorRelay<[ProductDTO]> = .init(value: [])
   
@@ -40,11 +43,13 @@ final class SearchProductInteractor: PresentableInteractor<SearchProductPresenta
     presenter: SearchProductPresentable,
     searchText: String,
     searchRepository: SearchRepository,
-    userManager: MutableUserManagerStream
+    userManager: MutableUserManagerStream,
+    productStreamManager: MutableProductStream
   ) {
     self.searchText = searchText
     self.searchRepository = searchRepository
     self.userManager = userManager
+    self.productStreamManager = productStreamManager
     super.init(presenter: presenter)
     presenter.listener = self
   }
@@ -52,11 +57,20 @@ final class SearchProductInteractor: PresentableInteractor<SearchProductPresenta
   override func didBecomeActive() {
     super.didBecomeActive()
     self.fetchProductList(createdAt: Int.max)
+    self.setupProductListStreamBinding()
   }
   
   override func willResignActive() {
     super.willResignActive()
     // TODO: Pause any business logic.
+  }
+  
+  private func setupProductListStreamBinding() {
+    productStreamManager.productList
+      .subscribe(onNext: { [weak self] list in
+        guard let self else { return }
+        self.productList.accept(list)
+      }).disposed(by: disposeBag)
   }
   
   func fetchProductList(createdAt: Int) {
@@ -73,9 +87,14 @@ final class SearchProductInteractor: PresentableInteractor<SearchProductPresenta
         )
       ), !productList.isEmpty {
         let prevData = self.productList.value
-        self.productList.accept(prevData + productList)
+        self.productStreamManager.updateProductList(with: prevData + productList)
       }
     }
+  }
+  
+  func pushProductDetailVC(at index: Int, with productInfo: ProductDTO) {
+    productStreamManager.updateSelectedIndex(index: index)
+    listener?.pushProductDetailVC(with: productInfo)
   }
 }
 

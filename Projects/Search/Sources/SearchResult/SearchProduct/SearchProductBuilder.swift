@@ -7,17 +7,20 @@
 
 import User
 import Networking
+import ProductDetail
 import RIBs
 
 protocol SearchProductDependency: Dependency {
   var searchText: String { get }
   var searchRepository: SearchRepository { get }
   var userManager: MutableUserManagerStream { get }
+  var productListStream: MutableProductStream { get }
 }
 
 final class SearchProductComponent: Component<SearchProductDependency> {
   
   var searchText: String { dependency.searchText }
+  var productListStream: MutableProductStream { dependency.productListStream }
 }
 
 // MARK: - Builder
@@ -39,7 +42,8 @@ final class SearchProductBuilder: Builder<SearchProductDependency>, SearchProduc
       presenter: viewController,
       searchText: component.searchText,
       searchRepository: dependency.searchRepository,
-      userManager: dependency.userManager
+      userManager: dependency.userManager,
+      productStreamManager: component.productListStream
     )
     interactor.listener = listener
     return SearchProductRouter(interactor: interactor, viewController: viewController)

@@ -7,6 +7,7 @@
 
 import User
 import Networking
+import ProductDetail
 
 import RIBs
 
@@ -20,7 +21,8 @@ final class SearchResultComponent:
   SearchPhotoDependency,
   SearchProductDependency,
   SearchBrandDependency,
-  SearchUserDependency
+  SearchUserDependency,
+  ProductDetailDependency
 {
 
   var searchText: String
@@ -32,6 +34,11 @@ final class SearchResultComponent:
   
   var userManager: MutableUserManagerStream { dependency.userManager }
   var searchRepository: SearchRepository { dependency.searchRepository }
+  
+  // 체크
+  var productRepository: Networking.ProductRepository = ProductRepositoryImpl()
+  var bookmarkRepository: Networking.BookmarkRepository = BookmarkRepositoryImpl()
+  var productListStream: ProductDetail.MutableProductStream = ProductStreamImpl()
 }
 
 // MARK: - Builder
@@ -56,6 +63,7 @@ final class SearchResultBuilder: Builder<SearchResultDependency>, SearchResultBu
     let searchProductBuilder = SearchProductBuilder(dependency: component)
     let searchBrandBuilder = SearchBrandBuilder(dependency: component)
     let searchUserBuilder = SearchUserBuilder(dependency: component)
+    let productDetailBuilder = ProductDetailBuilder(dependency: component)
     
     return SearchResultRouter(
       interactor: interactor,
@@ -63,7 +71,8 @@ final class SearchResultBuilder: Builder<SearchResultDependency>, SearchResultBu
       searchPhotoBuildable: searchPhotoBuilder,
       searchProductBuildable: searchProductBuilder,
       searchBrandBuildable: searchBrandBuilder,
-      searchUserBuildable: searchUserBuilder
+      searchUserBuildable: searchUserBuilder,
+      productDetailBuildable: productDetailBuilder
     )
   }
 }

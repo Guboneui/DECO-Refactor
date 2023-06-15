@@ -21,6 +21,7 @@ protocol SearchProductPresentableListener: AnyObject {
   var productList: BehaviorRelay<[ProductDTO]> { get }
   
   func fetchProductList(createdAt: Int)
+  func pushProductDetailVC(at index: Int, with productInfo: ProductDTO)
 }
 
 final class SearchProductViewController: UIViewController, SearchProductPresentable, SearchProductViewControllable {
@@ -124,6 +125,9 @@ final class SearchProductViewController: UIViewController, SearchProductPresenta
   }
   
   private func setupProductCollectionView() {
+    productCollectionView.delegate = nil
+    productCollectionView.dataSource = nil
+    
     listener?.productList
       .bind(to: productCollectionView.rx.items(
         cellIdentifier: BookmarkImageCell.identifier,
@@ -143,8 +147,16 @@ final class SearchProductViewController: UIViewController, SearchProductPresenta
           let lastCreatedAt = productList[index].createdAt
           self.listener?.fetchProductList(createdAt: lastCreatedAt)
         }
-        
       }).disposed(by: disposeBag)
+    
+    Observable.zip(
+      productCollectionView.rx.itemSelected,
+      productCollectionView.rx.modelSelected(ProductDTO.self)
+    ).subscribe(onNext: { [weak self] index, product in
+      guard let self else { return }
+      print(index, product)
+      self.listener?.pushProductDetailVC(at: index.row, with: product)
+    }).disposed(by: disposeBag)
     
     productCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
   }

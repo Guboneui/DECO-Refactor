@@ -6,6 +6,7 @@
 //
 
 import Util
+import Entity
 
 import RIBs
 import RxSwift
@@ -19,7 +20,8 @@ enum SearchTab {
 }
 
 protocol SearchResultRouting: ViewableRouting {
-  // TODO: Declare methods the interactor can invoke to manage sub-tree via the router.
+  func attachProductDetailVC(with productInfo: ProductDTO)
+  func detachProductDetailVC(with popType: PopType)
 }
 
 protocol SearchResultPresentable: Presentable {
@@ -80,5 +82,13 @@ final class SearchResultInteractor: PresentableInteractor<SearchResultPresentabl
   
   func popSearchResultVC(with popType: PopType) {
     listener?.popSearchResultVC(with: popType)
+  }
+  
+  func pushProductDetailVC(with productInfo: ProductDTO) {
+    router?.attachProductDetailVC(with: productInfo)
+  }
+  
+  func popProductDetailVC(with popType: Util.PopType) {
+    router?.detachProductDetailVC(with: popType)
   }
 }

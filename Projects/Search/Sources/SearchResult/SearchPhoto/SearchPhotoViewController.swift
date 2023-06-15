@@ -65,6 +65,11 @@ final class SearchPhotoViewController: UIViewController, SearchPhotoPresentable,
     $0.showsVerticalScrollIndicator = false
   }
   
+  let emptyNoticeLabel: UILabel = UILabel().then {
+    $0.isHidden = true
+    $0.makeEmptySearchResultNoticeText()
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     self.view.backgroundColor = .DecoColor.whiteColor
@@ -82,6 +87,7 @@ final class SearchPhotoViewController: UIViewController, SearchPhotoPresentable,
     self.view.addSubview(filterFlexView)
     self.view.addSubview(selectedFilterCollectionView)
     self.view.addSubview(photoCollectionView)
+    self.view.addSubview(emptyNoticeLabel)
     
     filterFlexView.flex.direction(.row).define { flex in
       flex.addItem(filterLabel)
@@ -108,6 +114,10 @@ final class SearchPhotoViewController: UIViewController, SearchPhotoPresentable,
       .horizontally()
       .bottom()
       .marginTop(selectedFilterCollectionView.isHidden ? 8 : 12)
+    
+    emptyNoticeLabel.pin
+      .center()
+      .sizeToFit()
     
     filterFlexView.flex.layout(mode: .adjustHeight)
   }
@@ -147,6 +157,11 @@ final class SearchPhotoViewController: UIViewController, SearchPhotoPresentable,
       }).disposed(by: disposeBag)
     
     photoCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
+  }
+  
+  func showEmptyNotice() {
+    self.photoCollectionView.isHidden = true
+    self.emptyNoticeLabel.isHidden = false
   }
 }
 

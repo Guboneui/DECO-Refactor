@@ -36,6 +36,11 @@ final class SearchBrandViewController: UIViewController, SearchBrandPresentable,
     $0.showsVerticalScrollIndicator = false
   }
   
+  let emptyNoticeLabel: UILabel = UILabel().then {
+    $0.isHidden = true
+    $0.makeEmptySearchResultNoticeText()
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     self.view.backgroundColor = .DecoColor.whiteColor
@@ -50,10 +55,15 @@ final class SearchBrandViewController: UIViewController, SearchBrandPresentable,
   
   private func setupViews() {
     self.view.addSubview(brandCollectionView)
+    self.view.addSubview(emptyNoticeLabel)
   }
   
   private func setupLayouts() {
     brandCollectionView.pin.all()
+    
+    emptyNoticeLabel.pin
+      .center()
+      .sizeToFit()
   }
   
   private func setupBrandListCollectionView() {
@@ -72,6 +82,11 @@ final class SearchBrandViewController: UIViewController, SearchBrandPresentable,
       }.disposed(by: disposeBag)
     
     brandCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
+  }
+  
+  func showEmptyNotice() {
+    self.brandCollectionView.isHidden = true
+    self.emptyNoticeLabel.isHidden = false
   }
 }
 

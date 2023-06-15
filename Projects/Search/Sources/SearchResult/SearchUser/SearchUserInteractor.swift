@@ -18,7 +18,7 @@ protocol SearchUserRouting: ViewableRouting {
 
 protocol SearchUserPresentable: Presentable {
   var listener: SearchUserPresentableListener? { get set }
-  // TODO: Declare methods the interactor can invoke the presenter to present data.
+  @MainActor func showEmptyNotice()
 }
 
 protocol SearchUserListener: AnyObject {
@@ -61,6 +61,10 @@ final class SearchUserInteractor: PresentableInteractor<SearchUserPresentable>, 
       guard let self else { return }
       if let userList = await self.searchRepository.getSearchUserList(nickname: searchText) {
         self.userList.accept(userList)
+        
+        if userList.isEmpty {
+          await presenter.showEmptyNotice()
+        }
       }
     }
   }

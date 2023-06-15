@@ -19,7 +19,7 @@ protocol SearchPhotoRouting: ViewableRouting {
 
 protocol SearchPhotoPresentable: Presentable {
   var listener: SearchPhotoPresentableListener? { get set }
-  // TODO: Declare methods the interactor can invoke the presenter to present data.
+  @MainActor func showEmptyNotice()
 }
 
 protocol SearchPhotoListener: AnyObject {
@@ -72,9 +72,16 @@ final class SearchPhotoInteractor: PresentableInteractor<SearchPhotoPresentable>
           colorIds: [],
           boardCategoryIds: [],
           userId: self.userManager.userID)
-      ), !photoList.isEmpty {
+      ) {
         let prevData = self.photoList.value
-        self.photoList.accept(prevData + photoList)
+        if !photoList.isEmpty {
+          self.photoList.accept(prevData + photoList)
+        }
+        
+        if prevData.isEmpty && photoList.isEmpty {
+          await self.presenter.showEmptyNotice()
+        }
+        
       }
     }
   }

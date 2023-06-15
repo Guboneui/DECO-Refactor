@@ -19,7 +19,7 @@ protocol SearchProductRouting: ViewableRouting {
 
 protocol SearchProductPresentable: Presentable {
   var listener: SearchProductPresentableListener? { get set }
-  // TODO: Declare methods the interactor can invoke the presenter to present data.
+  @MainActor func showEmptyNotice()
 }
 
 protocol SearchProductListener: AnyObject {
@@ -88,9 +88,15 @@ final class SearchProductInteractor: PresentableInteractor<SearchProductPresenta
           createdAt: createdAt,
           name: self.searchText
         )
-      ), !productList.isEmpty {
+      ) {
         let prevData = self.productList.value
-        self.productStreamManager.updateProductList(with: prevData + productList)
+        if !productList.isEmpty {
+          self.productStreamManager.updateProductList(with: prevData + productList)
+        }
+        
+        if prevData.isEmpty && productList.isEmpty {
+          await self.presenter.showEmptyNotice()
+        }
       }
     }
   }

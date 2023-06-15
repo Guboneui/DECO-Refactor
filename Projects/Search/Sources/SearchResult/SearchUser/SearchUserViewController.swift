@@ -34,6 +34,11 @@ final class SearchUserViewController: UIViewController, SearchUserPresentable, S
     $0.showsVerticalScrollIndicator = false
   }
   
+  let emptyNoticeLabel: UILabel = UILabel().then {
+    $0.isHidden = true
+    $0.makeEmptySearchResultNoticeText()
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     self.view.backgroundColor = .DecoColor.whiteColor
@@ -48,10 +53,15 @@ final class SearchUserViewController: UIViewController, SearchUserPresentable, S
   
   private func setupViews() {
     self.view.addSubview(userCollectionView)
+    self.view.addSubview(emptyNoticeLabel)
   }
   
   private func setupLayouts() {
     userCollectionView.pin.all()
+    
+    emptyNoticeLabel.pin
+      .center()
+      .sizeToFit()
   }
   
   private func setupUserListCollectionView() {
@@ -71,6 +81,11 @@ final class SearchUserViewController: UIViewController, SearchUserPresentable, S
       }.disposed(by: disposeBag)
     
     userCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
+  }
+  
+  func showEmptyNotice() {
+    self.userCollectionView.isHidden = true
+    self.emptyNoticeLabel.isHidden = false
   }
 }
 

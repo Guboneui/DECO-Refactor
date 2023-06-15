@@ -31,4 +31,38 @@ public extension UILabel {
     
     return attributedString
   }
+  
+  func makeEmptySearchResultNoticeText() {
+    let headerText = "앗! 다른 "
+    let mainText = "단어"
+    let trailingText = "를 검색해 주세요."
+
+    let headerTextAttributes: [NSAttributedString.Key: Any] = [
+      .font: UIFont.DecoFont.getFont(with: .NotoSans, type: .medium, size: 12),
+      .foregroundColor: UIColor.DecoColor.darkGray2
+    ]
+
+    let mainTextAttributes: [NSAttributedString.Key: Any] = [
+      .font: UIFont.DecoFont.getFont(with: .NotoSans, type: .bold, size: 12),
+      .foregroundColor: UIColor.DecoColor.darkGray2
+    ]
+
+    let trailingTextAttributes: [NSAttributedString.Key: Any] = [
+      .font: UIFont.DecoFont.getFont(with: .NotoSans, type: .medium, size: 12),
+      .foregroundColor: UIColor.DecoColor.darkGray2
+    ]
+
+    let noticeText = [headerText, mainText, trailingText].joined(separator: "")
+    let attributedString = NSMutableAttributedString(string: noticeText)
+
+    let headerTextRange = attributedString.mutableString.range(of: headerText)
+    let mainTextRange = attributedString.mutableString.range(of: mainText)
+    let trailingTextRange = attributedString.mutableString.range(of: trailingText)
+
+    attributedString.addAttributes(headerTextAttributes, range: headerTextRange)
+    attributedString.addAttributes(mainTextAttributes, range: mainTextRange)
+    attributedString.addAttributes(trailingTextAttributes, range: trailingTextRange)
+    
+    self.attributedText = attributedString
+  }
 }

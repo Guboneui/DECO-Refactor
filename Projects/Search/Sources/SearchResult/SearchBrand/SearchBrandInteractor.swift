@@ -18,7 +18,7 @@ protocol SearchBrandRouting: ViewableRouting {
 
 protocol SearchBrandPresentable: Presentable {
   var listener: SearchBrandPresentableListener? { get set }
-  // TODO: Declare methods the interactor can invoke the presenter to present data.
+  @MainActor func showEmptyNotice()
 }
 
 protocol SearchBrandListener: AnyObject {
@@ -61,6 +61,10 @@ final class SearchBrandInteractor: PresentableInteractor<SearchBrandPresentable>
       guard let self else { return }
       if let brandList = await self.searchRepository.getSearchBrandList(brandName: searchText) {
         self.brandList.accept(brandList)
+        
+        if brandList.isEmpty {
+          await presenter.showEmptyNotice()
+        }
       }
     }
   }

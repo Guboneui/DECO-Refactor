@@ -71,6 +71,11 @@ final class SearchProductViewController: UIViewController, SearchProductPresenta
     $0.showsVerticalScrollIndicator = false
   }
   
+  let emptyNoticeLabel: UILabel = UILabel().then {
+    $0.isHidden = true
+    $0.makeEmptySearchResultNoticeText()
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     self.view.backgroundColor = .DecoColor.whiteColor
@@ -88,7 +93,7 @@ final class SearchProductViewController: UIViewController, SearchProductPresenta
     self.view.addSubview(filterFlexView)
     self.view.addSubview(selectedFilterCollectionView)
     self.view.addSubview(productCollectionView)
-    
+    self.view.addSubview(emptyNoticeLabel)
     
     filterFlexView.flex.direction(.row).define { flex in
       flex.addItem(filterLabel)
@@ -115,6 +120,10 @@ final class SearchProductViewController: UIViewController, SearchProductPresenta
       .horizontally()
       .bottom()
       .marginTop(selectedFilterCollectionView.isHidden ? 8 : 12)
+    
+    emptyNoticeLabel.pin
+      .center()
+      .sizeToFit()
     
     filterFlexView.flex.layout(mode: .adjustHeight)
   }
@@ -183,6 +192,11 @@ final class SearchProductViewController: UIViewController, SearchProductPresenta
     }).disposed(by: disposeBag)
     
     productCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
+  }
+  
+  func showEmptyNotice() {
+    self.productCollectionView.isHidden = true
+    self.emptyNoticeLabel.isHidden = false
   }
 }
 

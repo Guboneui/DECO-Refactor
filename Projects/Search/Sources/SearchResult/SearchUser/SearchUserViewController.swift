@@ -55,6 +55,9 @@ final class SearchUserViewController: UIViewController, SearchUserPresentable, S
   }
   
   private func setupUserListCollectionView() {
+    userCollectionView.delegate = nil
+    userCollectionView.dataSource = nil
+    
     listener?.userList
       .bind(to: userCollectionView.rx.items(
         cellIdentifier: SearchUserCell.identifier,

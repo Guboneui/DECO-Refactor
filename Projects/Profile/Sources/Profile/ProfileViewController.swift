@@ -157,6 +157,9 @@ final public class ProfileViewController: UIViewController, ProfilePresentable, 
   }
   
   private func setupProfilePostingCollectionView() {
+    userPostingCollectionView.delegate = nil
+    userPostingCollectionView.dataSource = nil
+    
     self.listener?.userPostings
       .observe(on: MainScheduler.instance)
       .filter{!$0.isEmpty}

@@ -136,6 +136,9 @@ final class FollowingListViewController: UIViewController, FollowingListPresenta
   }
   
   private func setFollowingListCollectionView() {
+    followingListCollectionView.delegate = nil
+    followingListCollectionView.dataSource = nil
+    
     listener?.followingList.bind(to: followingListCollectionView.rx.items(
       cellIdentifier: FollowListCell.identifier,
       cellType: FollowListCell.self)

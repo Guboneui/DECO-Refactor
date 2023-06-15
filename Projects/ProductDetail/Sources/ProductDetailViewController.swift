@@ -223,6 +223,9 @@ final class ProductDetailViewController: UIViewController, ProductDetailPresenta
   }
   
   private func setupProductPostingCollectionView() {
+    productPostingCollectionView.delegate = nil
+    productPostingCollectionView.dataSource = nil
+    
     listener?.productPostings
       .share()
       .observe(on: MainScheduler.instance)

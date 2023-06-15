@@ -77,7 +77,6 @@ final class ProductCategoryViewController: UIViewController, ProductCategoryPres
   override func viewDidLoad() {
     super.viewDidLoad()
     self.view.backgroundColor = .link
-    collectionView.rx.setDelegate(self).disposed(by: disposeBag)
     
     self.setupViews()
     self.setupCollectionView()
@@ -138,6 +137,9 @@ final class ProductCategoryViewController: UIViewController, ProductCategoryPres
   
   
   private func setupCollectionView() {
+    collectionView.delegate = nil
+    collectionView.dataSource = nil
+    
     listener?.productCategorySections
       .bind(to: collectionView.rx.items(dataSource: dataSource))
       .disposed(by: disposeBag)
@@ -156,6 +158,8 @@ final class ProductCategoryViewController: UIViewController, ProductCategoryPres
         break
       }
     }).disposed(by: disposeBag)
+    
+    collectionView.rx.setDelegate(self).disposed(by: disposeBag)
   }
 }
 

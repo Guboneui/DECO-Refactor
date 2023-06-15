@@ -57,6 +57,9 @@ final class SearchBrandViewController: UIViewController, SearchBrandPresentable,
   }
   
   private func setupBrandListCollectionView() {
+    brandCollectionView.delegate = nil
+    brandCollectionView.dataSource = nil
+    
     listener?.brandList
       .bind(to: brandCollectionView.rx.items(
         cellIdentifier: SearchBrandCell.identifier,

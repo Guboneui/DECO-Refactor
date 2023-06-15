@@ -60,7 +60,8 @@ final class BrandListViewController: UIViewController, BrandListPresentable, Bra
   }
   
   private func setupBrandListCollectionView() {
-    collectionView.rx.setDelegate(self).disposed(by: disposeBag)
+    collectionView.delegate = nil
+    collectionView.dataSource = nil
     
     listener?.brandList
       .bind(to: collectionView.rx.items(
@@ -78,6 +79,8 @@ final class BrandListViewController: UIViewController, BrandListPresentable, Bra
         print("\($0)")
       })
       .disposed(by: disposeBag)
+    
+    collectionView.rx.setDelegate(self).disposed(by: disposeBag)
   }
 }
 

@@ -172,6 +172,9 @@ final class FollowViewController: UIViewController, FollowPresentable, FollowVie
   }
   
   private func setupFollowCollectionView() {
+    followCollectionView.delegate = nil
+    followCollectionView.dataSource = nil
+    
     listener?.followVCs
       .bind(to: followCollectionView.rx.items(
         cellIdentifier: ChildViewCell.identifier,

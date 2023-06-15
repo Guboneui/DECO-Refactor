@@ -85,6 +85,9 @@ final class ProductBookmarkViewController: UIViewController, ProductBookmarkPres
   }
   
   private func setupCategoryCollectionView() {
+    productBookmarkCategoryCollectionView.delegate = nil
+    productBookmarkCategoryCollectionView.dataSource = nil
+    
     listener?.productBookmarkCategory
       .bind(to: productBookmarkCategoryCollectionView.rx.items(
         cellIdentifier: SmallTextCell.identifier,
@@ -109,6 +112,9 @@ final class ProductBookmarkViewController: UIViewController, ProductBookmarkPres
   }
   
   private func setupBookmarkCollectionView() {
+    productBookmarkCollectionView.delegate = nil
+    productBookmarkCollectionView.dataSource = nil
+    
     listener?.productBookmarkList
       .bind(to: productBookmarkCollectionView.rx.items(
         cellIdentifier: BookmarkImageCell.identifier,

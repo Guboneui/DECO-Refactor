@@ -237,6 +237,9 @@ final class BrandDetailViewController: UIViewController, BrandDetailPresentable,
 
 extension BrandDetailViewController {
   private func setupBrandProductUsageCollectionView() {
+    brandProductUsageCollectionView.delegate = nil
+    brandProductUsageCollectionView.dataSource = nil
+    
     listener?.brandProductUsagePostings
       .observe(on: MainScheduler.instance)
       .filter{!$0.isEmpty}
@@ -277,6 +280,10 @@ extension BrandDetailViewController {
 
 extension BrandDetailViewController {
   private func setupProductCategoryCollectionView() {
+    
+    brandProductCategoryCollectionView.delegate = nil
+    brandProductCategoryCollectionView.dataSource = nil
+    
     listener?.productCategory
       .bind(to: brandProductCategoryCollectionView.rx.items(
         cellIdentifier: SmallTextCell.identifier,
@@ -306,6 +313,9 @@ extension BrandDetailViewController {
 
 extension BrandDetailViewController {
   private func setupStickyCategoryCollectionView() {
+    stickyCategoryCollectionView.delegate = nil
+    stickyCategoryCollectionView.dataSource = nil
+    
     listener?.productCategory
       .bind(to: stickyCategoryCollectionView.rx.items(
         cellIdentifier: SmallTextCell.identifier,
@@ -334,6 +344,9 @@ extension BrandDetailViewController {
 
 extension BrandDetailViewController {
   private func setupBrandProductCollectionView() {
+    brandProductCollectionView.delegate = nil
+    brandProductCollectionView.dataSource = nil
+    
     listener?.categoryVCs
       .bind(to: brandProductCollectionView.rx.items(
         cellIdentifier: ChildViewCell.identifier,

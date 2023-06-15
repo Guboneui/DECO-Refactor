@@ -136,6 +136,9 @@ final class FollowerListViewController: UIViewController, FollowerListPresentabl
   }
   
   private func setFollowingListCollectionView() {
+    followerListCollectionView.delegate = nil
+    followerListCollectionView.dataSource = nil
+    
     listener?.followerList.bind(to: followerListCollectionView.rx.items(
       cellIdentifier: FollowListCell.identifier,
       cellType: FollowListCell.self)

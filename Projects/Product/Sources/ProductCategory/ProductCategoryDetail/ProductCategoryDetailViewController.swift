@@ -190,6 +190,9 @@ final class ProductCategoryDetailViewController: UIViewController, ProductCatego
   }
   
   private func setSelectedFilterCollectionView() {
+    selectedFilterCollectionView.delegate = nil
+    selectedFilterCollectionView.dataSource = nil
+    
     self.listener?.selectedFilter
       .observe(on: MainScheduler.instance)
       .bind { [weak self] selectedFilter in
@@ -232,6 +235,9 @@ final class ProductCategoryDetailViewController: UIViewController, ProductCatego
   }
   
   private func setProductListCollectionView() {
+    productCollectionView.delegate = nil
+    productCollectionView.dataSource = nil
+    
     listener?.productLists
       .bind(to: productCollectionView.rx.items(
         cellIdentifier: BookmarkImageCell.identifier,

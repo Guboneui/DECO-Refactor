@@ -238,10 +238,10 @@ final class SearchResultViewController: UIViewController, SearchResultPresentabl
   }
   
   
-  
-  
-  
   private func setupMainCollectionView() {
+    mainCollectionView.delegate = nil
+    mainCollectionView.dataSource = nil
+    
     listener?.childVCs
       .bind(to: mainCollectionView.rx.items(
         cellIdentifier: ChildViewCell.identifier,

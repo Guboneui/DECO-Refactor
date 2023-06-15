@@ -83,6 +83,9 @@ final class PhotoBookmarkViewController: UIViewController, PhotoBookmarkPresenta
   }
   
   private func setupCategoryCollectionView() {
+    photoBookmarkCollectionView.delegate = nil
+    photoBookmarkCollectionView.dataSource = nil
+    
     listener?.photoBookmarkCategory
       .bind(to: photoBookmarkCategoryCollectionView.rx.items(
         cellIdentifier: SmallTextCell.identifier,
@@ -107,6 +110,9 @@ final class PhotoBookmarkViewController: UIViewController, PhotoBookmarkPresenta
   }
   
   private func setupBookmarkCollectionView() {
+    photoBookmarkCollectionView.delegate = nil
+    photoBookmarkCollectionView.dataSource = nil
+    
     listener?.photoBookmarkList
       .bind(to: photoBookmarkCollectionView.rx.items(
         cellIdentifier: BookmarkImageCell.identifier,

@@ -248,6 +248,9 @@ final class TargetUserProfileViewController: UIViewController, TargetUserProfile
   }
   
   private func setupTargetUserPostingCollectionView() {
+    targetUserPostingCollectionView.delegate = nil
+    targetUserPostingCollectionView.dataSource = nil
+    
     self.listener?.targetUserPostings
       .observe(on: MainScheduler.instance)
       .filter{!$0.isEmpty}

@@ -149,6 +149,9 @@ final class BookmarkViewController: UIViewController, BookmarkPresentable, Bookm
   }
   
   private func setupSegmentCollectionView() {
+    segmentCollectionView.delegate = nil
+    segmentCollectionView.dataSource = nil
+    
     listener?.bookmarkVCs
       .bind(to: segmentCollectionView.rx.items(
         cellIdentifier: ChildViewCell.identifier,

@@ -104,6 +104,9 @@ final class BrandProductUsageViewController: UIViewController, BrandProductUsage
   }
   
   func setBrandProductUsageCollectionView() {
+    brandProductUsageCollectionView.delegate = nil
+    brandProductUsageCollectionView.dataSource = nil
+    
     listener?.brandProductUsagePosting
       .bind(to: brandProductUsageCollectionView.rx.items(
         cellIdentifier: ImageCell.identifier,

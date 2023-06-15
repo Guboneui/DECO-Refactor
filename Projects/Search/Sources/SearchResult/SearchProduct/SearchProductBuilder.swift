@@ -15,12 +15,14 @@ protocol SearchProductDependency: Dependency {
   var searchRepository: SearchRepository { get }
   var userManager: MutableUserManagerStream { get }
   var productListStream: MutableProductStream { get }
+  var bookmarkRepository: BookmarkRepository { get }
 }
 
 final class SearchProductComponent: Component<SearchProductDependency> {
   
   var searchText: String { dependency.searchText }
   var productListStream: MutableProductStream { dependency.productListStream }
+  var bookmarkRepository: BookmarkRepository { dependency.bookmarkRepository }
 }
 
 // MARK: - Builder
@@ -42,6 +44,7 @@ final class SearchProductBuilder: Builder<SearchProductDependency>, SearchProduc
       presenter: viewController,
       searchText: component.searchText,
       searchRepository: dependency.searchRepository,
+      bookmarkRepository: component.bookmarkRepository,
       userManager: dependency.userManager,
       productStreamManager: component.productListStream
     )

@@ -34,6 +34,7 @@ final class SearchProductInteractor: PresentableInteractor<SearchProductPresenta
   
   private let searchText: String
   private let searchRepository: SearchRepository
+  private let bookmarkRepository: BookmarkRepository
   private let userManager: MutableUserManagerStream
   private let productStreamManager: MutableProductStream
   
@@ -43,11 +44,13 @@ final class SearchProductInteractor: PresentableInteractor<SearchProductPresenta
     presenter: SearchProductPresentable,
     searchText: String,
     searchRepository: SearchRepository,
+    bookmarkRepository: BookmarkRepository,
     userManager: MutableUserManagerStream,
     productStreamManager: MutableProductStream
   ) {
     self.searchText = searchText
     self.searchRepository = searchRepository
+    self.bookmarkRepository = bookmarkRepository
     self.userManager = userManager
     self.productStreamManager = productStreamManager
     super.init(presenter: presenter)
@@ -90,6 +93,32 @@ final class SearchProductInteractor: PresentableInteractor<SearchProductPresenta
         self.productStreamManager.updateProductList(with: prevData + productList)
       }
     }
+  }
+  
+  func fetchAddBookmark(with productID: Int) {
+    Task.detached { [weak self] in
+      guard let self else { return }
+      _ = await self.bookmarkRepository.addBookmark(
+        productId: productID,
+        boardId: 0,
+        userId: self.userManager.userID
+      )
+    }
+  }
+  
+  func fetchDeleteBookmark(with productID: Int) {
+    Task.detached { [weak self] in
+      guard let self else { return }
+      _ = await self.bookmarkRepository.deleteBookmark(
+        productId: productID,
+        boardId: 0,
+        userId: self.userManager.userID
+      )
+    }
+  }
+  
+  func updateBookmarkState(at index: Int, product: ProductDTO) {
+    productStreamManager.updateProduct(at: index, product: product)
   }
   
   func pushProductDetailVC(at index: Int, with productInfo: ProductDTO) {

@@ -21,6 +21,9 @@ protocol SearchProductPresentableListener: AnyObject {
   var productList: BehaviorRelay<[ProductDTO]> { get }
   
   func fetchProductList(createdAt: Int)
+  func fetchAddBookmark(with productID: Int)
+  func fetchDeleteBookmark(with productID: Int)
+  func updateBookmarkState(at index: Int, product: ProductDTO)
   func pushProductDetailVC(at index: Int, with productInfo: ProductDTO)
 }
 
@@ -135,7 +138,28 @@ final class SearchProductViewController: UIViewController, SearchProductPresenta
       ) { [weak self] index, product, cell in
         guard let self else { return }
         cell.setupCellConfigure(imageURL: product.imageUrl, isBookmarked: product.scrap)
-        
+        cell.didTapBookmarkButton = { [weak self] in
+          guard let inSelf = self else { return }
+          if product.scrap {
+            inSelf.listener?.fetchDeleteBookmark(with: product.id)
+          } else {
+            inSelf.listener?.fetchAddBookmark(with: product.id)
+          }
+          
+          let shouldInputData: ProductDTO = ProductDTO(
+            name: product.name,
+            imageUrl: product.imageUrl,
+            brandName: product.brandName,
+            id: product.id,
+            scrap: !product.scrap,
+            createdAt: product.createdAt
+          )
+          
+          inSelf.listener?.updateBookmarkState(
+            at: index,
+            product: shouldInputData
+          )
+        }
       }.disposed(by: disposeBag)
     
     productCollectionView.rx.willDisplayCell

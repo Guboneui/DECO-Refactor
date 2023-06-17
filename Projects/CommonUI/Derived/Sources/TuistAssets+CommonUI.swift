@@ -57,6 +57,7 @@ public enum CommonUIAsset {
     public static let bye = CommonUIImages(name: "bye")
     public static let camera = CommonUIImages(name: "camera")
     public static let cameraWhite = CommonUIImages(name: "camera_white")
+    public static let categoryPopup = CommonUIImages(name: "categoryPopup")
     public static let checkColor = CommonUIImages(name: "check_color")
     public static let checkLightgrey1 = CommonUIImages(name: "check_lightgrey_1")
     public static let checkSec = CommonUIImages(name: "check_sec")

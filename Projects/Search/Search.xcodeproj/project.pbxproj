@@ -3,17 +3,21 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		014FBE686CFCA5FD9B3A9610 /* SearchPhotoFilterInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF242430CF31D703830A42C6 /* SearchPhotoFilterInteractor.swift */; };
 		01C563931CF57DAE72076F17 /* SearchResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61CA9976574B2D87A92C12A /* SearchResultViewController.swift */; };
 		0C768754F74228A5D1D1BE75 /* SearchPhotoBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC3C74D31F2FC7542EE0B34 /* SearchPhotoBuilder.swift */; };
+		0F9720E3189D89740B9239EF /* SearchPhotoFilterBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AAD79CB044071DC5F09B89 /* SearchPhotoFilterBuilder.swift */; };
 		10D5F3CA1A590217D0DD4D36 /* SearchPhotoRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E6FE2FAA69D1BC38F73D41 /* SearchPhotoRouter.swift */; };
 		17D692D96C6010DC810B44AF /* ProductDetail.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C65EBCD190C30829DABCF0F5 /* ProductDetail.framework */; platformFilter = ios; };
 		18EF59DEA7525C68659F3A16 /* SearchBrandViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102C000FC0058C0650177631 /* SearchBrandViewController.swift */; };
 		2A1313506AC9858BF4281552 /* SearchResultBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C01D5EFFB71E17810B902D /* SearchResultBuilder.swift */; };
+		2C5272412A3B87CE00451098 /* SearchPhotoFilterStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5272402A3B87CE00451098 /* SearchPhotoFilterStream.swift */; };
 		3673F135729326EE0064436C /* SearchInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419087690FD5ED809475BCA6 /* SearchInteractor.swift */; };
+		4673DEEE6D24A434C46999DA /* SearchPhotoFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991C4C3A76D9376F097F1BAA /* SearchPhotoFilterViewController.swift */; };
 		4B295DEE9154896E968F3D94 /* SearchResultRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751451A9A20E126D8601B2D6 /* SearchResultRouter.swift */; };
 		4FF8CCF60A4EB50FC58FEB91 /* SearchUserRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4ED71C1E2EA6B2698B3D245 /* SearchUserRouter.swift */; };
 		61033D34A872A15C743A58E5 /* SearchProductInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88BF42400872D69C6D2D3D83 /* SearchProductInteractor.swift */; };
@@ -28,6 +32,7 @@
 		D1A230DC9344BB0117742A20 /* SearchBrandBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59840A3BF06D6B4B9C7CD74B /* SearchBrandBuilder.swift */; };
 		D8373F8EF9206546BB7CC77F /* SearchPhotoInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7017E898A47BC7508A97D045 /* SearchPhotoInteractor.swift */; };
 		DA237FA89E4D7EBDCE87BB3D /* SearchPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADEB1B103D58874613DA782 /* SearchPhotoViewController.swift */; };
+		E19B1FD18562D0499E0B4B99 /* SearchPhotoFilterRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68557905B49540175C2D7B9D /* SearchPhotoFilterRouter.swift */; };
 		EC3154A1751DA6CE5D8932BE /* SearchProductBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B862BBEF795965BABE9C30 /* SearchProductBuilder.swift */; };
 		F7DF126B56045F9AA663F55F /* SearchUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3496AAF4B6F5082D03409804 /* SearchUserCell.swift */; };
 		FAABFC572969AF296931092A /* SearchProductRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B379CE852975E01D04BD26 /* SearchProductRouter.swift */; };
@@ -56,22 +61,27 @@
 		13FDFA7670117D9B5F469962 /* SearchProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchProductViewController.swift; sourceTree = "<group>"; };
 		15D75A54739E2391FBACD3CD /* SearchUserInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserInteractor.swift; sourceTree = "<group>"; };
 		23C01D5EFFB71E17810B902D /* SearchResultBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultBuilder.swift; sourceTree = "<group>"; };
+		2C5272402A3B87CE00451098 /* SearchPhotoFilterStream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPhotoFilterStream.swift; sourceTree = "<group>"; };
 		3496AAF4B6F5082D03409804 /* SearchUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserCell.swift; sourceTree = "<group>"; };
 		400F24713D8A84B16827032E /* SearchRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRouter.swift; sourceTree = "<group>"; };
 		419087690FD5ED809475BCA6 /* SearchInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchInteractor.swift; sourceTree = "<group>"; };
+		41AAD79CB044071DC5F09B89 /* SearchPhotoFilterBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPhotoFilterBuilder.swift; sourceTree = "<group>"; };
 		47506C2B8CF716A0AD1E9198 /* Search-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Search-Info.plist"; sourceTree = "<group>"; };
 		59840A3BF06D6B4B9C7CD74B /* SearchBrandBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBrandBuilder.swift; sourceTree = "<group>"; };
 		6823BA856EC6283240036EDE /* SearchUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserViewController.swift; sourceTree = "<group>"; };
+		68557905B49540175C2D7B9D /* SearchPhotoFilterRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPhotoFilterRouter.swift; sourceTree = "<group>"; };
 		69E55981027264EFBA638C42 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		7017E898A47BC7508A97D045 /* SearchPhotoInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPhotoInteractor.swift; sourceTree = "<group>"; };
 		751451A9A20E126D8601B2D6 /* SearchResultRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultRouter.swift; sourceTree = "<group>"; };
 		88BF42400872D69C6D2D3D83 /* SearchProductInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchProductInteractor.swift; sourceTree = "<group>"; };
 		89B379CE852975E01D04BD26 /* SearchProductRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchProductRouter.swift; sourceTree = "<group>"; };
+		991C4C3A76D9376F097F1BAA /* SearchPhotoFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPhotoFilterViewController.swift; sourceTree = "<group>"; };
 		A662140D58E4130FB8D4DBDD /* SearchBrandRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBrandRouter.swift; sourceTree = "<group>"; };
 		AADEB1B103D58874613DA782 /* SearchPhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPhotoViewController.swift; sourceTree = "<group>"; };
 		B61CA9976574B2D87A92C12A /* SearchResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultViewController.swift; sourceTree = "<group>"; };
 		C5A077F6DF8B6EF30EC98423 /* SearchResultInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultInteractor.swift; sourceTree = "<group>"; };
 		C65EBCD190C30829DABCF0F5 /* ProductDetail.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ProductDetail.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CF242430CF31D703830A42C6 /* SearchPhotoFilterInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPhotoFilterInteractor.swift; sourceTree = "<group>"; };
 		D4ED71C1E2EA6B2698B3D245 /* SearchUserRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserRouter.swift; sourceTree = "<group>"; };
 		DCEA3ABCBA70F49C90FFC61F /* Search.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Search.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1B862BBEF795965BABE9C30 /* SearchProductBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchProductBuilder.swift; sourceTree = "<group>"; };
@@ -105,12 +115,33 @@
 		29987828935616BA6663C85A /* SearchPhoto */ = {
 			isa = PBXGroup;
 			children = (
+				2C52723F2A3B87B600451098 /* FilterStream */,
+				48A90F52F50216A0675493B1 /* SearchPhotoFilter */,
 				ECC3C74D31F2FC7542EE0B34 /* SearchPhotoBuilder.swift */,
 				7017E898A47BC7508A97D045 /* SearchPhotoInteractor.swift */,
 				E9E6FE2FAA69D1BC38F73D41 /* SearchPhotoRouter.swift */,
 				AADEB1B103D58874613DA782 /* SearchPhotoViewController.swift */,
 			);
 			path = SearchPhoto;
+			sourceTree = "<group>";
+		};
+		2C52723F2A3B87B600451098 /* FilterStream */ = {
+			isa = PBXGroup;
+			children = (
+				2C5272402A3B87CE00451098 /* SearchPhotoFilterStream.swift */,
+			);
+			path = FilterStream;
+			sourceTree = "<group>";
+		};
+		48A90F52F50216A0675493B1 /* SearchPhotoFilter */ = {
+			isa = PBXGroup;
+			children = (
+				41AAD79CB044071DC5F09B89 /* SearchPhotoFilterBuilder.swift */,
+				CF242430CF31D703830A42C6 /* SearchPhotoFilterInteractor.swift */,
+				68557905B49540175C2D7B9D /* SearchPhotoFilterRouter.swift */,
+				991C4C3A76D9376F097F1BAA /* SearchPhotoFilterViewController.swift */,
+			);
+			path = SearchPhotoFilter;
 			sourceTree = "<group>";
 		};
 		57482371D47026349289B3AC /* SearchResult */ = {
@@ -251,8 +282,6 @@
 		5A5799AE384BBD104247C169 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				TargetAttributes = {
-				};
 			};
 			buildConfigurationList = 731940972587373E5B45F8C7 /* Build configuration list for PBXProject "Search" */;
 			compatibilityVersion = "Xcode 13.0";
@@ -290,12 +319,17 @@
 				FD7DA493AAFC12C9592AC3AB /* SearchBrandCell.swift in Sources */,
 				F7DF126B56045F9AA663F55F /* SearchUserCell.swift in Sources */,
 				88D874BEEA4169CD598264B3 /* SearchBuilder.swift in Sources */,
+				2C5272412A3B87CE00451098 /* SearchPhotoFilterStream.swift in Sources */,
 				3673F135729326EE0064436C /* SearchInteractor.swift in Sources */,
 				D1A230DC9344BB0117742A20 /* SearchBrandBuilder.swift in Sources */,
 				FF16034A212529E84E5D434C /* SearchBrandInteractor.swift in Sources */,
 				67FBB311559C8286353A23CC /* SearchBrandRouter.swift in Sources */,
 				18EF59DEA7525C68659F3A16 /* SearchBrandViewController.swift in Sources */,
 				0C768754F74228A5D1D1BE75 /* SearchPhotoBuilder.swift in Sources */,
+				0F9720E3189D89740B9239EF /* SearchPhotoFilterBuilder.swift in Sources */,
+				014FBE686CFCA5FD9B3A9610 /* SearchPhotoFilterInteractor.swift in Sources */,
+				E19B1FD18562D0499E0B4B99 /* SearchPhotoFilterRouter.swift in Sources */,
+				4673DEEE6D24A434C46999DA /* SearchPhotoFilterViewController.swift in Sources */,
 				D8373F8EF9206546BB7CC77F /* SearchPhotoInteractor.swift in Sources */,
 				10D5F3CA1A590217D0DD4D36 /* SearchPhotoRouter.swift in Sources */,
 				DA237FA89E4D7EBDCE87BB3D /* SearchPhotoViewController.swift in Sources */,

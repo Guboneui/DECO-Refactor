@@ -14,11 +14,18 @@ protocol SearchPhotoDependency: Dependency {
   var searchText: String { get }
   var searchRepository: SearchRepository { get }
   var userManager: MutableUserManagerStream { get }
+  var productRepository: ProductRepository { get }
 }
 
-final class SearchPhotoComponent: Component<SearchPhotoDependency> {
+final class SearchPhotoComponent:
+  Component<SearchPhotoDependency>,
+  SearchPhotoFilterDependency
+{
   
   var searchText: String { dependency.searchText }
+  var searchPhotoFilterManager: MutableSearchPhotoFilterStream = SearchPhotoFilterStreamImpl()
+  
+  fileprivate var boardRepository = BoardRepositoryImpl()
 }
 
 // MARK: - Builder
@@ -40,9 +47,20 @@ final class SearchPhotoBuilder: Builder<SearchPhotoDependency>, SearchPhotoBuild
       presenter: viewController,
       searchText: component.searchText,
       searchRepository: dependency.searchRepository,
-      userManager: dependency.userManager
+      userManager: dependency.userManager,
+      productRepository: dependency.productRepository,
+      boardRepository: component.boardRepository,
+      searchPhotoFilterManager: component.searchPhotoFilterManager
     )
+    
     interactor.listener = listener
-    return SearchPhotoRouter(interactor: interactor, viewController: viewController)
+    
+    let searchPhotoFilterBuilder = SearchPhotoFilterBuilder(dependency: component)
+    
+    return SearchPhotoRouter(
+      interactor: interactor,
+      viewController: viewController,
+      searchPhotoFilterBuildable: searchPhotoFilterBuilder
+    )
   }
 }

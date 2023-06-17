@@ -238,22 +238,22 @@ final class ProductDetailViewController: UIViewController, ProductDetailPresenta
         
         let postingCount: Int = postings.count
         var lineCount: Int
-        let cvItemHeight: CGFloat = (view.frame.width - (cvHorizontalEdge*2) - cvSpacing) / 2.0
+        let cvItemHeight: CGFloat = (self.view.frame.width - (self.cvHorizontalEdge*2) - self.cvSpacing) / 2.0
         if postingCount % 2 == 0 { lineCount = postingCount / 2 }
         else { lineCount = postingCount / 2 + 1 }
         
-        let cvHeight: Int = (lineCount * Int(cvItemHeight)) + (lineCount-1) * Int(cvSpacing)
+        let cvHeight: Int = (lineCount * Int(cvItemHeight)) + (lineCount-1) * Int(self.cvSpacing)
         self.cvHeight = CGFloat(cvHeight)
         
         self.productPostingCollectionView.pin
-          .below(of: otherUserUsedLabel)
+          .below(of: self.otherUserUsedLabel)
           .horizontally()
           .height(CGFloat(cvHeight))
           .marginTop(28)
         
         self.scrollView.contentSize = CGSize(
-          width: view.frame.width,
-          height: productPostingCollectionView.frame.maxY
+          width: self.view.frame.width,
+          height: self.productPostingCollectionView.frame.maxY
         )
         
       }.disposed(by: disposeBag)
@@ -272,7 +272,7 @@ final class ProductDetailViewController: UIViewController, ProductDetailPresenta
       .map{$0.at.row}
       .subscribe(onNext: { [weak self] index in
         guard let self else { return }
-        if let productPostings = listener?.productPostings.value,
+        if let productPostings = self.listener?.productPostings.value,
            productPostings.count - 1 == index,
            let lastCreatedAt = productPostings[index].createdAt
         {

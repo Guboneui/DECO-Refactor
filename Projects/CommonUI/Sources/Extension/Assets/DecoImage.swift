@@ -97,6 +97,7 @@ public extension UIImage {
     public static let cute = CommonUIAsset.Image.cute.image
     public static let appleLogo = CommonUIAsset.Image.appleLogo.image
     public static let thumbnail = CommonUIAsset.Image.thumbnail.image
+    public static let categoryPopup = CommonUIAsset.Image.categoryPopup.image
     
     // MARK: Bottom TabBar Image
     public static let defaultHomeTab = CommonUIAsset.Image.defaultHome.image

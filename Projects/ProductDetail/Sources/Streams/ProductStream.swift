@@ -17,6 +17,7 @@ public protocol ProductStream: AnyObject {
 public protocol MutableProductStream: ProductStream {
   func updateProductList(with productList: [ProductDTO])
   func updateProduct(product: ProductDTO)
+  func updateProduct(at index: Int, product: ProductDTO)
   func updateSelectedIndex(index: Int)
 }
 
@@ -45,6 +46,12 @@ public class ProductStreamImpl: MutableProductStream {
       updatedData[selectedIndex] = product
       list.accept(updatedData)
     }
+  }
+  
+  public func updateProduct(at index: Int, product: ProductDTO) {
+    var updatedData: [ProductDTO] = list.value
+    updatedData[index] = product
+    list.accept(updatedData)
   }
   
   public func updateSelectedIndex(index: Int) {

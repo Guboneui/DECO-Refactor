@@ -63,7 +63,7 @@ final class SearchUserInteractor: PresentableInteractor<SearchUserPresentable>, 
         self.userList.accept(userList)
         
         if userList.isEmpty {
-          await presenter.showEmptyNotice()
+          await self.presenter.showEmptyNotice()
         }
       }
     }

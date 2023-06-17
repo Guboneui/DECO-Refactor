@@ -63,7 +63,7 @@ final class SearchBrandInteractor: PresentableInteractor<SearchBrandPresentable>
         self.brandList.accept(brandList)
         
         if brandList.isEmpty {
-          await presenter.showEmptyNotice()
+          await self.presenter.showEmptyNotice()
         }
       }
     }

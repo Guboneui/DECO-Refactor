@@ -18,8 +18,15 @@ import FlexLayout
 
 protocol SearchPhotoPresentableListener: AnyObject {
   var photoList: BehaviorRelay<[PostingDTO]> { get }
+  var selectedFilter: BehaviorRelay<[(name: String, id: Int, filterType: SearchPhotoFilterType, isSelected: Bool)]> { get }
   
+  func showFilterModalVC()
   func fetchPhotoList(createdAt: Int)
+  func updateFilter(
+    cateogryList: [(name: String, id: Int, filterType: SearchPhotoFilterType, isSelected: Bool)],
+    moodList: [(name: String, id: Int, filterType: SearchPhotoFilterType, isSelected: Bool)],
+    colorList: [(name: String, id: Int, filterType: SearchPhotoFilterType, isSelected: Bool)]
+  )
 }
 
 final class SearchPhotoViewController: UIViewController, SearchPhotoPresentable, SearchPhotoViewControllable {
@@ -39,20 +46,21 @@ final class SearchPhotoViewController: UIViewController, SearchPhotoPresentable,
     $0.contentMode = .scaleAspectFit
   }
   
-  private let filterFlexView: TouchAnimationView = TouchAnimationView().then {
+  private let filterFlexView: UIView = UIView().then {
     $0.backgroundColor = .DecoColor.whiteColor
+    $0.isHidden = true
   }
   
   private let selectedFilterCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: .init()).then {
     $0.register(SelectedFilterCell.self, forCellWithReuseIdentifier: SelectedFilterCell.identifier)
-    $0.backgroundColor = .DecoColor.warningColor
+    $0.backgroundColor = .DecoColor.whiteColor
     $0.bounces = false
     
     let layout = UICollectionViewFlowLayout()
     layout.scrollDirection = .horizontal
     $0.collectionViewLayout = layout
     $0.showsHorizontalScrollIndicator = false
-    $0.isHidden = false
+    $0.isHidden = true
   }
   
   private let photoCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: .init()).then {
@@ -75,7 +83,9 @@ final class SearchPhotoViewController: UIViewController, SearchPhotoPresentable,
     self.view.backgroundColor = .DecoColor.whiteColor
     self.setupViews()
     self.setupGestures()
+    self.setupFilterCollectionView()
     self.setupPhotoCollectionView()
+    
   }
   
   override func viewDidLayoutSubviews() {
@@ -126,8 +136,7 @@ final class SearchPhotoViewController: UIViewController, SearchPhotoPresentable,
     filterFlexView.tap()
       .bind { [weak self] _ in
         guard let self else { return }
-        print("필터 클릭")
-        
+        self.listener?.showFilterModalVC()
       }.disposed(by: disposeBag)
   }
   
@@ -159,9 +168,66 @@ final class SearchPhotoViewController: UIViewController, SearchPhotoPresentable,
     photoCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
   }
   
-  func showEmptyNotice() {
-    self.photoCollectionView.isHidden = true
-    self.emptyNoticeLabel.isHidden = false
+  func showEmptyNotice(isEmpty: Bool) {
+    if isEmpty {
+      self.photoCollectionView.isHidden = true
+      self.emptyNoticeLabel.isHidden = false
+    } else {
+      self.photoCollectionView.isHidden = false
+      self.emptyNoticeLabel.isHidden = true
+    }
+    
+  }
+  
+  func showFilterView() {
+    self.filterFlexView.isHidden = false
+    self.setupLayouts()
+  }
+  
+  private func setupFilterCollectionView() {
+    selectedFilterCollectionView.delegate = nil
+    selectedFilterCollectionView.dataSource = nil
+    
+    listener?.selectedFilter
+      .observe(on: MainScheduler.instance)
+      .bind { [weak self] selectedFilter in
+        guard let self else { return }
+        self.selectedFilterCollectionView.isHidden = selectedFilter.isEmpty
+        self.setupLayouts()
+      }.disposed(by: disposeBag)
+    
+    listener?.selectedFilter
+      .bind(to: selectedFilterCollectionView.rx.items(
+        cellIdentifier: SelectedFilterCell.identifier,
+        cellType: SelectedFilterCell.self)
+      ) { index, filter, cell in
+        cell.setupCellConfigure(text: filter.name, isSelected: filter.isSelected)
+      }.disposed(by: disposeBag)
+    
+    Observable.zip(
+      selectedFilterCollectionView.rx.itemSelected,
+      selectedFilterCollectionView.rx.modelSelected((name: String, id: Int, filterType: SearchPhotoFilterType, isSelected: Bool).self)
+    ).subscribe(onNext: { [weak self] index, filter in
+      guard let self else { return }
+      if index.row == 0 { self.listener?.updateFilter(cateogryList: [], moodList: [], colorList: [])}
+      else {
+        var filterList = self.listener?.selectedFilter.value ?? []
+        filterList.remove(at: index.row)
+        
+        if filterList.count == 1 { self.listener?.updateFilter(cateogryList: [], moodList: [], colorList: [])}
+        else {
+          var filterList = self.listener?.selectedFilter.value ?? []
+          filterList.remove(at: index.row)
+          let categoryList = filterList.filter{$0.filterType == .Board}
+          let moodList = filterList.filter{$0.filterType == .Mood}
+          let colorList = filterList.filter{$0.filterType == .Color}
+          
+          self.listener?.updateFilter(cateogryList: categoryList, moodList: moodList, colorList: colorList)
+        }
+      }
+    }).disposed(by: disposeBag)
+    
+    selectedFilterCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
   }
 }
 
@@ -171,8 +237,27 @@ extension SearchPhotoViewController: UICollectionViewDelegate, UICollectionViewD
     layout collectionViewLayout: UICollectionViewLayout,
     sizeForItemAt indexPath: IndexPath
   ) -> CGSize {
-    let cellSize: CGFloat = (UIScreen.main.bounds.width - 5.0) / 2.0
-    return CGSize(width: cellSize, height: cellSize)
+    switch collectionView {
+    case selectedFilterCollectionView:
+      let font: UIFont = UIFont.DecoFont.getFont(with: .Suit, type: .medium, size: 12)
+      if let filterList = listener?.selectedFilter.value {
+        return CGSize(
+          width: (
+            (filterList[indexPath.row].name.size(withAttributes: [NSAttributedString.Key.font:font]).width) +
+            (SelectedFilterCell.horizontalMargin * 2) +
+            (SelectedFilterCell.imageSize) +
+            (SelectedFilterCell.itemSpacing)
+          ),
+          height: 30
+        )
+      }
+      return .zero
+    case photoCollectionView:
+      let cellSize: CGFloat = (UIScreen.main.bounds.width - 5.0) / 2.0
+      return CGSize(width: cellSize, height: cellSize)
+    default:
+      return .zero
+    }
   }
   
   func collectionView(
@@ -180,7 +265,11 @@ extension SearchPhotoViewController: UICollectionViewDelegate, UICollectionViewD
     layout collectionViewLayout: UICollectionViewLayout,
     minimumLineSpacingForSectionAt section: Int
   ) -> CGFloat {
-    return 5.0
+    switch collectionView {
+    case selectedFilterCollectionView: return 8.0
+    case photoCollectionView: return 5.0
+    default: return .zero
+    }
   }
   
   func collectionView(
@@ -188,7 +277,11 @@ extension SearchPhotoViewController: UICollectionViewDelegate, UICollectionViewD
     layout collectionViewLayout: UICollectionViewLayout,
     minimumInteritemSpacingForSectionAt section: Int
   ) -> CGFloat {
-    return 5.0
+    switch collectionView {
+    case selectedFilterCollectionView: return 8.0
+    case photoCollectionView: return 5.0
+    default: return .zero
+    }
   }
   
   func collectionView(
@@ -196,6 +289,10 @@ extension SearchPhotoViewController: UICollectionViewDelegate, UICollectionViewD
     layout collectionViewLayout: UICollectionViewLayout,
     insetForSectionAt section: Int
   ) -> UIEdgeInsets {
-    return UIEdgeInsets.zero
+    switch collectionView {
+    case selectedFilterCollectionView: return UIEdgeInsets(top: 0, left: 18, bottom: 0, right: 18)
+    case photoCollectionView: return UIEdgeInsets.zero
+    default: return UIEdgeInsets.zero
+    }
   }
 }

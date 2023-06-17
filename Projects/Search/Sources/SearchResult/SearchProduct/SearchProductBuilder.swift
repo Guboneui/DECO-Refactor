@@ -18,7 +18,10 @@ protocol SearchProductDependency: Dependency {
   var bookmarkRepository: BookmarkRepository { get }
 }
 
-final class SearchProductComponent: Component<SearchProductDependency> {
+final class SearchProductComponent:
+  Component<SearchProductDependency>,
+  SearchProductFilterDependency
+{
   
   var searchText: String { dependency.searchText }
   var productListStream: MutableProductStream { dependency.productListStream }
@@ -48,7 +51,15 @@ final class SearchProductBuilder: Builder<SearchProductDependency>, SearchProduc
       userManager: dependency.userManager,
       productStreamManager: component.productListStream
     )
+    
     interactor.listener = listener
-    return SearchProductRouter(interactor: interactor, viewController: viewController)
+    
+    let searchProductFilterBuilder = SearchProductFilterBuilder(dependency: component)
+    
+    return SearchProductRouter(
+      interactor: interactor,
+      viewController: viewController,
+      searchProductFilterBuildable: searchProductFilterBuilder
+    )
   }
 }

@@ -39,10 +39,6 @@ protocol MutableSearchPhotoFilterStream: SearchPhotoFilterStream {
   func setMoodFilterData(moodData: [ProductMoodDTO])
   func setColorFilterData(colorData: [ProductColorModel])
   
-  func updateCategoryFilterData(categoryData: [BoardCategoryDTO])
-  func updateMoodFilterData(moodData: [ProductMoodDTO])
-  func updateColorFilterData(colorData: [ProductColorModel])
-  
   func updateFilterStream(
     category: [BoardCategoryDTO],
     mood: [ProductMoodDTO],
@@ -83,42 +79,6 @@ class SearchPhotoFilterStreamImpl: MutableSearchPhotoFilterStream {
   
   func setColorFilterData(colorData: [Util.ProductColorModel]) {
     colorList = colorData
-  }
-  
-  func updateCategoryFilterData(categoryData: [Entity.BoardCategoryDTO]) {
-    let updatedInfo: SearchPhotoFilterStreamModel = {
-      let currentInfo = filter.value
-      return SearchPhotoFilterStreamModel(
-        selectedCategory: categoryData,
-        selectedMood: currentInfo.selectedMood,
-        selectedColors: currentInfo.selectedColors
-      )
-    }()
-    filter.accept(updatedInfo)
-  }
-  
-  func updateMoodFilterData(moodData: [Entity.ProductMoodDTO]) {
-    let updatedInfo: SearchPhotoFilterStreamModel = {
-      let currentInfo = filter.value
-      return SearchPhotoFilterStreamModel(
-        selectedCategory: currentInfo.selectedCategory,
-        selectedMood: moodData,
-        selectedColors: currentInfo.selectedColors
-      )
-    }()
-    filter.accept(updatedInfo)
-  }
-  
-  func updateColorFilterData(colorData: [Util.ProductColorModel]) {
-    let updatedInfo: SearchPhotoFilterStreamModel = {
-      let currentInfo = filter.value
-      return SearchPhotoFilterStreamModel(
-        selectedCategory: currentInfo.selectedCategory,
-        selectedMood: currentInfo.selectedMood,
-        selectedColors: colorData
-      )
-    }()
-    filter.accept(updatedInfo)
   }
   
   func updateFilterStream(category: [Entity.BoardCategoryDTO], mood: [Entity.ProductMoodDTO], color: [Util.ProductColorModel]) {

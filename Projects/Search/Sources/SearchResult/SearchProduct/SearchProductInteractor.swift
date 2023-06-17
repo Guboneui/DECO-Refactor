@@ -14,7 +14,8 @@ import RxSwift
 import RxRelay
 
 protocol SearchProductRouting: ViewableRouting {
-  // TODO: Declare methods the interactor can invoke to manage sub-tree via the router.
+  func attachFilterModalVC()
+  func detachFilterModalVC()
 }
 
 protocol SearchProductPresentable: Presentable {
@@ -61,6 +62,9 @@ final class SearchProductInteractor: PresentableInteractor<SearchProductPresenta
     super.didBecomeActive()
     self.fetchProductList(createdAt: Int.max)
     self.setupProductListStreamBinding()
+    
+    var arr: [Int] = []
+    print(arr.isEmpty)
   }
   
   override func willResignActive() {
@@ -130,6 +134,14 @@ final class SearchProductInteractor: PresentableInteractor<SearchProductPresenta
   func pushProductDetailVC(at index: Int, with productInfo: ProductDTO) {
     productStreamManager.updateSelectedIndex(index: index)
     listener?.pushProductDetailVC(with: productInfo)
+  }
+  
+  func showFilterModalVC() {
+    router?.attachFilterModalVC()
+  }
+  
+  func dismissFilterModalVC() {
+    router?.detachFilterModalVC()
   }
 }
 

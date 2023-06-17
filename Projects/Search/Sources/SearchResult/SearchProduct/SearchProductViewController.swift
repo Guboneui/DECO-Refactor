@@ -24,6 +24,7 @@ protocol SearchProductPresentableListener: AnyObject {
   func fetchAddBookmark(with productID: Int)
   func fetchDeleteBookmark(with productID: Int)
   func updateBookmarkState(at index: Int, product: ProductDTO)
+  func showFilterModalVC()
   func pushProductDetailVC(at index: Int, with productInfo: ProductDTO)
 }
 
@@ -132,7 +133,7 @@ final class SearchProductViewController: UIViewController, SearchProductPresenta
     filterFlexView.tap()
       .bind { [weak self] _ in
         guard let self else { return }
-        print("필터 클릭")
+        self.listener?.showFilterModalVC()
       }.disposed(by: disposeBag)
   }
   

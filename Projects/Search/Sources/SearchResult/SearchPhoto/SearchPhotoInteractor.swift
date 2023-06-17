@@ -67,7 +67,6 @@ final class SearchPhotoInteractor: PresentableInteractor<SearchPhotoPresentable>
   
   override func didBecomeActive() {
     super.didBecomeActive()
-//    self.fetchPhotoList(createdAt: Int.max)
     self.searchPhotoCategoryStreamBinding()
     
     Task.detached { [weak self] in

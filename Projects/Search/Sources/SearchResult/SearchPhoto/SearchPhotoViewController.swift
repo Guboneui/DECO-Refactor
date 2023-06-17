@@ -225,6 +225,7 @@ final class SearchPhotoViewController: UIViewController, SearchPhotoPresentable,
           self.listener?.updateFilter(cateogryList: categoryList, moodList: moodList, colorList: colorList)
         }
       }
+      
     }).disposed(by: disposeBag)
     
     selectedFilterCollectionView.rx.setDelegate(self).disposed(by: disposeBag)

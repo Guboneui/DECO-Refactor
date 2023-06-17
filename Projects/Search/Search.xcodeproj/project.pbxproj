@@ -15,6 +15,10 @@
 		17D692D96C6010DC810B44AF /* ProductDetail.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C65EBCD190C30829DABCF0F5 /* ProductDetail.framework */; platformFilter = ios; };
 		18EF59DEA7525C68659F3A16 /* SearchBrandViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102C000FC0058C0650177631 /* SearchBrandViewController.swift */; };
 		2A1313506AC9858BF4281552 /* SearchResultBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C01D5EFFB71E17810B902D /* SearchResultBuilder.swift */; };
+		2C14E6FC2A3E71C6000BA0CA /* SearchProductFilterRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C14E6F82A3E71C6000BA0CA /* SearchProductFilterRouter.swift */; };
+		2C14E6FD2A3E71C6000BA0CA /* SearchProductFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C14E6F92A3E71C6000BA0CA /* SearchProductFilterViewController.swift */; };
+		2C14E6FE2A3E71C6000BA0CA /* SearchProductFilterBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C14E6FA2A3E71C6000BA0CA /* SearchProductFilterBuilder.swift */; };
+		2C14E6FF2A3E71C6000BA0CA /* SearchProductFilterInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C14E6FB2A3E71C6000BA0CA /* SearchProductFilterInteractor.swift */; };
 		2C5272412A3B87CE00451098 /* SearchPhotoFilterStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5272402A3B87CE00451098 /* SearchPhotoFilterStream.swift */; };
 		3673F135729326EE0064436C /* SearchInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419087690FD5ED809475BCA6 /* SearchInteractor.swift */; };
 		4673DEEE6D24A434C46999DA /* SearchPhotoFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991C4C3A76D9376F097F1BAA /* SearchPhotoFilterViewController.swift */; };
@@ -61,6 +65,10 @@
 		13FDFA7670117D9B5F469962 /* SearchProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchProductViewController.swift; sourceTree = "<group>"; };
 		15D75A54739E2391FBACD3CD /* SearchUserInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserInteractor.swift; sourceTree = "<group>"; };
 		23C01D5EFFB71E17810B902D /* SearchResultBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultBuilder.swift; sourceTree = "<group>"; };
+		2C14E6F82A3E71C6000BA0CA /* SearchProductFilterRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchProductFilterRouter.swift; sourceTree = "<group>"; };
+		2C14E6F92A3E71C6000BA0CA /* SearchProductFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchProductFilterViewController.swift; sourceTree = "<group>"; };
+		2C14E6FA2A3E71C6000BA0CA /* SearchProductFilterBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchProductFilterBuilder.swift; sourceTree = "<group>"; };
+		2C14E6FB2A3E71C6000BA0CA /* SearchProductFilterInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchProductFilterInteractor.swift; sourceTree = "<group>"; };
 		2C5272402A3B87CE00451098 /* SearchPhotoFilterStream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPhotoFilterStream.swift; sourceTree = "<group>"; };
 		3496AAF4B6F5082D03409804 /* SearchUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserCell.swift; sourceTree = "<group>"; };
 		400F24713D8A84B16827032E /* SearchRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRouter.swift; sourceTree = "<group>"; };
@@ -123,6 +131,17 @@
 				AADEB1B103D58874613DA782 /* SearchPhotoViewController.swift */,
 			);
 			path = SearchPhoto;
+			sourceTree = "<group>";
+		};
+		2C14E6F72A3E71B8000BA0CA /* SearchProductFilter */ = {
+			isa = PBXGroup;
+			children = (
+				2C14E6F82A3E71C6000BA0CA /* SearchProductFilterRouter.swift */,
+				2C14E6F92A3E71C6000BA0CA /* SearchProductFilterViewController.swift */,
+				2C14E6FA2A3E71C6000BA0CA /* SearchProductFilterBuilder.swift */,
+				2C14E6FB2A3E71C6000BA0CA /* SearchProductFilterInteractor.swift */,
+			);
+			path = SearchProductFilter;
 			sourceTree = "<group>";
 		};
 		2C52723F2A3B87B600451098 /* FilterStream */ = {
@@ -207,6 +226,7 @@
 		B3AE03AA5EB28A8C4AB213F9 /* SearchProduct */ = {
 			isa = PBXGroup;
 			children = (
+				2C14E6F72A3E71B8000BA0CA /* SearchProductFilter */,
 				E1B862BBEF795965BABE9C30 /* SearchProductBuilder.swift */,
 				88BF42400872D69C6D2D3D83 /* SearchProductInteractor.swift */,
 				89B379CE852975E01D04BD26 /* SearchProductRouter.swift */,
@@ -332,14 +352,18 @@
 				4673DEEE6D24A434C46999DA /* SearchPhotoFilterViewController.swift in Sources */,
 				D8373F8EF9206546BB7CC77F /* SearchPhotoInteractor.swift in Sources */,
 				10D5F3CA1A590217D0DD4D36 /* SearchPhotoRouter.swift in Sources */,
+				2C14E6FF2A3E71C6000BA0CA /* SearchProductFilterInteractor.swift in Sources */,
+				2C14E6FD2A3E71C6000BA0CA /* SearchProductFilterViewController.swift in Sources */,
 				DA237FA89E4D7EBDCE87BB3D /* SearchPhotoViewController.swift in Sources */,
 				EC3154A1751DA6CE5D8932BE /* SearchProductBuilder.swift in Sources */,
 				61033D34A872A15C743A58E5 /* SearchProductInteractor.swift in Sources */,
 				FAABFC572969AF296931092A /* SearchProductRouter.swift in Sources */,
 				B189A5D129C10C158FC12954 /* SearchProductViewController.swift in Sources */,
+				2C14E6FE2A3E71C6000BA0CA /* SearchProductFilterBuilder.swift in Sources */,
 				2A1313506AC9858BF4281552 /* SearchResultBuilder.swift in Sources */,
 				8B583B2D8C64F0FB2C59B712 /* SearchResultInteractor.swift in Sources */,
 				4B295DEE9154896E968F3D94 /* SearchResultRouter.swift in Sources */,
+				2C14E6FC2A3E71C6000BA0CA /* SearchProductFilterRouter.swift in Sources */,
 				01C563931CF57DAE72076F17 /* SearchResultViewController.swift in Sources */,
 				A21A76A07F9A1FC497B4E663 /* SearchUserBuilder.swift in Sources */,
 				ACA9AC904CB204732AA6D544 /* SearchUserInteractor.swift in Sources */,

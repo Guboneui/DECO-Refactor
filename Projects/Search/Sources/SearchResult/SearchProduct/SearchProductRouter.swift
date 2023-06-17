@@ -7,20 +7,47 @@
 
 import RIBs
 
-protocol SearchProductInteractable: Interactable {
-    var router: SearchProductRouting? { get set }
-    var listener: SearchProductListener? { get set }
+protocol SearchProductInteractable:
+  Interactable,
+  SearchProductFilterListener
+{
+  var router: SearchProductRouting? { get set }
+  var listener: SearchProductListener? { get set }
 }
 
 protocol SearchProductViewControllable: ViewControllable {
-    // TODO: Declare methods the router invokes to manipulate the view hierarchy.
+  // TODO: Declare methods the router invokes to manipulate the view hierarchy.
 }
 
 final class SearchProductRouter: ViewableRouter<SearchProductInteractable, SearchProductViewControllable>, SearchProductRouting {
-
-    // TODO: Constructor inject child builder protocols to allow building children.
-    override init(interactor: SearchProductInteractable, viewController: SearchProductViewControllable) {
-        super.init(interactor: interactor, viewController: viewController)
-        interactor.router = self
-    }
+  
+  private let searchProductFilterBuildable: SearchProductFilterBuildable
+  private var searchProductFilterRouting: Routing?
+  
+  // TODO: Constructor inject child builder protocols to allow building children.
+  init(
+    interactor: SearchProductInteractable,
+    viewController: SearchProductViewControllable,
+    searchProductFilterBuildable: SearchProductFilterBuildable
+  ) {
+    self.searchProductFilterBuildable = searchProductFilterBuildable
+    super.init(interactor: interactor, viewController: viewController)
+    interactor.router = self
+  }
+  
+  func attachFilterModalVC() {
+    if searchProductFilterRouting != nil { return }
+    let router = searchProductFilterBuildable.build(withListener: interactor)
+    attachChild(router)
+    router.viewControllable.uiviewController.modalPresentationStyle = .overFullScreen
+    self.viewControllable.present(router.viewControllable, animated: false, completion: nil)
+    searchProductFilterRouting = router
+  }
+  
+  func detachFilterModalVC() {
+    guard let router = searchProductFilterRouting else { return }
+    detachChild(router)
+    viewControllable.dismiss(animated: false, completion: nil)
+    searchProductFilterRouting = nil
+  }
 }

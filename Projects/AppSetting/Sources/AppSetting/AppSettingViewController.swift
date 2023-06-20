@@ -16,6 +16,7 @@ import RxSwift
 
 public protocol AppSettingPresentableListener: AnyObject {
   func popAppSettingVC(with popType: PopType)
+  func showLogoutPopup()
 }
 
 final class AppSettingViewController: UIViewController, AppSettingPresentable, AppSettingViewControllable {
@@ -167,6 +168,12 @@ final class AppSettingViewController: UIViewController, AppSettingPresentable, A
     self.privacyPolicyView.tap()
       .bind { _ in
         SafariLoder.loadSafari(with: DecoURL.privacyURL)
+      }.disposed(by: disposeBag)
+    
+    self.logoutView.tap()
+      .bind { [weak self] _ in
+        guard let self else { return }
+        self.listener?.showLogoutPopup()
       }.disposed(by: disposeBag)
   }
 }

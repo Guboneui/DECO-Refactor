@@ -11,7 +11,8 @@ import RIBs
 import RxSwift
 
 public protocol AppSettingRouting: ViewableRouting {
-  
+  func attachLogoutPopupVC()
+  func detachLogoutPopupVC()
 }
 
 protocol AppSettingPresentable: Presentable {
@@ -47,5 +48,13 @@ final class AppSettingInteractor: PresentableInteractor<AppSettingPresentable>, 
   
   func popAppSettingVC(with popType: Util.PopType) {
     self.listener?.detachAppSettingVC(with: popType)
+  }
+  
+  func showLogoutPopup() {
+    self.router?.attachLogoutPopupVC()
+  }
+  
+  func dismissLogoutPopup() {
+    self.router?.detachLogoutPopupVC()
   }
 }

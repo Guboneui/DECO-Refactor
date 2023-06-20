@@ -9,7 +9,8 @@ import RIBs
 
 protocol AppSettingInteractable:
   Interactable,
-  LogoutListener
+  LogoutListener,
+  WithdrawListener
 {
   var router: AppSettingRouting? { get set }
   var listener: AppSettingListener? { get set }
@@ -24,13 +25,18 @@ final class AppSettingRouter: ViewableRouter<AppSettingInteractable, AppSettingV
   private let logoutBuildable: LogoutBuildable
   private var logoutRouting: Routing?
   
+  private let withdrawBuildable: WithdrawBuildable
+  private var withdrawRouting: Routing?
+  
   // TODO: Constructor inject child builder protocols to allow building children.
   init(
     interactor: AppSettingInteractable,
     viewController: AppSettingViewControllable,
-    logoutBuildable: LogoutBuildable
+    logoutBuildable: LogoutBuildable,
+    withdrawBuildable: WithdrawBuildable
   ) {
     self.logoutBuildable = logoutBuildable
+    self.withdrawBuildable = withdrawBuildable
     super.init(interactor: interactor, viewController: viewController)
     interactor.router = self
   }
@@ -49,5 +55,21 @@ final class AppSettingRouter: ViewableRouter<AppSettingInteractable, AppSettingV
     detachChild(router)
     viewControllable.dismiss(animated: false, completion: nil)
     logoutRouting = nil
+  }
+  
+  func attachWithdrawPopupVC() {
+    if withdrawRouting != nil { return }
+    let router = withdrawBuildable.build(withListener: interactor)
+    attachChild(router)
+    router.viewControllable.uiviewController.modalPresentationStyle = .overFullScreen
+    self.viewControllable.present(router.viewControllable, animated: false, completion: nil)
+    withdrawRouting = router
+  }
+  
+  func detachWithdrawPopupVC() {
+    guard let router = withdrawRouting else { return }
+    detachChild(router)
+    viewControllable.dismiss(animated: false, completion: nil)
+    withdrawRouting = nil
   }
 }

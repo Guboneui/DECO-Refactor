@@ -17,6 +17,7 @@ import RxSwift
 public protocol AppSettingPresentableListener: AnyObject {
   func popAppSettingVC(with popType: PopType)
   func showLogoutPopup()
+  func showWithdrawPopup()
 }
 
 final class AppSettingViewController: UIViewController, AppSettingPresentable, AppSettingViewControllable {
@@ -46,7 +47,7 @@ final class AppSettingViewController: UIViewController, AppSettingPresentable, A
   private let privacyPolicyView: LinkWithImageView = LinkWithImageView(image: .DecoImage.paper, title: "개인 정보 처리 방침")
   private let openSourceLicenseView: LinkWithImageView = LinkWithImageView(image: .DecoImage.question, title: "오픈 소스 라이선스")
   private let logoutView: LinkWithImageView = LinkWithImageView(image: .DecoImage.login, title: "로그아웃")
-  private let deactivateView: LinkWithImageView = LinkWithImageView(image: .DecoImage.bye, title: "탈퇴하기")
+  private let withdrawView: LinkWithImageView = LinkWithImageView(image: .DecoImage.bye, title: "탈퇴하기")
   
   private let bottomGuideLineView: UIView = UIView().then {
     $0.backgroundColor = .DecoColor.lightBackground
@@ -83,7 +84,7 @@ final class AppSettingViewController: UIViewController, AppSettingPresentable, A
     self.scrollBoundsView.addSubview(privacyPolicyView)
     self.scrollBoundsView.addSubview(openSourceLicenseView)
     self.scrollBoundsView.addSubview(logoutView)
-    self.scrollBoundsView.addSubview(deactivateView)
+    self.scrollBoundsView.addSubview(withdrawView)
     self.scrollBoundsView.addSubview(bottomGuideLineView)
   }
   
@@ -133,12 +134,12 @@ final class AppSettingViewController: UIViewController, AppSettingPresentable, A
       .horizontally()
       .marginTop(10)
     
-    deactivateView.pin
+    withdrawView.pin
       .below(of: logoutView)
       .horizontally()
     
     bottomGuideLineView.pin
-      .below(of: deactivateView)
+      .below(of: withdrawView)
       .horizontally()
       .height(10)
       .bottom()
@@ -175,5 +176,12 @@ final class AppSettingViewController: UIViewController, AppSettingPresentable, A
         guard let self else { return }
         self.listener?.showLogoutPopup()
       }.disposed(by: disposeBag)
+    
+    self.withdrawView.tap()
+      .bind { [weak self] _ in
+        guard let self else { return }
+        self.listener?.showWithdrawPopup()
+      }.disposed(by: disposeBag)
+    
   }
 }

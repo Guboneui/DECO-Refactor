@@ -14,7 +14,8 @@ public protocol AppSettingDependency: Dependency {
 
 final class AppSettingComponent:
   Component<AppSettingDependency>,
-  LogoutDependency
+  LogoutDependency,
+  WithdrawDependency
 {
   
   // TODO: Declare 'fileprivate' dependencies that are only used by this RIB.
@@ -39,11 +40,13 @@ final public class AppSettingBuilder: Builder<AppSettingDependency>, AppSettingB
     interactor.listener = listener
     
     let logoutBuilder = LogoutBuilder(dependency: component)
+    let withdrawBuilder = WithdrawBuilder(dependency: component)
     
     return AppSettingRouter(
       interactor: interactor,
       viewController: viewController,
-      logoutBuildable: logoutBuilder
+      logoutBuildable: logoutBuilder,
+      withdrawBuildable: withdrawBuilder
     )
   }
 }

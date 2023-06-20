@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -13,6 +13,8 @@
 		1338ABD30178CD64C10E2D2C /* BoardRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56ED6F358A78E34F9D037DDE /* BoardRepository.swift */; };
 		194B1CBF286913BA2AB2EBF0 /* UserProfileAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C19B8199D6FCE5B268A9FA /* UserProfileAPI.swift */; };
 		26ACA67718CC4308BA10A409 /* FollowRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6003A63E54F594730407FC54 /* FollowRepository.swift */; };
+		2C53CE5C2A4201150084DA13 /* WithdrawAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C53CE5B2A4201150084DA13 /* WithdrawAPI.swift */; };
+		2C53CE5E2A4201AB0084DA13 /* WithdrawRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C53CE5D2A4201AB0084DA13 /* WithdrawRepository.swift */; };
 		365764F556A44E8FF069FCA0 /* FollowAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76287323E296DA35B83AFFA /* FollowAPI.swift */; };
 		39D189E1D6A6A7A77873657D /* DecoURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = E360643046B75AB26A6C478C /* DecoURL.swift */; };
 		45A5121E51ED8FB91AF17720 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B776BEF0579A06D9322B14A3 /* NetworkError.swift */; };
@@ -50,6 +52,8 @@
 		0B088D032BAD6D7217511F54 /* UserProfileRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileRepository.swift; sourceTree = "<group>"; };
 		0E7E982C3454878DC62EA7C4 /* UserControlAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserControlAPI.swift; sourceTree = "<group>"; };
 		25325A35D513363242CBFAA1 /* BoardAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardAPI.swift; sourceTree = "<group>"; };
+		2C53CE5B2A4201150084DA13 /* WithdrawAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawAPI.swift; sourceTree = "<group>"; };
+		2C53CE5D2A4201AB0084DA13 /* WithdrawRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawRepository.swift; sourceTree = "<group>"; };
 		316AD36DC658CF5F2B4688ED /* BaseRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRepository.swift; sourceTree = "<group>"; };
 		4428D9E80856A0A55FDCEA40 /* BookmarkAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkAPI.swift; sourceTree = "<group>"; };
 		4617E7589C04AEE9F50A167A /* UserControlRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserControlRepository.swift; sourceTree = "<group>"; };
@@ -119,6 +123,7 @@
 				B12F4A2B4B737C1A287F267E /* SearchAPI.swift */,
 				0E7E982C3454878DC62EA7C4 /* UserControlAPI.swift */,
 				F2C19B8199D6FCE5B268A9FA /* UserProfileAPI.swift */,
+				2C53CE5B2A4201150084DA13 /* WithdrawAPI.swift */,
 			);
 			path = APIs;
 			sourceTree = "<group>";
@@ -161,6 +166,7 @@
 				72CEEAEA749ED65C1FE17F29 /* SearchRepository.swift */,
 				4617E7589C04AEE9F50A167A /* UserControlRepository.swift */,
 				0B088D032BAD6D7217511F54 /* UserProfileRepository.swift */,
+				2C53CE5D2A4201AB0084DA13 /* WithdrawRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -209,8 +215,6 @@
 		CC04E9F23ECE8BE9BFA0029D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				TargetAttributes = {
-				};
 			};
 			buildConfigurationList = FEB7E731AD1BAD90CD6A8409 /* Build configuration list for PBXProject "Networking" */;
 			compatibilityVersion = "Xcode 13.0";
@@ -254,6 +258,8 @@
 				C6CB650BF0671C50BD24C1B5 /* BrandAPI.swift in Sources */,
 				365764F556A44E8FF069FCA0 /* FollowAPI.swift in Sources */,
 				F69F490869B3C8F45EBB1B5A /* ProductAPI.swift in Sources */,
+				2C53CE5E2A4201AB0084DA13 /* WithdrawRepository.swift in Sources */,
+				2C53CE5C2A4201150084DA13 /* WithdrawAPI.swift in Sources */,
 				5C68E9D3D579F0680E076799 /* SearchAPI.swift in Sources */,
 				5347641D314C8DF36450ACE8 /* UserControlAPI.swift in Sources */,
 				194B1CBF286913BA2AB2EBF0 /* UserProfileAPI.swift in Sources */,

@@ -2,7 +2,7 @@
 //  Project.swift
 //  ProjectDescriptionHelpers
 //
-//  Created by 구본의 on 2023/05/12.
+//  Created by 구본의 on 2023/06/20.
 //
 
 import ProjectDescription
@@ -22,16 +22,16 @@ let packages: [Package] = [
 
 let dependencies: [TargetDependency] = [
 
-  .project(target: "AppSetting", path: "../AppSetting")
+  .project(target: "User", path: "../User")
   
 ]
 
-let profile = Target(
-  name: "Profile",
+let appSetting = Target(
+  name: "AppSetting",
   platform: .iOS,
   product: .framework,
-  productName: "Profile",
-  bundleId: "com.deco.ios.profile",
+  productName: "AppSetting",
+  bundleId: "com.deco.ios.appSetting",
   deploymentTarget: .iOS(targetVersion: "15.0", devices: [.iphone]),
   infoPlist: .default,
   sources: ["Sources/**"],
@@ -41,10 +41,11 @@ let profile = Target(
 )
 
 let project = Project(
-  name: "Profile",
+  name: "AppSetting",
   packages: packages,
-  targets: [profile]
+  targets: [appSetting]
 )
+
 
 
 

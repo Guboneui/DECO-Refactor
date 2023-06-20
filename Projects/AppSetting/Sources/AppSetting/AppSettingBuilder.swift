@@ -19,17 +19,17 @@ final class AppSettingComponent: Component<AppSettingDependency> {
 
 // MARK: - Builder
 
-protocol AppSettingBuildable: Buildable {
+public protocol AppSettingBuildable: Buildable {
   func build(withListener listener: AppSettingListener) -> AppSettingRouting
 }
 
-final class AppSettingBuilder: Builder<AppSettingDependency>, AppSettingBuildable {
+final public class AppSettingBuilder: Builder<AppSettingDependency>, AppSettingBuildable {
   
-  override init(dependency: AppSettingDependency) {
+  public override init(dependency: AppSettingDependency) {
     super.init(dependency: dependency)
   }
   
-  func build(withListener listener: AppSettingListener) -> AppSettingRouting {
+  public func build(withListener listener: AppSettingListener) -> AppSettingRouting {
     let component = AppSettingComponent(dependency: dependency)
     let viewController = AppSettingViewController()
     let interactor = AppSettingInteractor(presenter: viewController)

@@ -8,16 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		2BBEC205571A2E8ED4164868 /* ProfileEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2399C3FB3587415F182EA369 /* ProfileEditViewController.swift */; };
+		2DCBEDDD7CE4E90F908AC55B /* AppSetting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F29D7D26A593D2060D0A437 /* AppSetting.framework */; platformFilter = ios; };
 		4979A34FEB00C620719A3020 /* ProfileBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694C417CDEB37898D6EF1B53 /* ProfileBuilder.swift */; };
-		57084A55A7C8D792933BA422 /* AppSettingBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01C40FB3786D1F909CC4D68 /* AppSettingBuilder.swift */; };
 		6D2A4D79CBF302DA7DF51C0F /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E1BCBD89E1E7CFE090F701 /* ProfileViewController.swift */; };
-		8D4D9AEB88D57AB4795111D3 /* AppSettingRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6792887967546024EAA0FC99 /* AppSettingRouter.swift */; };
 		ADA6F437CFD99F736BDEDCD4 /* ProfileRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E19C4437ABE16ED59B3C532 /* ProfileRouter.swift */; };
-		C1273F38884ECCF88D348708 /* AppSettingInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DA8FF37B88879366560419E /* AppSettingInteractor.swift */; };
 		D8CC13972E821C44B5A68896 /* ProfileEditBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3FF0F991B58E44C10FB6446 /* ProfileEditBuilder.swift */; };
-		E84F004755E8F7676C23E040 /* AppSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193E65EF1FD413CBB6395CFC /* AppSettingViewController.swift */; };
 		EBF11630360EBBCF062092B1 /* ProfileInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E59CF53E5A56E882767D700 /* ProfileInteractor.swift */; };
-		F70E301D7C5F7242820E10DD /* User.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 041EC5E6348D0A600F75DF10 /* User.framework */; platformFilter = ios; };
 		F9C4719C3895A0AFC0CF3EB1 /* ProfileEditInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A89F7121C97C6DE20E9391AE /* ProfileEditInteractor.swift */; };
 		FD7F7169CEA11A82D3D4C5AE /* ProfileEditRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942A4C68972D13169F02CB9D /* ProfileEditRouter.swift */; };
 /* End PBXBuildFile section */
@@ -36,12 +32,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		041EC5E6348D0A600F75DF10 /* User.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = User.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		193E65EF1FD413CBB6395CFC /* AppSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingViewController.swift; sourceTree = "<group>"; };
 		2399C3FB3587415F182EA369 /* ProfileEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewController.swift; sourceTree = "<group>"; };
-		2DA8FF37B88879366560419E /* AppSettingInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingInteractor.swift; sourceTree = "<group>"; };
 		2E59CF53E5A56E882767D700 /* ProfileInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInteractor.swift; sourceTree = "<group>"; };
-		6792887967546024EAA0FC99 /* AppSettingRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingRouter.swift; sourceTree = "<group>"; };
+		3F29D7D26A593D2060D0A437 /* AppSetting.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AppSetting.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		694C417CDEB37898D6EF1B53 /* ProfileBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileBuilder.swift; sourceTree = "<group>"; };
 		8E19C4437ABE16ED59B3C532 /* ProfileRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRouter.swift; sourceTree = "<group>"; };
 		942A4C68972D13169F02CB9D /* ProfileEditRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditRouter.swift; sourceTree = "<group>"; };
@@ -49,7 +42,6 @@
 		C0358E9E447943DBA6A4C569 /* Profile-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Profile-Info.plist"; sourceTree = "<group>"; };
 		D3FF0F991B58E44C10FB6446 /* ProfileEditBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditBuilder.swift; sourceTree = "<group>"; };
 		D5E1BCBD89E1E7CFE090F701 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
-		F01C40FB3786D1F909CC4D68 /* AppSettingBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingBuilder.swift; sourceTree = "<group>"; };
 		FCFEAF10AB4C6CB5C0ED0FD9 /* Profile.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Profile.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -58,7 +50,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F70E301D7C5F7242820E10DD /* User.framework in Frameworks */,
+				2DCBEDDD7CE4E90F908AC55B /* AppSetting.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -79,8 +71,8 @@
 		3FEC19802DA26B12A5AF8561 /* Products */ = {
 			isa = PBXGroup;
 			children = (
+				3F29D7D26A593D2060D0A437 /* AppSetting.framework */,
 				FCFEAF10AB4C6CB5C0ED0FD9 /* Profile.framework */,
-				041EC5E6348D0A600F75DF10 /* User.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -105,7 +97,6 @@
 		87183548EBB011E464D5B23E /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				EB8356B6A92A51A286DFD94F /* AppSetting */,
 				0BA736FB2935A83104029CA9 /* Profile */,
 				F77DA6C1B37F21265C995A84 /* ProfileEdit */,
 			);
@@ -119,17 +110,6 @@
 				87183548EBB011E464D5B23E /* Sources */,
 			);
 			name = Project;
-			sourceTree = "<group>";
-		};
-		EB8356B6A92A51A286DFD94F /* AppSetting */ = {
-			isa = PBXGroup;
-			children = (
-				F01C40FB3786D1F909CC4D68 /* AppSettingBuilder.swift */,
-				2DA8FF37B88879366560419E /* AppSettingInteractor.swift */,
-				6792887967546024EAA0FC99 /* AppSettingRouter.swift */,
-				193E65EF1FD413CBB6395CFC /* AppSettingViewController.swift */,
-			);
-			path = AppSetting;
 			sourceTree = "<group>";
 		};
 		F77DA6C1B37F21265C995A84 /* ProfileEdit */ = {
@@ -221,10 +201,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				57084A55A7C8D792933BA422 /* AppSettingBuilder.swift in Sources */,
-				C1273F38884ECCF88D348708 /* AppSettingInteractor.swift in Sources */,
-				8D4D9AEB88D57AB4795111D3 /* AppSettingRouter.swift in Sources */,
-				E84F004755E8F7676C23E040 /* AppSettingViewController.swift in Sources */,
 				4979A34FEB00C620719A3020 /* ProfileBuilder.swift in Sources */,
 				EBF11630360EBBCF062092B1 /* ProfileInteractor.swift in Sources */,
 				ADA6F437CFD99F736BDEDCD4 /* ProfileRouter.swift in Sources */,

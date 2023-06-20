@@ -10,7 +10,7 @@ import Util
 import RIBs
 import RxSwift
 
-protocol AppSettingRouting: ViewableRouting {
+public protocol AppSettingRouting: ViewableRouting {
   
 }
 
@@ -19,7 +19,7 @@ protocol AppSettingPresentable: Presentable {
   // TODO: Declare methods the interactor can invoke the presenter to present data.
 }
 
-protocol AppSettingListener: AnyObject {
+public protocol AppSettingListener: AnyObject {
   func detachAppSettingVC(with popType: PopType)
 }
 

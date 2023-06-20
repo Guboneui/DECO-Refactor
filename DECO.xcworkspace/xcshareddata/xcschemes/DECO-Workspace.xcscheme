@@ -14,6 +14,20 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
+               BlueprintIdentifier = "312BF25B1E3BA43AB67CFD17"
+               BuildableName = "AppSetting.framework"
+               BlueprintName = "AppSetting"
+               ReferencedContainer = "container:Projects/AppSetting/AppSetting.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
                BlueprintIdentifier = "CA3BDA5CCBC32BFCAFE328FB"
                BuildableName = "Bookmark.framework"
                BlueprintName = "Bookmark"
@@ -225,10 +239,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "CA3BDA5CCBC32BFCAFE328FB"
-            BuildableName = "Bookmark.framework"
-            BlueprintName = "Bookmark"
-            ReferencedContainer = "container:Projects/Bookmark/Bookmark.xcodeproj">
+            BlueprintIdentifier = "312BF25B1E3BA43AB67CFD17"
+            BuildableName = "AppSetting.framework"
+            BlueprintName = "AppSetting"
+            ReferencedContainer = "container:Projects/AppSetting/AppSetting.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </LaunchAction>
@@ -241,10 +255,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "CA3BDA5CCBC32BFCAFE328FB"
-            BuildableName = "Bookmark.framework"
-            BlueprintName = "Bookmark"
-            ReferencedContainer = "container:Projects/Bookmark/Bookmark.xcodeproj">
+            BlueprintIdentifier = "312BF25B1E3BA43AB67CFD17"
+            BuildableName = "AppSetting.framework"
+            BlueprintName = "AppSetting"
+            ReferencedContainer = "container:Projects/AppSetting/AppSetting.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>

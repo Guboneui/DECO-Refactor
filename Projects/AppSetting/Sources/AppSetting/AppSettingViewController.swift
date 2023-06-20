@@ -14,7 +14,7 @@ import RIBs
 import RxSwift
 
 
-protocol AppSettingPresentableListener: AnyObject {
+public protocol AppSettingPresentableListener: AnyObject {
   func popAppSettingVC(with popType: PopType)
 }
 

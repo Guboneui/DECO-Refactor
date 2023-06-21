@@ -52,6 +52,11 @@ final class WithdrawViewController: PopupViewController, WithdrawPresentable, Wi
     $0.makeCornerRadius(radius: 12)
   }
   
+  private let confirmBaseView: UIView = UIView().then {
+    $0.backgroundColor = .DecoColor.whiteColor
+    $0.makeCornerRadius(radius: 12)
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     self.setupViews()
@@ -187,8 +192,6 @@ extension WithdrawViewController {
   }
   
   private func makeInputEtcReasonView() {
-    
-    
     let etcReasonTextField: UITextField = UITextField().then {
       $0.placeholder = "탈퇴 기타 이유를 입력해 주세요."
       $0.textColor = .DecoColor.darkGray1
@@ -264,8 +267,8 @@ extension WithdrawViewController {
         guard let self else { return }
         self.isKeyboardVisible.accept(false)
         UIView.animate(withDuration: 0.15, delay: 0.0) { [weak self] in
-          guard let self = self else { return }
-          self.etcReasonBaseView.alpha = 0.0
+          guard let inSelf = self else { return }
+          inSelf.etcReasonBaseView.alpha = 0.0
         }
         
         self.hideAnimation { [weak self] in
@@ -278,7 +281,10 @@ extension WithdrawViewController {
       .bind { [weak self] in
         guard let self else { return }
         if let reason = etcReasonTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) {
-          print("탈퇴이유: \(reason)")
+          //print("탈퇴이유: \(reason)")
+          self.isKeyboardVisible.accept(false)
+          self.removeEtcBaseView()
+          self.makeWithdrawConfirmView()
         }
       }.disposed(by: disposeBag)
   }
@@ -293,6 +299,86 @@ extension WithdrawViewController {
           inSelf.etcReasonBaseView.pin
             .vCenter(isVisible ? -40 : 0)
         })
+      }.disposed(by: disposeBag)
+  }
+}
+
+// MARK: Make Confirm View
+
+extension WithdrawViewController {
+  private func removeEtcBaseView() {
+    etcReasonBaseView.removeFromSuperview()
+  }
+  
+  private func makeWithdrawConfirmView() {
+    let withdrawConfirmLabel: UILabel = UILabel().then {
+      $0.text = "정말 탈퇴하실건가요? :("
+      $0.font = .DecoFont.getFont(with: .NotoSans, type: .medium, size: 14)
+      $0.textColor = .DecoColor.darkGray1
+    }
+    
+    let noButton: UIButton = UIButton(type: .system).then {
+      $0.setTitle("아니오", for: .normal)
+      $0.titleLabel?.font = .DecoFont.getFont(with: .Suit, type: .medium, size: 14)
+      $0.tintColor = .DecoColor.successColor
+    }
+    
+    let yesButton: UIButton = UIButton(type: .system).then {
+      $0.setTitle("예", for: .normal)
+      $0.titleLabel?.font = .DecoFont.getFont(with: .Suit, type: .medium, size: 14)
+      $0.tintColor = .DecoColor.darkGray2
+    }
+    
+    
+    view.addSubview(confirmBaseView)
+    confirmBaseView.addSubview(withdrawConfirmLabel)
+    confirmBaseView.addSubview(noButton)
+    confirmBaseView.addSubview(yesButton)
+    
+    confirmBaseView.pin
+      .vCenter()
+      .horizontally(18)
+      .height(120)
+    
+    withdrawConfirmLabel.pin
+      .top()
+      .horizontally(24)
+      .height(60)
+    
+    noButton.pin
+      .below(of: withdrawConfirmLabel)
+      .left()
+      .right(to: withdrawConfirmLabel.edge.hCenter)
+      .height(60)
+    
+    yesButton.pin
+      .below(of: withdrawConfirmLabel)
+      .after(of: noButton)
+      .right()
+      .height(60)
+    
+    self.confirmViewButtonAction(noButton, yesButton)
+  }
+  
+  private func confirmViewButtonAction(_ noButton: UIButton, _ yesButton: UIButton) {
+    noButton.tap()
+      .bind { [weak self] in
+        guard let self else { return }
+        UIView.animate(withDuration: 0.15, delay: 0.0) { [weak self] in
+          guard let inSelf = self else { return }
+          inSelf.confirmBaseView.alpha = 0.0
+        }
+        self.hideAnimation { [weak self] in
+          guard let inSelf = self else { return }
+          inSelf.listener?.dismissWithdrawPopup()
+        }
+      }.disposed(by: disposeBag)
+    
+    yesButton.tap()
+      .bind { [weak self] in
+        guard let self else { return }
+        print("진짜 탈퇴")
+        
       }.disposed(by: disposeBag)
   }
 }

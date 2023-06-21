@@ -249,8 +249,10 @@ final class ProductMoodDetailViewController: UIViewController, ProductMoodDetail
           guard let inSelf = self else { return }
           if product.scrap {
             inSelf.listener?.fetchDeleteBookmark(with: product.id)
+            ToastManager.shared.showToast(.DeleteBookmark)
           } else {
             inSelf.listener?.fetchAddBookmark(with: product.id)
+            ToastManager.shared.showToast(.AddBookmark)
           }
          
           let shouldInputData: ProductDTO = ProductDTO(

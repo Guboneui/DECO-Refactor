@@ -130,8 +130,10 @@ final class ProductBookmarkViewController: UIViewController, ProductBookmarkPres
           guard let inSelf = self else { return }
           if data.isBookmark {
             inSelf.listener?.fetchDeleteBookmark(with: data.bookmarkData.scrap.productId)
+            ToastManager.shared.showToast(.DeleteBookmark)
           } else {
             inSelf.listener?.fetchAddBookmark(with: data.bookmarkData.scrap.productId)
+            ToastManager.shared.showToast(.AddBookmark)
           }
           
           let shouldInputData: (BookmarkDTO, Bool) = (data.bookmarkData, !data.isBookmark)

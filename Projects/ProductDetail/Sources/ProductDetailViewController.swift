@@ -288,6 +288,10 @@ final class ProductDetailViewController: UIViewController, ProductDetailPresenta
     productPostingCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
     
   }
+  
+  func showToast(status: Bool) {
+    ToastManager.shared.showToast(status ? .DeleteBookmark : .AddBookmark)
+  }
 }
 
 extension ProductDetailViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {

@@ -21,6 +21,7 @@ public protocol ProductDetailRouting: ViewableRouting {
 protocol ProductDetailPresentable: Presentable {
   var listener: ProductDetailPresentableListener? { get set }
   @MainActor func setProductInfo(with productInfo: ProductDetailDTO)
+  func showToast(status: Bool)
 }
 
 public protocol ProductDetailListener: AnyObject {
@@ -94,7 +95,7 @@ final class ProductDetailInteractor: PresentableInteractor<ProductDetailPresenta
   func fetchBookmark() {
     if let productDetailInfo {
       let product = productDetailInfo.product
-      
+      presenter.showToast(status: productDetailInfo.scrap)
       Task.detached { [weak self] in
         guard let self else { return }
         

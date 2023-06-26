@@ -51,10 +51,7 @@ final public class ProfileViewController: UIViewController, ProfilePresentable, 
   
   private let userPostingCollectionView : UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: .init()).then {
     $0.backgroundColor = .DecoColor.whiteColor
-    let layout = UICollectionViewFlowLayout()
-    layout.scrollDirection = .vertical
-    $0.collectionViewLayout = layout
-    
+    $0.setupDefaultTwoColumnGridLayout()
     $0.register(ImageCell.self, forCellWithReuseIdentifier: ImageCell.identifier)
     $0.bounces = false
     $0.isScrollEnabled = false
@@ -194,9 +191,6 @@ final public class ProfileViewController: UIViewController, ProfilePresentable, 
           self.listener?.fetchUserPostings(createdAt: lastCreatedAt)
         }
       }).disposed(by: disposeBag)
-    
-    
-    self.userPostingCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
   }
   
   private func setupBinds() {
@@ -258,20 +252,5 @@ final public class ProfileViewController: UIViewController, ProfilePresentable, 
     self.profileView.setProfile(with: profileInfo)
     self.profileInfoView.setProfileInfo(with: profileInfo)
     self.stickyProfileInfoView.setProfileInfo(with: profileInfo)
-  }
-}
-
-extension ProfileViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-  public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    let size: CGFloat = (UIScreen.main.bounds.width - 5.0) / 2.0
-    return CGSize(width: size, height: size)
-  }
-  
-  public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-    return 5.0
-  }
-  
-  public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-    return 5.0
   }
 }

@@ -64,13 +64,10 @@ final class TargetUserProfileViewController: UIViewController, TargetUserProfile
   
   private let targetUserPostingCollectionView : UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: .init()).then {
     $0.backgroundColor = .DecoColor.whiteColor
-    let layout = UICollectionViewFlowLayout()
-    layout.scrollDirection = .vertical
-    $0.collectionViewLayout = layout
-    
     $0.register(ImageCell.self, forCellWithReuseIdentifier: ImageCell.identifier)
     $0.bounces = false
     $0.isScrollEnabled = false
+    $0.setupDefaultTwoColumnGridLayout()
   }
   
   private var userPostingCollectionViewHeight: CGFloat = 0.0
@@ -284,8 +281,6 @@ final class TargetUserProfileViewController: UIViewController, TargetUserProfile
           self.listener?.fetchTargetUserPostings(createdAt: lastCreatedAt)
         }
       }).disposed(by: disposeBag)
-    
-    self.targetUserPostingCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
   }
   
   
@@ -401,22 +396,5 @@ final class TargetUserProfileViewController: UIViewController, TargetUserProfile
     alert.addAction(editButton)
     alert.addAction(cancelButton)
     self.present(alert, animated: true)
-  }
-}
-
-
-
-extension TargetUserProfileViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-  public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    let size: CGFloat = (UIScreen.main.bounds.width - 5.0) / 2.0
-    return CGSize(width: size, height: size)
-  }
-  
-  public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-    return 5.0
-  }
-  
-  public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-    return 5.0
   }
 }

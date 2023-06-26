@@ -66,10 +66,7 @@ final class SearchPhotoViewController: UIViewController, SearchPhotoPresentable,
   private let photoCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: .init()).then {
     $0.register(ImageCell.self, forCellWithReuseIdentifier: ImageCell.identifier)
     $0.backgroundColor = .DecoColor.whiteColor
-    
-    let layout = UICollectionViewFlowLayout()
-    layout.scrollDirection = .vertical
-    $0.collectionViewLayout = layout
+    $0.setupDefaultTwoColumnGridLayout()
     $0.showsVerticalScrollIndicator = false
   }
   
@@ -164,8 +161,6 @@ final class SearchPhotoViewController: UIViewController, SearchPhotoPresentable,
         }
         
       }).disposed(by: disposeBag)
-    
-    photoCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
   }
   
   func showEmptyNotice(isEmpty: Bool) {
@@ -227,73 +222,5 @@ final class SearchPhotoViewController: UIViewController, SearchPhotoPresentable,
       }
       
     }).disposed(by: disposeBag)
-    
-    selectedFilterCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
-  }
-}
-
-extension SearchPhotoViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-  func collectionView(
-    _ collectionView: UICollectionView,
-    layout collectionViewLayout: UICollectionViewLayout,
-    sizeForItemAt indexPath: IndexPath
-  ) -> CGSize {
-    switch collectionView {
-    case selectedFilterCollectionView:
-      let font: UIFont = UIFont.DecoFont.getFont(with: .Suit, type: .medium, size: 12)
-      if let filterList = listener?.selectedFilter.value {
-        return CGSize(
-          width: (
-            (filterList[indexPath.row].name.size(withAttributes: [NSAttributedString.Key.font:font]).width) +
-            (SelectedFilterCell.horizontalMargin * 2) +
-            (SelectedFilterCell.imageSize) +
-            (SelectedFilterCell.itemSpacing)
-          ),
-          height: 30
-        )
-      }
-      return .zero
-    case photoCollectionView:
-      let cellSize: CGFloat = (UIScreen.main.bounds.width - 5.0) / 2.0
-      return CGSize(width: cellSize, height: cellSize)
-    default:
-      return .zero
-    }
-  }
-  
-  func collectionView(
-    _ collectionView: UICollectionView,
-    layout collectionViewLayout: UICollectionViewLayout,
-    minimumLineSpacingForSectionAt section: Int
-  ) -> CGFloat {
-    switch collectionView {
-    case selectedFilterCollectionView: return 8.0
-    case photoCollectionView: return 5.0
-    default: return .zero
-    }
-  }
-  
-  func collectionView(
-    _ collectionView: UICollectionView,
-    layout collectionViewLayout: UICollectionViewLayout,
-    minimumInteritemSpacingForSectionAt section: Int
-  ) -> CGFloat {
-    switch collectionView {
-    case selectedFilterCollectionView: return 8.0
-    case photoCollectionView: return 5.0
-    default: return .zero
-    }
-  }
-  
-  func collectionView(
-    _ collectionView: UICollectionView,
-    layout collectionViewLayout: UICollectionViewLayout,
-    insetForSectionAt section: Int
-  ) -> UIEdgeInsets {
-    switch collectionView {
-    case selectedFilterCollectionView: return UIEdgeInsets(top: 0, left: 18, bottom: 0, right: 18)
-    case photoCollectionView: return UIEdgeInsets.zero
-    default: return UIEdgeInsets.zero
-    }
   }
 }

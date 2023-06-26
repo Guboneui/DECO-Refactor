@@ -45,9 +45,7 @@ final class PhotoBookmarkViewController: UIViewController, PhotoBookmarkPresenta
     $0.backgroundColor = .DecoColor.whiteColor
     $0.register(BookmarkImageCell.self, forCellWithReuseIdentifier: BookmarkImageCell.identifier)
     $0.bounces = false
-    let layout = UICollectionViewFlowLayout()
-    layout.scrollDirection = .vertical
-    $0.collectionViewLayout = layout
+    $0.setupDefaultTwoColumnGridLayout()
     $0.showsVerticalScrollIndicator = false
   }
   
@@ -154,8 +152,6 @@ final class PhotoBookmarkViewController: UIViewController, PhotoBookmarkPresenta
           )
         }
       }).disposed(by: disposeBag)
-    
-    photoBookmarkCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
   }
 }
 
@@ -176,9 +172,6 @@ extension PhotoBookmarkViewController: UICollectionViewDelegate, UICollectionVie
       } else {
         return .zero
       }
-    case photoBookmarkCollectionView:
-      let cellSize: CGFloat = (UIScreen.main.bounds.width - 5.0) / 2.0
-      return CGSize(width: cellSize, height: cellSize)
     default:
       return .zero
     }

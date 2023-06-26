@@ -89,10 +89,7 @@ final class ProductMoodDetailViewController: UIViewController, ProductMoodDetail
   private let productCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: .init()).then {
     $0.register(BookmarkImageCell.self, forCellWithReuseIdentifier: BookmarkImageCell.identifier)
     $0.backgroundColor = .DecoColor.whiteColor
-    
-    let layout = UICollectionViewFlowLayout()
-    layout.scrollDirection = .vertical
-    $0.collectionViewLayout = layout
+    $0.setupDefaultTwoColumnGridLayout()
   }
   
   override func viewDidLoad() {
@@ -287,8 +284,6 @@ final class ProductMoodDetailViewController: UIViewController, ProductMoodDetail
           self.listener?.fetchProductList(createdAt: lastCreatedAt)
         }
       }).disposed(by: disposeBag)
-    
-    productCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
   }
   
   
@@ -320,10 +315,6 @@ extension ProductMoodDetailViewController: UICollectionViewDelegate, UICollectio
         )
       }
       return .zero
-      
-    case productCollectionView:
-      let cellSize: CGFloat = (UIScreen.main.bounds.width - 5.0) / 2.0
-      return CGSize(width: cellSize, height: cellSize)
     default: return .zero
     }
   }
@@ -335,7 +326,6 @@ extension ProductMoodDetailViewController: UICollectionViewDelegate, UICollectio
   ) -> CGFloat {
     switch collectionView {
     case selectedFilterCollectionView: return 8.0
-    case productCollectionView: return 5.0
     default: return .zero
     }
     
@@ -348,7 +338,6 @@ extension ProductMoodDetailViewController: UICollectionViewDelegate, UICollectio
   ) -> CGFloat {
     switch collectionView {
     case selectedFilterCollectionView: return 8.0
-    case productCollectionView: return 5.0
     default: return .zero
     }
   }
@@ -360,7 +349,6 @@ extension ProductMoodDetailViewController: UICollectionViewDelegate, UICollectio
   ) -> UIEdgeInsets {
     switch collectionView {
     case selectedFilterCollectionView: return UIEdgeInsets(top: 0, left: 18, bottom: 0, right: 18)
-    case productCollectionView: return UIEdgeInsets.zero
     default: return UIEdgeInsets.zero
     }
   }

@@ -65,10 +65,7 @@ final class SearchProductViewController: UIViewController, SearchProductPresenta
   private let productCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: .init()).then {
     $0.register(BookmarkImageCell.self, forCellWithReuseIdentifier: BookmarkImageCell.identifier)
     $0.backgroundColor = .DecoColor.whiteColor
-    
-    let layout = UICollectionViewFlowLayout()
-    layout.scrollDirection = .vertical
-    $0.collectionViewLayout = layout
+    $0.setupDefaultTwoColumnGridLayout()
     $0.showsVerticalScrollIndicator = false
   }
   
@@ -191,8 +188,6 @@ final class SearchProductViewController: UIViewController, SearchProductPresenta
       print(index, product)
       self.listener?.pushProductDetailVC(at: index.row, with: product)
     }).disposed(by: disposeBag)
-    
-    productCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
   }
   
   func showEmptyNotice() {
@@ -200,39 +195,3 @@ final class SearchProductViewController: UIViewController, SearchProductPresenta
     self.emptyNoticeLabel.isHidden = false
   }
 }
-
-extension SearchProductViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-  func collectionView(
-    _ collectionView: UICollectionView,
-    layout collectionViewLayout: UICollectionViewLayout,
-    sizeForItemAt indexPath: IndexPath
-  ) -> CGSize {
-    let cellSize: CGFloat = (UIScreen.main.bounds.width - 5.0) / 2.0
-    return CGSize(width: cellSize, height: cellSize)
-  }
-  
-  func collectionView(
-    _ collectionView: UICollectionView,
-    layout collectionViewLayout: UICollectionViewLayout,
-    minimumLineSpacingForSectionAt section: Int
-  ) -> CGFloat {
-    return 5.0
-  }
-  
-  func collectionView(
-    _ collectionView: UICollectionView,
-    layout collectionViewLayout: UICollectionViewLayout,
-    minimumInteritemSpacingForSectionAt section: Int
-  ) -> CGFloat {
-    return 5.0
-  }
-  
-  func collectionView(
-    _ collectionView: UICollectionView,
-    layout collectionViewLayout: UICollectionViewLayout,
-    insetForSectionAt section: Int
-  ) -> UIEdgeInsets {
-    return UIEdgeInsets.zero
-  }
-}
-

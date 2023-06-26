@@ -73,13 +73,9 @@ final class BrandDetailViewController: UIViewController, BrandDetailPresentable,
   private let brandProductCategoryCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: .init()).then {
     $0.backgroundColor = .DecoColor.whiteColor
     $0.register(SmallTextCell.self, forCellWithReuseIdentifier: SmallTextCell.identifier)
-    let layout = UICollectionViewFlowLayout()
-    layout.scrollDirection = .horizontal
-    
-    $0.collectionViewLayout = layout
+    $0.setupSmallCategoryLayout()
     $0.showsHorizontalScrollIndicator = false
     $0.bounces = false
-    $0.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
   }
   
   private let brandProductCollectionView : UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: .init()).then {
@@ -95,14 +91,9 @@ final class BrandDetailViewController: UIViewController, BrandDetailPresentable,
   
   private let stickyCategoryCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: .init()).then {
     $0.register(SmallTextCell.self, forCellWithReuseIdentifier: SmallTextCell.identifier)
-    let layout = UICollectionViewFlowLayout()
-    layout.scrollDirection = .horizontal
-    
-    $0.collectionViewLayout = layout
+    $0.setupSmallCategoryLayout()
     $0.showsHorizontalScrollIndicator = false
     $0.bounces = false
-    $0.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-    
     $0.isHidden = true
   }
   
@@ -373,16 +364,6 @@ extension BrandDetailViewController: UICollectionViewDelegate, UICollectionViewD
     switch collectionView {
     case brandProductUsageCollectionView:
       return CGSize(width: usageCollectionViewHeight, height: usageCollectionViewHeight)
-    case brandProductCategoryCollectionView, stickyCategoryCollectionView:
-      let font: UIFont = UIFont.DecoFont.getFont(with: .Suit, type: .medium, size: 12)
-      if let productCategory = listener?.productCategory.value {
-        return CGSize(
-          width: productCategory[indexPath.row].category.categoryName.size(withAttributes: [NSAttributedString.Key.font:font]).width + 20,
-          height: 15
-        )
-      } else {
-        return .zero
-      }
     case brandProductCollectionView:
       print(brandProductCollectionView.frame)
       return CGSize(
@@ -402,8 +383,6 @@ extension BrandDetailViewController: UICollectionViewDelegate, UICollectionViewD
     switch collectionView {
     case brandProductUsageCollectionView:
       return 8.0
-    case brandProductCategoryCollectionView, stickyCategoryCollectionView:
-      return 24.0
     case brandProductCollectionView:
       return .zero
     default:

@@ -38,9 +38,7 @@ final class ProductBookmarkViewController: UIViewController, ProductBookmarkPres
     $0.register(SmallTextCell.self, forCellWithReuseIdentifier: SmallTextCell.identifier)
     $0.showsHorizontalScrollIndicator = false
     $0.bounces = false
-    let layout = UICollectionViewFlowLayout()
-    layout.scrollDirection = .horizontal
-    $0.collectionViewLayout = layout
+    $0.setupSmallCategoryLayout()
   }
   
   private let productBookmarkCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: .init()).then {
@@ -105,8 +103,6 @@ final class ProductBookmarkViewController: UIViewController, ProductBookmarkPres
         self.listener?.fetchBookmarkListWithCategory(categoryID: selectedCategoryID, createdAt: Int.max)
         self.listener?.selectProductBookmarkCategory(categoryID: selectedCategoryID, index: selectedIndex)
       }).disposed(by: disposeBag)
-    
-    productBookmarkCategoryCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
   }
   
   private func setupBookmarkCollectionView() {
@@ -154,57 +150,5 @@ final class ProductBookmarkViewController: UIViewController, ProductBookmarkPres
           )
         }
       }).disposed(by: disposeBag)
-  }
-}
-
-extension ProductBookmarkViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-  func collectionView(
-    _ collectionView: UICollectionView,
-    layout collectionViewLayout: UICollectionViewLayout,
-    sizeForItemAt indexPath: IndexPath
-  ) -> CGSize {
-    switch collectionView {
-    case productBookmarkCategoryCollectionView:
-      let font: UIFont = UIFont.DecoFont.getFont(with: .Suit, type: .medium, size: 12)
-      if let productBookmarkCategory = listener?.productBookmarkCategory.value {
-        return CGSize(
-          width: productBookmarkCategory[indexPath.row].category.categoryName.size(withAttributes: [NSAttributedString.Key.font:font]).width + 24,
-          height: 15
-        )
-      } else {
-        return .zero
-      }
-    default:
-      return .zero
-    }
-  }
-  
-  func collectionView(
-    _ collectionView: UICollectionView,
-    layout collectionViewLayout: UICollectionViewLayout,
-    insetForSectionAt section: Int
-  ) -> UIEdgeInsets {
-    switch collectionView {
-    case productBookmarkCategoryCollectionView:
-      return UIEdgeInsets(top: 0, left: 28, bottom: 0, right: 4)
-    default:
-      return .zero
-    }
-  }
-  
-  func collectionView(
-    _ collectionView: UICollectionView,
-    layout collectionViewLayout: UICollectionViewLayout,
-    minimumLineSpacingForSectionAt section: Int
-  ) -> CGFloat {
-    return 5.0
-  }
-  
-  func collectionView(
-    _ collectionView: UICollectionView,
-    layout collectionViewLayout: UICollectionViewLayout,
-    minimumInteritemSpacingForSectionAt section: Int
-  ) -> CGFloat {
-    return 5.0
   }
 }

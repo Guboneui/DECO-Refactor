@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 public class SmallTextCell: UICollectionViewCell {
   
@@ -36,12 +37,9 @@ public class SmallTextCell: UICollectionViewCell {
   }
   
   private func setupLayouts() {
-    self.textLabel.pin
-      .horizontally()
-      .vCenter()
-      .sizeToFit(.width)
-    
-    self.contentView.pin.wrapContent()
+    textLabel.snp.makeConstraints { make in
+      make.edges.equalToSuperview()
+    }
   }
   
   public override func sizeThatFits(_ size: CGSize) -> CGSize {
@@ -54,8 +52,6 @@ public class SmallTextCell: UICollectionViewCell {
   ) {
     self.textLabel.text = text
     self.textLabel.textColor = isSelected ? .DecoColor.darkGray2 : .DecoColor.lightGray2
+    self.setupLayouts()
   }
 }
-
-
-

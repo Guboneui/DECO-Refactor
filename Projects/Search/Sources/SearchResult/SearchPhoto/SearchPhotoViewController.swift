@@ -55,12 +55,9 @@ final class SearchPhotoViewController: UIViewController, SearchPhotoPresentable,
     $0.register(SelectedFilterCell.self, forCellWithReuseIdentifier: SelectedFilterCell.identifier)
     $0.backgroundColor = .DecoColor.whiteColor
     $0.bounces = false
-    
-    let layout = UICollectionViewFlowLayout()
-    layout.scrollDirection = .horizontal
-    $0.collectionViewLayout = layout
     $0.showsHorizontalScrollIndicator = false
     $0.isHidden = true
+    $0.setupSelectionFilterLayout()
   }
   
   private let photoCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: .init()).then {

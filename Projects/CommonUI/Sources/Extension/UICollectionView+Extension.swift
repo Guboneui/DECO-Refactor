@@ -24,4 +24,31 @@ public extension UICollectionView {
     let layout = UICollectionViewCompositionalLayout(section: section)
     self.collectionViewLayout = layout
   }
+  
+  func setupSelectionFilterLayout() {
+    let config = UICollectionViewCompositionalLayoutConfiguration()
+    config.scrollDirection = .horizontal
+    config.interSectionSpacing = 0
+    
+    let screenWidth: CGFloat = UIScreen.main.bounds.width
+    let estimatedWidth: CGFloat = 20.0
+    let absoluteHeight: CGFloat = 30.0
+    let spacing: CGFloat = 8.0
+    let inset: CGFloat = 18.0
+    
+    let layout = UICollectionViewCompositionalLayout(sectionProvider: { (sectionIndex, environment) -> NSCollectionLayoutSection? in
+      let itemSize = NSCollectionLayoutSize(widthDimension: .estimated(estimatedWidth), heightDimension: .absolute(absoluteHeight))
+      let item = NSCollectionLayoutItem(layoutSize: itemSize)
+      item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
+      let groupSize = NSCollectionLayoutSize(widthDimension: .estimated(screenWidth), heightDimension: .absolute(absoluteHeight))
+      let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+      group.interItemSpacing = .fixed(spacing)
+      let section = NSCollectionLayoutSection(group: group)
+      section.interGroupSpacing = spacing
+      section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: inset, bottom: 0, trailing: inset)
+
+      return section
+    }, configuration: config)
+    self.collectionViewLayout = layout
+  }
 }

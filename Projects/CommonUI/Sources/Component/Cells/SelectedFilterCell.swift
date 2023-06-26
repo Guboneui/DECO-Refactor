@@ -6,13 +6,14 @@
 //
 
 import UIKit
+import SnapKit
 
 public class SelectedFilterCell: UICollectionViewCell {
   
   public static let identifier = "SelectedFilterCell"
-  public static let horizontalMargin: CGFloat = 10
-  public static let imageSize: CGFloat = 11
-  public static let itemSpacing: CGFloat = 2
+  private let horizontalMargin: CGFloat = 10
+  private let imageSize: CGFloat = 11
+  private let itemSpacing: CGFloat = 2
   
   private let textLabel: UILabel = UILabel().then {
     $0.textAlignment = .center
@@ -37,31 +38,34 @@ public class SelectedFilterCell: UICollectionViewCell {
     self.setupLayouts()
   }
   
+  public override func prepareForReuse() {
+    super.prepareForReuse()
+    self.textLabel.text = nil
+  }
+  
   private func setupViews() {
     self.contentView.addSubview(selectedView)
     self.contentView.addSubview(textLabel)
     self.contentView.addSubview(imageView)
-
     self.contentView.makeCornerRadius(radius: 14)
-    
   }
   
   private func setupLayouts() {
-    self.selectedView.pin.all()
+    selectedView.snp.makeConstraints { make in
+      make.edges.equalToSuperview()
+    }
     
-    self.textLabel.pin
-      .left(SelectedFilterCell.horizontalMargin)
-      .vCenter()
-      .sizeToFit()
+    textLabel.snp.makeConstraints { make in
+      make.leading.equalToSuperview().inset(horizontalMargin)
+      make.centerY.equalToSuperview()
+    }
     
-    imageView.pin
-      .left(to: textLabel.edge.right)
-      .vCenter()
-      .right(SelectedFilterCell.horizontalMargin)
-      .size(SelectedFilterCell.imageSize)
-      .marginLeft(SelectedFilterCell.itemSpacing)
-    
-    self.contentView.pin.wrapContent()
+    imageView.snp.makeConstraints { make in
+      make.leading.equalTo(textLabel.snp.trailing).offset(itemSpacing)
+      make.trailing.equalToSuperview().inset(horizontalMargin)
+      make.centerY.equalToSuperview()
+      make.size.equalTo(imageSize)
+    }
   }
   
   public override func sizeThatFits(_ size: CGSize) -> CGSize {
@@ -72,19 +76,13 @@ public class SelectedFilterCell: UICollectionViewCell {
     text: String,
     isSelected: Bool
   ) {
-    self.textLabel.text = text
-    self.textLabel.font = .DecoFont.getFont(with: .Suit, type: isSelected ? .bold : .medium, size: 12)
-    self.textLabel.textColor = isSelected ? .DecoColor.secondaryColor : .DecoColor.gray2
-    self.contentView.makeBorder(width: 1.0, borderColor: isSelected ? .DecoColor.secondaryColor : .DecoColor.lightGray1)
-    self.selectedView.backgroundColor = isSelected ? .DecoColor.lightSecondaryColor : .clear
-    self.imageView.image = isSelected ? .DecoImage.closeSec : .DecoImage.resetDarkgray2
+    textLabel.text = text
+    textLabel.font = .DecoFont.getFont(with: .Suit, type: isSelected ? .bold : .medium, size: 12)
+    textLabel.textColor = isSelected ? .DecoColor.secondaryColor : .DecoColor.gray2
+    contentView.makeBorder(width: 1.0, borderColor: isSelected ? .DecoColor.secondaryColor : .DecoColor.lightGray1)
+    selectedView.backgroundColor = isSelected ? .DecoColor.lightSecondaryColor : .clear
+    imageView.image = isSelected ? .DecoImage.closeSec : .DecoImage.resetDarkgray2
     
-    self.setupLayouts()
+    setupLayouts()
   }
 }
-
-
-
-
-
-

@@ -78,12 +78,9 @@ final class ProductMoodDetailViewController: UIViewController, ProductMoodDetail
     $0.register(SelectedFilterCell.self, forCellWithReuseIdentifier: SelectedFilterCell.identifier)
     $0.backgroundColor = .DecoColor.whiteColor
     $0.bounces = false
-    
-    let layout = UICollectionViewFlowLayout()
-    layout.scrollDirection = .horizontal
-    $0.collectionViewLayout = layout
     $0.showsHorizontalScrollIndicator = false
     $0.isHidden = true
+    $0.setupSelectionFilterLayout()
   }
   
   private let productCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: .init()).then {
@@ -226,8 +223,6 @@ final class ProductMoodDetailViewController: UIViewController, ProductMoodDetail
         }
       }
     }).disposed(by: disposeBag)
-    
-    selectedFilterCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
   }
   
   private func setProductListCollectionView() {
@@ -291,65 +286,5 @@ final class ProductMoodDetailViewController: UIViewController, ProductMoodDetail
     self.navCategoryLabel.text = mood
     self.navCategoryLabel.flex.markDirty()
     self.navCategoryView.flex.layout(mode: .adjustWidth)
-  }
-}
-
-extension ProductMoodDetailViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-  func collectionView(
-    _ collectionView: UICollectionView,
-    layout collectionViewLayout: UICollectionViewLayout,
-    sizeForItemAt indexPath: IndexPath
-  ) -> CGSize {
-    switch collectionView {
-    case selectedFilterCollectionView:
-      let font: UIFont = UIFont.DecoFont.getFont(with: .Suit, type: .medium, size: 12)
-      if let categoryList = listener?.selectedFilter.value {
-        return CGSize(
-          width: (
-            (categoryList[indexPath.row].name.size(withAttributes: [NSAttributedString.Key.font:font]).width) +
-            (SelectedFilterCell.horizontalMargin * 2) +
-            (SelectedFilterCell.imageSize) +
-            (SelectedFilterCell.itemSpacing)
-          ),
-          height: 30
-        )
-      }
-      return .zero
-    default: return .zero
-    }
-  }
-  
-  func collectionView(
-    _ collectionView: UICollectionView,
-    layout collectionViewLayout: UICollectionViewLayout,
-    minimumLineSpacingForSectionAt section: Int
-  ) -> CGFloat {
-    switch collectionView {
-    case selectedFilterCollectionView: return 8.0
-    default: return .zero
-    }
-    
-  }
-  
-  func collectionView(
-    _ collectionView: UICollectionView,
-    layout collectionViewLayout: UICollectionViewLayout,
-    minimumInteritemSpacingForSectionAt section: Int
-  ) -> CGFloat {
-    switch collectionView {
-    case selectedFilterCollectionView: return 8.0
-    default: return .zero
-    }
-  }
-  
-  func collectionView(
-    _ collectionView: UICollectionView,
-    layout collectionViewLayout: UICollectionViewLayout,
-    insetForSectionAt section: Int
-  ) -> UIEdgeInsets {
-    switch collectionView {
-    case selectedFilterCollectionView: return UIEdgeInsets(top: 0, left: 18, bottom: 0, right: 18)
-    default: return UIEdgeInsets.zero
-    }
   }
 }

@@ -54,12 +54,9 @@ final class SearchProductViewController: UIViewController, SearchProductPresenta
     $0.register(SelectedFilterCell.self, forCellWithReuseIdentifier: SelectedFilterCell.identifier)
     $0.backgroundColor = .DecoColor.kakaoColor
     $0.bounces = false
-    
-    let layout = UICollectionViewFlowLayout()
-    layout.scrollDirection = .horizontal
-    $0.collectionViewLayout = layout
     $0.showsHorizontalScrollIndicator = false
     $0.isHidden = false
+    $0.setupSelectionFilterLayout()
   }
   
   private let productCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: .init()).then {

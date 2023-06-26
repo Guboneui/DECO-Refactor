@@ -21,13 +21,15 @@ let setting: Settings = .settings(
 let packages: [Package] = [
   .FlexLayout,
   .PinLayout,
-  .Then
+  .Then,
+  .SnapKit
 ]
 
 let dependencies: [TargetDependency] = [
   .FlexLayout,
   .PinLayout,
   .Then,
+  .SnapKit,
   .project(target: "Util", path: "../Util"),
 ]
 

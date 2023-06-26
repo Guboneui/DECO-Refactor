@@ -3,23 +3,23 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		020CC41F1A018DD5A7AF2DE4 /* AppSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538CAB18FC54A75E7658D7B2 /* AppSettingViewController.swift */; };
 		0DAB5095DADE6786E4E4F852 /* AppSettingRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E262913C931A6B09CD7DD9C7 /* AppSettingRouter.swift */; };
 		11C2A135B95A409CDEFC9746 /* AppSettingInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA74E8D76B8040F18066557 /* AppSettingInteractor.swift */; };
+		1A0C0B17B6D4717827A2A4D3 /* WithdrawRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632F3BE17FD32ACAC41F2A26 /* WithdrawRouter.swift */; };
+		215D2A755ADF29BD48F961D8 /* WithdrawBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320F1DBD20A0AA9422796A04 /* WithdrawBuilder.swift */; };
 		245D7DD8A2F321DE74CD2F45 /* User.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F34D01E6A0DB6473F9FECDE /* User.framework */; platformFilter = ios; };
-		2C53CE442A414E380084DA13 /* LogoutRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C53CE402A414E380084DA13 /* LogoutRouter.swift */; };
-		2C53CE452A414E380084DA13 /* LogoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C53CE412A414E380084DA13 /* LogoutViewController.swift */; };
-		2C53CE462A414E380084DA13 /* LogoutBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C53CE422A414E380084DA13 /* LogoutBuilder.swift */; };
-		2C53CE472A414E380084DA13 /* LogoutInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C53CE432A414E380084DA13 /* LogoutInteractor.swift */; };
-		2C53CE572A41FDB40084DA13 /* WithdrawRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C53CE532A41FDB40084DA13 /* WithdrawRouter.swift */; };
-		2C53CE582A41FDB40084DA13 /* WithdrawViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C53CE542A41FDB40084DA13 /* WithdrawViewController.swift */; };
-		2C53CE592A41FDB40084DA13 /* WithdrawBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C53CE552A41FDB40084DA13 /* WithdrawBuilder.swift */; };
-		2C53CE5A2A41FDB40084DA13 /* WithdrawInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C53CE562A41FDB40084DA13 /* WithdrawInteractor.swift */; };
+		9711363B4573CBB817B36332 /* LogoutRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E4AF27CE119CCE8F474823 /* LogoutRouter.swift */; };
+		B8908D02E0DE93FACE9B6638 /* WithdrawViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6404AA0E63A84A7E8DB4CD0A /* WithdrawViewController.swift */; };
 		BB92E46BBCF4FBA5616AFBDB /* AppSettingBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E20EA72D381707E57AC672 /* AppSettingBuilder.swift */; };
+		BBFD84790693BE2367616C23 /* LogoutInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E4CF54C1C882E2FEF9E4DA /* LogoutInteractor.swift */; };
+		F19EC7FDEE4C943E11EF5920 /* WithdrawInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2847C292473AE44EEE7B688E /* WithdrawInteractor.swift */; };
+		F38253EEF4D0126CF070AC66 /* LogoutBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F87DE33D817E27C9B1B7845 /* LogoutBuilder.swift */; };
+		F9CD3A0F13D6AC847E99FEDE /* LogoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAFFFFBF9E00ECBD59798DB /* LogoutViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -36,19 +36,19 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		2C53CE402A414E380084DA13 /* LogoutRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutRouter.swift; sourceTree = "<group>"; };
-		2C53CE412A414E380084DA13 /* LogoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutViewController.swift; sourceTree = "<group>"; };
-		2C53CE422A414E380084DA13 /* LogoutBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutBuilder.swift; sourceTree = "<group>"; };
-		2C53CE432A414E380084DA13 /* LogoutInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutInteractor.swift; sourceTree = "<group>"; };
-		2C53CE532A41FDB40084DA13 /* WithdrawRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawRouter.swift; sourceTree = "<group>"; };
-		2C53CE542A41FDB40084DA13 /* WithdrawViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawViewController.swift; sourceTree = "<group>"; };
-		2C53CE552A41FDB40084DA13 /* WithdrawBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawBuilder.swift; sourceTree = "<group>"; };
-		2C53CE562A41FDB40084DA13 /* WithdrawInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawInteractor.swift; sourceTree = "<group>"; };
+		2847C292473AE44EEE7B688E /* WithdrawInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawInteractor.swift; sourceTree = "<group>"; };
+		28E4CF54C1C882E2FEF9E4DA /* LogoutInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutInteractor.swift; sourceTree = "<group>"; };
+		320F1DBD20A0AA9422796A04 /* WithdrawBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawBuilder.swift; sourceTree = "<group>"; };
+		36E4AF27CE119CCE8F474823 /* LogoutRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutRouter.swift; sourceTree = "<group>"; };
 		3F34D01E6A0DB6473F9FECDE /* User.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = User.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4F87DE33D817E27C9B1B7845 /* LogoutBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutBuilder.swift; sourceTree = "<group>"; };
 		538CAB18FC54A75E7658D7B2 /* AppSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingViewController.swift; sourceTree = "<group>"; };
 		56E20EA72D381707E57AC672 /* AppSettingBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingBuilder.swift; sourceTree = "<group>"; };
+		632F3BE17FD32ACAC41F2A26 /* WithdrawRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawRouter.swift; sourceTree = "<group>"; };
+		6404AA0E63A84A7E8DB4CD0A /* WithdrawViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawViewController.swift; sourceTree = "<group>"; };
 		ABA74E8D76B8040F18066557 /* AppSettingInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingInteractor.swift; sourceTree = "<group>"; };
 		ACBB43FF37618E2F7BFBE53F /* AppSetting.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AppSetting.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		ADAFFFFBF9E00ECBD59798DB /* LogoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutViewController.swift; sourceTree = "<group>"; };
 		E262913C931A6B09CD7DD9C7 /* AppSettingRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingRouter.swift; sourceTree = "<group>"; };
 		F12289E66C14C0E9BAD9FC82 /* AppSetting-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "AppSetting-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -65,28 +65,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2C53CE3F2A414E1E0084DA13 /* Logout */ = {
-			isa = PBXGroup;
-			children = (
-				2C53CE402A414E380084DA13 /* LogoutRouter.swift */,
-				2C53CE412A414E380084DA13 /* LogoutViewController.swift */,
-				2C53CE422A414E380084DA13 /* LogoutBuilder.swift */,
-				2C53CE432A414E380084DA13 /* LogoutInteractor.swift */,
-			);
-			path = Logout;
-			sourceTree = "<group>";
-		};
-		2C53CE522A41FD9F0084DA13 /* Withdraw */ = {
-			isa = PBXGroup;
-			children = (
-				2C53CE532A41FDB40084DA13 /* WithdrawRouter.swift */,
-				2C53CE542A41FDB40084DA13 /* WithdrawViewController.swift */,
-				2C53CE552A41FDB40084DA13 /* WithdrawBuilder.swift */,
-				2C53CE562A41FDB40084DA13 /* WithdrawInteractor.swift */,
-			);
-			path = Withdraw;
-			sourceTree = "<group>";
-		};
 		5171C11A085A3C02E82A450A /* Project */ = {
 			isa = PBXGroup;
 			children = (
@@ -107,9 +85,9 @@
 		8D154ACD7587E88F9508E52A /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				2C53CE522A41FD9F0084DA13 /* Withdraw */,
-				2C53CE3F2A414E1E0084DA13 /* Logout */,
 				A3ADD10680CE33C83DE0F214 /* AppSetting */,
+				B187003C5EDA533173FA07F0 /* Logout */,
+				CCDF3355DC020B1AC5C7C169 /* Withdraw */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -130,6 +108,28 @@
 				538CAB18FC54A75E7658D7B2 /* AppSettingViewController.swift */,
 			);
 			path = AppSetting;
+			sourceTree = "<group>";
+		};
+		B187003C5EDA533173FA07F0 /* Logout */ = {
+			isa = PBXGroup;
+			children = (
+				4F87DE33D817E27C9B1B7845 /* LogoutBuilder.swift */,
+				28E4CF54C1C882E2FEF9E4DA /* LogoutInteractor.swift */,
+				36E4AF27CE119CCE8F474823 /* LogoutRouter.swift */,
+				ADAFFFFBF9E00ECBD59798DB /* LogoutViewController.swift */,
+			);
+			path = Logout;
+			sourceTree = "<group>";
+		};
+		CCDF3355DC020B1AC5C7C169 /* Withdraw */ = {
+			isa = PBXGroup;
+			children = (
+				320F1DBD20A0AA9422796A04 /* WithdrawBuilder.swift */,
+				2847C292473AE44EEE7B688E /* WithdrawInteractor.swift */,
+				632F3BE17FD32ACAC41F2A26 /* WithdrawRouter.swift */,
+				6404AA0E63A84A7E8DB4CD0A /* WithdrawViewController.swift */,
+			);
+			path = Withdraw;
 			sourceTree = "<group>";
 		};
 		D7484F5995EAC030D4976B85 /* Products */ = {
@@ -185,6 +185,8 @@
 		FB483ADB1DDE1AC07EEBF04F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				TargetAttributes = {
+				};
 			};
 			buildConfigurationList = FA0976D3548C5B0E2DE6147E /* Build configuration list for PBXProject "AppSetting" */;
 			compatibilityVersion = "Xcode 13.0";
@@ -222,15 +224,15 @@
 				BB92E46BBCF4FBA5616AFBDB /* AppSettingBuilder.swift in Sources */,
 				11C2A135B95A409CDEFC9746 /* AppSettingInteractor.swift in Sources */,
 				0DAB5095DADE6786E4E4F852 /* AppSettingRouter.swift in Sources */,
-				2C53CE592A41FDB40084DA13 /* WithdrawBuilder.swift in Sources */,
-				2C53CE5A2A41FDB40084DA13 /* WithdrawInteractor.swift in Sources */,
-				2C53CE462A414E380084DA13 /* LogoutBuilder.swift in Sources */,
-				2C53CE582A41FDB40084DA13 /* WithdrawViewController.swift in Sources */,
-				2C53CE442A414E380084DA13 /* LogoutRouter.swift in Sources */,
-				2C53CE572A41FDB40084DA13 /* WithdrawRouter.swift in Sources */,
-				2C53CE452A414E380084DA13 /* LogoutViewController.swift in Sources */,
-				2C53CE472A414E380084DA13 /* LogoutInteractor.swift in Sources */,
 				020CC41F1A018DD5A7AF2DE4 /* AppSettingViewController.swift in Sources */,
+				F38253EEF4D0126CF070AC66 /* LogoutBuilder.swift in Sources */,
+				BBFD84790693BE2367616C23 /* LogoutInteractor.swift in Sources */,
+				9711363B4573CBB817B36332 /* LogoutRouter.swift in Sources */,
+				F9CD3A0F13D6AC847E99FEDE /* LogoutViewController.swift in Sources */,
+				215D2A755ADF29BD48F961D8 /* WithdrawBuilder.swift in Sources */,
+				F19EC7FDEE4C943E11EF5920 /* WithdrawInteractor.swift in Sources */,
+				1A0C0B17B6D4717827A2A4D3 /* WithdrawRouter.swift in Sources */,
+				B8908D02E0DE93FACE9B6638 /* WithdrawViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

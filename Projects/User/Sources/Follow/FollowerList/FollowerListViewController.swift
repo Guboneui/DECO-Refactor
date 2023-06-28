@@ -54,9 +54,9 @@ final class FollowerListViewController: UIViewController, FollowerListPresentabl
   private let followerListCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: .init()).then {
     $0.register(FollowListCell.self, forCellWithReuseIdentifier: FollowListCell.identifier)
     $0.bounces = false
-    let layout = UICollectionViewFlowLayout()
-    layout.scrollDirection = .vertical
-    $0.collectionViewLayout = layout
+    
+    let setcionInset: NSDirectionalEdgeInsets = NSDirectionalEdgeInsets(top: 4, leading: 0, bottom: 4, trailing: 0)
+    $0.setupDefaultListLayout(cellHeight: 74, sectionInset: setcionInset)
   }
   
   private let emptyListNoticeTitleLabel: UILabel = UILabel().then {
@@ -163,8 +163,6 @@ final class FollowerListViewController: UIViewController, FollowerListPresentabl
       }
       
     }.disposed(by: disposeBag)
-    
-    followerListCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
   }
   
   private func searchTextFieldBinding() {
@@ -183,39 +181,5 @@ final class FollowerListViewController: UIViewController, FollowerListPresentabl
   
   func showNoticeLabel(isEmptyArray: Bool) {
     self.emptyListNoticeStackView.isHidden = !isEmptyArray
-  }
-}
-
-extension FollowerListViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-  func collectionView(
-    _ collectionView: UICollectionView,
-    layout collectionViewLayout: UICollectionViewLayout,
-    sizeForItemAt indexPath: IndexPath
-  ) -> CGSize {
-    return CGSize(width: UIScreen.main.bounds.width, height: 74)
-  }
-  
-  func collectionView(
-    _ collectionView: UICollectionView,
-    layout collectionViewLayout: UICollectionViewLayout,
-    minimumLineSpacingForSectionAt section: Int
-  ) -> CGFloat {
-    return 0.0
-  }
-  
-  func collectionView(
-    _ collectionView: UICollectionView,
-    layout collectionViewLayout: UICollectionViewLayout,
-    minimumInteritemSpacingForSectionAt section: Int
-  ) -> CGFloat {
-    return 0.0
-  }
-  
-  func collectionView(
-    _ collectionView: UICollectionView,
-    layout collectionViewLayout: UICollectionViewLayout,
-    insetForSectionAt section: Int
-  ) -> UIEdgeInsets {
-    return UIEdgeInsets(top: 4, left: 0, bottom: 4, right: 0)
   }
 }

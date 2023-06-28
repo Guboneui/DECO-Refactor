@@ -78,4 +78,21 @@ public extension UICollectionView {
     }, configuration: config)
     self.collectionViewLayout = layout
   }
+  
+  func setupDefaultListLayout(cellHeight: CGFloat, groupInset: NSDirectionalEdgeInsets = .zero, groupSpacing: CGFloat = 0, sectionInset: NSDirectionalEdgeInsets = .zero) {
+    let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(cellHeight))
+    let item = NSCollectionLayoutItem(layoutSize: itemSize)
+    
+    let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(cellHeight))
+    let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
+    group.contentInsets = groupInset
+    
+    let section = NSCollectionLayoutSection(group: group)
+    section.contentInsets = sectionInset
+    section.interGroupSpacing = groupSpacing
+    
+    let layout = UICollectionViewCompositionalLayout(section: section)
+    
+    self.collectionViewLayout = layout
+  }
 }

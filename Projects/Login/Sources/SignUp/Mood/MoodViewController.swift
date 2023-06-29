@@ -46,16 +46,11 @@ final class MoodViewController: UIViewController, MoodPresentable, MoodViewContr
   private lazy var moodCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: .init()).then {
 
     $0.register(ImageCell.self, forCellWithReuseIdentifier: ImageCell.identifier)
-
-    let layout = UICollectionViewFlowLayout()
-    layout.scrollDirection = .vertical
-    layout.minimumLineSpacing = 4
-    layout.minimumInteritemSpacing = 4
-
     $0.bounces = false
     $0.isScrollEnabled = false
-    $0.collectionViewLayout = layout
     $0.showsVerticalScrollIndicator = false
+    
+    $0.setupDefaultTwoColumnGridLayout(spacing: 4.0)
   }
   
   // MARK: - LifeCycle
@@ -148,9 +143,6 @@ final class MoodViewController: UIViewController, MoodPresentable, MoodViewContr
       cell.setupCellConfigure(type: .SelectedType, image: data.styleInfo.image, isSelected: data.isSelected)
     }.disposed(by: disposeBag)
     
-    moodCollectionView.rx.setDelegate(self)
-      .disposed(by: disposeBag)
-
     moodCollectionView.rx.itemSelected
       .throttle(.milliseconds(300), latest: false, scheduler: MainScheduler.instance)
       .bind { [weak self] indexPath in
@@ -165,11 +157,5 @@ final class MoodViewController: UIViewController, MoodPresentable, MoodViewContr
       title: "마음에 드는 무드를 1개 이상 골라주세요!",
       subTitle: "\(nickname)님의 취향에 맞는 콘텐츠를 보여드릴게요 :)"
     )
-  }
-}
-
-extension MoodViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    return CGSize(width: cellSize, height: cellSize)
   }
 }

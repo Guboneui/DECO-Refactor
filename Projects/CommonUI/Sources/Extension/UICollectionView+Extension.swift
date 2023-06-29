@@ -11,8 +11,7 @@ public extension UICollectionView {
   
   /// 일반적인 사진 그리드 정렬에 사용됩니다.
   /// spacing = 5입니다
-  func setupDefaultTwoColumnGridLayout() {
-    let spacing: CGFloat = 5.0
+  func setupDefaultTwoColumnGridLayout(spacing: CGFloat = 5.0) {
     let cellSize: CGFloat = (UIScreen.main.bounds.width - spacing) / 2.0
     let itemSize = NSCollectionLayoutSize(widthDimension: .absolute(cellSize), heightDimension: .absolute(cellSize))
     let item = NSCollectionLayoutItem(layoutSize: itemSize)

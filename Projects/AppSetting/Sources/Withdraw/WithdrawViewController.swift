@@ -22,7 +22,7 @@ protocol WithdrawPresentableListener: AnyObject {
 final class WithdrawViewController: PopupViewController, WithdrawPresentable, WithdrawViewControllable {
   
   weak var listener: WithdrawPresentableListener?
-  private let disposeBag: DisposeBag = DisposeBag()
+  private var disposeBag: DisposeBag = DisposeBag()
   private var isKeyboardVisible: BehaviorRelay<Bool> = .init(value: false)
   
   private let titleLabel: UILabel = UILabel().then {
@@ -34,10 +34,7 @@ final class WithdrawViewController: PopupViewController, WithdrawPresentable, Wi
   private let withdrawReasonCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: .init()).then {
     $0.register(DefaultTextCell.self, forCellWithReuseIdentifier: DefaultTextCell.identifier)
     $0.backgroundColor = .DecoColor.whiteColor
-    
-    let layout = UICollectionViewFlowLayout()
-    layout.scrollDirection = .vertical
-    $0.collectionViewLayout = layout
+    $0.bounces = false
   }
   
   private let cvItemHeight: CGFloat = 20.0
@@ -63,6 +60,11 @@ final class WithdrawViewController: PopupViewController, WithdrawPresentable, Wi
     self.setupGestures()
     self.setupWithdrawReasonCollectionView()
     self.keyboardBinding()
+  }
+  
+  override func viewDidDisappear(_ animated: Bool) {
+    super.viewDidDisappear(animated)
+    self.disposeBag = DisposeBag()
   }
   
   override func viewWillLayoutSubviews() {
@@ -113,6 +115,12 @@ final class WithdrawViewController: PopupViewController, WithdrawPresentable, Wi
   }
   
   private func setupWithdrawReasonCollectionView() {
+    withdrawReasonCollectionView.setupDefaultListLayout(
+      cellHeight: cvItemHeight,
+      groupSpacing: cvLineSpacing,
+      sectionInset: NSDirectionalEdgeInsets(top: cvTopMargin, leading: cvLeftMargin, bottom: cvBottomMargin, trailing: 0.0)
+    )
+    
     listener?.withdrawReason
       .share()
       .bind(to: withdrawReasonCollectionView.rx.items(
@@ -140,8 +148,6 @@ final class WithdrawViewController: PopupViewController, WithdrawPresentable, Wi
       }
       print(index, reason)
     }).disposed(by: disposeBag)
-    
-    withdrawReasonCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
   }
   
   func setCvHeight(with count: Int) {
@@ -150,37 +156,6 @@ final class WithdrawViewController: PopupViewController, WithdrawPresentable, Wi
     self.cvHeight = totalCellHeight + totalSpacing + cvTopMargin + cvBottomMargin
     self.setupLayouts()
     self.view.setNeedsLayout()
-  }
-}
-
-extension WithdrawViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-  func collectionView(
-    _ collectionView: UICollectionView,
-    layout collectionViewLayout: UICollectionViewLayout,
-    sizeForItemAt indexPath: IndexPath
-  ) -> CGSize {
-    return CGSize(width: baseView.frame.width, height: cvItemHeight)
-  }
-  
-  func collectionView(
-    _ collectionView: UICollectionView,
-    layout collectionViewLayout: UICollectionViewLayout,
-    minimumLineSpacingForSectionAt section: Int
-  ) -> CGFloat {
-    return cvLineSpacing
-  }
-  
-  func collectionView(
-    _ collectionView: UICollectionView,
-    layout collectionViewLayout: UICollectionViewLayout,
-    insetForSectionAt section: Int
-  ) -> UIEdgeInsets {
-    return UIEdgeInsets(
-      top: cvTopMargin,
-      left: cvLeftMargin,
-      bottom: cvBottomMargin,
-      right: 0.0
-    )
   }
 }
 

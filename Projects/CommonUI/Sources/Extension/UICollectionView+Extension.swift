@@ -24,6 +24,22 @@ public extension UICollectionView {
     self.collectionViewLayout = layout
   }
   
+  func setupDefaultTwoColumnGridLayoutWithHorizontalMargin(spacing: CGFloat = 5.0, margin: CGFloat = 16.0) {
+    let cellSize: CGFloat = (UIScreen.main.bounds.width - (margin * 2) - spacing) / 2.0
+    let itemSize = NSCollectionLayoutSize(widthDimension: .absolute(cellSize), heightDimension: .absolute(cellSize))
+    let item = NSCollectionLayoutItem(layoutSize: itemSize)
+    let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(cellSize))
+    let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+    group.interItemSpacing = .fixed(spacing)
+    let section = NSCollectionLayoutSection(group: group)
+    section.interGroupSpacing = spacing
+    section.contentInsets = NSDirectionalEdgeInsets(top: 12, leading: margin, bottom: 0, trailing: margin)
+    let layout = UICollectionViewCompositionalLayout(section: section)
+    self.collectionViewLayout = layout
+  }
+  
+  
+  
   func setupSelectionFilterLayout() {
     let config = UICollectionViewCompositionalLayoutConfiguration()
     config.scrollDirection = .horizontal

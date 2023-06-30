@@ -44,13 +44,9 @@ final class BrandProductUsageViewController: UIViewController, BrandProductUsage
   private let brandProductUsageCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: .init()).then {
     $0.backgroundColor = .DecoColor.whiteColor
     $0.register(ImageCell.self, forCellWithReuseIdentifier: ImageCell.identifier)
-    let layout = UICollectionViewFlowLayout()
-    layout.scrollDirection = .vertical
-    
-    $0.collectionViewLayout = layout
     $0.showsHorizontalScrollIndicator = false
     $0.bounces = false
-    $0.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 0, right: 0)
+    $0.setupDefaultTwoColumnGridLayoutWithHorizontalMargin()
   }
   
   override func viewDidLoad() {
@@ -129,34 +125,5 @@ final class BrandProductUsageViewController: UIViewController, BrandProductUsage
           }
         }
       }).disposed(by: disposeBag)
-    
-    
-    brandProductUsageCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
   }
 }
-
-extension BrandProductUsageViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    let cellSize: CGFloat = (collectionViewMetric.deviceWidth - (collectionViewMetric.horizontalSpacing * 2) - collectionViewMetric.lineSpacing) / 2.0
-    return CGSize(width: cellSize, height: cellSize)
-  }
-  
-  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-    return collectionViewMetric.lineSpacing
-  }
-
-  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-    return collectionViewMetric.lineSpacing
-  }
-
-  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-    return UIEdgeInsets(
-      top: 0,
-      left: collectionViewMetric.horizontalSpacing,
-      bottom: 0,
-      right: collectionViewMetric.horizontalSpacing
-    )
-  }
-}
-
-

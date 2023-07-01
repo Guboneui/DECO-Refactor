@@ -77,7 +77,7 @@ final public class HomeViewController: UIViewController, HomePresentable, HomeVi
   
   private lazy var segmentStackView: UIStackView = UIStackView(arrangedSubviews: [recentButton, popularButton, followButton]).then {
     $0.axis = .horizontal
-    $0.spacing = 24
+    $0.spacing = 12
   }
   
   private let segmentBarView: UIView = UIView().then {
@@ -92,7 +92,7 @@ final public class HomeViewController: UIViewController, HomePresentable, HomeVi
   private let segmentCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: .init()).then {
     $0.backgroundColor = .orange
     $0.register(LargeTextCell.self, forCellWithReuseIdentifier: LargeTextCell.identifier)
-    
+    $0.showsHorizontalScrollIndicator = false
     let layout = UICollectionViewFlowLayout()
     layout.scrollDirection = .horizontal
     $0.collectionViewLayout = layout
@@ -109,7 +109,6 @@ final public class HomeViewController: UIViewController, HomePresentable, HomeVi
     
     segmentCollectionView.dataSource = self
     segmentCollectionView.delegate = self
-    
   }
   
  
@@ -163,11 +162,13 @@ final public class HomeViewController: UIViewController, HomePresentable, HomeVi
       make.height.equalTo(20)
     }
     
+    view.layoutIfNeeded()
+    
     segmentBarView.snp.makeConstraints { make in
       make.height.equalTo(2)
       make.top.equalTo(segmentStackView.snp.bottom).offset(6)
-      make.leading.equalTo(recentButton.snp.leading)
-      make.width.equalTo(recentButton.snp.width)
+      make.leading.equalToSuperview().offset(30)
+      make.width.equalTo(recentButton.frame.width)
     }
     
     filterCollectionView.snp.makeConstraints { make in
@@ -209,25 +210,41 @@ final public class HomeViewController: UIViewController, HomePresentable, HomeVi
       .observe(on: MainScheduler.instance)
       .skip(1)
       .subscribe(onNext: { [weak self] t in
-        print("type")
         guard let self else { return }
-        UIView.animate(withDuration: 0.3) { [weak self] in
+//        UIView.animate(withDuration: 0.1) {[weak self] in
+//          guard let inSelf = self else { return }
+        
+//          inSelf.view.layoutIfNeeded()
+//        }
+//        inSelf.updateSegmentBarLayout(at: inSelf.recentButton)
+        
+        switch t {
+        case .Recent: self.updateSegmentBarLayout(at: self.recentButton)
+        case .Popular: self.updateSegmentBarLayout(at: self.popularButton)
+        case .Follow: self.updateSegmentBarLayout(at: self.followButton)
+        }
+        
+        
+        UIView.animate(withDuration: 0.25) { [weak self] in
           guard let inSelf = self else { return }
           switch t {
           case .Recent:
-            inSelf.updateSegmentBarLayout(at: inSelf.recentButton)
+//            inSelf.updateSegmentBarLayout(at: inSelf.recentButton)
+            inSelf.updateSegmentBarUI(with: .Recent)
             inSelf.segmentCollectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .left, animated: true)
           case .Popular:
-            inSelf.updateSegmentBarLayout(at: inSelf.popularButton)
+            inSelf.updateSegmentBarUI(with: .Popular)
+//            inSelf.updateSegmentBarLayout(at: inSelf.popularButton)
             inSelf.segmentCollectionView.scrollToItem(at: IndexPath(row: 1, section: 0), at: .left, animated: true)
           case .Follow:
-            inSelf.updateSegmentBarLayout(at: inSelf.followButton)
+//            inSelf.updateSegmentBarLayout(at: inSelf.followButton)
+            inSelf.updateSegmentBarUI(with: .Follow)
             inSelf.segmentCollectionView.scrollToItem(at: IndexPath(row: 2, section: 0), at: .left, animated: true)
             
           }
-          inSelf.updateSegmentBarUI(with: t)
           inSelf.view.layoutIfNeeded()
         }
+        
       }).disposed(by: disposeBag)
   }
 }
@@ -235,11 +252,12 @@ final public class HomeViewController: UIViewController, HomePresentable, HomeVi
 // MARK: SegmentBar Layout & UI
 extension HomeViewController {
   private func updateSegmentBarLayout(at button: UIButton) {
-    segmentBarView.snp.remakeConstraints { make in
-      make.height.equalTo(2)
-      make.top.equalTo(segmentStackView.snp.bottom).offset(6)
-      make.leading.equalTo(button.snp.leading)
-      make.width.equalTo(button.frame.width)
+//    UIView.animate(withDuration: 0.1) {[weak self] in
+//      guard let self else { return }
+      self.segmentBarView.snp.updateConstraints { make in
+        make.width.equalTo(button.frame.width)
+//      }
+//      self.view.layoutIfNeeded()
     }
   }
   
@@ -271,16 +289,30 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
   public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
     return CGSize(width: segmentCollectionView.frame.width, height: segmentCollectionView.frame.height)
   }
-  
+
   public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
     return 0
   }
-  
+
   public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
     return 0
   }
-  
+
   public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
     return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+  }
+  
+  public func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    let x = scrollView.contentOffset.x
+    let width: CGFloat = segmentCollectionView.frame.width
+    if x == 0.0 { type.accept(.Recent) }
+    else if x == width * 1.0 { type.accept(.Popular) }
+    else if x == width * 2.0 { type.accept(.Follow) }
+    
+    let spacing: CGFloat = 42.0
+
+    segmentBarView.snp.updateConstraints { make in
+      make.leading.equalToSuperview().offset(scrollView.contentOffset.x / width * spacing + 30)
+    }
   }
 }

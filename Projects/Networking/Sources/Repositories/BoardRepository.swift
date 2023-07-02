@@ -12,6 +12,7 @@ import Foundation
 
 public protocol BoardRepository {
   func boardCategoryList() async -> [BoardCategoryDTO]?
+  func boardList(param: BoardRequestDTO) async -> [PostingDTO]?
 }
 
 public class BoardRepositoryImpl: BaseRepository, BoardRepository {
@@ -21,6 +22,10 @@ public class BoardRepositoryImpl: BaseRepository, BoardRepository {
   
   public func boardCategoryList() async -> [BoardCategoryDTO]? {
     await provider.request(.boardCategoryList)
+  }
+  
+  public func boardList(param: BoardRequestDTO) async -> [PostingDTO]? {
+    await provider.request(.boardList(param))
   }
 }
 

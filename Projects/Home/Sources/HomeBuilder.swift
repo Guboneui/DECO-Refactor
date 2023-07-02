@@ -5,6 +5,8 @@
 //  Created by 구본의 on 2023/05/11.
 //
 
+import Networking
+
 import RIBs
 
 public protocol HomeDependency: Dependency {
@@ -13,8 +15,7 @@ public protocol HomeDependency: Dependency {
 }
 
 final class HomeComponent: Component<HomeDependency> {
-  
-  // TODO: Declare 'fileprivate' dependencies that are only used by this RIB.
+  var boardRepository: BoardRepository = BoardRepositoryImpl()
 }
 
 // MARK: - Builder
@@ -32,7 +33,10 @@ final public class HomeBuilder: Builder<HomeDependency>, HomeBuildable {
   public func build(withListener listener: HomeListener) -> HomeRouting {
     let component = HomeComponent(dependency: dependency)
     let viewController = HomeViewController()
-    let interactor = HomeInteractor(presenter: viewController)
+    let interactor = HomeInteractor(
+      presenter: viewController,
+      boardRepository: component.boardRepository
+    )
     interactor.listener = listener
     
     

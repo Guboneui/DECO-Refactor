@@ -7,9 +7,11 @@
 
 import Foundation
 import Moya
+import Entity
 
 enum BoardAPI {
   case boardCategoryList
+  case boardList(BoardRequestDTO)
 }
 
 extension BoardAPI: TargetType {
@@ -22,6 +24,8 @@ extension BoardAPI: TargetType {
     switch self {
     case .boardCategoryList:
       return "\(defaultURL)/category/list"
+    case .boardList:
+      return "\(defaultURL)/list"
     }
   }
   
@@ -29,6 +33,8 @@ extension BoardAPI: TargetType {
     switch self {
     case .boardCategoryList:
       return .get
+    case .boardList:
+      return .post
     }
   }
   
@@ -36,6 +42,8 @@ extension BoardAPI: TargetType {
     switch self {
     case .boardCategoryList:
       return .requestPlain
+    case .boardList(let param):
+      return .requestParameters(parameters: param.toDictionary, encoding: JSONEncoding.default)
     }
   }
   

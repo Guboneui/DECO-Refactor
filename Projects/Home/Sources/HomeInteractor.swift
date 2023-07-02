@@ -8,6 +8,9 @@
 import RIBs
 import RxSwift
 
+import Entity
+import Networking
+
 public protocol HomeRouting: ViewableRouting {
   // TODO: Declare methods the interactor can invoke to manage sub-tree via the router.
 }
@@ -26,9 +29,13 @@ final class HomeInteractor: PresentableInteractor<HomePresentable>, HomeInteract
   weak var router: HomeRouting?
   weak var listener: HomeListener?
   
-  // TODO: Add additional dependencies to constructor. Do not perform any logic
-  // in constructor.
-  override init(presenter: HomePresentable) {
+  private let boardRepository: BoardRepository
+  
+  init(
+    presenter: HomePresentable,
+    boardRepository: BoardRepository
+  ) {
+    self.boardRepository = boardRepository
     super.init(presenter: presenter)
     presenter.listener = self
   }

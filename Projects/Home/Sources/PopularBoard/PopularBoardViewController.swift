@@ -25,12 +25,19 @@ final class PopularBoardViewController: UIViewController, PopularBoardPresentabl
   weak var listener: PopularBoardPresentableListener?
   private let disposeBag: DisposeBag = DisposeBag()
   
+  private let emptyNoticeLabel: UILabel = UILabel().then {
+    $0.text = "인기 게시물이 없어요"
+    $0.font = .DecoFont.getFont(with: .Suit, type: .medium, size: 12)
+    $0.textColor = .DecoColor.darkGray2
+  }
+  
   private let popularBoardCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: .init()).then {
     $0.register(ImageCell.self, forCellWithReuseIdentifier: ImageCell.identifier)
     $0.backgroundColor = .DecoColor.whiteColor
     $0.setupDefaultTwoColumnGridLayout()
     $0.bounces = false
     $0.showsVerticalScrollIndicator = false
+    $0.isHidden = true
   }
   
   override func viewDidLoad() {
@@ -45,10 +52,16 @@ final class PopularBoardViewController: UIViewController, PopularBoardPresentabl
   }
   
   private func setupViews() {
+    self.view.addSubview(emptyNoticeLabel)
     self.view.addSubview(popularBoardCollectionView)
   }
   
   private func setupLayouts() {
+    
+    emptyNoticeLabel.pin
+      .center()
+      .sizeToFit()
+    
     popularBoardCollectionView.pin.all()
   }
   
@@ -57,6 +70,16 @@ final class PopularBoardViewController: UIViewController, PopularBoardPresentabl
     popularBoardCollectionView.dataSource = nil
     
     listener?.popularBoardList
+      .share()
+      .observe(on: MainScheduler.instance)
+      .bind { [weak self] in
+        guard let self else { return }
+        self.popularBoardCollectionView.isHidden = $0.isEmpty
+        self.emptyNoticeLabel.isHidden = !$0.isEmpty
+      }.disposed(by: disposeBag)
+    
+    listener?.popularBoardList
+      .share()
       .bind(to: popularBoardCollectionView.rx.items(
         cellIdentifier: ImageCell.identifier,
         cellType: ImageCell.self)

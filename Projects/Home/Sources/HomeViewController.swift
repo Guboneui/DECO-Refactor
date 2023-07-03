@@ -19,6 +19,7 @@ enum HomeType {
 }
 
 protocol HomePresentableListener: AnyObject {
+  var boardVCs: BehaviorRelay<[ViewControllable]> { get }
 }
 
 final public class HomeViewController: UIViewController, HomePresentable, HomeViewControllable {
@@ -90,8 +91,8 @@ final public class HomeViewController: UIViewController, HomePresentable, HomeVi
   }
   
   private let segmentCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: .init()).then {
-    $0.backgroundColor = .orange
-    $0.register(LargeTextCell.self, forCellWithReuseIdentifier: LargeTextCell.identifier)
+    $0.backgroundColor = .DecoColor.whiteColor
+    $0.register(ChildViewCell.self, forCellWithReuseIdentifier: ChildViewCell.identifier)
     $0.showsHorizontalScrollIndicator = false
     let layout = UICollectionViewFlowLayout()
     layout.scrollDirection = .horizontal
@@ -106,12 +107,8 @@ final public class HomeViewController: UIViewController, HomePresentable, HomeVi
     self.setupLayouts()
     self.setupGestures()
     self.setupBindings()
-    
-    segmentCollectionView.dataSource = self
-    segmentCollectionView.delegate = self
+    self.setupSegmentCollectionViews()
   }
-  
- 
   
   private func setupLayouts() {
     self.view.addSubview(logoImageView)
@@ -211,33 +208,22 @@ final public class HomeViewController: UIViewController, HomePresentable, HomeVi
       .skip(1)
       .subscribe(onNext: { [weak self] t in
         guard let self else { return }
-//        UIView.animate(withDuration: 0.1) {[weak self] in
-//          guard let inSelf = self else { return }
-        
-//          inSelf.view.layoutIfNeeded()
-//        }
-//        inSelf.updateSegmentBarLayout(at: inSelf.recentButton)
-        
         switch t {
-        case .Recent: self.updateSegmentBarLayout(at: self.recentButton)
-        case .Popular: self.updateSegmentBarLayout(at: self.popularButton)
-        case .Follow: self.updateSegmentBarLayout(at: self.followButton)
+          case .Recent: self.updateSegmentBarLayout(at: self.recentButton)
+          case .Popular: self.updateSegmentBarLayout(at: self.popularButton)
+          case .Follow: self.updateSegmentBarLayout(at: self.followButton)
         }
-        
         
         UIView.animate(withDuration: 0.25) { [weak self] in
           guard let inSelf = self else { return }
           switch t {
           case .Recent:
-//            inSelf.updateSegmentBarLayout(at: inSelf.recentButton)
             inSelf.updateSegmentBarUI(with: .Recent)
             inSelf.segmentCollectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .left, animated: true)
           case .Popular:
             inSelf.updateSegmentBarUI(with: .Popular)
-//            inSelf.updateSegmentBarLayout(at: inSelf.popularButton)
             inSelf.segmentCollectionView.scrollToItem(at: IndexPath(row: 1, section: 0), at: .left, animated: true)
           case .Follow:
-//            inSelf.updateSegmentBarLayout(at: inSelf.followButton)
             inSelf.updateSegmentBarUI(with: .Follow)
             inSelf.segmentCollectionView.scrollToItem(at: IndexPath(row: 2, section: 0), at: .left, animated: true)
             
@@ -247,17 +233,49 @@ final public class HomeViewController: UIViewController, HomePresentable, HomeVi
         
       }).disposed(by: disposeBag)
   }
+  
+  private func setupSegmentCollectionViews() {
+    segmentCollectionView.delegate = nil
+    segmentCollectionView.dataSource = nil
+    
+    listener?.boardVCs
+      .bind(to: segmentCollectionView.rx.items(
+        cellIdentifier: ChildViewCell.identifier,
+        cellType: ChildViewCell.self)
+      ) { [weak self] index, vc, cell in
+        guard let self else { return }
+        self.addChild(vc.uiviewController)
+        vc.uiviewController.didMove(toParent: self)
+        cell.setupCellConfigure(childVC: vc.uiviewController)
+      }.disposed(by: disposeBag)
+    
+    segmentCollectionView.rx.contentOffset
+      .observe(on: MainScheduler.instance)
+      .skip(1)
+      .map{$0.x}
+      .bind { [weak self] xOffSet in
+        guard let self else { return }
+        let width: CGFloat = self.segmentCollectionView.frame.width
+        if xOffSet == 0.0 { self.type.accept(.Recent) }
+        else if xOffSet == width * 1.0 { self.type.accept(.Popular) }
+        else if xOffSet == width * 2.0 { self.type.accept(.Follow) }
+        
+        let spacing: CGFloat = 42.0
+
+        self.segmentBarView.snp.updateConstraints { make in
+          make.leading.equalToSuperview().offset(xOffSet / width * spacing + 30)
+        }
+      }.disposed(by: disposeBag)
+    
+    segmentCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
+  }
 }
 
 // MARK: SegmentBar Layout & UI
 extension HomeViewController {
   private func updateSegmentBarLayout(at button: UIButton) {
-//    UIView.animate(withDuration: 0.1) {[weak self] in
-//      guard let self else { return }
       self.segmentBarView.snp.updateConstraints { make in
         make.width.equalTo(button.frame.width)
-//      }
-//      self.view.layoutIfNeeded()
     }
   }
   
@@ -273,19 +291,7 @@ extension HomeViewController {
   }
 }
 
-extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-  
-  
-  public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return 3
-  }
-  
-  public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LargeTextCell.identifier, for: indexPath) as? LargeTextCell else { return UICollectionViewCell() }
-    cell.setupCellConfigure(text: "\(indexPath)", isSelected: false)
-    return cell
-  }
-  
+extension HomeViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
   public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
     return CGSize(width: segmentCollectionView.frame.width, height: segmentCollectionView.frame.height)
   }
@@ -300,19 +306,5 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
 
   public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
     return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-  }
-  
-  public func scrollViewDidScroll(_ scrollView: UIScrollView) {
-    let x = scrollView.contentOffset.x
-    let width: CGFloat = segmentCollectionView.frame.width
-    if x == 0.0 { type.accept(.Recent) }
-    else if x == width * 1.0 { type.accept(.Popular) }
-    else if x == width * 2.0 { type.accept(.Follow) }
-    
-    let spacing: CGFloat = 42.0
-
-    segmentBarView.snp.updateConstraints { make in
-      make.leading.equalToSuperview().offset(scrollView.contentOffset.x / width * spacing + 30)
-    }
   }
 }

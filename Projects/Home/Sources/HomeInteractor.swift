@@ -7,6 +7,7 @@
 
 import RIBs
 import RxSwift
+import RxRelay
 
 import Entity
 import Networking
@@ -26,6 +27,15 @@ public protocol HomeListener: AnyObject {
 
 final class HomeInteractor: PresentableInteractor<HomePresentable>, HomeInteractable, HomePresentableListener {
   
+  
+  
+  
+  var latestBoardViewControllerable: RIBs.ViewControllable?
+  var popularBoardViewControllerable: RIBs.ViewControllable?
+  var followBoardViewControllerable: RIBs.ViewControllable?
+  
+  var boardVCs: BehaviorRelay<[ViewControllable]> = .init(value: [])
+  
   weak var router: HomeRouting?
   weak var listener: HomeListener?
   
@@ -42,7 +52,11 @@ final class HomeInteractor: PresentableInteractor<HomePresentable>, HomeInteract
   
   override func didBecomeActive() {
     super.didBecomeActive()
-    // TODO: Implement business logic here.
+    if let latestBoardViewControllerable,
+       let popularBoardViewControllerable,
+       let followBoardViewControllerable {
+      self.boardVCs.accept([latestBoardViewControllerable, popularBoardViewControllerable, followBoardViewControllerable])
+    }
   }
   
   override func willResignActive() {

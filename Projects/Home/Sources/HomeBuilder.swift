@@ -5,16 +5,20 @@
 //  Created by 구본의 on 2023/05/11.
 //
 
+import User
 import Networking
 
 import RIBs
 
 public protocol HomeDependency: Dependency {
-  // TODO: Declare the set of dependencies required by this RIB, but cannot be
-  // created by this RIB.
 }
 
-final class HomeComponent: Component<HomeDependency> {
+final class HomeComponent:
+  Component<HomeDependency>,
+  LatestBoardDependency,
+  PopularBoardDependency,
+  FollowBoardDependency
+{
   var boardRepository: BoardRepository = BoardRepositoryImpl()
 }
 
@@ -39,10 +43,16 @@ final public class HomeBuilder: Builder<HomeDependency>, HomeBuildable {
     )
     interactor.listener = listener
     
+    let latestBoardBuildable = LatestBoardBuilder(dependency: component)
+    let popularBoardBuildable = PopularBoardBuilder(dependency: component)
+    let followBoardBuildable = FollowBoardBuilder(dependency: component)
     
     return HomeRouter(
       interactor: interactor,
-      viewController: viewController
+      viewController: viewController,
+      latestBoardBuildable: latestBoardBuildable,
+      popularBoardBuildable: popularBoardBuildable,
+      followBoardBuildable: followBoardBuildable
     )
   }
 }

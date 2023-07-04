@@ -5,12 +5,14 @@
 //  Created by 구본의 on 2023/07/03.
 //
 
+import User
 import Networking
 
 import RIBs
 
 protocol PopularBoardDependency: Dependency {
   var boardRepository: BoardRepository { get }
+  var userManager: MutableUserManagerStream { get }
 }
 
 final class PopularBoardComponent: Component<PopularBoardDependency> {
@@ -35,7 +37,8 @@ final class PopularBoardBuilder: Builder<PopularBoardDependency>, PopularBoardBu
     let viewController = PopularBoardViewController()
     let interactor = PopularBoardInteractor(
       presenter: viewController,
-      boardRepository: dependency.boardRepository
+      boardRepository: dependency.boardRepository,
+      userManager: dependency.userManager
     )
     interactor.listener = listener
     return PopularBoardRouter(interactor: interactor, viewController: viewController)

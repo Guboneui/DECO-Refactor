@@ -32,16 +32,17 @@ final class LatestBoardInteractor: PresentableInteractor<LatestBoardPresentable>
   weak var listener: LatestBoardListener?
   
   private let boardRepository: BoardRepository
-  
+  private let userManager: MutableUserManagerStream
   
   var latestBoardList: RxRelay.BehaviorRelay<[Entity.PostingDTO]> = .init(value: [])
   
   init(
     presenter: LatestBoardPresentable,
-    boardRepository: BoardRepository
-    
+    boardRepository: BoardRepository,
+    userManager: MutableUserManagerStream
   ) {
     self.boardRepository = boardRepository
+    self.userManager = userManager
     super.init(presenter: presenter)
     presenter.listener = self
   }
@@ -67,7 +68,7 @@ final class LatestBoardInteractor: PresentableInteractor<LatestBoardPresentable>
           styleIds: [],
           colorIds: [],
           boardCategoryIds: [],
-          userId: 72
+          userId: self.userManager.userID
         )
       ), !boardList.isEmpty {
         let prevList = self.latestBoardList.value

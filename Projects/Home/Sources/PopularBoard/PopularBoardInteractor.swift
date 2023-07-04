@@ -32,14 +32,17 @@ final class PopularBoardInteractor: PresentableInteractor<PopularBoardPresentabl
   weak var listener: PopularBoardListener?
   
   private let boardRepository: BoardRepository
+  private let userManager: MutableUserManagerStream
   
   var popularBoardList: BehaviorRelay<[PostingDTO]> = .init(value: [])
   
   init(
     presenter: PopularBoardPresentable,
-    boardRepository: BoardRepository
+    boardRepository: BoardRepository,
+    userManager: MutableUserManagerStream
   ) {
     self.boardRepository = boardRepository
+    self.userManager = userManager
     super.init(presenter: presenter)
     presenter.listener = self
   }
@@ -65,7 +68,7 @@ final class PopularBoardInteractor: PresentableInteractor<PopularBoardPresentabl
           styleIds: [],
           colorIds: [],
           boardCategoryIds: [],
-          userId: 72
+          userId: self.userManager.userID
         )
       ), !boardList.isEmpty {
         let prevList = self.popularBoardList.value

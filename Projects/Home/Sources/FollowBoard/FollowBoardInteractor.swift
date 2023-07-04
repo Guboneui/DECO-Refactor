@@ -32,14 +32,17 @@ final class FollowBoardInteractor: PresentableInteractor<FollowBoardPresentable>
   weak var listener: FollowBoardListener?
   
   private let boardRepository: BoardRepository
+  private let userManager: MutableUserManagerStream
   
   var followBoardList: BehaviorRelay<[PostingDTO]> = .init(value: [])
   
   init(
     presenter: FollowBoardPresentable,
-    boardRepository: BoardRepository
+    boardRepository: BoardRepository,
+    userManager: MutableUserManagerStream
   ) {
     self.boardRepository = boardRepository
+    self.userManager = userManager
     super.init(presenter: presenter)
     presenter.listener = self
   }
@@ -65,7 +68,7 @@ final class FollowBoardInteractor: PresentableInteractor<FollowBoardPresentable>
           styleIds: [],
           colorIds: [],
           boardCategoryIds: [],
-          userId: 72
+          userId: self.userManager.userID
         )
       ), !boardList.isEmpty {
         let prevList = self.followBoardList.value

@@ -5,12 +5,14 @@
 //  Created by 구본의 on 2023/07/03.
 //
 
+import User
 import Networking
 
 import RIBs
 
 protocol FollowBoardDependency: Dependency {
   var boardRepository: BoardRepository { get }
+  var userManager: MutableUserManagerStream { get }
 }
 
 final class FollowBoardComponent: Component<FollowBoardDependency> {
@@ -35,7 +37,8 @@ final class FollowBoardBuilder: Builder<FollowBoardDependency>, FollowBoardBuild
     let viewController = FollowBoardViewController()
     let interactor = FollowBoardInteractor(
       presenter: viewController,
-      boardRepository: dependency.boardRepository
+      boardRepository: dependency.boardRepository,
+      userManager: dependency.userManager
     )
     interactor.listener = listener
     return FollowBoardRouter(interactor: interactor, viewController: viewController)

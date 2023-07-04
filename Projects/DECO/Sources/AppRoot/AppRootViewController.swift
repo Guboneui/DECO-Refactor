@@ -35,11 +35,11 @@ final class AppRootViewController:
 		super.viewDidLoad()
 		self.setupViews()
 		
-		DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: { [weak self] in
-			guard let self else { return }
-//			self.listener?.moveToLogin()
-			self.listener?.moveToMain()
-		})
+//		DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: { [weak self] in
+//			guard let self else { return }
+////			self.listener?.moveToLogin()
+//			self.listener?.moveToMain()
+//		})
 	}
 	
 	override func viewDidLayoutSubviews() {

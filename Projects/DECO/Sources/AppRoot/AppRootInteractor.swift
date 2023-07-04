@@ -84,6 +84,9 @@ final class AppRootInteractor: PresentableInteractor<AppRootPresentable>, AppRoo
 						followStatus: userInfo.followStatus
 					)
 				)
+				await MainActor.run {
+					self.router?.attachMain()
+				}
 			}
 		}
 	}

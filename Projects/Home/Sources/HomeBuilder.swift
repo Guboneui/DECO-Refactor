@@ -11,6 +11,7 @@ import Networking
 import RIBs
 
 public protocol HomeDependency: Dependency {
+  var userManager: MutableUserManagerStream { get }
 }
 
 final class HomeComponent:
@@ -19,6 +20,8 @@ final class HomeComponent:
   PopularBoardDependency,
   FollowBoardDependency
 {
+  var userManager: User.MutableUserManagerStream { dependency.userManager }
+  
   var boardRepository: BoardRepository = BoardRepositoryImpl()
 }
 

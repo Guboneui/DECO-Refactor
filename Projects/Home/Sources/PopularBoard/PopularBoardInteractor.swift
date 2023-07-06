@@ -31,30 +31,67 @@ final class PopularBoardInteractor: PresentableInteractor<PopularBoardPresentabl
   weak var router: PopularBoardRouting?
   weak var listener: PopularBoardListener?
   
+  private let disposeBag: DisposeBag = DisposeBag()
   private let boardRepository: BoardRepository
   private let userManager: MutableUserManagerStream
+  private let postingCategoryFilter: MutableSelectedPostingFilterStream
   
   var popularBoardList: BehaviorRelay<[PostingDTO]> = .init(value: [])
+  
+  private var selectedBoardId: [Int] = []
+  private var selectedStyleId: [Int] = []
   
   init(
     presenter: PopularBoardPresentable,
     boardRepository: BoardRepository,
-    userManager: MutableUserManagerStream
+    userManager: MutableUserManagerStream,
+    postingCategoryFilter: MutableSelectedPostingFilterStream
   ) {
     self.boardRepository = boardRepository
     self.userManager = userManager
+    self.postingCategoryFilter = postingCategoryFilter
     super.init(presenter: presenter)
     presenter.listener = self
   }
   
   override func didBecomeActive() {
     super.didBecomeActive()
-    fetchPopularBoardList(at: Int.max)
+    
+    postingCategoryFilter.selectedFilter
+      .share()
+      .subscribe(onNext: { [weak self] filter in
+        guard let self else { return }
+        let boardId: [Int] = filter.selectedBoardCategory.map{$0.id}
+        let styleId: [Int] = filter.selectedStyleCategory.map{$0.id}
+        self.selectedBoardId = boardId
+        self.selectedStyleId = styleId
+        self.fetchPopularBoardListNewCategory(boardId: boardId, styleId: styleId)
+      }).disposed(by: disposeBag)
   }
   
   override func willResignActive() {
     super.willResignActive()
     // TODO: Pause any business logic.
+  }
+  
+  private func fetchPopularBoardListNewCategory(boardId: [Int], styleId: [Int]) {
+    Task.detached { [weak self] in
+      guard let self else { return }
+      self.popularBoardList.accept([])
+      if let boardList = await self.boardRepository.boardList(
+        param: BoardRequestDTO(
+          offset: Int.max,
+          listType: BoardType.LIKE.rawValue,
+          keyword: "",
+          styleIds: styleId,
+          colorIds: [],
+          boardCategoryIds: boardId,
+          userId: self.userManager.userID
+        )
+      ) {
+        self.popularBoardList.accept(boardList)
+      }
+    }
   }
   
   func fetchPopularBoardList(at createdAt: Int) {
@@ -65,9 +102,9 @@ final class PopularBoardInteractor: PresentableInteractor<PopularBoardPresentabl
           offset: createdAt,
           listType: BoardType.LIKE.rawValue,
           keyword: "",
-          styleIds: [],
+          styleIds: self.selectedStyleId,
           colorIds: [],
-          boardCategoryIds: [],
+          boardCategoryIds: self.selectedBoardId,
           userId: self.userManager.userID
         )
       ), !boardList.isEmpty {

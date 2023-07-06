@@ -38,6 +38,9 @@ final class LatestBoardInteractor: PresentableInteractor<LatestBoardPresentable>
   
   var latestBoardList: RxRelay.BehaviorRelay<[Entity.PostingDTO]> = .init(value: [])
   
+  private var selectedBoardId: [Int] = []
+  private var selectedStyleId: [Int] = []
+  
   init(
     presenter: LatestBoardPresentable,
     boardRepository: BoardRepository,
@@ -53,23 +56,42 @@ final class LatestBoardInteractor: PresentableInteractor<LatestBoardPresentable>
   
   override func didBecomeActive() {
     super.didBecomeActive()
-    fetchLatestBoardList(at: Int.max)
-    
-    
+
     postingCategoryFilter.selectedFilter
       .share()
-      .subscribe(onNext: {
-        print("-----LATEST-----")
-        print($0.selectedBoardCategory)
-        print($0.selectedStyleCategory)
-        print("-----LATEST-----")
+      .subscribe(onNext: { [weak self] filter in
+        guard let self else { return }
+        let boardId: [Int] = filter.selectedBoardCategory.map{$0.id}
+        let styleId: [Int] = filter.selectedStyleCategory.map{$0.id}
+        self.selectedBoardId = boardId
+        self.selectedStyleId = styleId
+        self.fetchLatestBoardListNewCategory(boardId: boardId, styleId: styleId)
       }).disposed(by: disposeBag)
-    
   }
   
   override func willResignActive() {
     super.willResignActive()
     // TODO: Pause any business logic.
+  }
+  
+  private func fetchLatestBoardListNewCategory(boardId: [Int], styleId: [Int]) {
+    Task.detached { [weak self] in
+      guard let self else { return }
+      self.latestBoardList.accept([])
+      if let boardList = await self.boardRepository.boardList(
+        param: BoardRequestDTO(
+          offset: Int.max,
+          listType: BoardType.LATEST.rawValue,
+          keyword: "",
+          styleIds: styleId,
+          colorIds: [],
+          boardCategoryIds: boardId,
+          userId: self.userManager.userID
+        )
+      ) {
+        self.latestBoardList.accept(boardList)
+      }
+    }
   }
   
   func fetchLatestBoardList(at createdAt: Int) {
@@ -80,9 +102,9 @@ final class LatestBoardInteractor: PresentableInteractor<LatestBoardPresentable>
           offset: createdAt,
           listType: BoardType.LATEST.rawValue,
           keyword: "",
-          styleIds: [],
+          styleIds: self.selectedStyleId,
           colorIds: [],
-          boardCategoryIds: [],
+          boardCategoryIds: self.selectedBoardId,
           userId: self.userManager.userID
         )
       ), !boardList.isEmpty {

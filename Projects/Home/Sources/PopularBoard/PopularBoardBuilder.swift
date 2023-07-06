@@ -13,6 +13,7 @@ import RIBs
 protocol PopularBoardDependency: Dependency {
   var boardRepository: BoardRepository { get }
   var userManager: MutableUserManagerStream { get }
+  var postingCategoryFilter: MutableSelectedPostingFilterStream { get }
 }
 
 final class PopularBoardComponent: Component<PopularBoardDependency> {
@@ -38,7 +39,8 @@ final class PopularBoardBuilder: Builder<PopularBoardDependency>, PopularBoardBu
     let interactor = PopularBoardInteractor(
       presenter: viewController,
       boardRepository: dependency.boardRepository,
-      userManager: dependency.userManager
+      userManager: dependency.userManager,
+      postingCategoryFilter: dependency.postingCategoryFilter
     )
     interactor.listener = listener
     return PopularBoardRouter(interactor: interactor, viewController: viewController)

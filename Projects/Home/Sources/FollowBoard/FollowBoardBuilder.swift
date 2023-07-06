@@ -13,6 +13,7 @@ import RIBs
 protocol FollowBoardDependency: Dependency {
   var boardRepository: BoardRepository { get }
   var userManager: MutableUserManagerStream { get }
+  var postingCategoryFilter: MutableSelectedPostingFilterStream { get }
 }
 
 final class FollowBoardComponent: Component<FollowBoardDependency> {
@@ -38,7 +39,8 @@ final class FollowBoardBuilder: Builder<FollowBoardDependency>, FollowBoardBuild
     let interactor = FollowBoardInteractor(
       presenter: viewController,
       boardRepository: dependency.boardRepository,
-      userManager: dependency.userManager
+      userManager: dependency.userManager,
+      postingCategoryFilter: dependency.postingCategoryFilter
     )
     interactor.listener = listener
     return FollowBoardRouter(interactor: interactor, viewController: viewController)

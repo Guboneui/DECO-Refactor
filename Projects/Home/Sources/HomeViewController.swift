@@ -20,6 +20,9 @@ enum HomeType {
 
 protocol HomePresentableListener: AnyObject {
   var boardVCs: BehaviorRelay<[ViewControllable]> { get }
+  var postingFilter: BehaviorRelay<[(filter: PostingCategoryModel, isSelected: Bool)]> { get }
+  
+  func selectFilter(at index: Int, with filter: (PostingCategoryModel, Bool))
 }
 
 final public class HomeViewController: UIViewController, HomePresentable, HomeViewControllable {
@@ -87,7 +90,11 @@ final public class HomeViewController: UIViewController, HomePresentable, HomeVi
   }
   
   private let filterCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: .init()).then {
-    $0.backgroundColor = .yellow
+    $0.register(FilterCell.self, forCellWithReuseIdentifier: FilterCell.identifier)
+    $0.backgroundColor = .DecoColor.whiteColor
+    $0.bounces = false
+    $0.showsHorizontalScrollIndicator = false
+    $0.setupSelectionFilterLayout()
   }
   
   private let segmentCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: .init()).then {
@@ -107,6 +114,7 @@ final public class HomeViewController: UIViewController, HomePresentable, HomeVi
     self.setupLayouts()
     self.setupGestures()
     self.setupBindings()
+    self.setupFilterCollectionView()
     self.setupSegmentCollectionViews()
   }
   
@@ -232,6 +240,29 @@ final public class HomeViewController: UIViewController, HomePresentable, HomeVi
         }
         
       }).disposed(by: disposeBag)
+  }
+  
+  private func setupFilterCollectionView() {
+    filterCollectionView.delegate = nil
+    filterCollectionView.dataSource = nil
+    
+    listener?.postingFilter
+      .bind(to: filterCollectionView.rx.items(
+        cellIdentifier: FilterCell.identifier,
+        cellType: FilterCell.self)
+      ) { [weak self] index, category, cell in
+        guard let self else { return }
+        cell.setupCellConfigure(text: category.filter.name, isSelected: category.isSelected)
+      }.disposed(by: disposeBag)
+    
+    Observable.zip(
+      filterCollectionView.rx.itemSelected,
+      filterCollectionView.rx.modelSelected((PostingCategoryModel, Bool).self)
+    ).subscribe(onNext: { [weak self] index, filter in
+      guard let self else { return }
+      self.listener?.selectFilter(at: index.row, with: filter)
+    }).disposed(by: disposeBag)
+    
   }
   
   private func setupSegmentCollectionViews() {

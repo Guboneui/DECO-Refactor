@@ -23,6 +23,8 @@ final class HomeComponent:
   var userManager: User.MutableUserManagerStream { dependency.userManager }
   
   var boardRepository: BoardRepository = BoardRepositoryImpl()
+  var productRepository: ProductRepository = ProductRepositoryImpl()
+  var postingCategoryFilter: MutableSelectedPostingFilterStream = SelectedPostingFilterStreamImpl()
 }
 
 // MARK: - Builder
@@ -42,7 +44,9 @@ final public class HomeBuilder: Builder<HomeDependency>, HomeBuildable {
     let viewController = HomeViewController()
     let interactor = HomeInteractor(
       presenter: viewController,
-      boardRepository: component.boardRepository
+      boardRepository: component.boardRepository,
+      productRepository: component.productRepository,
+      postingCategoryFilter: component.postingCategoryFilter
     )
     interactor.listener = listener
     

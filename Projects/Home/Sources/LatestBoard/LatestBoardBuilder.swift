@@ -13,6 +13,7 @@ import RIBs
 protocol LatestBoardDependency: Dependency {
   var boardRepository: BoardRepository { get }
   var userManager: MutableUserManagerStream { get }
+  var postingCategoryFilter: MutableSelectedPostingFilterStream { get }
 }
 
 final class LatestBoardComponent: Component<LatestBoardDependency> {
@@ -38,7 +39,8 @@ final class LatestBoardBuilder: Builder<LatestBoardDependency>, LatestBoardBuild
     let interactor = LatestBoardInteractor(
       presenter: viewController,
       boardRepository: dependency.boardRepository,
-      userManager: dependency.userManager
+      userManager: dependency.userManager,
+      postingCategoryFilter: dependency.postingCategoryFilter
     )
     interactor.listener = listener
     return LatestBoardRouter(interactor: interactor, viewController: viewController)

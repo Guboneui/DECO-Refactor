@@ -31,18 +31,22 @@ final class LatestBoardInteractor: PresentableInteractor<LatestBoardPresentable>
   weak var router: LatestBoardRouting?
   weak var listener: LatestBoardListener?
   
+  private let disposeBag: DisposeBag = DisposeBag()
   private let boardRepository: BoardRepository
   private let userManager: MutableUserManagerStream
+  private let postingCategoryFilter: MutableSelectedPostingFilterStream
   
   var latestBoardList: RxRelay.BehaviorRelay<[Entity.PostingDTO]> = .init(value: [])
   
   init(
     presenter: LatestBoardPresentable,
     boardRepository: BoardRepository,
-    userManager: MutableUserManagerStream
+    userManager: MutableUserManagerStream,
+    postingCategoryFilter: MutableSelectedPostingFilterStream
   ) {
     self.boardRepository = boardRepository
     self.userManager = userManager
+    self.postingCategoryFilter = postingCategoryFilter
     super.init(presenter: presenter)
     presenter.listener = self
   }
@@ -50,6 +54,17 @@ final class LatestBoardInteractor: PresentableInteractor<LatestBoardPresentable>
   override func didBecomeActive() {
     super.didBecomeActive()
     fetchLatestBoardList(at: Int.max)
+    
+    
+    postingCategoryFilter.selectedFilter
+      .share()
+      .subscribe(onNext: {
+        print("-----LATEST-----")
+        print($0.selectedBoardCategory)
+        print($0.selectedStyleCategory)
+        print("-----LATEST-----")
+      }).disposed(by: disposeBag)
+    
   }
   
   override func willResignActive() {

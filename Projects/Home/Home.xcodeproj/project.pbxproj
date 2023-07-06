@@ -3,27 +3,28 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2C7192142A52C1CB00A2D16F /* LatestBoardRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7192102A52C1CB00A2D16F /* LatestBoardRouter.swift */; };
-		2C7192152A52C1CB00A2D16F /* LatestBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7192112A52C1CB00A2D16F /* LatestBoardViewController.swift */; };
-		2C7192162A52C1CB00A2D16F /* LatestBoardBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7192122A52C1CB00A2D16F /* LatestBoardBuilder.swift */; };
-		2C7192172A52C1CB00A2D16F /* LatestBoardInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7192132A52C1CB00A2D16F /* LatestBoardInteractor.swift */; };
-		2C71921D2A52C57300A2D16F /* PopularBoardRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7192192A52C57300A2D16F /* PopularBoardRouter.swift */; };
-		2C71921E2A52C57300A2D16F /* PopularBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C71921A2A52C57300A2D16F /* PopularBoardViewController.swift */; };
-		2C71921F2A52C57300A2D16F /* PopularBoardBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C71921B2A52C57300A2D16F /* PopularBoardBuilder.swift */; };
-		2C7192202A52C57300A2D16F /* PopularBoardInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C71921C2A52C57300A2D16F /* PopularBoardInteractor.swift */; };
-		2C7192262A52C58200A2D16F /* FollowBoardRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7192222A52C58200A2D16F /* FollowBoardRouter.swift */; };
-		2C7192272A52C58200A2D16F /* FollowBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7192232A52C58200A2D16F /* FollowBoardViewController.swift */; };
-		2C7192282A52C58200A2D16F /* FollowBoardBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7192242A52C58200A2D16F /* FollowBoardBuilder.swift */; };
-		2C7192292A52C58200A2D16F /* FollowBoardInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7192252A52C58200A2D16F /* FollowBoardInteractor.swift */; };
+		08D71769E4CF2C34FE4BFE2F /* PopularBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3406018FF704319808EDBD2 /* PopularBoardViewController.swift */; };
+		1CB26E39A4DE1F78A9F443D2 /* PostingFilterStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9B97C711A2CB72FD7B99B6 /* PostingFilterStream.swift */; };
+		23BCC7095F44EB1B54AF5259 /* FollowBoardInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92558056C7BFAEC2D72F36D9 /* FollowBoardInteractor.swift */; };
+		2B3A43CF2F442C439915B5C9 /* FollowBoardRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A81463CC2603FB7C0BF4D6D /* FollowBoardRouter.swift */; };
+		30EAB9FD180180B0ED13E5F1 /* LatestBoardRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9967A925F95DD075CB0BE7 /* LatestBoardRouter.swift */; };
+		42936DA6FEC513D9FD20B3FF /* LatestBoardInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65975A315732F6E8D39BF328 /* LatestBoardInteractor.swift */; };
+		4743D71A678E1519B95DA2D2 /* FollowBoardBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C5B9ABBE27B699D3DB7940 /* FollowBoardBuilder.swift */; };
+		6955D80F8D6F10D9A7B85A85 /* LatestBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7628A2B3551C5E995DD8DD67 /* LatestBoardViewController.swift */; };
+		71142422FF1A8116C0BF321B /* PopularBoardInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48D910407739D09DF800AB8 /* PopularBoardInteractor.swift */; };
 		969AE3FC67639657050B796A /* HomeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC9D00E6250394A9E0CC7EC /* HomeRouter.swift */; };
+		992ECEB252E1A6FD4FA19A0D /* LatestBoardBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7350F1463941671A276C044 /* LatestBoardBuilder.swift */; };
 		9E5E2B3F30DD9698E7DA138C /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAFEFB4CCEB4FBFFF16CA05 /* HomeViewController.swift */; };
 		A428098AD615CD3B5F694A31 /* HomeBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9879BE437F14BB2EB41CC295 /* HomeBuilder.swift */; };
+		B3F1BFF50AB8F5B3FB71FF65 /* FollowBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A19A747B2422FEB232ECE7E /* FollowBoardViewController.swift */; };
+		C38C26480F67CEAABC1951D6 /* PopularBoardRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E554E5024AB0DFCA70EBC936 /* PopularBoardRouter.swift */; };
 		DBFA187FDD847EAA147700EE /* Search.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A643F0F23AAADCC27C89CE25 /* Search.framework */; platformFilter = ios; };
 		F7FB1076CF30671B49BE611D /* HomeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F62D067FC82E37F588B2D29 /* HomeInteractor.swift */; };
+		FC51AFF13D539475F6794D06 /* PopularBoardBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2364A31793BD73E8EE4D49F4 /* PopularBoardBuilder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -41,24 +42,25 @@
 
 /* Begin PBXFileReference section */
 		1F62D067FC82E37F588B2D29 /* HomeInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeInteractor.swift; sourceTree = "<group>"; };
-		2C7192102A52C1CB00A2D16F /* LatestBoardRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatestBoardRouter.swift; sourceTree = "<group>"; };
-		2C7192112A52C1CB00A2D16F /* LatestBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatestBoardViewController.swift; sourceTree = "<group>"; };
-		2C7192122A52C1CB00A2D16F /* LatestBoardBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatestBoardBuilder.swift; sourceTree = "<group>"; };
-		2C7192132A52C1CB00A2D16F /* LatestBoardInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatestBoardInteractor.swift; sourceTree = "<group>"; };
-		2C7192192A52C57300A2D16F /* PopularBoardRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularBoardRouter.swift; sourceTree = "<group>"; };
-		2C71921A2A52C57300A2D16F /* PopularBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularBoardViewController.swift; sourceTree = "<group>"; };
-		2C71921B2A52C57300A2D16F /* PopularBoardBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularBoardBuilder.swift; sourceTree = "<group>"; };
-		2C71921C2A52C57300A2D16F /* PopularBoardInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularBoardInteractor.swift; sourceTree = "<group>"; };
-		2C7192222A52C58200A2D16F /* FollowBoardRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowBoardRouter.swift; sourceTree = "<group>"; };
-		2C7192232A52C58200A2D16F /* FollowBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowBoardViewController.swift; sourceTree = "<group>"; };
-		2C7192242A52C58200A2D16F /* FollowBoardBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowBoardBuilder.swift; sourceTree = "<group>"; };
-		2C7192252A52C58200A2D16F /* FollowBoardInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowBoardInteractor.swift; sourceTree = "<group>"; };
+		2364A31793BD73E8EE4D49F4 /* PopularBoardBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularBoardBuilder.swift; sourceTree = "<group>"; };
 		3CC9D00E6250394A9E0CC7EC /* HomeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRouter.swift; sourceTree = "<group>"; };
+		5A81463CC2603FB7C0BF4D6D /* FollowBoardRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowBoardRouter.swift; sourceTree = "<group>"; };
+		60C5B9ABBE27B699D3DB7940 /* FollowBoardBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowBoardBuilder.swift; sourceTree = "<group>"; };
 		61EC700930D1096A1F12C0D7 /* Home-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Home-Info.plist"; sourceTree = "<group>"; };
+		65975A315732F6E8D39BF328 /* LatestBoardInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatestBoardInteractor.swift; sourceTree = "<group>"; };
+		6A9B97C711A2CB72FD7B99B6 /* PostingFilterStream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostingFilterStream.swift; sourceTree = "<group>"; };
+		7628A2B3551C5E995DD8DD67 /* LatestBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatestBoardViewController.swift; sourceTree = "<group>"; };
 		7CAFEFB4CCEB4FBFFF16CA05 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		92558056C7BFAEC2D72F36D9 /* FollowBoardInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowBoardInteractor.swift; sourceTree = "<group>"; };
 		9290645AFD421A6E8E0A3C77 /* Home.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Home.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9879BE437F14BB2EB41CC295 /* HomeBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBuilder.swift; sourceTree = "<group>"; };
+		9A19A747B2422FEB232ECE7E /* FollowBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowBoardViewController.swift; sourceTree = "<group>"; };
+		A3406018FF704319808EDBD2 /* PopularBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularBoardViewController.swift; sourceTree = "<group>"; };
 		A643F0F23AAADCC27C89CE25 /* Search.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Search.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BF9967A925F95DD075CB0BE7 /* LatestBoardRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatestBoardRouter.swift; sourceTree = "<group>"; };
+		C48D910407739D09DF800AB8 /* PopularBoardInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularBoardInteractor.swift; sourceTree = "<group>"; };
+		E554E5024AB0DFCA70EBC936 /* PopularBoardRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularBoardRouter.swift; sourceTree = "<group>"; };
+		E7350F1463941671A276C044 /* LatestBoardBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatestBoardBuilder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,44 +84,44 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		2C71920F2A52C1A400A2D16F /* LatestBoard */ = {
-			isa = PBXGroup;
-			children = (
-				2C7192102A52C1CB00A2D16F /* LatestBoardRouter.swift */,
-				2C7192112A52C1CB00A2D16F /* LatestBoardViewController.swift */,
-				2C7192122A52C1CB00A2D16F /* LatestBoardBuilder.swift */,
-				2C7192132A52C1CB00A2D16F /* LatestBoardInteractor.swift */,
-			);
-			path = LatestBoard;
-			sourceTree = "<group>";
-		};
-		2C7192182A52C56400A2D16F /* PopularBoard */ = {
-			isa = PBXGroup;
-			children = (
-				2C7192192A52C57300A2D16F /* PopularBoardRouter.swift */,
-				2C71921A2A52C57300A2D16F /* PopularBoardViewController.swift */,
-				2C71921B2A52C57300A2D16F /* PopularBoardBuilder.swift */,
-				2C71921C2A52C57300A2D16F /* PopularBoardInteractor.swift */,
-			);
-			path = PopularBoard;
-			sourceTree = "<group>";
-		};
-		2C7192212A52C57600A2D16F /* FollowBoard */ = {
-			isa = PBXGroup;
-			children = (
-				2C7192222A52C58200A2D16F /* FollowBoardRouter.swift */,
-				2C7192232A52C58200A2D16F /* FollowBoardViewController.swift */,
-				2C7192242A52C58200A2D16F /* FollowBoardBuilder.swift */,
-				2C7192252A52C58200A2D16F /* FollowBoardInteractor.swift */,
-			);
-			path = FollowBoard;
-			sourceTree = "<group>";
-		};
 		440337F7B58BC84FCBC5A96E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		48685CFCD358001C958273EC /* FollowBoard */ = {
+			isa = PBXGroup;
+			children = (
+				60C5B9ABBE27B699D3DB7940 /* FollowBoardBuilder.swift */,
+				92558056C7BFAEC2D72F36D9 /* FollowBoardInteractor.swift */,
+				5A81463CC2603FB7C0BF4D6D /* FollowBoardRouter.swift */,
+				9A19A747B2422FEB232ECE7E /* FollowBoardViewController.swift */,
+			);
+			path = FollowBoard;
+			sourceTree = "<group>";
+		};
+		53EAADA2BB91D9AC202AEE60 /* PopularBoard */ = {
+			isa = PBXGroup;
+			children = (
+				2364A31793BD73E8EE4D49F4 /* PopularBoardBuilder.swift */,
+				C48D910407739D09DF800AB8 /* PopularBoardInteractor.swift */,
+				E554E5024AB0DFCA70EBC936 /* PopularBoardRouter.swift */,
+				A3406018FF704319808EDBD2 /* PopularBoardViewController.swift */,
+			);
+			path = PopularBoard;
+			sourceTree = "<group>";
+		};
+		5CAA4D52F97EEB01E51B9C8C /* LatestBoard */ = {
+			isa = PBXGroup;
+			children = (
+				E7350F1463941671A276C044 /* LatestBoardBuilder.swift */,
+				65975A315732F6E8D39BF328 /* LatestBoardInteractor.swift */,
+				BF9967A925F95DD075CB0BE7 /* LatestBoardRouter.swift */,
+				7628A2B3551C5E995DD8DD67 /* LatestBoardViewController.swift */,
+			);
+			path = LatestBoard;
 			sourceTree = "<group>";
 		};
 		70BB71A4919E9DCCA3DEA54A /* Derived */ = {
@@ -139,6 +141,14 @@
 			);
 			sourceTree = "<group>";
 		};
+		893AF8ED88D5D806E649C5EF /* Stream */ = {
+			isa = PBXGroup;
+			children = (
+				6A9B97C711A2CB72FD7B99B6 /* PostingFilterStream.swift */,
+			);
+			path = Stream;
+			sourceTree = "<group>";
+		};
 		A0406DFCF5F3BCA58AF39988 /* Project */ = {
 			isa = PBXGroup;
 			children = (
@@ -151,9 +161,10 @@
 		B74810073A3D8A4993EE22B2 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				2C7192212A52C57600A2D16F /* FollowBoard */,
-				2C7192182A52C56400A2D16F /* PopularBoard */,
-				2C71920F2A52C1A400A2D16F /* LatestBoard */,
+				48685CFCD358001C958273EC /* FollowBoard */,
+				5CAA4D52F97EEB01E51B9C8C /* LatestBoard */,
+				53EAADA2BB91D9AC202AEE60 /* PopularBoard */,
+				893AF8ED88D5D806E649C5EF /* Stream */,
 				9879BE437F14BB2EB41CC295 /* HomeBuilder.swift */,
 				1F62D067FC82E37F588B2D29 /* HomeInteractor.swift */,
 				3CC9D00E6250394A9E0CC7EC /* HomeRouter.swift */,
@@ -197,6 +208,8 @@
 		F648A09DF594BC533BCA5FD3 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				TargetAttributes = {
+				};
 			};
 			buildConfigurationList = AA685C1613CFBDFB4ED6BAE7 /* Build configuration list for PBXProject "Home" */;
 			compatibilityVersion = "Xcode 13.0";
@@ -231,22 +244,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C7192282A52C58200A2D16F /* FollowBoardBuilder.swift in Sources */,
-				2C71921E2A52C57300A2D16F /* PopularBoardViewController.swift in Sources */,
-				2C71921D2A52C57300A2D16F /* PopularBoardRouter.swift in Sources */,
-				2C7192262A52C58200A2D16F /* FollowBoardRouter.swift in Sources */,
-				2C7192142A52C1CB00A2D16F /* LatestBoardRouter.swift in Sources */,
-				2C7192162A52C1CB00A2D16F /* LatestBoardBuilder.swift in Sources */,
+				4743D71A678E1519B95DA2D2 /* FollowBoardBuilder.swift in Sources */,
+				23BCC7095F44EB1B54AF5259 /* FollowBoardInteractor.swift in Sources */,
+				2B3A43CF2F442C439915B5C9 /* FollowBoardRouter.swift in Sources */,
+				B3F1BFF50AB8F5B3FB71FF65 /* FollowBoardViewController.swift in Sources */,
 				A428098AD615CD3B5F694A31 /* HomeBuilder.swift in Sources */,
-				2C7192272A52C58200A2D16F /* FollowBoardViewController.swift in Sources */,
 				F7FB1076CF30671B49BE611D /* HomeInteractor.swift in Sources */,
 				969AE3FC67639657050B796A /* HomeRouter.swift in Sources */,
-				2C7192152A52C1CB00A2D16F /* LatestBoardViewController.swift in Sources */,
-				2C7192172A52C1CB00A2D16F /* LatestBoardInteractor.swift in Sources */,
-				2C7192292A52C58200A2D16F /* FollowBoardInteractor.swift in Sources */,
-				2C7192202A52C57300A2D16F /* PopularBoardInteractor.swift in Sources */,
 				9E5E2B3F30DD9698E7DA138C /* HomeViewController.swift in Sources */,
-				2C71921F2A52C57300A2D16F /* PopularBoardBuilder.swift in Sources */,
+				992ECEB252E1A6FD4FA19A0D /* LatestBoardBuilder.swift in Sources */,
+				42936DA6FEC513D9FD20B3FF /* LatestBoardInteractor.swift in Sources */,
+				30EAB9FD180180B0ED13E5F1 /* LatestBoardRouter.swift in Sources */,
+				6955D80F8D6F10D9A7B85A85 /* LatestBoardViewController.swift in Sources */,
+				FC51AFF13D539475F6794D06 /* PopularBoardBuilder.swift in Sources */,
+				71142422FF1A8116C0BF321B /* PopularBoardInteractor.swift in Sources */,
+				C38C26480F67CEAABC1951D6 /* PopularBoardRouter.swift in Sources */,
+				08D71769E4CF2C34FE4BFE2F /* PopularBoardViewController.swift in Sources */,
+				1CB26E39A4DE1F78A9F443D2 /* PostingFilterStream.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

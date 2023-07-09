@@ -11,6 +11,7 @@ import RxRelay
 import RxDataSources
 import RxCocoa
 import UIKit
+import SnapKit
 
 protocol ProductCategoryPresentableListener: AnyObject {
   var productCategorySections: BehaviorRelay<[ProductCategorySection]> { get }
@@ -79,13 +80,8 @@ final class ProductCategoryViewController: UIViewController, ProductCategoryPres
     self.view.backgroundColor = .link
     
     self.setupViews()
-    self.setupCollectionView()
-   
-  }
-  
-  override func viewDidLayoutSubviews() {
-    super.viewDidLayoutSubviews()
     self.setupLayouts()
+    self.setupCollectionView()
   }
   
   private func setupViews() {
@@ -93,7 +89,9 @@ final class ProductCategoryViewController: UIViewController, ProductCategoryPres
   }
   
   private func setupLayouts() {
-    self.collectionView.pin.all()
+    collectionView.snp.makeConstraints { make in
+      make.edges.equalToSuperview()
+    }
   }
   
   let dataSource = RxCollectionViewSectionedReloadDataSource<ProductCategorySection>(

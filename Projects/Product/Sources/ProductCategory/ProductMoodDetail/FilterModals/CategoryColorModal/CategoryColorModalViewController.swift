@@ -85,7 +85,7 @@ final class CategoryColorModalViewController: ModalViewController, CategoryColor
     self.setupGestures()
     self.setupColorCollectionView()
     self.setupCategoryCollectionView()
-    
+    self.modalSwipeDismiss()
   }
   
   override func viewWillLayoutSubviews() {
@@ -209,40 +209,33 @@ final class CategoryColorModalViewController: ModalViewController, CategoryColor
       self.dismissModalAnimation()
     }
     
-    scrollView.rx.contentOffset
-      .map{$0.y}
-      .subscribe(onNext: { [weak self] yOffset in
-        guard let self else { return }
-        if yOffset <= 0 {
-          self.modalSwipeDismiss()
-        }
-      }).disposed(by: disposeBag)
     
   }
   
   private func modalSwipeDismiss() {
-    modalView.rx.panGesture()
-      .when(.began, .changed, .ended)
-      .subscribe(onNext: { [weak self] recognize in
+    
+    Observable.zip(scrollView.rx.panGesture(), modalView.rx.panGesture())
+      .subscribe(onNext: { [weak self] panOfScrollView, panOfModalView in
         guard let self else { return }
-        let transform = recognize.translation(in: self.modalView)
-        switch recognize.state {
+        let modalViewTransY = panOfScrollView.translation(in: self.scrollView).y
+        let offSet = self.scrollView.contentOffset.y
         
-        case .changed:
-
-          if transform.y >= 0 {
-            UIView.animate(withDuration: 0.05, delay: 0, options: .curveEaseOut) { [weak self] in
-              guard let inSelf = self else { return }
-              inSelf.modalView.transform = CGAffineTransform(translationX: 0, y: transform.y)
+        if modalViewTransY > 0 && offSet == 0 {
+          let transform = panOfModalView.translation(in: self.modalView)
+          switch panOfModalView.state {
+          case .began, .changed:
+            self.modalView.transform = CGAffineTransform(translationX: 0, y: transform.y)
+          case .ended:
+            if transform.y >= 100 {
+              self.dismissModalAnimation()
+            } else {
+              UIView.animate(withDuration: 0.1) { [weak self] in
+                guard let inSelf = self else { return }
+                inSelf.modalView.transform = .identity
+              }
             }
+          default: break
           }
-        case .ended:
-          if transform.y >= 100 {
-            self.dismissModalAnimation()
-          } else {
-            self.modalView.transform = .identity
-          }
-        default: break
         }
       }).disposed(by: disposeBag)
   }
@@ -297,15 +290,15 @@ final class CategoryColorModalViewController: ModalViewController, CategoryColor
     
     listener?.colorList
       .bind(to: colorCollectionView.rx.items(
-      cellIdentifier: ColorFilterCell.identifier,
-      cellType: ColorFilterCell.self)
-    ) { index, data, cell in
-      cell.setupCellConfigure(
-        text: data.color.name,
-        image: data.color.image,
-        isSelected: data.isSelected
-      )
-    }.disposed(by: disposeBag)
+        cellIdentifier: ColorFilterCell.identifier,
+        cellType: ColorFilterCell.self)
+      ) { index, data, cell in
+        cell.setupCellConfigure(
+          text: data.color.name,
+          image: data.color.image,
+          isSelected: data.isSelected
+        )
+      }.disposed(by: disposeBag)
     
     Observable.zip(
       colorCollectionView.rx.itemSelected,
@@ -373,3 +366,5 @@ extension CategoryColorModalViewController: UICollectionViewDelegate, UICollecti
     }
   }
 }
+
+

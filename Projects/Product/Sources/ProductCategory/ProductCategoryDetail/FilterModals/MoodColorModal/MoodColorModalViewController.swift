@@ -41,11 +41,9 @@ final class MoodColorModalViewController: ModalViewController, MoodColorModalPre
     $0.backgroundColor = .DecoColor.whiteColor
     $0.register(FilterCell.self, forCellWithReuseIdentifier: FilterCell.identifier)
     $0.bounces = false
-    
     $0.showsHorizontalScrollIndicator = false
-    let layout = UICollectionViewFlowLayout()
-    layout.scrollDirection = .horizontal
-    $0.collectionViewLayout = layout
+    $0.setupSelectionFilterLayout(inset: 28)
+    
   }
   
   private let colorLabel: UILabel = UILabel().then {
@@ -58,11 +56,8 @@ final class MoodColorModalViewController: ModalViewController, MoodColorModalPre
     $0.backgroundColor = .DecoColor.whiteColor
     $0.register(ColorFilterCell.self, forCellWithReuseIdentifier: ColorFilterCell.identifier)
     $0.bounces = false
-    
-    $0.showsHorizontalScrollIndicator = false
-    let layout = UICollectionViewFlowLayout()
-    layout.scrollDirection = .vertical
-    $0.collectionViewLayout = layout
+    $0.showsVerticalScrollIndicator = false
+    $0.colorFilterLayout()
   }
   
   private let editFilterButtonView: EditFilterButtonView = EditFilterButtonView()
@@ -70,9 +65,6 @@ final class MoodColorModalViewController: ModalViewController, MoodColorModalPre
   private let deviceWidth: CGFloat = UIScreen.main.bounds.width
   
   private let moodCvHeight: CGFloat = 30
-  private let moodCvItemHeight: CGFloat = 30
-  private let moodCvHorizontalItemSpacing: CGFloat = 8
-  private let moodCvHorizontalEdgeSpacing: CGFloat = 28
   
   private let colorCvHorizontalItemSpacing: CGFloat = 36
   private let colorCvVerticalItemSpacing: CGFloat = 24
@@ -224,8 +216,6 @@ final class MoodColorModalViewController: ModalViewController, MoodColorModalPre
       prevData[index.row] = selectedData
       self.listener?.moodList.accept(prevData)
     }).disposed(by: disposeBag)
-    
-    moodCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
   }
   
   private func setupColorCollectionView() {
@@ -254,84 +244,5 @@ final class MoodColorModalViewController: ModalViewController, MoodColorModalPre
       prevData[index.row] = selectedData
       self.listener?.colorList.accept(prevData)
     }).disposed(by: disposeBag)
-    
-    colorCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
-  }
-  
-}
-
-extension MoodColorModalViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-  func collectionView(
-    _ collectionView: UICollectionView,
-    layout collectionViewLayout: UICollectionViewLayout,
-    sizeForItemAt indexPath: IndexPath
-  ) -> CGSize {
-    switch collectionView {
-    case moodCollectionView:
-      let font: UIFont = UIFont.DecoFont.getFont(with: .Suit, type: .bold, size: 12)
-      if let moodList = listener?.moodList.value {
-        return CGSize(
-          width: moodList[indexPath.row].category.title.size(withAttributes: [NSAttributedString.Key.font:font]).width + (FilterCell.horizontalMargin * 2),
-          height: moodCvItemHeight
-        )
-      }
-      return .zero
-    case colorCollectionView:
-      return CGSize(
-        width: colorCvItemWidth,
-        height: colorCvItemHeight
-      )
-    default: return .zero
-    }
-  }
-  
-  func collectionView(
-    _ collectionView: UICollectionView,
-    layout collectionViewLayout: UICollectionViewLayout,
-    minimumLineSpacingForSectionAt section: Int
-  ) -> CGFloat {
-    switch collectionView {
-    case moodCollectionView: return moodCvHorizontalItemSpacing
-    case colorCollectionView: return colorCvVerticalItemSpacing
-    default: return .zero
-    }
-  }
-  
-  func collectionView(
-    _ collectionView: UICollectionView,
-    layout collectionViewLayout: UICollectionViewLayout,
-    minimumInteritemSpacingForSectionAt section: Int
-  ) -> CGFloat {
-    switch collectionView {
-    case moodCollectionView: return moodCvHorizontalItemSpacing
-    case colorCollectionView: return colorCvHorizontalItemSpacing
-    default: return .zero
-    }
-  }
-  
-  func collectionView(
-    _ collectionView: UICollectionView,
-    layout collectionViewLayout: UICollectionViewLayout,
-    insetForSectionAt section: Int
-  ) -> UIEdgeInsets {
-    switch collectionView {
-    case moodCollectionView:
-      return UIEdgeInsets(
-        top: 0,
-        left: moodCvHorizontalEdgeSpacing,
-        bottom: 0,
-        right: moodCvHorizontalEdgeSpacing
-      )
-    case colorCollectionView:
-      return UIEdgeInsets(
-        top: 0,
-        left: colorCvHorizontalEdgeSpacing,
-        bottom: 0,
-        right: colorCvHorizontalEdgeSpacing
-      )
-    default: return .zero
-    }
-    
-    
   }
 }

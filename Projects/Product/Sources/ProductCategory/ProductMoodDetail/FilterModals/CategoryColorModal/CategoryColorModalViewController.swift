@@ -64,11 +64,8 @@ final class CategoryColorModalViewController: ModalViewController, CategoryColor
     $0.backgroundColor = .DecoColor.whiteColor
     $0.register(ColorFilterCell.self, forCellWithReuseIdentifier: ColorFilterCell.identifier)
     $0.bounces = false
-    
-    $0.showsHorizontalScrollIndicator = false
-    let layout = UICollectionViewFlowLayout()
-    layout.scrollDirection = .vertical
-    $0.collectionViewLayout = layout
+    $0.showsVerticalScrollIndicator = false
+    $0.colorFilterLayout()
   }
   
   private let editFilterButtonView: EditFilterButtonView = EditFilterButtonView()
@@ -80,12 +77,7 @@ final class CategoryColorModalViewController: ModalViewController, CategoryColor
   private let categoryCvHorizontalItemSpacing: CGFloat = 8
   private let categoryCvHorizontalEdgeSpacing: CGFloat = 28
   
-  private let colorCvHorizontalItemSpacing: CGFloat = 36
-  private let colorCvVerticalItemSpacing: CGFloat = 24
-  private let colorCvHorizontalEdgeSpacing: CGFloat = 34
   private let colorCvHeight: CGFloat = 228
-  private let colorCvItemHeight: CGFloat = 60
-  private lazy var colorCvItemWidth: CGFloat = (deviceWidth - (colorCvHorizontalEdgeSpacing * 2) - (colorCvHorizontalItemSpacing * 4)) / 5
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -325,8 +317,6 @@ final class CategoryColorModalViewController: ModalViewController, CategoryColor
       prevData[index.row] = selectedData
       self.listener?.colorList.accept(prevData)
     }).disposed(by: disposeBag)
-    
-    colorCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
   }
 }
 
@@ -340,11 +330,6 @@ extension CategoryColorModalViewController: UICollectionViewDelegate, UICollecti
     case categoryCollectionView:
       let cellWidth: CGFloat = (view.frame.width - (categoryCvHorizontalEdgeSpacing * 2) - categoryCvHorizontalItemSpacing) / 2.0
       return CGSize(width: cellWidth, height: categoryCvItemHeight)
-    case colorCollectionView:
-      return CGSize(
-        width: colorCvItemWidth,
-        height: colorCvItemHeight
-      )
     default: return .zero
     }
   }
@@ -356,7 +341,6 @@ extension CategoryColorModalViewController: UICollectionViewDelegate, UICollecti
   ) -> CGFloat {
     switch collectionView {
     case categoryCollectionView: return categoryCvHorizontalItemSpacing
-    case colorCollectionView: return colorCvVerticalItemSpacing
     default: return .zero
     }
   }
@@ -368,7 +352,6 @@ extension CategoryColorModalViewController: UICollectionViewDelegate, UICollecti
   ) -> CGFloat {
     switch collectionView {
     case categoryCollectionView: return categoryCvHorizontalItemSpacing
-    case colorCollectionView: return colorCvHorizontalItemSpacing
     default: return .zero
     }
   }
@@ -385,13 +368,6 @@ extension CategoryColorModalViewController: UICollectionViewDelegate, UICollecti
         left: categoryCvHorizontalEdgeSpacing,
         bottom: 0,
         right: categoryCvHorizontalEdgeSpacing
-      )
-    case colorCollectionView:
-      return UIEdgeInsets(
-        top: 0,
-        left: colorCvHorizontalEdgeSpacing,
-        bottom: 0,
-        right: colorCvHorizontalEdgeSpacing
       )
     default: return .zero
     }

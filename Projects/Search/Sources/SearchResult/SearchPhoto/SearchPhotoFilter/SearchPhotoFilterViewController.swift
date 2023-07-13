@@ -64,9 +64,7 @@ final class SearchPhotoFilterViewController: ModalViewController, SearchPhotoFil
     $0.bounces = false
     
     $0.showsHorizontalScrollIndicator = false
-    let layout = UICollectionViewFlowLayout()
-    layout.scrollDirection = .vertical
-    $0.collectionViewLayout = layout
+    $0.setupSelectionFilterLayout(inset: 28)
   }
   
   private let moodLabel: UILabel = UILabel().then {
@@ -81,9 +79,7 @@ final class SearchPhotoFilterViewController: ModalViewController, SearchPhotoFil
     $0.bounces = false
     
     $0.showsHorizontalScrollIndicator = false
-    let layout = UICollectionViewFlowLayout()
-    layout.scrollDirection = .vertical
-    $0.collectionViewLayout = layout
+    $0.setupSelectionFilterLayout(inset: 28)
   }
   
   
@@ -98,10 +94,8 @@ final class SearchPhotoFilterViewController: ModalViewController, SearchPhotoFil
     $0.register(ColorFilterCell.self, forCellWithReuseIdentifier: ColorFilterCell.identifier)
     $0.bounces = false
     
-    $0.showsHorizontalScrollIndicator = false
-    let layout = UICollectionViewFlowLayout()
-    layout.scrollDirection = .vertical
-    $0.collectionViewLayout = layout
+    $0.showsVerticalScrollIndicator = false
+    $0.colorFilterLayout()
   }
   
   private let editFilterButtonView: EditFilterButtonView = EditFilterButtonView()
@@ -340,8 +334,6 @@ extension SearchPhotoFilterViewController {
       boardCategoryList[index.row] = selectedData
       self.listener?.boardCategoryList.accept(boardCategoryList)
     }).disposed(by: disposeBag)
-    
-    categoryCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
   }
   
   private func setupMoodCategoryCollectionView() {
@@ -367,8 +359,6 @@ extension SearchPhotoFilterViewController {
       moodCategoryList[index.row] = selectedData
       self.listener?.moodCategoryList.accept(moodCategoryList)
     }).disposed(by: disposeBag)
-    
-    moodCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
   }
   
   private func setupColorCategoryCollectionView() {
@@ -394,82 +384,5 @@ extension SearchPhotoFilterViewController {
       colorCategoryList[index.row] = selectedData
       self.listener?.colorCategoryList.accept(colorCategoryList)
     }).disposed(by: disposeBag)
-    
-    colorCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
-  }
-}
-
-extension SearchPhotoFilterViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    switch collectionView {
-    case categoryCollectionView:
-      let font: UIFont = UIFont.DecoFont.getFont(with: .Suit, type: .bold, size: 12)
-      if let categoryList = listener?.boardCategoryList.value {
-        return CGSize(
-          width: categoryList[indexPath.row].category.categoryName.size(withAttributes: [NSAttributedString.Key.font:font]).width + (FilterCell.horizontalMargin * 2),
-          height: categoryCvItemHeight
-        )
-      }
-      return .zero
-      
-    case moodCollectionView:
-      let font: UIFont = UIFont.DecoFont.getFont(with: .Suit, type: .bold, size: 12)
-      if let moodList = listener?.moodCategoryList.value {
-        return CGSize(
-          width: moodList[indexPath.row].category.name.size(withAttributes: [NSAttributedString.Key.font:font]).width + (FilterCell.horizontalMargin * 2),
-          height: moodCvItemHeight
-        )
-      }
-      return .zero
-    
-    case colorCollectionView:
-      return CGSize(
-        width: colorCvItemWidth,
-        height: colorCvItemHeight
-      )
-    default: return .zero
-    }
-  }
-  
-  func collectionView(
-    _ collectionView: UICollectionView,
-    layout collectionViewLayout: UICollectionViewLayout,
-    minimumLineSpacingForSectionAt section: Int
-  ) -> CGFloat {
-    switch collectionView {
-    case categoryCollectionView: return categoryCvHorizontalItemSpacing
-    case moodCollectionView: return moodCvHorizontalItemSpacing
-    case colorCollectionView: return colorCvVerticalItemSpacing
-    default: return .zero
-    }
-  }
-  
-  func collectionView(
-    _ collectionView: UICollectionView,
-    layout collectionViewLayout: UICollectionViewLayout,
-    minimumInteritemSpacingForSectionAt section: Int
-  ) -> CGFloat {
-    switch collectionView {
-    case categoryCollectionView: return categoryCvHorizontalItemSpacing
-    case moodCollectionView: return moodCvHorizontalItemSpacing
-    case colorCollectionView: return colorCvHorizontalItemSpacing
-    default: return .zero
-    }
-  }
-  
-  func collectionView(
-    _ collectionView: UICollectionView,
-    layout collectionViewLayout: UICollectionViewLayout,
-    insetForSectionAt section: Int
-  ) -> UIEdgeInsets {
-    switch collectionView {
-    case categoryCollectionView:
-      return UIEdgeInsets(top: 0, left: categoryCvHorizontalEdgeSpacing, bottom: 0, right: categoryCvHorizontalEdgeSpacing)
-    case moodCollectionView:
-      return UIEdgeInsets(top: 0, left: moodCvHorizontalEdgeSpacing, bottom: 0, right: moodCvHorizontalEdgeSpacing)
-    case colorCollectionView:
-      return UIEdgeInsets(top: 0, left: colorCvHorizontalEdgeSpacing, bottom: 0, right: colorCvHorizontalEdgeSpacing)
-    default: return .zero
-    }
   }
 }

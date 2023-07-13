@@ -40,7 +40,7 @@ public extension UICollectionView {
   
   
   
-  func setupSelectionFilterLayout() {
+  func setupSelectionFilterLayout(spacing: CGFloat = 8.0, inset: CGFloat = 18.0) {
     let config = UICollectionViewCompositionalLayoutConfiguration()
     config.scrollDirection = .horizontal
     config.interSectionSpacing = 0
@@ -48,8 +48,6 @@ public extension UICollectionView {
     let screenWidth: CGFloat = UIScreen.main.bounds.width
     let estimatedWidth: CGFloat = 20.0
     let absoluteHeight: CGFloat = 30.0
-    let spacing: CGFloat = 8.0
-    let inset: CGFloat = 18.0
     
     let layout = UICollectionViewCompositionalLayout(sectionProvider: { (sectionIndex, environment) -> NSCollectionLayoutSection? in
       let itemSize = NSCollectionLayoutSize(widthDimension: .estimated(estimatedWidth), heightDimension: .absolute(absoluteHeight))
@@ -108,6 +106,28 @@ public extension UICollectionView {
     
     let layout = UICollectionViewCompositionalLayout(section: section)
     
+    self.collectionViewLayout = layout
+  }
+  
+  
+  func colorFilterLayout() {
+    let deviceWidth: CGFloat = UIScreen.main.bounds.width
+    let edgeInset: CGFloat = 34
+    let itemSpacing: CGFloat = 36
+    let lineSpacing: CGFloat = 24
+    
+    let cellWidth: CGFloat = (deviceWidth - (edgeInset * 2) - (itemSpacing * 4)) / 5
+    let cellHeight: CGFloat = 60
+    
+    let itemSize = NSCollectionLayoutSize(widthDimension: .absolute(cellWidth), heightDimension: .absolute(cellHeight))
+    let item = NSCollectionLayoutItem(layoutSize: itemSize)
+    let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(cellHeight))
+    let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+    group.interItemSpacing = .fixed(itemSpacing)
+    let section = NSCollectionLayoutSection(group: group)
+    section.interGroupSpacing = lineSpacing
+    section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: edgeInset, bottom: 0, trailing: edgeInset)
+    let layout = UICollectionViewCompositionalLayout(section: section)
     self.collectionViewLayout = layout
   }
 }

@@ -130,4 +130,25 @@ public extension UICollectionView {
     let layout = UICollectionViewCompositionalLayout(section: section)
     self.collectionViewLayout = layout
   }
+  
+  func twoColumnGridLayoutForCategory() {
+    let deviceWidth: CGFloat = UIScreen.main.bounds.width
+    let edgeInset: CGFloat = 28
+    let itemSpacing: CGFloat = 30
+    let lineSpacing: CGFloat = 8
+    
+    let cellWidth: CGFloat = (deviceWidth - (edgeInset * 2) - (itemSpacing)) / 2
+    let cellHeight: CGFloat = 30
+    
+    let itemSize = NSCollectionLayoutSize(widthDimension: .absolute(cellWidth), heightDimension: .absolute(cellHeight))
+    let item = NSCollectionLayoutItem(layoutSize: itemSize)
+    let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(cellHeight))
+    let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+    group.interItemSpacing = .fixed(itemSpacing)
+    let section = NSCollectionLayoutSection(group: group)
+    section.interGroupSpacing = lineSpacing
+    section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: edgeInset, bottom: 0, trailing: edgeInset)
+    let layout = UICollectionViewCompositionalLayout(section: section)
+    self.collectionViewLayout = layout
+  }
 }

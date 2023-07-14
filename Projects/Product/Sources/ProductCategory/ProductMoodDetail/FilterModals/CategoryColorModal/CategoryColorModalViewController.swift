@@ -45,13 +45,14 @@ final class CategoryColorModalViewController: ModalViewController, CategoryColor
   
   private let categoryCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: .init()).then {
     $0.backgroundColor = .DecoColor.whiteColor
-    $0.register(FilterCell.self, forCellWithReuseIdentifier: FilterCell.identifier)
+    $0.register(FilterWithBoundsCell.self, forCellWithReuseIdentifier: FilterWithBoundsCell.identifier)
     $0.bounces = false
     
-    $0.showsHorizontalScrollIndicator = false
-    let layout = UICollectionViewFlowLayout()
-    layout.scrollDirection = .vertical
-    $0.collectionViewLayout = layout
+    $0.showsVerticalScrollIndicator = false
+    $0.twoColumnGridLayoutForCategory()
+//    let layout = UICollectionViewFlowLayout()
+//    layout.scrollDirection = .vertical
+//    $0.collectionViewLayout = layout
   }
   
   private let colorLabel: UILabel = UILabel().then {
@@ -261,9 +262,10 @@ final class CategoryColorModalViewController: ModalViewController, CategoryColor
     listener?.categoryList
       .share()
       .bind(to: categoryCollectionView.rx.items(
-        cellIdentifier: FilterCell.identifier,
-        cellType: FilterCell.self)
-      ) { index, data, cell in
+        cellIdentifier: FilterWithBoundsCell.identifier,
+        cellType: FilterWithBoundsCell.self)
+      ) { [weak self] index, data, cell in
+        guard let self else { return }
         cell.setupCellConfigure(
           text: data.category.title,
           isSelected: data.isSelected
@@ -312,59 +314,3 @@ final class CategoryColorModalViewController: ModalViewController, CategoryColor
     }).disposed(by: disposeBag)
   }
 }
-
-extension CategoryColorModalViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-  func collectionView(
-    _ collectionView: UICollectionView,
-    layout collectionViewLayout: UICollectionViewLayout,
-    sizeForItemAt indexPath: IndexPath
-  ) -> CGSize {
-    switch collectionView {
-    case categoryCollectionView:
-      let cellWidth: CGFloat = (view.frame.width - (categoryCvHorizontalEdgeSpacing * 2) - categoryCvHorizontalItemSpacing) / 2.0
-      return CGSize(width: cellWidth, height: categoryCvItemHeight)
-    default: return .zero
-    }
-  }
-  
-  func collectionView(
-    _ collectionView: UICollectionView,
-    layout collectionViewLayout: UICollectionViewLayout,
-    minimumLineSpacingForSectionAt section: Int
-  ) -> CGFloat {
-    switch collectionView {
-    case categoryCollectionView: return categoryCvHorizontalItemSpacing
-    default: return .zero
-    }
-  }
-  
-  func collectionView(
-    _ collectionView: UICollectionView,
-    layout collectionViewLayout: UICollectionViewLayout,
-    minimumInteritemSpacingForSectionAt section: Int
-  ) -> CGFloat {
-    switch collectionView {
-    case categoryCollectionView: return categoryCvHorizontalItemSpacing
-    default: return .zero
-    }
-  }
-  
-  func collectionView(
-    _ collectionView: UICollectionView,
-    layout collectionViewLayout: UICollectionViewLayout,
-    insetForSectionAt section: Int
-  ) -> UIEdgeInsets {
-    switch collectionView {
-    case categoryCollectionView:
-      return UIEdgeInsets(
-        top: 0,
-        left: categoryCvHorizontalEdgeSpacing,
-        bottom: 0,
-        right: categoryCvHorizontalEdgeSpacing
-      )
-    default: return .zero
-    }
-  }
-}
-
-

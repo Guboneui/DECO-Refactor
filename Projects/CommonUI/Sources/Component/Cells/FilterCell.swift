@@ -48,20 +48,14 @@ public class FilterCell: UICollectionViewCell {
   }
   
   private func setupLayouts() {
-    self.selectedView.pin
-      .left()
-      .vertically()
-      .width(getTextLabelWidth())
+    selectedView.snp.makeConstraints { make in
+      make.edges.equalToSuperview()
+    }
     
-    self.textLabel.pin
-      .horizontally(FilterCell.horizontalMargin)
-      .vCenter()
-      .sizeToFit(.width)
-  }
-  
-  private func getTextLabelWidth() -> CGFloat {
-    let labelWidth: CGFloat = (textLabel.text ?? "").size(withAttributes: [NSAttributedString.Key.font:textLabelBaseFont]).width
-    return labelWidth + (2*FilterCell.horizontalMargin)
+    textLabel.snp.makeConstraints { make in
+      make.horizontalEdges.equalToSuperview().inset(FilterCell.horizontalMargin)
+      make.centerY.equalToSuperview()
+    }
   }
   
   public override func sizeThatFits(_ size: CGSize) -> CGSize {
@@ -77,10 +71,7 @@ public class FilterCell: UICollectionViewCell {
     self.textLabel.textColor = isSelected ? .DecoColor.secondaryColor : .DecoColor.gray2
     self.selectedView.makeBorder(width: 1.0, borderColor: isSelected ? .DecoColor.secondaryColor : .DecoColor.lightGray1)
     self.selectedView.backgroundColor = isSelected ? .DecoColor.lightSecondaryColor : .clear
+    
+    self.setupLayouts()
   }
 }
-
-
-
-
-

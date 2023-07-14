@@ -270,20 +270,17 @@ final class CategoryColorModalViewController: ModalViewController, CategoryColor
           text: data.category.title,
           isSelected: data.isSelected
         )
+        
+        cell.didTapAction = { [weak self] in
+          guard let inSelf = self else { return }
+          var prevData: [(ProductCategoryModel, Bool)] = inSelf.listener?.categoryList.value ?? []
+          var model: (ProductCategoryModel, Bool) = prevData[index]
+          let selectedData: (ProductCategoryModel, Bool) = (model.0, !model.1)
+          prevData[index] = selectedData
+          inSelf.listener?.categoryList.accept(prevData)
+        }
+        
       }.disposed(by: disposeBag)
-    
-    Observable.zip(
-      categoryCollectionView.rx.itemSelected,
-      categoryCollectionView.rx.modelSelected((category: ProductCategoryModel, isSelected: Bool).self)
-    ).subscribe(onNext: { [weak self] index, model in
-      guard let self else { return }
-      var prevData: [(ProductCategoryModel, Bool)] = self.listener?.categoryList.value ?? []
-      let selectedData: (ProductCategoryModel, Bool) = (model.category, !model.isSelected)
-      prevData[index.row] = selectedData
-      self.listener?.categoryList.accept(prevData)
-    }).disposed(by: disposeBag)
-    
-    categoryCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
   }
   
   private func setupColorCollectionView() {

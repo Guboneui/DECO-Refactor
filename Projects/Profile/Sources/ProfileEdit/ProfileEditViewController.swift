@@ -283,6 +283,30 @@ final class ProfileEditViewController: UIViewController, ProfileEditPresentable,
         guard let self else { return }
         self.changeBackgroundImageActionSheet()
       }.disposed(by: disposeBag)
+    
+    editProfileNamePencilImageView.tap()
+      .subscribe(onNext: { [weak self] _ in
+        guard let self else { return }
+        self.editProfileNameTextField.becomeFirstResponder()
+      }).disposed(by: disposeBag)
+    
+    editProfileNickNamePencilImageView.tap()
+      .subscribe(onNext: { [weak self] _ in
+        guard let self else { return }
+        self.editProfileNickNameTextField.becomeFirstResponder()
+      }).disposed(by: disposeBag)
+
+    editProfileDescriptionPencilImageView.tap()
+      .subscribe(onNext: { [weak self] _ in
+        guard let self else { return }
+        self.editProfileDescriptionTextView.becomeFirstResponder()
+      }).disposed(by: disposeBag)
+    
+    view.tap()
+      .subscribe(onNext: { [weak self] _ in
+        guard let self else { return }
+        self.view.endEditing(true)
+      }).disposed(by: disposeBag)
   }
   
   private func setupBindings() {

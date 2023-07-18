@@ -52,28 +52,28 @@ final class BookmarkRouter: ViewableRouter<BookmarkInteractable, BookmarkViewCon
   private func attachPhotoBookmarkRIB() {
     if photoBookmarkRouting != nil { return }
     let router = photoBookmarkBuildable.build(withListener: interactor)
-    attachChild(router)
     self.interactor.photoBookmarkViewControllerable = router.viewControllable
     self.photoBookmarkRouting = router
+    attachChild(router)
   }
   
   private func detachPhotoBookmarkRIB() {
     guard let router = photoBookmarkRouting else { return }
-    self.detachChild(router)
     self.photoBookmarkRouting = nil
+    self.detachChild(router)
   }
   
   private func attachProductBookmarkRIB() {
     if productBookmarkRouting != nil { return }
     let router = productBookmarkBuildable.build(withListener: interactor)
-    attachChild(router)
     self.interactor.productBookmarkViewControllerable = router.viewControllable
     self.productBookmarkRouting = router
+    attachChild(router)
   }
   
   private func detachProductBookmarkRIB() {
     guard let router = productBookmarkRouting else { return }
-    self.detachChild(router)
     self.productBookmarkRouting = nil
+    self.detachChild(router)
   }
 }

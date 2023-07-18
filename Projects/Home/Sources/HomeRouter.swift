@@ -62,43 +62,43 @@ final class HomeRouter: ViewableRouter<HomeInteractable, HomeViewControllable>, 
   private func attachLatestBoardRIB() {
     if latestBoardRouting != nil { return }
     let router = latestBoardBuildable.build(withListener: interactor)
-    attachChild(router)
     self.interactor.latestBoardViewControllerable = router.viewControllable
     self.latestBoardRouting = router
+    attachChild(router)
   }
   
   private func detachLatestBoardRIB() {
     guard let router = latestBoardRouting else { return }
-    self.detachChild(router)
     self.latestBoardRouting = nil
+    self.detachChild(router)
   }
   
   private func attachPopularBoardRIB() {
     if popularBoardRouting != nil { return }
     let router = popularBoardBuildable.build(withListener: interactor)
-    attachChild(router)
     self.interactor.popularBoardViewControllerable = router.viewControllable
     self.popularBoardRouting = router
+    attachChild(router)
   }
   
   private func detachPopularBoardRIB() {
     guard let router = popularBoardRouting else { return }
-    self.detachChild(router)
     self.popularBoardRouting = nil
+    self.detachChild(router)
   }
   
   private func attachFollowBoardRIB() {
     if followBoardRouting != nil { return }
     let router = followBoardBuildable.build(withListener: interactor)
-    attachChild(router)
     self.interactor.followBoardViewControllerable = router.viewControllable
     self.followBoardRouting = router
+    attachChild(router)
   }
   
   private func detachFollowBoardRIB() {
     guard let router = followBoardRouting else { return }
-    detachChild(router)
     followBoardRouting = nil
+    detachChild(router)
   }
   
   

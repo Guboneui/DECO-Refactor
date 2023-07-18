@@ -57,9 +57,9 @@ final class ProductRouter: ViewableRouter<ProductInteractable, ProductViewContro
   func attachSearchVC() {
     if searchRouting != nil { return }
     let router = searchBuildable.build(withListener: interactor)
-    attachChild(router)
     self.searchRouting = router
     self.viewControllable.pushViewController(router.viewControllable, animated: true)
+    attachChild(router)
   }
   
   func detachSearchVC(with popType: PopType) {
@@ -67,8 +67,8 @@ final class ProductRouter: ViewableRouter<ProductInteractable, ProductViewContro
     if popType == .BackButton {
       self.viewControllable.popViewController(animated: true)
     }
-    self.detachChild(router)
     self.searchRouting = nil
+    self.detachChild(router)
   }
   
   func attachChildVCRib(with type: ProductTabType) {
@@ -87,30 +87,30 @@ extension ProductRouter {
   private func attachProductCategoryRIB() {
     if productCategoryRouting != nil { return }
     let router = productCategoryBuildable.build(withListener: interactor)
-    attachChild(router)
     self.productCategoryRouting = router
     self.viewController.setChildVCLayout(childVC: router.viewControllable)
+    attachChild(router)
   }
   
   private func detachProductCategoryRIB() {
     if let router = productCategoryRouting {
-      detachChild(router)
       self.productCategoryRouting = nil
+      detachChild(router)
     }
   }
   
   private func attachBrandListRIB() {
     if brandListRouting != nil { return }
     let router = brandListBuildable.build(withListener: interactor)
-    attachChild(router)
     self.brandListRouting = router
     self.viewController.setChildVCLayout(childVC: router.viewControllable)
+    attachChild(router)
   }
   
   private func detachBrandListRIB() {
     if let router = brandListRouting {
-      detachChild(router)
       self.brandListRouting = nil
+      detachChild(router)
     }
   }
 }

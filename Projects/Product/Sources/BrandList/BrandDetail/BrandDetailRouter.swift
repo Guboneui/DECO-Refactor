@@ -40,9 +40,9 @@ final class BrandDetailRouter: ViewableRouter<BrandDetailInteractable, BrandDeta
   func attachBrandProductUsage(brandInfo: BrandDTO) {
     if brandProductUsageRouting != nil { return }
     let router = brandProductUsageBuildable.build(withListener: interactor, brandInfo: brandInfo)
-    attachChild(router)
     self.brandProductUsageRouting = router
     self.viewControllable.pushViewController(router.viewControllable, animated: true)
+    attachChild(router)
   }
   
   func detachBrandProductUsageVC(with popType: PopType) {
@@ -50,7 +50,7 @@ final class BrandDetailRouter: ViewableRouter<BrandDetailInteractable, BrandDeta
     if popType == .BackButton {
       self.viewControllable.popViewController(animated: true)
     }
-    detachChild(router)
     brandProductUsageRouting = nil
+    detachChild(router)
   }
 }

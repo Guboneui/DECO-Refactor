@@ -43,10 +43,9 @@ final class BrandListRouter: ViewableRouter<BrandListInteractable, BrandListView
       withListener: interactor,
       brandInfo: brandInfo
     )
-    self.attachChild(router)
     self.brandDetailRouting = router
-    
     self.viewControllable.pushViewController(router.viewControllable, animated: true)
+    self.attachChild(router)
   }
   
   func detachBrandDetailVC(with popType: PopType) {
@@ -54,7 +53,7 @@ final class BrandListRouter: ViewableRouter<BrandListInteractable, BrandListView
     if popType == .BackButton {
       self.viewControllable.popViewController(animated: true)
     }
-    self.detachChild(router)
     self.brandDetailRouting = nil
+    self.detachChild(router)
   }
 }

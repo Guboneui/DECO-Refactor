@@ -40,8 +40,8 @@ final class AgeRouter: ViewableRouter<AgeInteractable, AgeViewControllable>, Age
     if moodRouting != nil { return }
     let router = moodBuildable.build(withListener: interactor)
     self.viewControllable.pushViewController(router.viewControllable, animated: true)
-    attachChild(router)
     self.moodRouting = router
+    attachChild(router)
   }
   
   func detachMoodVC(with popType: PopType) {
@@ -49,7 +49,8 @@ final class AgeRouter: ViewableRouter<AgeInteractable, AgeViewControllable>, Age
     if popType == .BackButton {
       self.viewControllable.popViewController(animated: true)
     }
-    detachChild(router)
     moodRouting = nil
+    detachChild(router)
   }
 }
+

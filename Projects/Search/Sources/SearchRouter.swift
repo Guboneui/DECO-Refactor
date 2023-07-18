@@ -39,9 +39,9 @@ final class SearchRouter: ViewableRouter<SearchInteractable, SearchViewControlla
   func attachSearchResultVC(with searchText: String) {
     if searchResultRouting != nil { return }
     let router = searchResultBuildable.build(withListener: interactor, searchText: searchText)
-    attachChild(router)
     self.searchResultRouting = router
     self.viewControllable.pushViewController(router.viewControllable, animated: true)
+    attachChild(router)
   }
   
   func detachSearchResultVC(with popType: PopType) {
@@ -49,7 +49,7 @@ final class SearchRouter: ViewableRouter<SearchInteractable, SearchViewControlla
     if popType == .BackButton {
       self.viewControllable.popViewController(animated: true)
     }
-    self.detachChild(router)
     self.searchResultRouting = nil
+    self.detachChild(router)
   }
 }

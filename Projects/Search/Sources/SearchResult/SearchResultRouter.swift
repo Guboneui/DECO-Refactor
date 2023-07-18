@@ -76,41 +76,41 @@ final class SearchResultRouter: ViewableRouter<SearchResultInteractable, SearchR
   private func attachSearchPhotoRIB() {
     if searchPhotoRouting != nil { return }
     let router = searchPhotoBuildable.build(withListener: interactor)
-    attachChild(router)
     self.interactor.searchPhotoViewControllerable = router.viewControllable
     self.searchPhotoRouting = router
+    attachChild(router)
   }
   
   private func attachSearchProductRIB() {
     if searchProductRouting != nil { return }
     let router = searchProductBuildable.build(withListener: interactor)
-    attachChild(router)
     self.interactor.searchProductViewControllerable = router.viewControllable
     self.searchProductRouting = router
+    attachChild(router)
   }
   
   private func attachSearchBrandRIB() {
     if searchBrandRouting != nil { return }
     let router = searchBrandBuildable.build(withListener: interactor)
-    attachChild(router)
     self.interactor.searchBrandViewControllerable = router.viewControllable
     self.searchBrandRouting = router
+    attachChild(router)
   }
   
   private func attachSearchUserRIB() {
     if searchUserRouting != nil { return }
     let router = searchUserBuildable.build(withListener: interactor)
-    attachChild(router)
     self.interactor.searchUserViewControllerable = router.viewControllable
     self.searchUserRouting = router
+    attachChild(router)
   }
   
   func attachProductDetailVC(with productInfo: Entity.ProductDTO) {
     if productDetailRouting != nil { return }
     let router = productDetailBuildable.build(withListener: interactor, productInfo: productInfo)
-    attachChild(router)
     self.viewControllable.pushViewController(router.viewControllable, animated: true)
     self.productDetailRouting = router
+    attachChild(router)
   }
   
   func detachProductDetailVC(with popType: PopType) {
@@ -118,7 +118,7 @@ final class SearchResultRouter: ViewableRouter<SearchResultInteractable, SearchR
     if popType == .BackButton {
       self.viewControllable.popViewController(animated: true)
     }
-    self.detachChild(router)
     self.productDetailRouting = nil
+    self.detachChild(router)
   }
 }

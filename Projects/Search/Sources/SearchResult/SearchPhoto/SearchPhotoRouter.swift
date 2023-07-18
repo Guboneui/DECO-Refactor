@@ -37,16 +37,16 @@ final class SearchPhotoRouter: ViewableRouter<SearchPhotoInteractable, SearchPho
   func attachFilterModalVC() {
     if searchPhotoFilterRouting != nil { return }
     let router = searchPhotoFilterBuildable.build(withListener: interactor)
-    attachChild(router)
     router.viewControllable.uiviewController.modalPresentationStyle = .overFullScreen
     self.viewControllable.present(router.viewControllable, animated: false, completion: nil)
     searchPhotoFilterRouting = router
+    attachChild(router)
   }
   
   func detachFilterModalVC() {
     guard let router = searchPhotoFilterRouting else { return }
-    detachChild(router)
     viewControllable.dismiss(animated: false, completion: nil)
     searchPhotoFilterRouting = nil
+    detachChild(router)
   }
 }

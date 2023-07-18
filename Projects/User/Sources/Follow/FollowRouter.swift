@@ -62,38 +62,38 @@ final class FollowRouter: ViewableRouter<FollowInteractable, FollowViewControlla
   private func attachFollowerListRIB(targetUserID: Int) {
     if followerListRouting != nil { return }
     let router = followerListBuildable.build(withListener: interactor, targetUserID: targetUserID)
-    attachChild(router)
     self.interactor.followerListViewControllerable = router.viewControllable
     self.followerListRouting = router
+    attachChild(router)
   }
   
   private func detachFollowerListRIB() {
     guard let router = followerListRouting else { return }
-    self.detachChild(router)
     self.followerListRouting = nil
+    self.detachChild(router)
   }
   
   private func attachFollowingListRIB(targetUserID: Int) {
     if followingListRouting != nil { return }
     let router = followingListBuildable.build(withListener: interactor, targetUserID: targetUserID)
-    attachChild(router)
     self.interactor.followingListViewControllerable = router.viewControllable
     self.followingListRouting = router
+    attachChild(router)
   }
   
   private func detachFollowingListRIB() {
     guard let router = followingListRouting else { return }
-    self.detachChild(router)
     self.followingListRouting = nil
+    self.detachChild(router)
   }
   
   
   func attachTargetUserProfileVC(with targetUserInfo: UserDTO) {
     if targetUserProfileRouting != nil { return }
     let router = targetUserProfileBuildable.build(withListener: interactor, targetUserInfo: targetUserInfo)
-    attachChild(router)
     self.viewControllable.pushViewController(router.viewControllable, animated: true)
     self.targetUserProfileRouting = router
+    attachChild(router)
   }
   
   func detachTargetUserProfileVC(with popType: PopType) {
@@ -101,7 +101,7 @@ final class FollowRouter: ViewableRouter<FollowInteractable, FollowViewControlla
     if popType == .BackButton {
       self.viewControllable.popViewController(animated: true)
     }
-    self.detachChild(router)
     self.targetUserProfileRouting = nil
+    self.detachChild(router)
   }
 }

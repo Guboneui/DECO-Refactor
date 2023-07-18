@@ -44,32 +44,32 @@ final class AppSettingRouter: ViewableRouter<AppSettingInteractable, AppSettingV
   func attachLogoutPopupVC() {
     if logoutRouting != nil { return }
     let router = logoutBuildable.build(withListener: interactor)
-    attachChild(router)
     router.viewControllable.uiviewController.modalPresentationStyle = .overFullScreen
     self.viewControllable.present(router.viewControllable, animated: false, completion: nil)
     logoutRouting = router
+    attachChild(router)
   }
   
   func detachLogoutPopupVC() {
     guard let router = logoutRouting else { return }
-    detachChild(router)
     viewControllable.dismiss(animated: false, completion: nil)
     logoutRouting = nil
+    detachChild(router)
   }
   
   func attachWithdrawPopupVC() {
     if withdrawRouting != nil { return }
     let router = withdrawBuildable.build(withListener: interactor)
-    attachChild(router)
     router.viewControllable.uiviewController.modalPresentationStyle = .overFullScreen
     self.viewControllable.present(router.viewControllable, animated: false, completion: nil)
     withdrawRouting = router
+    attachChild(router)
   }
   
   func detachWithdrawPopupVC() {
     guard let router = withdrawRouting else { return }
-    detachChild(router)
     viewControllable.dismiss(animated: false, completion: nil)
     withdrawRouting = nil
+    detachChild(router)
   }
 }

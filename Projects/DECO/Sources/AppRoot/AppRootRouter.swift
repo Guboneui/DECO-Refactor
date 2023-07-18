@@ -49,14 +49,14 @@ final class AppRootRouter: LaunchRouter<AppRootInteractable, AppRootViewControll
 		let router = loginBuildable.build(withListener: interactor)
 		window.rootViewController = router.viewControllable.uiviewController
 		window.makeKeyAndVisible()
-		attachChild(router)
 		loginRouting = router
+		attachChild(router)
 	}
 	
 	private func detachLogin() {
 		if loginRouting != nil {
-			detachChild(loginRouting!)
 			loginRouting = nil
+			detachChild(loginRouting!)
 		}
 	}
 	
@@ -68,7 +68,8 @@ final class AppRootRouter: LaunchRouter<AppRootInteractable, AppRootViewControll
 		navigation.navigationController.navigationBar.isHidden = true
 		window.rootViewController = navigation.uiviewController
 		window.makeKeyAndVisible()
-		attachChild(router)
 		mainRouting = router
+		attachChild(router)
 	}
 }
+

@@ -46,9 +46,9 @@ final class ProductCategoryRouter: ViewableRouter<ProductCategoryInteractable, P
   func attachProductCategoryDetailVC() {
     if productCategoryDetailRouting != nil { return }
     let router = productCategoryDetailBuildable.build(withListener: interactor)
-    attachChild(router)
     self.viewControllable.pushViewController(router.viewControllable, animated: true)
     self.productCategoryDetailRouting = router
+    attachChild(router)
   }
   
   func detachProductCategoryDetailVC(with popType: PopType) {
@@ -56,16 +56,16 @@ final class ProductCategoryRouter: ViewableRouter<ProductCategoryInteractable, P
     if popType == .BackButton {
       self.viewControllable.popViewController(animated: true)
     }
-    detachChild(router)
     self.productCategoryDetailRouting = nil
+    detachChild(router)
   }
   
   func attachProductMoodDetailVC() {
     if productMoodDetailRouting != nil { return }
     let router = productMoodDetailBuildable.build(withListener: interactor)
-    attachChild(router)
     self.viewControllable.pushViewController(router.viewControllable, animated: true)
     self.productMoodDetailRouting = router
+    attachChild(router)
   }
   
   func detachProductMoodDetailVC(with popType: PopType) {
@@ -73,7 +73,8 @@ final class ProductCategoryRouter: ViewableRouter<ProductCategoryInteractable, P
     if popType == .BackButton {
       self.viewControllable.popViewController(animated: true)
     }
-    self.detachChild(router)
     self.productMoodDetailRouting = nil
+    self.detachChild(router)
   }
 }
+

@@ -67,26 +67,26 @@ final class MainRouter: ViewableRouter<MainInteractable, MainViewControllable>, 
   func attachChildVCRib(with type: TabType) {
     switch type {
     case .Home:
-      attachHomeRIB()
       detachProductRIB()
       detachBookmarkRIB()
       detachProfileRIB()
+      attachHomeRIB()
     case .Product:
-      attachProductRIB()
       detachHomeRIB()
       detachBookmarkRIB()
       detachProfileRIB()
+      attachProductRIB()
     case .Upload: break
     case .Bookmark:
-      attachBookmarkRIB()
       detachHomeRIB()
       detachProductRIB()
       detachProfileRIB()
+      attachBookmarkRIB()
     case .Profile:
-      attachProfileRIB()
       detachHomeRIB()
       detachProductRIB()
       detachBookmarkRIB()
+      attachProfileRIB()
     }
   }
   
@@ -107,60 +107,60 @@ extension MainRouter {
   private func attachHomeRIB() {
     if homeRouting != nil { return }
     let router = homeBuildable.build(withListener: interactor)
-    attachChild(router)
     self.homeRouting = router
     self.viewController.setChildVCLayout(childVC: router.viewControllable)
+    attachChild(router)
   }
   
   private func detachHomeRIB() {
     if let router = homeRouting {
-      detachChild(router)
       self.homeRouting = nil
+      detachChild(router)
     }
   }
   
   private func attachProductRIB() {
     if productRouting != nil { return }
     let router = productBuildable.build(withListener: interactor)
-    attachChild(router)
     self.productRouting = router
     self.viewController.setChildVCLayout(childVC: router.viewControllable)
+    attachChild(router)
   }
   
   private func detachProductRIB() {
     if let router = productRouting {
-      detachChild(router)
       self.productRouting = nil
+      detachChild(router)
     }
   }
   
   private func attachBookmarkRIB() {
     if bookmarkRouting != nil { return }
     let router = bookmarkBuildable.build(withListener: interactor)
-    attachChild(router)
     self.bookmarkRouting = router
     self.viewController.setChildVCLayout(childVC: router.viewControllable)
+    attachChild(router)
   }
   
   private func detachBookmarkRIB() {
     if let router = bookmarkRouting {
-      detachChild(router)
       self.bookmarkRouting = nil
+      detachChild(router)
     }
   }
   
   private func attachProfileRIB() {
     if profileRouting != nil { return }
     let router = profileBuildable.build(withListener: interactor)
-    attachChild(router)
     self.profileRouting = router
     self.viewController.setChildVCLayout(childVC: router.viewControllable)
+    attachChild(router)
   }
   
   private func detachProfileRIB() {
     if let router = profileRouting {
-      detachChild(router)
       self.profileRouting = nil
+      detachChild(router)
     }
   }
 }

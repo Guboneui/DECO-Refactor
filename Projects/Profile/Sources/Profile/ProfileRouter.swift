@@ -54,9 +54,9 @@ final class ProfileRouter: ViewableRouter<ProfileInteractable, ProfileViewContro
   func attachAppSettingVC() {
     if appSettingRouting != nil { return }
     let router = appSettingBuildable.build(withListener: interactor)
-    attachChild(router)
     self.appSettingRouting = router
     self.viewControllable.pushViewController(router.viewControllable, animated: true)
+    attachChild(router)
   }
   
   func detachAppSettingVC(with popType: PopType) {
@@ -64,16 +64,16 @@ final class ProfileRouter: ViewableRouter<ProfileInteractable, ProfileViewContro
     if popType == .BackButton {
       self.viewControllable.popViewController(animated: true)
     }
-    self.detachChild(router)
     self.appSettingRouting = nil
+    self.detachChild(router)
   }
   
   func attachProfileEditVC() {
     if profileEditRouting != nil { return }
     let router = profileEditBuildable.build(withListener: interactor)
-    attachChild(router)
     self.profileEditRouting = router
     self.viewControllable.pushViewController(router.viewControllable, animated: true)
+    attachChild(router)
   }
   
   func detachProfileEditVC(with popType: PopType) {
@@ -81,8 +81,8 @@ final class ProfileRouter: ViewableRouter<ProfileInteractable, ProfileViewContro
     if popType == .BackButton {
       self.viewControllable.popViewController(animated: true)
     }
-    self.detachChild(router)
     self.profileEditRouting = nil
+    self.detachChild(router)
   }
   
   func attachFollowVC(targetUserID: Int, targetUserNickname: String, firstFollowTabStatus: FollowTabType) {
@@ -93,9 +93,9 @@ final class ProfileRouter: ViewableRouter<ProfileInteractable, ProfileViewContro
       targetUserNickname: targetUserNickname,
       firstFollowTabStatus: firstFollowTabStatus
     )
-    attachChild(router)
     self.followRouting = router
     self.viewControllable.pushViewController(router.viewControllable, animated: true)
+    attachChild(router)
   }
   
   func detachFollowVC(with popType: PopType) {
@@ -103,8 +103,8 @@ final class ProfileRouter: ViewableRouter<ProfileInteractable, ProfileViewContro
     if popType == .BackButton {
       self.viewControllable.popViewController(animated: true)
     }
-    self.detachChild(router)
     self.followRouting = nil
+    self.detachChild(router)
   }
   
   

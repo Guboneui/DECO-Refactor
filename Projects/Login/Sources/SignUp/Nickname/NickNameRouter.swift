@@ -45,8 +45,8 @@ final class NickNameRouter:
     if genderRouting != nil { return }
     let router = genderBuildable.build(withListener: interactor)
     self.viewControllable.pushViewController(router.viewControllable, animated: true)
-    attachChild(router)
     self.genderRouting = router
+    attachChild(router)
   }
   
   func detachGenderVC(with popType: PopType) {
@@ -54,7 +54,7 @@ final class NickNameRouter:
     if popType == .BackButton {
       self.viewControllable.popViewController(animated: true)
     }
-    detachChild(router)
     genderRouting = nil
+    detachChild(router)
   }
 }

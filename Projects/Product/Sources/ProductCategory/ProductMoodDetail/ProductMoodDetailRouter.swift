@@ -53,41 +53,41 @@ final class ProductMoodDetailRouter: ViewableRouter<ProductMoodDetailInteractabl
   func attachMoodModalVC() {
     if moodModalRouting != nil { return }
     let router = moodModalBuildable.build(withListener: interactor)
-    attachChild(router)
     router.viewControllable.uiviewController.modalPresentationStyle = .overFullScreen
     self.viewControllable.present(router.viewControllable, animated: false, completion: nil)
     moodModalRouting = router
+    attachChild(router)
   }
   
   func detachMoodModalVC() {
     guard let router = moodModalRouting else { return }
-    detachChild(router)
     viewControllable.dismiss(animated: false, completion: nil)
     moodModalRouting = nil
+    detachChild(router)
   }
   
   func attachCategoryColorModalVC() {
     if categoryColorModalRouting != nil { return }
     let router = categoryColorModalBuildable.build(withListener: interactor)
-    attachChild(router)
     router.viewControllable.uiviewController.modalPresentationStyle = .overFullScreen
     self.viewControllable.present(router.viewControllable, animated: false, completion: nil)
     categoryColorModalRouting = router
+    attachChild(router)
   }
   
   func detachCategoryColorModalVC() {
     guard let router = categoryColorModalRouting else { return }
-    detachChild(router)
     viewControllable.dismiss(animated: false, completion: nil)
     categoryColorModalRouting = nil
+    detachChild(router)
   }
   
   func attachProductDetailVC(with productInfo: ProductDTO) {
     if productDetailRouting != nil { return }
     let router = productDetailBuildable.build(withListener: interactor, productInfo: productInfo)
-    attachChild(router)
     self.viewControllable.pushViewController(router.viewControllable, animated: true)
     self.productDetailRouting = router
+    attachChild(router)
   }
   
   func detachProductDetailVC(with popType: PopType) {
@@ -95,7 +95,7 @@ final class ProductMoodDetailRouter: ViewableRouter<ProductMoodDetailInteractabl
     if popType == .BackButton {
       self.viewControllable.popViewController(animated: true)
     }
-    self.detachChild(router)
     self.productDetailRouting = nil
+    self.detachChild(router)
   }
 }

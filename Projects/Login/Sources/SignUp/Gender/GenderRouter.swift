@@ -40,8 +40,8 @@ final class GenderRouter: ViewableRouter<GenderInteractable, GenderViewControlla
     if ageRouting != nil { return }
     let router = ageBuildable.build(withListener: interactor)
     self.viewControllable.pushViewController(router.viewControllable, animated: true)
-    attachChild(router)
     self.ageRouting = router
+    attachChild(router)
   }
   
   func detachAgeVC(with popType: PopType) {
@@ -49,7 +49,7 @@ final class GenderRouter: ViewableRouter<GenderInteractable, GenderViewControlla
     if popType == .BackButton {
       self.viewControllable.popViewController(animated: true)
     }
-    detachChild(router)
     ageRouting = nil
+    detachChild(router)
   }
 }

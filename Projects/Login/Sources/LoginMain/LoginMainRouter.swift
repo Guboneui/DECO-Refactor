@@ -44,8 +44,8 @@ final class LoginMainRouter: ViewableRouter<LoginMainInteractable, NavigationCon
     if nicknameRouting != nil { return }
     let router = nicknameBuildable.build(withListener: interactor)
     self.viewControllable.pushViewController(router.viewControllable, animated: true)
-    attachChild(router)
     self.nicknameRouting = router
+    attachChild(router)
   }
 
   func detachNicknameVC(with popType: PopType) {
@@ -53,7 +53,7 @@ final class LoginMainRouter: ViewableRouter<LoginMainInteractable, NavigationCon
     if popType == .BackButton {
       self.viewControllable.popViewController(animated: true)
     }
-    detachChild(router)
     nicknameRouting = nil
+    detachChild(router)
   }
 }

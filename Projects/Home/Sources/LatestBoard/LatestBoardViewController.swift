@@ -18,6 +18,7 @@ protocol LatestBoardPresentableListener: AnyObject {
   var latestBoardList: BehaviorRelay<[PostingDTO]> { get }
   
   func fetchLatestBoardList(at createdAt: Int)
+  func pushLatestBoardFeedVC()
 }
 
 final class LatestBoardViewController: UIViewController, LatestBoardPresentable, LatestBoardViewControllable {
@@ -67,6 +68,14 @@ final class LatestBoardViewController: UIViewController, LatestBoardPresentable,
           imageURL: data.imageUrl ?? ""
         )
       }.disposed(by: disposeBag)
+    
+    Observable.zip(
+      latestBoardCollectionView.rx.itemSelected,
+      latestBoardCollectionView.rx.modelSelected(PostingDTO.self)
+    ).subscribe(onNext: { [weak self] index, model in
+      guard let self else { return }
+      self.listener?.pushLatestBoardFeedVC()
+    }).disposed(by: disposeBag)
     
     latestBoardCollectionView.rx.willDisplayCell
       .map{$0.at.row}

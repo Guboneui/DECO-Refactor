@@ -6,6 +6,7 @@
 //
 
 import User
+import Util
 import Entity
 import Networking
 
@@ -14,7 +15,8 @@ import RxSwift
 import RxRelay
 
 protocol LatestBoardRouting: ViewableRouting {
-  // TODO: Declare methods the interactor can invoke to manage sub-tree via the router.
+  func attachLatestBoardFeedRIB()
+  func detachLatestBoardFeedRIB(with popType: PopType)
 }
 
 protocol LatestBoardPresentable: Presentable {
@@ -64,6 +66,7 @@ final class LatestBoardInteractor: PresentableInteractor<LatestBoardPresentable>
       }).disposed(by: disposeBag)
     
   }
+  
   
   override func didBecomeActive() {
     super.didBecomeActive()
@@ -123,5 +126,13 @@ final class LatestBoardInteractor: PresentableInteractor<LatestBoardPresentable>
         self.boardListStream.updateBoardList(with: prevList + boardList)
       }
     }
+  }
+  
+  func pushLatestBoardFeedVC() {
+    router?.attachLatestBoardFeedRIB()
+  }
+  
+  func popLatestBoardFeedVC(with popType: PopType) {
+    router?.detachLatestBoardFeedRIB(with: popType)
   }
 }

@@ -35,6 +35,7 @@ final class LatestBoardInteractor: PresentableInteractor<LatestBoardPresentable>
   private let boardRepository: BoardRepository
   private let userManager: MutableUserManagerStream
   private let postingCategoryFilter: MutableSelectedPostingFilterStream
+  private let boardListStream: MutableBoardStream
   
   var latestBoardList: RxRelay.BehaviorRelay<[Entity.PostingDTO]> = .init(value: [])
   
@@ -45,13 +46,23 @@ final class LatestBoardInteractor: PresentableInteractor<LatestBoardPresentable>
     presenter: LatestBoardPresentable,
     boardRepository: BoardRepository,
     userManager: MutableUserManagerStream,
-    postingCategoryFilter: MutableSelectedPostingFilterStream
+    postingCategoryFilter: MutableSelectedPostingFilterStream,
+    boardListStream: MutableBoardStream
   ) {
     self.boardRepository = boardRepository
     self.userManager = userManager
     self.postingCategoryFilter = postingCategoryFilter
+    self.boardListStream = boardListStream
     super.init(presenter: presenter)
     presenter.listener = self
+    
+    
+    boardListStream.boardList
+      .subscribe(onNext: { [weak self] list in
+        guard let self else { return }
+        self.latestBoardList.accept(list)
+      }).disposed(by: disposeBag)
+    
   }
   
   override func didBecomeActive() {
@@ -89,7 +100,7 @@ final class LatestBoardInteractor: PresentableInteractor<LatestBoardPresentable>
           userId: self.userManager.userID
         )
       ) {
-        self.latestBoardList.accept(boardList)
+        self.boardListStream.updateBoardList(with: boardList)
       }
     }
   }
@@ -109,7 +120,7 @@ final class LatestBoardInteractor: PresentableInteractor<LatestBoardPresentable>
         )
       ), !boardList.isEmpty {
         let prevList = self.latestBoardList.value
-        self.latestBoardList.accept(prevList + boardList)
+        self.boardListStream.updateBoardList(with: prevList + boardList)
       }
     }
   }

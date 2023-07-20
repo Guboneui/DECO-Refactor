@@ -16,9 +16,12 @@ protocol LatestBoardDependency: Dependency {
   var postingCategoryFilter: MutableSelectedPostingFilterStream { get }
 }
 
-final class LatestBoardComponent: Component<LatestBoardDependency> {
+final class LatestBoardComponent:
+  Component<LatestBoardDependency>,
+  LatestBoardFeedDependency
+{
   
-  // TODO: Declare 'fileprivate' dependencies that are only used by this RIB.
+  var boardListStream: MutableBoardStream = BoardStreamImpl()
 }
 
 // MARK: - Builder
@@ -40,9 +43,19 @@ final class LatestBoardBuilder: Builder<LatestBoardDependency>, LatestBoardBuild
       presenter: viewController,
       boardRepository: dependency.boardRepository,
       userManager: dependency.userManager,
-      postingCategoryFilter: dependency.postingCategoryFilter
+      postingCategoryFilter: dependency.postingCategoryFilter,
+      boardListStream: component.boardListStream
     )
     interactor.listener = listener
-    return LatestBoardRouter(interactor: interactor, viewController: viewController)
+    
+    let latestBoardFeedBuildable = LatestBoardFeedBuilder(dependency: component)
+    
+    return LatestBoardRouter(
+      interactor: interactor,
+      viewController: viewController,
+      latestBoardFeedBuildable: latestBoardFeedBuildable
+    )
+  }
+  
   }
 }

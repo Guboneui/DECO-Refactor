@@ -13,3 +13,14 @@ public extension UIAlertController {
   }
 }
 
+public extension UIAlertAction {
+  convenience init(
+    title: String,
+    titleColor: UIColor,
+    style: UIAlertAction.Style,
+    handler: ((UIAlertAction) -> Void)? = nil
+  ) {
+    self.init(title: title, style: style, handler: handler)
+    self.setValue(titleColor, forKey: "titleTextColor")
+  }
+}

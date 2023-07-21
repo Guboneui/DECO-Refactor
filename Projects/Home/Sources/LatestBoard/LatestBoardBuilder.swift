@@ -12,6 +12,7 @@ import RIBs
 
 protocol LatestBoardDependency: Dependency {
   var boardRepository: BoardRepository { get }
+  var bookmarkRepository: BookmarkRepository { get }
   var userManager: MutableUserManagerStream { get }
   var postingCategoryFilter: MutableSelectedPostingFilterStream { get }
 }
@@ -22,6 +23,9 @@ final class LatestBoardComponent:
 {
   
   var boardListStream: MutableBoardStream = BoardStreamImpl()
+  var userManager: MutableUserManagerStream { dependency.userManager }
+  var bookmarkRepository: BookmarkRepository { dependency.bookmarkRepository }
+  var boardRepository: BoardRepository { dependency.boardRepository }
 }
 
 // MARK: - Builder
@@ -57,5 +61,8 @@ final class LatestBoardBuilder: Builder<LatestBoardDependency>, LatestBoardBuild
     )
   }
   
+  deinit {
+    print("---> latestBoardBuilder deinit")
   }
 }
+

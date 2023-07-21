@@ -5,14 +5,16 @@
 //  Created by 구본의 on 2023/05/09.
 //
 
-import RIBs
-import RxSwift
+import UIKit
+
 import Home
 import Product
 import Bookmark
 import Profile
-import Foundation
-import UIKit
+
+import RIBs
+import RxSwift
+import RxRelay
 
 public enum TabType {
   case Home
@@ -23,12 +25,12 @@ public enum TabType {
 }
 
 public protocol MainRouting: ViewableRouting {
-  func attachChildVCRib(with type: TabType)
-  func detachChildVCRib()
+
 }
 
 protocol MainPresentable: Presentable {
   var listener: MainPresentableListener? { get set }
+  func setChildVC(with type: TabType)
 }
 
 public protocol MainListener: AnyObject {
@@ -40,6 +42,10 @@ final class MainInteractor: PresentableInteractor<MainPresentable>, MainInteract
   weak var router: MainRouting?
   weak var listener: MainListener?
   
+  private let disposeBag: DisposeBag = DisposeBag()
+
+  lazy var currentTab: BehaviorRelay<TabType> = .init(value: .Home)
+  
   override init(presenter: MainPresentable) {
     super.init(presenter: presenter)
     presenter.listener = self
@@ -47,17 +53,20 @@ final class MainInteractor: PresentableInteractor<MainPresentable>, MainInteract
   
   override func didBecomeActive() {
     super.didBecomeActive()
+    self.setupBindings()
   }
   
   override func willResignActive() {
     super.willResignActive()
   }
   
-  func addChildVCLayout(with type: TabType) {
-    router?.attachChildVCRib(with: type)
-  }
-  
-  func removeChildVCLayout() {
-    router?.detachChildVCRib()
+  private func setupBindings() {
+    currentTab
+      .distinctUntilChanged()
+      .observe(on: MainScheduler.instance)
+      .subscribe(onNext: { [weak self] tab in
+        guard let self else { return }
+        self.presenter.setChildVC(with: tab)
+    }).disposed(by: disposeBag)
   }
 }

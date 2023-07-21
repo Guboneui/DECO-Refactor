@@ -38,16 +38,16 @@ final class SearchProductRouter: ViewableRouter<SearchProductInteractable, Searc
   func attachFilterModalVC() {
     if searchProductFilterRouting != nil { return }
     let router = searchProductFilterBuildable.build(withListener: interactor)
-    attachChild(router)
     router.viewControllable.uiviewController.modalPresentationStyle = .overFullScreen
     self.viewControllable.present(router.viewControllable, animated: false, completion: nil)
     searchProductFilterRouting = router
+    attachChild(router)
   }
   
   func detachFilterModalVC() {
     guard let router = searchProductFilterRouting else { return }
-    detachChild(router)
     viewControllable.dismiss(animated: false, completion: nil)
     searchProductFilterRouting = nil
+    detachChild(router)
   }
 }

@@ -199,7 +199,7 @@ final class ProfileEditViewController: UIViewController, ProfileEditPresentable,
       .bottomRight()
       .marginBottom(-10)
       .marginRight(-6)
-      
+    
       .size(45)
     
     editProfileNameGuideLineView.pin
@@ -295,7 +295,7 @@ final class ProfileEditViewController: UIViewController, ProfileEditPresentable,
         guard let self else { return }
         self.editProfileNickNameTextField.becomeFirstResponder()
       }).disposed(by: disposeBag)
-
+    
     editProfileDescriptionPencilImageView.tap()
       .subscribe(onNext: { [weak self] _ in
         guard let self else { return }
@@ -378,52 +378,61 @@ extension ProfileEditViewController {
 extension ProfileEditViewController {
   private func changeProfileImageActionSheet() {
     let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-    let albumButton = UIAlertAction(title: "앨범에서 선택", style: .default) { _ in
-      print("앨범에서 선택")
-    }
-    albumButton.setValue(UIColor.DecoColor.darkGray1, forKey: "titleTextColor")
+    let albumButton = UIAlertAction(
+      title: "앨범에서 선택",
+      titleColor: .DecoColor.darkGray1,
+      style: .default) { _ in
+        print("앨범에서 선택")
+      }
     
-    let removeButton = UIAlertAction(title: "프로필 사진 삭제", style: .default) { _ in
-      print("프로필 이미지 삭제")
-    }
-    removeButton.setValue(UIColor.DecoColor.darkGray1, forKey: "titleTextColor")
+    let removeButton = UIAlertAction(
+      title: "프로필 사진 삭제",
+      titleColor: .DecoColor.darkGray1,
+      style: .default) { _ in
+        print("프로필 이미지 삭제")
+      }
     
-    let cancelButton = UIAlertAction(title: "취소", style: .cancel)
-    cancelButton.setValue(UIColor.DecoColor.warningColor, forKey: "titleTextColor")
+    let cancelButton = UIAlertAction(
+      title: "취소",
+      titleColor: .DecoColor.warningColor,
+      style: .cancel
+    )
     
-    alert.addAction(albumButton)
-    alert.addAction(removeButton)
-    alert.addAction(cancelButton)
+    alert.addActions([albumButton, removeButton, cancelButton])
     
     self.present(alert, animated: true)
   }
   
   private func changeBackgroundImageActionSheet() {
     let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-    let albumButton = UIAlertAction(title: "앨범에서 선택", style: .default) { _ in
-      print("앨범에서 선택")
-    }
-    albumButton.setValue(UIColor.DecoColor.darkGray1, forKey: "titleTextColor")
+    let albumButton = UIAlertAction(
+      title: "앨범에서 선택",
+      titleColor: .DecoColor.darkGray1,
+      style: .default) { _ in
+        print("앨범에서 선택")
+      }
     
-    let defaultButton = UIAlertAction(title: "기본 이미지에서 선택", style: .default) {  _ in
-      print("기본 이미지")
-    }
+    let defaultButton = UIAlertAction(
+      title: "기본 이미지에서 선택",
+      titleColor: .DecoColor.darkGray1,
+      style: .default) {  _ in
+        print("기본 이미지")
+      }
     
-    defaultButton.setValue(UIColor.DecoColor.darkGray1, forKey: "titleTextColor")
+    let removeButton = UIAlertAction(
+      title: "배경 사진 삭제",
+      titleColor: .DecoColor.darkGray1,
+      style: .default) { _ in
+        print("삭제")
+      }
     
-    let removeButton = UIAlertAction(title: "배경 사진 삭제", style: .default) { _ in
-      print("삭제")
-    }
+    let cancelButton = UIAlertAction(
+      title: "취소",
+      titleColor: .DecoColor.warningColor,
+      style: .cancel
+    )
     
-    removeButton.setValue(UIColor.DecoColor.darkGray1, forKey: "titleTextColor")
-    
-    let cancelButton = UIAlertAction(title: "취소", style: .cancel)
-    cancelButton.setValue(UIColor.DecoColor.warningColor, forKey: "titleTextColor")
-    
-    alert.addAction(albumButton)
-    alert.addAction(defaultButton)
-    alert.addAction(removeButton)
-    alert.addAction(cancelButton)
+    alert.addActions([albumButton, defaultButton, removeButton, cancelButton])
     
     self.present(alert, animated: true)
   }

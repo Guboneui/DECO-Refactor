@@ -166,7 +166,7 @@ final class TargetUserProfileViewController: UIViewController, TargetUserProfile
       .horizontally()
       .height(userPostingCollectionViewHeight)
       .marginTop(1)
-      
+    
     
     scrollView.contentSize = CGSize(
       width: view.frame.width,
@@ -194,7 +194,7 @@ final class TargetUserProfileViewController: UIViewController, TargetUserProfile
         and: stickyFollowStatusButton,
         aligned: .center
       ).height(20)
-      
+    
     
     stickySuperAreaView.pin
       .top()
@@ -341,60 +341,79 @@ final class TargetUserProfileViewController: UIViewController, TargetUserProfile
   func showBlockAlert() {
     let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
     
-    let blameButton = UIAlertAction(title: "신고하기", style: .default) { _ in
-      print("신고하기")
-    }
-    blameButton.setValue(UIColor.DecoColor.darkGray1, forKey: "titleTextColor")
+    let blameButton = UIAlertAction(
+      title: "신고하기",
+      titleColor: .DecoColor.darkGray1,
+      style: .default) { _ in
+        print("신고하기")
+      }
     
-    let blockButton = UIAlertAction(title: "차단하기", style: .default) { _ in
-      print("차단하기")
-    }
-    blockButton.setValue(UIColor.DecoColor.darkGray1, forKey: "titleTextColor")
+    let blockButton = UIAlertAction(
+      title: "차단하기",
+      titleColor: .DecoColor.darkGray1,
+      style: .default) { _ in
+        print("차단하기")
+      }
     
-    let cancelButton = UIAlertAction(title: "취소", style: .cancel)
-    cancelButton.setValue(UIColor.DecoColor.warningColor, forKey: "titleTextColor")
     
-    alert.addAction(blameButton)
-    alert.addAction(blockButton)
-    alert.addAction(cancelButton)
+    let cancelButton = UIAlertAction(
+      title: "취소",
+      titleColor: .DecoColor.warningColor,
+      style: .cancel
+    )
+    
+    alert.addActions([blameButton, blockButton, cancelButton])
+    
     self.present(alert, animated: true)
   }
   
   func showUnblockAlert() {
     let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
     
-    let blameButton = UIAlertAction(title: "신고하기", style: .default) { _ in
-      print("신고하기")
-    }
-    blameButton.setValue(UIColor.DecoColor.darkGray1, forKey: "titleTextColor")
+    let blameButton = UIAlertAction(
+      title: "신고하기",
+      titleColor: .DecoColor.darkGray1,
+      style: .default) { _ in
+        print("신고하기")
+      }
     
-    let blockButton = UIAlertAction(title: "차단 해제", style: .default) { _ in
+    let blockButton = UIAlertAction(
+      title: "차단 해제",
+      titleColor: .DecoColor.darkGray1,
+      style: .default
+    ) { _ in
       print("차단 해제")
     }
-    blockButton.setValue(UIColor.DecoColor.darkGray1, forKey: "titleTextColor")
     
-    let cancelButton = UIAlertAction(title: "취소", style: .cancel)
-    cancelButton.setValue(UIColor.DecoColor.warningColor, forKey: "titleTextColor")
+    let cancelButton = UIAlertAction(
+      title: "취소",
+      titleColor: .DecoColor.warningColor,
+      style: .cancel
+    )
     
-    alert.addAction(blameButton)
-    alert.addAction(blockButton)
-    alert.addAction(cancelButton)
+    alert.addActions([blameButton, blockButton, cancelButton])
+    
     self.present(alert, animated: true)
   }
   
   func showEditProfileAlert() {
     let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
     
-    let editButton = UIAlertAction(title: "수정하기", style: .default) { _ in
-      print("수정하기")
-    }
-    editButton.setValue(UIColor.DecoColor.darkGray1, forKey: "titleTextColor")
+    let editButton = UIAlertAction(
+      title: "수정하기",
+      titleColor: .DecoColor.darkGray1,
+      style: .default) { _ in
+        print("수정하기")
+      }
     
-    let cancelButton = UIAlertAction(title: "취소", style: .cancel)
-    cancelButton.setValue(UIColor.DecoColor.warningColor, forKey: "titleTextColor")
+    let cancelButton = UIAlertAction(
+      title: "취소",
+      titleColor: .DecoColor.warningColor,
+      style: .cancel
+    )
     
-    alert.addAction(editButton)
-    alert.addAction(cancelButton)
+    alert.addActions([editButton, cancelButton])
+    
     self.present(alert, animated: true)
   }
 }

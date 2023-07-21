@@ -47,11 +47,8 @@ class TabbarView: TouchAnimationView {
     }
   }
   
-  public func changeTabbarImage(with image: UIImage) {
+  public func changeTabbarConfigure(image: UIImage, isSelected: Bool) {
     self.tabbarImageView.image = image
-  }
-  
-  public func changeTabbarTextColor(isSelected: Bool) {
     self.tabbarTitleLabel.textColor = isSelected ? .DecoColor.darkGray1 : .DecoColor.gray2
   }
 }

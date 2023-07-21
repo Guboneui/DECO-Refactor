@@ -21,6 +21,7 @@ protocol LatestBoardFeedRouting: ViewableRouting {
 protocol LatestBoardFeedPresentable: Presentable {
   var listener: LatestBoardFeedPresentableListener? { get set }
   @MainActor func showToast(status: Bool)
+  func showAlert(isMine: Bool)
 }
 
 protocol LatestBoardFeedListener: AnyObject {
@@ -129,5 +130,12 @@ final class LatestBoardFeedInteractor: PresentableInteractor<LatestBoardFeedPres
     var boardData: [PostingDTO] = self.latestBoardList.value
     boardData[index] = updatedBoard
     boardListStream.updateBoardList(with: boardData)
+  }
+  
+  func checkCurrentBoardUser(at index: Int) {
+    let currentBoard: PostingDTO = self.latestBoardList.value[index]
+    guard let boardUserID = currentBoard.userId else { return }
+    let currentUserID = userManager.userID
+    presenter.showAlert(isMine: boardUserID == currentUserID)
   }
 }

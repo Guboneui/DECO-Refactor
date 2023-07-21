@@ -21,6 +21,7 @@ protocol LatestBoardFeedPresentableListener: AnyObject {
   func popLatestBoardFeedVC(with popType: PopType)
   func fetchBoardBookmark(at index: Int)
   func fetchBoardLike(at index: Int)
+  func checkCurrentBoardUser(at index: Int)
 }
 
 final class LatestBoardFeedViewController: UIViewController, LatestBoardFeedPresentable, LatestBoardFeedViewControllable {
@@ -76,14 +77,15 @@ final class LatestBoardFeedViewController: UIViewController, LatestBoardFeedPres
   }
   
   func setupGestures() {
-    self.navigationBar.didTapBackButton = { [weak self] in
+    self.navigationBar.didTapBackButtonAction = { [weak self] in
       guard let self else { return }
       self.listener?.popLatestBoardFeedVC(with: .BackButton)
     }
     
-    self.navigationBar.didTapOptionButton = { [weak self] in
+    self.navigationBar.didTapOptionButtonAction = { [weak self] in
       guard let self else { return }
-      print("Option Button Click")
+      let currentIndex: Int = self.feedCollectionView.currentIndex
+      self.listener?.checkCurrentBoardUser(at: currentIndex)
     }
   }
   
@@ -125,4 +127,64 @@ final class LatestBoardFeedViewController: UIViewController, LatestBoardFeedPres
   func showToast(status: Bool) {
     ToastManager.shared.showToast(status ? .DeleteBookmark : .AddBookmark)
   }
+  
+  func showAlert(isMine: Bool) {
+    if isMine == true {
+      self.makeMyBoardAlert()
+    } else {
+      self.makeOtherUserBoardAlert()
+    }
+  }
+  
+  private func makeMyBoardAlert() {
+    let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+    let editButton = UIAlertAction(
+      title: "수정하기",
+      titleColor: .DecoColor.darkGray1,
+      style: .default
+    ) { _ in
+      print("TODO: 수정하기")
+    }
+    
+    let deleteButton = UIAlertAction(
+      title: "삭제하기",
+      titleColor: .DecoColor.darkGray1,
+      style: .default
+    ) { _ in
+      print("TODO: 삭제하기")
+    }
+    
+    let cancelButton = UIAlertAction(
+      title: "취소",
+      titleColor: .DecoColor.warningColor,
+      style: .cancel
+    )
+    
+    alert.addActions([editButton, deleteButton, cancelButton])
+    
+    self.present(alert, animated: true)
+  }
+  
+  private func makeOtherUserBoardAlert() {
+    let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+    
+    let reportButton = UIAlertAction(
+      title: "신고하기",
+      titleColor: .DecoColor.darkGray1,
+      style: .default
+    ) { _ in
+      print("TODO: 신고하기")
+    }
+    
+    let cancelButton = UIAlertAction(
+      title: "취소",
+      titleColor: .DecoColor.warningColor,
+      style: .cancel
+    )
+    
+    alert.addActions([reportButton, cancelButton])
+    
+    self.present(alert, animated: true)
+  }
 }
+

@@ -13,6 +13,10 @@ import Then
 import RxSwift
 
 private class FeedCellHeaderView: UIView {
+  
+  private let disposeBag: DisposeBag = DisposeBag()
+  fileprivate var didTapProfileImage: (()->())?
+  
   private let userProfileImageView = UIImageView().then {
     $0.backgroundColor = .DecoColor.lightBackground
     $0.layer.cornerRadius = 16
@@ -21,13 +25,11 @@ private class FeedCellHeaderView: UIView {
   
   private let userNameLabel = UILabel().then {
     $0.textColor = .white
-    $0.text = "이름"
     $0.font = .DecoFont.getFont(with: .Suit, type: .bold, size: 12)
   }
   
   private let userDescriptionLabel = UILabel().then {
     $0.textColor = .white
-    $0.text = "디스크립션"
     $0.font = .DecoFont.getFont(with: .Suit, type: .regular, size: 12)
   }
   
@@ -39,19 +41,15 @@ private class FeedCellHeaderView: UIView {
   private let timeLabel = UILabel().then {
     $0.textColor = .white
     $0.textAlignment = .right
-    $0.text = "시간"
     $0.font = .DecoFont.getFont(with: .Suit, type: .regular, size: 10)
   }
 
-  
-  
   override init(frame: CGRect) {
     super.init(frame: frame)
     self.setupViews()
+    self.setupGestures()
     
   }
-  
-
   
   override func layoutSubviews() {
     super.layoutSubviews()
@@ -65,7 +63,6 @@ private class FeedCellHeaderView: UIView {
   }
   
   private func setupLayouts() {
-    
     userProfileImageView.snp.makeConstraints { make in
       make.size.equalTo(32)
       make.leading.equalToSuperview().offset(20)
@@ -83,6 +80,13 @@ private class FeedCellHeaderView: UIView {
       make.leading.equalTo(userProfileImageView.snp.trailing).offset(12)
       make.trailing.equalTo(timeLabel.snp.leading).offset(-12)
     }
+  }
+  
+  private func setupGestures() {
+    userProfileImageView.tap()
+      .subscribe(onNext: { [weak self] _ in
+        self?.didTapProfileImage?()
+      }).disposed(by: disposeBag)
   }
   
   fileprivate func setHeaderViewData(
@@ -106,7 +110,12 @@ private class FeedCellHeaderView: UIView {
 }
 
 private class FeedCellFooterView: UIView {
-  let likeButton = UIButton(type: .system).then {
+  private let disposeBag: DisposeBag = DisposeBag()
+  fileprivate var didTapLikeButton: (()->())?
+  fileprivate var didTapCommentButton: (()->())?
+  fileprivate var didTapBookmarkButton: (()->())?
+  
+  private let likeButton = UIButton(type: .system).then {
     $0.setImage(.DecoImage.like, for: .normal)
     $0.tintColor = .white
   }
@@ -119,7 +128,7 @@ private class FeedCellFooterView: UIView {
     $0.textAlignment = .center
   }
   
-  let commentButton = UIButton(type: .system).then {
+  private let commentButton = UIButton(type: .system).then {
     $0.setImage(.DecoImage.message, for: .normal)
     $0.tintColor = .white
   }
@@ -132,16 +141,15 @@ private class FeedCellFooterView: UIView {
     $0.textAlignment = .center
   }
   
-  
-  let bookmarkButton = UIButton(type: .system).then {
+  private let bookmarkButton = UIButton(type: .system).then {
     $0.setImage(.DecoImage.saveThick, for: .normal)
     $0.tintColor = .white
   }
-  private let disposeBag: DisposeBag = DisposeBag()
+  
   override init(frame: CGRect) {
     super.init(frame: frame)
     self.setupViews()
-    
+    self.setupGestures()
   }
   
   override func layoutSubviews() {
@@ -182,12 +190,28 @@ private class FeedCellFooterView: UIView {
       make.size.equalTo(17)
     }
     
-    
     bookmarkButton.snp.makeConstraints { make in
       make.size.equalTo(38)
       make.bottom.equalToSuperview().offset(-8)
       make.trailing.equalToSuperview().offset(-24)
     }
+  }
+  
+  private func setupGestures() {
+    likeButton.tap()
+      .subscribe(onNext: { [weak self] in
+        self?.didTapLikeButton?()
+      }).disposed(by: disposeBag)
+    
+    commentButton.tap()
+      .subscribe(onNext: { [weak self] in
+        self?.didTapCommentButton?()
+      }).disposed(by: disposeBag)
+    
+    bookmarkButton.tap()
+      .subscribe(onNext: { [weak self] in
+        self?.didTapBookmarkButton?()
+      }).disposed(by: disposeBag)
   }
   
   fileprivate func setFooterViewData(
@@ -227,7 +251,10 @@ public class FeedCell: UICollectionViewCell {
   
   public static let identifier = "FeedCell"
   private let disposeBag = DisposeBag()
-  
+  public var didTapProfileImage: (()->())?
+  public var didTapLikeButton: (()->())?
+  public var didTapCommentButton: (()->())?
+  public var didTapBookmarkButton: (()->())?
   
   private let feedImageView = UIImageView().then {
     $0.contentMode = .scaleAspectFill
@@ -243,6 +270,7 @@ public class FeedCell: UICollectionViewCell {
   override init(frame: CGRect) {
     super.init(frame: frame)
     self.setupLayouts()
+    self.setupGestures()
     self.makeGradientLayer()
   }
   
@@ -289,25 +317,29 @@ public class FeedCell: UICollectionViewCell {
     footerView.snp.makeConstraints { make in
       make.bottom.equalToSuperview()
       make.horizontalEdges.equalToSuperview()
+      make.height.equalTo(38)
     }
   }
   
   private func setupGestures() {
-    footerView.likeButton.tap()
-      .bind { [weak self] in
-        print("TAP In Parent")
-        self?.didTapLikeButton?()
-      }.disposed(by: disposeBag)
     
-    footerView.likeButton.tap()
-      .bind { [weak self] in
-        self?.didTapCommentButton?()
-      }.disposed(by: disposeBag)
+    // MARK: HeaderView Gesture
+    headerView.didTapProfileImage = { [weak self] in
+      self?.didTapProfileImage?()
+    }
     
-    footerView.bookmarkButton.tap()
-      .bind { [weak self] in
-        self?.didTapBookmarkButton?()
-      }.disposed(by: disposeBag)
+    // MARK: FooterView Gesture
+    footerView.didTapLikeButton = { [weak self] in
+      self?.didTapLikeButton?()
+    }
+    
+    footerView.didTapCommentButton = { [weak self] in
+      self?.didTapCommentButton?()
+    }
+    
+    footerView.didTapBookmarkButton = { [weak self] in
+      self?.didTapBookmarkButton?()
+    }
   }
   
   public func setFeedCellConfigure(with postingData: PostingDTO) {

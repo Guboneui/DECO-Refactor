@@ -98,6 +98,11 @@ final class LatestBoardFeedViewController: UIViewController, LatestBoardFeedPres
         
         cell.setFeedCellConfigure(with: postingData)
         
+        cell.didTapProfileImage = { [weak self] in
+          guard let inSelf = self else { return }
+          print("Clicked ProfileImage Button ")
+        }
+        
         cell.didTapLikeButton = { [weak self] in
           guard let inSelf = self else { return }
           print("Clicked Like Button ")
@@ -105,12 +110,12 @@ final class LatestBoardFeedViewController: UIViewController, LatestBoardFeedPres
         
         cell.didTapCommentButton = { [weak self] in
           guard let inSelf = self else { return }
-          print("Clicked Like Button ")
+          print("Clicked Comment Button ")
         }
         
         cell.didTapBookmarkButton = { [weak self] in
           guard let inSelf = self else { return }
-          print("Clicked Like Button ")
+          print("Clicked Bookmark Button ")
         }
         
       }.disposed(by: disposeBag)

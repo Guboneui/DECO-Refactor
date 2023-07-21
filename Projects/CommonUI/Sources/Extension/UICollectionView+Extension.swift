@@ -9,6 +9,8 @@ import UIKit
 
 public extension UICollectionView {
   
+  var currentIndex: Int { self.indexPathsForVisibleItems.first?.row ?? 0 }
+  
   /// 일반적인 사진 그리드 정렬에 사용됩니다.
   /// spacing = 5입니다
   func setupDefaultTwoColumnGridLayout(spacing: CGFloat = 5.0) {

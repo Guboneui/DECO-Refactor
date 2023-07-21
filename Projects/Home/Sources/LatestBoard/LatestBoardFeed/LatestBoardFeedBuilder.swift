@@ -13,6 +13,7 @@ protocol LatestBoardFeedDependency: Dependency {
   var boardListStream: MutableBoardStream { get }
   var userManager: MutableUserManagerStream { get }
   var bookmarkRepository: BookmarkRepository { get }
+  var boardRepository: BoardRepository { get }
 }
 
 final class LatestBoardFeedComponent: Component<LatestBoardFeedDependency> {
@@ -39,7 +40,8 @@ final class LatestBoardFeedBuilder: Builder<LatestBoardFeedDependency>, LatestBo
       presenter: viewController,
       boardListStream: dependency.boardListStream,
       userManager: dependency.userManager,
-      bookmarkRepository: dependency.bookmarkRepository
+      bookmarkRepository: dependency.bookmarkRepository,
+      boardRepository: dependency.boardRepository
     )
     interactor.listener = listener
     return LatestBoardFeedRouter(interactor: interactor, viewController: viewController)

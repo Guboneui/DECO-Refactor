@@ -38,16 +38,19 @@ final class LatestBoardFeedInteractor: PresentableInteractor<LatestBoardFeedPres
   private let boardListStream: MutableBoardStream
   private let userManager: MutableUserManagerStream
   private let bookmarkRepository: BookmarkRepository
+  private let boardRepository: BoardRepository
   
   init(
     presenter: LatestBoardFeedPresentable,
     boardListStream: MutableBoardStream,
     userManager: MutableUserManagerStream,
-    bookmarkRepository: BookmarkRepository
+    bookmarkRepository: BookmarkRepository,
+    boardRepository: BoardRepository
   ) {
     self.boardListStream = boardListStream
     self.userManager = userManager
     self.bookmarkRepository = bookmarkRepository
+    self.boardRepository = boardRepository
     super.init(presenter: presenter)
     presenter.listener = self
   }
@@ -100,6 +103,31 @@ final class LatestBoardFeedInteractor: PresentableInteractor<LatestBoardFeedPres
     var currentBoard: PostingDTO = boardData[index]
     currentBoard.scrap = !status
     boardData[index] = currentBoard
+    boardListStream.updateBoardList(with: boardData)
+  }
+  
+  func fetchBoardLike(at index: Int) {
+    Task.detached { [weak self] in
+      guard let self else { return }
+      let currentBoard: PostingDTO = self.latestBoardList.value[index]
+      guard let likeStatus = currentBoard.like,
+            let boardID = currentBoard.id else { return }
+      
+      if likeStatus == true {
+        _ = await self.boardRepository.boardDisLike(boardID: boardID, userID: self.userManager.userID)
+      } else {
+        _ = await self.boardRepository.boardLike(boardID: boardID, userID: self.userManager.userID)
+      }
+      
+      if let updatedBoard = await self.boardRepository.boardInfo(boardID: boardID, userID: self.userManager.userID) {
+        await self.updatedBoardList(at: index, updatedBoard: updatedBoard)
+      }
+    }
+  }
+  
+  private func updatedBoardList(at index: Int, updatedBoard: PostingDTO) async {
+    var boardData: [PostingDTO] = self.latestBoardList.value
+    boardData[index] = updatedBoard
     boardListStream.updateBoardList(with: boardData)
   }
 }

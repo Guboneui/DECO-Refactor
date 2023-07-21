@@ -20,6 +20,7 @@ protocol LatestBoardFeedPresentableListener: AnyObject {
   
   func popLatestBoardFeedVC(with popType: PopType)
   func fetchBoardBookmark(at index: Int)
+  func fetchBoardLike(at index: Int)
 }
 
 final class LatestBoardFeedViewController: UIViewController, LatestBoardFeedPresentable, LatestBoardFeedViewControllable {
@@ -106,7 +107,7 @@ final class LatestBoardFeedViewController: UIViewController, LatestBoardFeedPres
         
         cell.didTapLikeButton = { [weak self] in
           guard let inSelf = self else { return }
-          print("Clicked Like Button ")
+          inSelf.listener?.fetchBoardLike(at: index)
         }
         
         cell.didTapCommentButton = { [weak self] in

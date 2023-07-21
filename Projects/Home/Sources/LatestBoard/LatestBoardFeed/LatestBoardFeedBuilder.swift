@@ -6,9 +6,13 @@
 //
 
 import RIBs
+import User
+import Networking
 
 protocol LatestBoardFeedDependency: Dependency {
   var boardListStream: MutableBoardStream { get }
+  var userManager: MutableUserManagerStream { get }
+  var bookmarkRepository: BookmarkRepository { get }
 }
 
 final class LatestBoardFeedComponent: Component<LatestBoardFeedDependency> {
@@ -33,7 +37,9 @@ final class LatestBoardFeedBuilder: Builder<LatestBoardFeedDependency>, LatestBo
     let viewController = LatestBoardFeedViewController()
     let interactor = LatestBoardFeedInteractor(
       presenter: viewController,
-      boardListStream: dependency.boardListStream
+      boardListStream: dependency.boardListStream,
+      userManager: dependency.userManager,
+      bookmarkRepository: dependency.bookmarkRepository
     )
     interactor.listener = listener
     return LatestBoardFeedRouter(interactor: interactor, viewController: viewController)

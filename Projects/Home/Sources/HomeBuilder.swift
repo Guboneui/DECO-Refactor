@@ -23,6 +23,7 @@ final class HomeComponent:
   var userManager: User.MutableUserManagerStream { dependency.userManager }
   
   var boardRepository: BoardRepository = BoardRepositoryImpl()
+  var bookmarkRepository: BookmarkRepository = BookmarkRepositoryImpl()
   var productRepository: ProductRepository = ProductRepositoryImpl()
   var postingCategoryFilter: MutableSelectedPostingFilterStream = SelectedPostingFilterStreamImpl()
 }

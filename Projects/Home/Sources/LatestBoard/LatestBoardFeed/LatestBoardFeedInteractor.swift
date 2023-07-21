@@ -6,7 +6,9 @@
 //
 
 import Util
+import User
 import Entity
+import Networking
 
 import RIBs
 import RxSwift
@@ -18,7 +20,7 @@ protocol LatestBoardFeedRouting: ViewableRouting {
 
 protocol LatestBoardFeedPresentable: Presentable {
   var listener: LatestBoardFeedPresentableListener? { get set }
-  // TODO: Declare methods the interactor can invoke the presenter to present data.
+  @MainActor func showToast(status: Bool)
 }
 
 protocol LatestBoardFeedListener: AnyObject {
@@ -34,12 +36,18 @@ final class LatestBoardFeedInteractor: PresentableInteractor<LatestBoardFeedPres
   var latestBoardList: BehaviorRelay<[PostingDTO]> = .init(value: [])
   
   private let boardListStream: MutableBoardStream
+  private let userManager: MutableUserManagerStream
+  private let bookmarkRepository: BookmarkRepository
   
   init(
     presenter: LatestBoardFeedPresentable,
-    boardListStream: MutableBoardStream
+    boardListStream: MutableBoardStream,
+    userManager: MutableUserManagerStream,
+    bookmarkRepository: BookmarkRepository
   ) {
     self.boardListStream = boardListStream
+    self.userManager = userManager
+    self.bookmarkRepository = bookmarkRepository
     super.init(presenter: presenter)
     presenter.listener = self
   }
@@ -61,5 +69,37 @@ final class LatestBoardFeedInteractor: PresentableInteractor<LatestBoardFeedPres
   
   func popLatestBoardFeedVC(with popType: PopType) {
     listener?.popLatestBoardFeedVC(with: popType)
+  }
+  
+  func fetchBoardBookmark(at index: Int) {
+    Task.detached { [weak self] in
+      guard let self else { return }
+      let currentBoard: PostingDTO = self.latestBoardList.value[index]
+      guard let scrapStatus = currentBoard.scrap,
+            let boardID = currentBoard.id else { return }
+      if scrapStatus == true {
+        _ = await self.bookmarkRepository.deleteBookmark(
+          productId: 0,
+          boardId: boardID,
+          userId: self.userManager.userID
+        )
+      } else {
+        _ = await self.bookmarkRepository.addBookmark(
+          productId: 0,
+          boardId: boardID,
+          userId: self.userManager.userID
+        )
+      }
+      await self.changedBookmarkStatus(at: index, status: scrapStatus)
+      await self.presenter.showToast(status: scrapStatus)
+    }
+  }
+  
+  private func changedBookmarkStatus(at index: Int, status: Bool) async {
+    var boardData: [PostingDTO] = self.latestBoardList.value
+    var currentBoard: PostingDTO = boardData[index]
+    currentBoard.scrap = !status
+    boardData[index] = currentBoard
+    boardListStream.updateBoardList(with: boardData)
   }
 }

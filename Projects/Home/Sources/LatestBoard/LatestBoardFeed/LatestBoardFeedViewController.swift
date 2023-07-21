@@ -19,6 +19,7 @@ protocol LatestBoardFeedPresentableListener: AnyObject {
   var latestBoardList: BehaviorRelay<[PostingDTO]> { get }
   
   func popLatestBoardFeedVC(with popType: PopType)
+  func fetchBoardBookmark(at index: Int)
 }
 
 final class LatestBoardFeedViewController: UIViewController, LatestBoardFeedPresentable, LatestBoardFeedViewControllable {
@@ -115,9 +116,12 @@ final class LatestBoardFeedViewController: UIViewController, LatestBoardFeedPres
         
         cell.didTapBookmarkButton = { [weak self] in
           guard let inSelf = self else { return }
-          print("Clicked Bookmark Button ")
+          inSelf.listener?.fetchBoardBookmark(at: index)
         }
-        
       }.disposed(by: disposeBag)
+  }
+  
+  func showToast(status: Bool) {
+    ToastManager.shared.showToast(status ? .DeleteBookmark : .AddBookmark)
   }
 }

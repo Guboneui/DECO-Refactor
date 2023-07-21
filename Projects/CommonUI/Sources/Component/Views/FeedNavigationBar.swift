@@ -14,8 +14,8 @@ public class FeedNavigationBar: UIView {
   
   // MARK: Property
   
-  public var didTapBackButton: (()->())?
-  public var didTapOptionButton: (()->())?
+  public var didTapBackButtonAction: (()->())?
+  public var didTapOptionButtonAction: (()->())?
   
   private let backButton: UIButton = UIButton(type: .system).then {
     $0.setImage(.DecoImage.arrowWhite)
@@ -74,10 +74,15 @@ public class FeedNavigationBar: UIView {
   
   private func setupGestures() {
     backButton.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
+    optionButton.addTarget(self, action: #selector(didTapOptionButton), for: .touchUpInside)
   }
   
   @objc private func didTapButton() {
-    didTapBackButton?()
+    didTapBackButtonAction?()
+  }
+  
+  @objc private func didTapOptionButton() {
+    didTapOptionButtonAction?()
   }
   
 }

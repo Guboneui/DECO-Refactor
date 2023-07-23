@@ -30,6 +30,7 @@ final class LatestBoardComponent:
   var boardRepository: BoardRepository { dependency.boardRepository }
   var userProfileRepository: UserProfileRepository { dependency.userProfileRepository }
   var followRepository: FollowRepository { dependency.followRepository }
+  var postingCategoryFilter: MutableSelectedPostingFilterStream { dependency.postingCategoryFilter }
   
 }
 

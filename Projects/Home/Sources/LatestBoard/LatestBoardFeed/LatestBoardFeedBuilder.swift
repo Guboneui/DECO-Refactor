@@ -16,6 +16,7 @@ protocol LatestBoardFeedDependency: Dependency {
   var boardRepository: BoardRepository { get }
   var userProfileRepository: UserProfileRepository { get }
   var followRepository: FollowRepository { get }
+  var postingCategoryFilter: MutableSelectedPostingFilterStream { get }
 }
 
 final class LatestBoardFeedComponent:
@@ -50,7 +51,8 @@ final class LatestBoardFeedBuilder: Builder<LatestBoardFeedDependency>, LatestBo
       boardListStream: dependency.boardListStream,
       userManager: dependency.userManager,
       bookmarkRepository: dependency.bookmarkRepository,
-      boardRepository: dependency.boardRepository
+      boardRepository: dependency.boardRepository,
+      postingCategoryFilter: dependency.postingCategoryFilter
     )
     interactor.listener = listener
     

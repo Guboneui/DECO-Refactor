@@ -41,30 +41,31 @@ final class LatestBoardFeedInteractor: PresentableInteractor<LatestBoardFeedPres
   private let userManager: MutableUserManagerStream
   private let bookmarkRepository: BookmarkRepository
   private let boardRepository: BoardRepository
+  private let postingCategoryFilter: MutableSelectedPostingFilterStream
+  
+  private var selectedBoardId: [Int] = []
+  private var selectedStyleId: [Int] = []
   
   init(
     presenter: LatestBoardFeedPresentable,
     boardListStream: MutableBoardStream,
     userManager: MutableUserManagerStream,
     bookmarkRepository: BookmarkRepository,
-    boardRepository: BoardRepository
+    boardRepository: BoardRepository,
+    postingCategoryFilter: MutableSelectedPostingFilterStream
   ) {
     self.boardListStream = boardListStream
     self.userManager = userManager
     self.bookmarkRepository = bookmarkRepository
     self.boardRepository = boardRepository
+    self.postingCategoryFilter = postingCategoryFilter
     super.init(presenter: presenter)
     presenter.listener = self
   }
   
   override func didBecomeActive() {
     super.didBecomeActive()
-    
-    boardListStream.boardList
-      .subscribe(onNext: { [weak self] list in
-        self?.latestBoardList.accept(list)
-      }).disposed(by: disposeBag)
-    
+    self.setupBindings()
   }
   
   override func willResignActive() {
@@ -74,6 +75,24 @@ final class LatestBoardFeedInteractor: PresentableInteractor<LatestBoardFeedPres
   
   func popLatestBoardFeedVC(with popType: PopType) {
     listener?.popLatestBoardFeedVC(with: popType)
+  }
+  
+  private func setupBindings() {
+    boardListStream.boardList
+      .subscribe(onNext: { [weak self] list in
+        self?.latestBoardList.accept(list)
+      }).disposed(by: disposeBag)
+    
+    postingCategoryFilter.selectedFilter
+      .take(1) // 사이드 이팩트 방지하기 위해서 1회만 호출
+      .share()
+      .subscribe(onNext: { [weak self] filter in
+        guard let self else { return }
+        let boardId: [Int] = filter.selectedBoardCategory.map{$0.id}
+        let styleId: [Int] = filter.selectedStyleCategory.map{$0.id}
+        self.selectedBoardId = boardId
+        self.selectedStyleId = styleId
+      }).disposed(by: disposeBag)
   }
   
   func fetchBoardBookmark(at index: Int) {
@@ -160,5 +179,26 @@ final class LatestBoardFeedInteractor: PresentableInteractor<LatestBoardFeedPres
   
   func popTargetUserProfileVC(with popType: Util.PopType) {
     router?.detachTargetUserProfileVC(with: popType)
+  }
+  
+  func fetchLatestBoardList(lastIndex index: Int) {
+    Task.detached { [weak self] in
+      guard let self else { return }
+      let createdAt: Int = self.latestBoardList.value[index].createdAt ?? Int.max
+      if let boardList = await self.boardRepository.boardList(
+        param: BoardRequestDTO(
+          offset: createdAt,
+          listType: BoardType.LATEST.rawValue,
+          keyword: "",
+          styleIds: self.selectedStyleId,
+          colorIds: [],
+          boardCategoryIds: self.selectedBoardId,
+          userId: self.userManager.userID
+        )
+      ), !boardList.isEmpty {
+        let prevList = self.latestBoardList.value
+        self.boardListStream.updateBoardList(with: prevList + boardList)
+      }
+    }
   }
 }

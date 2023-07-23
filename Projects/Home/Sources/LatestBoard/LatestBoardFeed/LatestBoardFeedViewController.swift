@@ -23,6 +23,7 @@ protocol LatestBoardFeedPresentableListener: AnyObject {
   func fetchBoardBookmark(at index: Int)
   func fetchBoardLike(at index: Int)
   func checkCurrentBoardUser(at index: Int)
+  func fetchLatestBoardList(lastIndex index: Int)
 }
 
 final class LatestBoardFeedViewController: UIViewController, LatestBoardFeedPresentable, LatestBoardFeedViewControllable {
@@ -32,7 +33,7 @@ final class LatestBoardFeedViewController: UIViewController, LatestBoardFeedPres
   
   private let navigationBar: FeedNavigationBar = FeedNavigationBar()
   private let feedCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: .init()).then {
-    $0.backgroundColor = .gray
+    $0.backgroundColor = .black
     $0.register(FeedCell.self, forCellWithReuseIdentifier: FeedCell.identifier)
     $0.bounces = false
     $0.alwaysBounceHorizontal = false
@@ -124,6 +125,18 @@ final class LatestBoardFeedViewController: UIViewController, LatestBoardFeedPres
           inSelf.listener?.fetchBoardBookmark(at: index)
         }
       }.disposed(by: disposeBag)
+    
+    feedCollectionView.rx.willDisplayCell
+      .map{$0.at.row}
+      .subscribe(onNext: { [weak self] index in
+        guard let self else { return }
+        if let boardList = self.listener?.latestBoardList.value,
+           boardList.count - 1 == index {
+          self.listener?.fetchLatestBoardList(lastIndex: index)
+        }
+        
+      }).disposed(by: disposeBag)
+    
   }
   
   func showToast(status: Bool) {

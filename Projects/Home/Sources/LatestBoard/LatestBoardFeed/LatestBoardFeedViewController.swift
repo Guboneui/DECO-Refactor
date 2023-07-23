@@ -38,7 +38,10 @@ final class LatestBoardFeedViewController: UIViewController, LatestBoardFeedPres
     $0.bounces = false
     $0.alwaysBounceHorizontal = false
     $0.showsHorizontalScrollIndicator = false
-    $0.feedLayout()
+    $0.isPagingEnabled = true
+    let layout = UICollectionViewFlowLayout()
+    layout.scrollDirection = .horizontal
+    $0.collectionViewLayout = layout
   }
   
   override func viewDidLoad() {
@@ -137,6 +140,7 @@ final class LatestBoardFeedViewController: UIViewController, LatestBoardFeedPres
         
       }).disposed(by: disposeBag)
     
+    feedCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
   }
   
   func showToast(status: Bool) {
@@ -203,3 +207,37 @@ final class LatestBoardFeedViewController: UIViewController, LatestBoardFeedPres
   }
 }
 
+extension LatestBoardFeedViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+  func collectionView(
+    _ collectionView: UICollectionView,
+    layout collectionViewLayout: UICollectionViewLayout,
+    sizeForItemAt indexPath: IndexPath
+  ) -> CGSize {
+    let collectionViewSize: CGSize = feedCollectionView.frame.size
+    return CGSize(width: collectionViewSize.width, height: collectionViewSize.height)
+  }
+  
+  func collectionView(
+    _ collectionView: UICollectionView,
+    layout collectionViewLayout: UICollectionViewLayout,
+    minimumLineSpacingForSectionAt section: Int
+  ) -> CGFloat {
+    return .zero
+  }
+  
+  func collectionView(
+    _ collectionView: UICollectionView,
+    layout collectionViewLayout: UICollectionViewLayout,
+    minimumInteritemSpacingForSectionAt section: Int
+  ) -> CGFloat {
+    return .zero
+  }
+  
+  func collectionView(
+    _ collectionView: UICollectionView,
+    layout collectionViewLayout: UICollectionViewLayout,
+    insetForSectionAt section: Int
+  ) -> UIEdgeInsets {
+    return .zero
+  }
+}

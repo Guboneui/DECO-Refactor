@@ -17,6 +17,7 @@
 		265FA00318D779BDB6F197EA /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8532B1B24B020BF76AEDFF76 /* ProfileView.swift */; };
 		26A89C8ABDA7272793E1DF1A /* Image.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42C46A1D137F6D04C3967B64 /* Image.xcassets */; };
 		2C2109102A6AF8770033AED6 /* UIAlert+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C21090F2A6AF8770033AED6 /* UIAlert+Extension.swift */; };
+		2C26B4152A6D9AAB00957647 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C26B4142A6D9AAB00957647 /* SearchView.swift */; };
 		2C8584AF2A691322008B8CAB /* FeedNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8584AE2A691322008B8CAB /* FeedNavigationBar.swift */; };
 		2C8584B12A691A18008B8CAB /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8584B02A691A18008B8CAB /* FeedCell.swift */; };
 		39EC6BCA36C6D9020E2FBEEE /* SUIT-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7D7B839FF2BD4170FF0A7D18 /* SUIT-Bold.otf */; };
@@ -93,6 +94,7 @@
 		2AAA16EB10167F4F8A589DF2 /* SUIT-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUIT-Light.otf"; sourceTree = "<group>"; };
 		2B7E87AAC5EAA53360489DC8 /* ColorFilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorFilterCell.swift; sourceTree = "<group>"; };
 		2C21090F2A6AF8770033AED6 /* UIAlert+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlert+Extension.swift"; sourceTree = "<group>"; };
+		2C26B4142A6D9AAB00957647 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		2C8584AE2A691322008B8CAB /* FeedNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedNavigationBar.swift; sourceTree = "<group>"; };
 		2C8584B02A691A18008B8CAB /* FeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
 		2EA530434C111C4BB344B33F /* NotoSansKR-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Black.otf"; sourceTree = "<group>"; };
@@ -346,6 +348,7 @@
 				823B5C9949AC3082E546F866 /* TitleSubtitleView.swift */,
 				1D297767E626B65505AAE415 /* ToastManager.swift */,
 				411996B5464DF570E5FFE779 /* TouchAnimationView.swift */,
+				2C26B4142A6D9AAB00957647 /* SearchView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -488,6 +491,7 @@
 				E548B3EA2C782F393F284B29 /* SelectedFilterCell.swift in Sources */,
 				25D11A48D5BD5B11E545DC64 /* SmallTextCell.swift in Sources */,
 				B4659745A1A98085B68A42C7 /* EditFilterButtonView.swift in Sources */,
+				2C26B4152A6D9AAB00957647 /* SearchView.swift in Sources */,
 				9DA268FB6D09BB0089BAAC0C /* InfoWithTitleView.swift in Sources */,
 				915E8F0D979DABD002B163AC /* LinkWithImageView.swift in Sources */,
 				259FD2F714D7E710266810E9 /* NavigationBar.swift in Sources */,

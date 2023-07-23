@@ -29,15 +29,7 @@ final public class ProductViewController: UIViewController, ProductPresentable, 
   weak var listener: ProductPresentableListener?
   private let disposeBag: DisposeBag = DisposeBag()
   
-  private let searchView: UIView = UIView().then {
-    $0.backgroundColor = .DecoColor.lightGray1
-    $0.makeCornerRadius(radius: 10)
-  }
-  
-  private let searchImageView: UIImageView = UIImageView().then {
-    $0.image = .DecoImage.search
-    $0.tintColor = .DecoColor.gray2
-  }
+  private let searchView: SearchView = SearchView(type: .PRODUCT, cornerRadius: 10)
   
   private let searchLabel: UILabel = UILabel().then {
     $0.text = "브랜드 및 상품 검색하기"
@@ -81,10 +73,6 @@ final public class ProductViewController: UIViewController, ProductPresentable, 
     self.view.addSubview(brandButton)
     self.view.addSubview(parentVCContainerView)
     
-    searchView.flex.direction(.row).alignItems(.center).define { flex in
-      flex.addItem(searchImageView).marginLeft(14).size(20)
-      flex.addItem(searchLabel).marginLeft(20)
-    }
   }
   
   private func setupLayouts() {
@@ -94,8 +82,6 @@ final public class ProductViewController: UIViewController, ProductPresentable, 
       .marginHorizontal(22)
       .marginTop(10)
       .height(32)
-    
-    searchView.flex.layout()
     
     productButton.pin
       .below(of: searchView)

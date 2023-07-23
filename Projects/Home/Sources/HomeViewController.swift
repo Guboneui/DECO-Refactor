@@ -40,16 +40,7 @@ final public class HomeViewController: UIViewController, HomePresentable, HomeVi
     $0.contentMode = .scaleAspectFit
   }
   
-  private let searchView: UIView = UIView().then {
-    $0.backgroundColor = .DecoColor.lightGray1
-    $0.makeCornerRadius(radius: 12)
-  }
-  
-  private let searchImageView: UIImageView = UIImageView().then {
-    $0.image = .DecoImage.search
-    $0.contentMode = .scaleAspectFit
-    $0.tintColor = .DecoColor.gray2
-  }
+  private let searchView: SearchView = SearchView(type: .HOME, cornerRadius: 12)
   
   private let searchLabel: UILabel = UILabel().then {
     $0.text = "브랜드 및 상품 검색하기"
@@ -123,8 +114,6 @@ final public class HomeViewController: UIViewController, HomePresentable, HomeVi
     self.view.addSubview(logoImageView)
     self.view.addSubview(noticeButton)
     self.view.addSubview(searchView)
-    self.searchView.addSubview(searchImageView)
-    self.searchView.addSubview(searchLabel)
     self.view.addSubview(segmentStackView)
     self.view.addSubview(segmentBarView)
     self.view.addSubview(filterCollectionView)
@@ -148,18 +137,6 @@ final public class HomeViewController: UIViewController, HomePresentable, HomeVi
       make.leading.equalTo(logoImageView.snp.trailing).offset(22)
       make.trailing.equalTo(noticeButton.snp.leading).offset(-8)
       make.height.equalTo(30)
-    }
-    
-    searchImageView.snp.makeConstraints { make in
-      make.centerY.equalToSuperview()
-      make.leading.equalToSuperview().offset(10)
-      make.size.equalTo(20)
-    }
-    
-    searchLabel.snp.makeConstraints { make in
-      make.centerY.equalToSuperview()
-      make.leading.equalTo(searchImageView.snp.trailing).offset(10)
-      make.trailing.equalToSuperview()
     }
     
     segmentStackView.snp.makeConstraints { make in

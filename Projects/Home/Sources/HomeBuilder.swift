@@ -26,6 +26,8 @@ final class HomeComponent:
   var bookmarkRepository: BookmarkRepository = BookmarkRepositoryImpl()
   var productRepository: ProductRepository = ProductRepositoryImpl()
   var postingCategoryFilter: MutableSelectedPostingFilterStream = SelectedPostingFilterStreamImpl()
+  var userProfileRepository: UserProfileRepository = UserProfileRepositoryImpl()
+  var followRepository: FollowRepository = FollowRepositoryImpl()
 }
 
 // MARK: - Builder

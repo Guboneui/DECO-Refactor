@@ -15,6 +15,8 @@ protocol LatestBoardDependency: Dependency {
   var bookmarkRepository: BookmarkRepository { get }
   var userManager: MutableUserManagerStream { get }
   var postingCategoryFilter: MutableSelectedPostingFilterStream { get }
+  var userProfileRepository: UserProfileRepository { get }
+  var followRepository: FollowRepository { get }
 }
 
 final class LatestBoardComponent:
@@ -26,6 +28,9 @@ final class LatestBoardComponent:
   var userManager: MutableUserManagerStream { dependency.userManager }
   var bookmarkRepository: BookmarkRepository { dependency.bookmarkRepository }
   var boardRepository: BoardRepository { dependency.boardRepository }
+  var userProfileRepository: UserProfileRepository { dependency.userProfileRepository }
+  var followRepository: FollowRepository { dependency.followRepository }
+  
 }
 
 // MARK: - Builder

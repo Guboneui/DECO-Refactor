@@ -19,6 +19,7 @@ protocol LatestBoardFeedPresentableListener: AnyObject {
   var latestBoardList: BehaviorRelay<[PostingDTO]> { get }
   
   func popLatestBoardFeedVC(with popType: PopType)
+  func pushTargetUserProfileVC(at index: Int)
   func fetchBoardBookmark(at index: Int)
   func fetchBoardLike(at index: Int)
   func checkCurrentBoardUser(at index: Int)
@@ -104,7 +105,8 @@ final class LatestBoardFeedViewController: UIViewController, LatestBoardFeedPres
         
         cell.didTapProfileImage = { [weak self] in
           guard let inSelf = self else { return }
-          print("Clicked ProfileImage Button ")
+          let currentIndex: Int = inSelf.feedCollectionView.currentIndex
+          inSelf.listener?.pushTargetUserProfileVC(at: currentIndex)
         }
         
         cell.didTapLikeButton = { [weak self] in

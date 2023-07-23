@@ -14,9 +14,18 @@ protocol LatestBoardFeedDependency: Dependency {
   var userManager: MutableUserManagerStream { get }
   var bookmarkRepository: BookmarkRepository { get }
   var boardRepository: BoardRepository { get }
+  var userProfileRepository: UserProfileRepository { get }
+  var followRepository: FollowRepository { get }
 }
 
-final class LatestBoardFeedComponent: Component<LatestBoardFeedDependency> {
+final class LatestBoardFeedComponent:
+  Component<LatestBoardFeedDependency>,
+  TargetUserProfileDependency
+{
+  var userManager: User.MutableUserManagerStream { dependency.userManager }
+  var userProfileRepository: Networking.UserProfileRepository { dependency.userProfileRepository }
+  var followRepository: Networking.FollowRepository { dependency.followRepository }
+  
   
   // TODO: Declare 'fileprivate' dependencies that are only used by this RIB.
 }
@@ -44,6 +53,13 @@ final class LatestBoardFeedBuilder: Builder<LatestBoardFeedDependency>, LatestBo
       boardRepository: dependency.boardRepository
     )
     interactor.listener = listener
-    return LatestBoardFeedRouter(interactor: interactor, viewController: viewController)
+    
+    let targetUserProfileBuildable = TargetUserProfileBuilder(dependency: component)
+    
+    return LatestBoardFeedRouter(
+      interactor: interactor,
+      viewController: viewController,
+      targetUserProfileBuildable: targetUserProfileBuildable
+    )
   }
 }

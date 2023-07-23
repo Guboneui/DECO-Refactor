@@ -15,7 +15,8 @@ import RxSwift
 import RxRelay
 
 protocol LatestBoardFeedRouting: ViewableRouting {
-  // TODO: Declare methods the interactor can invoke to manage sub-tree via the router.
+  func attachTargetUserProfileVC(with targetUserInfo: UserDTO)
+  func detachTargetUserProfileVC(with popType: PopType)
 }
 
 protocol LatestBoardFeedPresentable: Presentable {
@@ -137,5 +138,27 @@ final class LatestBoardFeedInteractor: PresentableInteractor<LatestBoardFeedPres
     guard let boardUserID = currentBoard.userId else { return }
     let currentUserID = userManager.userID
     presenter.showAlert(isMine: boardUserID == currentUserID)
+  }
+  
+  func pushTargetUserProfileVC(at index: Int) {
+    let currentBoard: PostingDTO = self.latestBoardList.value[index]
+    guard let boardUserID = currentBoard.userId,
+          let profileURL = currentBoard.profileUrl,
+          let followStatus = currentBoard.follow,
+          let nickName = currentBoard.userName,
+          let profileName = currentBoard.profileName else { return }
+    
+    let targetUserInfo: UserDTO = UserDTO(
+      profileUrl: profileURL,
+      followStatus: followStatus,
+      nickName: nickName,
+      userId: boardUserID,
+      profileName: profileName
+    )
+    router?.attachTargetUserProfileVC(with: targetUserInfo)
+  }
+  
+  func popTargetUserProfileVC(with popType: Util.PopType) {
+    router?.detachTargetUserProfileVC(with: popType)
   }
 }

@@ -9,11 +9,13 @@ import RIBs
 import RxSwift
 import RxRelay
 
+import Util
 import Entity
 import Networking
 
 public protocol HomeRouting: ViewableRouting {
-  // TODO: Declare methods the interactor can invoke to manage sub-tree via the router.
+  func attachSearchVC()
+  func detachSearchVC(with popType: PopType)
 }
 
 protocol HomePresentable: Presentable {
@@ -26,6 +28,8 @@ public protocol HomeListener: AnyObject {
 }
 
 final class HomeInteractor: PresentableInteractor<HomePresentable>, HomeInteractable, HomePresentableListener {
+  
+  
   
   var latestBoardViewControllerable: RIBs.ViewControllable?
   var popularBoardViewControllerable: RIBs.ViewControllable?
@@ -118,5 +122,13 @@ final class HomeInteractor: PresentableInteractor<HomePresentable>, HomeInteract
     var clearData: [(PostingCategoryModel, Bool)] = self.postingFilter.value.map{($0.0, false)}
     clearData[0].1 = true
     return clearData
+  }
+  
+  func pushSearchVC() {
+    router?.attachSearchVC()
+  }
+  
+  func popSearchVC(with popType: Util.PopType) {
+    router?.detachSearchVC(with: popType)
   }
 }

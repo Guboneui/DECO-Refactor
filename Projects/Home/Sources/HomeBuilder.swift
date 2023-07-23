@@ -6,6 +6,8 @@
 //
 
 import User
+import Util
+import Search
 import Networking
 
 import RIBs
@@ -18,7 +20,8 @@ final class HomeComponent:
   Component<HomeDependency>,
   LatestBoardDependency,
   PopularBoardDependency,
-  FollowBoardDependency
+  FollowBoardDependency,
+  SearchDependency
 {
   var userManager: User.MutableUserManagerStream { dependency.userManager }
   
@@ -56,13 +59,15 @@ final public class HomeBuilder: Builder<HomeDependency>, HomeBuildable {
     let latestBoardBuildable = LatestBoardBuilder(dependency: component)
     let popularBoardBuildable = PopularBoardBuilder(dependency: component)
     let followBoardBuildable = FollowBoardBuilder(dependency: component)
+    let searchBuildable = SearchBuilder(dependency: component)
     
     return HomeRouter(
       interactor: interactor,
       viewController: viewController,
       latestBoardBuildable: latestBoardBuildable,
       popularBoardBuildable: popularBoardBuildable,
-      followBoardBuildable: followBoardBuildable
+      followBoardBuildable: followBoardBuildable,
+      searchBuildable: searchBuildable
     )
   }
 }

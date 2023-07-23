@@ -5,13 +5,17 @@
 //  Created by 구본의 on 2023/05/11.
 //
 
+import Util
+import Search
+
 import RIBs
 
 protocol HomeInteractable:
   Interactable,
   LatestBoardListener,
   PopularBoardListener,
-  FollowBoardListener
+  FollowBoardListener,
+  SearchListener
 {
   var router: HomeRouting? { get set }
   var listener: HomeListener? { get set }
@@ -36,16 +40,21 @@ final class HomeRouter: ViewableRouter<HomeInteractable, HomeViewControllable>, 
   private let followBoardBuildable: FollowBoardBuildable
   private var followBoardRouting: Routing?
   
+  private let searchBuildable: SearchBuildable
+  private var searchRouting: Routing?
+  
   init(
     interactor: HomeInteractable,
     viewController: HomeViewControllable,
     latestBoardBuildable: LatestBoardBuildable,
     popularBoardBuildable: PopularBoardBuildable,
-    followBoardBuildable: FollowBoardBuildable
+    followBoardBuildable: FollowBoardBuildable,
+    searchBuildable: SearchBuildable
   ) {
     self.latestBoardBuildable = latestBoardBuildable
     self.popularBoardBuildable = popularBoardBuildable
     self.followBoardBuildable = followBoardBuildable
+    self.searchBuildable = searchBuildable
     super.init(interactor: interactor, viewController: viewController)
     interactor.router = self
     self.attachLatestBoardRIB()
@@ -101,5 +110,20 @@ final class HomeRouter: ViewableRouter<HomeInteractable, HomeViewControllable>, 
     detachChild(router)
   }
   
+  func attachSearchVC() {
+    if searchRouting != nil { return }
+    let router = searchBuildable.build(withListener: interactor)
+    self.searchRouting = router
+    self.viewControllable.pushViewController(router.viewControllable, animated: true)
+    attachChild(router)
+  }
   
+  func detachSearchVC(with popType: PopType) {
+    guard let router = searchRouting else { return }
+    if popType == .BackButton {
+      self.viewControllable.popViewController(animated: true)
+    }
+    self.searchRouting = nil
+    self.detachChild(router)
+  }
 }

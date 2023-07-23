@@ -23,6 +23,7 @@ protocol HomePresentableListener: AnyObject {
   var postingFilter: BehaviorRelay<[(filter: PostingCategoryModel, isSelected: Bool)]> { get }
   
   func selectFilter(at index: Int, with filter: (PostingCategoryModel, Bool))
+  func pushSearchVC()
 }
 
 final public class HomeViewController: UIViewController, HomePresentable, HomeViewControllable {
@@ -207,6 +208,12 @@ final public class HomeViewController: UIViewController, HomePresentable, HomeVi
       .bind { [weak self] in
         guard let self else { return }
         self.type.accept(.Follow)
+      }.disposed(by: disposeBag)
+    
+    searchView.tap()
+      .bind { [weak self] _ in
+        guard let self else { return }
+        self.listener?.pushSearchVC()
       }.disposed(by: disposeBag)
   }
   

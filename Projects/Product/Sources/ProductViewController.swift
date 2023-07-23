@@ -122,6 +122,24 @@ final public class ProductViewController: UIViewController, ProductPresentable, 
         guard let self else { return }
         self.listener?.pushSearchVC()
       }.disposed(by: disposeBag)
+    
+    parentVCContainerView.rx
+      .swipeGesture([.right, .left])
+      .when(.recognized)
+      .map{$0.direction}
+      .subscribe(onNext: { [weak self] direction in
+        guard let self else { return }
+        switch direction {
+        case .right:
+          self.listener?.addChildVCLayout(with: .Product)
+          self.categoryButtonDidSelected(with: .Product)
+        case .left:
+          self.listener?.addChildVCLayout(with: .Brand)
+          self.categoryButtonDidSelected(with: .Brand)
+        default: break
+        }
+      }).disposed(by: disposeBag)
+    
   }
   
   func setChildVCLayout(childVC: ViewControllable) {

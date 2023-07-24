@@ -153,4 +153,14 @@ public extension UICollectionView {
     let layout = UICollectionViewCompositionalLayout(section: section)
     self.collectionViewLayout = layout
   }
+  
+  func feedLayout() {
+    let layout = UICollectionViewFlowLayout()
+    layout.scrollDirection = .horizontal
+    layout.minimumLineSpacing = .zero
+    layout.minimumInteritemSpacing = .zero
+    layout.sectionInset = .zero
+    layout.itemSize = self.frame.size
+    self.collectionViewLayout = layout
+  }
 }

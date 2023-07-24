@@ -77,7 +77,7 @@ final class LatestBoardFeedViewController: UIViewController, LatestBoardFeedPres
       .horizontally()
       .bottom(view.pin.safeArea)
     
-    feedCollectionView.feedFlowLayout()
+    feedCollectionView.feedLayout()
   }
   
   func setupGestures() {

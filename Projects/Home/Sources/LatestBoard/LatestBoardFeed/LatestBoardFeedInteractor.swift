@@ -127,17 +127,12 @@ final class LatestBoardFeedInteractor: PresentableInteractor<LatestBoardFeedPres
           userId: self.userManager.userID
         )
       }
-      await self.changedBookmarkStatus(at: index, status: scrapStatus)
+      
+      if let updatedBoard = await self.boardRepository.boardInfo(boardID: boardID, userID: self.userManager.userID) {
+        await self.updatedBoardList(at: index, updatedBoard: updatedBoard)
+      }
       await self.presenter.showToast(status: scrapStatus)
     }
-  }
-  
-  private func changedBookmarkStatus(at index: Int, status: Bool) async {
-    var boardData: [PostingDTO] = self.latestBoardList.value
-    var currentBoard: PostingDTO = boardData[index]
-    currentBoard.scrap = !status
-    boardData[index] = currentBoard
-    boardListStream.updateBoardList(with: boardData)
   }
   
   func fetchBoardLike(at index: Int) {

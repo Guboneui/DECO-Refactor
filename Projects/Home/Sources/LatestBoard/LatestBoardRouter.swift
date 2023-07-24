@@ -38,9 +38,12 @@ final class LatestBoardRouter: ViewableRouter<LatestBoardInteractable, LatestBoa
     interactor.router = self
   }
   
-  func attachLatestBoardFeedRIB() {
+  func attachLatestBoardFeedRIB(at startIndex: Int) {
     if latestBoardFeedRouting != nil { return }
-    let router = latestBoardFeedBuildable.build(withListener: interactor)
+    let router = latestBoardFeedBuildable.build(
+      withListener: interactor,
+      feedStartIndex: startIndex
+    )
     self.viewControllable.pushViewController(router.viewControllable, animated: true)
     self.latestBoardFeedRouting = router
     attachChild(router)

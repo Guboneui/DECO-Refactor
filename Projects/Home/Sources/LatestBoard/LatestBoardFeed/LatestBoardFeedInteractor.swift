@@ -23,6 +23,7 @@ protocol LatestBoardFeedPresentable: Presentable {
   var listener: LatestBoardFeedPresentableListener? { get set }
   @MainActor func showToast(status: Bool)
   func showAlert(isMine: Bool)
+  func moveToStartIndex(at index: Int)
 }
 
 protocol LatestBoardFeedListener: AnyObject {
@@ -42,6 +43,7 @@ final class LatestBoardFeedInteractor: PresentableInteractor<LatestBoardFeedPres
   private let bookmarkRepository: BookmarkRepository
   private let boardRepository: BoardRepository
   private let postingCategoryFilter: MutableSelectedPostingFilterStream
+  private let feedStartIndex: Int
   
   private var selectedBoardId: [Int] = []
   private var selectedStyleId: [Int] = []
@@ -52,13 +54,15 @@ final class LatestBoardFeedInteractor: PresentableInteractor<LatestBoardFeedPres
     userManager: MutableUserManagerStream,
     bookmarkRepository: BookmarkRepository,
     boardRepository: BoardRepository,
-    postingCategoryFilter: MutableSelectedPostingFilterStream
+    postingCategoryFilter: MutableSelectedPostingFilterStream,
+    feedStartIndex: Int
   ) {
     self.boardListStream = boardListStream
     self.userManager = userManager
     self.bookmarkRepository = bookmarkRepository
     self.boardRepository = boardRepository
     self.postingCategoryFilter = postingCategoryFilter
+    self.feedStartIndex = feedStartIndex
     super.init(presenter: presenter)
     presenter.listener = self
   }
@@ -92,6 +96,15 @@ final class LatestBoardFeedInteractor: PresentableInteractor<LatestBoardFeedPres
         let styleId: [Int] = filter.selectedStyleCategory.map{$0.id}
         self.selectedBoardId = boardId
         self.selectedStyleId = styleId
+      }).disposed(by: disposeBag)
+    
+    
+    Observable.just(feedStartIndex)
+      .take(1)
+      .observe(on: MainScheduler.instance)
+      .subscribe(onNext: { [weak self] startIndex in
+        guard let self else { return }
+        self.presenter.moveToStartIndex(at: startIndex)
       }).disposed(by: disposeBag)
   }
   

@@ -15,7 +15,7 @@ import RxSwift
 import RxRelay
 
 protocol LatestBoardRouting: ViewableRouting {
-  func attachLatestBoardFeedRIB()
+  func attachLatestBoardFeedRIB(at startIndex: Int)
   func detachLatestBoardFeedRIB(with popType: PopType)
 }
 
@@ -128,8 +128,8 @@ final class LatestBoardInteractor: PresentableInteractor<LatestBoardPresentable>
     }
   }
   
-  func pushLatestBoardFeedVC() {
-    router?.attachLatestBoardFeedRIB()
+  func pushLatestBoardFeedVC(at startIndex: Int) {
+    router?.attachLatestBoardFeedRIB(at: startIndex)
   }
   
   func popLatestBoardFeedVC(with popType: PopType) {

@@ -130,6 +130,7 @@ final class LatestBoardFeedViewController: UIViewController, LatestBoardFeedPres
     
     feedCollectionView.rx.willDisplayCell
       .map{$0.at.row}
+      .share()
       .subscribe(onNext: { [weak self] index in
         guard let self else { return }
         if let boardList = self.listener?.latestBoardList.value,
@@ -137,6 +138,21 @@ final class LatestBoardFeedViewController: UIViewController, LatestBoardFeedPres
           self.listener?.fetchLatestBoardList(lastIndex: index)
         }
         
+      }).disposed(by: disposeBag)
+  }
+  
+  func moveToStartIndex(at index: Int) {
+    feedCollectionView.rx.willDisplayCell
+      .take(1)
+      .share()
+      .subscribe(onNext: { [weak self] _ in
+        guard let self else { return }
+        let startIndexPath: IndexPath = IndexPath(row: index, section: 0)
+        self.feedCollectionView.scrollToItem(
+          at: startIndexPath,
+          at: .right,
+          animated: false
+        )
       }).disposed(by: disposeBag)
   }
   

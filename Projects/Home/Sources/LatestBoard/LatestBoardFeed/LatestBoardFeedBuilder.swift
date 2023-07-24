@@ -34,7 +34,10 @@ final class LatestBoardFeedComponent:
 // MARK: - Builder
 
 protocol LatestBoardFeedBuildable: Buildable {
-  func build(withListener listener: LatestBoardFeedListener) -> LatestBoardFeedRouting
+  func build(
+    withListener listener: LatestBoardFeedListener,
+    feedStartIndex: Int
+  ) -> LatestBoardFeedRouting
 }
 
 final class LatestBoardFeedBuilder: Builder<LatestBoardFeedDependency>, LatestBoardFeedBuildable {
@@ -43,7 +46,10 @@ final class LatestBoardFeedBuilder: Builder<LatestBoardFeedDependency>, LatestBo
     super.init(dependency: dependency)
   }
   
-  func build(withListener listener: LatestBoardFeedListener) -> LatestBoardFeedRouting {
+  func build(
+    withListener listener: LatestBoardFeedListener,
+    feedStartIndex: Int
+  ) -> LatestBoardFeedRouting {
     let component = LatestBoardFeedComponent(dependency: dependency)
     let viewController = LatestBoardFeedViewController()
     let interactor = LatestBoardFeedInteractor(
@@ -52,7 +58,8 @@ final class LatestBoardFeedBuilder: Builder<LatestBoardFeedDependency>, LatestBo
       userManager: dependency.userManager,
       bookmarkRepository: dependency.bookmarkRepository,
       boardRepository: dependency.boardRepository,
-      postingCategoryFilter: dependency.postingCategoryFilter
+      postingCategoryFilter: dependency.postingCategoryFilter,
+      feedStartIndex: feedStartIndex
     )
     interactor.listener = listener
     

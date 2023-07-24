@@ -1,8 +1,8 @@
 //
-//  LatestBoardFeedInteractor.swift
+//  HomeBoardFeedInteractor.swift
 //  Home
 //
-//  Created by 구본의 on 2023/07/20.
+//  Created by 구본의 on 2023/07/25.
 //
 
 import Util
@@ -14,55 +14,60 @@ import RIBs
 import RxSwift
 import RxRelay
 
-protocol LatestBoardFeedRouting: ViewableRouting {
+protocol HomeBoardFeedRouting: ViewableRouting {
   func attachTargetUserProfileVC(with targetUserInfo: UserDTO)
   func detachTargetUserProfileVC(with popType: PopType)
 }
 
-protocol LatestBoardFeedPresentable: Presentable {
-  var listener: LatestBoardFeedPresentableListener? { get set }
+protocol HomeBoardFeedPresentable: Presentable {
+  var listener: HomeBoardFeedPresentableListener? { get set }
   @MainActor func showToast(status: Bool)
   func showAlert(isMine: Bool)
   func moveToStartIndex(at index: Int)
 }
 
-protocol LatestBoardFeedListener: AnyObject {
-  func popLatestBoardFeedVC(with popType: PopType)
+protocol HomeBoardFeedListener: AnyObject {
+  func popHomeBoardFeedVC(with popType: PopType)
 }
 
-final class LatestBoardFeedInteractor: PresentableInteractor<LatestBoardFeedPresentable>, LatestBoardFeedInteractable, LatestBoardFeedPresentableListener {
+final class HomeBoardFeedInteractor: PresentableInteractor<HomeBoardFeedPresentable>, HomeBoardFeedInteractable, HomeBoardFeedPresentableListener {
   
-  weak var router: LatestBoardFeedRouting?
-  weak var listener: LatestBoardFeedListener?
+  
+  weak var router: HomeBoardFeedRouting?
+  weak var listener: HomeBoardFeedListener?
   private let disposeBag: DisposeBag = DisposeBag()
   
-  var latestBoardList: BehaviorRelay<[PostingDTO]> = .init(value: [])
+  private let feedStartIndex: Int
+  private let feedType: HomeType
+  
+  var boardList: BehaviorRelay<[PostingDTO]> = .init(value: [])
   
   private let boardListStream: MutableBoardStream
   private let userManager: MutableUserManagerStream
   private let bookmarkRepository: BookmarkRepository
   private let boardRepository: BoardRepository
   private let postingCategoryFilter: MutableSelectedPostingFilterStream
-  private let feedStartIndex: Int
   
   private var selectedBoardId: [Int] = []
   private var selectedStyleId: [Int] = []
   
   init(
-    presenter: LatestBoardFeedPresentable,
+    presenter: HomeBoardFeedPresentable,
+    feedStartIndex: Int,
+    feedType: HomeType,
     boardListStream: MutableBoardStream,
     userManager: MutableUserManagerStream,
     bookmarkRepository: BookmarkRepository,
     boardRepository: BoardRepository,
-    postingCategoryFilter: MutableSelectedPostingFilterStream,
-    feedStartIndex: Int
+    postingCategoryFilter: MutableSelectedPostingFilterStream
   ) {
+    self.feedStartIndex = feedStartIndex
+    self.feedType = feedType
     self.boardListStream = boardListStream
     self.userManager = userManager
     self.bookmarkRepository = bookmarkRepository
     self.boardRepository = boardRepository
     self.postingCategoryFilter = postingCategoryFilter
-    self.feedStartIndex = feedStartIndex
     super.init(presenter: presenter)
     presenter.listener = self
   }
@@ -77,14 +82,14 @@ final class LatestBoardFeedInteractor: PresentableInteractor<LatestBoardFeedPres
     // TODO: Pause any business logic.
   }
   
-  func popLatestBoardFeedVC(with popType: PopType) {
-    listener?.popLatestBoardFeedVC(with: popType)
+  func popHomeBoardFeedVC(with popType: PopType) {
+    listener?.popHomeBoardFeedVC(with: popType)
   }
   
   private func setupBindings() {
     boardListStream.boardList
       .subscribe(onNext: { [weak self] list in
-        self?.latestBoardList.accept(list)
+        self?.boardList.accept(list)
       }).disposed(by: disposeBag)
     
     postingCategoryFilter.selectedFilter
@@ -111,7 +116,7 @@ final class LatestBoardFeedInteractor: PresentableInteractor<LatestBoardFeedPres
   func fetchBoardBookmark(at index: Int) {
     Task.detached { [weak self] in
       guard let self else { return }
-      let currentBoard: PostingDTO = self.latestBoardList.value[index]
+      let currentBoard: PostingDTO = self.boardList.value[index]
       guard let scrapStatus = currentBoard.scrap,
             let boardID = currentBoard.id else { return }
       if scrapStatus == true {
@@ -138,7 +143,7 @@ final class LatestBoardFeedInteractor: PresentableInteractor<LatestBoardFeedPres
   func fetchBoardLike(at index: Int) {
     Task.detached { [weak self] in
       guard let self else { return }
-      let currentBoard: PostingDTO = self.latestBoardList.value[index]
+      let currentBoard: PostingDTO = self.boardList.value[index]
       guard let likeStatus = currentBoard.like,
             let boardID = currentBoard.id else { return }
       
@@ -155,20 +160,20 @@ final class LatestBoardFeedInteractor: PresentableInteractor<LatestBoardFeedPres
   }
   
   private func updatedBoardList(at index: Int, updatedBoard: PostingDTO) async {
-    var boardData: [PostingDTO] = self.latestBoardList.value
+    var boardData: [PostingDTO] = self.boardList.value
     boardData[index] = updatedBoard
     boardListStream.updateBoardList(with: boardData)
   }
   
   func checkCurrentBoardUser(at index: Int) {
-    let currentBoard: PostingDTO = self.latestBoardList.value[index]
+    let currentBoard: PostingDTO = self.boardList.value[index]
     guard let boardUserID = currentBoard.userId else { return }
     let currentUserID = userManager.userID
     presenter.showAlert(isMine: boardUserID == currentUserID)
   }
   
   func pushTargetUserProfileVC(at index: Int) {
-    let currentBoard: PostingDTO = self.latestBoardList.value[index]
+    let currentBoard: PostingDTO = self.boardList.value[index]
     guard let boardUserID = currentBoard.userId,
           let profileURL = currentBoard.profileUrl,
           let followStatus = currentBoard.follow,
@@ -189,14 +194,23 @@ final class LatestBoardFeedInteractor: PresentableInteractor<LatestBoardFeedPres
     router?.detachTargetUserProfileVC(with: popType)
   }
   
-  func fetchLatestBoardList(lastIndex index: Int) {
+  func fetchBoardList(lastIndex index: Int) {
     Task.detached { [weak self] in
       guard let self else { return }
-      let createdAt: Int = self.latestBoardList.value[index].createdAt ?? Int.max
+      let createdAt: Int = self.boardList.value[index].createdAt ?? Int.max
+      
+      var boardType: String {
+        switch self.feedType {
+        case .Recent: return BoardType.LATEST.rawValue
+        case .Follow: return BoardType.FOLLOW.rawValue
+        case .Popular: return BoardType.LIKE.rawValue
+        }
+      }
+      
       if let boardList = await self.boardRepository.boardList(
         param: BoardRequestDTO(
           offset: createdAt,
-          listType: BoardType.LATEST.rawValue,
+          listType: boardType,
           keyword: "",
           styleIds: self.selectedStyleId,
           colorIds: [],
@@ -204,7 +218,7 @@ final class LatestBoardFeedInteractor: PresentableInteractor<LatestBoardFeedPres
           userId: self.userManager.userID
         )
       ), !boardList.isEmpty {
-        let prevList = self.latestBoardList.value
+        let prevList = self.boardList.value
         self.boardListStream.updateBoardList(with: prevList + boardList)
       }
     }

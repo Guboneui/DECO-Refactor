@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -11,6 +11,11 @@
 		1CB26E39A4DE1F78A9F443D2 /* PostingFilterStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9B97C711A2CB72FD7B99B6 /* PostingFilterStream.swift */; };
 		23BCC7095F44EB1B54AF5259 /* FollowBoardInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92558056C7BFAEC2D72F36D9 /* FollowBoardInteractor.swift */; };
 		2B3A43CF2F442C439915B5C9 /* FollowBoardRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A81463CC2603FB7C0BF4D6D /* FollowBoardRouter.swift */; };
+		2C8584A42A690C4A008B8CAB /* BoardStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8584A32A690C4A008B8CAB /* BoardStream.swift */; };
+		2CFC14792A6ECA3200B13D73 /* HomeBoardFeedRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFC14752A6ECA3200B13D73 /* HomeBoardFeedRouter.swift */; };
+		2CFC147A2A6ECA3200B13D73 /* HomeBoardFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFC14762A6ECA3200B13D73 /* HomeBoardFeedViewController.swift */; };
+		2CFC147B2A6ECA3200B13D73 /* HomeBoardFeedBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFC14772A6ECA3200B13D73 /* HomeBoardFeedBuilder.swift */; };
+		2CFC147C2A6ECA3200B13D73 /* HomeBoardFeedInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFC14782A6ECA3200B13D73 /* HomeBoardFeedInteractor.swift */; };
 		30EAB9FD180180B0ED13E5F1 /* LatestBoardRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9967A925F95DD075CB0BE7 /* LatestBoardRouter.swift */; };
 		42936DA6FEC513D9FD20B3FF /* LatestBoardInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65975A315732F6E8D39BF328 /* LatestBoardInteractor.swift */; };
 		4743D71A678E1519B95DA2D2 /* FollowBoardBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C5B9ABBE27B699D3DB7940 /* FollowBoardBuilder.swift */; };
@@ -43,6 +48,11 @@
 /* Begin PBXFileReference section */
 		1F62D067FC82E37F588B2D29 /* HomeInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeInteractor.swift; sourceTree = "<group>"; };
 		2364A31793BD73E8EE4D49F4 /* PopularBoardBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularBoardBuilder.swift; sourceTree = "<group>"; };
+		2C8584A32A690C4A008B8CAB /* BoardStream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardStream.swift; sourceTree = "<group>"; };
+		2CFC14752A6ECA3200B13D73 /* HomeBoardFeedRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBoardFeedRouter.swift; sourceTree = "<group>"; };
+		2CFC14762A6ECA3200B13D73 /* HomeBoardFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBoardFeedViewController.swift; sourceTree = "<group>"; };
+		2CFC14772A6ECA3200B13D73 /* HomeBoardFeedBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBoardFeedBuilder.swift; sourceTree = "<group>"; };
+		2CFC14782A6ECA3200B13D73 /* HomeBoardFeedInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBoardFeedInteractor.swift; sourceTree = "<group>"; };
 		3CC9D00E6250394A9E0CC7EC /* HomeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRouter.swift; sourceTree = "<group>"; };
 		5A81463CC2603FB7C0BF4D6D /* FollowBoardRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowBoardRouter.swift; sourceTree = "<group>"; };
 		60C5B9ABBE27B699D3DB7940 /* FollowBoardBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowBoardBuilder.swift; sourceTree = "<group>"; };
@@ -82,6 +92,17 @@
 				A643F0F23AAADCC27C89CE25 /* Search.framework */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		2CFC14742A6ECA2800B13D73 /* HomeBoardFeed */ = {
+			isa = PBXGroup;
+			children = (
+				2CFC14752A6ECA3200B13D73 /* HomeBoardFeedRouter.swift */,
+				2CFC14762A6ECA3200B13D73 /* HomeBoardFeedViewController.swift */,
+				2CFC14772A6ECA3200B13D73 /* HomeBoardFeedBuilder.swift */,
+				2CFC14782A6ECA3200B13D73 /* HomeBoardFeedInteractor.swift */,
+			);
+			path = HomeBoardFeed;
 			sourceTree = "<group>";
 		};
 		440337F7B58BC84FCBC5A96E /* Frameworks */ = {
@@ -145,6 +166,7 @@
 			isa = PBXGroup;
 			children = (
 				6A9B97C711A2CB72FD7B99B6 /* PostingFilterStream.swift */,
+				2C8584A32A690C4A008B8CAB /* BoardStream.swift */,
 			);
 			path = Stream;
 			sourceTree = "<group>";
@@ -161,6 +183,7 @@
 		B74810073A3D8A4993EE22B2 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				2CFC14742A6ECA2800B13D73 /* HomeBoardFeed */,
 				48685CFCD358001C958273EC /* FollowBoard */,
 				5CAA4D52F97EEB01E51B9C8C /* LatestBoard */,
 				53EAADA2BB91D9AC202AEE60 /* PopularBoard */,
@@ -208,8 +231,6 @@
 		F648A09DF594BC533BCA5FD3 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				TargetAttributes = {
-				};
 			};
 			buildConfigurationList = AA685C1613CFBDFB4ED6BAE7 /* Build configuration list for PBXProject "Home" */;
 			compatibilityVersion = "Xcode 13.0";
@@ -247,16 +268,21 @@
 				4743D71A678E1519B95DA2D2 /* FollowBoardBuilder.swift in Sources */,
 				23BCC7095F44EB1B54AF5259 /* FollowBoardInteractor.swift in Sources */,
 				2B3A43CF2F442C439915B5C9 /* FollowBoardRouter.swift in Sources */,
+				2CFC14792A6ECA3200B13D73 /* HomeBoardFeedRouter.swift in Sources */,
 				B3F1BFF50AB8F5B3FB71FF65 /* FollowBoardViewController.swift in Sources */,
 				A428098AD615CD3B5F694A31 /* HomeBuilder.swift in Sources */,
 				F7FB1076CF30671B49BE611D /* HomeInteractor.swift in Sources */,
+				2CFC147A2A6ECA3200B13D73 /* HomeBoardFeedViewController.swift in Sources */,
+				2C8584A42A690C4A008B8CAB /* BoardStream.swift in Sources */,
 				969AE3FC67639657050B796A /* HomeRouter.swift in Sources */,
 				9E5E2B3F30DD9698E7DA138C /* HomeViewController.swift in Sources */,
+				2CFC147C2A6ECA3200B13D73 /* HomeBoardFeedInteractor.swift in Sources */,
 				992ECEB252E1A6FD4FA19A0D /* LatestBoardBuilder.swift in Sources */,
 				42936DA6FEC513D9FD20B3FF /* LatestBoardInteractor.swift in Sources */,
 				30EAB9FD180180B0ED13E5F1 /* LatestBoardRouter.swift in Sources */,
 				6955D80F8D6F10D9A7B85A85 /* LatestBoardViewController.swift in Sources */,
 				FC51AFF13D539475F6794D06 /* PopularBoardBuilder.swift in Sources */,
+				2CFC147B2A6ECA3200B13D73 /* HomeBoardFeedBuilder.swift in Sources */,
 				71142422FF1A8116C0BF321B /* PopularBoardInteractor.swift in Sources */,
 				C38C26480F67CEAABC1951D6 /* PopularBoardRouter.swift in Sources */,
 				08D71769E4CF2C34FE4BFE2F /* PopularBoardViewController.swift in Sources */,

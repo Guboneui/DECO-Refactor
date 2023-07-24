@@ -11,7 +11,7 @@ import RIBs
 
 protocol LatestBoardInteractable:
   Interactable,
-  LatestBoardFeedListener
+  HomeBoardFeedListener
 {
   var router: LatestBoardRouting? { get set }
   var listener: LatestBoardListener? { get set }
@@ -24,38 +24,39 @@ protocol LatestBoardViewControllable: ViewControllable {
 
 final class LatestBoardRouter: ViewableRouter<LatestBoardInteractable, LatestBoardViewControllable>, LatestBoardRouting {
   
-  private let latestBoardFeedBuildable: LatestBoardFeedBuildable
-  private var latestBoardFeedRouting: Routing?
+  private let homeBoardFeedBuildable: HomeBoardFeedBuildable
+  private var homeBoardFeedRouting: Routing?
   
   // TODO: Constructor inject child builder protocols to allow building children.
   init(
     interactor: LatestBoardInteractable,
     viewController: LatestBoardViewControllable,
-    latestBoardFeedBuildable: LatestBoardFeedBuildable
+    homeBoardFeedBuildable: HomeBoardFeedBuildable
   ) {
-    self.latestBoardFeedBuildable = latestBoardFeedBuildable
+    self.homeBoardFeedBuildable = homeBoardFeedBuildable
     super.init(interactor: interactor, viewController: viewController)
     interactor.router = self
   }
   
-  func attachLatestBoardFeedRIB(at startIndex: Int) {
-    if latestBoardFeedRouting != nil { return }
-    let router = latestBoardFeedBuildable.build(
+  func attachHomeBoardFeedRIB(at startIndex: Int, type: HomeType) {
+    if homeBoardFeedRouting != nil { return }
+    let router = homeBoardFeedBuildable.build(
       withListener: interactor,
-      feedStartIndex: startIndex
+      startIndex: startIndex,
+      feedType: type
     )
     self.viewControllable.pushViewController(router.viewControllable, animated: true)
-    self.latestBoardFeedRouting = router
+    self.homeBoardFeedRouting = router
     attachChild(router)
   }
   
-  func detachLatestBoardFeedRIB(with popType: PopType) {
-    guard let router = latestBoardFeedRouting else { return }
+  func detachHomeBoardFeedRIB(with popType: PopType) {
+    guard let router = homeBoardFeedRouting else { return }
     if popType == .BackButton {
       self.viewControllable.popViewController(animated: true)
     }
     
-    self.latestBoardFeedRouting = nil
+    self.homeBoardFeedRouting = nil
     self.detachChild(router)
   }
 }

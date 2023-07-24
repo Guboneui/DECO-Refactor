@@ -15,8 +15,8 @@ import RxSwift
 import RxRelay
 
 protocol LatestBoardRouting: ViewableRouting {
-  func attachLatestBoardFeedRIB(at startIndex: Int)
-  func detachLatestBoardFeedRIB(with popType: PopType)
+  func attachHomeBoardFeedRIB(at startIndex: Int, type: HomeType)
+  func detachHomeBoardFeedRIB(with popType: PopType)
 }
 
 protocol LatestBoardPresentable: Presentable {
@@ -57,20 +57,19 @@ final class LatestBoardInteractor: PresentableInteractor<LatestBoardPresentable>
     self.boardListStream = boardListStream
     super.init(presenter: presenter)
     presenter.listener = self
-    
-    
-    boardListStream.boardList
-      .subscribe(onNext: { [weak self] list in
-        guard let self else { return }
-        self.latestBoardList.accept(list)
-      }).disposed(by: disposeBag)
-    
   }
-  
   
   override func didBecomeActive() {
     super.didBecomeActive()
-
+    self.setupBindings()
+  }
+  
+  override func willResignActive() {
+    super.willResignActive()
+    // TODO: Pause any business logic.
+  }
+  
+  private func setupBindings() {
     postingCategoryFilter.selectedFilter
       .share()
       .subscribe(onNext: { [weak self] filter in
@@ -81,11 +80,12 @@ final class LatestBoardInteractor: PresentableInteractor<LatestBoardPresentable>
         self.selectedStyleId = styleId
         self.fetchLatestBoardListNewCategory(boardId: boardId, styleId: styleId)
       }).disposed(by: disposeBag)
-  }
-  
-  override func willResignActive() {
-    super.willResignActive()
-    // TODO: Pause any business logic.
+    
+    boardListStream.boardList
+      .subscribe(onNext: { [weak self] list in
+        guard let self else { return }
+        self.latestBoardList.accept(list)
+      }).disposed(by: disposeBag)
   }
   
   private func fetchLatestBoardListNewCategory(boardId: [Int], styleId: [Int]) {
@@ -128,11 +128,11 @@ final class LatestBoardInteractor: PresentableInteractor<LatestBoardPresentable>
     }
   }
   
-  func pushLatestBoardFeedVC(at startIndex: Int) {
-    router?.attachLatestBoardFeedRIB(at: startIndex)
+  func pushHomeBoardFeedVC(at startIndex: Int, type: HomeType) {
+    router?.attachHomeBoardFeedRIB(at: startIndex, type: type)
   }
   
-  func popLatestBoardFeedVC(with popType: PopType) {
-    router?.detachLatestBoardFeedRIB(with: popType)
+  func popHomeBoardFeedVC(with popType: PopType) {
+    router?.detachHomeBoardFeedRIB(with: popType)
   }
 }

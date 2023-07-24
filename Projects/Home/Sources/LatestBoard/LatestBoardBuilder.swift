@@ -21,7 +21,7 @@ protocol LatestBoardDependency: Dependency {
 
 final class LatestBoardComponent:
   Component<LatestBoardDependency>,
-  LatestBoardFeedDependency
+  HomeBoardFeedDependency
 {
   
   var boardListStream: MutableBoardStream = BoardStreamImpl()
@@ -58,17 +58,13 @@ final class LatestBoardBuilder: Builder<LatestBoardDependency>, LatestBoardBuild
     )
     interactor.listener = listener
     
-    let latestBoardFeedBuildable = LatestBoardFeedBuilder(dependency: component)
+    let homeBoardFeedBuildable = HomeBoardFeedBuilder(dependency: component)
     
     return LatestBoardRouter(
       interactor: interactor,
       viewController: viewController,
-      latestBoardFeedBuildable: latestBoardFeedBuildable
+      homeBoardFeedBuildable: homeBoardFeedBuildable
     )
-  }
-  
-  deinit {
-    print("---> latestBoardBuilder deinit")
   }
 }
 

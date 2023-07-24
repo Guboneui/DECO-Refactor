@@ -6,6 +6,7 @@
 //
 
 import User
+import Util
 import Entity
 import Networking
 
@@ -14,7 +15,8 @@ import RxSwift
 import RxRelay
 
 protocol FollowBoardRouting: ViewableRouting {
-  // TODO: Declare methods the interactor can invoke to manage sub-tree via the router.
+  func attachHomeBoardFeedRIB(at startIndex: Int, type: HomeType)
+  func detachHomeBoardFeedRIB(with popType: PopType)
 }
 
 protocol FollowBoardPresentable: Presentable {
@@ -32,10 +34,10 @@ final class FollowBoardInteractor: PresentableInteractor<FollowBoardPresentable>
   weak var listener: FollowBoardListener?
   
   private let disposeBag: DisposeBag = DisposeBag()
-  
   private let boardRepository: BoardRepository
   private let userManager: MutableUserManagerStream
   private let postingCategoryFilter: MutableSelectedPostingFilterStream
+  private let boardListStream: MutableBoardStream
   
   var followBoardList: BehaviorRelay<[PostingDTO]> = .init(value: [])
   
@@ -46,17 +48,28 @@ final class FollowBoardInteractor: PresentableInteractor<FollowBoardPresentable>
     presenter: FollowBoardPresentable,
     boardRepository: BoardRepository,
     userManager: MutableUserManagerStream,
-    postingCategoryFilter: MutableSelectedPostingFilterStream
+    postingCategoryFilter: MutableSelectedPostingFilterStream,
+    boardListStream: MutableBoardStream
   ) {
     self.boardRepository = boardRepository
     self.userManager = userManager
     self.postingCategoryFilter = postingCategoryFilter
+    self.boardListStream = boardListStream
     super.init(presenter: presenter)
     presenter.listener = self
   }
   
   override func didBecomeActive() {
     super.didBecomeActive()
+    self.setupBindings()
+  }
+  
+  override func willResignActive() {
+    super.willResignActive()
+    // TODO: Pause any business logic.
+  }
+  
+  private func setupBindings() {
     postingCategoryFilter.selectedFilter
       .share()
       .subscribe(onNext: { [weak self] filter in
@@ -67,11 +80,12 @@ final class FollowBoardInteractor: PresentableInteractor<FollowBoardPresentable>
         self.selectedStyleId = styleId
         self.fetchFollowBoardListWithNewCategory(boardId: boardId, styleId: styleId)
       }).disposed(by: disposeBag)
-  }
-  
-  override func willResignActive() {
-    super.willResignActive()
-    // TODO: Pause any business logic.
+    
+    boardListStream.boardList
+      .subscribe(onNext: { [weak self] list in
+        guard let self else { return }
+        self.followBoardList.accept(list)
+      }).disposed(by: disposeBag)
   }
   
   private func fetchFollowBoardListWithNewCategory(boardId: [Int], styleId: [Int]) {
@@ -89,7 +103,7 @@ final class FollowBoardInteractor: PresentableInteractor<FollowBoardPresentable>
           userId: self.userManager.userID
         )
       ) {
-        self.followBoardList.accept(boardList)
+        self.boardListStream.updateBoardList(with: boardList)
       }
     }
   }
@@ -109,8 +123,16 @@ final class FollowBoardInteractor: PresentableInteractor<FollowBoardPresentable>
         )
       ), !boardList.isEmpty {
         let prevList = self.followBoardList.value
-        self.followBoardList.accept(prevList + boardList)
+        self.boardListStream.updateBoardList(with: prevList + boardList)
       }
     }
+  }
+  
+  func pushHomeBoardFeedVC(at startIndex: Int, type: HomeType) {
+    router?.attachHomeBoardFeedRIB(at: startIndex, type: type)
+  }
+  
+  func popHomeBoardFeedVC(with popType: PopType) {
+    router?.detachHomeBoardFeedRIB(with: popType)
   }
 }

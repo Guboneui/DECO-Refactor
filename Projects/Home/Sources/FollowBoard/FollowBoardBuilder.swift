@@ -14,16 +14,30 @@ protocol FollowBoardDependency: Dependency {
   var boardRepository: BoardRepository { get }
   var userManager: MutableUserManagerStream { get }
   var postingCategoryFilter: MutableSelectedPostingFilterStream { get }
+  var userProfileRepository: UserProfileRepository { get }
+  var followRepository: FollowRepository { get }
+  var bookmarkRepository: BookmarkRepository { get }
 }
 
-final class FollowBoardComponent: Component<FollowBoardDependency> {
+final class FollowBoardComponent:
+  Component<FollowBoardDependency>,
+  HomeBoardFeedDependency
+{
+  var boardListStream: MutableBoardStream = BoardStreamImpl()
+  var userManager: MutableUserManagerStream { dependency.userManager }
+  var bookmarkRepository: BookmarkRepository { dependency.bookmarkRepository }
+  var boardRepository: BoardRepository { dependency.boardRepository }
+  var userProfileRepository: UserProfileRepository { dependency.userProfileRepository }
+  var followRepository: FollowRepository { dependency.followRepository }
+  var postingCategoryFilter: MutableSelectedPostingFilterStream { dependency.postingCategoryFilter }
   
-  // TODO: Declare 'fileprivate' dependencies that are only used by this RIB.
 }
 
 // MARK: - Builder
 
-protocol FollowBoardBuildable: Buildable {
+protocol FollowBoardBuildable:
+  Buildable
+{
   func build(withListener listener: FollowBoardListener) -> FollowBoardRouting
 }
 
@@ -40,9 +54,18 @@ final class FollowBoardBuilder: Builder<FollowBoardDependency>, FollowBoardBuild
       presenter: viewController,
       boardRepository: dependency.boardRepository,
       userManager: dependency.userManager,
-      postingCategoryFilter: dependency.postingCategoryFilter
+      postingCategoryFilter: dependency.postingCategoryFilter,
+      boardListStream: component.boardListStream
     )
+    
     interactor.listener = listener
-    return FollowBoardRouter(interactor: interactor, viewController: viewController)
+    
+    let homeBoardFeedBuildable = HomeBoardFeedBuilder(dependency: component)
+    
+    return FollowBoardRouter(
+      interactor: interactor,
+      viewController: viewController,
+      homeBoardFeedBuildable: homeBoardFeedBuildable
+    )
   }
 }

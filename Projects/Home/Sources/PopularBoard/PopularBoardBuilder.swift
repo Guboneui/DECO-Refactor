@@ -14,11 +14,22 @@ protocol PopularBoardDependency: Dependency {
   var boardRepository: BoardRepository { get }
   var userManager: MutableUserManagerStream { get }
   var postingCategoryFilter: MutableSelectedPostingFilterStream { get }
+  var userProfileRepository: UserProfileRepository { get }
+  var followRepository: FollowRepository { get }
+  var bookmarkRepository: BookmarkRepository { get }
 }
 
-final class PopularBoardComponent: Component<PopularBoardDependency> {
-  
-  // TODO: Declare 'fileprivate' dependencies that are only used by this RIB.
+final class PopularBoardComponent:
+  Component<PopularBoardDependency>,
+  HomeBoardFeedDependency
+{
+  var boardListStream: MutableBoardStream = BoardStreamImpl()
+  var userManager: MutableUserManagerStream { dependency.userManager }
+  var bookmarkRepository: BookmarkRepository { dependency.bookmarkRepository }
+  var boardRepository: BoardRepository { dependency.boardRepository }
+  var userProfileRepository: UserProfileRepository { dependency.userProfileRepository }
+  var followRepository: FollowRepository { dependency.followRepository }
+  var postingCategoryFilter: MutableSelectedPostingFilterStream { dependency.postingCategoryFilter }
 }
 
 // MARK: - Builder
@@ -40,9 +51,18 @@ final class PopularBoardBuilder: Builder<PopularBoardDependency>, PopularBoardBu
       presenter: viewController,
       boardRepository: dependency.boardRepository,
       userManager: dependency.userManager,
-      postingCategoryFilter: dependency.postingCategoryFilter
+      postingCategoryFilter: dependency.postingCategoryFilter,
+      boardListStream: component.boardListStream
     )
+    
     interactor.listener = listener
-    return PopularBoardRouter(interactor: interactor, viewController: viewController)
+    
+    let homeBoardFeedBuildable = HomeBoardFeedBuilder(dependency: component)
+    
+    return PopularBoardRouter(
+      interactor: interactor,
+      viewController: viewController,
+      homeBoardFeedBuildable: homeBoardFeedBuildable
+    )
   }
 }

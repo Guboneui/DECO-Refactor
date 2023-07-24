@@ -6,6 +6,7 @@
 //
 
 import User
+import Util
 import Entity
 import Networking
 
@@ -14,7 +15,8 @@ import RxSwift
 import RxRelay
 
 protocol PopularBoardRouting: ViewableRouting {
-  // TODO: Declare methods the interactor can invoke to manage sub-tree via the router.
+  func attachHomeBoardFeedRIB(at startIndex: Int, type: HomeType)
+  func detachHomeBoardFeedRIB(with popType: PopType)
 }
 
 protocol PopularBoardPresentable: Presentable {
@@ -28,6 +30,7 @@ protocol PopularBoardListener: AnyObject {
 
 final class PopularBoardInteractor: PresentableInteractor<PopularBoardPresentable>, PopularBoardInteractable, PopularBoardPresentableListener {
   
+  
   weak var router: PopularBoardRouting?
   weak var listener: PopularBoardListener?
   
@@ -35,6 +38,7 @@ final class PopularBoardInteractor: PresentableInteractor<PopularBoardPresentabl
   private let boardRepository: BoardRepository
   private let userManager: MutableUserManagerStream
   private let postingCategoryFilter: MutableSelectedPostingFilterStream
+  private let boardListStream: MutableBoardStream
   
   var popularBoardList: BehaviorRelay<[PostingDTO]> = .init(value: [])
   
@@ -45,11 +49,13 @@ final class PopularBoardInteractor: PresentableInteractor<PopularBoardPresentabl
     presenter: PopularBoardPresentable,
     boardRepository: BoardRepository,
     userManager: MutableUserManagerStream,
-    postingCategoryFilter: MutableSelectedPostingFilterStream
+    postingCategoryFilter: MutableSelectedPostingFilterStream,
+    boardListStream: MutableBoardStream
   ) {
     self.boardRepository = boardRepository
     self.userManager = userManager
     self.postingCategoryFilter = postingCategoryFilter
+    self.boardListStream = boardListStream
     super.init(presenter: presenter)
     presenter.listener = self
   }
@@ -66,6 +72,12 @@ final class PopularBoardInteractor: PresentableInteractor<PopularBoardPresentabl
         self.selectedBoardId = boardId
         self.selectedStyleId = styleId
         self.fetchPopularBoardListNewCategory(boardId: boardId, styleId: styleId)
+      }).disposed(by: disposeBag)
+    
+    boardListStream.boardList
+      .subscribe(onNext: { [weak self] list in
+        guard let self else { return }
+        self.popularBoardList.accept(list)
       }).disposed(by: disposeBag)
   }
   
@@ -89,7 +101,7 @@ final class PopularBoardInteractor: PresentableInteractor<PopularBoardPresentabl
           userId: self.userManager.userID
         )
       ) {
-        self.popularBoardList.accept(boardList)
+        self.boardListStream.updateBoardList(with: boardList)
       }
     }
   }
@@ -109,8 +121,16 @@ final class PopularBoardInteractor: PresentableInteractor<PopularBoardPresentabl
         )
       ), !boardList.isEmpty {
         let prevList = self.popularBoardList.value
-        self.popularBoardList.accept(prevList + boardList)
+        self.boardListStream.updateBoardList(with: prevList + boardList)
       }
     }
+  }
+  
+  func pushHomeBoardFeedVC(at startIndex: Int, type: HomeType) {
+    router?.attachHomeBoardFeedRIB(at: startIndex, type: type)
+  }
+  
+  func popHomeBoardFeedVC(with popType: PopType) {
+    router?.detachHomeBoardFeedRIB(with: popType)
   }
 }

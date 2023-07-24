@@ -1,8 +1,8 @@
 //
-//  LatestBoardFeedRouter.swift
+//  HomeBoardFeedRouter.swift
 //  Home
 //
-//  Created by 구본의 on 2023/07/20.
+//  Created by 구본의 on 2023/07/25.
 //
 
 import User
@@ -10,27 +10,27 @@ import Util
 import Entity
 import RIBs
 
-protocol LatestBoardFeedInteractable:
+protocol HomeBoardFeedInteractable:
   Interactable,
   TargetUserProfileListener
 {
-  var router: LatestBoardFeedRouting? { get set }
-  var listener: LatestBoardFeedListener? { get set }
+  var router: HomeBoardFeedRouting? { get set }
+  var listener: HomeBoardFeedListener? { get set }
 }
 
-protocol LatestBoardFeedViewControllable: ViewControllable {
+protocol HomeBoardFeedViewControllable: ViewControllable {
   // TODO: Declare methods the router invokes to manipulate the view hierarchy.
 }
 
-final class LatestBoardFeedRouter: ViewableRouter<LatestBoardFeedInteractable, LatestBoardFeedViewControllable>, LatestBoardFeedRouting {
+final class HomeBoardFeedRouter: ViewableRouter<HomeBoardFeedInteractable, HomeBoardFeedViewControllable>, HomeBoardFeedRouting {
   
   private let targetUserProfileBuildable: TargetUserProfileBuildable
   private var targetUserProfileRouting: Routing?
   
   // TODO: Constructor inject child builder protocols to allow building children.
   init(
-    interactor: LatestBoardFeedInteractable,
-    viewController: LatestBoardFeedViewControllable,
+    interactor: HomeBoardFeedInteractable,
+    viewController: HomeBoardFeedViewControllable,
     targetUserProfileBuildable: TargetUserProfileBuildable
   ) {
     self.targetUserProfileBuildable = targetUserProfileBuildable

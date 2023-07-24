@@ -17,6 +17,7 @@ protocol FollowBoardPresentableListener: AnyObject {
   var followBoardList: BehaviorRelay<[PostingDTO]> { get }
   
   func fetchFollowBoardList(at createdAt: Int)
+  func pushHomeBoardFeedVC(at startIndex: Int, type: HomeType)
 }
 
 final class FollowBoardViewController: UIViewController, FollowBoardPresentable, FollowBoardViewControllable {
@@ -89,6 +90,14 @@ final class FollowBoardViewController: UIViewController, FollowBoardPresentable,
           imageURL: data.imageUrl ?? ""
         )
       }.disposed(by: disposeBag)
+    
+    Observable.zip(
+      followBoardCollectionView.rx.itemSelected,
+      followBoardCollectionView.rx.modelSelected(PostingDTO.self)
+    ).subscribe(onNext: { [weak self] index, model in
+      guard let self else { return }
+      self.listener?.pushHomeBoardFeedVC(at: index.row, type: .Follow)
+    }).disposed(by: disposeBag)
     
     followBoardCollectionView.rx.willDisplayCell
       .map{$0.at.row}

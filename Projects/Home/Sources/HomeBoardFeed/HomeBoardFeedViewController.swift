@@ -1,8 +1,8 @@
 //
-//  LatestBoardFeedViewController.swift
+//  HomeBoardFeedViewController.swift
 //  Home
 //
-//  Created by 구본의 on 2023/07/20.
+//  Created by 구본의 on 2023/07/25.
 //
 
 import UIKit
@@ -15,20 +15,21 @@ import RIBs
 import RxSwift
 import RxRelay
 
-protocol LatestBoardFeedPresentableListener: AnyObject {
-  var latestBoardList: BehaviorRelay<[PostingDTO]> { get }
+protocol HomeBoardFeedPresentableListener: AnyObject {
+  var boardList: BehaviorRelay<[PostingDTO]> { get }
   
-  func popLatestBoardFeedVC(with popType: PopType)
+  func popHomeBoardFeedVC(with popType: PopType)
   func pushTargetUserProfileVC(at index: Int)
   func fetchBoardBookmark(at index: Int)
   func fetchBoardLike(at index: Int)
   func checkCurrentBoardUser(at index: Int)
-  func fetchLatestBoardList(lastIndex index: Int)
+  func fetchBoardList(lastIndex index: Int)
 }
 
-final class LatestBoardFeedViewController: UIViewController, LatestBoardFeedPresentable, LatestBoardFeedViewControllable {
+final class HomeBoardFeedViewController: UIViewController, HomeBoardFeedPresentable, HomeBoardFeedViewControllable {
   
-  weak var listener: LatestBoardFeedPresentableListener?
+  weak var listener: HomeBoardFeedPresentableListener?
+  
   private let disposeBag: DisposeBag = DisposeBag()
   
   private let navigationBar: FeedNavigationBar = FeedNavigationBar()
@@ -51,7 +52,7 @@ final class LatestBoardFeedViewController: UIViewController, LatestBoardFeedPres
   override func viewDidDisappear(_ animated: Bool) {
     super.viewDidDisappear(animated)
     if isMovingFromParent {
-      listener?.popLatestBoardFeedVC(with: .Swipe)
+      listener?.popHomeBoardFeedVC(with: .Swipe)
     }
   }
   
@@ -83,7 +84,7 @@ final class LatestBoardFeedViewController: UIViewController, LatestBoardFeedPres
   func setupGestures() {
     self.navigationBar.didTapBackButtonAction = { [weak self] in
       guard let self else { return }
-      self.listener?.popLatestBoardFeedVC(with: .BackButton)
+      self.listener?.popHomeBoardFeedVC(with: .BackButton)
     }
     
     self.navigationBar.didTapOptionButtonAction = { [weak self] in
@@ -97,7 +98,7 @@ final class LatestBoardFeedViewController: UIViewController, LatestBoardFeedPres
     feedCollectionView.delegate = nil
     feedCollectionView.dataSource = nil
     
-    listener?.latestBoardList
+    listener?.boardList
       .bind(to: feedCollectionView.rx.items(
         cellIdentifier: FeedCell.identifier,
         cellType: FeedCell.self)
@@ -133,9 +134,9 @@ final class LatestBoardFeedViewController: UIViewController, LatestBoardFeedPres
       .share()
       .subscribe(onNext: { [weak self] index in
         guard let self else { return }
-        if let boardList = self.listener?.latestBoardList.value,
+        if let boardList = self.listener?.boardList.value,
            boardList.count - 1 == index {
-          self.listener?.fetchLatestBoardList(lastIndex: index)
+          self.listener?.fetchBoardList(lastIndex: index)
         }
         
       }).disposed(by: disposeBag)

@@ -18,6 +18,7 @@ protocol PopularBoardPresentableListener: AnyObject {
   var popularBoardList: BehaviorRelay<[PostingDTO]> { get }
   
   func fetchPopularBoardList(at createdAt: Int)
+  func pushHomeBoardFeedVC(at startIndex: Int, type: HomeType)
 }
 
 final class PopularBoardViewController: UIViewController, PopularBoardPresentable, PopularBoardViewControllable {
@@ -90,6 +91,14 @@ final class PopularBoardViewController: UIViewController, PopularBoardPresentabl
           imageURL: data.imageUrl ?? ""
         )
       }.disposed(by: disposeBag)
+    
+    Observable.zip(
+      popularBoardCollectionView.rx.itemSelected,
+      popularBoardCollectionView.rx.modelSelected(PostingDTO.self)
+    ).subscribe(onNext: { [weak self] index, model in
+      guard let self else { return }
+      self.listener?.pushHomeBoardFeedVC(at: index.row, type: .Popular)
+    }).disposed(by: disposeBag)
     
     popularBoardCollectionView.rx.willDisplayCell
       .map{$0.at.row}

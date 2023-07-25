@@ -111,7 +111,7 @@ public extension UICollectionView {
     self.collectionViewLayout = layout
   }
   
-  func setupCommentListLayout() {
+  func setupCommentListLayout(inset: CGFloat = 20) {
     let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(48))
     let item = NSCollectionLayoutItem(layoutSize: itemSize)
     
@@ -119,7 +119,7 @@ public extension UICollectionView {
     let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
     
     let section = NSCollectionLayoutSection(group: group)
-    section.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 0, bottom: 20, trailing: 0)
+    section.contentInsets = NSDirectionalEdgeInsets(top: inset, leading: 0, bottom: inset, trailing: 0)
     let layout = UICollectionViewCompositionalLayout(section: section)
     
     

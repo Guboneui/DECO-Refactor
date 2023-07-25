@@ -42,6 +42,20 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
+               BlueprintIdentifier = "1B4CD3A7E33EF2F418227294"
+               BuildableName = "Comment.framework"
+               BlueprintName = "Comment"
+               ReferencedContainer = "container:Projects/Comment/Comment.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
                BlueprintIdentifier = "CFD7DEB690E20277121FAD5C"
                BuildableName = "CommonUI.framework"
                BlueprintName = "CommonUI"

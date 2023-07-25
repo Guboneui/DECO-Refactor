@@ -11,6 +11,9 @@
          location = "group:Bookmark/Bookmark.xcodeproj">
       </FileRef>
       <FileRef
+         location = "group:Comment/Comment.xcodeproj">
+      </FileRef>
+      <FileRef
          location = "group:CommonUI/CommonUI.xcodeproj">
       </FileRef>
       <FileRef

@@ -12,6 +12,7 @@ import Then
 public enum CommentType {
   case Parent
   case Child
+  case ParentInChild
 }
 
 public class CommentCell: UICollectionViewCell {
@@ -59,6 +60,7 @@ public class CommentCell: UICollectionViewCell {
   
   public override init(frame: CGRect) {
     super.init(frame: frame)
+    self.contentView.backgroundColor = .DecoColor.whiteColor
     self.setupLayouts()
   }
   
@@ -92,7 +94,8 @@ public class CommentCell: UICollectionViewCell {
     userName: String,
     comment: String,
     createdAt: Int,
-    childReplyCount: Int
+    childReplyCount: Int,
+    commentType: CommentType
   ) {
     
     profileImageView.loadLowQualityImage(imageUrl: profileUrl)
@@ -126,6 +129,27 @@ public class CommentCell: UICollectionViewCell {
     commentLabel.attributedText = attributedString
     let date = Date().getTimeInterver(serverTime: createdAt)
     timeLabel.text = date == "0초 후" ? "방금" : date
+    
+    switch commentType {
+    case .Parent:
+      self.contentView.backgroundColor = .DecoColor.whiteColor
+      self.showChildCommentButton.isHidden = false
+      self.profileImageView.snp.updateConstraints { make in
+        make.leading.equalToSuperview().offset(20)
+      }
+    case .Child:
+      self.contentView.backgroundColor = .DecoColor.whiteColor
+      self.showChildCommentButton.isHidden = true
+      self.profileImageView.snp.updateConstraints { make in
+        make.leading.equalToSuperview().offset(62)
+      }
+    case .ParentInChild:
+      self.contentView.backgroundColor = .DecoColor.lightBackground
+      self.showChildCommentButton.isHidden = true
+      self.profileImageView.snp.updateConstraints { make in
+        make.leading.equalToSuperview().offset(20)
+      }
+    }
   }
   
   required init?(coder: NSCoder) {

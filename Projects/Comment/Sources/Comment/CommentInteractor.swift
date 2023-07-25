@@ -6,6 +6,7 @@
 //
 
 import User
+import Util
 import Entity
 import Networking
 
@@ -14,16 +15,16 @@ import RxSwift
 import RxRelay
 
 protocol CommentRouting: ViewableRouting {
-  // TODO: Declare methods the interactor can invoke to manage sub-tree via the router.
+  func attachCommentDetailRIB(boardID: Int, parentComment: CommentDTO, commentParentID: Int)
+  func detachCommentDetailRIB(with popType: PopType)
 }
 
 protocol CommentPresentable: Presentable {
   var listener: CommentPresentableListener? { get set }
-  // TODO: Declare methods the interactor can invoke the presenter to present data.
 }
 
 protocol CommentListener: AnyObject {
-  // TODO: Declare methods the interactor can invoke to communicate with other RIBs.
+  func didTapCloseButton()
 }
 
 final class CommentInteractor: PresentableInteractor<CommentPresentable>, CommentInteractable, CommentPresentableListener {
@@ -86,5 +87,23 @@ final class CommentInteractor: PresentableInteractor<CommentPresentable>, Commen
         self.commentList.accept(prevList + list)
       }
     }
+  }
+  
+  func pushCommentDetailVC(at index: Int) {
+    let parentID: Int = commentList.value[index].postingReply.id
+    let commentInfo: CommentDTO = commentList.value[index]
+    self.router?.attachCommentDetailRIB(
+      boardID: boardID,
+      parentComment: commentInfo,
+      commentParentID: parentID
+    )
+  }
+  
+  func popCommentDetailVC(with popType: PopType) {
+    self.router?.detachCommentDetailRIB(with: popType)
+  }
+  
+  func didTapCloseButton() {
+    self.listener?.didTapCloseButton()
   }
 }

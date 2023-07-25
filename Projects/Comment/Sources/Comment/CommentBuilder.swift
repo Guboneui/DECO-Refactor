@@ -15,9 +15,12 @@ protocol CommentDependency: Dependency {
   var userManager: MutableUserManagerStream { get }
 }
 
-final class CommentComponent: Component<CommentDependency> {
-  
-  // TODO: Declare 'fileprivate' dependencies that are only used by this RIB.
+final class CommentComponent:
+  Component<CommentDependency>,
+  CommentDetailDependency
+{
+  var userManager: MutableUserManagerStream { dependency.userManager }
+  var boardRepository: BoardRepository { dependency.boardRepository }
 }
 
 // MARK: - Builder
@@ -42,6 +45,13 @@ final class CommentBuilder: Builder<CommentDependency>, CommentBuildable {
       boardRepository: dependency.boardRepository
     )
     interactor.listener = listener
-    return CommentRouter(interactor: interactor, viewController: viewController)
+    
+    let commentDetailBuildable = CommentDetailBuilder(dependency: component)
+    
+    return CommentRouter(
+      interactor: interactor,
+      viewController: viewController,
+      commentDetailBuildable: commentDetailBuildable
+    )
   }
 }

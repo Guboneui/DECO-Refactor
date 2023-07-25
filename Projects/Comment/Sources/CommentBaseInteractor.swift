@@ -15,7 +15,7 @@ public protocol CommentBaseRouting: ViewableRouting {
 
 protocol CommentBasePresentable: Presentable {
   var listener: CommentBasePresentableListener? { get set }
-  // TODO: Declare methods the interactor can invoke the presenter to present data.
+  func didTapCloseButton()
 }
 
 public protocol CommentBaseListener: AnyObject {
@@ -50,5 +50,9 @@ final class CommentBaseInteractor: PresentableInteractor<CommentBasePresentable>
   
   func dismissCommentVC() {
     listener?.dismissCommentVC()
+  }
+  
+  func didTapCloseButton() {
+    self.presenter.didTapCloseButton()
   }
 }

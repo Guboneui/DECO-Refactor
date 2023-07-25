@@ -98,4 +98,8 @@ final class CommentBaseViewController: ModalViewController, CommentBasePresentab
     }
     vc.didMove(toParent: self)
   }
+  
+  func didTapCloseButton() {
+    self.didTapBackgroundView()
+  }
 }

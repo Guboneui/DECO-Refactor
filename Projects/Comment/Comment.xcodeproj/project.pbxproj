@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2C73C3CA2A70721300A161D8 /* CommentDetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C73C3C62A70721300A161D8 /* CommentDetailRouter.swift */; };
+		2C73C3CB2A70721300A161D8 /* CommentDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C73C3C72A70721300A161D8 /* CommentDetailViewController.swift */; };
+		2C73C3CC2A70721300A161D8 /* CommentDetailBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C73C3C82A70721300A161D8 /* CommentDetailBuilder.swift */; };
+		2C73C3CD2A70721300A161D8 /* CommentDetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C73C3C92A70721300A161D8 /* CommentDetailInteractor.swift */; };
 		2CB405462A6FA00A0075E47A /* CommentBaseRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB405422A6FA00A0075E47A /* CommentBaseRouter.swift */; };
 		2CB405472A6FA00A0075E47A /* CommentBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB405432A6FA00A0075E47A /* CommentBaseViewController.swift */; };
 		2CB405482A6FA00A0075E47A /* CommentBaseBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB405442A6FA00A0075E47A /* CommentBaseBuilder.swift */; };
@@ -35,6 +39,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2C73C3C62A70721300A161D8 /* CommentDetailRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentDetailRouter.swift; sourceTree = "<group>"; };
+		2C73C3C72A70721300A161D8 /* CommentDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentDetailViewController.swift; sourceTree = "<group>"; };
+		2C73C3C82A70721300A161D8 /* CommentDetailBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentDetailBuilder.swift; sourceTree = "<group>"; };
+		2C73C3C92A70721300A161D8 /* CommentDetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentDetailInteractor.swift; sourceTree = "<group>"; };
 		2CB405422A6FA00A0075E47A /* CommentBaseRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentBaseRouter.swift; sourceTree = "<group>"; };
 		2CB405432A6FA00A0075E47A /* CommentBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentBaseViewController.swift; sourceTree = "<group>"; };
 		2CB405442A6FA00A0075E47A /* CommentBaseBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentBaseBuilder.swift; sourceTree = "<group>"; };
@@ -66,9 +74,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2C73C3C52A7071FB00A161D8 /* CommentDetail */ = {
+			isa = PBXGroup;
+			children = (
+				2C73C3C62A70721300A161D8 /* CommentDetailRouter.swift */,
+				2C73C3C72A70721300A161D8 /* CommentDetailViewController.swift */,
+				2C73C3C82A70721300A161D8 /* CommentDetailBuilder.swift */,
+				2C73C3C92A70721300A161D8 /* CommentDetailInteractor.swift */,
+			);
+			path = CommentDetail;
+			sourceTree = "<group>";
+		};
 		2E7C4BF4F5486842EFC06E23 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				2C73C3C52A7071FB00A161D8 /* CommentDetail */,
 				9F745DAE83DB5D2BDF0C7464 /* Comment */,
 				2CB405422A6FA00A0075E47A /* CommentBaseRouter.swift */,
 				2CB405432A6FA00A0075E47A /* CommentBaseViewController.swift */,
@@ -204,13 +224,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				2CB405552A7044D80075E47A /* CommentInteractor.swift in Sources */,
+				2C73C3CD2A70721300A161D8 /* CommentDetailInteractor.swift in Sources */,
 				2CB405482A6FA00A0075E47A /* CommentBaseBuilder.swift in Sources */,
 				2CB405462A6FA00A0075E47A /* CommentBaseRouter.swift in Sources */,
+				2C73C3CA2A70721300A161D8 /* CommentDetailRouter.swift in Sources */,
 				2CB405532A7044D80075E47A /* CommentViewController.swift in Sources */,
 				2CB405472A6FA00A0075E47A /* CommentBaseViewController.swift in Sources */,
 				2CB405492A6FA00A0075E47A /* CommentBaseInteractor.swift in Sources */,
 				2CB405522A7044D80075E47A /* CommentRouter.swift in Sources */,
 				2CB405542A7044D80075E47A /* CommentBuilder.swift in Sources */,
+				2C73C3CB2A70721300A161D8 /* CommentDetailViewController.swift in Sources */,
+				2C73C3CC2A70721300A161D8 /* CommentDetailBuilder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

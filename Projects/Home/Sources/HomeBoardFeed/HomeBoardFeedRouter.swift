@@ -8,11 +8,14 @@
 import User
 import Util
 import Entity
+import Comment
+
 import RIBs
 
 protocol HomeBoardFeedInteractable:
   Interactable,
-  TargetUserProfileListener
+  TargetUserProfileListener,
+  CommentBaseListener
 {
   var router: HomeBoardFeedRouting? { get set }
   var listener: HomeBoardFeedListener? { get set }
@@ -27,13 +30,18 @@ final class HomeBoardFeedRouter: ViewableRouter<HomeBoardFeedInteractable, HomeB
   private let targetUserProfileBuildable: TargetUserProfileBuildable
   private var targetUserProfileRouting: Routing?
   
+  private let commentBaseBuildable: CommentBaseBuildable
+  private var commentBaseRouting: Routing?
+  
   // TODO: Constructor inject child builder protocols to allow building children.
   init(
     interactor: HomeBoardFeedInteractable,
     viewController: HomeBoardFeedViewControllable,
-    targetUserProfileBuildable: TargetUserProfileBuildable
+    targetUserProfileBuildable: TargetUserProfileBuildable,
+    commentBaseBuildable: CommentBaseBuildable
   ) {
     self.targetUserProfileBuildable = targetUserProfileBuildable
+    self.commentBaseBuildable = commentBaseBuildable
     super.init(interactor: interactor, viewController: viewController)
     interactor.router = self
   }
@@ -52,6 +60,22 @@ final class HomeBoardFeedRouter: ViewableRouter<HomeBoardFeedInteractable, HomeB
       self.viewControllable.popViewController(animated: true)
     }
     self.targetUserProfileRouting = nil
+    self.detachChild(router)
+  }
+  
+  func attachCommentBaseRIB(with boardID: Int) {
+    if commentBaseRouting != nil { return }
+    let router = commentBaseBuildable.build(withListener: interactor, boardID: boardID)
+    router.viewControllable.uiviewController.modalPresentationStyle = .overFullScreen
+    self.viewControllable.present(router.viewControllable, animated: false, completion: nil)
+    self.commentBaseRouting = router
+    attachChild(router)
+  }
+  
+  func detachCommentBaseRIB() {
+    guard let router = commentBaseRouting else { return }
+    viewControllable.dismiss(animated: false, completion: nil)
+    self.commentBaseRouting = nil
     self.detachChild(router)
   }
 }

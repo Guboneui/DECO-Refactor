@@ -20,6 +20,7 @@ protocol HomeBoardFeedPresentableListener: AnyObject {
   
   func popHomeBoardFeedVC(with popType: PopType)
   func pushTargetUserProfileVC(at index: Int)
+  func presentCommentBaseVC(at index: Int)
   func fetchBoardBookmark(at index: Int)
   func fetchBoardLike(at index: Int)
   func checkCurrentBoardUser(at index: Int)
@@ -120,6 +121,8 @@ final class HomeBoardFeedViewController: UIViewController, HomeBoardFeedPresenta
         
         cell.didTapCommentButton = { [weak self] in
           guard let inSelf = self else { return }
+          let currentIndex: Int = inSelf.feedCollectionView.currentIndex
+          inSelf.listener?.presentCommentBaseVC(at: currentIndex)
           print("Clicked Comment Button ")
         }
         

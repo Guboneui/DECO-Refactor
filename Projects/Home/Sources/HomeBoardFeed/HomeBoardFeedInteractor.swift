@@ -17,6 +17,8 @@ import RxRelay
 protocol HomeBoardFeedRouting: ViewableRouting {
   func attachTargetUserProfileVC(with targetUserInfo: UserDTO)
   func detachTargetUserProfileVC(with popType: PopType)
+  func attachCommentBaseRIB(with boardID: Int)
+  func detachCommentBaseRIB()
 }
 
 protocol HomeBoardFeedPresentable: Presentable {
@@ -222,5 +224,14 @@ final class HomeBoardFeedInteractor: PresentableInteractor<HomeBoardFeedPresenta
         self.boardListStream.updateBoardList(with: prevList + boardList)
       }
     }
+  }
+  
+  func presentCommentBaseVC(at index: Int) {
+    guard let boardID: Int = boardList.value[index].id else { return }
+    self.router?.attachCommentBaseRIB(with: boardID)
+  }
+  
+  func dismissCommentVC() {
+    self.router?.detachCommentBaseRIB()
   }
 }

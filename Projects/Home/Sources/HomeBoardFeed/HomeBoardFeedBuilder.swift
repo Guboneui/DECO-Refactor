@@ -7,6 +7,7 @@
 
 import RIBs
 import User
+import Comment
 import Networking
 
 protocol HomeBoardFeedDependency: Dependency {
@@ -21,7 +22,8 @@ protocol HomeBoardFeedDependency: Dependency {
 
 final class HomeBoardFeedComponent:
   Component<HomeBoardFeedDependency>,
-  TargetUserProfileDependency
+  TargetUserProfileDependency,
+  CommentBaseDependency
 {
   var userManager: User.MutableUserManagerStream { dependency.userManager }
   var userProfileRepository: Networking.UserProfileRepository { dependency.userProfileRepository }
@@ -65,11 +67,13 @@ final class HomeBoardFeedBuilder: Builder<HomeBoardFeedDependency>, HomeBoardFee
     interactor.listener = listener
     
     let targetUserProfileBuildable = TargetUserProfileBuilder(dependency: component)
+    let commentBaseBuildable = CommentBaseBuilder(dependency: component)
     
     return HomeBoardFeedRouter(
       interactor: interactor,
       viewController: viewController,
-      targetUserProfileBuildable: targetUserProfileBuildable
+      targetUserProfileBuildable: targetUserProfileBuildable,
+      commentBaseBuildable: commentBaseBuildable
     )
   }
 }

@@ -13,7 +13,7 @@ import RIBs
 import RxSwift
 import RxRelay
 
-protocol TargetUserProfileRouting: ViewableRouting {
+public protocol TargetUserProfileRouting: ViewableRouting {
   func attachFollowVC(targetUserID: Int, targetUserNickname: String, firstFollowTabStatus: FollowTabType)
   func detachFollowVC(with popType: PopType)
 }
@@ -27,13 +27,11 @@ protocol TargetUserProfilePresentable: Presentable {
   @MainActor func showUnblockAlert()
 }
 
-protocol TargetUserProfileListener: AnyObject {
+public protocol TargetUserProfileListener: AnyObject {
   func popTargetUserProfileVC(with popType: PopType)
 }
 
 final class TargetUserProfileInteractor: PresentableInteractor<TargetUserProfilePresentable>, TargetUserProfileInteractable, TargetUserProfilePresentableListener {
-  
-  
   
   weak var router: TargetUserProfileRouting?
   weak var listener: TargetUserProfileListener?

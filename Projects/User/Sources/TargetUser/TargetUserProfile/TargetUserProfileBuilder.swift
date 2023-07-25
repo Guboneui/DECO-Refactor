@@ -10,7 +10,7 @@ import Networking
 
 import RIBs
 
-protocol TargetUserProfileDependency: Dependency {
+public protocol TargetUserProfileDependency: Dependency {
   var userManager: MutableUserManagerStream { get }
   var userProfileRepository: UserProfileRepository { get }
   var followRepository: FollowRepository { get }
@@ -26,17 +26,17 @@ final class TargetUserProfileComponent: Component<TargetUserProfileDependency>, 
 
 // MARK: - Builder
 
-protocol TargetUserProfileBuildable: Buildable {
+public protocol TargetUserProfileBuildable: Buildable {
   func build(withListener listener: TargetUserProfileListener, targetUserInfo: UserDTO) -> TargetUserProfileRouting
 }
 
-final class TargetUserProfileBuilder: Builder<TargetUserProfileDependency>, TargetUserProfileBuildable {
+public final class TargetUserProfileBuilder: Builder<TargetUserProfileDependency>, TargetUserProfileBuildable {
   
-  override init(dependency: TargetUserProfileDependency) {
+  public override init(dependency: TargetUserProfileDependency) {
     super.init(dependency: dependency)
   }
   
-  func build(
+  public func build(
     withListener listener: TargetUserProfileListener,
     targetUserInfo: UserDTO
   ) -> TargetUserProfileRouting {

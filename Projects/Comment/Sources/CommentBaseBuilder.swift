@@ -5,16 +5,23 @@
 //  Created by 구본의 on 2023/07/25.
 //
 
+import User
+import Networking
+
 import RIBs
 
 public protocol CommentBaseDependency: Dependency {
-  // TODO: Declare the set of dependencies required by this RIB, but cannot be
-  // created by this RIB.
+  var boardRepository: BoardRepository { get }
+  var userManager: MutableUserManagerStream { get }
 }
 
-final class CommentBaseComponent: Component<CommentBaseDependency> {
+final class CommentBaseComponent:
+  Component<CommentBaseDependency>,
+  CommentDependency
+{
   
-  // TODO: Declare 'fileprivate' dependencies that are only used by this RIB.
+  var boardRepository: BoardRepository { dependency.boardRepository }
+  var userManager: MutableUserManagerStream { dependency.userManager }
 }
 
 // MARK: - Builder
@@ -34,6 +41,13 @@ public final class CommentBaseBuilder: Builder<CommentBaseDependency>, CommentBa
     let viewController = CommentBaseViewController()
     let interactor = CommentBaseInteractor(presenter: viewController, boardID: boardID)
     interactor.listener = listener
-    return CommentBaseRouter(interactor: interactor, viewController: viewController)
+    
+    let commentBuildable = CommentBuilder(dependency: component)
+    
+    return CommentBaseRouter(
+      interactor: interactor,
+      viewController: viewController,
+      commentBuildable: commentBuildable
+    )
   }
 }

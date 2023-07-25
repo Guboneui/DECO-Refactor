@@ -28,6 +28,7 @@ final class HomeBoardFeedComponent:
   var userManager: User.MutableUserManagerStream { dependency.userManager }
   var userProfileRepository: Networking.UserProfileRepository { dependency.userProfileRepository }
   var followRepository: Networking.FollowRepository { dependency.followRepository }
+  var boardRepository: BoardRepository { dependency.boardRepository }
 }
 
 // MARK: - Builder

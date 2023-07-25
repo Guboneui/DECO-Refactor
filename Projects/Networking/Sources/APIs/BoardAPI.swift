@@ -15,6 +15,7 @@ enum BoardAPI {
   case boardInfo(Int, Int)
   case boardLike(Int, Int)
   case boardDisLike(Int, Int)
+  case boardCommentList(Int, Int, Int, Int)
 }
 
 extension BoardAPI: TargetType {
@@ -35,12 +36,14 @@ extension BoardAPI: TargetType {
       return "\(defaultURL)/like/\(boardID)"
     case .boardDisLike(let boardID, _):
       return "\(defaultURL)/dislike/\(boardID)"
+    case .boardCommentList(_, _, _, let boardID):
+      return "\(defaultURL)/reply/\(boardID)"
     }
   }
   
   var method: Moya.Method {
     switch self {
-    case .boardCategoryList, .boardInfo:
+    case .boardCategoryList, .boardInfo, .boardCommentList:
       return .get
     case .boardList, .boardLike, .boardDisLike:
       return .post
@@ -59,6 +62,8 @@ extension BoardAPI: TargetType {
       return .requestParameters(parameters: ["userId":userID], encoding: JSONEncoding.default)
     case .boardDisLike(_, let userID):
       return .requestParameters(parameters: ["userId":userID], encoding: JSONEncoding.default)
+    case .boardCommentList(let createdAt, let parentReplyID, let userID, _):
+      return .requestParameters(parameters: ["createdAt":createdAt, "parentReplyId":parentReplyID, "userId":userID], encoding: URLEncoding.queryString)
     }
   }
   
@@ -66,4 +71,3 @@ extension BoardAPI: TargetType {
     return nil
   }
 }
-

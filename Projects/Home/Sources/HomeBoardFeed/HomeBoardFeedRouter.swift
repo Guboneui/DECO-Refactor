@@ -22,7 +22,7 @@ protocol HomeBoardFeedInteractable:
 }
 
 protocol HomeBoardFeedViewControllable: ViewControllable {
-  // TODO: Declare methods the router invokes to manipulate the view hierarchy.
+
 }
 
 final class HomeBoardFeedRouter: ViewableRouter<HomeBoardFeedInteractable, HomeBoardFeedViewControllable>, HomeBoardFeedRouting {

@@ -9,7 +9,8 @@ import RIBs
 import RxSwift
 
 public protocol CommentBaseRouting: ViewableRouting {
-  
+  func attachCommentRIB(boardID: Int)
+  func detachCommentRIB()
 }
 
 protocol CommentBasePresentable: Presentable {
@@ -39,12 +40,12 @@ final class CommentBaseInteractor: PresentableInteractor<CommentBasePresentable>
   
   override func didBecomeActive() {
     super.didBecomeActive()
-    // TODO: Implement business logic here.
+    router?.attachCommentRIB(boardID: boardID)
   }
   
   override func willResignActive() {
     super.willResignActive()
-    // TODO: Pause any business logic.
+    router?.detachCommentRIB()
   }
   
   func dismissCommentVC() {

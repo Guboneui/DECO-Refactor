@@ -86,4 +86,16 @@ final class CommentBaseViewController: ModalViewController, CommentBasePresentab
       .horizontally()
       .height(20)
   }
+  
+  func addCommentVC(_ view: ViewControllable) {
+    let vc = view.uiviewController
+    addChild(vc)
+    containerView.addSubview(vc.view)
+    vc.view.snp.makeConstraints { make in
+      make.top.equalToSuperview().offset(20)
+      make.horizontalEdges.equalToSuperview()
+      make.bottom.equalToSuperview()
+    }
+    vc.didMove(toParent: self)
+  }
 }

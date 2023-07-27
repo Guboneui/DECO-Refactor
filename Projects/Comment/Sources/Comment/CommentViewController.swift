@@ -28,6 +28,25 @@ final class CommentViewController: UIViewController, CommentPresentable, Comment
   
   private let inputField: UIView = UIView().then {
     $0.backgroundColor = .blue
+  private let noticeTitleLabel: UILabel = UILabel().then {
+    $0.text = "아직 댓글이 없어요!"
+    $0.font = .DecoFont.getFont(with: .Suit, type: .bold, size: 16)
+    $0.textColor = .DecoColor.darkGray1
+    $0.textAlignment = .center
+    $0.sizeToFit()
+  }
+  
+  private let noticeSubTitleLable: UILabel = UILabel().then {
+    $0.text = "댓글을 남겨 가장 먼저 인사를 건네보세요."
+    $0.font = .DecoFont.getFont(with: .Suit, type: .regular, size: 12)
+    $0.textColor = .DecoColor.gray2
+    $0.textAlignment = .center
+    $0.sizeToFit()
+  }
+  
+  private lazy var noticeFlexView: UIView = UIView().then {
+    $0.isHidden = true
+  }
   }
   
   private let commentCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: .init()).then {
@@ -53,12 +72,24 @@ final class CommentViewController: UIViewController, CommentPresentable, Comment
   
   private func setupViews() {
     self.view.addSubview(inputField)
+    
+    noticeFlexView.flex.alignItems(.center).grow(1).define { flex in
+      flex.addItem(noticeTitleLabel).height(23)
+      flex.addItem(noticeSubTitleLable).height(17).marginTop(8)
+    }
+    
     self.view.addSubview(commentCollectionView)
   }
   
   private func setupLayouts() {
     
     inputField.pin
+    noticeFlexView.pin
+      .horizontally()
+      .vCenter()
+      .marginBottom(40)
+      .height(48)
+
       .horizontally()
       .bottom()
       .height(70)
@@ -67,6 +98,9 @@ final class CommentViewController: UIViewController, CommentPresentable, Comment
       .above(of: inputField)
       .top()
       .horizontally()
+    
+    noticeFlexView.flex.layout()
+    
   }
   
   private func setupCollectionView() {
@@ -107,5 +141,10 @@ final class CommentViewController: UIViewController, CommentPresentable, Comment
         guard let self else { return }
         self.listener?.pushCommentDetailVC(at: index)
       }).disposed(by: disposeBag)
+  }
+  
+  func showEmptyNotice(isEmpty: Bool) {
+    commentCollectionView.isHidden = isEmpty
+    noticeFlexView.isHidden = !isEmpty
   }
 }

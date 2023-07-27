@@ -21,6 +21,7 @@ protocol CommentRouting: ViewableRouting {
 
 protocol CommentPresentable: Presentable {
   var listener: CommentPresentableListener? { get set }
+  @MainActor func showEmptyNotice(isEmpty: Bool)
 }
 
 protocol CommentListener: AnyObject {
@@ -70,7 +71,10 @@ final class CommentInteractor: PresentableInteractor<CommentPresentable>, Commen
         userID: self.userManager.userID,
         boardID: self.boardID
       )
-      self.commentList.accept(list ?? [])
+      if let list {
+        await self.presenter.showEmptyNotice(isEmpty: list.isEmpty)
+        self.commentList.accept(list)
+      }
     }
   }
   

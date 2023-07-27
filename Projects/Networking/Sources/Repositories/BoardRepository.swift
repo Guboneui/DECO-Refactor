@@ -17,6 +17,7 @@ public protocol BoardRepository {
   func boardLike(boardID: Int, userID: Int) async -> Bool?
   func boardDisLike(boardID: Int, userID: Int) async -> Bool?
   func boardCommentList(createdAt: Int, parentCommentID: Int, userID: Int, boardID: Int) async -> [CommentDTO]?
+  func boardDelete(userID: Int, boardID: Int) async -> Bool?
 }
 
 public class BoardRepositoryImpl: BaseRepository, BoardRepository {
@@ -46,6 +47,10 @@ public class BoardRepositoryImpl: BaseRepository, BoardRepository {
   
   public func boardCommentList(createdAt: Int, parentCommentID: Int, userID: Int, boardID: Int) async -> [CommentDTO]? {
     await provider.request(.boardCommentList(createdAt, parentCommentID, userID, boardID))
+  }
+  
+  public func boardDelete(userID: Int, boardID: Int) async -> Bool? {
+    await provider.request(.boardDelete(userID, boardID))
   }
 }
 

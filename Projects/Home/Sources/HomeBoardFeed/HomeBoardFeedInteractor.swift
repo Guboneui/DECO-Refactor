@@ -234,4 +234,23 @@ final class HomeBoardFeedInteractor: PresentableInteractor<HomeBoardFeedPresenta
   func dismissCommentVC() {
     self.router?.detachCommentBaseRIB()
   }
+  
+  func fetchDeleteBoard(at index: Int) {
+    Task.detached { [weak self] in
+      guard let self else { return }
+      let currentBoard = self.boardList.value[index]
+      guard let boardID: Int = currentBoard.id else { return }
+      _ = await self.boardRepository.boardDelete(
+        userID: self.userManager.userID,
+        boardID: boardID
+      )
+      await self.deleteBoardList(at: index)
+    }
+  }
+  
+  private func deleteBoardList(at index: Int) async {
+    var currentBoardList = boardList.value
+    currentBoardList.remove(at: index)
+    self.boardListStream.updateBoardList(with: currentBoardList)
+  }
 }

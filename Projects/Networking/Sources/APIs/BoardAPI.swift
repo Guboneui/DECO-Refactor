@@ -16,6 +16,7 @@ enum BoardAPI {
   case boardLike(Int, Int)
   case boardDisLike(Int, Int)
   case boardCommentList(Int, Int, Int, Int)
+  case boardDelete(Int, Int)
 }
 
 extension BoardAPI: TargetType {
@@ -38,6 +39,8 @@ extension BoardAPI: TargetType {
       return "\(defaultURL)/dislike/\(boardID)"
     case .boardCommentList(_, _, _, let boardID):
       return "\(defaultURL)/reply/\(boardID)"
+    case .boardDelete:
+      return "\(defaultURL)/delete"
     }
   }
   
@@ -45,7 +48,7 @@ extension BoardAPI: TargetType {
     switch self {
     case .boardCategoryList, .boardInfo, .boardCommentList:
       return .get
-    case .boardList, .boardLike, .boardDisLike:
+    case .boardList, .boardLike, .boardDisLike, .boardDelete:
       return .post
     }
   }
@@ -64,6 +67,8 @@ extension BoardAPI: TargetType {
       return .requestParameters(parameters: ["userId":userID], encoding: JSONEncoding.default)
     case .boardCommentList(let createdAt, let parentReplyID, let userID, _):
       return .requestParameters(parameters: ["createdAt":createdAt, "parentReplyId":parentReplyID, "userId":userID], encoding: URLEncoding.queryString)
+    case .boardDelete(let userID, let postingID):
+      return .requestParameters(parameters: ["userId":userID, "postingId":postingID], encoding: JSONEncoding.default)
     }
   }
   

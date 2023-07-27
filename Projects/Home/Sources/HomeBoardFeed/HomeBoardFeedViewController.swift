@@ -25,6 +25,7 @@ protocol HomeBoardFeedPresentableListener: AnyObject {
   func fetchBoardLike(at index: Int)
   func checkCurrentBoardUser(at index: Int)
   func fetchBoardList(lastIndex index: Int)
+  func fetchDeleteBoard(at index: Int)
 }
 
 final class HomeBoardFeedViewController: UIViewController, HomeBoardFeedPresentable, HomeBoardFeedViewControllable {
@@ -186,8 +187,10 @@ final class HomeBoardFeedViewController: UIViewController, HomeBoardFeedPresenta
       title: "삭제하기",
       titleColor: .DecoColor.darkGray1,
       style: .default
-    ) { _ in
-      print("TODO: 삭제하기")
+    ) { [weak self] _ in
+      guard let self else { return }
+      let currentIndex: Int = self.feedCollectionView.currentIndex
+      self.listener?.fetchDeleteBoard(at: currentIndex)
     }
     
     let cancelButton = UIAlertAction(

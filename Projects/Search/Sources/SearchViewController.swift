@@ -18,6 +18,7 @@ protocol SearchPresentableListener: AnyObject {
   
   var searchHistory: BehaviorRelay<[String]> { get }
   
+  func searchText(with keyword: String)
   func popSearchVC(with popType: PopType)
   func pushSearchResultVC(with searchText: String)
 }
@@ -66,12 +67,21 @@ final class SearchViewController: UIViewController, SearchPresentable, SearchVie
     $0.makeCornerRadius(radius: 8)
   }
   
+  private let recentSearchListCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: .init()).then {
+    $0.register(FilterCell.self, forCellWithReuseIdentifier: FilterCell.identifier)
+    $0.backgroundColor = .DecoColor.kakaoColor
+    $0.bounces = false
+    $0.showsHorizontalScrollIndicator = false
+    $0.setupSelectionFilterLayout()
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     self.view.backgroundColor = .DecoColor.whiteColor
     self.setupViews()
     self.setupGestures()
     self.setupBindings()
+    self.setupCollectionViews()
   }
   
   override func viewDidAppear(_ animated: Bool) {
@@ -98,6 +108,7 @@ final class SearchViewController: UIViewController, SearchPresentable, SearchVie
     self.searchBarView.addSubview(searchTextField)
     self.view.addSubview(recentSearchTextLabel)
     self.view.addSubview(removeSearchHistoryButton)
+    self.view.addSubview(recentSearchListCollectionView)
   }
   
   private func setupLayouts() {
@@ -135,6 +146,11 @@ final class SearchViewController: UIViewController, SearchPresentable, SearchVie
       .right(20)
       .sizeToFit()
     
+    recentSearchListCollectionView.pin
+      .below(of: recentSearchTextLabel)
+      .horizontally()
+      .height(30)
+      .marginTop(15)
   }
   
   private func setupGestures() {
@@ -152,16 +168,26 @@ final class SearchViewController: UIViewController, SearchPresentable, SearchVie
         guard let self else { return }
         if let text = self.searchTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
            !text.isEmpty {
+          self.listener?.searchText(with: text)
           self.listener?.pushSearchResultVC(with: text)
         }
       }).disposed(by: disposeBag)
-    
+  }
+  
+  private func setupCollectionViews() {
     listener?.searchHistory
-      .compactMap{$0}
-      .subscribe(onNext: { [weak self] histories in
-        guard let self else { return }
-        self.recentSearchTextLabel.isHidden = histories.isEmpty
-        self.removeSearchHistoryButton.isHidden = histories.isEmpty
-      }).disposed(by: disposeBag)
+      .bind(to: recentSearchListCollectionView.rx.items(
+        cellIdentifier: FilterCell.identifier,
+        cellType: FilterCell.self)
+      ) { index, searchText, cell in
+        cell.setupCellConfigure(text: searchText, isSelected: false)
+      }.disposed(by: disposeBag)
+    
+    Observable.zip(
+      recentSearchListCollectionView.rx.itemSelected,
+      recentSearchListCollectionView.rx.modelSelected(String.self)
+    ).subscribe(onNext: { [weak self] index, searchText in
+      print(index, searchText)
+    }).disposed(by: disposeBag)
   }
 }

@@ -41,6 +41,7 @@ final class SearchInteractor: PresentableInteractor<SearchPresentable>, SearchIn
   
   override func didBecomeActive() {
     super.didBecomeActive()
+    self.getUserSearchHistory()
   }
   
   override func willResignActive() {
@@ -58,5 +59,15 @@ final class SearchInteractor: PresentableInteractor<SearchPresentable>, SearchIn
   
   func popSearchResultVC(with popType: PopType) {
     router?.detachSearchResultVC(with: popType)
+  }
+  
+  func searchText(with keyword: String) {
+    UserDefaults().updateSearchHistoryValue(with: keyword)
+    getUserSearchHistory()
+  }
+  
+  private func getUserSearchHistory() {
+    let searchHistory = UserDefaults().getSearchHistoryValue()
+    self.searchHistory.accept(searchHistory)
   }
 }

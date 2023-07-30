@@ -173,7 +173,7 @@ final class SearchViewController: UIViewController, SearchPresentable, SearchVie
         guard let self else { return }
         if let text = self.searchTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
            !text.isEmpty {
-          listener?.searchText(with: text)
+          self.listener?.searchText(with: text)
           self.listener?.pushSearchResultVC(with: text)
         }
       }).disposed(by: disposeBag)
@@ -193,6 +193,7 @@ final class SearchViewController: UIViewController, SearchPresentable, SearchVie
       recentSearchListCollectionView.rx.modelSelected(String.self)
     ).subscribe(onNext: { [weak self] index, searchText in
       guard let self else { return }
+      self.listener?.searchText(with: searchText)
       self.listener?.pushSearchResultVC(with: searchText)
     }).disposed(by: disposeBag)
   }

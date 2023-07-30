@@ -20,7 +20,15 @@ public extension UserDefaults {
     if historyValue.isEmpty {
       defaults.set([searchHistory], forKey: key)
     } else {
-      historyValue.append(searchHistory)
+      if let targetIndex: Int = historyValue.lastIndex(of: searchHistory) {
+        let popValue: String = historyValue.remove(at: targetIndex)
+        historyValue.insert(popValue, at: 0)
+      } else {
+        historyValue.insert(searchHistory, at: 0)
+      }
+      if historyValue.count > 5 {
+        historyValue.removeLast()
+      }
       defaults.set(historyValue, forKey: key)
     }
   }

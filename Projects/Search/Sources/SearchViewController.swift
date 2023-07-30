@@ -187,7 +187,8 @@ final class SearchViewController: UIViewController, SearchPresentable, SearchVie
       recentSearchListCollectionView.rx.itemSelected,
       recentSearchListCollectionView.rx.modelSelected(String.self)
     ).subscribe(onNext: { [weak self] index, searchText in
-      print(index, searchText)
+      guard let self else { return }
+      self.listener?.pushSearchResultVC(with: searchText)
     }).disposed(by: disposeBag)
   }
 }

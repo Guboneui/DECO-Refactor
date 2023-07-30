@@ -25,6 +25,13 @@ public extension UserDefaults {
     }
   }
   
+  func removeAllSearchHistory() {
+    let key: String = UserDefaultsKey.searchHistory.rawValue
+    let defaults = UserDefaults.standard
+    
+    defaults.set([String](), forKey: key)
+  }
+  
   func getSearchHistoryValue() -> [String] {
     let key: String = UserDefaultsKey.searchHistory.rawValue
     let defaults = UserDefaults.standard

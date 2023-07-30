@@ -20,7 +20,7 @@ public protocol SearchRouting: ViewableRouting {
 
 protocol SearchPresentable: Presentable {
   var listener: SearchPresentableListener? { get set }
-  // TODO: Declare methods the interactor can invoke the presenter to present data.
+  func searchHistoryIsEmpty(isEmpty: Bool)
 }
 
 public protocol SearchListener: AnyObject {
@@ -32,6 +32,7 @@ final class SearchInteractor: PresentableInteractor<SearchPresentable>, SearchIn
   weak var router: SearchRouting?
   weak var listener: SearchListener?
   
+  private let disposeBag: DisposeBag = DisposeBag()
   var searchHistory: BehaviorRelay<[String]> = .init(value: [])
   
   override init(presenter: SearchPresentable) {
@@ -42,6 +43,7 @@ final class SearchInteractor: PresentableInteractor<SearchPresentable>, SearchIn
   override func didBecomeActive() {
     super.didBecomeActive()
     self.getUserSearchHistory()
+    self.setupBindings()
   }
   
   override func willResignActive() {
@@ -61,6 +63,17 @@ final class SearchInteractor: PresentableInteractor<SearchPresentable>, SearchIn
     router?.detachSearchResultVC(with: popType)
   }
   
+  private func setupBindings() {
+    self.searchHistory
+      .map{$0.isEmpty}
+      .observe(on: MainScheduler.instance)
+      .subscribe(onNext: { [weak self] isEmpty in
+        guard let self else { return }
+        self.presenter.searchHistoryIsEmpty(isEmpty: isEmpty)
+      }).disposed(by: disposeBag)
+      
+  }
+  
   func searchText(with keyword: String) {
     UserDefaults().updateSearchHistoryValue(with: keyword)
     getUserSearchHistory()
@@ -70,4 +83,11 @@ final class SearchInteractor: PresentableInteractor<SearchPresentable>, SearchIn
     let searchHistory = UserDefaults().getSearchHistoryValue()
     self.searchHistory.accept(searchHistory)
   }
+  
+  func removeAllSearchHistory() {
+    UserDefaults().removeAllSearchHistory()
+    self.getUserSearchHistory()
+  }
+  
+  
 }

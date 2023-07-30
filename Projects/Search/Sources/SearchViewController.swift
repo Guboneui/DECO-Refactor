@@ -19,6 +19,7 @@ protocol SearchPresentableListener: AnyObject {
   var searchHistory: BehaviorRelay<[String]> { get }
   
   func searchText(with keyword: String)
+  func removeAllSearchHistory()
   func popSearchVC(with popType: PopType)
   func pushSearchResultVC(with searchText: String)
 }
@@ -69,7 +70,7 @@ final class SearchViewController: UIViewController, SearchPresentable, SearchVie
   
   private let recentSearchListCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: .init()).then {
     $0.register(FilterCell.self, forCellWithReuseIdentifier: FilterCell.identifier)
-    $0.backgroundColor = .DecoColor.kakaoColor
+    $0.backgroundColor = .DecoColor.whiteColor
     $0.bounces = false
     $0.showsHorizontalScrollIndicator = false
     $0.setupSelectionFilterLayout()
@@ -159,7 +160,11 @@ final class SearchViewController: UIViewController, SearchPresentable, SearchVie
       self.listener?.popSearchVC(with: .BackButton)
     }
     
-    
+    removeSearchHistoryButton.tap()
+      .bind { [weak self] in
+        guard let self else { return }
+        self.listener?.removeAllSearchHistory()
+      }.disposed(by: disposeBag)
   }
   
   private func setupBindings() {
@@ -168,7 +173,7 @@ final class SearchViewController: UIViewController, SearchPresentable, SearchVie
         guard let self else { return }
         if let text = self.searchTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
            !text.isEmpty {
-          self.listener?.searchText(with: text)
+          listener?.searchText(with: text)
           self.listener?.pushSearchResultVC(with: text)
         }
       }).disposed(by: disposeBag)
@@ -190,5 +195,11 @@ final class SearchViewController: UIViewController, SearchPresentable, SearchVie
       guard let self else { return }
       self.listener?.pushSearchResultVC(with: searchText)
     }).disposed(by: disposeBag)
+  }
+  
+  func searchHistoryIsEmpty(isEmpty: Bool) {
+    recentSearchTextLabel.isHidden = isEmpty
+    removeSearchHistoryButton.isHidden = isEmpty
+    recentSearchListCollectionView.isHidden = isEmpty
   }
 }

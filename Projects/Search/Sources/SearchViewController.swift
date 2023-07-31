@@ -138,13 +138,13 @@ final class SearchViewController: UIViewController, SearchPresentable, SearchVie
     
     recentSearchTextLabel.pin
       .below(of: navigationBar)
-      .left(30)
+      .left(22)
       .marginTop(30)
       .sizeToFit()
       
     removeSearchHistoryButton.pin
       .vCenter(to: recentSearchTextLabel.edge.vCenter)
-      .right(20)
+      .right(11)
       .sizeToFit()
     
     recentSearchListCollectionView.pin

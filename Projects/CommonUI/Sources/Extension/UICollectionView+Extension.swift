@@ -42,7 +42,7 @@ public extension UICollectionView {
   
   
   
-  func setupSelectionFilterLayout(spacing: CGFloat = 8.0, inset: CGFloat = 18.0) {
+  func setupSelectionFilterLayout(spacing: CGFloat = 8.0, inset: CGFloat = 22.0) {
     let config = UICollectionViewCompositionalLayoutConfiguration()
     config.scrollDirection = .horizontal
     config.interSectionSpacing = 0

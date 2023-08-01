@@ -16,6 +16,7 @@ public protocol UserProfileRepository {
   func checkUserBlockStatus(userID: Int, targetUserID: Int) async -> Bool?
   func blockUser(userID: Int, targetUserID: Int) async -> EmptyDTO?
   func unblockUser(userID: Int, targetUserID: Int) async -> EmptyDTO?
+  func editProfile(userID: Int, backgroundURL: String, profileURL: String, profileName: String, profileDescription: String, nickName: String) async -> ProfileDTO?
 }
 
 public class UserProfileRepositoryImpl: BaseRepository, UserProfileRepository {
@@ -41,6 +42,10 @@ public class UserProfileRepositoryImpl: BaseRepository, UserProfileRepository {
   
   public func unblockUser(userID: Int, targetUserID: Int) async -> EmptyDTO? {
     await provider.request(.unblockUser(userID, targetUserID))
+  }
+  
+  public func editProfile(userID: Int, backgroundURL: String, profileURL: String, profileName: String, profileDescription: String, nickName: String) async -> ProfileDTO? {
+    await provider.request(.editProfile(userID, backgroundURL, profileURL, profileName, profileDescription, nickName))
   }
 }
 

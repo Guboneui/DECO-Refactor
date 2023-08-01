@@ -7,6 +7,8 @@
 
 import User
 import Util
+import Entity
+import Networking
 
 import RIBs
 import RxSwift
@@ -33,12 +35,15 @@ final class ProfileEditInteractor: PresentableInteractor<ProfileEditPresentable>
   
   private let disposeBag: DisposeBag = DisposeBag()
   private let userManager: MutableUserManagerStream
+  private let userProfileRepository: UserProfileRepository
   
   init(
     presenter: ProfileEditPresentable,
-    userManager: MutableUserManagerStream
+    userManager: MutableUserManagerStream,
+    userProfileRepository: UserProfileRepository
   ) {
     self.userManager = userManager
+    self.userProfileRepository = userProfileRepository
     super.init(presenter: presenter)
     presenter.listener = self
   }
@@ -64,5 +69,39 @@ final class ProfileEditInteractor: PresentableInteractor<ProfileEditPresentable>
   
   func popProfileEditVC(with popType: PopType) {
     self.listener?.detachProfileEditVC(with: popType)
+  }
+  
+  func fetchEditProfile(profileName: String, nickName: String, description: String) {
+    let backgroundImage: String = self.userManager.userBackgroundImage
+    let profileImage: String = self.userManager.userProfileImage
+    
+    Task.detached { [weak self] in
+      guard let self else { return }
+      if let editedProfileInfo = await self.userProfileRepository.editProfile(
+        userID: self.userManager.userID,
+        backgroundURL: backgroundImage,
+        profileURL: profileImage,
+        profileName: profileName,
+        profileDescription: description,
+        nickName: nickName
+      ) {
+        await self.updateUserProfile(with: editedProfileInfo)
+        await self.popEditViewController()
+      }
+    }
+  }
+  
+  @MainActor
+  private func updateUserProfile(with profileInfo: ProfileDTO) {
+    self.userManager.updateUserInfo(
+      with: self.userManager.castingUserInfoModel(
+        with: profileInfo
+      )
+    )
+  }
+  
+  @MainActor
+  private func popEditViewController() {
+    self.listener?.detachProfileEditVC(with: .BackButton)
   }
 }

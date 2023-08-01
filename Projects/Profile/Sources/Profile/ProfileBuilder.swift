@@ -23,7 +23,7 @@ final class ProfileComponent:
   FollowDependency
 
 {
-  fileprivate var userProfileRepository: UserProfileRepository { UserProfileRepositoryImpl() }
+  var userProfileRepository: UserProfileRepository { UserProfileRepositoryImpl() }
   
   var userManager: MutableUserManagerStream { dependency.userManager }
   // TODO: Declare 'fileprivate' dependencies that are only used by this RIB.

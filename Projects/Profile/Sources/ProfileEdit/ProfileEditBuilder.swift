@@ -6,11 +6,13 @@
 //
 
 import User
+import Networking
 
 import RIBs
 
 public protocol ProfileEditDependency: Dependency {
   var userManager: MutableUserManagerStream { get }
+  var userProfileRepository: UserProfileRepository { get }
 }
 
 final class ProfileEditComponent: Component<ProfileEditDependency> {
@@ -35,7 +37,8 @@ public final class ProfileEditBuilder: Builder<ProfileEditDependency>, ProfileEd
     let viewController = ProfileEditViewController()
     let interactor = ProfileEditInteractor(
       presenter: viewController,
-      userManager: dependency.userManager
+      userManager: dependency.userManager,
+      userProfileRepository: dependency.userProfileRepository
     )
     interactor.listener = listener
     return ProfileEditRouter(interactor: interactor, viewController: viewController)

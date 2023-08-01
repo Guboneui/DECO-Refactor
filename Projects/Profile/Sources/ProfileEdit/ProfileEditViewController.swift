@@ -17,6 +17,11 @@ import RxSwift
 
 protocol ProfileEditPresentableListener: AnyObject {
   func popProfileEditVC(with popType: PopType)
+  func fetchEditProfile(
+    profileName: String,
+    nickName: String,
+    description: String
+  )
 }
 
 final class ProfileEditViewController: UIViewController, ProfileEditPresentable, ProfileEditViewControllable {
@@ -306,6 +311,29 @@ final class ProfileEditViewController: UIViewController, ProfileEditPresentable,
       .subscribe(onNext: { [weak self] _ in
         guard let self else { return }
         self.view.endEditing(true)
+      }).disposed(by: disposeBag)
+    
+    confirmButton.tap()
+      .subscribe(onNext: { [weak self] in
+        guard let self else { return }
+        
+        guard let userNickName = self.editProfileNickNameTextField.text,
+              userNickName.isEmpty == false
+        else {
+          ToastManager.shared.showToast(.EmptyNickName)
+          return
+        }
+        
+        let profileName: String = self.editProfileNameTextField.text ?? ""
+        
+        var profileDescription: String = self.editProfileDescriptionTextView.text.trimmingCharacters(in: .whitespacesAndNewlines)
+        if profileDescription == self.descriptionPlaceHolder { profileDescription = "" }
+        
+        self.listener?.fetchEditProfile(
+          profileName: profileName,
+          nickName: userNickName,
+          description: profileDescription
+        )
       }).disposed(by: disposeBag)
   }
   

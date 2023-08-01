@@ -14,6 +14,7 @@ enum UserProfileAPI {
   case checkUserBlockStatus(Int, Int)
   case blockUser(Int, Int)
   case unblockUser(Int, Int)
+  case editProfile(Int, String, String, String, String, String)
 }
 
 extension UserProfileAPI: TargetType {
@@ -33,6 +34,8 @@ extension UserProfileAPI: TargetType {
       return "/block"
     case .unblockUser:
       return "/block/off"
+    case .editProfile(let userID, _, _, _, _, _):
+      return "profile/\(userID)/change"
     }
   }
   
@@ -42,6 +45,8 @@ extension UserProfileAPI: TargetType {
       return .get
     case .blockUser, .unblockUser:
       return .post
+    case .editProfile:
+      return .put
     }
   }
   
@@ -57,6 +62,14 @@ extension UserProfileAPI: TargetType {
       return .requestParameters(parameters: ["userId":userID, "targetUserId":targetUserID], encoding: JSONEncoding.default)
     case .unblockUser(let userID, let targetUserID):
       return .requestParameters(parameters: ["userId":userID, "targetUserId":targetUserID], encoding: JSONEncoding.default)
+    case .editProfile(_, let backgroundUrl, let profileUrl, let profileName, let profileDescription, let nickname):
+      return .requestParameters(parameters: [
+        "backgroundUrl": backgroundUrl,
+        "profileUrl": profileUrl,
+        "profileName": profileName,
+        "profileDescription": profileDescription,
+        "nickname": nickname
+      ], encoding: JSONEncoding.default)
     }
   }
   

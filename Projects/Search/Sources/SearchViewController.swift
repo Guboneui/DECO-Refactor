@@ -185,7 +185,7 @@ final class SearchViewController: UIViewController, SearchPresentable, SearchVie
         cellIdentifier: FilterCell.identifier,
         cellType: FilterCell.self)
       ) { index, searchText, cell in
-        cell.setupCellConfigure(text: searchText, isSelected: false)
+        cell.setupCellDefaultConfigure(text: searchText)
       }.disposed(by: disposeBag)
     
     Observable.zip(

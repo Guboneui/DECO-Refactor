@@ -19,7 +19,7 @@ public class FilterCell: UICollectionViewCell {
     $0.sizeToFit()
   }
   private let selectedView: UIView = UIView().then {
-    $0.backgroundColor = .blue
+    $0.backgroundColor = .DecoColor.whiteColor
   }
   
   public override init(frame: CGRect) {
@@ -72,6 +72,15 @@ public class FilterCell: UICollectionViewCell {
     self.selectedView.makeBorder(width: 1.0, borderColor: isSelected ? .DecoColor.secondaryColor : .DecoColor.lightGray1)
     self.selectedView.backgroundColor = isSelected ? .DecoColor.lightSecondaryColor : .clear
     
+    self.setupLayouts()
+  }
+  
+  public func setupCellDefaultConfigure(text: String) {
+    self.textLabel.text = text
+    self.textLabel.font = .DecoFont.getFont(with: .Suit, type: .bold, size: 12)
+    self.textLabel.textColor = .DecoColor.darkGray2
+    self.selectedView.makeBorder(width: 1.0, borderColor: .DecoColor.lightGray1)
+    self.selectedView.backgroundColor = .DecoColor.whiteColor
     self.setupLayouts()
   }
 }

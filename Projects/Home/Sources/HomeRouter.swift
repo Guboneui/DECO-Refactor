@@ -9,6 +9,7 @@ import Util
 import Search
 
 import RIBs
+import RxRelay
 
 protocol HomeInteractable:
   Interactable,
@@ -19,14 +20,10 @@ protocol HomeInteractable:
 {
   var router: HomeRouting? { get set }
   var listener: HomeListener? { get set }
-  
-  var latestBoardViewControllerable: ViewControllable? { get set }
-  var popularBoardViewControllerable: ViewControllable? { get set }
-  var followBoardViewControllerable: ViewControllable? { get set }
 }
 
 public protocol HomeViewControllable: ViewControllable {
-  // TODO: Declare methods the router invokes to manipulate the view hierarchy.
+  var homeBoardControllers: BehaviorRelay<[ViewControllable]> { get set }
 }
 
 final class HomeRouter: ViewableRouter<HomeInteractable, HomeViewControllable>, HomeRouting {
@@ -57,57 +54,49 @@ final class HomeRouter: ViewableRouter<HomeInteractable, HomeViewControllable>, 
     self.searchBuildable = searchBuildable
     super.init(interactor: interactor, viewController: viewController)
     interactor.router = self
-    self.attachLatestBoardRIB()
-    self.attachPopularBoardRIB()
-    self.attachFollowBoardRIB()
+    self.attachHomeBoardRIB()
   }
   
   deinit {
-    self.detachLatestBoardRIB()
-    self.detachPopularBoardRIB()
-    self.detachFollowBoardRIB()
+    self.detachHomeBoardRIB()
   }
   
-  private func attachLatestBoardRIB() {
+  private func attachHomeBoardRIB() {
     if latestBoardRouting != nil { return }
-    let router = latestBoardBuildable.build(withListener: interactor)
-    self.interactor.latestBoardViewControllerable = router.viewControllable
-    self.latestBoardRouting = router
-    attachChild(router)
-  }
-  
-  private func detachLatestBoardRIB() {
-    guard let router = latestBoardRouting else { return }
-    self.latestBoardRouting = nil
-    self.detachChild(router)
-  }
-  
-  private func attachPopularBoardRIB() {
+    let latestBoardRouter = latestBoardBuildable.build(withListener: interactor)
+    
     if popularBoardRouting != nil { return }
-    let router = popularBoardBuildable.build(withListener: interactor)
-    self.interactor.popularBoardViewControllerable = router.viewControllable
-    self.popularBoardRouting = router
-    attachChild(router)
-  }
-  
-  private func detachPopularBoardRIB() {
-    guard let router = popularBoardRouting else { return }
-    self.popularBoardRouting = nil
-    self.detachChild(router)
-  }
-  
-  private func attachFollowBoardRIB() {
+    let popularBoardRouter = popularBoardBuildable.build(withListener: interactor)
+    
     if followBoardRouting != nil { return }
-    let router = followBoardBuildable.build(withListener: interactor)
-    self.interactor.followBoardViewControllerable = router.viewControllable
-    self.followBoardRouting = router
-    attachChild(router)
+    let followBoardRouter = followBoardBuildable.build(withListener: interactor)
+    
+    self.latestBoardRouting = latestBoardRouter
+    self.popularBoardRouting = popularBoardRouter
+    self.followBoardRouting = followBoardRouter
+    attachChild(latestBoardRouter)
+    attachChild(popularBoardRouter)
+    attachChild(followBoardRouter)
+    
+    viewController.homeBoardControllers.accept([
+      latestBoardRouter.viewControllable,
+      popularBoardRouter.viewControllable,
+      followBoardRouter.viewControllable
+    ])
   }
   
-  private func detachFollowBoardRIB() {
-    guard let router = followBoardRouting else { return }
-    followBoardRouting = nil
-    detachChild(router)
+  private func detachHomeBoardRIB() {
+    guard let latestBoardRouter = latestBoardRouting else { return }
+    guard let popularBoardRouter = popularBoardRouting else { return }
+    guard let followBoardRouter = followBoardRouting else { return }
+    
+    self.latestBoardRouting = nil
+    self.popularBoardRouting = nil
+    self.followBoardRouting = nil
+    
+    self.detachChild(latestBoardRouter)
+    self.detachChild(popularBoardRouter)
+    self.detachChild(followBoardRouter)
   }
   
   func attachSearchVC() {

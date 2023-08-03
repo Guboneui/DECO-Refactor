@@ -19,7 +19,6 @@ enum HomeType {
 }
 
 protocol HomePresentableListener: AnyObject {
-  var boardVCs: BehaviorRelay<[ViewControllable]> { get }
   var postingFilter: BehaviorRelay<[(filter: PostingCategoryModel, isSelected: Bool)]> { get }
   
   func selectFilter(at index: Int, with filter: (PostingCategoryModel, Bool))
@@ -28,8 +27,9 @@ protocol HomePresentableListener: AnyObject {
 
 final public class HomeViewController: UIViewController, HomePresentable, HomeViewControllable {
   
-  weak var listener: HomePresentableListener?
+  public var homeBoardControllers: RxRelay.BehaviorRelay<[RIBs.ViewControllable]> = .init(value: [])
   
+  weak var listener: HomePresentableListener?
   private let disposeBag: DisposeBag = DisposeBag()
   
   private let type: BehaviorRelay<HomeType> = .init(value: .Recent)
@@ -253,7 +253,7 @@ final public class HomeViewController: UIViewController, HomePresentable, HomeVi
     segmentCollectionView.delegate = nil
     segmentCollectionView.dataSource = nil
     
-    listener?.boardVCs
+    homeBoardControllers
       .bind(to: segmentCollectionView.rx.items(
         cellIdentifier: ChildViewCell.identifier,
         cellType: ChildViewCell.self)
@@ -320,6 +320,6 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDelegate
   }
 
   public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-    return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+    UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
   }
 }

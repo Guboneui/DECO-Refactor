@@ -29,13 +29,6 @@ public protocol HomeListener: AnyObject {
 
 final class HomeInteractor: PresentableInteractor<HomePresentable>, HomeInteractable, HomePresentableListener {
   
-  
-  
-  var latestBoardViewControllerable: RIBs.ViewControllable?
-  var popularBoardViewControllerable: RIBs.ViewControllable?
-  var followBoardViewControllerable: RIBs.ViewControllable?
-  
-  var boardVCs: BehaviorRelay<[ViewControllable]> = .init(value: [])
   var postingFilter: BehaviorRelay<[(filter: PostingCategoryModel, isSelected: Bool)]> = .init(value: [])
   
   weak var router: HomeRouting?
@@ -61,11 +54,6 @@ final class HomeInteractor: PresentableInteractor<HomePresentable>, HomeInteract
   
   override func didBecomeActive() {
     super.didBecomeActive()
-    if let latestBoardViewControllerable,
-       let popularBoardViewControllerable,
-       let followBoardViewControllerable {
-      self.boardVCs.accept([latestBoardViewControllerable, popularBoardViewControllerable, followBoardViewControllerable])
-    }
     
     self.fetchFilterList()
     

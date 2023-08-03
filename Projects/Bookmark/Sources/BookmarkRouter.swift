@@ -6,6 +6,7 @@
 //
 
 import RIBs
+import RxRelay
 
 protocol BookmarkInteractable:
   Interactable,
@@ -14,12 +15,10 @@ protocol BookmarkInteractable:
 {
   var router: BookmarkRouting? { get set }
   var listener: BookmarkListener? { get set }
-  
-  var photoBookmarkViewControllerable: ViewControllable? { get set }
-  var productBookmarkViewControllerable: ViewControllable? { get set }
 }
 
 public protocol BookmarkViewControllable: ViewControllable {
+  var bookmarkControllers: BehaviorRelay<[ViewControllable]> { get set }
 }
 
 final class BookmarkRouter: ViewableRouter<BookmarkInteractable, BookmarkViewControllable>, BookmarkRouting {
@@ -40,40 +39,39 @@ final class BookmarkRouter: ViewableRouter<BookmarkInteractable, BookmarkViewCon
     self.productBookmarkBuildable = productBookmarkBuildable
     super.init(interactor: interactor, viewController: viewController)
     interactor.router = self
-    self.attachPhotoBookmarkRIB()
-    self.attachProductBookmarkRIB()
+    self.attachBookmarkChildRIB()
   }
   
   deinit {
-    self.detachPhotoBookmarkRIB()
-    self.detachProductBookmarkRIB()
+    self.detachBookmarkChildRIB()
   }
   
-  private func attachPhotoBookmarkRIB() {
+  private func attachBookmarkChildRIB() {
     if photoBookmarkRouting != nil { return }
-    let router = photoBookmarkBuildable.build(withListener: interactor)
-    self.interactor.photoBookmarkViewControllerable = router.viewControllable
-    self.photoBookmarkRouting = router
-    attachChild(router)
-  }
-  
-  private func detachPhotoBookmarkRIB() {
-    guard let router = photoBookmarkRouting else { return }
-    self.photoBookmarkRouting = nil
-    self.detachChild(router)
-  }
-  
-  private func attachProductBookmarkRIB() {
+    let photoBookmarkRouter = photoBookmarkBuildable.build(withListener: interactor)
+    
     if productBookmarkRouting != nil { return }
-    let router = productBookmarkBuildable.build(withListener: interactor)
-    self.interactor.productBookmarkViewControllerable = router.viewControllable
-    self.productBookmarkRouting = router
-    attachChild(router)
+    let productBookmarkRouter = productBookmarkBuildable.build(withListener: interactor)
+    
+    self.photoBookmarkRouting = photoBookmarkRouter
+    self.productBookmarkRouting = productBookmarkRouter
+    attachChild(photoBookmarkRouter)
+    attachChild(productBookmarkRouter)
+    
+    let photoBookmarkViewController = photoBookmarkRouter.viewControllable
+    let productBookmarkViewController = productBookmarkRouter.viewControllable
+    
+    viewController.bookmarkControllers.accept([photoBookmarkViewController, productBookmarkViewController])
   }
   
-  private func detachProductBookmarkRIB() {
-    guard let router = productBookmarkRouting else { return }
+  private func detachBookmarkChildRIB() {
+    guard let photoBookmarkRouter = photoBookmarkRouting else { return }
+    guard let productBookmarkRouter = productBookmarkRouting else { return }
+    
+    self.photoBookmarkRouting = nil
     self.productBookmarkRouting = nil
-    self.detachChild(router)
+    
+    self.detachChild(photoBookmarkRouter)
+    self.detachChild(productBookmarkRouter)
   }
 }

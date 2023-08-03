@@ -31,10 +31,7 @@ final class BookmarkInteractor: PresentableInteractor<BookmarkPresentable>, Book
   
   weak var router: BookmarkRouting?
   weak var listener: BookmarkListener?
-  var photoBookmarkViewControllerable: ViewControllable?
-  var productBookmarkViewControllerable: ViewControllable?
   
-  var bookmarkVCs: BehaviorRelay<[ViewControllable]> = .init(value: [])
   var currentSegmentTab: BehaviorRelay<BookMarkSegmentType> = .init(value: .Photo)
   
   override init(
@@ -46,14 +43,9 @@ final class BookmarkInteractor: PresentableInteractor<BookmarkPresentable>, Book
   
   override func didBecomeActive() {
     super.didBecomeActive()
-    if let photoBookmarkViewControllerable,
-       let productBookmarkViewControllerable {
-      self.bookmarkVCs.accept([photoBookmarkViewControllerable, productBookmarkViewControllerable])
-    }
   }
   
   override func willResignActive() {
     super.willResignActive()
-    
   }
 }

@@ -18,9 +18,6 @@ protocol FollowInteractable:
 {
   var router: FollowRouting? { get set }
   var listener: FollowListener? { get set }
-  
-//  var followerListViewControllerable: ViewControllable? { get set }
-//  var followingListViewControllerable: ViewControllable? { get set }
 }
 
 protocol FollowViewControllable: ViewControllable {

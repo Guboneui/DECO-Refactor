@@ -17,10 +17,10 @@ import FlexLayout
 
 protocol BookmarkPresentableListener: AnyObject {
   var currentSegmentTab: BehaviorRelay<BookMarkSegmentType> { get }
-  var bookmarkVCs: BehaviorRelay<[ViewControllable]> { get }
 }
 
 final class BookmarkViewController: UIViewController, BookmarkPresentable, BookmarkViewControllable {
+  var bookmarkControllers: RxRelay.BehaviorRelay<[RIBs.ViewControllable]> = .init(value: [])
   
   weak var listener: BookmarkPresentableListener?
   private let disposeBag: DisposeBag = DisposeBag()
@@ -152,7 +152,7 @@ final class BookmarkViewController: UIViewController, BookmarkPresentable, Bookm
     segmentCollectionView.delegate = nil
     segmentCollectionView.dataSource = nil
     
-    listener?.bookmarkVCs
+    bookmarkControllers
       .bind(to: segmentCollectionView.rx.items(
         cellIdentifier: ChildViewCell.identifier,
         cellType: ChildViewCell.self)

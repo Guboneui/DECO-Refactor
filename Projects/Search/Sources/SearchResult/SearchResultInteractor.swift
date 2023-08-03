@@ -38,13 +38,7 @@ final class SearchResultInteractor: PresentableInteractor<SearchResultPresentabl
   weak var router: SearchResultRouting?
   weak var listener: SearchResultListener?
   
-  var searchPhotoViewControllerable: RIBs.ViewControllable?
-  var searchProductViewControllerable: RIBs.ViewControllable?
-  var searchBrandViewControllerable: RIBs.ViewControllable?
-  var searchUserViewControllerable: RIBs.ViewControllable?
-  
   var currentTab: BehaviorRelay<SearchTab> = .init(value: .Photo)
-  var childVCs: BehaviorRelay<[ViewControllable]> = .init(value: [])
   
   private let searchText: String
   
@@ -60,19 +54,6 @@ final class SearchResultInteractor: PresentableInteractor<SearchResultPresentabl
   override func didBecomeActive() {
     super.didBecomeActive()
     self.presenter.setSearchTextLabel(with: self.searchText)
-    
-    if let searchPhotoViewControllerable,
-       let searchProductViewControllerable,
-       let searchBrandViewControllerable,
-       let searchUserViewControllerable {
-      
-      self.childVCs.accept([
-        searchPhotoViewControllerable,
-        searchProductViewControllerable,
-        searchBrandViewControllerable,
-        searchUserViewControllerable
-      ])
-    }
   }
   
   override func willResignActive() {

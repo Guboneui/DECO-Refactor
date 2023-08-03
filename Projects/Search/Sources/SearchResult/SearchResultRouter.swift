@@ -10,6 +10,7 @@ import Entity
 import ProductDetail
 
 import RIBs
+import RxRelay
 
 protocol SearchResultInteractable:
   Interactable,
@@ -21,15 +22,10 @@ protocol SearchResultInteractable:
 {
   var router: SearchResultRouting? { get set }
   var listener: SearchResultListener? { get set }
-  
-  var searchPhotoViewControllerable: ViewControllable? { get set }
-  var searchProductViewControllerable: ViewControllable? { get set }
-  var searchBrandViewControllerable: ViewControllable? { get set }
-  var searchUserViewControllerable: ViewControllable? { get set }
 }
 
 protocol SearchResultViewControllable: ViewControllable {
-  // TODO: Declare methods the router invokes to manipulate the view hierarchy.
+  var searchResultControllers: BehaviorRelay<[ViewControllable]> { get set }
 }
 
 final class SearchResultRouter: ViewableRouter<SearchResultInteractable, SearchResultViewControllable>, SearchResultRouting {
@@ -66,43 +62,59 @@ final class SearchResultRouter: ViewableRouter<SearchResultInteractable, SearchR
     self.productDetailBuildable = productDetailBuildable
     super.init(interactor: interactor, viewController: viewController)
     interactor.router = self
-    
-    self.attachSearchPhotoRIB()
-    self.attachSearchProductRIB()
-    self.attachSearchBrandRIB()
-    self.attachSearchUserRIB()
+    self.attachSearchResultChildRIB()
   }
   
-  private func attachSearchPhotoRIB() {
+  deinit {
+    self.detachSearchResultChildRIB()
+  }
+  
+  private func attachSearchResultChildRIB() {
     if searchPhotoRouting != nil { return }
-    let router = searchPhotoBuildable.build(withListener: interactor)
-    self.interactor.searchPhotoViewControllerable = router.viewControllable
-    self.searchPhotoRouting = router
-    attachChild(router)
-  }
-  
-  private func attachSearchProductRIB() {
+    let searchPhotoRouter = searchPhotoBuildable.build(withListener: interactor)
+    
     if searchProductRouting != nil { return }
-    let router = searchProductBuildable.build(withListener: interactor)
-    self.interactor.searchProductViewControllerable = router.viewControllable
-    self.searchProductRouting = router
-    attachChild(router)
-  }
-  
-  private func attachSearchBrandRIB() {
+    let searchProductRouter = searchProductBuildable.build(withListener: interactor)
+    
     if searchBrandRouting != nil { return }
-    let router = searchBrandBuildable.build(withListener: interactor)
-    self.interactor.searchBrandViewControllerable = router.viewControllable
-    self.searchBrandRouting = router
-    attachChild(router)
+    let searchBrandRouter = searchBrandBuildable.build(withListener: interactor)
+    
+    if searchUserRouting != nil { return }
+    let searchUserRouter = searchUserBuildable.build(withListener: interactor)
+    
+    self.searchPhotoRouting = searchPhotoRouter
+    self.searchProductRouting = searchProductRouter
+    self.searchBrandRouting = searchBrandRouter
+    self.searchUserRouting = searchUserRouter
+    
+    attachChild(searchPhotoRouter)
+    attachChild(searchProductRouter)
+    attachChild(searchBrandRouter)
+    attachChild(searchUserRouter)
+    
+    viewController.searchResultControllers.accept([
+      searchPhotoRouter.viewControllable,
+      searchProductRouter.viewControllable,
+      searchBrandRouter.viewControllable,
+      searchUserRouter.viewControllable
+    ])
   }
   
-  private func attachSearchUserRIB() {
-    if searchUserRouting != nil { return }
-    let router = searchUserBuildable.build(withListener: interactor)
-    self.interactor.searchUserViewControllerable = router.viewControllable
-    self.searchUserRouting = router
-    attachChild(router)
+  private func detachSearchResultChildRIB() {
+    guard let searchPhotoRouter = searchPhotoRouting,
+          let searchProductRouter = searchProductRouting,
+          let searchBrandRouter = searchBrandRouting,
+          let searchUserRouter = searchUserRouting else { return }
+    
+    self.searchPhotoRouting = nil
+    self.searchProductRouting = nil
+    self.searchBrandRouting = nil
+    self.searchUserRouting = nil
+    
+    self.detachChild(searchPhotoRouter)
+    self.detachChild(searchProductRouter)
+    self.detachChild(searchBrandRouter)
+    self.detachChild(searchUserRouter)
   }
   
   func attachProductDetailVC(with productInfo: Entity.ProductDTO) {

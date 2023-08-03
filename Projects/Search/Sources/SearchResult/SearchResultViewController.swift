@@ -16,14 +16,13 @@ import RxRelay
 import FlexLayout
 
 protocol SearchResultPresentableListener: AnyObject {
-  
   var currentTab: BehaviorRelay<SearchTab> { get }
-  var childVCs: BehaviorRelay<[ViewControllable]> { get }
   
   func popSearchResultVC(with popType: PopType)
 }
 
 final class SearchResultViewController: UIViewController, SearchResultPresentable, SearchResultViewControllable {
+  var searchResultControllers: RxRelay.BehaviorRelay<[RIBs.ViewControllable]> = .init(value: [])
   
   weak var listener: SearchResultPresentableListener?
   private let disposeBag: DisposeBag = DisposeBag()
@@ -242,7 +241,7 @@ final class SearchResultViewController: UIViewController, SearchResultPresentabl
     mainCollectionView.delegate = nil
     mainCollectionView.dataSource = nil
     
-    listener?.childVCs
+    searchResultControllers
       .bind(to: mainCollectionView.rx.items(
         cellIdentifier: ChildViewCell.identifier,
         cellType: ChildViewCell.self)

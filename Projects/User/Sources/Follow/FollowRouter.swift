@@ -8,6 +8,7 @@
 import Entity
 import Util
 import RIBs
+import RxRelay
 
 protocol FollowInteractable:
   Interactable,
@@ -18,12 +19,13 @@ protocol FollowInteractable:
   var router: FollowRouting? { get set }
   var listener: FollowListener? { get set }
   
-  var followerListViewControllerable: ViewControllable? { get set }
-  var followingListViewControllerable: ViewControllable? { get set }
+//  var followerListViewControllerable: ViewControllable? { get set }
+//  var followingListViewControllerable: ViewControllable? { get set }
 }
 
 protocol FollowViewControllable: ViewControllable {
   // TODO: Declare methods the router invokes to manipulate the view hierarchy.
+  var followViewControllers: BehaviorRelay<[ViewControllable]> { get set }
 }
 
 final class FollowRouter: ViewableRouter<FollowInteractable, FollowViewControllable>, FollowRouting {
@@ -50,43 +52,41 @@ final class FollowRouter: ViewableRouter<FollowInteractable, FollowViewControlla
     self.targetUserProfileBuildable = targetUserProfileBuildable
     super.init(interactor: interactor, viewController: viewController)
     interactor.router = self
-    self.attachFollowerListRIB(targetUserID: targetUserID)
-    self.attachFollowingListRIB(targetUserID: targetUserID)
+    attachFollowListRIB(targetUserID: targetUserID)
   }
   
   deinit {
-    self.detachFollowerListRIB()
-    self.detachFollowingListRIB()
+    self.detachFollowListRIB()
   }
   
-  private func attachFollowerListRIB(targetUserID: Int) {
+  private func attachFollowListRIB(targetUserID: Int) {
     if followerListRouting != nil { return }
-    let router = followerListBuildable.build(withListener: interactor, targetUserID: targetUserID)
-    self.interactor.followerListViewControllerable = router.viewControllable
-    self.followerListRouting = router
-    attachChild(router)
-  }
-  
-  private func detachFollowerListRIB() {
-    guard let router = followerListRouting else { return }
-    self.followerListRouting = nil
-    self.detachChild(router)
-  }
-  
-  private func attachFollowingListRIB(targetUserID: Int) {
+    let followerListRouter = followerListBuildable.build(withListener: interactor, targetUserID: targetUserID)
+    
     if followingListRouting != nil { return }
-    let router = followingListBuildable.build(withListener: interactor, targetUserID: targetUserID)
-    self.interactor.followingListViewControllerable = router.viewControllable
-    self.followingListRouting = router
-    attachChild(router)
+    let followingListRouter = followingListBuildable.build(withListener: interactor, targetUserID: targetUserID)
+    
+    self.followerListRouting = followerListRouter
+    self.followingListRouting = followingListRouter
+    attachChild(followerListRouter)
+    attachChild(followingListRouter)
+    
+    let followerListViewController = followerListRouter.viewControllable
+    let followingListViewController = followingListRouter.viewControllable
+    
+    viewController.followViewControllers.accept([followerListViewController, followingListViewController])
   }
   
-  private func detachFollowingListRIB() {
-    guard let router = followingListRouting else { return }
+  private func detachFollowListRIB() {
+    guard let followerListRouter = followerListRouting,
+          let followingListRouter = followingListRouting else { return }
+    
+    self.followerListRouting = nil
     self.followingListRouting = nil
-    self.detachChild(router)
-  }
   
+    self.detachChild(followerListRouter)
+    self.detachChild(followingListRouter)
+  }
   
   func attachTargetUserProfileVC(with targetUserInfo: UserDTO) {
     if targetUserProfileRouting != nil { return }

@@ -35,14 +35,9 @@ public protocol FollowListener: AnyObject {
 
 final class FollowInteractor: PresentableInteractor<FollowPresentable>, FollowInteractable, FollowPresentableListener {
   
-  
-  
   weak var router: FollowRouting?
   weak var listener: FollowListener?
-  var followerListViewControllerable: ViewControllable?
-  var followingListViewControllerable: ViewControllable?
   
-  var followVCs: BehaviorRelay<[ViewControllable]> = .init(value: [])
   var currentFollowTab: BehaviorRelay<FollowTabType> = .init(value: .Follower)
   
   private let disposeBag: DisposeBag = DisposeBag()
@@ -65,10 +60,6 @@ final class FollowInteractor: PresentableInteractor<FollowPresentable>, FollowIn
   
   override func didBecomeActive() {
     super.didBecomeActive()
-    if let followerListViewControllerable,
-       let followingListViewControllerable {
-      self.followVCs.accept([followerListViewControllerable, followingListViewControllerable])
-    }
     self.presenter.setNavTitle(with: targetUserNickname)
     self.presenter.setFirstFollowStatus(with: firstFollowTabStatus)
   }

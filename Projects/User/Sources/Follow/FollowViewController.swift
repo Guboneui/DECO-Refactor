@@ -17,14 +17,14 @@ import PinLayout
 import FlexLayout
 
 protocol FollowPresentableListener: AnyObject {
-  var followVCs: BehaviorRelay<[ViewControllable]> { get }
   var currentFollowTab: BehaviorRelay<FollowTabType> { get }
   
   func popFollowVC(with popType: PopType)
 }
 
 final class FollowViewController: UIViewController, FollowPresentable, FollowViewControllable {
-  
+  var followViewControllers: RxRelay.BehaviorRelay<[RIBs.ViewControllable]> = .init(value: [])
+
   weak var listener: FollowPresentableListener?
   private let disposeBag: DisposeBag = DisposeBag()
   private var onlyOnceCollectionViewWillDisplay: Bool = false
@@ -175,7 +175,7 @@ final class FollowViewController: UIViewController, FollowPresentable, FollowVie
     followCollectionView.delegate = nil
     followCollectionView.dataSource = nil
     
-    listener?.followVCs
+    followViewControllers
       .bind(to: followCollectionView.rx.items(
         cellIdentifier: ChildViewCell.identifier,
         cellType: ChildViewCell.self)

@@ -21,6 +21,7 @@ protocol ProfileEditPresentable: Presentable {
   var listener: ProfileEditPresentableListener? { get set }
   
   func defaultUserProfileInfo(with userInfo: UserManagerModel)
+  @MainActor func stopLoading()
 }
 
 protocol ProfileEditListener: AnyObject {
@@ -86,6 +87,7 @@ final class ProfileEditInteractor: PresentableInteractor<ProfileEditPresentable>
         nickName: nickName
       ) {
         await self.updateUserProfile(with: editedProfileInfo)
+        await self.presenter.stopLoading()
         await self.popEditViewController()
       }
     }

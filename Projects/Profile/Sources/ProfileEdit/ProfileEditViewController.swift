@@ -329,6 +329,8 @@ final class ProfileEditViewController: UIViewController, ProfileEditPresentable,
         var profileDescription: String = self.editProfileDescriptionTextView.text.trimmingCharacters(in: .whitespacesAndNewlines)
         if profileDescription == self.descriptionPlaceHolder { profileDescription = "" }
         
+        IndicatorManager.shared.startLoading()
+        
         self.listener?.fetchEditProfile(
           profileName: profileName,
           nickName: userNickName,
@@ -366,6 +368,10 @@ final class ProfileEditViewController: UIViewController, ProfileEditPresentable,
     self.backgroundImageView.loadImage(imageUrl: userInfo.backgroundUrl)
     self.profileImageView.loadImage(imageUrl: userInfo.profileUrl)
     self.editProfileDescriptionTextView.text = userInfo.profileDescription
+  }
+  
+  func stopLoading() {
+    IndicatorManager.shared.stopLoading()
   }
 }
 

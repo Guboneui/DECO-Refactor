@@ -43,7 +43,7 @@ private class FeedCellHeaderView: UIView {
     $0.textAlignment = .right
     $0.font = .DecoFont.getFont(with: .Suit, type: .regular, size: 10)
   }
-
+  
   override init(frame: CGRect) {
     super.init(frame: frame)
     self.setupViews()
@@ -274,16 +274,6 @@ public class FeedCell: UICollectionViewCell {
     self.makeGradientLayer()
   }
   
-  public override func layoutSubviews() {
-    super.layoutSubviews()
-    
-  }
-  
-  
-  private func setupViews() {
-    
-  }
-  
   private func setupLayouts() {
     self.contentView.addSubview(feedImageView)
     feedImageView.snp.makeConstraints { make in
@@ -308,7 +298,7 @@ public class FeedCell: UICollectionViewCell {
     
     self.contentView.addSubview(headerView)
     self.contentView.addSubview(footerView)
-
+    
     headerView.snp.makeConstraints { make in
       make.top.equalToSuperview()
       make.horizontalEdges.equalToSuperview()
@@ -344,7 +334,7 @@ public class FeedCell: UICollectionViewCell {
   
   public func setFeedCellConfigure(with postingData: PostingDTO) {
     feedImageView.loadImage(imageUrl: postingData.imageUrl ?? "")
-
+    
     headerView.setHeaderViewData(
       profileURL: postingData.profileUrl ?? "",
       userName: postingData.userName ?? "",
@@ -357,6 +347,18 @@ public class FeedCell: UICollectionViewCell {
       isLike: postingData.like ?? false,
       commentCount: postingData.replyCount ?? 0,
       isBookmark: postingData.scrap ?? false
+    )
+    
+    makeBrandSticker(
+      mainWidth: CGFloat(postingData.width ?? 0),
+      mainHeight: CGFloat(postingData.height ?? 0),
+      brands: postingData.postingBrandObjectViews
+    )
+    
+    makeProductSticker(
+      mainWidth: CGFloat(postingData.width ?? 0),
+      mainHeight: CGFloat(postingData.height ?? 0),
+      products: postingData.postingProductObjectViews
     )
   }
   
@@ -386,3 +388,66 @@ extension FeedCell {
   }
 }
 
+// MARK: - Brand & Product Sticker
+
+extension FeedCell {
+  /// 브랜드 스티커를 만들어 줍니다.
+  private func makeBrandSticker(
+    mainWidth: CGFloat,
+    mainHeight: CGFloat,
+    brands: [PostingBrandObjectView]
+  ) {
+    let containerWidth = feedImageView.frame.width
+    let containerHeight = feedImageView.frame.height
+    
+    for brandObject in brands {
+      let x = abs((brandObject.translationX ?? 0.0) * containerWidth / mainWidth)
+      let y = abs((brandObject.translationY ?? 0.0) * containerHeight / mainHeight)
+      
+      let sticker = FeedStickerView(
+        with: brandObject.postingBrand?.name ?? "",
+        type: .brand,
+        direction: brandObject.direction ?? "",
+        isKnown: brandObject.known ?? false
+      )
+      
+      self.contentView.addSubview(sticker)
+      sticker.layoutIfNeeded()
+      
+      sticker.pin
+        .topLeft()
+        .marginLeft(x)
+        .marginTop(y)
+    }
+  }
+  
+  /// 상품 스티커를 만들어 줍니다.
+  private func makeProductSticker(
+    mainWidth: CGFloat,
+    mainHeight: CGFloat,
+    products: [PostingProductObjectView]
+  ) {
+    let containerWidth = feedImageView.frame.width
+    let containerHeight = feedImageView.frame.height
+    
+    for productObject in products {
+      let x = abs((productObject.translationX ?? 0.0) * containerWidth / mainWidth)
+      let y = abs((productObject.translationY ?? 0.0) * containerHeight / mainHeight)
+      
+      let sticker = FeedStickerView(
+        with: productObject.postingProduct?.name ?? "",
+        type: .brand,
+        direction: productObject.direction ?? "",
+        isKnown: true
+      )
+      
+      self.contentView.addSubview(sticker)
+      sticker.layoutIfNeeded()
+      
+      sticker.pin
+        .topLeft()
+        .marginLeft(x)
+        .marginTop(y)
+    }
+  }
+}

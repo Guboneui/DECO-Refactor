@@ -16,6 +16,9 @@
 		25D11A48D5BD5B11E545DC64 /* SmallTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBC5C9522A829AB27CB37F0 /* SmallTextCell.swift */; };
 		265FA00318D779BDB6F197EA /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8532B1B24B020BF76AEDFF76 /* ProfileView.swift */; };
 		26A89C8ABDA7272793E1DF1A /* Image.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42C46A1D137F6D04C3967B64 /* Image.xcassets */; };
+		2C6F628D2A823FD000326762 /* FeedStickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6F628C2A823FD000326762 /* FeedStickerView.swift */; };
+		2C6F62902A82653B00326762 /* FeedStickerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6F628F2A82653B00326762 /* FeedStickerType.swift */; };
+		2C6F62922A82654B00326762 /* FeedStickerDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6F62912A82654B00326762 /* FeedStickerDirection.swift */; };
 		2C8BB9472A7F98C00058272B /* IndicatorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8BB9462A7F98C00058272B /* IndicatorManager.swift */; };
 		2CB4054B2A6FA3050075E47A /* HandleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB4054A2A6FA3050075E47A /* HandleView.swift */; };
 		2CB405572A704BF00075E47A /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB405562A704BF00075E47A /* CommentCell.swift */; };
@@ -96,6 +99,9 @@
 		1D297767E626B65505AAE415 /* ToastManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastManager.swift; sourceTree = "<group>"; };
 		2AAA16EB10167F4F8A589DF2 /* SUIT-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUIT-Light.otf"; sourceTree = "<group>"; };
 		2B7E87AAC5EAA53360489DC8 /* ColorFilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorFilterCell.swift; sourceTree = "<group>"; };
+		2C6F628C2A823FD000326762 /* FeedStickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedStickerView.swift; sourceTree = "<group>"; };
+		2C6F628F2A82653B00326762 /* FeedStickerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedStickerType.swift; sourceTree = "<group>"; };
+		2C6F62912A82654B00326762 /* FeedStickerDirection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedStickerDirection.swift; sourceTree = "<group>"; };
 		2C8BB9462A7F98C00058272B /* IndicatorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndicatorManager.swift; sourceTree = "<group>"; };
 		2CB4054A2A6FA3050075E47A /* HandleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandleView.swift; sourceTree = "<group>"; };
 		2CB405562A704BF00075E47A /* CommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
@@ -207,6 +213,16 @@
 				59332FC4BE501E08FBC09008 /* SUIT-Thin.otf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		2C6F628B2A823F8C00326762 /* Sticker */ = {
+			isa = PBXGroup;
+			children = (
+				2C6F628C2A823FD000326762 /* FeedStickerView.swift */,
+				2C6F628F2A82653B00326762 /* FeedStickerType.swift */,
+				2C6F62912A82654B00326762 /* FeedStickerDirection.swift */,
+			);
+			path = Sticker;
 			sourceTree = "<group>";
 		};
 		2CB9B041D0482E219F735CBC /* Color */ = {
@@ -346,6 +362,7 @@
 		EAEAEB2B0A978F44126F19FA /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				2C6F628B2A823F8C00326762 /* Sticker */,
 				A60664CAE36A32F91A6EAB45 /* Profile */,
 				42B47DA7A807F90CEEC2A4E6 /* EditFilterButtonView.swift */,
 				FE05E87A578B1DEFC695DA50 /* FeedNavigationBar.swift */,
@@ -496,6 +513,7 @@
 				6D997F50E62D939D33486C1E /* FilterWithBoundsCell.swift in Sources */,
 				93996CA08EDB1D537507DCA3 /* ImageCell.swift in Sources */,
 				50C8C875945C12866235CF8D /* LargeTextCell.swift in Sources */,
+				2C6F628D2A823FD000326762 /* FeedStickerView.swift in Sources */,
 				7EEACB832494A5A6432EEC72 /* SegmentTableViewCell.swift in Sources */,
 				2C8BB9472A7F98C00058272B /* IndicatorManager.swift in Sources */,
 				E548B3EA2C782F393F284B29 /* SelectedFilterCell.swift in Sources */,
@@ -508,11 +526,13 @@
 				C70C23839F262CD7B4A5C3F5 /* ProfileInfoView.swift in Sources */,
 				265FA00318D779BDB6F197EA /* ProfileView.swift in Sources */,
 				4548DECE6268BDA9FD1FC377 /* SearchView.swift in Sources */,
+				2C6F62902A82653B00326762 /* FeedStickerType.swift in Sources */,
 				957B65F97FE384B4AFD4F050 /* TitleSubtitleView.swift in Sources */,
 				1F8C6CF27E09B1CD4E6BE40D /* ToastManager.swift in Sources */,
 				2CB4054B2A6FA3050075E47A /* HandleView.swift in Sources */,
 				4D05256CA52D034DF54104C2 /* TouchAnimationView.swift in Sources */,
 				7B701FE62D4EF108880CB632 /* DecoColor.swift in Sources */,
+				2C6F62922A82654B00326762 /* FeedStickerDirection.swift in Sources */,
 				926300E34AAEEDDCAF9DFBEA /* DecoFont.swift in Sources */,
 				0A48B28CDDEE8CE6C65B174A /* DecoImage.swift in Sources */,
 				CEC17852A8EC5DB0914A226D /* UIAlert+Extension.swift in Sources */,

@@ -21,8 +21,8 @@ let packages: [Package] = [
 ]
 
 let dependencies: [TargetDependency] = [
-  .project(target: "Search", path: "../Search"),
-  .project(target: "Comment", path: "../Comment")
+  .project(target: "Comment", path: "../Comment"),
+  .project(target: "Product", path: "../Product")
 ]
 
 let home = Target(

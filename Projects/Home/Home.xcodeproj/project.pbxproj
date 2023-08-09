@@ -21,13 +21,13 @@
 		71142422FF1A8116C0BF321B /* PopularBoardInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48D910407739D09DF800AB8 /* PopularBoardInteractor.swift */; };
 		7F791D2A9FD848C292B35A7E /* HomeBoardFeedInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC635A516CDA207C996AF6C5 /* HomeBoardFeedInteractor.swift */; };
 		87CF70FEF6A23D5638E9B785 /* HomeBoardFeedRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9586F4E42FF7997245B5CA75 /* HomeBoardFeedRouter.swift */; };
+		8E4BEAC7A6CC701A2842BFFB /* Product.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71D7BA23D01D6B0D8DBA795F /* Product.framework */; platformFilter = ios; };
 		969AE3FC67639657050B796A /* HomeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC9D00E6250394A9E0CC7EC /* HomeRouter.swift */; };
 		992ECEB252E1A6FD4FA19A0D /* LatestBoardBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7350F1463941671A276C044 /* LatestBoardBuilder.swift */; };
 		9E5E2B3F30DD9698E7DA138C /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAFEFB4CCEB4FBFFF16CA05 /* HomeViewController.swift */; };
 		A428098AD615CD3B5F694A31 /* HomeBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9879BE437F14BB2EB41CC295 /* HomeBuilder.swift */; };
 		B3F1BFF50AB8F5B3FB71FF65 /* FollowBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A19A747B2422FEB232ECE7E /* FollowBoardViewController.swift */; };
 		C38C26480F67CEAABC1951D6 /* PopularBoardRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E554E5024AB0DFCA70EBC936 /* PopularBoardRouter.swift */; };
-		DBFA187FDD847EAA147700EE /* Search.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A643F0F23AAADCC27C89CE25 /* Search.framework */; platformFilter = ios; };
 		E5E5544450DE94288A100A1F /* Comment.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A55B3822FBDF0EE94BAB283 /* Comment.framework */; platformFilter = ios; };
 		F7FB1076CF30671B49BE611D /* HomeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F62D067FC82E37F588B2D29 /* HomeInteractor.swift */; };
 		FC51AFF13D539475F6794D06 /* PopularBoardBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2364A31793BD73E8EE4D49F4 /* PopularBoardBuilder.swift */; };
@@ -57,6 +57,7 @@
 		61EC700930D1096A1F12C0D7 /* Home-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Home-Info.plist"; sourceTree = "<group>"; };
 		65975A315732F6E8D39BF328 /* LatestBoardInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatestBoardInteractor.swift; sourceTree = "<group>"; };
 		6A9B97C711A2CB72FD7B99B6 /* PostingFilterStream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostingFilterStream.swift; sourceTree = "<group>"; };
+		71D7BA23D01D6B0D8DBA795F /* Product.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Product.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7628A2B3551C5E995DD8DD67 /* LatestBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatestBoardViewController.swift; sourceTree = "<group>"; };
 		7CAFEFB4CCEB4FBFFF16CA05 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		92558056C7BFAEC2D72F36D9 /* FollowBoardInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowBoardInteractor.swift; sourceTree = "<group>"; };
@@ -66,7 +67,6 @@
 		9A19A747B2422FEB232ECE7E /* FollowBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowBoardViewController.swift; sourceTree = "<group>"; };
 		9A55B3822FBDF0EE94BAB283 /* Comment.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Comment.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3406018FF704319808EDBD2 /* PopularBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularBoardViewController.swift; sourceTree = "<group>"; };
-		A643F0F23AAADCC27C89CE25 /* Search.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Search.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC635A516CDA207C996AF6C5 /* HomeBoardFeedInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBoardFeedInteractor.swift; sourceTree = "<group>"; };
 		BF9967A925F95DD075CB0BE7 /* LatestBoardRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatestBoardRouter.swift; sourceTree = "<group>"; };
 		C48D910407739D09DF800AB8 /* PopularBoardInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularBoardInteractor.swift; sourceTree = "<group>"; };
@@ -81,7 +81,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E5E5544450DE94288A100A1F /* Comment.framework in Frameworks */,
-				DBFA187FDD847EAA147700EE /* Search.framework in Frameworks */,
+				8E4BEAC7A6CC701A2842BFFB /* Product.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -93,7 +93,7 @@
 			children = (
 				9A55B3822FBDF0EE94BAB283 /* Comment.framework */,
 				9290645AFD421A6E8E0A3C77 /* Home.framework */,
-				A643F0F23AAADCC27C89CE25 /* Search.framework */,
+				71D7BA23D01D6B0D8DBA795F /* Product.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";

@@ -340,6 +340,14 @@ public class FeedCell: UICollectionViewCell {
     footerView.didTapBookmarkButton = { [weak self] in
       self?.didTapBookmarkButton?()
     }
+    
+    feedImageView.tap()
+      .bind { [weak self] _ in
+        guard let self else { return }
+        self.productStickerViews.forEach { productSticker in
+          productSticker.isHidden.toggle()
+        }
+      }.disposed(by: disposeBag)
   }
   
   public func setFeedCellConfigure(with postingData: PostingDTO) {
@@ -452,6 +460,7 @@ extension FeedCell {
         direction: productObject.direction ?? "",
         isKnown: true
       )
+      sticker.isHidden = true
       sticker.tag = productObject.postingProduct?.id ?? 0
       sticker.tap()
         .bind { [weak self] _ in

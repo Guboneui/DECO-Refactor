@@ -255,6 +255,7 @@ public class FeedCell: UICollectionViewCell {
   public var didTapLikeButton: (()->())?
   public var didTapCommentButton: (()->())?
   public var didTapBookmarkButton: (()->())?
+  public var didTapProductSticker: ((Int)->())?
   
   private let feedImageView = UIImageView().then {
     $0.contentMode = .scaleAspectFill
@@ -451,6 +452,12 @@ extension FeedCell {
         direction: productObject.direction ?? "",
         isKnown: true
       )
+      sticker.tag = productObject.postingProduct?.id ?? 0
+      sticker.tap()
+        .bind { [weak self] _ in
+          guard let self else { return }
+          self.didTapProductSticker?(sticker.tag)
+        }.disposed(by: disposeBag)
       
       productStickerViews.append(sticker)
       

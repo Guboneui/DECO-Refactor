@@ -267,11 +267,20 @@ public class FeedCell: UICollectionViewCell {
   private let headerView: FeedCellHeaderView = FeedCellHeaderView()
   private let footerView: FeedCellFooterView = FeedCellFooterView()
   
+  private var brandStickerViews: [FeedStickerView] = []
+  private var productStickerViews: [FeedStickerView] = []
+  
   override init(frame: CGRect) {
     super.init(frame: frame)
     self.setupLayouts()
     self.setupGestures()
     self.makeGradientLayer()
+  }
+  
+  public override func prepareForReuse() {
+    super.prepareForReuse()
+    brandStickerViews.forEach{ $0.removeFromSuperview() }
+    productStickerViews.forEach{ $0.removeFromSuperview() }
   }
   
   private func setupLayouts() {
@@ -411,6 +420,8 @@ extension FeedCell {
         isKnown: brandObject.known ?? false
       )
       
+      brandStickerViews.append(sticker)
+      
       self.contentView.addSubview(sticker)
       sticker.layoutIfNeeded()
       
@@ -440,6 +451,8 @@ extension FeedCell {
         direction: productObject.direction ?? "",
         isKnown: true
       )
+      
+      productStickerViews.append(sticker)
       
       self.contentView.addSubview(sticker)
       sticker.layoutIfNeeded()

@@ -9,13 +9,15 @@ import User
 import Util
 import Entity
 import Comment
+import ProductDetail
 
 import RIBs
 
 protocol HomeBoardFeedInteractable:
   Interactable,
   TargetUserProfileListener,
-  CommentBaseListener
+  CommentBaseListener,
+  ProductDetailListener
 {
   var router: HomeBoardFeedRouting? { get set }
   var listener: HomeBoardFeedListener? { get set }
@@ -33,15 +35,20 @@ final class HomeBoardFeedRouter: ViewableRouter<HomeBoardFeedInteractable, HomeB
   private let commentBaseBuildable: CommentBaseBuildable
   private var commentBaseRouting: Routing?
   
+  private let productDetailBuildable: ProductDetailBuildable
+  private var productDetailRouting: ProductDetailRouting?
+  
   // TODO: Constructor inject child builder protocols to allow building children.
   init(
     interactor: HomeBoardFeedInteractable,
     viewController: HomeBoardFeedViewControllable,
     targetUserProfileBuildable: TargetUserProfileBuildable,
-    commentBaseBuildable: CommentBaseBuildable
+    commentBaseBuildable: CommentBaseBuildable,
+    productDetailBuildable: ProductDetailBuildable
   ) {
     self.targetUserProfileBuildable = targetUserProfileBuildable
     self.commentBaseBuildable = commentBaseBuildable
+    self.productDetailBuildable = productDetailBuildable
     super.init(interactor: interactor, viewController: viewController)
     interactor.router = self
   }
@@ -76,6 +83,23 @@ final class HomeBoardFeedRouter: ViewableRouter<HomeBoardFeedInteractable, HomeB
     guard let router = commentBaseRouting else { return }
     viewControllable.dismiss(animated: false, completion: nil)
     self.commentBaseRouting = nil
+    self.detachChild(router)
+  }
+  
+  func attachProductDetailVC(with productInfo: ProductDTO) {
+    if productDetailRouting != nil { return }
+    let router = productDetailBuildable.build(withListener: interactor, productInfo: productInfo)
+    self.viewControllable.pushViewController(router.viewControllable, animated: true)
+    self.productDetailRouting = router
+    attachChild(router)
+  }
+  
+  func detachProductDetailVC(with popType: PopType) {
+    guard let router = productDetailRouting else { return }
+    if popType == .BackButton {
+      self.viewControllable.popViewController(animated: true)
+    }
+    self.productDetailRouting = nil
     self.detachChild(router)
   }
 }

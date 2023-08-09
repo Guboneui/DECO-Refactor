@@ -19,6 +19,8 @@ protocol HomeBoardFeedRouting: ViewableRouting {
   func detachTargetUserProfileVC(with popType: PopType)
   func attachCommentBaseRIB(with boardID: Int)
   func detachCommentBaseRIB()
+  @MainActor func attachProductDetailVC(with productInfo: ProductDTO)
+  func detachProductDetailVC(with popType: PopType)
 }
 
 protocol HomeBoardFeedPresentable: Presentable {
@@ -34,7 +36,6 @@ protocol HomeBoardFeedListener: AnyObject {
 
 final class HomeBoardFeedInteractor: PresentableInteractor<HomeBoardFeedPresentable>, HomeBoardFeedInteractable, HomeBoardFeedPresentableListener {
   
-  
   weak var router: HomeBoardFeedRouting?
   weak var listener: HomeBoardFeedListener?
   private let disposeBag: DisposeBag = DisposeBag()
@@ -48,6 +49,7 @@ final class HomeBoardFeedInteractor: PresentableInteractor<HomeBoardFeedPresenta
   private let userManager: MutableUserManagerStream
   private let bookmarkRepository: BookmarkRepository
   private let boardRepository: BoardRepository
+  private let productRepository: ProductRepository
   private let postingCategoryFilter: MutableSelectedPostingFilterStream
   
   private var selectedBoardId: [Int] = []
@@ -61,6 +63,7 @@ final class HomeBoardFeedInteractor: PresentableInteractor<HomeBoardFeedPresenta
     userManager: MutableUserManagerStream,
     bookmarkRepository: BookmarkRepository,
     boardRepository: BoardRepository,
+    productRepository: ProductRepository,
     postingCategoryFilter: MutableSelectedPostingFilterStream
   ) {
     self.feedStartIndex = feedStartIndex
@@ -69,6 +72,7 @@ final class HomeBoardFeedInteractor: PresentableInteractor<HomeBoardFeedPresenta
     self.userManager = userManager
     self.bookmarkRepository = bookmarkRepository
     self.boardRepository = boardRepository
+    self.productRepository = productRepository
     self.postingCategoryFilter = postingCategoryFilter
     super.init(presenter: presenter)
     presenter.listener = self
@@ -252,5 +256,29 @@ final class HomeBoardFeedInteractor: PresentableInteractor<HomeBoardFeedPresenta
     var currentBoardList = boardList.value
     currentBoardList.remove(at: index)
     self.boardListStream.updateBoardList(with: currentBoardList)
+  }
+  
+  func pushProductDetailVC(with productID: Int) {
+    Task.detached { [weak self] in
+      guard let self else { return }
+      if let productInfo = await self.productRepository.getProductInfo(
+        productID: productID,
+        userID: self.userManager.userID
+      ) {
+        let product: ProductDTO = ProductDTO(
+          name: productInfo.product.name,
+          imageUrl: productInfo.product.imageUrl,
+          brandName: productInfo.brandName,
+          id: productInfo.product.id,
+          scrap: productInfo.scrap,
+          createdAt: productInfo.product.createdAt
+        )
+        await self.router?.attachProductDetailVC(with: product)
+      }
+    }
+  }
+  
+  func popProductDetailVC(with popType: Util.PopType) {
+    router?.detachProductDetailVC(with: popType)
   }
 }

@@ -9,6 +9,7 @@ import RIBs
 import User
 import Comment
 import Networking
+import ProductDetail
 
 protocol HomeBoardFeedDependency: Dependency {
   var boardListStream: MutableBoardStream { get }
@@ -23,12 +24,16 @@ protocol HomeBoardFeedDependency: Dependency {
 final class HomeBoardFeedComponent:
   Component<HomeBoardFeedDependency>,
   TargetUserProfileDependency,
-  CommentBaseDependency
+  CommentBaseDependency,
+  ProductDetailDependency
 {
   var userManager: User.MutableUserManagerStream { dependency.userManager }
   var userProfileRepository: Networking.UserProfileRepository { dependency.userProfileRepository }
   var followRepository: Networking.FollowRepository { dependency.followRepository }
   var boardRepository: BoardRepository { dependency.boardRepository }
+  var productRepository: ProductRepository = ProductRepositoryImpl()
+  var bookmarkRepository: Networking.BookmarkRepository = BookmarkRepositoryImpl()
+  var productListStream: ProductDetail.MutableProductStream = ProductStreamImpl()
 }
 
 // MARK: - Builder
@@ -62,6 +67,7 @@ final class HomeBoardFeedBuilder: Builder<HomeBoardFeedDependency>, HomeBoardFee
       userManager: dependency.userManager,
       bookmarkRepository: dependency.bookmarkRepository,
       boardRepository: dependency.boardRepository,
+      productRepository: component.productRepository,
       postingCategoryFilter: dependency.postingCategoryFilter
     )
     
@@ -69,12 +75,14 @@ final class HomeBoardFeedBuilder: Builder<HomeBoardFeedDependency>, HomeBoardFee
     
     let targetUserProfileBuildable = TargetUserProfileBuilder(dependency: component)
     let commentBaseBuildable = CommentBaseBuilder(dependency: component)
+    let productDetailBuildable = ProductDetailBuilder(dependency: component)
     
     return HomeBoardFeedRouter(
       interactor: interactor,
       viewController: viewController,
       targetUserProfileBuildable: targetUserProfileBuildable,
-      commentBaseBuildable: commentBaseBuildable
+      commentBaseBuildable: commentBaseBuildable,
+      productDetailBuildable: productDetailBuildable
     )
   }
 }

@@ -26,6 +26,8 @@ protocol HomeBoardFeedPresentableListener: AnyObject {
   func checkCurrentBoardUser(at index: Int)
   func fetchBoardList(lastIndex index: Int)
   func fetchDeleteBoard(at index: Int)
+  
+  func pushProductDetailVC(with productID: Int)
 }
 
 final class HomeBoardFeedViewController: UIViewController, HomeBoardFeedPresentable, HomeBoardFeedViewControllable {
@@ -130,6 +132,11 @@ final class HomeBoardFeedViewController: UIViewController, HomeBoardFeedPresenta
         cell.didTapBookmarkButton = { [weak self] in
           guard let inSelf = self else { return }
           inSelf.listener?.fetchBoardBookmark(at: index)
+        }
+        
+        cell.didTapProductSticker = { [weak self] productID in
+          guard let inSelf = self else { return }
+          inSelf.listener?.pushProductDetailVC(with: productID)
         }
       }.disposed(by: disposeBag)
     

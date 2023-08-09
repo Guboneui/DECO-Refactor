@@ -344,8 +344,13 @@ public class FeedCell: UICollectionViewCell {
     feedImageView.tap()
       .bind { [weak self] _ in
         guard let self else { return }
+        
         self.productStickerViews.forEach { productSticker in
           productSticker.isHidden.toggle()
+        }
+        
+        self.brandStickerViews.forEach { brandSticker in
+          brandSticker.isHidden.toggle()
         }
       }.disposed(by: disposeBag)
   }
@@ -428,7 +433,7 @@ extension FeedCell {
         direction: brandObject.direction ?? "",
         isKnown: brandObject.known ?? false
       )
-      
+      sticker.isHidden = true
       brandStickerViews.append(sticker)
       
       self.contentView.addSubview(sticker)

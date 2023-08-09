@@ -22,6 +22,7 @@ let packages: [Package] = []
 let dependencies: [TargetDependency] = [
   .project(target: "Login", path: .relativeToCurrentFile("../Login")),
   .project(target: "Home", path: .relativeToCurrentFile("../Home")),
+  .project(target: "Product", path: .relativeToCurrentFile("../Product")),
   .project(target: "Bookmark", path: .relativeToCurrentFile("../Bookmark")),
   .project(target: "Profile", path: .relativeToCurrentFile("../Profile"))
 ]

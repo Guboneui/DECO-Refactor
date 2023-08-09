@@ -3,13 +3,13 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		004CA85ED0AB530CBB1CC3AE /* BoardFilterRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25E02D4F3CB58086E8FB251 /* BoardFilterRequest.swift */; };
-		0ECFF533F48C6635F60D52B5 /* CommentDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 662C97EBDC500438F9F2CEE5 /* CommentDTO.swift */; };
 		19D8E7418656174171CBF568 /* BoardCategoryDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D94ACD94B96A521CE3B8CB4 /* BoardCategoryDTO.swift */; };
+		2CB405592A7053330075E47A /* CommentDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB405582A7053330075E47A /* CommentDTO.swift */; };
 		2F0C8B3EFA9B8A2286BB844D /* ProductDetailDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155AFFCA8D3D09391D68239D /* ProductDetailDTO.swift */; };
 		43D5B314C2C163006072F967 /* SearchUserDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C707B6EC3F742A88E11EBF10 /* SearchUserDTO.swift */; };
 		468A437D991263CC15393957 /* Encodable+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7B8D524E857484B5736949 /* Encodable+Extension.swift */; };
@@ -42,9 +42,9 @@
 
 /* Begin PBXFileReference section */
 		155AFFCA8D3D09391D68239D /* ProductDetailDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailDTO.swift; sourceTree = "<group>"; };
+		2CB405582A7053330075E47A /* CommentDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentDTO.swift; sourceTree = "<group>"; };
 		4D94ACD94B96A521CE3B8CB4 /* BoardCategoryDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardCategoryDTO.swift; sourceTree = "<group>"; };
 		4F7B8D524E857484B5736949 /* Encodable+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+Extension.swift"; sourceTree = "<group>"; };
-		662C97EBDC500438F9F2CEE5 /* CommentDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentDTO.swift; sourceTree = "<group>"; };
 		6D3D722D8A39C97CE4035A34 /* Entity.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Entity.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		84DAF896FBE07994EDED8649 /* ProductDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDTO.swift; sourceTree = "<group>"; };
 		8B0568F2A388548B91161519 /* BookmarkDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkDTO.swift; sourceTree = "<group>"; };
@@ -106,7 +106,6 @@
 				4D94ACD94B96A521CE3B8CB4 /* BoardCategoryDTO.swift */,
 				8B0568F2A388548B91161519 /* BookmarkDTO.swift */,
 				F02A85EB8455629B1BB05379 /* BrandDTO.swift */,
-				662C97EBDC500438F9F2CEE5 /* CommentDTO.swift */,
 				CA1A4D81598A5288669357E3 /* EmptyDTO.swift */,
 				B25F9F9CA091D22A1FD4E987 /* PostingDTO.swift */,
 				D540ACB77C679308558B3054 /* ProductCategoryDTO.swift */,
@@ -116,6 +115,7 @@
 				BB381273D96A2ADB7934FF1D /* ProfileDTO.swift */,
 				C707B6EC3F742A88E11EBF10 /* SearchUserDTO.swift */,
 				8CF19610E9CB4833C2220C17 /* UserDTO.swift */,
+				2CB405582A7053330075E47A /* CommentDTO.swift */,
 			);
 			path = DTOs;
 			sourceTree = "<group>";
@@ -207,8 +207,6 @@
 		C0331ED0A44E915A96750580 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				TargetAttributes = {
-				};
 			};
 			buildConfigurationList = C85ABA34F5262643211DAA3D /* Build configuration list for PBXProject "Entity" */;
 			compatibilityVersion = "Xcode 13.0";
@@ -246,13 +244,13 @@
 				19D8E7418656174171CBF568 /* BoardCategoryDTO.swift in Sources */,
 				6D0D2710109C33742790EA27 /* BookmarkDTO.swift in Sources */,
 				8F8C667522DE0DF500D0E0E9 /* BrandDTO.swift in Sources */,
-				0ECFF533F48C6635F60D52B5 /* CommentDTO.swift in Sources */,
 				E865D492A48382F493A438E8 /* EmptyDTO.swift in Sources */,
 				676381263AAD42E57F467F4D /* PostingDTO.swift in Sources */,
 				9AE39D9CDF446C67A7B6BABD /* ProductCategoryDTO.swift in Sources */,
 				FE864159065C6F91A2EAB7AA /* ProductDTO.swift in Sources */,
 				2F0C8B3EFA9B8A2286BB844D /* ProductDetailDTO.swift in Sources */,
 				855A421F32C03F545FB382D2 /* ProductMoodDTO.swift in Sources */,
+				2CB405592A7053330075E47A /* CommentDTO.swift in Sources */,
 				BC6132654699C46A9C4BC795 /* ProfileDTO.swift in Sources */,
 				43D5B314C2C163006072F967 /* SearchUserDTO.swift in Sources */,
 				5F4713DB1EF6DDC93F5DC120 /* UserDTO.swift in Sources */,

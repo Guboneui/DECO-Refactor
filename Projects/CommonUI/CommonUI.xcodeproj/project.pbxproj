@@ -21,6 +21,7 @@
 		2C6F62962A84BFBF00326762 /* FeedTextStickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6F62952A84BFBF00326762 /* FeedTextStickerView.swift */; };
 		2C6F62982A84CE4000326762 /* FeedTextObjectTextColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6F62972A84CE4000326762 /* FeedTextObjectTextColor.swift */; };
 		2C6F629A2A84CE4F00326762 /* FeedTextObjectBackgroundColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6F62992A84CE4F00326762 /* FeedTextObjectBackgroundColor.swift */; };
+		2C6F629C2A854C6F00326762 /* BrandStickerPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6F629B2A854C6F00326762 /* BrandStickerPopupView.swift */; };
 		39EC6BCA36C6D9020E2FBEEE /* SUIT-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7D7B839FF2BD4170FF0A7D18 /* SUIT-Bold.otf */; };
 		3B93A3AC2360B6AA4211F43D /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB2A151EF61A0078BCB1E57 /* UILabel+Extension.swift */; };
 		3E07DEB89DFB0D7F64B67BC4 /* CheckButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E42D1D3EF0292998585D8C3 /* CheckButton.swift */; };
@@ -106,6 +107,7 @@
 		2C6F62952A84BFBF00326762 /* FeedTextStickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedTextStickerView.swift; sourceTree = "<group>"; };
 		2C6F62972A84CE4000326762 /* FeedTextObjectTextColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedTextObjectTextColor.swift; sourceTree = "<group>"; };
 		2C6F62992A84CE4F00326762 /* FeedTextObjectBackgroundColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedTextObjectBackgroundColor.swift; sourceTree = "<group>"; };
+		2C6F629B2A854C6F00326762 /* BrandStickerPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandStickerPopupView.swift; sourceTree = "<group>"; };
 		2EA530434C111C4BB344B33F /* NotoSansKR-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Black.otf"; sourceTree = "<group>"; };
 		3407EDA565C1D704E76D28C5 /* UICollectionView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extension.swift"; sourceTree = "<group>"; };
 		3E1F9AB6697D8F4730D429E0 /* SelectedFilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedFilterCell.swift; sourceTree = "<group>"; };
@@ -204,6 +206,7 @@
 			children = (
 				2C6F62942A84BFAD00326762 /* Text */,
 				2C6F62932A84BF8B00326762 /* BrandProduct */,
+				2C6F629B2A854C6F00326762 /* BrandStickerPopupView.swift */,
 			);
 			path = Sticker;
 			sourceTree = "<group>";
@@ -547,6 +550,7 @@
 				2C6F62962A84BFBF00326762 /* FeedTextStickerView.swift in Sources */,
 				EBB476C17C8F2970AEC65466 /* HandleView.swift in Sources */,
 				28E4D4868568BADF4D03119E /* IndicatorManager.swift in Sources */,
+				2C6F629C2A854C6F00326762 /* BrandStickerPopupView.swift in Sources */,
 				9DA268FB6D09BB0089BAAC0C /* InfoWithTitleView.swift in Sources */,
 				915E8F0D979DABD002B163AC /* LinkWithImageView.swift in Sources */,
 				259FD2F714D7E710266810E9 /* NavigationBar.swift in Sources */,

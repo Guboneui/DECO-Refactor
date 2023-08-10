@@ -138,6 +138,13 @@ final class HomeBoardFeedViewController: UIViewController, HomeBoardFeedPresenta
           guard let inSelf = self else { return }
           inSelf.listener?.pushProductDetailVC(with: productID)
         }
+        
+        cell.didTapBrandSticker = { [weak self] brandName in
+          guard let inSelf = self else { return }
+          let popup = BrandStickerPopupView(brandName: brandName)
+          popup.modalPresentationStyle = .overFullScreen
+          inSelf.present(popup, animated: false, completion: nil)
+        }
       }.disposed(by: disposeBag)
     
     feedCollectionView.rx.willDisplayCell

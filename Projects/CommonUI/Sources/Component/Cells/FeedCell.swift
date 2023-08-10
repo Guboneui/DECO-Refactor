@@ -270,6 +270,7 @@ public class FeedCell: UICollectionViewCell {
   
   private var brandStickerViews: [FeedStickerView] = []
   private var productStickerViews: [FeedStickerView] = []
+  private var textStickerViews: [FeedTextStickerView] = []
   
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -352,6 +353,10 @@ public class FeedCell: UICollectionViewCell {
         self.brandStickerViews.forEach { brandSticker in
           brandSticker.isHidden.toggle()
         }
+        
+        self.textStickerViews.forEach { textSticker in
+          textSticker.isHidden.toggle()
+        }
       }.disposed(by: disposeBag)
   }
   
@@ -382,6 +387,12 @@ public class FeedCell: UICollectionViewCell {
       mainWidth: CGFloat(postingData.width ?? 0),
       mainHeight: CGFloat(postingData.height ?? 0),
       products: postingData.postingProductObjectViews
+    )
+    
+    makeTextObject(
+      mainWidth: CGFloat(postingData.width ?? 0),
+      mainHeight: CGFloat(postingData.height ?? 0),
+      texts: postingData.postingTextObjectViews
     )
   }
   
@@ -482,6 +493,48 @@ extension FeedCell {
         .topLeft()
         .marginLeft(x)
         .marginTop(y)
+    }
+  }
+  
+  /// 텍스트를 만들어 줍니다.
+  private func makeTextObject(
+    mainWidth: CGFloat,
+    mainHeight: CGFloat,
+    texts: [PostingTextObjectView]
+  ) {
+    let containerWidth = feedImageView.frame.width
+    let containerHeight = feedImageView.frame.height
+    
+    
+    for textObject in texts {
+      let x = abs((textObject.translationX ?? 0.0) * containerWidth / mainWidth)
+      let y = abs((textObject.translationY ?? 0.0) * containerHeight / mainHeight)
+      
+      let sticker = FeedTextStickerView(
+        with: textObject.postingText.text ?? "",
+        alignment: textObject.postingText.gravity ?? "LEFT",
+        textColorID: textObject.postingText.textColor?.id ?? 0,
+        backgroundColorID: textObject.postingText.backgroundColor?.id ?? 0
+      )
+      sticker.isHidden = true
+      textStickerViews.append(sticker)
+      self.contentView.addSubview(sticker)
+      sticker.layoutSubviews()
+      
+      sticker.transform = sticker.transform.scaledBy(x: textObject.scaleX ?? 1.0, y: textObject.scaleY ?? 1.0)
+      sticker.transform = sticker.transform.rotated(by: textObject.rotation ?? 0)
+      
+      let textLabelSize: CGSize = sticker.bounds.size
+      let textLabelWidth: CGFloat = textLabelSize.width
+      let textLabelHeight: CGFloat = textLabelSize.height
+      
+      sticker.pin
+        .topLeft()
+        .marginLeft(x - (textLabelWidth / 2))
+        .marginTop(y - (textLabelHeight / 2))
+        .wrapContent(padding: 5)
+        .sizeToFit()
+        .layout()
     }
   }
 }

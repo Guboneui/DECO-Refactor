@@ -283,6 +283,7 @@ public class FeedCell: UICollectionViewCell {
     super.prepareForReuse()
     brandStickerViews.forEach{ $0.removeFromSuperview() }
     productStickerViews.forEach{ $0.removeFromSuperview() }
+    textStickerViews.forEach { $0.removeFromSuperview() }
   }
   
   private func setupLayouts() {

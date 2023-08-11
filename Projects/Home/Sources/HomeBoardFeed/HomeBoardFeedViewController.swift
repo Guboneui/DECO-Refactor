@@ -91,6 +91,14 @@ final class HomeBoardFeedViewController: UIViewController, HomeBoardFeedPresenta
       self.listener?.popHomeBoardFeedVC(with: .BackButton)
     }
     
+    self.view.rx.swipeGesture(.up)
+      .when(.recognized)
+      .throttle(.milliseconds(300), latest: false, scheduler: MainScheduler.instance)
+      .bind { [weak self] _ in
+        guard let self else { return }
+        self.listener?.popHomeBoardFeedVC(with: .BackButton)
+      }.disposed(by: disposeBag)
+    
     self.navigationBar.didTapOptionButtonAction = { [weak self] in
       guard let self else { return }
       let currentIndex: Int = self.feedCollectionView.currentIndex

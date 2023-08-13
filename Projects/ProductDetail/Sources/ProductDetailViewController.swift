@@ -292,6 +292,10 @@ final class ProductDetailViewController: UIViewController, ProductDetailPresenta
   func showToast(status: Bool) {
     ToastManager.shared.showToast(status ? .DeleteBookmark : .AddBookmark)
   }
+  
+  func showEmptyLinkToast() {
+    ToastManager.shared.showToast(.EmptyProductLink)
+  }
 }
 
 extension ProductDetailViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {

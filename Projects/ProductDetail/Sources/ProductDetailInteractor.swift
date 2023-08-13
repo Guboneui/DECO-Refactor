@@ -22,6 +22,7 @@ protocol ProductDetailPresentable: Presentable {
   var listener: ProductDetailPresentableListener? { get set }
   @MainActor func setProductInfo(with productInfo: ProductDetailDTO)
   func showToast(status: Bool)
+  @MainActor func showEmptyLinkToast()
 }
 
 public protocol ProductDetailListener: AnyObject {
@@ -86,8 +87,9 @@ final class ProductDetailInteractor: PresentableInteractor<ProductDetailPresenta
       if let link = productDetailInfo.product.sellLink {
         SafariLoder.loadSafari(with: link)
       } else {
-        // TODO:
-        print("구매 링크 없음 토스트 띄우기")
+        Task {
+          await presenter.showEmptyLinkToast()
+        }        
       }
     }
   }

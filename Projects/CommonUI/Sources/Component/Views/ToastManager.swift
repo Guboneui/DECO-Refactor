@@ -19,7 +19,7 @@ public enum ToastMessage: String {
   case InitialSoundKeyword = "초성은 등록할 수 없는 키워드에요"
   case EmoticonKeyword = "특수문자 및 이모티콘은 등록할 수 없는 키워드에요"
   case KoreanKeyword = "키워드는 한글로만 등록 가능해요"
-  case ProductNoLink = "위 상품은 연결된 링크가 없어요"
+  case EmptyProductLink = "위 상품은 연결된 링크가 없어요"
   case Blame = "신고가 성공적으로 접수되었습니다.\n(신고하신 내용은 관리자 검토 후 내부정책 하에 조치를 진행할 예정입니다.)"
   case UserBlock = "상대방이 차단되었습니다"
   case UserUnblock = "상대방이 차단 해제되었습니다"

@@ -278,8 +278,7 @@ final class ProductDetailViewController: UIViewController, ProductDetailPresenta
         {
           Task.detached { [weak self] in
             guard let inSelf = self else { return }
-            await
-            inSelf.listener?.fetchProductPostings(createdAt: lastCreatedAt)
+            await inSelf.listener?.fetchProductPostings(createdAt: lastCreatedAt)
           }
         }
         
@@ -289,7 +288,7 @@ final class ProductDetailViewController: UIViewController, ProductDetailPresenta
     
   }
   
-  func showToast(status: Bool) {
+  func showBookmarkToast(status: Bool) {
     ToastManager.shared.showToast(status ? .DeleteBookmark : .AddBookmark)
   }
   

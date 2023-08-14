@@ -52,5 +52,8 @@
       <FileRef
          location = "group:Util/Util.xcodeproj">
       </FileRef>
+      <FileRef
+         location = "group:README.md">
+      </FileRef>
    </Group>
 </Workspace>
